@@ -1,0 +1,567 @@
+import {
+  formatIssues,
+  OutlineSchema,
+  SceneSchema,
+  validateOutline,
+  validateScene,
+  type ExplanationShape,
+  type Language,
+  type Level,
+  type Outline,
+  type Scene,
+} from "scene";
+import { LlmError, type LlmRole } from "../llm";
+import { EventLog, EventLogRegistry, type FinalStatus, type Verdict } from "./events";
+import { pipelineMessage } from "./messages";
+import {
+  SHARE_RETENTION_DAYS,
+  type ExplanationKind,
+  type ExplanationRecord,
+  type PipelineDeps,
+} from "./ports";
+import {
+  buildCheckerPrompt,
+  buildJudgePrompt,
+  buildOutlinePrompt,
+  buildScenePrompt,
+  buildTriagePrompt,
+  CheckSchema,
+  JudgeSchema,
+  TriageSchema,
+  type Check,
+  type Judgement,
+  type Subject,
+  type Triage,
+} from "./prompts";
+
+export interface StartInput {
+  question: string;
+  language: Language;
+  level: Level;
+  interpretation?: string | undefined;
+  kind?: ExplanationKind;
+}
+
+export interface Started {
+  id: string;
+  cached: boolean;
+  log: EventLog | null;
+}
+
+interface SceneOutcome {
+  scene: Scene | null;
+  verdict: Verdict;
+}
+
+interface SceneRun {
+  result(index: number): Promise<SceneOutcome>;
+  abort(): void;
+}
+
+interface RunContext {
+  id: string;
+  input: StartInput;
+  log: EventLog;
+  signal: AbortSignal;
+  subject: Subject;
+}
+
+export const SCENE_CONCURRENCY = 3;
+export const MAX_PLAN_ROUNDS = 3;
+export const MAX_SCENE_ROUNDS = 2;
+
+const UNAVAILABLE_CODES = new Set(["unavailable", "timeout", "rate_limited"]);
+const SHORT_KINDS = new Set<ExplanationKind>(["followup", "zoom"]);
+
+function shapeOf(kind: ExplanationKind): ExplanationShape {
+  return SHORT_KINDS.has(kind) ? "short" : "full";
+}
+
+export class Pipeline {
+  private readonly logs: EventLogRegistry;
+
+  constructor(
+    private readonly deps: PipelineDeps,
+    logs?: EventLogRegistry,
+  ) {
+    this.logs = logs ?? new EventLogRegistry();
+  }
+
+  logFor(id: string): EventLog | undefined {
+    return this.logs.get(id);
+  }
+
+  async start(input: StartInput): Promise<Started> {
+    const kind = input.kind ?? "initial";
+    const key = { language: input.language, level: input.level };
+    if (kind === "initial") {
+      const cachedId = await this.deps.cache.findByQuestion(input.question, key);
+      if (cachedId) return { id: cachedId, cached: true, log: null };
+    }
+
+    const id = this.deps.newId();
+    const record: ExplanationRecord = {
+      id,
+      kind,
+      parent_id: null,
+      root_id: id,
+      focus_scene_id: null,
+      question: input.question,
+      language: input.language,
+      level: input.level,
+      concept_slug: null,
+      subject: null,
+      title: null,
+      status: "triaging",
+      payload: {
+        version: 1,
+        plan: null,
+        params: [],
+        model: { constants: [], derived: [] },
+        scenes: [],
+        quiz: null,
+      },
+      verdicts: [],
+      scene_count_planned: null,
+      provider: this.deps.llm.name,
+      model: this.deps.llm.modelFor("author"),
+      timings: {},
+      created_at: this.deps.now(),
+      completed_at: null,
+      expires_at: null,
+    };
+    await this.deps.store.create(record);
+
+    const log = this.logs.create(id);
+    log.emit({ type: "accepted", explanation_id: id, cached: false });
+    void this.run(record, input, log);
+    return { id, cached: false, log };
+  }
+
+  private async run(record: ExplanationRecord, input: StartInput, log: EventLog): Promise<void> {
+    const { deps } = this;
+    const { id } = record;
+    const { language, level } = input;
+    const started = Date.now();
+    const timings: Record<string, number> = {};
+    const mark = (name: string): void => {
+      timings[name] = Date.now() - started;
+    };
+    const controller = new AbortController();
+    const signal = controller.signal;
+    const kind = input.kind ?? "initial";
+    const shape = shapeOf(kind);
+
+    const fail = async (code: string, message: string): Promise<void> => {
+      controller.abort();
+      await deps.store.update(id, { status: "failed", timings, completed_at: deps.now() });
+      log.emit({ type: "error", code, message });
+    };
+
+    try {
+      log.emit({ type: "step", name: "triage", status: "started" });
+      const triage = await this.triage(id, input, signal);
+      mark("triage");
+      log.emit({ type: "step", name: "triage", status: "done" });
+
+      if (triage.decision === "refuse") {
+        await deps.store.update(id, { status: "refused", timings, completed_at: deps.now() });
+        log.emit({ type: "refused", reason: triage.reason });
+        return;
+      }
+      if (triage.decision === "clarify" || !triage.concept) {
+        await deps.store.update(id, {
+          status: "needs_clarification",
+          timings,
+          completed_at: deps.now(),
+        });
+        log.emit({
+          type: "clarify",
+          reason: triage.reason,
+          interpretations: triage.interpretations,
+        });
+        return;
+      }
+
+      const concept = triage.concept;
+      if (kind === "initial") {
+        const hit = await deps.cache.findByConcept(concept.slug, { language, level });
+        if (hit) {
+          await deps.store.remove(id);
+          log.emit({ type: "cached", explanation_id: hit });
+          return;
+        }
+      }
+      await deps.store.update(id, {
+        concept_slug: concept.slug,
+        subject: concept.subject,
+        title: concept.title,
+        status: "planning",
+      });
+      log.emit({
+        type: "meta",
+        title: concept.title,
+        subject: concept.subject,
+        concept_slug: concept.slug,
+        deep_eligible: triage.deep_eligible,
+        detected_language: triage.detected_language,
+      });
+
+      const ctx: RunContext = { id, input, log, signal, subject: concept.subject };
+
+      log.emit({ type: "step", name: "plan", status: "started" });
+      let outline: Outline | null = null;
+      let judgement: Judgement | null = null;
+      let judgeFallback = false;
+      let scenes: SceneRun | null = null;
+      let planAttempts = 0;
+      let feedback: string | undefined;
+
+      for (let round = 1; round <= MAX_PLAN_ROUNDS && !outline; round += 1) {
+        const written = await deps.llm.generateObject({
+          role: "author",
+          ...buildOutlinePrompt({
+            question: input.question,
+            title: concept.title,
+            subject: concept.subject,
+            language,
+            level,
+            shape,
+            extra: feedback,
+          }),
+          schema: OutlineSchema,
+          validate: (value) => {
+            const result = validateOutline(value, { shape });
+            return result.ok ? null : formatIssues(result.issues);
+          },
+          traceId: id,
+          signal,
+        });
+        planAttempts += written.attempts;
+        if (round === 1) {
+          mark("outline");
+          log.emit({ type: "step", name: "plan", status: "done" });
+          log.emit({ type: "step", name: "verify_plan", status: "started" });
+        }
+
+        const candidate = written.value;
+        const speculative = this.startScenes(ctx, candidate);
+        const judged = await this.judge(ctx, concept.title, candidate);
+        judgement = judged.judgement;
+        judgeFallback = judged.fallback;
+        if (judgement.verdict === "valid") {
+          outline = candidate;
+          scenes = speculative;
+        } else {
+          speculative.abort();
+          feedback = `An examiner rejected your previous outline. Fix every point and write the outline again.\n${judgement.issues
+            .map((item) => `- ${item.where}: ${item.problem}`)
+            .join("\n")}`;
+        }
+      }
+      mark("verify_plan");
+      log.emit({ type: "step", name: "verify_plan", status: "done" });
+
+      const planChecks = [
+        "structure",
+        "model",
+        "pedagogy",
+        judgeFallback ? "accuracy:fallback" : "accuracy",
+      ];
+      if (!outline || !scenes) {
+        const verdict: Verdict = {
+          target: "plan",
+          status: "dropped",
+          attempts: planAttempts,
+          reason: judgement?.reason ?? pipelineMessage(language, "planDropped"),
+          checks: planChecks,
+        };
+        await deps.store.update(id, { verdicts: [verdict] });
+        log.emit({ type: "verdict", ...verdict });
+        await fail("plan_unverifiable", pipelineMessage(language, "failed"));
+        return;
+      }
+
+      const verdicts: Verdict[] = [
+        {
+          target: "plan",
+          status: planAttempts === 1 ? "validated" : "corrected",
+          attempts: planAttempts,
+          reason: judgement?.reason ?? pipelineMessage(language, "validated"),
+          checks: planChecks,
+        },
+      ];
+      const payload = {
+        version: 1 as const,
+        plan: outline.plan,
+        params: outline.params,
+        model: outline.model,
+        scenes: [] as Scene[],
+        quiz: null as ExplanationRecord["payload"]["quiz"],
+      };
+      const count = outline.plan.steps.length;
+      await deps.store.update(id, {
+        payload,
+        verdicts,
+        scene_count_planned: count,
+        status: "streaming",
+      });
+      log.emit({ type: "verdict", ...(verdicts[0] as Verdict) });
+      log.emit({
+        type: "plan",
+        plan: outline.plan,
+        params: outline.params,
+        model: outline.model,
+        scene_count: count,
+      });
+
+      log.emit({ type: "step", name: "scenes", status: "started" });
+      let dropped = 0;
+      for (let index = 0; index < count; index += 1) {
+        const outcome = await scenes.result(index);
+        verdicts.push(outcome.verdict);
+        log.emit({ type: "verdict", ...outcome.verdict });
+        if (outcome.scene) {
+          payload.scenes.push(outcome.scene);
+          if (timings.first_scene === undefined) mark("first_scene");
+          log.emit({ type: "scene", index, scene: outcome.scene });
+        } else {
+          dropped += 1;
+          log.emit({ type: "scene_dropped", index });
+        }
+        await deps.store.update(id, { payload, verdicts });
+      }
+      mark("scenes");
+      log.emit({ type: "step", name: "scenes", status: "done" });
+
+      if (payload.scenes.length === 0) {
+        await fail("generation_failed", pipelineMessage(language, "failed"));
+        return;
+      }
+
+      if (deps.writeQuiz && shape === "full") {
+        log.emit({ type: "step", name: "quiz", status: "started" });
+        const quiz = await deps
+          .writeQuiz({ outline, scenes: payload.scenes, language, level, traceId: id })
+          .catch(() => null);
+        if (quiz) {
+          payload.quiz = quiz;
+          log.emit({ type: "quiz", quiz });
+        }
+        mark("quiz");
+        log.emit({ type: "step", name: "quiz", status: "done" });
+      }
+
+      const status: FinalStatus = dropped === 0 ? "ready" : "partial";
+      const completed = deps.now();
+      mark("total");
+      await deps.store.update(id, {
+        payload,
+        verdicts,
+        status,
+        timings,
+        completed_at: completed,
+        expires_at: new Date(completed.getTime() + SHARE_RETENTION_DAYS * 24 * 60 * 60 * 1000),
+      });
+      if (status === "ready" && kind === "initial") {
+        await deps.cache.remember(id, {
+          question: input.question,
+          slug: concept.slug,
+          language,
+          level,
+        });
+      }
+      if (triage.deep_eligible && deps.enqueueDeep && status === "ready") {
+        await deps.enqueueDeep(id).then(
+          () => log.emit({ type: "deep", status: "queued" }),
+          () => undefined,
+        );
+      }
+      log.emit({ type: "done", status, share_url: deps.shareUrl(id, language) });
+    } catch (error) {
+      const unavailable = error instanceof LlmError && UNAVAILABLE_CODES.has(error.code);
+      await fail(
+        unavailable ? "generation_unavailable" : "generation_failed",
+        pipelineMessage(language, unavailable ? "unavailable" : "failed"),
+      ).catch(() => undefined);
+    }
+  }
+
+  private async triage(id: string, input: StartInput, signal: AbortSignal): Promise<Triage> {
+    const result = await this.deps.llm.generateObject({
+      role: "triage",
+      ...buildTriagePrompt({
+        question: input.question,
+        language: input.language,
+        level: input.level,
+        interpretation: input.interpretation,
+      }),
+      schema: TriageSchema,
+      validate: (value) => {
+        if (value.decision === "accept" && !value.concept)
+          return 'decision "accept" needs "concept"';
+        if (value.decision === "clarify" && value.interpretations.length < 2) {
+          return 'decision "clarify" needs 2 or 3 "interpretations"';
+        }
+        if (value.decision !== "accept" && value.reason.trim() === "") {
+          return `decision "${value.decision}" needs a "reason" for the student`;
+        }
+        return null;
+      },
+      traceId: id,
+      signal,
+    });
+    return result.value;
+  }
+
+  private async judge(
+    ctx: RunContext,
+    title: string,
+    outline: Outline,
+  ): Promise<{ judgement: Judgement; fallback: boolean }> {
+    const prompt = buildJudgePrompt({
+      title,
+      outline,
+      language: ctx.input.language,
+      level: ctx.input.level,
+    });
+    const ask = async (role: LlmRole): Promise<Judgement> =>
+      (
+        await this.deps.llm.generateObject({
+          role,
+          ...prompt,
+          schema: JudgeSchema,
+          traceId: ctx.id,
+          signal: ctx.signal,
+        })
+      ).value;
+    try {
+      return { judgement: await ask("judge"), fallback: false };
+    } catch (error) {
+      if (!(error instanceof LlmError) || ctx.signal.aborted) throw error;
+      return { judgement: await ask("checker"), fallback: true };
+    }
+  }
+
+  private startScenes(ctx: RunContext, outline: Outline): SceneRun {
+    const controller = new AbortController();
+    const signal = AbortSignal.any([ctx.signal, controller.signal]);
+    const count = outline.plan.steps.length;
+    const results: Promise<SceneOutcome>[] = [];
+    let next = 0;
+    let active = 0;
+    const waiting: (() => void)[] = [];
+
+    const acquire = async (): Promise<void> => {
+      if (active < SCENE_CONCURRENCY) {
+        active += 1;
+        return;
+      }
+      await new Promise<void>((resolve) => waiting.push(resolve));
+    };
+    const release = (): void => {
+      const resume = waiting.shift();
+      if (resume) resume();
+      else active -= 1;
+    };
+
+    for (; next < count; next += 1) {
+      const index = next;
+      const task = (async (): Promise<SceneOutcome> => {
+        await acquire();
+        try {
+          return await this.writeScene(ctx, outline, index, signal);
+        } finally {
+          release();
+        }
+      })();
+      task.catch(() => undefined);
+      results.push(task);
+    }
+
+    return {
+      result: (index) => results[index] as Promise<SceneOutcome>,
+      abort: () => controller.abort(),
+    };
+  }
+
+  private async writeScene(
+    ctx: RunContext,
+    outline: Outline,
+    index: number,
+    signal: AbortSignal,
+  ): Promise<SceneOutcome> {
+    const { language, level } = ctx.input;
+    const target = `s${index + 1}`;
+    const checks = ["structure", "references", "model", "readability", "framing", "pedagogy"];
+    let attempts = 0;
+    let extra: string | undefined;
+    let reason = pipelineMessage(language, "dropped");
+
+    const drop = (): SceneOutcome => ({
+      scene: null,
+      verdict: { target, status: "dropped", attempts: Math.max(1, attempts), reason, checks },
+    });
+
+    for (let round = 1; round <= MAX_SCENE_ROUNDS; round += 1) {
+      let scene: Scene;
+      try {
+        const written = await this.deps.llm.generateObject({
+          role: "author",
+          ...buildScenePrompt({ outline, index, subject: ctx.subject, language, level, extra }),
+          schema: SceneSchema,
+          validate: (value) => {
+            value.id = target;
+            value.index = index;
+            const result = validateScene(value, outline);
+            return result.ok ? null : formatIssues(result.issues);
+          },
+          traceId: ctx.id,
+          signal,
+        });
+        attempts += written.attempts;
+        scene = written.value;
+      } catch (error) {
+        if (signal.aborted) throw error;
+        if (error instanceof LlmError) {
+          attempts += error.attempts;
+          return drop();
+        }
+        throw error;
+      }
+
+      let check: Check;
+      try {
+        check = (
+          await this.deps.llm.generateObject({
+            role: "checker",
+            ...buildCheckerPrompt({ outline, scene, language, level }),
+            schema: CheckSchema,
+            traceId: ctx.id,
+            signal,
+          })
+        ).value;
+      } catch (error) {
+        if (signal.aborted || !(error instanceof LlmError)) throw error;
+        return drop();
+      }
+
+      if (check.verdict === "valid") {
+        const narrated = await this.deps.voice.narrate(ctx.id, scene, language).catch(() => scene);
+        return {
+          scene: narrated,
+          verdict: {
+            target,
+            status: attempts === 1 ? "validated" : "corrected",
+            attempts,
+            reason: check.reason,
+            checks: [...checks, "accuracy"],
+          },
+        };
+      }
+      reason = check.reason;
+      extra = `A reviewer rejected your previous version of this scene. Fix this and write the scene again.\n${check.problem}`;
+    }
+    return drop();
+  }
+}
