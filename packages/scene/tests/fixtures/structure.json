@@ -1,0 +1,426 @@
+{
+  "language": "fr",
+  "payload": {
+    "version": 1,
+    "plan": {
+      "objective": "Replacer les grandes dates de la Révolution, ses causes, la synthèse des protéines et le jeu de l'offre et de la demande.",
+      "prerequisites": [],
+      "analogy": {
+        "name": "La planche de manuel",
+        "mapping": "Chaque notion est un repère sur la planche : une date, une étape, un lien de cause à effet."
+      },
+      "key_rule": {
+        "statement": "Une explication sans formule se lit comme une page de manuel : des repères alignés, des liens tracés à la règle."
+      },
+      "steps": [
+        {
+          "role": "hook",
+          "intent": "Situer cinq dates de la Révolution française.",
+          "visual": "Une frise de cinq événements."
+        },
+        {
+          "role": "mechanism",
+          "intent": "Suivre les quatre étapes de l'ADN à la protéine.",
+          "visual": "Quatre étapes numérotées côte à côte."
+        },
+        {
+          "role": "analogy",
+          "intent": "Relier les causes de la Révolution.",
+          "visual": "Un schéma de six notions reliées par des flèches."
+        },
+        {
+          "role": "example",
+          "intent": "Lire l'effet de l'offre et de la demande sur le prix.",
+          "visual": "Un schéma de relations et un tableau de lecture."
+        },
+        {
+          "role": "recap",
+          "intent": "Comparer la société avant et après 1789.",
+          "visual": "Deux tableaux côte à côte."
+        }
+      ]
+    },
+    "params": [],
+    "model": {
+      "constants": [],
+      "derived": []
+    },
+    "scenes": [
+      {
+        "id": "frise",
+        "index": 0,
+        "role": "hook",
+        "title": "La Révolution française en cinq dates",
+        "layout": "sequence",
+        "elements": [
+          {
+            "id": "dates",
+            "slot": "track",
+            "type": "timeline",
+            "events": [
+              {
+                "at": "5 mai 1789",
+                "label": "États généraux",
+                "detail": "Versailles"
+              },
+              {
+                "at": "20 juin 1789",
+                "label": "Jeu de paume",
+                "detail": "Le serment"
+              },
+              {
+                "at": "14 juil 1789",
+                "label": "Prise de la Bastille",
+                "detail": "Paris se soulève"
+              },
+              {
+                "at": "26 août 1789",
+                "label": "Droits de l'homme",
+                "detail": "Texte fondateur"
+              },
+              {
+                "at": "10 août 1792",
+                "label": "Chute du roi",
+                "detail": "Fin de la monarchie"
+              }
+            ]
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "La Révolution commence au printemps 1789 et renverse la monarchie en trois ans.",
+            "duration_ms": 4500,
+            "actions": [
+              {
+                "do": "show",
+                "targets": ["dates"],
+                "how": "draw",
+                "at": 0
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Le 14 juillet 1789, Paris prend la Bastille.",
+            "duration_ms": 3500,
+            "actions": [
+              {
+                "do": "highlight",
+                "targets": ["dates.e3"],
+                "at": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "proteine",
+        "index": 1,
+        "role": "mechanism",
+        "title": "De l'ADN à la protéine en quatre étapes",
+        "layout": "sequence",
+        "elements": [
+          {
+            "id": "etapes",
+            "slot": "track",
+            "type": "steps",
+            "items": [
+              {
+                "label": "Transcription",
+                "detail": "L'ADN est copié en ARN"
+              },
+              {
+                "label": "Sortie du noyau",
+                "detail": "L'ARN gagne le cytoplasme"
+              },
+              {
+                "label": "Traduction",
+                "detail": "Le ribosome lit les codons"
+              },
+              {
+                "label": "Repliement",
+                "detail": "La chaîne devient protéine"
+              }
+            ]
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Dans le noyau, l'ADN est d'abord copié en ARN messager.",
+            "duration_ms": 3000,
+            "actions": [
+              {
+                "do": "show",
+                "targets": ["etapes.s1", "etapes.s2"],
+                "how": "draw",
+                "at": 0
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Dans le cytoplasme, le ribosome lit l'ARN et assemble la chaîne.",
+            "duration_ms": 3000,
+            "actions": [
+              {
+                "do": "show",
+                "targets": ["etapes.s3", "etapes.s4"],
+                "how": "draw",
+                "at": 0
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "C'est la traduction qui fabrique la protéine.",
+            "duration_ms": 3000,
+            "actions": [
+              {
+                "do": "highlight",
+                "targets": ["etapes.s3"],
+                "at": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "causes",
+        "index": 2,
+        "role": "analogy",
+        "title": "Les causes de la Révolution",
+        "layout": "figure",
+        "elements": [
+          {
+            "id": "causes",
+            "slot": "figure",
+            "type": "relations",
+            "nodes": [
+              {
+                "id": "dette",
+                "label": "Crise financière"
+              },
+              {
+                "id": "inegal",
+                "label": "Inégalités sociales"
+              },
+              {
+                "id": "idees",
+                "label": "Idées des Lumières"
+              },
+              {
+                "id": "etats",
+                "label": "États généraux"
+              },
+              {
+                "id": "colere",
+                "label": "Colère du peuple"
+              },
+              {
+                "id": "revol",
+                "label": "Révolution de 1789"
+              }
+            ],
+            "edges": [
+              {
+                "from": "dette",
+                "to": "etats",
+                "label": "impôts"
+              },
+              {
+                "from": "dette",
+                "to": "colere"
+              },
+              {
+                "from": "inegal",
+                "to": "colere"
+              },
+              {
+                "from": "idees",
+                "to": "colere"
+              },
+              {
+                "from": "etats",
+                "to": "revol"
+              },
+              {
+                "from": "colere",
+                "to": "revol"
+              }
+            ]
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Trois causes profondes préparent la Révolution : l'argent, l'injustice et les idées.",
+            "duration_ms": 5000,
+            "actions": [
+              {
+                "do": "show",
+                "targets": ["causes"],
+                "how": "draw",
+                "at": 0
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "La colère du peuple est l'étincelle qui déclenche la Révolution de 1789.",
+            "duration_ms": 3500,
+            "actions": [
+              {
+                "do": "highlight",
+                "targets": ["causes.colere"],
+                "at": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "marche",
+        "index": 3,
+        "role": "example",
+        "title": "Offre, demande et prix",
+        "layout": "figure-notes",
+        "elements": [
+          {
+            "id": "marche",
+            "slot": "figure",
+            "type": "relations",
+            "nodes": [
+              {
+                "id": "offre",
+                "label": "Offre",
+                "role": "quantity"
+              },
+              {
+                "id": "demande",
+                "label": "Demande",
+                "role": "quantity"
+              },
+              {
+                "id": "prix",
+                "label": "Prix",
+                "role": "result"
+              }
+            ],
+            "edges": [
+              {
+                "from": "offre",
+                "to": "prix",
+                "label": "baisse"
+              },
+              {
+                "from": "demande",
+                "to": "prix",
+                "label": "hausse"
+              }
+            ]
+          },
+          {
+            "id": "lecture",
+            "slot": "notes",
+            "type": "table",
+            "columns": ["Si", "Alors"],
+            "rows": [
+              ["demande +", "prix +"],
+              ["offre +", "prix −"],
+              ["les deux +", "prix ="]
+            ]
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Le prix résulte de la rencontre de l'offre et de la demande.",
+            "duration_ms": 4000,
+            "actions": [
+              {
+                "do": "show",
+                "targets": ["marche"],
+                "how": "draw",
+                "at": 0
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Le tableau résume le sens de chaque variation.",
+            "duration_ms": 4000,
+            "actions": [
+              {
+                "do": "show",
+                "targets": ["lecture"],
+                "how": "draw",
+                "at": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "societe",
+        "index": 4,
+        "role": "recap",
+        "title": "La société avant et après 1789",
+        "layout": "compare",
+        "elements": [
+          {
+            "id": "ordres",
+            "slot": "figure_a",
+            "type": "table",
+            "columns": ["Ordre", "Part", "Impôt"],
+            "rows": [
+              ["Clergé", "0,5 %", "non"],
+              ["Noblesse", "1,5 %", "non"],
+              ["Tiers état", "98 %", "oui"]
+            ]
+          },
+          {
+            "id": "egalite",
+            "slot": "figure_b",
+            "type": "table",
+            "columns": ["Avant", "Après"],
+            "rows": [
+              ["trois ordres", "citoyens égaux"],
+              ["impôt inégal", "impôt pour tous"],
+              ["roi absolu", "roi encadré"]
+            ]
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "En 1789, deux ordres sur trois ne paient pas l'impôt.",
+            "duration_ms": 3500,
+            "actions": [
+              {
+                "do": "show",
+                "targets": ["ordres"],
+                "how": "fade",
+                "at": 0
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Après la nuit du 4 août, tous les citoyens sont égaux devant l'impôt.",
+            "duration_ms": 3500,
+            "actions": [
+              {
+                "do": "show",
+                "targets": ["egalite"],
+                "how": "fade",
+                "at": 0
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
