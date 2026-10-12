@@ -302,8 +302,15 @@ mesurer avec le script du jeu de référence. La mise en cache des consignes est
   répartiteur de confiance et un répertoire d'échange évitent de monter le socket Docker.
 - **Précaution**: la v0.22.0 date du 2026-10-08 et a retiré des options de ligne de commande ;
   la version est épinglée et la consigne d'écriture cible l'interface Python stable.
-- **Non vérifié**: le temps de rendu d'une scène de 60 secondes sur 2 à 4 cœurs — aucun
-  banc d'essai public ; à mesurer dès la première tâche du worker.
+- **Mesuré le 2026-10-13** dans le conteneur limité à 2 processeurs et 2 Go : une scène de
+  30 secondes en 1280 × 720 à 30 images par seconde, avec axes, courbe, tangente mobile et
+  formules LaTeX, est rendue en 20 secondes. Une version approfondie de 60 à 120 secondes
+  demande donc de l'ordre de 40 à 80 secondes de rendu, loin sous les 5 minutes visées.
+- **Isolation vérifiée** dans ce même conteneur (`network_mode: none`, racine en lecture
+  seule) : résolution de nom et connexion sortante refusées, seule l'interface de bouclage
+  existe, écriture refusée hors du volume d'échange et du répertoire temporaire, aucune
+  capacité Linux, aucune variable sensible. Un script important `os` est refusé au contrôle
+  statique. Reste à vérifier sous Dokploy.
 - **À réutiliser**: `makefinks/manim-generator` (MIT) pour la boucle écriture-relecture et
   `showlab/Code2Video` (MIT) pour ses consignes, comme sources d'inspiration.
 - **Alternatives considered**: un conteneur par rendu lancé via le socket Docker — rejeté :
@@ -343,7 +350,6 @@ mesurer avec le script du jeu de référence. La mise en cache des consignes est
 | Comportement du lecteur quand la durée augmente en cours de lecture (non documenté) | Coupure ou retour au début entre deux scènes | Prototype en première tâche technique ; reprise pilotée par la page ; repli : n'ajouter les scènes qu'aux pauses |
 | Latence de `deepseek-v4-pro` avec réflexion (non mesurée) | Première scène au-delà de 15 secondes | Vérification du plan en parallèle de la scène 1 ; mesure par le jeu de référence ; repli par configuration |
 | Réponses JSON vides ou hors schéma | Scènes à refaire, délai | Validation et nouvelle demande, deux fois au plus ; scène écartée ensuite |
-| Temps de rendu Manim (non mesuré) | Version approfondie au-delà de 5 minutes | Mesure précoce ; qualité `-qm` ; durée visée réduite si besoin |
 | `network_mode: none` sous Dokploy (non testé) | Bac à sable refusé au déploiement | Déployer ce service en premier ; repli sur un réseau `internal` dédié |
 | Voix Kokoro en français de qualité moyenne | Narration moins naturelle quand Azure est indisponible | Azure en principal ; audio des références versionné |
 | Tarifs DeepSeek doublés en heures de pointe | Coût doublé, sans effet sur le fonctionnement | Limitation de débit ; cache |

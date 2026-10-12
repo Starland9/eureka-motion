@@ -110,7 +110,7 @@ parcours dépendent.
 - [X] T009 [P] [S] Écrire `scripts/bench-llm.ts` : en mode JSON, mesurer délai jusqu'au premier jeton, jetons par seconde et durée totale pour `deepseek-flash` (réflexion désactivée) et `deepseek-v4-pro` (réflexion activée) sur trois consignes de 150, 600 et 700 jetons de sortie ; l'exécuter et reporter les mesures dans research.md § 5.1.
   - Lire : research.md § 5.1 et § 5.2 ; contracts/llm-provider.md § 3. Dépend de l'action A1.
   - Réussite : `pnpm tsx scripts/bench-llm.ts` affiche un tableau de mesures ; research.md § 5.1 indique si le rôle `judge` tient en 7,5 s.
-- [ ] T010 [P] [O] Prototyper le bac à sable dans `workers/manim/` : `Dockerfile` basé sur `manimcommunity/manim:v0.22.0`, exécutant minimal lisant `sandbox/in/`, service `manim` dans `deploy/docker-compose.dev.yml` avec `network_mode: none`, `read_only`, `tmpfs`, `cap_drop: [ALL]`, `security_opt`, `cpus`, `mem_limit`, `pids_limit` ; mesurer le rendu de deux scènes d'essai de 30 et 60 secondes en `-qm` et consigner les temps dans research.md § 7.
+- [X] T010 [P] [O] Prototyper le bac à sable dans `workers/manim/` : `Dockerfile` basé sur `manimcommunity/manim:v0.22.0`, exécutant minimal lisant `sandbox/in/`, service `manim` dans `deploy/docker-compose.dev.yml` avec `network_mode: none`, `read_only`, `tmpfs`, `cap_drop: [ALL]`, `security_opt`, `cpus`, `mem_limit`, `pids_limit` ; mesurer le rendu de deux scènes d'essai de 30 et 60 secondes en `-qm` et consigner les temps dans research.md § 7.
   - Lire : contracts/workers.md § 5 ; research.md § 7 et § 8.
   - Réussite : un fichier déposé produit une vidéo et un `.json` ; depuis le conteneur, une connexion sortante et une écriture hors volume échouent ; research.md § 7 contient les temps mesurés.
 

@@ -36,5 +36,30 @@ services:
       retries: 6
       start_period: 90s
 
+  manim:
+    build:
+      context: ../workers/manim
+    restart: unless-stopped
+    network_mode: none
+    read_only: true
+    user: "1000:1000"
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    cpus: 2
+    mem_limit: 2g
+    pids_limit: 256
+    tmpfs:
+      - /tmp:size=1g,mode=1777
+    volumes:
+      - ../sandbox:/sandbox
+    healthcheck:
+      test: ["CMD-SHELL", "find /sandbox/out/.heartbeat -mmin -1 | grep -q ."]
+      interval: 15s
+      timeout: 5s
+      retries: 4
+      start_period: 20s
+
 volumes:
   db-data:
