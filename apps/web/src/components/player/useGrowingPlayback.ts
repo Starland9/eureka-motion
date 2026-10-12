@@ -1,14 +1,14 @@
 "use client";
 
 import type { PlayerRef } from "@remotion/player";
-import { useEffect, useRef, useState, type RefObject } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export interface GrowingPlayback {
   waiting: boolean;
 }
 
 export function useGrowingPlayback(
-  ref: RefObject<PlayerRef | null>,
+  player: PlayerRef | null,
   durationInFrames: number,
   complete: boolean,
 ): GrowingPlayback {
@@ -16,7 +16,6 @@ export function useGrowingPlayback(
   const [waiting, setWaiting] = useState(false);
 
   useEffect(() => {
-    const player = ref.current;
     if (!player) return;
     const onEnded = (): void => {
       if (complete) return;
@@ -25,17 +24,16 @@ export function useGrowingPlayback(
     };
     player.addEventListener("ended", onEnded);
     return () => player.removeEventListener("ended", onEnded);
-  }, [ref, durationInFrames, complete]);
+  }, [player, durationInFrames, complete]);
 
   useEffect(() => {
-    const player = ref.current;
     const from = waitingFrom.current;
     if (!player || from === null || durationInFrames <= from) return;
     waitingFrom.current = null;
     setWaiting(false);
     player.seekTo(from);
     player.play();
-  }, [ref, durationInFrames]);
+  }, [player, durationInFrames]);
 
   useEffect(() => {
     if (complete && waitingFrom.current !== null) {

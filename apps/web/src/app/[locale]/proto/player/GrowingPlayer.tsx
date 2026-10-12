@@ -17,7 +17,7 @@ interface LogEntry {
 }
 
 export function GrowingPlayer({ document }: { document: ExplanationDocument }) {
-  const ref = useRef<PlayerRef>(null);
+  const [player, setPlayer] = useState<PlayerRef | null>(null);
   const started = useRef(0);
   const [count, setCount] = useState(1);
   const [log, setLog] = useState<LogEntry[]>([]);
@@ -33,7 +33,7 @@ export function GrowingPlayer({ document }: { document: ExplanationDocument }) {
   const scenes = useMemo(() => allScenes.slice(0, count), [allScenes, count]);
   const duration = explanationDurationInFrames(scenes);
   const complete = count >= allScenes.length;
-  const { waiting } = useGrowingPlayback(ref, duration, complete);
+  const { waiting } = useGrowingPlayback(player, duration, complete);
   const durationRef = useRef(duration);
   useEffect(() => {
     durationRef.current = duration;
@@ -61,7 +61,6 @@ export function GrowingPlayer({ document }: { document: ExplanationDocument }) {
   }, [allScenes.length]);
 
   useEffect(() => {
-    const player = ref.current;
     if (!player) return;
     const record = (event: string) => (): void => {
       setLog((entries) => [
@@ -80,12 +79,12 @@ export function GrowingPlayer({ document }: { document: ExplanationDocument }) {
     return () => {
       for (const [name, handler] of handlers) player.removeEventListener(name, handler);
     };
-  }, []);
+  }, [player]);
 
   return (
     <main>
       <Player
-        ref={ref}
+        ref={setPlayer}
         component={Explanation}
         inputProps={inputProps}
         durationInFrames={duration}
@@ -95,7 +94,7 @@ export function GrowingPlayer({ document }: { document: ExplanationDocument }) {
         style={{ width: 960 }}
         acknowledgeRemotionLicense
       />
-      <button type="button" data-testid="play" onClick={(event) => ref.current?.play(event)}>
+      <button type="button" data-testid="play" onClick={(event) => player?.play(event)}>
         play
       </button>
       <output data-testid="status">

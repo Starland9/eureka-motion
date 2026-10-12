@@ -20,7 +20,8 @@ export const EXPLANATION_ID_PATTERN = /^[23456789abcdefghjkmnpqrstuvwxyz]{12}$/;
 
 export function newExplanationId(): string {
   let id = "";
-  for (let i = 0; i < EXPLANATION_ID_LENGTH; i += 1) id += ID_ALPHABET[randomInt(ID_ALPHABET.length)];
+  for (let i = 0; i < EXPLANATION_ID_LENGTH; i += 1)
+    id += ID_ALPHABET[randomInt(ID_ALPHABET.length)];
   return id;
 }
 

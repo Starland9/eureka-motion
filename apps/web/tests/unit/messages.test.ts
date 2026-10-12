@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
-import en from "../../messages/en.json";
-import fr from "../../messages/fr.json";
+import { messages } from "@/i18n/messages";
+
+const { fr, en } = messages;
 
 function leaves(tree: unknown, path = ""): [string, unknown][] {
   if (typeof tree === "object" && tree !== null && !Array.isArray(tree)) {
