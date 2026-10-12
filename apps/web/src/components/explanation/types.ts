@@ -49,7 +49,7 @@ export interface ExplanationState {
   refusal: string | null;
   error: { code: string; message: string; retryAfterSeconds?: number } | null;
   shareUrl: string | null;
-  provider: string | null;
+  generator: { provider: string; model: string } | null;
   timings: Record<string, number>;
   lastSeq: number;
 }
@@ -96,7 +96,7 @@ export function initialExplanationState(
     refusal: null,
     error: null,
     shareUrl: null,
-    provider: null,
+    generator: null,
     timings: {},
     lastSeq: 0,
   };
@@ -104,4 +104,16 @@ export function initialExplanationState(
 
 export function isComplete(state: Pick<ExplanationState, "status">): boolean {
   return FINAL_STATUSES.has(state.status);
+}
+
+export type StartOutcome =
+  | { kind: "accepted"; id: string }
+  | { kind: "rejected"; code: string; message: string; retryAfterSeconds?: number };
+
+export interface ExplanationStream {
+  state: ExplanationState | null;
+  startedHere: boolean;
+  start(request: StartRequest): Promise<StartOutcome>;
+  open(id: string): void;
+  reset(): void;
 }

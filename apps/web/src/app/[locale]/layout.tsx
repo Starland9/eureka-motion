@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import { fontFaceCss, PRELOAD_FONT_FILES } from "scene";
+import { ExplanationSessionProvider } from "@/components/explanation/ExplanationSession";
 import { Toaster } from "@/components/ui/sonner";
 import { localeFromParams } from "@/i18n/params";
 import { routing } from "@/i18n/routing";
@@ -47,7 +48,9 @@ export default async function LocaleLayout({ children, params }: Props) {
         <a className="skip-link" href="#content">
           {t("skipToContent")}
         </a>
-        <NextIntlClientProvider>{children}</NextIntlClientProvider>
+        <NextIntlClientProvider>
+          <ExplanationSessionProvider>{children}</ExplanationSessionProvider>
+        </NextIntlClientProvider>
         <Toaster containerAriaLabel={t("notifications")} />
       </body>
     </html>

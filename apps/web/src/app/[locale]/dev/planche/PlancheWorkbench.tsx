@@ -1,13 +1,9 @@
 "use client";
 
-import { useMemo } from "react";
 import type { ExplanationDocument } from "scene";
+import { DevPlayback } from "@/components/dev/DevPlayback";
 import { Planche } from "@/components/player/Planche";
-import {
-  PlaybackProvider,
-  usePlayback,
-  usePlaybackPosition,
-} from "@/components/player/PlaybackProvider";
+import { usePlayback, usePlaybackPosition } from "@/components/player/PlaybackProvider";
 
 function Status() {
   const playback = usePlayback();
@@ -40,24 +36,14 @@ function Buttons() {
   );
 }
 
-export function PlancheProto({ document }: { document: ExplanationDocument }) {
-  const explanation = useMemo(
-    () => ({
-      scenes: document.scenes,
-      params: document.params,
-      model: document.model,
-      language: "fr" as const,
-      complete: true,
-    }),
-    [document],
-  );
+export function PlancheWorkbench({ document }: { document: ExplanationDocument }) {
   return (
     <main className="page-width py-6">
-      <PlaybackProvider explanation={explanation} autoPlay={false}>
+      <DevPlayback document={document}>
         <Planche />
         <Buttons />
         <Status />
-      </PlaybackProvider>
+      </DevPlayback>
     </main>
   );
 }

@@ -17,7 +17,7 @@ for (const [name, width, height, dark] of [
   page.on("console", (message) => {
     if (message.type() === "error") errors.push(message.text());
   });
-  await page.goto("http://localhost:3000/fr/proto/planche", { waitUntil: "networkidle" });
+  await page.goto("http://localhost:3000/fr/dev/planche", { waitUntil: "networkidle" });
   console.log(name, "initial", await page.getByTestId("status").textContent());
   await page.getByTestId("scene3").click();
   await page.waitForTimeout(300);
