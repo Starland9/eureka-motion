@@ -188,16 +188,31 @@ describe("vector", () => {
     expect(long.tip[0] - short.tip[0]).toBeCloseTo(2 * short.scale);
   });
 
-  it("follows the object it is attached to", () => {
+  it("starts at the edge of the object it is attached to, and follows it", () => {
     const attached = vector({ from: "o", to: [3, 0] });
+    const edgeFrom = (run: ReturnType<typeof draw>, centre: [number, number]) => {
+      const clear = run.scale * 0.58 + 0.4 * run.ctx.u;
+      const from = run.toPx(centre);
+      const to = run.toPx([3, 0]);
+      const length = Math.hypot(to[0] - from[0], to[1] - from[1]);
+      return [
+        from[0] + ((to[0] - from[0]) / length) * clear,
+        from[1] + ((to[1] - from[1]) / length) * clear,
+      ] as const;
+    };
     const first = draw(attached, { others: [ball], frame: 0 });
-    expectPoint(ends(first.container.querySelector("line")!)[0], first.toPx([0, 0]));
+    expectPoint(ends(first.container.querySelector("line")!)[0], edgeFrom(first, [0, 0]));
     const last = draw(attached, { others: [ball], actions: [moveBall], frame: "end" });
-    expectPoint(ends(last.container.querySelector("line")!)[0], last.toPx([1, 1]));
+    expectPoint(ends(last.container.querySelector("line")!)[0], edgeFrom(last, [1, 1]));
     const between = draw(attached, { others: [ball], actions: [moveBall], frame: MOVING });
     const origin = ends(between.container.querySelector("line")!)[0];
-    expect(origin[0]).toBeGreaterThan(between.toPx([0, 0])[0]);
-    expect(origin[0]).toBeLessThan(between.toPx([1, 1])[0]);
+    expect(origin[0]).toBeGreaterThan(edgeFrom(between, [0, 0])[0]);
+    expect(origin[0]).toBeLessThan(edgeFrom(between, [1, 1])[0]);
+  });
+
+  it("keeps its tip where the document puts it when it leaves an object", () => {
+    const { container, toPx } = draw(vector({ from: "o", to: [3, 0] }), { others: [ball] });
+    expectPoint(pointsOf(container.querySelector("polygon")!)[0], toPx([3, 0]));
   });
 
   it("aims at an object for `toward` and follows it too", () => {
@@ -269,7 +284,7 @@ describe("vector", () => {
     expect(lines).toHaveLength(2);
     const [band, shaft] = pair(lines);
     expect(band.getAttribute("stroke")).toBe(ctx.theme.role.result);
-    expect(num(band, "stroke-width")).toBeCloseTo(2.2 * ctx.u);
+    expect(num(band, "stroke-width")).toBeCloseTo(1.6 * ctx.u);
     expect(band.getAttribute("stroke-linecap")).toBe("square");
     expect(num(band, "stroke-dashoffset")).toBe(0);
     expect(shaft.getAttribute("stroke")).toBe(ctx.theme.ink);
@@ -385,7 +400,7 @@ describe("segment", () => {
     const { container, ctx } = draw(segment(), { actions: [highlight("s")], frame: "end" });
     const [band, line] = pair([...container.querySelectorAll("line")]);
     expect(band.getAttribute("stroke")).toBe(ctx.theme.role.result);
-    expect(num(band, "stroke-width")).toBeCloseTo(2.2 * ctx.u);
+    expect(num(band, "stroke-width")).toBeCloseTo(1.6 * ctx.u);
     expect(line.getAttribute("stroke")).toBe(ctx.theme.ink);
   });
 
@@ -534,7 +549,7 @@ describe("dimension", () => {
       (line) => line.getAttribute("stroke") === ctx.theme.role.result,
     );
     expect(bands).toHaveLength(2);
-    expect(num(bands[0], "stroke-width")).toBeCloseTo(2.2 * ctx.u);
+    expect(num(bands[0], "stroke-width")).toBeCloseTo(1.6 * ctx.u);
   });
 
   describe.each(THEME_NAMES)("in the %s theme", (theme) => {

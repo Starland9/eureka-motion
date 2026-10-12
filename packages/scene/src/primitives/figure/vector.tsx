@@ -1,4 +1,5 @@
 import type { PrimitiveProps } from "../../composition/context";
+import { resolve } from "../../expr";
 import { vectorEnd } from "../../schema/geometry";
 import { ARROW_HEAD_U, ArrowHead, drawStyle, FigureLabel, strokeWidth } from "../shared";
 import { HighlightBand } from "./b-band";
@@ -16,14 +17,29 @@ import {
 const HEAD_HALF_WIDTH = 0.38;
 const HEAD_OVERLAP_U = 0.1;
 const HEAD_APPEARS_AT = 0.92;
+const OBJECT_REACH = 0.58;
+const OBJECT_GAP_U = 0.4;
+const MIN_SHAFT_HEADS = 1.6;
 
 export function VectorPrimitive({ element, ctx }: PrimitiveProps<"vector">) {
   const space = figureSpace(ctx);
-  const origin = space?.anchor(element.from);
+  const centre = space?.anchor(element.from);
   const tipWorld = space ? vectorEnd(element, space.lookup, ctx.scope) : null;
-  const tip = space && tipWorld ? space.px(tipWorld) : null;
-  const arrow = origin && tip ? toward(origin, tip) : null;
-  if (!origin || !tip || !arrow) return null;
+  const aimed = space && tipWorld ? space.px(tipWorld) : null;
+  const direction = centre && aimed ? toward(centre, aimed) : null;
+  if (!space || !centre || !aimed || !direction) return null;
+
+  // A vector that leaves a pictogram starts at its edge, not under its drawing.
+  const source = typeof element.from === "string" ? space.lookup.get(element.from) : undefined;
+  const clear =
+    source?.type === "object"
+      ? resolve(source.size, ctx.scope) * space.scale * OBJECT_REACH + OBJECT_GAP_U * ctx.u
+      : 0;
+  const origin = along(centre, direction.unit, clear);
+  const shortest = clear > 0 ? ARROW_HEAD_U * ctx.u * MIN_SHAFT_HEADS : 0;
+  const tip = along(origin, direction.unit, Math.max(direction.length - clear, shortest));
+  const arrow = toward(origin, tip);
+  if (!arrow) return null;
 
   const state = ctx.state.of(element.id);
   const colour = lineColour(ctx, element.role);

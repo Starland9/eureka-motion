@@ -11,7 +11,7 @@ const TEXT_HEIGHT = 0.8;
 const GAP_U = 0.6;
 const GAP_OVER_BAND_U = 1.4;
 
-export const BAND_WIDTH_U = 2.2;
+export const BAND_WIDTH_U = 1.6;
 
 export interface LabelBox {
   width: number;
