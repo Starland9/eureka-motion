@@ -1,0 +1,554 @@
+{
+  "language": "fr",
+  "payload": {
+    "version": 1,
+    "plan": {
+      "objective": "Savoir lire et construire les figures de base de la physique et de la géométrie : forces, cotes, angles.",
+      "prerequisites": [
+        "Savoir tracer une flèche pour une force",
+        "Connaître le triangle rectangle"
+      ],
+      "analogy": {
+        "name": "La planche de manuel",
+        "mapping": "Chaque trait de la figure joue le rôle d'une grandeur : une flèche pour une force, une cote pour une longueur, un arc pour un angle."
+      },
+      "key_rule": {
+        "statement": "Sur un plan incliné à l'équilibre, la réaction normale vaut P cos α et le frottement P sin α.",
+        "formula": "\\a{f} = \\a{P} \\sin \\q{\\alpha}"
+      },
+      "steps": [
+        {
+          "role": "mechanism",
+          "intent": "Montrer les trois forces sur un bloc posé sur un plan incliné.",
+          "visual": "Un plan incliné, un bloc, trois flèches et l'angle de la pente."
+        },
+        {
+          "role": "example",
+          "intent": "Lire les trois côtés et les angles d'un triangle rectangle.",
+          "visual": "Un triangle rectangle coté sur ses trois côtés."
+        },
+        {
+          "role": "recap",
+          "intent": "Comparer un cercle et deux points à distance.",
+          "visual": "Un disque avec rayon et secteur hachuré, deux points et leur cote."
+        }
+      ]
+    },
+    "params": [
+      {
+        "id": "alpha",
+        "symbol": "α",
+        "label": "Angle du plan",
+        "unit": "°",
+        "min": 25,
+        "max": 40,
+        "step": 1,
+        "default": 30,
+        "role": "quantity"
+      }
+    ],
+    "model": {
+      "constants": [],
+      "derived": [
+        {
+          "id": "ar",
+          "expr": "alpha * pi / 180",
+          "unit": "rad",
+          "label": "Angle en radians"
+        },
+        {
+          "id": "ca",
+          "expr": "cos(ar)",
+          "unit": "",
+          "label": "Cosinus de l'angle"
+        },
+        {
+          "id": "sa",
+          "expr": "sin(ar)",
+          "unit": "",
+          "label": "Sinus de l'angle"
+        },
+        {
+          "id": "cx",
+          "expr": "-5.2 + 4.9 * ca - 0.6 * sa",
+          "unit": "",
+          "label": "Abscisse du bloc"
+        },
+        {
+          "id": "cy",
+          "expr": "-3 + 4.9 * sa + 0.6 * ca",
+          "unit": "",
+          "label": "Ordonnée du bloc"
+        }
+      ]
+    },
+    "scenes": [
+      {
+        "id": "s1",
+        "index": 0,
+        "role": "mechanism",
+        "title": "Un bloc sur un plan incliné",
+        "layout": "figure-notes",
+        "world": {
+          "x": [-6, 6],
+          "y": [-3.5, 3.5]
+        },
+        "elements": [
+          {
+            "id": "floor",
+            "slot": "figure",
+            "type": "shape",
+            "kind": "rect",
+            "center": [0, -3.2],
+            "width": 11.4,
+            "height": 0.4,
+            "fill": "hatch"
+          },
+          {
+            "id": "slope",
+            "slot": "figure",
+            "type": "shape",
+            "kind": "polygon",
+            "points": [
+              [-5.2, -3],
+              [
+                {
+                  "expr": "-5.2 + 9.4 * ca"
+                },
+                -3
+              ],
+              [
+                {
+                  "expr": "-5.2 + 9.4 * ca"
+                },
+                {
+                  "expr": "-3 + 9.4 * sa"
+                }
+              ]
+            ]
+          },
+          {
+            "id": "block",
+            "slot": "figure",
+            "type": "shape",
+            "kind": "polygon",
+            "points": [
+              [
+                {
+                  "expr": "cx - 0.7 * ca + 0.6 * sa"
+                },
+                {
+                  "expr": "cy - 0.7 * sa - 0.6 * ca"
+                }
+              ],
+              [
+                {
+                  "expr": "cx + 0.7 * ca + 0.6 * sa"
+                },
+                {
+                  "expr": "cy + 0.7 * sa - 0.6 * ca"
+                }
+              ],
+              [
+                {
+                  "expr": "cx + 0.7 * ca - 0.6 * sa"
+                },
+                {
+                  "expr": "cy + 0.7 * sa + 0.6 * ca"
+                }
+              ],
+              [
+                {
+                  "expr": "cx - 0.7 * ca - 0.6 * sa"
+                },
+                {
+                  "expr": "cy - 0.7 * sa + 0.6 * ca"
+                }
+              ]
+            ]
+          },
+          {
+            "id": "weight",
+            "slot": "figure",
+            "type": "vector",
+            "from": "block",
+            "toward": [
+              {
+                "expr": "cx"
+              },
+              -10
+            ],
+            "length": 2,
+            "label": "P",
+            "role": "action"
+          },
+          {
+            "id": "reaction",
+            "slot": "figure",
+            "type": "vector",
+            "from": "block",
+            "toward": [
+              {
+                "expr": "cx - sa"
+              },
+              {
+                "expr": "cy + ca"
+              }
+            ],
+            "length": {
+              "expr": "2 * ca"
+            },
+            "label": "N",
+            "role": "action"
+          },
+          {
+            "id": "friction",
+            "slot": "figure",
+            "type": "vector",
+            "from": "block",
+            "toward": [
+              {
+                "expr": "cx + ca"
+              },
+              {
+                "expr": "cy + sa"
+              }
+            ],
+            "length": {
+              "expr": "2 * sa"
+            },
+            "label": "f",
+            "role": "action"
+          },
+          {
+            "id": "tilt",
+            "slot": "figure",
+            "type": "angle",
+            "vertex": [-5.2, -3],
+            "from": [
+              {
+                "expr": "-5.2 + 9.4 * ca"
+              },
+              -3
+            ],
+            "to": [
+              {
+                "expr": "-5.2 + 9.4 * ca"
+              },
+              {
+                "expr": "-3 + 9.4 * sa"
+              }
+            ],
+            "label": "α",
+            "role": "quantity"
+          },
+          {
+            "id": "note_a",
+            "slot": "notes",
+            "type": "text",
+            "text": "Le poids tire vers le bas."
+          },
+          {
+            "id": "note_b",
+            "slot": "notes",
+            "type": "text",
+            "text": "Le sol répond par N et f."
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Un bloc repose sur un plan incliné.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": ["floor", "slope", "block"],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Son poids est une flèche verticale, toujours dirigée vers le bas.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": ["weight"],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": ["note_a"],
+                "how": "type"
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Le plan répond par une réaction normale et par un frottement.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": ["reaction", "friction"],
+                "how": "draw",
+                "at": 0
+              },
+              {
+                "do": "show",
+                "targets": ["note_b"],
+                "how": "type"
+              }
+            ]
+          },
+          {
+            "id": "b4",
+            "narration": "Tout dépend de l'angle de la pente.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": ["tilt"],
+                "how": "draw"
+              },
+              {
+                "do": "highlight",
+                "targets": ["friction"],
+                "at": 0.5
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s2",
+        "index": 1,
+        "role": "example",
+        "title": "Les côtés d'un triangle rectangle",
+        "layout": "figure",
+        "world": {
+          "x": [-8, 8],
+          "y": [-3, 3]
+        },
+        "elements": [
+          {
+            "id": "tri",
+            "slot": "figure",
+            "type": "shape",
+            "kind": "polygon",
+            "points": [
+              [-2.4, -2],
+              [2.4, -2],
+              [2.4, 1.6]
+            ]
+          },
+          {
+            "id": "dim_b",
+            "slot": "figure",
+            "type": "dimension",
+            "from": [-2.4, -2],
+            "to": [2.4, -2],
+            "label": "b"
+          },
+          {
+            "id": "dim_a",
+            "slot": "figure",
+            "type": "dimension",
+            "from": [2.4, -2],
+            "to": [2.4, 1.6],
+            "label": "a"
+          },
+          {
+            "id": "dim_c",
+            "slot": "figure",
+            "type": "dimension",
+            "from": [-2.4, -2],
+            "to": [2.4, 1.6],
+            "label": "c",
+            "offset": 0.9
+          },
+          {
+            "id": "square",
+            "slot": "figure",
+            "type": "angle",
+            "vertex": [2.4, -2],
+            "from": [-2.4, -2],
+            "to": [2.4, 1.6]
+          },
+          {
+            "id": "theta",
+            "slot": "figure",
+            "type": "angle",
+            "vertex": [-2.4, -2],
+            "from": [2.4, -2],
+            "to": [2.4, 1.6],
+            "label": "θ",
+            "role": "quantity"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Voici un triangle rectangle : un angle droit, deux côtés qui l'entourent.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": ["tri", "square"],
+                "how": "draw"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "On mesure chaque côté avec une cote, comme sur un plan technique.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": ["dim_b", "dim_a", "dim_c"],
+                "how": "draw"
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "L'angle aigu θ compare le côté opposé à l'hypoténuse.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": ["theta"],
+                "how": "draw"
+              },
+              {
+                "do": "highlight",
+                "targets": ["dim_c"],
+                "at": 0.6
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s3",
+        "index": 2,
+        "role": "recap",
+        "title": "Un disque, deux points",
+        "layout": "compare",
+        "world": {
+          "x": [-5, 5],
+          "y": [-3.9, 3.9]
+        },
+        "elements": [
+          {
+            "id": "disc",
+            "slot": "figure_a",
+            "type": "shape",
+            "kind": "circle",
+            "center": [0, 0],
+            "radius": 2.9
+          },
+          {
+            "id": "sector",
+            "slot": "figure_a",
+            "type": "shape",
+            "kind": "arc",
+            "center": [0, 0],
+            "radius": 2.9,
+            "startDeg": 0,
+            "endDeg": 60,
+            "fill": "hatch",
+            "label": "S"
+          },
+          {
+            "id": "radius",
+            "slot": "figure_a",
+            "type": "segment",
+            "from": [0, 0],
+            "to": [-2.05, 2.05],
+            "label": "r"
+          },
+          {
+            "id": "pa",
+            "slot": "figure_b",
+            "type": "point",
+            "at": [-3, 1.4],
+            "label": "A"
+          },
+          {
+            "id": "pb",
+            "slot": "figure_b",
+            "type": "point",
+            "at": [3, -1.2],
+            "label": "B"
+          },
+          {
+            "id": "link",
+            "slot": "figure_b",
+            "type": "segment",
+            "from": [-3, 1.4],
+            "to": [3, -1.2],
+            "style": "dashed"
+          },
+          {
+            "id": "gap",
+            "slot": "figure_b",
+            "type": "dimension",
+            "from": [-3, 1.4],
+            "to": [3, -1.2],
+            "label": "d"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "À gauche, un disque, son rayon et un secteur hachuré.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": ["disc"],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": ["radius", "sector"],
+                "how": "draw",
+                "at": 0.5
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "À droite, deux points reliés par un trait pointillé.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": ["pa", "pb"],
+                "how": "fade",
+                "at": 0
+              },
+              {
+                "do": "show",
+                "targets": ["link"],
+                "how": "draw",
+                "at": 0.3
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "La cote donne la distance entre les deux points.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": ["gap"],
+                "how": "draw"
+              },
+              {
+                "do": "highlight",
+                "targets": ["sector"],
+                "at": 0.6
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
