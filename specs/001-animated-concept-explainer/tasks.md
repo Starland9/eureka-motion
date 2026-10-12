@@ -173,7 +173,7 @@ parcours dépendent.
 
 ### Revue
 
-- [ ] T027 [S] Créer la page de développement `apps/web/src/app/[locale]/dev/gallery/page.tsx` : elle joue dans un `<Player>` chaque document de `packages/scene/tests/fixtures/`, avec bascule Papier / Tableau ; la page répond 404 quand `NODE_ENV` vaut `production`.
+- [X] T027 [S] Créer la page de développement `apps/web/src/app/[locale]/dev/gallery/page.tsx` : elle joue dans un `<Player>` chaque document de `packages/scene/tests/fixtures/`, avec bascule Papier / Tableau ; la page répond 404 quand `NODE_ENV` vaut `production`.
   - Lire : contracts/scene-schema.md § 4. Dépend de T020 à T024.
   - Réussite : la page affiche chaque document d'essai sans erreur de console, dans les deux thèmes.
 - [ ] T028 [O] Point de contrôle : relire le moteur (schéma, validation, composition, primitives) sur la page de galerie, corriger les écarts au design system et aux contrats, vérifier `pnpm typecheck && pnpm lint && pnpm test`.
