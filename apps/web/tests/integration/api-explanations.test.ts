@@ -1,4 +1,4 @@
-import { DocumentSchema, type Scene } from "scene";
+import { DocumentSchema, typesetTexts, type Scene } from "scene";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import reference from "../../../../content/reference/physics.universal-gravitation.fr.json";
 import { POST } from "../../src/app/api/explanations/route";
@@ -31,7 +31,7 @@ vi.mock("../../src/server/llm", async (importOriginal) => ({
   getLlm: () => ({ health: llm.health }),
 }));
 
-const document = DocumentSchema.parse(reference.payload);
+const document = typesetTexts(DocumentSchema.parse(reference.payload), "fr");
 const ORIGIN = "http://localhost:3000";
 const BODY = { question: reference.question, language: "fr", level: "lycee" } as const;
 const SECRET = "connection refused to postgres://admin:hunter2@10.0.0.5:5432/eureka";

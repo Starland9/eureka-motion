@@ -217,8 +217,8 @@ describe("list", () => {
       expect(numeral.style.color).toBe(rgb(theme.inkFaint));
       expect(numeral.style.fontFamily).toContain("IBM Plex Mono");
       expect(row.textContent).toBe(`${index + 1}${list.items[index]}`);
+      expect(row.style.color).toBe(rgb(theme.ink));
     });
-    expect(root.style.color).toBe(rgb(theme.ink));
   });
 
   it("uses the reading size when it fits and a smaller one when it does not", () => {
@@ -248,8 +248,12 @@ describe("list", () => {
 
   it("is hidden before its show", () => {
     const beats = beatOf(show("l", "fade", 0.5));
-    expect(mount(list, { ...statement, beats, frame: 0 }).root.style.opacity).toBe("0");
-    expect(mount(list, { ...statement, beats, frame: "end" }).root.style.opacity).toBe("1");
+    const opacities = (frame: number | "end") =>
+      [...mount(list, { ...statement, beats, frame }).root.children].map(
+        (row) => (row as HTMLElement).style.opacity,
+      );
+    expect(opacities(0)).toEqual(["0", "0", "0"]);
+    expect(opacities("end")).toEqual(["1", "1", "1"]);
   });
 
   it("changes the background when highlighted", () => {
@@ -257,6 +261,13 @@ describe("list", () => {
     const result = rgb(getTheme("paper").role.result);
     expect(fills(mount(list, statement).container, result)).toHaveLength(0);
     expect(fills(mount(list, { ...statement, beats }).container, result)).toHaveLength(3);
+  });
+
+  it("highlights a single item when the action targets it", () => {
+    const beats = beatOf(show("l", "fade"), highlight("l.i2"));
+    const result = rgb(getTheme("paper").role.result);
+    const rows = [...mount(list, { ...statement, beats }).root.children] as HTMLElement[];
+    expect(rows.map((row) => fills(row, result).length)).toEqual([0, 1, 0]);
   });
 });
 

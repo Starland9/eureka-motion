@@ -13,7 +13,6 @@ export function ListPrimitive({ element, ctx }: PrimitiveProps<"list">) {
     <div
       lang={ctx.language}
       style={{
-        opacity: state.opacity,
         display: "flex",
         flexDirection: "column",
         gap: size * BLOCK_GAP_EM,
@@ -21,35 +20,39 @@ export function ListPrimitive({ element, ctx }: PrimitiveProps<"list">) {
         fontSize: size,
         lineHeight: LINE_HEIGHT,
         textWrap: "pretty",
-        color: highlightTextColour(ctx, state, ctx.theme.ink),
       }}
     >
-      {element.items.map((item, index) => (
-        <div
-          key={index}
-          style={{
-            display: "flex",
-            alignItems: "baseline",
-            opacity: typing ? Math.min(1, Math.max(0, state.progress * count - index)) : 1,
-          }}
-        >
-          <span
+      {element.items.map((item, index) => {
+        const part = ctx.state.of(`${element.id}.i${index + 1}`);
+        const typed = typing ? Math.min(1, Math.max(0, state.progress * count - index)) : 1;
+        return (
+          <div
+            key={index}
             style={{
-              flex: "none",
-              width: column,
-              fontFamily: fontOf("mono"),
-              fontSize: numeralSize,
-              fontVariantNumeric: "tabular-nums",
-              color: highlightTextColour(ctx, state, ctx.theme.inkFaint),
+              display: "flex",
+              alignItems: "baseline",
+              opacity: part.opacity * typed,
+              color: highlightTextColour(ctx, part, ctx.theme.ink),
             }}
           >
-            {index + 1}
-          </span>
-          <Highlighted ctx={ctx} state={state} style={{ minWidth: 0 }}>
-            {item}
-          </Highlighted>
-        </div>
-      ))}
+            <span
+              style={{
+                flex: "none",
+                width: column,
+                fontFamily: fontOf("mono"),
+                fontSize: numeralSize,
+                fontVariantNumeric: "tabular-nums",
+                color: ctx.theme.inkFaint,
+              }}
+            >
+              {index + 1}
+            </span>
+            <Highlighted ctx={ctx} state={part} style={{ minWidth: 0 }}>
+              {item}
+            </Highlighted>
+          </div>
+        );
+      })}
     </div>
   );
 }

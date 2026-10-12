@@ -1,5 +1,5 @@
 import { fileURLToPath } from "node:url";
-import { DocumentSchema, type Scene } from "scene";
+import { DocumentSchema, typesetTexts, type Scene } from "scene";
 import { describe, expect, it, vi } from "vitest";
 import reference from "../../../../content/reference/physics.universal-gravitation.fr.json";
 import { createFixtureProvider, loadScenarios, type Scenario } from "../../src/server/llm";
@@ -28,11 +28,10 @@ import {
   brokenScene,
   draftSteps,
   scenarioFromReference,
-  scenesOf,
   sceneIdKey,
 } from "../helpers/scenario";
 
-const document = DocumentSchema.parse(reference.payload);
+const document = typesetTexts(DocumentSchema.parse(reference.payload), "fr");
 const INPUT: StartInput = { question: reference.question, language: "fr", level: "lycee" };
 const KEY = { language: "fr", level: "lycee" } as const;
 const DAY_MS = 24 * 60 * 60 * 1000;
@@ -165,7 +164,7 @@ const refusal = (reason: string) => ({
   deep_eligible: false,
 });
 
-const SCENES = scenesOf(reference);
+const SCENES = document.scenes;
 
 describe("nominal run", () => {
   it("emits accepted first, with cached false, before start() resolves", async () => {

@@ -3,6 +3,7 @@ import {
   OutlineSchema,
   repairScene,
   SceneSchema,
+  typesetTexts,
   validateOutline,
   validateScene,
   type ExplanationShape,
@@ -444,7 +445,9 @@ export class Pipeline {
       schema: OutlineSchema,
       validate: (value) => {
         const result = validateOutline(value, { shape });
-        return result.ok ? null : formatIssues(result.issues);
+        if (!result.ok) return formatIssues(result.issues);
+        Object.assign(value, typesetTexts(value, input.language));
+        return null;
       },
       traceId: ctx.id,
       signal: ctx.signal,
@@ -551,7 +554,9 @@ export class Pipeline {
             value.index = index;
             Object.assign(value, repairScene(value, outline));
             const result = validateScene(value, outline);
-            return result.ok ? null : formatIssues(result.issues);
+            if (!result.ok) return formatIssues(result.issues);
+            Object.assign(value, typesetTexts(value, language));
+            return null;
           },
           traceId: ctx.id,
           signal,

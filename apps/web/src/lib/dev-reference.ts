@@ -1,8 +1,8 @@
-import { DocumentSchema, type ExplanationDocument } from "scene";
+import { DocumentSchema, typesetTexts, type ExplanationDocument } from "scene";
 import reference from "../../../../content/reference/physics.universal-gravitation.fr.json";
 
 export function devReferenceDocument(): ExplanationDocument {
-  return DocumentSchema.parse(reference.payload);
+  return typesetTexts(DocumentSchema.parse(reference.payload), "fr");
 }
 
 export function isDevRouteEnabled(): boolean {

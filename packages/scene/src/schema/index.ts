@@ -7,3 +7,4 @@ export * from "./repair";
 export * from "./tex";
 export * from "./timing";
 export * from "./validate";
+export * from "./typeset";

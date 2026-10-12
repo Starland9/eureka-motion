@@ -62,4 +62,8 @@ export type TypeStyleName = keyof typeof typeScale;
 
 export const DISPLAY_MIN_SIZE_PX = 28;
 
+// A plate is scaled down in the page: the automatic optical size would thin the
+// hairlines of the display face below one pixel.
+export const SCENE_DISPLAY_OPTICAL_SIZE = 18;
+
 export const MEASURE_CH = { min: 60, max: 72 } as const;

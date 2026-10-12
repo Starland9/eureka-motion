@@ -680,9 +680,9 @@ describe("bars", () => {
     expect(attr(one(container, "baseline"), "stroke")).toBe(ctx.theme.ink);
   });
 
-  it("writes the category in mono capitals under the baseline", () => {
+  it("writes the category in mono under the baseline, in its own case", () => {
     const { container } = draw(barsOf());
-    expect(textsOf(container, "caption")).toEqual(["LYON", "NICE", "PARIS"]);
+    expect(textsOf(container, "caption")).toEqual(["Lyon", "Nice", "Paris"]);
     const caption = part(container, "caption")[0]!;
     expect(attr(caption, "font-family")).toContain("IBM Plex Mono");
     const baseline = Number(attr(one(container, "baseline"), "y1"));

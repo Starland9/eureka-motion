@@ -5,13 +5,15 @@ const SUPER_SCALE = 0.65;
 const SUPER_RAISE = 0.4;
 const MONO_ADVANCE = 0.6;
 const TIMES_TEN = "\u00A0×\u00A010";
+const TIGHT_TIMES_TEN = "×10";
 
 const signed = (exponent: number): string =>
   exponent < 0 ? `−${Math.abs(exponent)}` : String(exponent);
 
-export function partsWidth(parts: NumberParts, size: number, tail = ""): number {
+export function partsWidth(parts: NumberParts, size: number, tail = "", tight = false): number {
+  const times = tight ? TIGHT_TIMES_TEN : TIMES_TEN;
   const power =
-    parts.exponent === null ? 0 : TIMES_TEN.length + SUPER_SCALE * signed(parts.exponent).length;
+    parts.exponent === null ? 0 : times.length + SUPER_SCALE * signed(parts.exponent).length;
   return (parts.mantissa.length + parts.suffix.length + tail.length + power) * MONO_ADVANCE * size;
 }
 
@@ -26,6 +28,7 @@ export interface NumberTextProps {
   fill: string;
   opacity?: number;
   partName?: string;
+  tight?: boolean;
 }
 
 export function NumberText({
@@ -39,6 +42,7 @@ export function NumberText({
   fill,
   opacity,
   partName,
+  tight,
 }: NumberTextProps) {
   const raise = size * SUPER_RAISE;
   return (
@@ -58,7 +62,7 @@ export function NumberText({
       {parts.mantissa}
       {parts.exponent === null ? null : (
         <>
-          {TIMES_TEN}
+          {tight ? TIGHT_TIMES_TEN : TIMES_TEN}
           <tspan data-part="exponent" dy={-raise} fontSize={size * SUPER_SCALE}>
             {signed(parts.exponent)}
           </tspan>

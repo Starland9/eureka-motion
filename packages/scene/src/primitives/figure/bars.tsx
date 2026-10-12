@@ -19,8 +19,7 @@ const VALUE_GAP_U = 0.8;
 const EDGE_U = 0.5;
 const LINE_HEIGHT = 1.25;
 const CAPTION_BASELINE = 0.8;
-const TRACKING = 0.06;
-const ADVANCE = 0.6 + TRACKING;
+const ADVANCE = 0.6;
 const FIT = 0.98;
 
 function wrap(text: string, chars: number): string[] {
@@ -62,7 +61,7 @@ export function BarsPrimitive({ element, ctx }: PrimitiveProps<"bars">) {
     const value = resolve(item.value, ctx.scope);
     const parts = formatNumberParts(value, undefined, ctx.language);
     return {
-      caption: wrap(item.label.toLocaleUpperCase(ctx.language), chars),
+      caption: wrap(item.label, chars),
       colour: colourOf(ctx, item.role, "quantity"),
       parts,
       width: partsWidth(parts, size, unit),
@@ -71,6 +70,7 @@ export function BarsPrimitive({ element, ctx }: PrimitiveProps<"bars">) {
   });
 
   const stacked = unit !== "" && bars.some((bar) => bar.width > cell * FIT);
+  const tight = bars.some((bar) => partsWidth(bar.parts, size, stacked ? "" : unit) > cell * FIT);
   const largest = Math.max(0, ...bars.map((bar) => bar.value));
   const captionLines = Math.max(1, ...bars.map((bar) => bar.caption.length));
   const baseline = slot.height - EDGE_U * u - captionLines * lineHeight - CAPTION_GAP_U * u;
@@ -123,7 +123,6 @@ export function BarsPrimitive({ element, ctx }: PrimitiveProps<"bars">) {
               fontFamily={fontOf("mono")}
               fontWeight={500}
               fontSize={size}
-              letterSpacing={size * TRACKING}
               fill={theme.ink}
               opacity={state.opacity}
             >
@@ -141,6 +140,7 @@ export function BarsPrimitive({ element, ctx }: PrimitiveProps<"bars">) {
               partName="value"
               parts={bar.parts}
               tail={stacked ? undefined : unit}
+              tight={tight}
               x={bar.centre}
               y={stacked ? valueY - lineHeight : valueY}
               size={size}
