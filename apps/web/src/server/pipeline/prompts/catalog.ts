@@ -13,8 +13,10 @@ const SIMULATIONS: Readonly<Record<Subject, readonly ElementType[]>> = {
 
 export function typesFor(subject: Subject): ElementType[] {
   const simulations = new Set(SIMULATIONS[subject]);
+  const everything = process.env.SCENE_CATALOG === "all";
   return ELEMENT_TYPES.filter(
-    (type) => isImplemented(type) && (!type.startsWith("sim.") || simulations.has(type)),
+    (type) =>
+      (everything || isImplemented(type)) && (!type.startsWith("sim.") || simulations.has(type)),
   );
 }
 

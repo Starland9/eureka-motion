@@ -36,6 +36,17 @@ function rejection(reason: string): string {
   return `Your previous answer was rejected.\n${reason}\nReturn the corrected JSON object only.`;
 }
 
+export function dropEmpty(value: unknown): unknown {
+  if (Array.isArray(value)) return value.map(dropEmpty);
+  if (typeof value !== "object" || value === null) return value;
+  const kept: Record<string, unknown> = {};
+  for (const [key, child] of Object.entries(value)) {
+    if (child === null || child === "") continue;
+    kept[key] = dropEmpty(child);
+  }
+  return kept;
+}
+
 type Outcome<T> = { ok: true; value: T } | { ok: false; reason: string };
 
 function check<T>(request: GenerateRequest<T>, text: string): Outcome<T> {
@@ -45,7 +56,7 @@ function check<T>(request: GenerateRequest<T>, text: string): Outcome<T> {
   } catch (error) {
     return { ok: false, reason: (error as Error).message };
   }
-  const parsed = request.schema.safeParse(json);
+  const parsed = request.schema.safeParse(dropEmpty(json));
   if (!parsed.success) {
     return {
       ok: false,
@@ -90,6 +101,7 @@ export async function generateWithRetries<T>(
       };
     }
     lastReason = outcome.reason;
+    request.onRejected?.(outcome.reason, attempt);
     messages.push(
       {
         role: "assistant",

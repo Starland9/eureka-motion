@@ -37,12 +37,14 @@ Narration
 - Say what the eye should look at, in the order it appears.
 - Never state a number that depends on a parameter: the student can move the sliders and the spoken number would become false. Show it with a readout, or with {{id|format}} in a text.
 - Stay within the intent of the step. Do not announce the next scene.
+- The "hook" and "recap" scenes are simple: a "statement" layout, or one small figure, and no more than three beats.
 
 Actions
 - An element is invisible until a "show" action names it. Every element must be shown at some point.
 - "draw" for lines, arrows and curves; "type" for texts and formulas; "fade" for the rest.
 - Reveal progressively: what the sentence talks about appears while it is said.
-- When the model has parameters, use "sweep" to make the figure react while you state the relation ("if the distance doubles…"). The sweep must stay inside the range of the parameter.
+- When the model has parameters, use "sweep" to make the figure react while you state the relation ("if the distance doubles…"). A sweep moves the parameter from its current value to "to" while the sentence is spoken, then brings it back; { "expr": "2 * r" } doubles it exactly. The target must stay inside the range of the parameter: check min and max in the outline before writing it.
+- Never say something the scene does not show. If the range does not allow "three times as far", do not say it.
 - "highlight" marks what must be remembered. "focus" dims everything else for one beat.
 - Target one part of a simulation with "elementId.part".
 

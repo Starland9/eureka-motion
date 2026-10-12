@@ -80,6 +80,15 @@ export interface VoiceService {
   narrate(explanationId: string, scene: Scene, language: Language): Promise<Scene>;
 }
 
+export interface LlmTrace {
+  label: string;
+  role: string;
+  ms: number;
+  attempts: number;
+  ok: boolean;
+  rejections: string[];
+}
+
 export interface PipelineDeps {
   llm: LlmProvider;
   store: ExplanationStore;
@@ -96,6 +105,7 @@ export interface PipelineDeps {
     traceId: string;
   }) => Promise<Quiz | null>;
   enqueueDeep?: (explanationId: string) => Promise<void>;
+  trace?: (entry: LlmTrace) => void;
 }
 
 export const SHARE_RETENTION_DAYS = 90;

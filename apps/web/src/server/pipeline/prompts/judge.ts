@@ -21,8 +21,9 @@ Check each point
 - Nothing contradicts what the discipline accepts at this level. A standard simplification is acceptable.
 
 Verdict
-- "valid": a competent teacher would let it through unchanged.
-- "invalid": it contains at least one factual error or one misleading statement. A preference of wording is not an error.
+- "valid": nothing in it is false. This is the expected outcome for a careful outline.
+- "invalid": it contains at least one factual error: a wrong rule or formula, a wrong constant, an expression that does not compute what its label says, units that do not match, an analogy that teaches something false.
+Do not reject an outline for a choice of wording, of example, of analogy, of range or of level of detail that is merely different from what you would have chosen, nor for a simplification that is standard at this level. When in doubt, the outline is valid.
 
 Fields
 - issues: for "invalid", up to 5 items { where, problem }. "where" locates the field; "problem" says what is wrong and what is correct. Write them in English, for the author.

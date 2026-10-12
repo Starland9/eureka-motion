@@ -10,7 +10,7 @@ import {
   type Outline,
   type Scene,
 } from "scene";
-import { LlmError, type LlmRole } from "../llm";
+import { LlmError, type GenerateRequest, type GenerateResult, type LlmRole } from "../llm";
 import { EventLog, EventLogRegistry, type FinalStatus, type Verdict } from "./events";
 import { pipelineMessage } from "./messages";
 import {
@@ -61,14 +61,16 @@ interface SceneRun {
 interface RunContext {
   id: string;
   input: StartInput;
-  log: EventLog;
+  shape: ExplanationShape;
   signal: AbortSignal;
-  subject: Subject;
 }
 
 export const SCENE_CONCURRENCY = 3;
 export const MAX_PLAN_ROUNDS = 3;
 export const MAX_SCENE_ROUNDS = 2;
+
+const SIMPLER_SCENE =
+  'Your previous attempts at this scene were rejected by the validation rules. Write a simpler scene that conveys the same idea: a "statement" or "figure-notes" layout, at most five elements, short texts, no "sweep" and no "move".';
 
 const UNAVAILABLE_CODES = new Set(["unavailable", "timeout", "rate_limited"]);
 const SHORT_KINDS = new Set<ExplanationKind>(["followup", "zoom"]);
@@ -138,6 +140,31 @@ export class Pipeline {
     return { id, cached: false, log };
   }
 
+  private async ask<T>(label: string, request: GenerateRequest<T>): Promise<GenerateResult<T>> {
+    const started = Date.now();
+    const rejections: string[] = [];
+    const report = (ok: boolean, attempts: number): void =>
+      this.deps.trace?.({
+        label,
+        role: request.role,
+        ms: Date.now() - started,
+        attempts,
+        ok,
+        rejections,
+      });
+    try {
+      const result = await this.deps.llm.generateObject({
+        ...request,
+        onRejected: (reason) => rejections.push(reason),
+      });
+      report(true, result.attempts);
+      return result;
+    } catch (error) {
+      report(false, error instanceof LlmError ? error.attempts : 1);
+      throw error;
+    }
+  }
+
   private async run(record: ExplanationRecord, input: StartInput, log: EventLog): Promise<void> {
     const { deps } = this;
     const { id } = record;
@@ -148,9 +175,8 @@ export class Pipeline {
       timings[name] = Date.now() - started;
     };
     const controller = new AbortController();
-    const signal = controller.signal;
     const kind = input.kind ?? "initial";
-    const shape = shapeOf(kind);
+    const ctx: RunContext = { id, input, shape: shapeOf(kind), signal: controller.signal };
 
     const fail = async (code: string, message: string): Promise<void> => {
       controller.abort();
@@ -160,16 +186,20 @@ export class Pipeline {
 
     try {
       log.emit({ type: "step", name: "triage", status: "started" });
-      const triage = await this.triage(id, input, signal);
+      const firstOutline = this.writeOutline(ctx, undefined);
+      firstOutline.catch(() => undefined);
+      const triage = await this.triage(ctx);
       mark("triage");
       log.emit({ type: "step", name: "triage", status: "done" });
 
       if (triage.decision === "refuse") {
+        controller.abort();
         await deps.store.update(id, { status: "refused", timings, completed_at: deps.now() });
         log.emit({ type: "refused", reason: triage.reason });
         return;
       }
       if (triage.decision === "clarify" || !triage.concept) {
+        controller.abort();
         await deps.store.update(id, {
           status: "needs_clarification",
           timings,
@@ -187,6 +217,7 @@ export class Pipeline {
       if (kind === "initial") {
         const hit = await deps.cache.findByConcept(concept.slug, { language, level });
         if (hit) {
+          controller.abort();
           await deps.store.remove(id);
           log.emit({ type: "cached", explanation_id: hit });
           return;
@@ -207,8 +238,6 @@ export class Pipeline {
         detected_language: triage.detected_language,
       });
 
-      const ctx: RunContext = { id, input, log, signal, subject: concept.subject };
-
       log.emit({ type: "step", name: "plan", status: "started" });
       let outline: Outline | null = null;
       let judgement: Judgement | null = null;
@@ -218,25 +247,7 @@ export class Pipeline {
       let feedback: string | undefined;
 
       for (let round = 1; round <= MAX_PLAN_ROUNDS && !outline; round += 1) {
-        const written = await deps.llm.generateObject({
-          role: "author",
-          ...buildOutlinePrompt({
-            question: input.question,
-            title: concept.title,
-            subject: concept.subject,
-            language,
-            level,
-            shape,
-            extra: feedback,
-          }),
-          schema: OutlineSchema,
-          validate: (value) => {
-            const result = validateOutline(value, { shape });
-            return result.ok ? null : formatIssues(result.issues);
-          },
-          traceId: id,
-          signal,
-        });
+        const written = await (round === 1 ? firstOutline : this.writeOutline(ctx, feedback));
         planAttempts += written.attempts;
         if (round === 1) {
           mark("outline");
@@ -245,7 +256,7 @@ export class Pipeline {
         }
 
         const candidate = written.value;
-        const speculative = this.startScenes(ctx, candidate);
+        const speculative = this.startScenes(ctx, candidate, concept.subject);
         const judged = await this.judge(ctx, concept.title, candidate);
         judgement = judged.judgement;
         judgeFallback = judged.fallback;
@@ -339,7 +350,7 @@ export class Pipeline {
         return;
       }
 
-      if (deps.writeQuiz && shape === "full") {
+      if (deps.writeQuiz && ctx.shape === "full") {
         log.emit({ type: "step", name: "quiz", status: "started" });
         const quiz = await deps
           .writeQuiz({ outline, scenes: payload.scenes, language, level, traceId: id })
@@ -387,8 +398,9 @@ export class Pipeline {
     }
   }
 
-  private async triage(id: string, input: StartInput, signal: AbortSignal): Promise<Triage> {
-    const result = await this.deps.llm.generateObject({
+  private async triage(ctx: RunContext): Promise<Triage> {
+    const { input } = ctx;
+    const result = await this.ask("triage", {
       role: "triage",
       ...buildTriagePrompt({
         question: input.question,
@@ -408,10 +420,34 @@ export class Pipeline {
         }
         return null;
       },
-      traceId: id,
-      signal,
+      traceId: ctx.id,
+      signal: ctx.signal,
     });
     return result.value;
+  }
+
+  private writeOutline(
+    ctx: RunContext,
+    feedback: string | undefined,
+  ): Promise<GenerateResult<Outline>> {
+    const { input, shape } = ctx;
+    return this.ask("outline", {
+      role: "author",
+      ...buildOutlinePrompt({
+        question: input.interpretation ?? input.question,
+        language: input.language,
+        level: input.level,
+        shape,
+        extra: feedback,
+      }),
+      schema: OutlineSchema,
+      validate: (value) => {
+        const result = validateOutline(value, { shape });
+        return result.ok ? null : formatIssues(result.issues);
+      },
+      traceId: ctx.id,
+      signal: ctx.signal,
+    });
   }
 
   private async judge(
@@ -427,7 +463,7 @@ export class Pipeline {
     });
     const ask = async (role: LlmRole): Promise<Judgement> =>
       (
-        await this.deps.llm.generateObject({
+        await this.ask("judge", {
           role,
           ...prompt,
           schema: JudgeSchema,
@@ -443,12 +479,11 @@ export class Pipeline {
     }
   }
 
-  private startScenes(ctx: RunContext, outline: Outline): SceneRun {
+  private startScenes(ctx: RunContext, outline: Outline, subject: Subject): SceneRun {
     const controller = new AbortController();
     const signal = AbortSignal.any([ctx.signal, controller.signal]);
     const count = outline.plan.steps.length;
     const results: Promise<SceneOutcome>[] = [];
-    let next = 0;
     let active = 0;
     const waiting: (() => void)[] = [];
 
@@ -465,12 +500,11 @@ export class Pipeline {
       else active -= 1;
     };
 
-    for (; next < count; next += 1) {
-      const index = next;
+    for (let index = 0; index < count; index += 1) {
       const task = (async (): Promise<SceneOutcome> => {
         await acquire();
         try {
-          return await this.writeScene(ctx, outline, index, signal);
+          return await this.writeScene(ctx, outline, subject, index, signal);
         } finally {
           release();
         }
@@ -488,6 +522,7 @@ export class Pipeline {
   private async writeScene(
     ctx: RunContext,
     outline: Outline,
+    subject: Subject,
     index: number,
     signal: AbortSignal,
   ): Promise<SceneOutcome> {
@@ -506,9 +541,9 @@ export class Pipeline {
     for (let round = 1; round <= MAX_SCENE_ROUNDS; round += 1) {
       let scene: Scene;
       try {
-        const written = await this.deps.llm.generateObject({
+        const written = await this.ask(`scene ${index}`, {
           role: "author",
-          ...buildScenePrompt({ outline, index, subject: ctx.subject, language, level, extra }),
+          ...buildScenePrompt({ outline, index, subject, language, level, extra }),
           schema: SceneSchema,
           validate: (value) => {
             value.id = target;
@@ -523,17 +558,17 @@ export class Pipeline {
         scene = written.value;
       } catch (error) {
         if (signal.aborted) throw error;
-        if (error instanceof LlmError) {
-          attempts += error.attempts;
-          return drop();
-        }
-        throw error;
+        if (!(error instanceof LlmError)) throw error;
+        attempts += error.attempts;
+        if (error.code !== "invalid_output" || round === MAX_SCENE_ROUNDS) return drop();
+        extra = SIMPLER_SCENE;
+        continue;
       }
 
       let check: Check;
       try {
         check = (
-          await this.deps.llm.generateObject({
+          await this.ask(`check ${index}`, {
             role: "checker",
             ...buildCheckerPrompt({ outline, scene, language, level }),
             schema: CheckSchema,

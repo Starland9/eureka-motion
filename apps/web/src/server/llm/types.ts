@@ -31,6 +31,7 @@ export interface GenerateRequest<T> {
   messages: LlmMessage[];
   schema: z.ZodType<T>;
   validate?: (value: T) => string | null;
+  onRejected?: (reason: string, attempt: number) => void;
   maxTokens?: number;
   timeoutMs?: number;
   retries?: number;
@@ -82,7 +83,7 @@ export interface RawCall {
 export const DEFAULT_TIMEOUT_MS: Readonly<Record<LlmRole, number>> = {
   triage: 8_000,
   author: 30_000,
-  judge: 20_000,
+  judge: 12_000,
   checker: 10_000,
 };
 

@@ -15,7 +15,7 @@ rôle à un modèle.
 |---|---|---|---|
 | `triage` | Tri de la question, nom canonique du concept | Vitesse | `deepseek-flash`, réflexion désactivée |
 | `author` | Plan pédagogique, scènes, quiz, code de la version approfondie | Qualité et respect du format | `deepseek-flash`, réflexion désactivée |
-| `judge` | Exactitude du plan pédagogique | Exactitude | `deepseek-v4-pro`, réflexion activée |
+| `judge` | Exactitude du plan pédagogique | Exactitude | `deepseek-v4-pro`, réflexion désactivée |
 | `checker` | Conformité d'une scène au plan vérifié | Vitesse | `deepseek-flash`, réflexion désactivée |
 
 Les faits d'une explication sont dans son plan : c'est le plan que vérifie le rôle `judge`.
@@ -39,7 +39,7 @@ ajouter.
   DeepSeek). Toute demande fixe un nombre maximal de jetons en sortie.
 - Erreurs typées : `invalid_output`, `timeout`, `rate_limited`, `unavailable`, `refused`.
   Aucune erreur brute du fournisseur ne remonte au code appelant.
-- Délais par défaut : `triage` 8 s, `author` 30 s, `judge` 20 s, `checker` 10 s. Un
+- Délais par défaut : `triage` 8 s, `author` 30 s, `judge` 12 s, `checker` 10 s. Un
   dépassement annule la requête en cours.
 - La clé d'accès n'apparaît ni dans les journaux, ni dans les erreurs, ni côté client.
 - Le texte saisi par l'élève est toujours transmis comme message d'utilisateur délimité,
@@ -104,23 +104,24 @@ dégradé.
 
 Objectif : première scène jouée en moins de 15 secondes (SC-001).
 
-Base de calcul : environ 195 jetons par seconde et 1,2 s jusqu'au premier jeton pour
-`deepseek-flash` sans réflexion (mesure tierce, à confirmer par le jeu de référence).
+Mesures du 2026-10-12 sur la question « la loi de la gravité », fournisseur réel, depuis le
+poste de développement :
 
-| Étape | Rôle | Budget |
-|---|---|---|
-| Retour visible | — | < 1 s |
-| Tri de la question (environ 120 jetons) | `triage` | 2 s |
-| Plan pédagogique (environ 600 jetons) | `author` | 4,5 s |
-| Scène 1 : écriture (environ 700 jetons) et validation | `author` | 5 s |
-| Scène 1 : conformité et voix, en parallèle | `checker`, voix | 2,5 s |
-| **Total du chemin de la scène 1** | | **14 s** |
-| Vérification du plan, lancée dès le plan écrit | `judge` | doit finir en 7,5 s |
+| Étape | Rôle | Mesuré | Fin à |
+|---|---|---|---|
+| Retour visible | — | immédiat | 0 s |
+| Tri de la question | `triage` | 1,6 à 2,0 s | 2 s |
+| Plan pédagogique, lancé en même temps que le tri | `author` | 4,9 à 6,7 s | 5 à 7 s |
+| Vérification du plan | `judge` | 2,1 s | 7 à 9 s |
+| Scène 1 : écriture et validation | `author` | 3,3 à 6,2 s | 9 à 13 s |
+| Scène 1 : conformité | `checker` | 1,2 à 2,3 s | 11 à 15 s |
+| Explication complète de six scènes | | | 21 à 25 s |
 
-La vérification du plan tourne en parallèle du chemin de la scène 1 : la scène n'est montrée
-que lorsque les deux ont abouti. Les scènes suivantes sont écrites trois à la fois dès que le
-plan est écrit ; si la vérification du plan échoue, tout est jeté et rien n'a été montré.
+Le plan est demandé sans attendre le tri : si le tri refuse la question ou reconnaît un
+concept déjà en cache, la demande de plan est annulée. La vérification du plan tourne en
+parallèle de l'écriture des scènes, trois à la fois ; si elle échoue, tout est jeté et rien
+n'a été montré. Une scène n'est émise que lorsque le plan et elle-même sont vérifiés.
 
-Si le rôle `judge` dépasse régulièrement 7,5 s, il devient le facteur limitant : on le
-bascule alors sur un modèle plus rapide par configuration, et le jeu de référence mesure
-l'effet sur l'exactitude.
+Le rôle `judge` avec réflexion activée dépasse 20 secondes sur un plan complet : la réflexion
+est donc désactivée par défaut pour ce rôle, sur le modèle le plus fort. La marge sur les
+15 secondes est faible ; la voix s'y ajoute. Le jeu de référence suit cette mesure.

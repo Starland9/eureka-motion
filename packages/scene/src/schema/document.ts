@@ -785,7 +785,7 @@ export const ParamSchema = z.strictObject({
   id: IdSchema,
   symbol: z.string().min(1).max(8).describe("As printed, for example m₁."),
   label: label(40),
-  unit: z.string().max(16),
+  unit: z.string().max(16).default(""),
   min: z.number(),
   max: z.number(),
   step: z.number().positive(),
@@ -798,7 +798,7 @@ export type Param = z.infer<typeof ParamSchema>;
 export const ConstantSchema = z.strictObject({
   id: IdSchema,
   value: z.number(),
-  unit: z.string().max(16),
+  unit: z.string().max(16).default(""),
   label: label(60),
   symbol: z.string().min(1).max(8).optional(),
 });
@@ -810,7 +810,7 @@ export const DerivedSchema = z.strictObject({
     .min(1)
     .max(200)
     .describe("Reads parameters, constants and derived values declared before it."),
-  unit: z.string().max(16),
+  unit: z.string().max(16).default(""),
   label: label(60),
   symbol: z.string().min(1).max(8).optional(),
   format: z

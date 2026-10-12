@@ -24,7 +24,7 @@ const DEFAULT_MODELS: Readonly<Record<LlmRole, string>> = {
 const DEFAULT_THINKING: Readonly<Record<LlmRole, boolean>> = {
   triage: false,
   author: false,
-  judge: true,
+  judge: false,
   checker: false,
 };
 

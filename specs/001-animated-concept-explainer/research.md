@@ -199,7 +199,7 @@ pas pu être vérifiés sont signalés comme tels et portés dans la section Ris
   |---|---|---|---|
   | `triage` | Tri de la question, nom canonique du concept | `deepseek-flash` | Désactivée |
   | `author` | Plan, scènes, quiz, code Manim | `deepseek-flash` | Désactivée |
-  | `judge` | Exactitude du plan pédagogique | `deepseek-v4-pro` | Activée |
+  | `judge` | Exactitude du plan pédagogique | `deepseek-v4-pro` | Désactivée |
   | `checker` | Conformité d'une scène au plan vérifié | `deepseek-flash` | Désactivée |
 
 - **Rationale**: l'interface DeepSeek ne propose plus que deux modèles, `deepseek-flash`
@@ -210,9 +210,18 @@ pas pu être vérifiés sont signalés comme tels et portés dans la section Ris
   jusqu'au premier jeton (`artificialanalysis.ai`), ce qui rend le budget de 15 secondes
   réaliste. Les faits de l'explication sont dans le plan : c'est lui que vérifie le modèle le
   plus fort ; les scènes sont ensuite contrôlées contre ce plan par le modèle rapide.
-- **Non vérifié**: la latence de `deepseek-v4-pro` avec réflexion. La vérification du plan
-  tourne en parallèle de la première scène ; si elle dépasse le budget, le rôle `judge`
-  repasse sur `deepseek-flash` avec réflexion, par simple configuration.
+- **Mesuré le 2026-10-12** avec `scripts/bench-llm.ts`, depuis le poste de développement,
+  en mode JSON et en flux :
+
+  | Modèle | Réflexion | Premier jeton | Débit | Réponse de 400 jetons | Réponse courte |
+  |---|---|---|---|---|---|
+  | `deepseek-flash` | non | 0,7 à 1,0 s | 135 à 170 jetons/s | 3,3 à 3,8 s | 1,8 s |
+  | `deepseek-v4-pro` | oui | 3,3 à 4,7 s | — | — | 3,8 à 5,6 s |
+  | `deepseek-flash` | oui | 2,9 à 3,8 s | — | — | 3,6 à 4,0 s |
+
+  Le premier appel après une pause est plus lent (2,4 s jusqu'au premier jeton). Sur un plan
+  complet, `deepseek-v4-pro` avec réflexion dépasse 20 secondes ; sans réflexion il répond
+  en 2 secondes. La réflexion est donc désactivée pour le rôle `judge`.
 - **Alternatives considered**: tout sur `deepseek-v4-pro` — rejeté : délai et coût. Un
   second fournisseur pour le juge — possible sans changement de code, non retenu au départ.
 
