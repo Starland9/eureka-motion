@@ -3,11 +3,15 @@
   "compilerOptions": {
     "jsx": "react-jsx",
     "noEmit": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "paths": {
+      "scene": ["../../../packages/scene/src/index.ts"]
+    }
   },
   "include": [
     "../../../content/**/*.json",
     "../../../packages/scene/src/**/*",
+    "../../../scripts/tokens-to-css.ts",
     "../src/server/**/*",
     "./**/*"
   ]

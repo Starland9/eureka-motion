@@ -1,0 +1,20 @@
+{
+  "Common": {
+    "productName": "Eureka Motion",
+    "skipToContent": "Skip to content",
+    "notifications": "Notifications"
+  },
+  "Theme": {
+    "paper": "Paper",
+    "board": "Board"
+  },
+  "Level": {
+    "college": "Middle school",
+    "lycee": "High school",
+    "superieur": "Higher education"
+  },
+  "Language": {
+    "fr": "Français",
+    "en": "English"
+  }
+}
