@@ -1,1 +1,59 @@
-{}
+{
+  "Colophon": {
+    "heading": "Colophon — How this explanation was built",
+    "show": "+ Show",
+    "hide": "− Hide",
+    "sceneLabel": "Scene <n>{number}</n>",
+    "roles": {
+      "hook": "Hook",
+      "analogy": "Analogy",
+      "mechanism": "Mechanism",
+      "formula": "Formula",
+      "example": "Example",
+      "recap": "Recap"
+    },
+    "plan": {
+      "title": "Plan",
+      "objective": "Objective",
+      "prerequisites": "Prerequisites",
+      "analogy": "Chosen analogy",
+      "keyRule": "Key rule",
+      "steps": "Steps"
+    },
+    "verification": {
+      "title": "Verification",
+      "plan": "Plan",
+      "status": {
+        "validated": "[validated]",
+        "corrected": "[corrected, then validated]",
+        "dropped": "[removed]",
+        "pending": "[in preparation]"
+      },
+      "attempts": "{count, plural, one {<n>#</n> attempt} other {<n>#</n> attempts}}",
+      "checksPlan": "Plan checks",
+      "checksScenes": "Scene checks",
+      "checks": {
+        "structure": "structure",
+        "references": "references",
+        "model": "model",
+        "readability": "readability",
+        "framing": "framing",
+        "pedagogy": "pedagogy",
+        "accuracy": "accuracy",
+        "accuracyFallback": "accuracy (fallback check)"
+      }
+    },
+    "narration": {
+      "title": "Narration"
+    },
+    "making": {
+      "title": "Making",
+      "model": "Model",
+      "provider": "Provider",
+      "firstScene": "First scene",
+      "total": "Total preparation",
+      "seconds": "<n>{value}</n> s",
+      "reviewed": "Reviewed by {reviewer} on <d>{date}</d>"
+    }
+  }
+}

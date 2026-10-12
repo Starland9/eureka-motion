@@ -1,1 +1,59 @@
-{}
+{
+  "Colophon": {
+    "heading": "Colophon — Comment cette explication a été construite",
+    "show": "+ Afficher",
+    "hide": "− Masquer",
+    "sceneLabel": "Scène <n>{number}</n>",
+    "roles": {
+      "hook": "Accroche",
+      "analogy": "Analogie",
+      "mechanism": "Mécanisme",
+      "formula": "Formule",
+      "example": "Exemple",
+      "recap": "À retenir"
+    },
+    "plan": {
+      "title": "Plan",
+      "objective": "Objectif",
+      "prerequisites": "Prérequis",
+      "analogy": "Analogie retenue",
+      "keyRule": "Règle à retenir",
+      "steps": "Étapes"
+    },
+    "verification": {
+      "title": "Vérification",
+      "plan": "Plan",
+      "status": {
+        "validated": "[{kind, select, plan {validé} other {validée}}]",
+        "corrected": "[{kind, select, plan {corrigé, puis validé} other {corrigée, puis validée}}]",
+        "dropped": "[{kind, select, plan {écarté} other {écartée}}]",
+        "pending": "[en préparation]"
+      },
+      "attempts": "{count, plural, one {<n>#</n> tentative} other {<n>#</n> tentatives}}",
+      "checksPlan": "Contrôles du plan",
+      "checksScenes": "Contrôles des scènes",
+      "checks": {
+        "structure": "structure",
+        "references": "références",
+        "model": "modèle",
+        "readability": "lisibilité",
+        "framing": "cadrage",
+        "pedagogy": "pédagogie",
+        "accuracy": "exactitude",
+        "accuracyFallback": "exactitude (contrôle de secours)"
+      }
+    },
+    "narration": {
+      "title": "Narration"
+    },
+    "making": {
+      "title": "Fabrication",
+      "model": "Modèle",
+      "provider": "Fournisseur",
+      "firstScene": "Première scène",
+      "total": "Préparation totale",
+      "seconds": "<n>{value}</n> s",
+      "reviewed": "Relue par {reviewer} le <d>{date}</d>"
+    }
+  }
+}
