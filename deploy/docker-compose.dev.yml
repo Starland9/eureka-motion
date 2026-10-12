@@ -1,0 +1,40 @@
+name: eureka-dev
+
+services:
+  db:
+    image: postgres:18-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: eureka
+      POSTGRES_USER: eureka
+      POSTGRES_PASSWORD: eureka
+    ports:
+      - "127.0.0.1:54329:5432"
+    volumes:
+      # PostgreSQL 18 keeps its data in a versioned subdirectory of this path.
+      - db-data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U eureka -d eureka"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      start_period: 5s
+
+  tts:
+    image: ghcr.io/remsky/kokoro-fastapi-cpu:v0.9.0
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8880:8880"
+    healthcheck:
+      test:
+        - "CMD"
+        - "python"
+        - "-c"
+        - "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8880/health', timeout=3)"
+      interval: 10s
+      timeout: 5s
+      retries: 6
+      start_period: 90s
+
+volumes:
+  db-data:
