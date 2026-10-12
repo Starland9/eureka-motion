@@ -81,6 +81,9 @@ const SLOT_CAPACITY: Partial<Record<SlotName, number>> = {
   readout: 3,
 };
 
+export const NOTES_TEXT_CHARS = 70;
+export const NOTES_ITEM_CHARS = 40;
+
 const FRAME_TOLERANCE = 0.02;
 const LABEL_COLLISION = { x: 0.06, y: 0.07 };
 const MIN_VISIBLE_CURVE = 0.5;
@@ -616,6 +619,28 @@ function readabilityIssues(scene: Scene): ValidationIssue[] {
         `${worstCount} labels are visible together; at most ${sceneLimits.maxVisibleLabels}. Hide earlier elements or drop labels`,
       ),
     );
+  }
+
+  for (const element of scene.elements) {
+    if (element.slot !== "notes") continue;
+    if (element.type === "text" && element.text.length > NOTES_TEXT_CHARS) {
+      issues.push(
+        issue(
+          4,
+          at(scene, element, "text"),
+          `has ${element.text.length} characters; a note beside a figure holds ${NOTES_TEXT_CHARS} at most`,
+        ),
+      );
+    }
+    if (element.type === "list" && element.items.some((item) => item.length > NOTES_ITEM_CHARS)) {
+      issues.push(
+        issue(
+          4,
+          at(scene, element, "items"),
+          `an item of a list beside a figure holds ${NOTES_ITEM_CHARS} characters at most`,
+        ),
+      );
+    }
   }
 
   const load = new Map<SlotName, number>();

@@ -429,6 +429,14 @@ describe("rule 4 — readability", () => {
     expect(result.ok, result.ok ? "" : formatIssues(result.issues)).toBe(true);
   });
   it(
+    "rejects a note too long to sit beside a figure",
+    breaking(
+      4,
+      "a note beside a figure holds 70 at most",
+      (d) => (el(d, "s5", "meaning").text = "x".repeat(71)),
+    ),
+  );
+  it(
     "rejects an overloaded slot",
     breaking(4, 'slot "notes" holds 4 elements', (d) => {
       scene(d, "s5").elements.push({

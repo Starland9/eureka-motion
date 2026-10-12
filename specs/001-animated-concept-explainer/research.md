@@ -59,8 +59,9 @@ pas pu être vérifiés sont signalés comme tels et portés dans la section Ris
 ### 2.1 Version et licence
 
 - **Decision**: `remotion`, `@remotion/player`, `@remotion/renderer`, `@remotion/bundler`,
-  `@remotion/media` et `@remotion/fonts`, tous épinglés à la même version exacte, 4.0.535
-  (publiée le 2026-10-12 ; la 5.0 n'est pas sortie).
+  `@remotion/media` et `@remotion/fonts`, tous épinglés à la même version exacte, 4.0.534.
+  La 4.0.535, publiée le 2026-10-12, est refusée par le délai de sécurité de pnpm sur les
+  paquets de moins de 24 heures ; ce délai est respecté plutôt que contourné.
 - **Rationale**: les versions sortent tous les quelques jours et les paquets `@remotion/*`
   doivent être strictement alignés.
 - **Licence**: gratuite pour un individu, une organisation à but lucratif jusqu'à 3 employés,
@@ -228,15 +229,17 @@ pas pu être vérifiés sont signalés comme tels et portés dans la section Ris
 - **Alternatives considered**: appels d'outils stricts (bêta) — rejeté : instabilité et
   limites de schéma.
 
-### 5.3 Bibliothèque cliente
+### 5.3 Client HTTP direct
 
-- **Decision**: AI SDK (`ai` 7.0.138) avec `@ai-sdk/deepseek` 3.0.64, derrière l'interface du
-  dépôt ; `generateText` et `streamText` avec `output: Output.object()`.
-- **Rationale**: un fournisseur compatible se branche en changeant un import et une variable
-  d'environnement (principe IV). `generateObject` et `streamObject` existent encore mais sont
-  dépréciés dans la version 7.
-- **Alternatives considered**: kit OpenAI avec adresse de base DeepSeek — équivalent, mais
-  changement de fournisseur moins direct.
+- **Decision**: appel direct de l'interface compatible OpenAI (`POST /chat/completions`) avec
+  `fetch`, derrière l'interface du dépôt ; aucune bibliothèque cliente.
+- **Rationale**: le besoin tient en une requête. Tous les fournisseurs envisagés exposent
+  cette même interface : en changer revient à changer une adresse et une clé (principe IV).
+  Le commutateur de réflexion propre à DeepSeek n'est envoyé qu'à DeepSeek. Une dépendance
+  en moins (principe VII).
+- **Alternatives considered**: AI SDK (`ai` 7, `@ai-sdk/deepseek`) — écarté : ses fonctions de
+  sortie structurée viennent d'être dépréciées dans la version 7 et il n'apporte ici ni
+  sortie contrainte ni simplification. Kit OpenAI — équivalent, une dépendance de plus.
 
 ### 5.4 Cache sans plongements
 

@@ -41,8 +41,9 @@ Chaque événement porte un numéro d'ordre croissant dans le champ `id` du flux
 | `clarify` | `{ interpretations: [{ label, question }] }` | Question vague ou ambiguë ; fin du flux |
 | `refused` | `{ reason }` | Hors champ ou inappropriée ; fin du flux (FR-005) |
 | `redirected` | `{ reason: "unrelated_followup" }` | Suivi sans rapport, traité comme question de départ (FR-044) |
-| `meta` | `{ title, subject, concept_slug, scene_count, deep_eligible, detected_language }` | Après le tri ; `detected_language` permet de proposer un changement de langue |
-| `plan` | `{ plan, params, model }` | Plan vérifié ; le colophon peut s'afficher |
+| `cached` | `{ explanation_id }` | Le tri a reconnu un concept déjà expliqué : le client charge cette explication ; fin du flux |
+| `meta` | `{ title, subject, concept_slug, deep_eligible, detected_language }` | Après le tri ; `detected_language` permet de proposer un changement de langue |
+| `plan` | `{ plan, params, model, scene_count }` | Plan vérifié ; le colophon peut s'afficher |
 | `verdict` | `{ target, status, attempts, reason }` | Résultat de vérification du plan ou d'une scène |
 | `scene` | `{ index, scene }` | Scène vérifiée, prête à jouer, audio compris quand il existe (FR-041) |
 | `scene_dropped` | `{ index }` | Scène écartée après nouvelles tentatives (FR-042) |

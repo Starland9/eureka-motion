@@ -32,9 +32,9 @@ partagée, par un seul module de tokens, entre l'interface et les scènes.
 rendu) ; Python 3.12 (bac à sable Manim uniquement)
 
 **Primary Dependencies**: Next.js 16.4, React 19.3, Tailwind CSS 4.3, shadcn/ui (CLI 4.21),
-next-intl 4.14, Remotion 4.0.535 (`remotion`, `@remotion/player`, `@remotion/renderer`,
+next-intl 4.14, Remotion 4.0.534 (`remotion`, `@remotion/player`, `@remotion/renderer`,
 `@remotion/bundler`, `@remotion/media`, `@remotion/fonts`, tous à la même version exacte),
-Zod 4.6, KaTeX 0.19, AI SDK (`ai` 7.0, `@ai-sdk/deepseek` 3.0), Drizzle ORM, kit Azure
+Zod 4.6, KaTeX 0.19, Drizzle ORM, kit Azure
 Speech, Kokoro-FastAPI 0.9 (image), Manim Community 0.22.0 (image) — justifications dans
 [research.md](./research.md)
 

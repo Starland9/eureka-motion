@@ -139,7 +139,7 @@ export function elementRoles(element: SceneElement): Set<RoleColour> {
 }
 
 const SIM_LABELS: Partial<Record<ElementType, number>> = {
-  "sim.two-body": 4,
+  "sim.two-body": 5,
   "sim.fall": 2,
   "sim.orbit": 2,
   "sim.pendulum": 2,

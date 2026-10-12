@@ -80,13 +80,13 @@ de scènes partagé), `workers/render/` et `workers/manim/`, `content/reference/
 - [X] T003 [P] [S] Créer le paquet `packages/scene/` (bibliothèque TypeScript, `package.json`, `tsconfig.json`, `src/index.ts`) avec `remotion`, `@remotion/player`, `@remotion/media`, `@remotion/fonts` épinglés à la version exacte 4.0.535, `zod` 4.6 et `katex` 0.19.
   - Lire : research.md § 2.1 et § 2.4 (« Conséquence de conception »).
   - Réussite : `pnpm --filter scene typecheck` aboutit ; `apps/web` importe `scene` sans erreur.
-- [ ] T004 [P] [S] Configurer ESLint et Prettier à la racine (`eslint.config.mjs`, `.prettierrc`) et les scripts `typecheck`, `lint`, `test` ; interdire dans `packages/scene/` les importations `next/*`, les alias `@/` et l'attribut `className`.
+- [X] T004 [P] [S] Configurer ESLint et Prettier à la racine (`eslint.config.mjs`, `.prettierrc`) et les scripts `typecheck`, `lint`, `test` ; interdire dans `packages/scene/` les importations `next/*`, les alias `@/` et l'attribut `className`.
   - Lire : research.md § 2.4.
   - Réussite : `pnpm lint` passe ; un fichier d'essai important `next/link` dans `packages/scene/src/` fait échouer `pnpm lint`.
 - [ ] T005 [P] [S] Écrire `deploy/.env.example` avec toutes les variables des contrats, et `deploy/docker-compose.dev.yml` avec un service `db` (PostgreSQL) et un service `tts` (image CPU de Kokoro-FastAPI 0.9), tous deux avec contrôle de santé.
   - Lire : contracts/llm-provider.md § 1 et § 2 (Configuration) ; research.md § 4 et § 8.
   - Réussite : `docker compose -f deploy/docker-compose.dev.yml up -d` rend les deux services « healthy ».
-- [ ] T006 [P] [S] Installer Vitest 5 (`apps/web/vitest.config.ts`, `packages/scene/vitest.config.ts`) et Playwright 1.64 (`apps/web/playwright.config.ts`, projets 1440 px et 360 px) avec un test d'exemple dans chaque.
+- [X] T006 [P] [S] Installer Vitest 5 (`apps/web/vitest.config.ts`, `packages/scene/vitest.config.ts`) et Playwright 1.64 (`apps/web/playwright.config.ts`, projets 1440 px et 360 px) avec un test d'exemple dans chaque.
   - Lire : plan.md § Technical Context (Testing).
   - Réussite : `pnpm test` et `pnpm --filter web test:e2e` passent.
 - [X] T007 [P] [S] Placer dans `packages/scene/assets/fonts/` les fichiers woff2 de Bodoni Moda (variable, romain et italique), STIX Two Text (variable, romain et italique), IBM Plex Mono (400, 500, italiques) et les polices KaTeX, avec leurs fichiers de licence.
@@ -116,14 +116,14 @@ parcours dépendent.
 
 ### Design system et socle de l'application
 
-- [ ] T011 [O] Écrire le module de tokens `packages/scene/src/tokens/` (`colors.ts` Papier et Tableau, `roles.ts`, `typography.ts`, `space.ts`, `motion.ts` avec conversion durée → images à 30 i/s, `index.ts`) et son test de contraste `packages/scene/tests/unit/tokens.test.ts`.
+- [X] T011 [O] Écrire le module de tokens `packages/scene/src/tokens/` (`colors.ts` Papier et Tableau, `roles.ts`, `typography.ts`, `space.ts`, `motion.ts` avec conversion durée → images à 30 i/s, `index.ts`) et son test de contraste `packages/scene/tests/unit/tokens.test.ts`.
   - Lire : design-system/eureka-motion/MASTER.md § 2 et § 3 ; spec.md FR-012.
   - Réussite : le test confirme les rapports de contraste de MASTER.md § 2.1 et § 2.2 à 0,1 près, pour les deux thèmes.
 - [ ] T012 [S] Générer les variables CSS depuis les tokens avec `scripts/tokens-to-css.ts` vers `apps/web/src/app/tokens.css`, les exposer par `@theme inline` dans `apps/web/src/app/globals.css` (`:root` = Papier, `.dark` = Tableau), initialiser shadcn/ui et restyler `button`, `input`, `slider`, `dialog`, `collapsible`, `sonner` dans `apps/web/src/components/ui/` : rayon 0, aucune ombre, champ à filet bas, focus en contour de 2 px.
   - Lire : design-system/eureka-motion/MASTER.md § 2.4, § 2.5 et § 8.
   - Réussite : `pnpm --filter web build` aboutit ; aucune valeur hexadécimale, aucun `rounded-*` ni `shadow-*` dans `apps/web/src/components/ui/`.
-- [ ] T013 [P] [S] Brancher les polices : `next/font/local` dans `apps/web/src/app/[locale]/layout.tsx`, et `packages/scene/src/fonts.ts` exposant `loadSceneFonts()` (via `@remotion/fonts`) et `sceneFontsReady()` pour la page.
-  - Lire : research.md § 2.5 ; design-system/eureka-motion/MASTER.md § 2.3.
+- [ ] T013 [P] [S] Brancher les polices : `scripts/sync-fonts.mjs` copie les fichiers woff2 de `packages/scene/assets/fonts/` vers `apps/web/public/fonts/` (lancé avant `dev` et `build`), `apps/web/src/app/[locale]/layout.tsx` déclare les familles avec `fontFaceCss("/fonts")` du paquet `scene`, précharge `PRELOAD_FONT_FILES` et importe la feuille de style de KaTeX. Les familles gardent leur vrai nom (« Bodoni Moda »…), que les scènes emploient ; `next/font` n'est donc pas utilisé.
+  - Lire : research.md § 2.5 ; design-system/eureka-motion/MASTER.md § 2.3 ; `packages/scene/src/fonts.ts`.
   - Réussite : la page de base affiche les trois familles ; aucune requête de police ne sort du domaine (onglet réseau).
 - [ ] T014 [P] [S] Mettre en place next-intl 4.14 : routage `[locale]` (`fr`, `en`) dans `apps/web/src/i18n/`, `apps/web/src/proxy.ts`, `apps/web/messages/fr.json` et `en.json`, redirection de `/` vers la langue du navigateur, et test `apps/web/tests/unit/messages.test.ts` vérifiant que les deux fichiers ont exactement les mêmes clés.
   - Lire : contracts/http-api.md § 8 ; spec.md FR-002, FR-038.
@@ -134,19 +134,19 @@ parcours dépendent.
 
 ### Moteur de scènes
 
-- [ ] T016 [P] [O] Écrire l'interpréteur d'expressions `packages/scene/src/expr/` (`parse.ts`, `evaluate.ts`, `format.ts`) et ses tests `packages/scene/tests/unit/expr.test.ts` : grammaire, fonctions et constantes autorisées, identifiant `t`, formats `int`, `fixed:n`, `sig:n`, `sci:n`, `percent:n`, séparateur décimal par langue, rejet de toute construction interdite.
+- [X] T016 [P] [O] Écrire l'interpréteur d'expressions `packages/scene/src/expr/` (`parse.ts`, `evaluate.ts`, `format.ts`) et ses tests `packages/scene/tests/unit/expr.test.ts` : grammaire, fonctions et constantes autorisées, identifiant `t`, formats `int`, `fixed:n`, `sig:n`, `sci:n`, `percent:n`, séparateur décimal par langue, rejet de toute construction interdite.
   - Lire : contracts/scene-schema.md § 2 ; spec.md FR-015.
   - Réussite : les tests couvrent chaque opérateur, chaque fonction et chaque rejet ; aucun usage de `eval` ni de `Function` dans le paquet.
-- [ ] T017 [O] Écrire le schéma Zod du document `packages/scene/src/schema/document.ts` (plan, paramètres, modèle, scènes, éléments par type de primitive, temps, actions, quiz) et les types exportés.
+- [X] T017 [O] Écrire le schéma Zod du document `packages/scene/src/schema/document.ts` (plan, paramètres, modèle, scènes, éléments par type de primitive, temps, actions, quiz) et les types exportés.
   - Lire : contracts/scene-schema.md § 1, § 3, § 4 ; data-model.md (Plan, Paramètre, Scène, Quiz).
   - Réussite : l'exemple de scène de contracts/scene-schema.md § 4 est accepté ; `pnpm --filter scene typecheck` aboutit.
-- [ ] T018 [O] Écrire la validation en six règles `packages/scene/src/schema/validate.ts` (structure, références, modèle, lisibilité, cadrage, pédagogie), dont le nombre de scènes et la durée de FR-007, chacune rendant un message exploitable par le modèle de langage, et les tests de contrat `packages/scene/tests/contract/validate.test.ts` avec un document valide et au moins un document fautif par règle.
+- [X] T018 [O] Écrire la validation en six règles `packages/scene/src/schema/validate.ts` (structure, références, modèle, lisibilité, cadrage, pédagogie), dont le nombre de scènes et la durée de FR-007, chacune rendant un message exploitable par le modèle de langage, et les tests de contrat `packages/scene/tests/contract/validate.test.ts` avec un document valide et au moins un document fautif par règle.
   - Lire : contracts/scene-schema.md § 5. Dépend de T016 et T017.
   - Réussite : `pnpm --filter scene test` passe ; chaque règle a un cas qui échoue avec le message attendu.
-- [ ] T019 [O] Écrire le moteur de mise en page `packages/scene/src/layouts/` : les six gabarits et leurs zones, l'unité `u`, les marges de sécurité, la bande basse réservée, et la projection du repère mathématique vers la zone de figure avec cadrage automatique ; tests dans `packages/scene/tests/unit/layouts.test.ts`.
+- [X] T019 [O] Écrire le moteur de mise en page `packages/scene/src/layouts/` : les six gabarits et leurs zones, l'unité `u`, les marges de sécurité, la bande basse réservée, et la projection du repère mathématique vers la zone de figure avec cadrage automatique ; tests dans `packages/scene/tests/unit/layouts.test.ts`.
   - Lire : contracts/scene-schema.md § 3 ; design-system/eureka-motion/MASTER.md § 4.
   - Réussite : pour chaque gabarit, les zones tiennent dans les marges à 1920 × 1080 ; un repère quelconque est projeté sans déformation.
-- [ ] T020 [O] Écrire le cœur de la composition `packages/scene/src/composition/` : `timeline.ts` (durées en images depuis les temps et leur audio), `state.ts` (état de chaque élément à une image donnée d'après les actions `show`, `hide`, `highlight`, `focus`, `move`, `sweep`, `play`, avec les courbes des tokens), `Explanation.tsx` (scènes en `<Series>`, audio `@remotion/media`, prémontage, thème et valeurs des paramètres en propriétés, évaluation du modèle à chaque image), `registry.ts` (type de primitive → composant) ; tests `packages/scene/tests/unit/composition.test.ts`.
+- [X] T020 [O] Écrire le cœur de la composition `packages/scene/src/composition/` : `timeline.ts` (durées en images depuis les temps et leur audio), `state.ts` (état de chaque élément à une image donnée d'après les actions `show`, `hide`, `highlight`, `focus`, `move`, `sweep`, `play`, avec les courbes des tokens), `Explanation.tsx` (scènes en `<Series>`, audio `@remotion/media`, prémontage, thème et valeurs des paramètres en propriétés, évaluation du modèle à chaque image), `registry.ts` (type de primitive → composant) ; tests `packages/scene/tests/unit/composition.test.ts`.
   - Lire : contracts/scene-schema.md § 4.2 ; research.md § 2.2 ; résultat de T008. Dépend de T016, T017, T019.
   - Réussite : les tests vérifient l'état d'un élément avant, pendant et après chaque type d'action, et le recalcul d'une valeur dérivée quand un paramètre change.
 - [ ] T021 [P] [S] Écrire les primitives de texte `packages/scene/src/primitives/text/` : `text`, `list`, `formula` (KaTeX, variables colorées par rôle), `readout` (valeur du modèle, unité, chiffres tabulaires), enregistrées dans `registry.ts` ; tests `packages/scene/tests/unit/primitives-text.test.ts`.
@@ -164,7 +164,7 @@ parcours dépendent.
 
 ### Fournisseurs
 
-- [ ] T025 [P] [O] Écrire l'interface de modèle de langage `apps/web/src/server/llm/` : `types.ts` (rôles `triage`, `author`, `judge`, `checker`, erreurs typées), `deepseek.ts` (AI SDK, mode JSON, réflexion par rôle, nombre maximal de jetons, validation Zod et nouvelle demande deux fois au plus, réponse vide traitée comme invalide), `fixture.ts` (rejoue des fichiers de scénario `apps/web/tests/fixtures/scenarios/*.json`), `index.ts` (choix par `LLM_PROVIDER`) ; tests `apps/web/tests/unit/llm.test.ts`.
+- [X] T025 [P] [O] Écrire l'interface de modèle de langage `apps/web/src/server/llm/` : `types.ts` (rôles `triage`, `author`, `judge`, `checker`, erreurs typées), `openai-compatible.ts` (appel HTTP direct, sans bibliothèque cliente, mode JSON, réflexion par rôle, nombre maximal de jetons, validation Zod et nouvelle demande deux fois au plus, réponse vide traitée comme invalide), `fixture.ts` (rejoue des fichiers de scénario `apps/web/tests/fixtures/scenarios/*.json`), `index.ts` (choix par `LLM_PROVIDER`) ; tests `apps/web/tests/unit/llm.test.ts`.
   - Lire : contracts/llm-provider.md § 1 ; research.md § 5.2 et § 5.3.
   - Réussite : les tests couvrent sortie invalide puis valide, réponse vide, dépassement de délai, et scénario épuisé → `unavailable` ; la clé n'apparaît dans aucun message d'erreur.
 - [ ] T026 [P] [S] Écrire l'interface de voix `apps/web/src/server/tts/` : `types.ts`, `azure.ts` (kit officiel Azure Speech), `kokoro.ts` (appel HTTP au service `tts`), `chain.ts` (liste ordonnée `TTS_PROVIDERS`, une seule implémentation par explication), `cache.ts` (par empreinte du texte, de la langue et de la voix) ; tests `apps/web/tests/unit/tts.test.ts` avec appels simulés.
@@ -193,7 +193,7 @@ commence à se jouer en moins de 15 secondes et se complète scène par scène.
 
 ### Référence et tests du parcours (à écrire avant l'implémentation)
 
-- [ ] T029 [US1] [O] Écrire à la main le document canonique `content/reference/physics.universal-gravitation.fr.json` (niveau lycée, six scènes, paramètres `m1`, `m2`, `r`, dérivée `F`, quiz de trois questions), conforme aux six règles. Il sert d'exemple dans les consignes, de scénario de test et de première explication de référence.
+- [X] T029 [US1] [O] Écrire à la main le document canonique `content/reference/physics.universal-gravitation.fr.json` (niveau lycée, six scènes, paramètres `m1`, `m2`, `r`, dérivée `F`, quiz de trois questions), conforme aux six règles. Il sert d'exemple dans les consignes, de scénario de test et de première explication de référence.
   - Lire : contracts/scene-schema.md en entier ; data-model.md (Plan, Quiz).
   - Réussite : `validate` accepte le document ; il se joue dans la galerie (T027) une fois T030 livrée.
 - [ ] T030 [P] [US1] [S] Écrire la simulation `packages/scene/src/primitives/sim/two-body.tsx` (deux corps, vecteurs de force égaux et opposés dont la longueur suit `G·m1·m2/r²`, cote de distance, parties nommées `body_a`, `body_b`, `force_a`, `force_b`, `distance`) et son test `packages/scene/tests/unit/sim-two-body.test.ts`.

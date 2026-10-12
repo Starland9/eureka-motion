@@ -51,7 +51,7 @@ Limits: the scene is rejected otherwise
 - "result" is a highlighter: use it through a "highlight" action or as a fill, never as the role of a line, an arrow or a text.
 - A slot holds at most: text 2, notes 3, formula 1, readout 3 elements.
 - A simulation, a bar chart, a relations diagram, a table, a timeline or a list of steps fills its slot alone.
-- A text element has 140 characters at most. A label is a word or a symbol.
+- A text element has 140 characters at most, and 70 at most in the "notes" slot (40 per item of a list there). A label is a word or a symbol.
 - The labels of two elements must not sit on top of each other.
 - An element may be attached to another one by its id only if that one is a point, an object or a shape of the same slot.
 - Use the ids, symbols and names of the outline. Bind every value that comes from the model: { "expr": "…" } for numbers, {{id|format}} in texts, a readout for a live value.
