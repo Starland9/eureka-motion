@@ -1,0 +1,334 @@
+{
+  "language": "fr",
+  "payload": {
+    "version": 1,
+    "plan": {
+      "objective": "Savoir que l'énergie cinétique croît avec la masse et avec le carré de la vitesse.",
+      "prerequisites": ["Connaître la masse et la vitesse", "Savoir calculer le carré d'un nombre"],
+      "analogy": {
+        "name": "Le choc d'une voiture",
+        "mapping": "La voiture joue le rôle du corps en mouvement ; la gravité des dégâts joue le rôle de l'énergie ; rouler deux fois plus vite, c'est quatre fois plus de dégâts."
+      },
+      "key_rule": {
+        "statement": "L'énergie cinétique est proportionnelle à la masse et au carré de la vitesse.",
+        "formula": "\\a{E} = \\dfrac{1}{2} \\, \\q{m} \\, \\q{v}^2"
+      },
+      "steps": [
+        {
+          "role": "hook",
+          "intent": "Donner un ordre de grandeur.",
+          "visual": "Une phrase et trois idées."
+        },
+        {
+          "role": "mechanism",
+          "intent": "Montrer l'effet de la vitesse.",
+          "visual": "Deux valeurs en direct et une règle."
+        },
+        {
+          "role": "formula",
+          "intent": "Écrire la loi.",
+          "visual": "La formule en grand, trois valeurs en direct."
+        }
+      ]
+    },
+    "params": [
+      {
+        "id": "m",
+        "symbol": "m",
+        "label": "Masse de la voiture",
+        "unit": "kg",
+        "min": 500,
+        "max": 3000,
+        "step": 50,
+        "default": 1200,
+        "role": "quantity"
+      },
+      {
+        "id": "v",
+        "symbol": "v",
+        "label": "Vitesse",
+        "unit": "m/s",
+        "min": 5,
+        "max": 60,
+        "step": 1,
+        "default": 25,
+        "role": "quantity"
+      }
+    ],
+    "model": {
+      "constants": [],
+      "derived": [
+        {
+          "id": "E",
+          "expr": "0.5 * m * v^2",
+          "unit": "J",
+          "label": "Énergie cinétique",
+          "symbol": "E",
+          "format": "sci:2"
+        },
+        {
+          "id": "E_kJ",
+          "expr": "E / 1000",
+          "unit": "kJ",
+          "label": "Énergie",
+          "symbol": "E",
+          "format": "int"
+        }
+      ]
+    },
+    "scenes": [
+      {
+        "id": "s1",
+        "index": 0,
+        "role": "hook",
+        "title": "Ce que porte une voiture",
+        "layout": "statement",
+        "elements": [
+          {
+            "id": "claim",
+            "slot": "text",
+            "type": "text",
+            "text": "À {{v|fixed:1}} m/s, {{m}} kg emportent {{E_kJ}} kJ.",
+            "emphasis": "strong"
+          },
+          {
+            "id": "points",
+            "slot": "text",
+            "type": "list",
+            "items": [
+              "Elle croît avec la masse.",
+              "Elle croît avec le carré de la vitesse.",
+              "Elle se mesure en joules."
+            ]
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Une voiture lancée emporte une énergie considérable.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": ["claim"],
+                "how": "type"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Trois idées expliquent d'où elle vient.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": ["points"],
+                "how": "type"
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Retiens surtout la première phrase.",
+            "actions": [
+              {
+                "do": "highlight",
+                "targets": ["claim"]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s2",
+        "index": 1,
+        "role": "mechanism",
+        "title": "Doubler la vitesse",
+        "layout": "figure-notes",
+        "elements": [
+          {
+            "id": "bars",
+            "slot": "figure",
+            "type": "bars",
+            "unit": "J",
+            "items": [
+              {
+                "label": "à v",
+                "value": {
+                  "expr": "E"
+                },
+                "role": "action"
+              },
+              {
+                "label": "à 2 v",
+                "value": {
+                  "expr": "4 * E"
+                },
+                "role": "action"
+              }
+            ]
+          },
+          {
+            "id": "energy_now",
+            "slot": "notes",
+            "type": "readout",
+            "value": "E",
+            "label": "Énergie"
+          },
+          {
+            "id": "speed_now",
+            "slot": "notes",
+            "type": "readout",
+            "value": "v",
+            "label": "Vitesse"
+          },
+          {
+            "id": "rule",
+            "slot": "notes",
+            "type": "text",
+            "text": "Vitesse × 2 : énergie × 4.",
+            "emphasis": "strong"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Voici l'énergie à la vitesse de départ.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": ["bars"],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Les deux valeurs suivent le curseur de vitesse.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": ["energy_now", "speed_now"],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Si la vitesse double, l'énergie est multipliée par quatre.",
+            "actions": [
+              {
+                "do": "sweep",
+                "param": "v",
+                "to": {
+                  "expr": "2 * v"
+                }
+              },
+              {
+                "do": "show",
+                "targets": ["rule"],
+                "how": "type",
+                "at": 0.6
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s3",
+        "index": 2,
+        "role": "formula",
+        "title": "La loi de l'énergie cinétique",
+        "layout": "formula-focus",
+        "elements": [
+          {
+            "id": "law",
+            "slot": "formula",
+            "type": "formula",
+            "tex": "\\a{E} = \\dfrac{1}{2} \\, \\q{m} \\, \\q{v}^2"
+          },
+          {
+            "id": "chart",
+            "slot": "figure",
+            "type": "bars",
+            "unit": "kJ",
+            "items": [
+              {
+                "label": "à v",
+                "value": {
+                  "expr": "E_kJ"
+                },
+                "role": "action"
+              },
+              {
+                "label": "à 2 v",
+                "value": {
+                  "expr": "4 * E_kJ"
+                },
+                "role": "action"
+              }
+            ]
+          },
+          {
+            "id": "mass_now",
+            "slot": "readout",
+            "type": "readout",
+            "value": "m",
+            "label": "Masse"
+          },
+          {
+            "id": "speed_now",
+            "slot": "readout",
+            "type": "readout",
+            "value": "v",
+            "label": "Vitesse"
+          },
+          {
+            "id": "energy_now",
+            "slot": "readout",
+            "type": "readout",
+            "value": "E_kJ",
+            "label": "Énergie"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "L'énergie vaut la moitié du produit de la masse et du carré de la vitesse.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": ["law"],
+                "how": "type"
+              },
+              {
+                "do": "show",
+                "targets": ["chart"],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Chaque grandeur a sa valeur en direct.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": ["mass_now", "speed_now", "energy_now"],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "C'est le résultat à retenir.",
+            "actions": [
+              {
+                "do": "highlight",
+                "targets": ["energy_now"]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
