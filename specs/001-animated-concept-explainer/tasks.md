@@ -89,7 +89,7 @@ de scènes partagé), `workers/render/` et `workers/manim/`, `content/reference/
 - [ ] T006 [P] [S] Installer Vitest 5 (`apps/web/vitest.config.ts`, `packages/scene/vitest.config.ts`) et Playwright 1.64 (`apps/web/playwright.config.ts`, projets 1440 px et 360 px) avec un test d'exemple dans chaque.
   - Lire : plan.md § Technical Context (Testing).
   - Réussite : `pnpm test` et `pnpm --filter web test:e2e` passent.
-- [ ] T007 [P] [S] Placer dans `packages/scene/assets/fonts/` les fichiers woff2 de Bodoni Moda (variable, romain et italique), STIX Two Text (variable, romain et italique), IBM Plex Mono (400, 500, italiques) et les polices KaTeX, avec leurs fichiers de licence.
+- [X] T007 [P] [S] Placer dans `packages/scene/assets/fonts/` les fichiers woff2 de Bodoni Moda (variable, romain et italique), STIX Two Text (variable, romain et italique), IBM Plex Mono (400, 500, italiques) et les polices KaTeX, avec leurs fichiers de licence.
   - Lire : design-system/eureka-motion/MASTER.md § 2.3.
   - Réussite : les fichiers sont présents avec licence ; `packages/scene/assets/fonts/README.md` liste la source de chacun.
 
