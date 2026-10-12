@@ -1,0 +1,333 @@
+{
+  "language": "fr",
+  "payload": {
+    "version": 1,
+    "plan": {
+      "objective": "Savoir lire la pente d'une tangente, l'aire sous une courbe et comparer des quantités par des barres.",
+      "prerequisites": ["Savoir placer un point dans un repère"],
+      "analogy": {
+        "name": "La pente d'une route",
+        "mapping": "La tangente joue le rôle de la route, sa pente celui de la montée à cet endroit."
+      },
+      "key_rule": {
+        "statement": "En un point de la parabole d'équation y = x², la tangente a pour pente 2x.",
+        "formula": "f'(x) = 2x"
+      },
+      "steps": [
+        {
+          "role": "mechanism",
+          "intent": "Faire voir la pente de la tangente en un point d'une parabole.",
+          "visual": "Une parabole, un point, sa tangente et la valeur de la pente."
+        },
+        {
+          "role": "example",
+          "intent": "Faire voir l'aire sous une courbe entre deux bornes.",
+          "visual": "Une courbe, deux bornes et la région hachurée entre elles et l'axe."
+        },
+        {
+          "role": "recap",
+          "intent": "Comparer trois quantités de tailles différentes.",
+          "visual": "Trois barres proportionnelles aux valeurs, chacune avec sa valeur."
+        }
+      ]
+    },
+    "params": [
+      {
+        "id": "x0",
+        "symbol": "x₀",
+        "label": "Abscisse du point",
+        "unit": "",
+        "min": -2,
+        "max": 2,
+        "step": 0.5,
+        "default": 1,
+        "role": "quantity"
+      },
+      {
+        "id": "a",
+        "symbol": "a",
+        "label": "Borne gauche",
+        "unit": "s",
+        "min": 0,
+        "max": 6,
+        "step": 0.5,
+        "default": 2,
+        "role": "quantity"
+      },
+      {
+        "id": "b",
+        "symbol": "b",
+        "label": "Borne droite",
+        "unit": "s",
+        "min": 4,
+        "max": 12,
+        "step": 0.5,
+        "default": 8,
+        "role": "quantity"
+      }
+    ],
+    "model": {
+      "constants": [],
+      "derived": [
+        {
+          "id": "slope",
+          "expr": "2 * x0",
+          "unit": "",
+          "label": "Pente de la tangente",
+          "symbol": "m",
+          "format": "sig:2"
+        }
+      ]
+    },
+    "scenes": [
+      {
+        "id": "s1",
+        "index": 0,
+        "role": "mechanism",
+        "title": "La tangente à une parabole",
+        "layout": "figure-notes",
+        "world": {
+          "x": [-6, 6],
+          "y": [-1.5, 5.65]
+        },
+        "elements": [
+          {
+            "id": "axes1",
+            "slot": "figure",
+            "type": "axes",
+            "xLabel": "x",
+            "yLabel": "y",
+            "xTicks": 7,
+            "yTicks": 7,
+            "grid": true
+          },
+          {
+            "id": "f1",
+            "slot": "figure",
+            "type": "plot",
+            "fn": "x^2",
+            "label": "y = x²",
+            "domain": [-3, 3]
+          },
+          {
+            "id": "t1",
+            "slot": "figure",
+            "type": "tangent",
+            "plot": "f1",
+            "at": {
+              "expr": "x0"
+            },
+            "showSlope": true,
+            "label": "pente",
+            "role": "action"
+          },
+          {
+            "id": "p1",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              {
+                "expr": "x0"
+              },
+              {
+                "expr": "x0^2"
+              }
+            ],
+            "label": "P",
+            "role": "quantity"
+          },
+          {
+            "id": "note1",
+            "slot": "notes",
+            "type": "text",
+            "text": "La tangente en P a pour pente {{slope}}."
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Voici la parabole d'équation y égale x au carré.",
+            "duration_ms": 3500,
+            "actions": [
+              {
+                "do": "show",
+                "targets": ["axes1"],
+                "how": "draw",
+                "at": 0
+              },
+              {
+                "do": "show",
+                "targets": ["f1"],
+                "how": "draw",
+                "at": 0.25
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Au point P, la tangente a pour pente deux.",
+            "duration_ms": 3500,
+            "actions": [
+              {
+                "do": "show",
+                "targets": ["p1"],
+                "how": "fade",
+                "at": 0
+              },
+              {
+                "do": "show",
+                "targets": ["t1"],
+                "how": "draw",
+                "at": 0.3
+              },
+              {
+                "do": "show",
+                "targets": ["note1"],
+                "how": "type",
+                "at": 0.6
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s2",
+        "index": 1,
+        "role": "example",
+        "title": "L'aire sous la courbe",
+        "layout": "figure",
+        "world": {
+          "x": [-1.5, 12.5],
+          "y": [-1.5, 3.75]
+        },
+        "elements": [
+          {
+            "id": "axes2",
+            "slot": "figure",
+            "type": "axes",
+            "xLabel": "t (s)",
+            "yLabel": "v (m/s)"
+          },
+          {
+            "id": "f2",
+            "slot": "figure",
+            "type": "plot",
+            "fn": "2.2 + sin(x / 2)",
+            "domain": [0, 12]
+          },
+          {
+            "id": "area2",
+            "slot": "figure",
+            "type": "area",
+            "plot": "f2",
+            "from": {
+              "expr": "a"
+            },
+            "to": {
+              "expr": "b"
+            },
+            "role": "quantity",
+            "label": "distance"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Voici la vitesse en fonction du temps.",
+            "duration_ms": 3500,
+            "actions": [
+              {
+                "do": "show",
+                "targets": ["axes2"],
+                "how": "draw",
+                "at": 0
+              },
+              {
+                "do": "show",
+                "targets": ["f2"],
+                "how": "draw",
+                "at": 0.25
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "L'aire entre les deux bornes est la distance parcourue.",
+            "duration_ms": 3500,
+            "actions": [
+              {
+                "do": "show",
+                "targets": ["area2"],
+                "how": "draw",
+                "at": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s3",
+        "index": 2,
+        "role": "recap",
+        "title": "Comparer trois villes",
+        "layout": "figure-notes",
+        "elements": [
+          {
+            "id": "bars3",
+            "slot": "figure",
+            "type": "bars",
+            "unit": "hab.",
+            "items": [
+              {
+                "label": "Lyon",
+                "value": 520000
+              },
+              {
+                "label": "Marseille",
+                "value": 870000
+              },
+              {
+                "label": "Paris",
+                "value": 2100000
+              }
+            ]
+          },
+          {
+            "id": "note3",
+            "slot": "notes",
+            "type": "text",
+            "text": "Paris compte environ quatre fois plus d'habitants que Lyon."
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Voici le nombre d'habitants de trois villes.",
+            "duration_ms": 3500,
+            "actions": [
+              {
+                "do": "show",
+                "targets": ["bars3"],
+                "how": "draw",
+                "at": 0
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Paris est quatre fois plus peuplée que Lyon.",
+            "duration_ms": 3500,
+            "actions": [
+              {
+                "do": "show",
+                "targets": ["note3"],
+                "how": "type",
+                "at": 0
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
