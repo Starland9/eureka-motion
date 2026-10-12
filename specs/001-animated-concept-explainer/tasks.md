@@ -235,7 +235,7 @@ commence à se jouer en moins de 15 secondes et se complète scène par scène.
 
 ### Interface
 
-- [ ] T041 [P] [US1] [S] Écrire le crochet client `apps/web/src/components/player/useExplanationStream.ts` : lecture du flux par `fetch`, réducteur d'état (étapes, plan, scènes, verdicts, quiz, erreurs), reprise par `/events?after=n` après une coupure ; tests `apps/web/tests/unit/stream.test.ts`.
+- [X] T041 [P] [US1] [S] Écrire le crochet client `apps/web/src/components/player/useExplanationStream.ts` : lecture du flux par `fetch`, réducteur d'état (étapes, plan, scènes, verdicts, quiz, erreurs), reprise par `/events?after=n` après une coupure ; tests `apps/web/tests/unit/stream.test.ts`.
   - Lire : contracts/http-api.md § 1 et § 2.
   - Réussite : le test rejoue un flux coupé au milieu et retrouve l'état complet sans doublon de scène.
 - [X] T042 [US1] [O] Écrire la planche `apps/web/src/components/player/Planche.tsx` : `<Player>` sur la composition de T020, durée recalculée à chaque scène reçue, attente sur la dernière image quand la suite n'est pas prête puis reprise automatique (méthode validée en T008), cadre et repères d'impression, attente des polices, pas de lecture automatique sans action de l'élève.
