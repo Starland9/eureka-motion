@@ -1,5 +1,7 @@
 import { z } from "zod";
 
+const clipped = (max: number) => z.string().transform((text) => text.slice(0, max));
+
 export const SUBJECTS = [
   "maths",
   "physics",
@@ -39,16 +41,16 @@ export type Triage = z.infer<typeof TriageSchema>;
 export const JudgeSchema = z.strictObject({
   verdict: z.enum(["valid", "invalid"]),
   issues: z
-    .array(z.strictObject({ where: z.string().max(120), problem: z.string().max(400) }))
+    .array(z.strictObject({ where: clipped(120), problem: clipped(400) }))
     .max(5)
     .default([]),
-  reason: z.string().min(1).max(240),
+  reason: clipped(240).pipe(z.string().min(1)),
 });
 export type Judgement = z.infer<typeof JudgeSchema>;
 
 export const CheckSchema = z.strictObject({
   verdict: z.enum(["valid", "invalid"]),
-  problem: z.string().max(400).default(""),
-  reason: z.string().min(1).max(240),
+  problem: clipped(400).default(""),
+  reason: clipped(240).pipe(z.string().min(1)),
 });
 export type Check = z.infer<typeof CheckSchema>;

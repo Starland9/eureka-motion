@@ -33,6 +33,15 @@ export function colourOf(
   return resolveColour(ctx.theme, colour ?? fallback);
 }
 
+export function strokeOf(
+  ctx: Pick<SceneContext, "theme">,
+  colour: SceneColour | undefined,
+  fallback: SceneColour = "ink",
+): string {
+  const chosen = colour ?? fallback;
+  return resolveColour(ctx.theme, chosen === "result" ? "ink" : chosen);
+}
+
 export function fontOf(role: FontRole): string {
   return fontStacks[role];
 }

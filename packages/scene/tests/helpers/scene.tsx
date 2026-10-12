@@ -29,6 +29,7 @@ export function sceneOf(elements: SceneElement[], options: SceneOptions = {}): S
     title: options.title ?? "Test",
     layout: options.layout ?? "figure",
     world: options.world,
+    derived: [],
     elements,
     beats: options.beats ?? [
       {

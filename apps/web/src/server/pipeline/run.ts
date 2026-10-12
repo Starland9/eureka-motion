@@ -1,6 +1,7 @@
 import {
   formatIssues,
   OutlineSchema,
+  repairScene,
   SceneSchema,
   validateOutline,
   validateScene,
@@ -548,6 +549,7 @@ export class Pipeline {
           validate: (value) => {
             value.id = target;
             value.index = index;
+            Object.assign(value, repairScene(value, outline));
             const result = validateScene(value, outline);
             return result.ok ? null : formatIssues(result.issues);
           },

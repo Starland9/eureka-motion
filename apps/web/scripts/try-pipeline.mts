@@ -55,7 +55,7 @@ if (!log) throw new Error("no log");
 
 for await (const { seq, event } of log.stream()) {
   const elapsed = ((Date.now() - started) / 1000).toFixed(1).padStart(5);
-  let detail = "";
+  let detail: string;
   if (event.type === "step") detail = `${event.name} ${event.status}`;
   else if (event.type === "verdict")
     detail = `${event.target} ${event.status} x${event.attempts} — ${event.reason}`;

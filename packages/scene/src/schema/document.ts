@@ -20,7 +20,20 @@ export const TargetSchema = z
   .meta({ id: "Target", description: 'An element id, or "elementId.part" for a named part.' });
 
 export const BindableSchema = z
-  .union([z.number(), z.strictObject({ expr: z.string().min(1).max(200) })])
+  .union(
+    [
+      z.number(),
+      z.object({ expr: z.string().min(1).max(200) }),
+      z
+        .string()
+        .min(1)
+        .max(200)
+        .transform((expr) => ({ expr })),
+    ],
+    {
+      error: 'expected a number or { "expr": "…" }',
+    },
+  )
   .meta({
     id: "Bindable",
     description:
@@ -28,13 +41,19 @@ export const BindableSchema = z
   });
 
 export const PointSchema = z
-  .tuple([BindableSchema, BindableSchema])
+  .tuple([BindableSchema, BindableSchema], {
+    error: 'expected [x, y], each a number or { "expr": "…" }',
+  })
   .meta({ id: "Point", description: "[x, y] in the mathematical frame of the scene (`world`)." });
 
-export const AnchorSchema = z.union([PointSchema, IdSchema]).meta({
-  id: "Anchor",
-  description: "A Point, or the id of a point, object or shape of the same slot.",
-});
+export const AnchorSchema = z
+  .union([PointSchema, IdSchema], {
+    error: 'expected [x, y] (numbers or { "expr": "…" }) or the id of a point, object or shape',
+  })
+  .meta({
+    id: "Anchor",
+    description: "A Point, or the id of a point, object or shape of the same slot.",
+  });
 
 export const ROLE_COLOURS = ["quantity", "action", "result", "valid"] as const;
 export const RoleColourSchema = z.enum(ROLE_COLOURS).meta({ id: "Role" });
@@ -103,7 +122,7 @@ const FIGURE_SLOTS = ["figure", "figure_a", "figure_b"] as const satisfies reado
 const base = { id: IdSchema, slot: SlotSchema };
 
 const TextElement = z
-  .strictObject({
+  .object({
     ...base,
     type: z.literal("text"),
     text: z.string().min(1).max(140).describe("May interpolate model values: {{F|sci:2}}."),
@@ -113,7 +132,7 @@ const TextElement = z
   .describe("A short sentence.");
 
 const ListElement = z
-  .strictObject({
+  .object({
     ...base,
     type: z.literal("list"),
     items: z.array(z.string().min(1).max(80)).min(1).max(4),
@@ -121,7 +140,7 @@ const ListElement = z
   .describe("Up to four short points.");
 
 const FormulaElement = z
-  .strictObject({
+  .object({
     ...base,
     type: z.literal("formula"),
     tex: z
@@ -135,7 +154,7 @@ const FormulaElement = z
   .describe("A typeset formula.");
 
 const ReadoutElement = z
-  .strictObject({
+  .object({
     ...base,
     type: z.literal("readout"),
     value: IdSchema.describe("Id of a parameter, constant or derived value."),
@@ -144,7 +163,7 @@ const ReadoutElement = z
   .describe("A live value of the model with its unit; updates when a slider moves.");
 
 const AxesElement = z
-  .strictObject({
+  .object({
     ...base,
     type: z.literal("axes"),
     xLabel: label(24).optional(),
@@ -156,7 +175,7 @@ const AxesElement = z
   .describe("Axes spanning the scene `world`.");
 
 const PlotElement = z
-  .strictObject({
+  .object({
     ...base,
     type: z.literal("plot"),
     fn: z
@@ -172,7 +191,7 @@ const PlotElement = z
   .describe("The curve y = fn(x).");
 
 const PointElement = z
-  .strictObject({
+  .object({
     ...base,
     type: z.literal("point"),
     at: PointSchema,
@@ -182,7 +201,7 @@ const PointElement = z
   .describe("A marked point.");
 
 const SegmentElement = z
-  .strictObject({
+  .object({
     ...base,
     type: z.literal("segment"),
     from: AnchorSchema,
@@ -194,7 +213,7 @@ const SegmentElement = z
   .describe("A straight line between two points or elements.");
 
 const VectorElement = z
-  .strictObject({
+  .object({
     ...base,
     type: z.literal("vector"),
     from: AnchorSchema,
@@ -207,7 +226,7 @@ const VectorElement = z
   .describe("An arrow: a force, a velocity, a displacement.");
 
 const DimensionElement = z
-  .strictObject({
+  .object({
     ...base,
     type: z.literal("dimension"),
     from: AnchorSchema,
@@ -219,7 +238,7 @@ const DimensionElement = z
   .describe("A dimension line with extension lines, as on a technical drawing.");
 
 const AngleElement = z
-  .strictObject({
+  .object({
     ...base,
     type: z.literal("angle"),
     vertex: AnchorSchema,
@@ -231,7 +250,7 @@ const AngleElement = z
   .describe("An angle arc at `vertex`, between the directions of `from` and `to`.");
 
 const ShapeElement = z
-  .strictObject({
+  .object({
     ...base,
     type: z.literal("shape"),
     kind: z.enum(["circle", "rect", "polygon", "arc"]),
@@ -249,7 +268,7 @@ const ShapeElement = z
   .describe("A geometric outline, optionally filled with a role colour or hatching.");
 
 const AreaElement = z
-  .strictObject({
+  .object({
     ...base,
     type: z.literal("area"),
     plot: IdSchema.describe("Id of a plot element."),
@@ -261,7 +280,7 @@ const AreaElement = z
   .describe("The area under a plot between two abscissas.");
 
 const TangentElement = z
-  .strictObject({
+  .object({
     ...base,
     type: z.literal("tangent"),
     plot: IdSchema.describe("Id of a plot element."),
@@ -273,7 +292,7 @@ const TangentElement = z
   .describe("The tangent to a plot at one point, with its slope.");
 
 const ObjectElement = z
-  .strictObject({
+  .object({
     ...base,
     type: z.literal("object"),
     kind: PictogramSchema,
@@ -285,13 +304,11 @@ const ObjectElement = z
   .describe("A line-drawn pictogram from the closed library.");
 
 const BarsElement = z
-  .strictObject({
+  .object({
     ...base,
     type: z.literal("bars"),
     items: z
-      .array(
-        z.strictObject({ label: label(24), value: BindableSchema, role: ColourSchema.optional() }),
-      )
+      .array(z.object({ label: label(24), value: BindableSchema, role: ColourSchema.optional() }))
       .min(2)
       .max(6),
     unit: z.string().max(16).optional(),
@@ -299,12 +316,12 @@ const BarsElement = z
   .describe("A bar chart; values are labelled directly.");
 
 const TimelineElement = z
-  .strictObject({
+  .object({
     ...base,
     type: z.literal("timeline"),
     events: z
       .array(
-        z.strictObject({
+        z.object({
           at: z.string().min(1).max(16).describe("Date or moment, as shown."),
           label: label(60),
           detail: z.string().max(100).optional(),
@@ -316,32 +333,32 @@ const TimelineElement = z
   .describe("A timeline of dated events. Part names: e1, e2, …");
 
 const StepsElement = z
-  .strictObject({
+  .object({
     ...base,
     type: z.literal("steps"),
     items: z
-      .array(z.strictObject({ label: label(60), detail: z.string().max(100).optional() }))
+      .array(z.object({ label: label(60), detail: z.string().max(100).optional() }))
       .min(2)
       .max(6),
   })
   .describe("Ordered steps. Part names: s1, s2, …");
 
 const RelationsElement = z
-  .strictObject({
+  .object({
     ...base,
     type: z.literal("relations"),
     nodes: z
-      .array(z.strictObject({ id: IdSchema, label: label(30), role: ColourSchema.optional() }))
+      .array(z.object({ id: IdSchema, label: label(30), role: ColourSchema.optional() }))
       .min(2)
       .max(7),
     edges: z
-      .array(z.strictObject({ from: IdSchema, to: IdSchema, label: z.string().max(24).optional() }))
+      .array(z.object({ from: IdSchema, to: IdSchema, label: z.string().max(24).optional() }))
       .max(10),
   })
   .describe("A diagram of relations between notions. Part names are the node ids.");
 
 const TableElement = z
-  .strictObject({
+  .object({
     ...base,
     type: z.literal("table"),
     columns: z.array(label(24)).min(2).max(3),
@@ -353,7 +370,7 @@ const TableElement = z
   .describe("A small comparison table.");
 
 const SimTwoBody = z
-  .strictObject({
+  .object({
     ...base,
     type: z.literal("sim.two-body"),
     massA: BindableSchema,
@@ -372,7 +389,7 @@ const SimTwoBody = z
   );
 
 const SimFall = z
-  .strictObject({
+  .object({
     ...base,
     type: z.literal("sim.fall"),
     height: BindableSchema.describe("Drop height, metres."),
@@ -385,7 +402,7 @@ const SimFall = z
   );
 
 const SimOrbit = z
-  .strictObject({
+  .object({
     ...base,
     type: z.literal("sim.orbit"),
     radius: BindableSchema,
@@ -400,7 +417,7 @@ const SimOrbit = z
   );
 
 const SimPendulum = z
-  .strictObject({
+  .object({
     ...base,
     type: z.literal("sim.pendulum"),
     length: BindableSchema.describe("Metres."),
@@ -410,7 +427,7 @@ const SimPendulum = z
   .describe("A simple pendulum. Driven by a `play` action. Parts: pivot, rod, bob, arc.");
 
 const SimCircuit = z
-  .strictObject({
+  .object({
     ...base,
     type: z.literal("sim.circuit"),
     voltage: BindableSchema,
@@ -422,7 +439,7 @@ const SimCircuit = z
   );
 
 const SimWave = z
-  .strictObject({
+  .object({
     ...base,
     type: z.literal("sim.wave"),
     amplitude: BindableSchema,
@@ -434,7 +451,7 @@ const SimWave = z
   );
 
 const SimRightTriangle = z
-  .strictObject({
+  .object({
     ...base,
     type: z.literal("sim.right-triangle"),
     a: BindableSchema,
@@ -448,7 +465,7 @@ const SimRightTriangle = z
     "A right triangle with the squares built on its sides. Parts: triangle, side_a, side_b, side_c, square_a, square_b, square_c, right_angle.",
   );
 
-const species = z.strictObject({
+const species = z.object({
   formula: z
     .string()
     .regex(/^(?:[A-Z][a-z]?\d{0,2})+$/, "must be a plain chemical formula such as H2O or C6H12O6")
@@ -457,7 +474,7 @@ const species = z.strictObject({
 });
 
 const SimReaction = z
-  .strictObject({
+  .object({
     ...base,
     type: z.literal("sim.reaction"),
     reactants: z.array(species).min(1).max(3),
@@ -467,7 +484,7 @@ const SimReaction = z
     "Molecules of the reactants rearranged into products, with an atom count on each side. Parts: reactants, products, arrow, tally.",
   );
 
-const flowBranch = z.strictObject({
+const flowBranch = z.object({
   id: IdSchema,
   label: label(24),
   rate: BindableSchema,
@@ -475,10 +492,10 @@ const flowBranch = z.strictObject({
 });
 
 const SimFlow = z
-  .strictObject({
+  .object({
     ...base,
     type: z.literal("sim.flow"),
-    node: z.strictObject({ label: label(24), object: PictogramSchema.optional() }),
+    node: z.object({ label: label(24), object: PictogramSchema.optional() }),
     inputs: z.array(flowBranch).min(1).max(3),
     outputs: z.array(flowBranch).min(1).max(3),
   })
@@ -487,7 +504,7 @@ const SimFlow = z
   );
 
 const SimArray = z
-  .strictObject({
+  .object({
     ...base,
     type: z.literal("sim.array"),
     values: z.array(z.number()).min(3).max(10),
@@ -502,7 +519,7 @@ const SimArray = z
   );
 
 const SimMarket = z
-  .strictObject({
+  .object({
     ...base,
     type: z.literal("sim.market"),
     demandShift: BindableSchema.describe("Shift of the demand curve; 0 is the starting position."),
@@ -653,25 +670,25 @@ const targets = z.array(TargetSchema).min(1).max(6);
 
 export const ActionSchema = z.discriminatedUnion("do", [
   z
-    .strictObject({
+    .object({
       do: z.literal("show"),
       targets,
       how: z.enum(["fade", "draw", "type"]).optional(),
       at,
     })
     .describe('Make elements appear. "draw" traces lines, "type" sets text, "fade" for the rest.'),
-  z.strictObject({ do: z.literal("hide"), targets, at }).describe("Make elements disappear."),
+  z.object({ do: z.literal("hide"), targets, at }).describe("Make elements disappear."),
   z
-    .strictObject({ do: z.literal("highlight"), targets, at })
+    .object({ do: z.literal("highlight"), targets, at })
     .describe("Mark as the thing to remember (highlighter)."),
   z
-    .strictObject({ do: z.literal("focus"), targets, at })
+    .object({ do: z.literal("focus"), targets, at })
     .describe("Dim everything else until the end of the beat."),
   z
-    .strictObject({ do: z.literal("move"), target: IdSchema, to: PointSchema, at })
+    .object({ do: z.literal("move"), target: IdSchema, to: PointSchema, at })
     .describe("Move an element inside the frame."),
   z
-    .strictObject({
+    .object({
       do: z.literal("sweep"),
       param: IdSchema.describe("Id of a parameter."),
       to: BindableSchema,
@@ -683,7 +700,7 @@ export const ActionSchema = z.discriminatedUnion("do", [
     })
     .describe("Vary a parameter during the beat, as if moving its slider, so the figure reacts."),
   z
-    .strictObject({
+    .object({
       do: z.literal("play"),
       target: IdSchema,
       from: z.number().min(0).optional(),
@@ -696,12 +713,12 @@ export const ActionSchema = z.discriminatedUnion("do", [
 export type Action = z.infer<typeof ActionSchema>;
 export type ActionKind = Action["do"];
 
-export const AudioSchema = z.strictObject({
+export const AudioSchema = z.object({
   url: z.string().min(1).max(300),
   duration_ms: z.number().int().positive().max(60_000),
 });
 
-export const BeatSchema = z.strictObject({
+export const BeatSchema = z.object({
   id: IdSchema,
   narration: z
     .string()
@@ -715,6 +732,25 @@ export const BeatSchema = z.strictObject({
 
 export type Beat = z.infer<typeof BeatSchema>;
 
+export const DerivedSchema = z.object({
+  id: IdSchema,
+  expr: z
+    .string()
+    .min(1)
+    .max(200)
+    .describe("Reads parameters, constants and derived values declared before it."),
+  unit: z.string().max(16).default(""),
+  label: z.string().max(60).default(""),
+  symbol: z.string().min(1).max(16).optional(),
+  format: z
+    .string()
+    .regex(
+      /^(int|(fixed|sig|sci|percent):\d{1,2})$/,
+      'must be "int", "fixed:n", "sig:n", "sci:n" or "percent:n"',
+    )
+    .optional(),
+});
+
 export const SCENE_ROLES = ["hook", "analogy", "mechanism", "formula", "example", "recap"] as const;
 export const SceneRoleSchema = z.enum(SCENE_ROLES);
 export type SceneRole = (typeof SCENE_ROLES)[number];
@@ -724,18 +760,25 @@ const range = z
   .refine(([min, max]) => min < max, "the first value must be lower than the second");
 
 export const WorldSchema = z
-  .strictObject({ x: range, y: range })
+  .object({ x: range, y: range })
   .describe(
     "Mathematical frame of the figure; the engine fits it into the slot without distortion.",
   );
 
-export const SceneSchema = z.strictObject({
+export const SceneSchema = z.object({
   id: IdSchema,
   index: z.number().int().min(0).max(6),
   role: SceneRoleSchema,
   title: z.string().min(1).max(60).describe("Figure caption; shown in the title area."),
   layout: z.enum(LAYOUT_NAMES),
   world: WorldSchema.optional(),
+  derived: z
+    .array(DerivedSchema)
+    .max(6)
+    .default([])
+    .describe(
+      "Values computed for this scene only, from the parameters, constants and derived values of the outline. Declare here any number the scene shows that the outline does not provide.",
+    ),
   elements: z.array(ElementSchema).min(1).max(14),
   beats: z.array(BeatSchema).min(1).max(6),
   duration_ms: z.number().int().positive().optional(),
@@ -743,18 +786,18 @@ export const SceneSchema = z.strictObject({
 
 export type Scene = z.infer<typeof SceneSchema>;
 
-export const PlanSchema = z.strictObject({
+export const PlanSchema = z.object({
   objective: z
     .string()
     .min(1)
     .max(200)
     .describe("What the student will know at the end, in one sentence."),
   prerequisites: z.array(z.string().min(1).max(100)).max(4),
-  analogy: z.strictObject({
+  analogy: z.object({
     name: z.string().min(1).max(60).describe("Short name, used to avoid repeating an analogy."),
     mapping: z.string().min(1).max(300).describe("What stands for what."),
   }),
-  key_rule: z.strictObject({
+  key_rule: z.object({
     statement: z.string().min(1).max(240),
     formula: z
       .string()
@@ -765,7 +808,7 @@ export const PlanSchema = z.strictObject({
   }),
   steps: z
     .array(
-      z.strictObject({
+      z.object({
         role: SceneRoleSchema,
         intent: z
           .string()
@@ -781,9 +824,9 @@ export const PlanSchema = z.strictObject({
 
 export type Plan = z.infer<typeof PlanSchema>;
 
-export const ParamSchema = z.strictObject({
+export const ParamSchema = z.object({
   id: IdSchema,
-  symbol: z.string().min(1).max(8).describe("As printed, for example m₁."),
+  symbol: z.string().min(1).max(16).describe("As printed, for example m₁."),
   label: label(40),
   unit: z.string().max(16).default(""),
   min: z.number(),
@@ -795,44 +838,25 @@ export const ParamSchema = z.strictObject({
 
 export type Param = z.infer<typeof ParamSchema>;
 
-export const ConstantSchema = z.strictObject({
+export const ConstantSchema = z.object({
   id: IdSchema,
   value: z.number(),
   unit: z.string().max(16).default(""),
   label: label(60),
-  symbol: z.string().min(1).max(8).optional(),
+  symbol: z.string().min(1).max(16).optional(),
 });
 
-export const DerivedSchema = z.strictObject({
-  id: IdSchema,
-  expr: z
-    .string()
-    .min(1)
-    .max(200)
-    .describe("Reads parameters, constants and derived values declared before it."),
-  unit: z.string().max(16).default(""),
-  label: label(60),
-  symbol: z.string().min(1).max(8).optional(),
-  format: z
-    .string()
-    .regex(
-      /^(int|(fixed|sig|sci|percent):\d{1,2})$/,
-      'must be "int", "fixed:n", "sig:n", "sci:n" or "percent:n"',
-    )
-    .optional(),
-});
-
-export const ModelSchema = z.strictObject({
+export const ModelSchema = z.object({
   constants: z.array(ConstantSchema).max(6).default([]),
   derived: z.array(DerivedSchema).max(8).default([]),
 });
 
 export type Model = z.infer<typeof ModelSchema>;
 
-export const QuizQuestionSchema = z.strictObject({
+export const QuizQuestionSchema = z.object({
   prompt: z.string().min(1).max(240),
   choices: z
-    .array(z.strictObject({ id: IdSchema, text: z.string().min(1).max(120) }))
+    .array(z.object({ id: IdSchema, text: z.string().min(1).max(120) }))
     .min(3)
     .max(4),
   answer_id: IdSchema,
@@ -840,14 +864,14 @@ export const QuizQuestionSchema = z.strictObject({
   scene_id: IdSchema.describe("The scene that covers this point."),
 });
 
-export const QuizSchema = z.strictObject({
+export const QuizSchema = z.object({
   questions: z.array(QuizQuestionSchema).min(2).max(3),
 });
 
 export type Quiz = z.infer<typeof QuizSchema>;
 export type QuizQuestion = z.infer<typeof QuizQuestionSchema>;
 
-export const DocumentSchema = z.strictObject({
+export const DocumentSchema = z.object({
   version: z.literal(SCHEMA_VERSION),
   plan: PlanSchema,
   params: z.array(ParamSchema).max(4).default([]),

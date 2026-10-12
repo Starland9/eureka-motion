@@ -9,6 +9,8 @@ import {
 import { createFrame, createProjection, layoutSlots, type Frame, type Rect } from "../layouts";
 import type { Model, Param, Scene, SceneElement, SlotName } from "../schema/document";
 import { elementLookup } from "../schema/geometry";
+import { splitTarget } from "../schema/inspect";
+import { toModelDefinition, withSceneValues, type ModelSource } from "../schema/model-scope";
 import {
   durationsMs,
   ease,
@@ -47,7 +49,7 @@ const LONG_TITLE_U = 5;
 const HTML_GAP_U = 2.5;
 const SUBTITLE_U = 3.2;
 
-function valueTable(params: readonly Param[], model: Model): Map<string, ValueInfo> {
+function valueTable(params: readonly Param[], model: ModelSource["model"]): Map<string, ValueInfo> {
   const table = new Map<string, ValueInfo>();
   for (const param of params) {
     table.set(param.id, {
@@ -115,16 +117,13 @@ export function createSceneRuntime(props: SceneFrameProps): SceneRuntime {
   const { scene, timing, params, model, values, frame, fps, reducedMotion } = props;
   const geometry = createFrame(props.width, props.height);
   const slots = layoutSlots(scene.layout, geometry);
-  const definition: ModelDefinition = {
-    params,
-    constants: model.constants,
-    derived: model.derived,
-  };
-  const info = valueTable(params, model);
+  const source = withSceneValues({ params, model }, scene);
+  const definition: ModelDefinition = toModelDefinition(source);
+  const info = valueTable(params, source.model);
   const refScope = buildScope(definition, defaultParamValues(definition.params));
   const baseScope = buildScope(definition, values);
   const theme = getTheme(props.theme);
-  const state = computeSceneState({
+  const computed = computeSceneState({
     scene,
     timing,
     frame,
@@ -134,6 +133,19 @@ export function createSceneRuntime(props: SceneFrameProps): SceneRuntime {
     reducedMotion,
     disableSweeps: props.disableSweeps,
   });
+  const emphasised = new Set(
+    scene.elements
+      .filter((element) => "role" in element && element.role === "result")
+      .map((element) => element.id),
+  );
+  const state: SceneContext["state"] = {
+    ...computed,
+    of(target) {
+      const found = computed.of(target);
+      if (!found.visible || !emphasised.has(splitTarget(target).id)) return found;
+      return { ...found, highlight: Math.max(found.highlight, found.progress) };
+    },
+  };
   const base = {
     frame,
     fps,

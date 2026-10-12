@@ -13,4 +13,4 @@ export const EXAMPLE_OUTLINE: Outline = {
 
 const byId = (id: string): Scene => document.scenes.find((scene) => scene.id === id) as Scene;
 
-export const EXAMPLE_SCENES: readonly Scene[] = [byId("s1"), byId("s3")];
+export const EXAMPLE_SCENES: readonly Scene[] = [byId("s3"), byId("s5"), byId("s6")];

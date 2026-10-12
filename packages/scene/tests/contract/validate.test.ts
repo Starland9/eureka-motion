@@ -82,10 +82,25 @@ describe("rule 1 — structure", () => {
     "rejects a missing required field",
     breaking(1, "title", (d) => delete scene(d, "s1").title),
   );
-  it(
-    "rejects a property the primitive does not have",
-    breaking(1, "colour", (d) => (el(d, "s1", "apple").colour = "red")),
-  );
+  it("ignores a property the primitive does not have", () => {
+    const d = doc();
+    el(d, "s1", "apple").colour = "red";
+    const result = validateDocument(d);
+    if (!result.ok) throw new Error(formatIssues(result.issues));
+    expect(
+      result.value.scenes[0]?.elements.find((element) => element.id === "apple"),
+    ).not.toHaveProperty("colour");
+  });
+
+  it("accepts a bare expression where a number is expected", () => {
+    const d = doc();
+    el(d, "s3", "sys").distance = "r";
+    el(d, "s1", "apple").at = ["0", 1.5];
+    const result = validateDocument(d);
+    if (!result.ok) throw new Error(formatIssues(result.issues));
+    const sys = result.value.scenes[2]?.elements.find((element) => element.id === "sys");
+    expect(sys).toMatchObject({ distance: { expr: "r" } });
+  });
   it(
     "rejects an unknown primitive",
     breaking(1, "type", (d) => (el(d, "s1", "apple").type = "sprite")),
@@ -381,6 +396,40 @@ describe("rule 3 — model", () => {
   );
 });
 
+describe("values declared by a scene", () => {
+  it("lets a scene compute and show a value the outline does not provide", () => {
+    const d = doc();
+    scene(d, "s5").derived = [
+      { id: "F_half", expr: "F / 2", unit: "N", label: "Moitié", format: "sci:2" },
+    ];
+    el(d, "s5", "value").text = "Moitié de la force : {{F_half|sci:2}} N.";
+    const result = validateDocument(d);
+    expect(result.ok, result.ok ? "" : formatIssues(result.issues)).toBe(true);
+  });
+
+  it(
+    "keeps those values private to their scene",
+    breaking(3, "{{F_half}} refers to an undeclared value", (d) => {
+      scene(d, "s5").derived = [{ id: "F_half", expr: "F / 2", unit: "N", label: "Moitié" }];
+      el(d, "s3", "rule").text = "Moitié : {{F_half}}";
+    }),
+  );
+
+  it(
+    "rejects a scene value that redeclares a value of the outline",
+    breaking(3, "declared more than once", (d) => {
+      scene(d, "s5").derived = [{ id: "F", expr: "r", unit: "", label: "x" }];
+    }),
+  );
+
+  it(
+    "rejects a scene value that reads an undeclared name",
+    breaking(3, 'unknown name "nope"', (d) => {
+      scene(d, "s5").derived = [{ id: "x1", expr: "nope * 2", unit: "", label: "x" }];
+    }),
+  );
+});
+
 describe("rule 4 — readability", () => {
   it(
     "rejects more than three colour roles in a scene",
@@ -389,14 +438,12 @@ describe("rule 4 — readability", () => {
       el(d, "s1", "earth").role = "valid";
     }),
   );
-  it(
-    "rejects the result yellow used as a line or text colour",
-    breaking(
-      4,
-      '"result" is a highlighter fill',
-      (d) => (el(d, "s1", "apple_pull").role = "result"),
-    ),
-  );
+  it("accepts the result role on a line: it is drawn in ink over a highlight", () => {
+    const d = doc();
+    el(d, "s2", "twice").role = "result";
+    const result = validateDocument(d);
+    expect(result.ok, result.ok ? "" : formatIssues(result.issues)).toBe(true);
+  });
   it(
     "rejects more than six labels visible together",
     breaking(4, "labels are visible together", (d) => {

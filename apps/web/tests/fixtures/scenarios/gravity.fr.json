@@ -167,6 +167,7 @@
         "title": "Une pomme, la Lune, une seule force",
         "layout": "compare",
         "world": { "x": [-5, 5], "y": [-3, 3] },
+        "derived": [],
         "elements": [
           {
             "id": "ground",
@@ -256,6 +257,7 @@
         "role": "analogy",
         "title": "Comme la lumière d'une lampe",
         "layout": "figure-notes",
+        "derived": [],
         "elements": [
           {
             "id": "light",
@@ -308,6 +310,7 @@
         "role": "mechanism",
         "title": "Deux masses s'attirent",
         "layout": "figure-notes",
+        "derived": [],
         "elements": [
           {
             "id": "sys",
@@ -377,6 +380,7 @@
         "role": "formula",
         "title": "La loi de Newton",
         "layout": "formula-focus",
+        "derived": [],
         "elements": [
           {
             "id": "law",
@@ -446,6 +450,7 @@
         "role": "example",
         "title": "Entre la Terre et la Lune",
         "layout": "figure-notes",
+        "derived": [],
         "elements": [
           {
             "id": "forces",
@@ -501,6 +506,7 @@
         "role": "recap",
         "title": "À retenir",
         "layout": "statement",
+        "derived": [],
         "elements": [
           {
             "id": "recap",

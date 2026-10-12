@@ -1,15 +1,11 @@
 import type { z } from "zod";
 import {
-  buildScope,
   checkExpression,
   checkModel,
   compile,
-  defaultParamValues,
   modelIdentifiers,
   resolve,
   templateReferences,
-  type ModelDefinition,
-  type Scope,
 } from "../expr";
 import { sceneLimits } from "../tokens";
 import {
@@ -41,6 +37,13 @@ import {
   splitTarget,
   visibilityByBeat,
 } from "./inspect";
+import {
+  sampleScopes,
+  toModelDefinition,
+  withSceneValues,
+  type ModelSource,
+  type ScopeSample,
+} from "./model-scope";
 import { checkTex } from "./tex";
 import { totalDurationMs } from "./timing";
 
@@ -85,7 +88,7 @@ export const NOTES_TEXT_CHARS = 70;
 export const NOTES_ITEM_CHARS = 40;
 
 const FRAME_TOLERANCE = 0.02;
-const LABEL_COLLISION = { x: 0.06, y: 0.07 };
+const LABEL_COLLISION = { x: 0.03, y: 0.04 };
 const MIN_VISIBLE_CURVE = 0.5;
 
 function issue(rule: RuleNumber, where: string, message: string): ValidationIssue {
@@ -115,35 +118,7 @@ function duplicates(ids: readonly string[]): string[] {
   return [...twice];
 }
 
-function toModelDefinition(outline: Pick<Outline, "params" | "model">): ModelDefinition {
-  return {
-    params: outline.params,
-    constants: outline.model.constants,
-    derived: outline.model.derived,
-  };
-}
-
-interface Sample {
-  label: string;
-  scope: Scope;
-}
-
-function sampleScopes(outline: Pick<Outline, "params" | "model">): Sample[] {
-  const model = toModelDefinition(outline);
-  const defaults = defaultParamValues(model.params);
-  const samples: Sample[] = [{ label: "the default values", scope: buildScope(model, defaults) }];
-  for (const param of model.params) {
-    samples.push({
-      label: `${param.id} = ${param.min} (its minimum)`,
-      scope: buildScope(model, { ...defaults, [param.id]: param.min }),
-    });
-    samples.push({
-      label: `${param.id} = ${param.max} (its maximum)`,
-      scope: buildScope(model, { ...defaults, [param.id]: param.max }),
-    });
-  }
-  return samples;
-}
+type Sample = ScopeSample;
 
 const at = (
   scene: Pick<Scene, "id">,
@@ -268,10 +243,7 @@ function quizStructureIssues(quiz: Quiz): ValidationIssue[] {
   return issues;
 }
 
-function referenceIssues(
-  scene: Scene,
-  outline: Pick<Outline, "params" | "model">,
-): ValidationIssue[] {
+function referenceIssues(scene: Scene, outline: ModelSource): ValidationIssue[] {
   const issues: ValidationIssue[] = [];
   const modelIds = modelIdentifiers(toModelDefinition(outline));
   const paramIds = new Set(outline.params.map((param) => param.id));
@@ -495,7 +467,7 @@ function safeReferences(text: string): ReturnType<typeof templateReferences> {
   }
 }
 
-function modelIssues(scene: Scene, outline: Pick<Outline, "params" | "model">): ValidationIssue[] {
+function modelIssues(scene: Scene, outline: ModelSource): ValidationIssue[] {
   const issues: ValidationIssue[] = [];
   const declared = modelIdentifiers(toModelDefinition(outline));
   const withX = new Set([...declared, "x"]);
@@ -558,34 +530,12 @@ function modelIssues(scene: Scene, outline: Pick<Outline, "params" | "model">): 
   return issues;
 }
 
-const STROKE_OR_TEXT_TYPES = new Set<SceneElement["type"]>([
-  "text",
-  "plot",
-  "point",
-  "segment",
-  "vector",
-  "dimension",
-  "angle",
-  "tangent",
-  "shape",
-  "object",
-]);
-
 function readabilityIssues(scene: Scene): ValidationIssue[] {
   const issues: ValidationIssue[] = [];
 
   const roles = new Set<string>();
   for (const element of scene.elements) {
     for (const role of elementRoles(element)) roles.add(role);
-    if (STROKE_OR_TEXT_TYPES.has(element.type) && "role" in element && element.role === "result") {
-      issues.push(
-        issue(
-          4,
-          at(scene, element, "role"),
-          '"result" is a highlighter fill, unreadable as a line or text colour; use a "highlight" action or another role',
-        ),
-      );
-    }
   }
   if (scene.beats.some((beat) => beat.actions.some((action) => action.do === "highlight")))
     roles.add("result");
@@ -656,10 +606,7 @@ function readabilityIssues(scene: Scene): ValidationIssue[] {
   return issues;
 }
 
-function framingIssues(
-  scene: Scene,
-  outline: Pick<Outline, "params" | "model">,
-): ValidationIssue[] {
+function framingIssues(scene: Scene, outline: ModelSource): ValidationIssue[] {
   const issues: ValidationIssue[] = [];
   const samples = sampleScopes(outline);
   const defaults = (samples[0] as Sample).scope;
@@ -908,17 +855,32 @@ export function validateOutline(
   return { ok: true, value: outline };
 }
 
+function sceneModelIssues(scene: Scene, outline: ModelSource): ValidationIssue[] {
+  if (scene.derived.length === 0) return [];
+  const outlineIds = modelIdentifiers(toModelDefinition(outline));
+  const own = new Set(scene.derived.map((derived) => derived.id));
+  return checkModel(toModelDefinition(withSceneValues(outline, scene)))
+    .filter(
+      (message) => [...own].some((id) => message.includes(`"${id}"`)) || outlineIds.size === 0,
+    )
+    .map((message) => issue(3, `${at(scene)} › derived`, message));
+}
+
 export function validateScene(input: unknown, outline: Outline): ValidationResult<Scene> {
   const parsed = SceneSchema.safeParse(input);
   if (!parsed.success) return fail(fromZod(parsed.error, ""));
   const scene = parsed.data;
+  const scoped = withSceneValues(outline, scene);
 
   const rules: (() => ValidationIssue[])[] = [
     () => structureIssues(scene),
-    () => referenceIssues(scene, outline),
-    () => modelIssues(scene, outline),
+    () => referenceIssues(scene, scoped),
+    () => {
+      const own = sceneModelIssues(scene, outline);
+      return own.length > 0 ? own : modelIssues(scene, scoped);
+    },
     () => readabilityIssues(scene),
-    () => framingIssues(scene, outline),
+    () => framingIssues(scene, scoped),
     () => scenePedagogyIssues(scene, outline),
   ];
   for (const rule of rules) {
@@ -950,17 +912,21 @@ export function validateDocument(
       ...(quiz ? quizStructureIssues(quiz) : []),
     ],
     () => [
-      ...scenes.flatMap((scene) => referenceIssues(scene, document)),
+      ...scenes.flatMap((scene) => referenceIssues(scene, withSceneValues(document, scene))),
       ...(quiz ? quizReferenceIssues(quiz, scenes) : []),
     ],
     () => {
       const model = checkModel(toModelDefinition(document)).map((message) =>
         issue(3, "model", message),
       );
-      return model.length > 0 ? model : scenes.flatMap((scene) => modelIssues(scene, document));
+      if (model.length > 0) return model;
+      return scenes.flatMap((scene) => {
+        const own = sceneModelIssues(scene, document);
+        return own.length > 0 ? own : modelIssues(scene, withSceneValues(document, scene));
+      });
     },
     () => scenes.flatMap(readabilityIssues),
-    () => scenes.flatMap((scene) => framingIssues(scene, document)),
+    () => scenes.flatMap((scene) => framingIssues(scene, withSceneValues(document, scene))),
     () => [
       ...planPedagogyIssues(document, shape),
       ...scenes.flatMap((scene) => scenePedagogyIssues(scene, document)),

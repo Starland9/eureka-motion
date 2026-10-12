@@ -153,12 +153,11 @@ const SIM_LABELS: Partial<Record<ElementType, number>> = {
 
 export function elementLabelCount(element: SceneElement): number {
   switch (element.type) {
-    case "axes":
-      return (element.xLabel ? 1 : 0) + (element.yLabel ? 1 : 0);
     case "bars":
       return element.items.length;
     case "sim.flow":
       return 1 + element.inputs.length + element.outputs.length;
+    case "axes":
     case "text":
     case "list":
     case "formula":
@@ -178,6 +177,8 @@ export function elementLabelCount(element: SceneElement): number {
 
 export function elementParts(element: SceneElement): readonly string[] {
   switch (element.type) {
+    case "list":
+      return element.items.map((_, i) => `i${i + 1}`);
     case "timeline":
       return element.events.map((_, i) => `e${i + 1}`);
     case "steps":
