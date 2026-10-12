@@ -1,0 +1,8 @@
+packages:
+  - "apps/*"
+  - "packages/*"
+  - "workers/render"
+allowBuilds:
+  "@parcel/watcher": false
+  "@swc/core": false
+  esbuild: false

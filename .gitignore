@@ -1,0 +1,36 @@
+# dependencies
+node_modules/
+
+# build output
+.next/
+dist/
+build/
+coverage/
+*.tsbuildinfo
+next-env.d.ts
+
+# logs
+*.log
+
+# environment files (only the documented example is tracked)
+.env
+.env.*
+!deploy/.env.example
+
+# runtime artefacts (anchored: apps/web/src/app/api/media and
+# workers/manim/sandbox are source directories and must stay tracked)
+/media/
+/sandbox/
+
+# test output
+playwright-report/
+test-results/
+
+# python
+__pycache__/
+*.pyc
+.venv/
+
+# os
+.DS_Store
+/.snapshots/
