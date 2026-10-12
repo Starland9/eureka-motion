@@ -102,8 +102,14 @@ pas pu être vérifiés sont signalés comme tels et portés dans la section Ris
 - **Rationale**: la documentation indique seulement que le lecteur « réagit si les métadonnées
   changent » ; ce qui se passe quand la lecture atteint l'ancienne fin n'est pas documenté.
   `useBufferState().delayPlayback()` offre un second moyen de retenir la lecture.
-- **Non vérifié**: le comportement exact à l'ancienne fin de composition. Un prototype est la
-  première tâche technique (voir Risques).
+- **Vérifié le 2026-10-13** avec le prototype `/fr/proto/player` (Remotion 4.0.534, Chromium) :
+  - une scène qui arrive pendant la lecture est enchaînée sans aucune interruption : un seul
+    événement `play` à l'image 0 et un seul `ended` à la dernière image de la quatrième scène ;
+  - quand la lecture atteint la fin avant l'arrivée de la scène suivante, le lecteur émet
+    `ended` et s'arrête sur la dernière image ; à l'arrivée de la scène, la page repositionne
+    la tête de lecture sur la première image nouvelle (`seekTo`) puis relance (`play`) : la
+    lecture reprend là où elle s'était arrêtée, jamais au début.
+  Cette logique est le crochet `useGrowingPlayback`.
 
 ### 2.4 Export vidéo
 
@@ -347,7 +353,6 @@ mesurer avec le script du jeu de référence. La mise en cache des consignes est
 
 | Risque | Effet | Parade |
 |---|---|---|
-| Comportement du lecteur quand la durée augmente en cours de lecture (non documenté) | Coupure ou retour au début entre deux scènes | Prototype en première tâche technique ; reprise pilotée par la page ; repli : n'ajouter les scènes qu'aux pauses |
 | Latence de `deepseek-v4-pro` avec réflexion (non mesurée) | Première scène au-delà de 15 secondes | Vérification du plan en parallèle de la scène 1 ; mesure par le jeu de référence ; repli par configuration |
 | Réponses JSON vides ou hors schéma | Scènes à refaire, délai | Validation et nouvelle demande, deux fois au plus ; scène écartée ensuite |
 | `network_mode: none` sous Dokploy (non testé) | Bac à sable refusé au déploiement | Déployer ce service en premier ; repli sur un réseau `internal` dédié |

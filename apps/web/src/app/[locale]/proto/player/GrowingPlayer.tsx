@@ -52,9 +52,10 @@ export function GrowingPlayer({ document }: { document: ExplanationDocument }) {
 
   useEffect(() => {
     started.current = performance.now();
+    const requested = Number(new URLSearchParams(window.location.search).get("arrival"));
     const timer = setInterval(
       () => setCount((value) => Math.min(value + 1, allScenes.length)),
-      ARRIVAL_MS,
+      requested > 0 ? requested : ARRIVAL_MS,
     );
     return () => clearInterval(timer);
   }, [allScenes.length]);

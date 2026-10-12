@@ -97,7 +97,7 @@ export class Pipeline {
   async start(input: StartInput): Promise<Started> {
     const kind = input.kind ?? "initial";
     const key = { language: input.language, level: input.level };
-    if (kind === "initial") {
+    if (kind === "initial" && !input.interpretation) {
       const cachedId = await this.deps.cache.findByQuestion(input.question, key);
       if (cachedId) return { id: cachedId, cached: true, log: null };
     }
@@ -377,7 +377,7 @@ export class Pipeline {
       });
       if (status === "ready" && kind === "initial") {
         await deps.cache.remember(id, {
-          question: input.question,
+          question: input.interpretation ?? input.question,
           slug: concept.slug,
           language,
           level,
