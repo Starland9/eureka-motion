@@ -35,7 +35,7 @@ export interface SceneState {
 
 export const DIM_OPACITY = 0.35;
 export const DEFAULT_SPREAD = 0.6;
-const SWEEP_PHASES = { go: 0.45, stay: 0.2 };
+const SWEEP_PHASES = { go: 0.42, stay: 0.2, back: 0.33 };
 const SWEEP_HOLD_GO = 0.6;
 
 const HIDDEN: ElementState = {
@@ -160,12 +160,8 @@ export function computeSceneState(input: SceneStateInput): SceneState {
         } else if (t < SWEEP_PHASES.go + SWEEP_PHASES.stay) {
           k = 1;
         } else {
-          k =
-            1 -
-            ease(
-              "trace",
-              (t - SWEEP_PHASES.go - SWEEP_PHASES.stay) / (1 - SWEEP_PHASES.go - SWEEP_PHASES.stay),
-            );
+          const back = (t - SWEEP_PHASES.go - SWEEP_PHASES.stay) / SWEEP_PHASES.back;
+          k = back >= 1 ? 0 : 1 - ease("trace", back);
         }
         paramValues[action.param] = lerp(base, target, k);
         break;

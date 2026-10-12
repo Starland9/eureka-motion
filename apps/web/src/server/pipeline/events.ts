@@ -100,7 +100,7 @@ export class EventLog {
           yield item;
           if (isTerminal(item.event)) return;
         }
-        if (signal?.aborted) return;
+        if (signal?.aborted || this.finished) return;
         await new Promise<void>((resolve) => {
           wake = resolve;
         });

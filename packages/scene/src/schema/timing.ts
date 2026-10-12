@@ -1,7 +1,7 @@
 import type { Beat, Scene } from "./document";
 
 export const WORDS_PER_SECOND = 2.6;
-export const BEAT_PAUSE_MS = 400;
+export const BEAT_PAUSE_MS = 250;
 export const MIN_BEAT_MS = 1500;
 
 export function countWords(text: string): number {

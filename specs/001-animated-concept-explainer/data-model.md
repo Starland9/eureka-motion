@@ -157,7 +157,7 @@ l'écran pendant qu'elle est dite.
 |---|---|---|
 | `target` | `plan` ou identifiant de scène | |
 | `status` | `validated` \| `corrected` \| `dropped` | `corrected` = valide après nouvelle tentative |
-| `attempts` | entier 1 à 3 | |
+| `attempts` | entier, 1 ou plus | Nombre de demandes d'écriture, reprises comprises : 9 au plus pour le plan, 6 au plus pour une scène |
 | `reason` | texte, une phrase | Dans la langue de l'explication ; affiché au colophon (FR-048) |
 | `checks` | liste | Contrôles passés : schéma, cohérence du modèle, densité, exactitude |
 

@@ -4,7 +4,12 @@ import { describe, expect, it } from "vitest";
 import { buildTimeline, locate, sceneStartFrame } from "../../src/composition/timeline";
 import { computeSceneState, DIM_OPACITY, scheduleActions } from "../../src/composition/state";
 import { buildScope } from "../../src/expr";
-import { DocumentSchema, type ExplanationDocument, type Scene } from "../../src/schema";
+import {
+  BEAT_PAUSE_MS,
+  DocumentSchema,
+  type ExplanationDocument,
+  type Scene,
+} from "../../src/schema";
 import { ease, FPS } from "../../src/tokens";
 
 const REFERENCE = fileURLToPath(
@@ -85,7 +90,9 @@ describe("timeline", () => {
       },
     ]);
     const built = buildTimeline([scene]);
-    expect(built.scenes[0]!.beats[0]!.duration).toBe(Math.round(3.4 * FPS));
+    expect(built.scenes[0]!.beats[0]!.duration).toBe(
+      Math.round(((3000 + BEAT_PAUSE_MS) / 1000) * FPS),
+    );
     expect(built.scenes[0]!.beats[0]!.audioUrl).toBe("/media/x.mp3");
   });
 
