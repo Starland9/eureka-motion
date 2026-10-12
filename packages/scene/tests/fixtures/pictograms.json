@@ -1,0 +1,392 @@
+{
+  "language": "fr",
+  "payload": {
+    "version": 1,
+    "plan": {
+      "objective": "Contrôler le dessin des dix-sept pictogrammes de la bibliothèque fermée.",
+      "prerequisites": [],
+      "analogy": {
+        "name": "planche",
+        "mapping": "Chaque pictogramme est une vignette de planche de manuel."
+      },
+      "key_rule": {
+        "statement": "Le trait a la même épaisseur quelle que soit la taille du dessin."
+      },
+      "steps": [
+        {
+          "role": "example",
+          "intent": "Montrer toute la bibliothèque.",
+          "visual": "Dix-sept pictogrammes étiquetés."
+        }
+      ]
+    },
+    "params": [],
+    "model": {
+      "constants": [],
+      "derived": []
+    },
+    "scenes": [
+      {
+        "id": "pictos_a",
+        "index": 0,
+        "role": "example",
+        "title": "Planche A — astres et objets",
+        "layout": "figure",
+        "world": {
+          "x": [0, 36],
+          "y": [0, 15.5]
+        },
+        "elements": [
+          {
+            "id": "planet",
+            "slot": "figure",
+            "type": "object",
+            "kind": "planet",
+            "at": [6, 11.6],
+            "size": 3.8,
+            "label": "planète"
+          },
+          {
+            "id": "moon",
+            "slot": "figure",
+            "type": "object",
+            "kind": "moon",
+            "at": [18, 11.6],
+            "size": 3.8,
+            "label": "lune"
+          },
+          {
+            "id": "sun",
+            "slot": "figure",
+            "type": "object",
+            "kind": "sun",
+            "at": [30, 11.6],
+            "size": 3.8,
+            "label": "soleil"
+          },
+          {
+            "id": "apple",
+            "slot": "figure",
+            "type": "object",
+            "kind": "apple",
+            "at": [6, 4.4],
+            "size": 3.8,
+            "label": "pomme"
+          },
+          {
+            "id": "ball",
+            "slot": "figure",
+            "type": "object",
+            "kind": "ball",
+            "at": [18, 4.4],
+            "size": 3.8,
+            "label": "balle"
+          },
+          {
+            "id": "block",
+            "slot": "figure",
+            "type": "object",
+            "kind": "block",
+            "at": [30, 4.4],
+            "size": 3.8,
+            "label": "bloc"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Chaque pictogramme est tracé au même trait que le reste de la figure.",
+            "duration_ms": 2000,
+            "actions": [
+              {
+                "do": "show",
+                "targets": ["planet", "moon", "sun", "apple", "ball", "block"],
+                "how": "fade",
+                "at": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "pictos_b",
+        "index": 1,
+        "role": "example",
+        "title": "Planche B — mécanique et circuits",
+        "layout": "figure",
+        "world": {
+          "x": [0, 36],
+          "y": [0, 15.5]
+        },
+        "elements": [
+          {
+            "id": "spring",
+            "slot": "figure",
+            "type": "object",
+            "kind": "spring",
+            "at": [6, 11.6],
+            "size": 3.8,
+            "label": "ressort"
+          },
+          {
+            "id": "person",
+            "slot": "figure",
+            "type": "object",
+            "kind": "person",
+            "at": [18, 11.6],
+            "size": 3.8,
+            "label": "personne"
+          },
+          {
+            "id": "battery",
+            "slot": "figure",
+            "type": "object",
+            "kind": "battery",
+            "at": [30, 11.6],
+            "size": 3.8,
+            "label": "pile"
+          },
+          {
+            "id": "bulb",
+            "slot": "figure",
+            "type": "object",
+            "kind": "bulb",
+            "at": [6, 4.4],
+            "size": 3.8,
+            "label": "ampoule"
+          },
+          {
+            "id": "resistor",
+            "slot": "figure",
+            "type": "object",
+            "kind": "resistor",
+            "at": [18, 4.4],
+            "size": 3.8,
+            "label": "résistance"
+          },
+          {
+            "id": "beaker",
+            "slot": "figure",
+            "type": "object",
+            "kind": "beaker",
+            "at": [30, 4.4],
+            "size": 3.8,
+            "label": "bécher"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Chaque pictogramme est tracé au même trait que le reste de la figure.",
+            "duration_ms": 2000,
+            "actions": [
+              {
+                "do": "show",
+                "targets": ["spring", "person", "battery", "bulb", "resistor", "beaker"],
+                "how": "fade",
+                "at": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "pictos_c",
+        "index": 2,
+        "role": "example",
+        "title": "Planche C — vivant et échanges",
+        "layout": "figure",
+        "world": {
+          "x": [0, 36],
+          "y": [0, 15.5]
+        },
+        "elements": [
+          {
+            "id": "molecule",
+            "slot": "figure",
+            "type": "object",
+            "kind": "molecule",
+            "at": [6, 11.6],
+            "size": 3.8,
+            "label": "molécule"
+          },
+          {
+            "id": "cell",
+            "slot": "figure",
+            "type": "object",
+            "kind": "cell",
+            "at": [18, 11.6],
+            "size": 3.8,
+            "label": "cellule"
+          },
+          {
+            "id": "leaf",
+            "slot": "figure",
+            "type": "object",
+            "kind": "leaf",
+            "at": [30, 11.6],
+            "size": 3.8,
+            "label": "feuille"
+          },
+          {
+            "id": "coin",
+            "slot": "figure",
+            "type": "object",
+            "kind": "coin",
+            "at": [6, 4.4],
+            "size": 3.8,
+            "label": "pièce"
+          },
+          {
+            "id": "basket",
+            "slot": "figure",
+            "type": "object",
+            "kind": "basket",
+            "at": [18, 4.4],
+            "size": 3.8,
+            "label": "panier"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Chaque pictogramme est tracé au même trait que le reste de la figure.",
+            "duration_ms": 2000,
+            "actions": [
+              {
+                "do": "show",
+                "targets": ["molecule", "cell", "leaf", "coin", "basket"],
+                "how": "fade",
+                "at": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "pictos_sizes",
+        "index": 3,
+        "role": "example",
+        "title": "Planche D — trois tailles",
+        "layout": "figure",
+        "world": {
+          "x": [0, 36],
+          "y": [0, 15.5]
+        },
+        "elements": [
+          {
+            "id": "person",
+            "slot": "figure",
+            "type": "object",
+            "kind": "person",
+            "at": [29, 7.6],
+            "size": 9.5,
+            "label": "grand"
+          },
+          {
+            "id": "bulb",
+            "slot": "figure",
+            "type": "object",
+            "kind": "bulb",
+            "at": [6, 9.5],
+            "size": 3,
+            "label": "moyen"
+          },
+          {
+            "id": "cell",
+            "slot": "figure",
+            "type": "object",
+            "kind": "cell",
+            "at": [14, 9.5],
+            "size": 3
+          },
+          {
+            "id": "planet",
+            "slot": "figure",
+            "type": "object",
+            "kind": "planet",
+            "at": [3.5, 3.4],
+            "size": 1.25
+          },
+          {
+            "id": "apple",
+            "slot": "figure",
+            "type": "object",
+            "kind": "apple",
+            "at": [5.9, 3.4],
+            "size": 1.25
+          },
+          {
+            "id": "battery",
+            "slot": "figure",
+            "type": "object",
+            "kind": "battery",
+            "at": [8.3, 3.4],
+            "size": 1.25
+          },
+          {
+            "id": "spring",
+            "slot": "figure",
+            "type": "object",
+            "kind": "spring",
+            "at": [10.7, 3.4],
+            "size": 1.25
+          },
+          {
+            "id": "molecule",
+            "slot": "figure",
+            "type": "object",
+            "kind": "molecule",
+            "at": [13.1, 3.4],
+            "size": 1.25
+          },
+          {
+            "id": "basket",
+            "slot": "figure",
+            "type": "object",
+            "kind": "basket",
+            "at": [15.5, 3.4],
+            "size": 1.25
+          },
+          {
+            "id": "coin",
+            "slot": "figure",
+            "type": "object",
+            "kind": "coin",
+            "at": [17.9, 3.4],
+            "size": 1.25
+          },
+          {
+            "id": "beaker",
+            "slot": "figure",
+            "type": "object",
+            "kind": "beaker",
+            "at": [20.3, 3.4],
+            "size": 1.25
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Le trait garde la même épaisseur à toutes les tailles.",
+            "duration_ms": 2000,
+            "actions": [
+              {
+                "do": "show",
+                "targets": ["person", "bulb", "cell", "planet", "apple", "battery"],
+                "how": "fade",
+                "at": 0
+              },
+              {
+                "do": "show",
+                "targets": ["spring", "molecule", "basket", "coin", "beaker"],
+                "how": "fade",
+                "at": 0
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
