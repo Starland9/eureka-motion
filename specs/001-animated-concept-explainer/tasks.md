@@ -244,7 +244,7 @@ commence à se jouer en moins de 15 secondes et se complète scène par scène.
 - [ ] T043 [P] [US1] [S] Écrire la barre de lecture `apps/web/src/components/player/Transport.tsx` : règle graduée à une section par scène, lecture et pause, temps en chiffres tabulaires, sous-titres, volume, plein écran, raccourcis espace, flèches, `M`, `C`, `F`, cibles de 44 px.
   - Lire : design-system/eureka-motion/MASTER.md § 5.3 et § 6 ; spec.md FR-010.
   - Réussite : toutes les commandes sont utilisables au clavier ; chaque bouton a un nom accessible.
-- [ ] T044 [P] [US1] [S] Écrire `apps/web/src/components/player/SceneList.tsx` (liste des scènes, scène courante, scènes en préparation, compteur de scènes prêtes), `FigureCaption.tsx` et `Subtitles.tsx` (texte HTML du temps de narration courant, masquable).
+- [X] T044 [P] [US1] [S] Écrire `apps/web/src/components/player/SceneList.tsx` (liste des scènes, scène courante, scènes en préparation, compteur de scènes prêtes), `FigureCaption.tsx` et `Subtitles.tsx` (texte HTML du temps de narration courant, masquable).
   - Lire : design-system/eureka-motion/MASTER.md § 4 (Sous-titres) et § 5.3 ; spec.md FR-009, FR-041.
   - Réussite : le sous-titre affiché correspond au temps de narration en cours à chaque position de lecture.
 - [ ] T045 [P] [US1] [S] Écrire l'accueil `apps/web/src/app/[locale]/page.tsx` avec `apps/web/src/components/ask/AskSentence.tsx` (phrase à trou, 500 caractères au plus, bouton « Expliquer → ») et `Preferences.tsx` (langue, niveau, thème Papier ou Tableau, mémorisés sur l'appareil ; langue par défaut du navigateur, niveau par défaut lycée).

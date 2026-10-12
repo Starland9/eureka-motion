@@ -1,1 +1,10 @@
-{}
+{
+  "Scenes": {
+    "label": "Scenes",
+    "counter": "{ready, plural, =0 {No scene ready out of {total}} one {# scene ready out of {total}} other {# scenes ready out of {total}}}",
+    "complete": "{count, plural, =0 {No scene} one {# scene} other {# scenes}}",
+    "pending": "[In preparation]",
+    "missing": "[Dropped]",
+    "figure": "Fig.\u00a0{number}\u00a0— {title}"
+  }
+}
