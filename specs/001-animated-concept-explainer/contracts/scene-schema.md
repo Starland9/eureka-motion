@@ -38,6 +38,8 @@ jamais passée à `eval`, à `Function` ni à un moteur de gabarits.
   les propriétés marquées « temporelles » des primitives de simulation et de tracé.
 - **Interdit** : chaînes, accès à une propriété, appel de fonction inconnue, affectation,
   identifiant non déclaré. Toute infraction est une erreur de validation.
+- **Noms réservés** : `pi`, `e`, `t` et les noms de fonctions ne peuvent pas être déclarés
+  comme paramètre, constante ou grandeur dérivée.
 
 **Liaison de valeur** : toute propriété numérique accepte un nombre ou `{ "expr": "…" }`.
 
@@ -54,12 +56,15 @@ mathématique que le moteur cadre automatiquement.
 
 | Gabarit | Zones | Usage typique |
 |---|---|---|
-| `statement` | `title`, `text` | Accroche, récapitulatif |
-| `figure` | `title`, `figure` | Mécanisme |
-| `figure-notes` | `title`, `figure`, `notes` | Mécanisme commenté, exemple chiffré |
-| `formula-focus` | `title`, `formula`, `figure`, `readout` | Formule ou règle clé |
-| `compare` | `title`, `figure_a`, `figure_b` | Analogie, avant et après |
-| `sequence` | `title`, `track` | Frise, étapes ordonnées |
+| `statement` | `text` | Accroche, récapitulatif |
+| `figure` | `figure` | Mécanisme |
+| `figure-notes` | `figure`, `notes` | Mécanisme commenté, exemple chiffré |
+| `formula-focus` | `formula`, `figure`, `readout` | Formule ou règle clé |
+| `compare` | `figure_a`, `figure_b` | Analogie, avant et après |
+| `sequence` | `track` | Frise, étapes ordonnées |
+
+Le titre de la scène (`title`) occupe sa propre zone dans tous les gabarits ; aucun élément ne
+s'y place.
 
 Les dimensions, marges, tailles de texte et épaisseurs de trait de chaque zone viennent du
 design system (`design-system/eureka-motion/MASTER.md`, § 4) et ne sont pas réglables par le
@@ -86,6 +91,7 @@ document.
                    { "do": "show", "targets": ["pull"], "how": "draw" } ] },
     { "id": "b2", "narration": "Si on double la distance, la force est divisée par quatre.",
       "actions": [ { "do": "show", "targets": ["dist"], "how": "draw" },
+                   { "do": "show", "targets": ["note"], "how": "type" },
                    { "do": "sweep", "param": "r", "to": { "expr": "2 * r" } },
                    { "do": "highlight", "targets": ["note"] } ] }
   ]
@@ -94,31 +100,35 @@ document.
 
 ### 4.1 Primitives (`type`)
 
+La liste exacte des propriétés de chaque primitive est celle du schéma exécutable
+(`packages/scene/src/schema/document.ts`), qui fait foi ; les tableaux ci-dessous en donnent
+l'essentiel. Une propriété inconnue est une erreur de structure.
+
 **Texte et données**
 
 | Type | Propriétés principales | Zones |
 |---|---|---|
-| `text` | `text`, `emphasis` | `text`, `notes`, `title` |
+| `text` | `text`, `emphasis`, `role` | `text`, `notes` |
 | `list` | `items` (4 au plus) | `notes`, `text` |
-| `formula` | `tex`, `bind` (variable → rôle de couleur) | `formula`, `notes` |
+| `formula` | `tex` ; un symbole se colore par son rôle avec `\q{…}` (grandeur), `\a{…}` (action), `\res{…}` (résultat), `\ok{…}` (validé) ; aucune autre commande de couleur, de lien ou de définition n'est admise | `formula`, `notes` |
 | `readout` | `value` (identifiant du modèle), `label` | `readout`, `notes` |
 
 **Figure** (repère mathématique de la scène)
 
 | Type | Propriétés principales |
 |---|---|
-| `axes` | `x`, `y` : `{ label, min, max, ticks }`, `grid` |
+| `axes` | `xLabel`, `yLabel`, `xTicks`, `yTicks`, `grid` — les axes couvrent le repère `world` de la scène |
 | `plot` | `fn` (expression en `x`, temporelle), `domain`, `role` |
 | `point` | `at`, `label`, `role` |
 | `segment` | `from`, `to`, `label`, `role`, `style` (plein, tireté) |
-| `vector` | `from`, `to` ou `toward` + `length`, `label`, `role` |
-| `dimension` | `from`, `to`, `label` — cote avec traits de rappel |
+| `vector` | `from`, puis soit `to`, soit `toward` et `length` ; `label`, `role` |
+| `dimension` | `from`, `to`, `label`, `offset` — cote avec traits de rappel, tracée à côté de ce qu'elle mesure |
 | `angle` | `vertex`, `from`, `to`, `label` |
-| `shape` | `kind` (`circle`, `rect`, `polygon`, `arc`), géométrie, `fill` (`none`, rôle, hachures), `role` |
+| `shape` | `kind` : `circle` (`center`, `radius`), `rect` (`center`, `width`, `height`), `polygon` (`points`), `arc` (`center`, `radius`, `startDeg`, `endDeg`) ; `fill` (`none`, `hatch` ou un rôle), `role` |
 | `area` | `plot`, `from`, `to` — aire sous une courbe |
-| `tangent` | `plot`, `at` — tangente et pente |
+| `tangent` | `plot`, `at`, `showSlope` — tangente et pente |
 | `object` | `kind` (pictogramme de la bibliothèque), `at`, `size`, `label` |
-| `bars` | `items` : `{ label, value, role }`, `unit` |
+| `bars` | `items` (2 à 6) : `{ label, value, role }`, `unit` — occupe sa zone à lui seul |
 
 **Structure** (sujets de toute matière, FR-046)
 
@@ -147,7 +157,11 @@ actions peuvent viser)
 | `sim.market` | Offre et demande | décalage des courbes |
 
 Une simulation calcule elle-même ses positions à partir de la loi qu'elle représente ; le
-document ne lui fournit que des paramètres.
+document ne lui fournit que des paramètres. Elle occupe sa zone à elle seule, et ramène les
+valeurs physiques à l'écran en les comparant à leurs valeurs par défaut.
+
+Un point se donne par ses coordonnées `[x, y]` ou par l'identifiant d'un autre élément de la
+même zone servant d'ancre (`point`, `object` ou `shape`).
 
 **Pictogrammes** (`object.kind`) : bibliothèque fermée dessinée au trait dans le style du
 design system (planète, lune, soleil, pomme, bille, bloc, ressort, personnage, pile, ampoule,
@@ -165,6 +179,10 @@ résistance, bécher, molécule, cellule, feuille, pièce, panier…). Aucune im
 | `sweep` | Fait varier un paramètre pendant le temps | `param`, `to`, puis retour à la valeur de départ sauf `hold` |
 | `play` | Fait avancer une simulation | `target`, `from`, `to` (secondes simulées) |
 
+Une cible est l'identifiant d'un élément, ou `élément.partie` pour viser une partie nommée
+(parties d'une simulation ; `e1`, `e2`… d'une frise ; `s1`, `s2`… d'une liste d'étapes ; nœuds
+d'un schéma de relations). `focus` dure jusqu'à la fin du temps de narration.
+
 Chaque action peut porter `at` (fraction du temps, 0 à 1). Sans `at`, les actions d'un temps
 se suivent à intervalles égaux. Les durées et les courbes viennent des tokens de mouvement ;
 le document ne peut pas les modifier.
@@ -179,14 +197,19 @@ renvoyé au modèle de langage pour une nouvelle tentative.
 
 1. **Structure** : types, champs obligatoires, énumérations, tailles de listes.
 2. **Références** : identifiants uniques ; toute cible d'action, toute zone, toute valeur liée
-   existe.
+   existe ; chaque élément est rendu visible par au moins une action `show` ; une primitive
+   qui occupe sa zone à elle seule n'y est pas accompagnée.
 3. **Modèle** : chaque expression s'analyse, n'emploie que des identifiants déclarés, et reste
    finie pour chaque paramètre à sa borne basse, à sa valeur par défaut et à sa borne haute.
 4. **Lisibilité** (design system) : 14 éléments au plus par scène, 6 étiquettes au plus
    visibles ensemble, 3 rôles de couleur au plus, titre de 60 caractères au plus, texte de
-   140 caractères au plus par élément, narration de 200 caractères au plus par temps.
-5. **Cadrage** : tout élément de figure tient dans le repère de la scène pour toutes les
-   valeurs de paramètres ; les étiquettes ne se recouvrent pas à la valeur par défaut.
+   140 caractères au plus par élément, narration de 200 caractères au plus par temps ; au
+   plus 2 éléments dans `text`, 3 dans `notes`, 1 dans `formula`, 3 dans `readout` ; le rôle
+   « résultat » n'est jamais une couleur de trait ni de texte.
+5. **Cadrage** : tout élément de figure tient dans le repère de la scène, chaque paramètre
+   étant essayé à sa borne basse et à sa borne haute ; au moins la moitié d'une courbe est
+   visible ; un `sweep` reste dans la plage de son paramètre ; les étiquettes ne se
+   recouvrent pas à la valeur par défaut.
 6. **Pédagogie** : 4 à 7 scènes, rôles requis présents, 1 à 6 temps par scène, durée totale
    estimée entre 45 et 120 secondes.
 7. **Exactitude** : relecture par le modèle juge, qui compare la scène au plan vérifié.
