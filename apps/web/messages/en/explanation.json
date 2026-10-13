@@ -1,1 +1,71 @@
-{}
+{
+  "Explanation": {
+    "neutralTitle": "Explanation",
+    "documentTitle": "{title} — {product}",
+    "header": {
+      "newQuestion": "New question",
+      "theme": "Theme"
+    },
+    "play": "Play the explanation →",
+    "backHome": "Back to the home page →",
+    "preparation": {
+      "label": "Preparation",
+      "steps": {
+        "triage": "Reading the question",
+        "plan": "Plan",
+        "verify_plan": "Verification",
+        "scenes": "Scene 1 of {total}"
+      },
+      "state": {
+        "done": "[Done]",
+        "current": "[In progress]"
+      },
+      "now": {
+        "triage": "I am reading your question.",
+        "plan": "I am building the plan of the explanation.",
+        "verify_plan": "I am checking that the plan is accurate.",
+        "scenes": "I am preparing scene 1 of {total}.",
+        "firstScene": "I am preparing the first scene."
+      }
+    },
+    "refused": {
+      "next": "Ask another question, on a subject you study in class.",
+      "action": "Ask another question →"
+    },
+    "clarify": {
+      "next": "Choose what you meant:",
+      "pending": "Preparing the explanation…"
+    },
+    "failed": {
+      "connection_lost": "The connection was interrupted before the end of the explanation.",
+      "network": "The server did not answer.",
+      "default": "The explanation could not be prepared.",
+      "nextRetry": "You can start the preparation again.",
+      "nextHome": "Go back to the home page to ask your question.",
+      "retry": "Try again",
+      "pending": "Starting the explanation again…"
+    },
+    "missing": {
+      "lead": "This explanation does not exist, or the link is incomplete.",
+      "next": "Ask your question on the home page to get one."
+    },
+    "expired": {
+      "lead": "This link has expired.",
+      "next": "Ask your question again to get an explanation."
+    },
+    "partial": {
+      "notice": "Part of the explanation is missing: a scene could not be verified, so it is not shown.",
+      "action": "Start again",
+      "pending": "Starting the explanation again…"
+    },
+    "language": {
+      "notice": "Your question seems to be written in {language}.",
+      "action": "See the explanation in {language} →",
+      "pending": "Preparing the explanation…",
+      "names": {
+        "fr": "French",
+        "en": "English"
+      }
+    }
+  }
+}

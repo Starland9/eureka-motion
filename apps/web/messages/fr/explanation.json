@@ -1,1 +1,71 @@
-{}
+{
+  "Explanation": {
+    "neutralTitle": "Explication",
+    "documentTitle": "{title} — {product}",
+    "header": {
+      "newQuestion": "Nouvelle question",
+      "theme": "Thème"
+    },
+    "play": "Lire l’explication →",
+    "backHome": "Revenir à l’accueil →",
+    "preparation": {
+      "label": "Préparation",
+      "steps": {
+        "triage": "Lecture de la question",
+        "plan": "Plan",
+        "verify_plan": "Vérification",
+        "scenes": "Scène 1 sur {total}"
+      },
+      "state": {
+        "done": "[Fait]",
+        "current": "[En cours]"
+      },
+      "now": {
+        "triage": "Je lis ta question.",
+        "plan": "Je construis le plan de l’explication.",
+        "verify_plan": "Je vérifie que le plan est exact.",
+        "scenes": "Je prépare la scène 1 sur {total}.",
+        "firstScene": "Je prépare la première scène."
+      }
+    },
+    "refused": {
+      "next": "Pose une autre question, sur un sujet que tu étudies en cours.",
+      "action": "Poser une autre question →"
+    },
+    "clarify": {
+      "next": "Choisis ce que tu voulais dire :",
+      "pending": "Je prépare l’explication…"
+    },
+    "failed": {
+      "connection_lost": "La connexion a été interrompue avant la fin de l’explication.",
+      "network": "Le serveur n’a pas répondu.",
+      "default": "L’explication n’a pas pu être préparée.",
+      "nextRetry": "Tu peux relancer la préparation.",
+      "nextHome": "Reviens à l’accueil pour poser ta question.",
+      "retry": "Réessayer",
+      "pending": "Je relance l’explication…"
+    },
+    "missing": {
+      "lead": "Cette explication n’existe pas, ou le lien est incomplet.",
+      "next": "Pose ta question à l’accueil pour en obtenir une."
+    },
+    "expired": {
+      "lead": "Ce lien a expiré.",
+      "next": "Pose de nouveau ta question pour obtenir une explication."
+    },
+    "partial": {
+      "notice": "Une partie de l’explication manque : une scène n’a pas pu être vérifiée, elle n’est donc pas montrée.",
+      "action": "Relancer",
+      "pending": "Je relance l’explication…"
+    },
+    "language": {
+      "notice": "Ta question semble écrite en {language}.",
+      "action": "Voir l’explication en {language} →",
+      "pending": "Je prépare l’explication…",
+      "names": {
+        "fr": "français",
+        "en": "anglais"
+      }
+    }
+  }
+}

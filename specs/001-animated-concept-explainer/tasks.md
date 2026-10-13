@@ -208,7 +208,7 @@ commence à se jouer en moins de 15 secondes et se complète scène par scène.
 - [X] T033 [P] [US1] [S] Écrire les tests de contrat HTTP `apps/web/tests/integration/api-explanations.test.ts` : `POST /api/explanations` (400, 429, 503, flux nominal, `clarify`, `refused`), `GET /api/explanations/{id}` (200, 404, 410), reprise par `/events?after=n`.
   - Lire : contracts/http-api.md § 1 et § 2.
   - Réussite : les tests existent et échouent tant que T040 n'est pas livrée.
-- [ ] T034 [P] [US1] [S] Écrire le test de parcours `apps/web/tests/e2e/ask.spec.ts` sur le fournisseur simulé : saisie dans la phrase à trou, retour en moins d'une seconde, première scène jouée, pause, changement de scène, coupure du son, ouverture du colophon ; vérifier que la première explication est obtenue en deux actions au plus (SC-005).
+- [X] T034 [P] [US1] [S] Écrire le test de parcours `apps/web/tests/e2e/ask.spec.ts` sur le fournisseur simulé : saisie dans la phrase à trou, retour en moins d'une seconde, première scène jouée, pause, changement de scène, coupure du son, ouverture du colophon ; vérifier que la première explication est obtenue en deux actions au plus (SC-005).
   - Lire : quickstart.md scénario 1 ; spec.md User Story 1.
   - Réussite : le test existe et échoue tant que T046 n'est pas livrée.
 
@@ -250,7 +250,7 @@ commence à se jouer en moins de 15 secondes et se complète scène par scène.
 - [X] T045 [P] [US1] [S] Écrire l'accueil `apps/web/src/app/[locale]/page.tsx` avec `apps/web/src/components/ask/AskSentence.tsx` (phrase à trou, 500 caractères au plus, bouton « Expliquer → ») et `Preferences.tsx` (langue, niveau, thème Papier ou Tableau, mémorisés sur l'appareil ; langue par défaut du navigateur, niveau par défaut lycée).
   - Lire : design-system/eureka-motion/MASTER.md § 1 (éléments de signature) et § 5.1 ; spec.md FR-001 à FR-004, FR-037.
   - Réussite : les préférences survivent à un rechargement ; la page tient sur 360 px sans défilement horizontal.
-- [ ] T046 [US1] [S] Écrire la page de lecture `apps/web/src/app/[locale]/e/[id]/page.tsx` : état de préparation (planche vide, traits de construction, liste des étapes en région `aria-live`), mise en page bureau et téléphone, états de refus, de demande de précision avec interprétations cliquables, d'échec et d'explication partielle ; quand la langue détectée de la question diffère de la langue choisie et qu'elle est prise en charge, proposer de basculer (événement `meta`, champ `detected_language`).
+- [X] T046 [US1] [S] Écrire la page de lecture `apps/web/src/app/[locale]/e/[id]/page.tsx` : état de préparation (planche vide, traits de construction, liste des étapes en région `aria-live`), mise en page bureau et téléphone, états de refus, de demande de précision avec interprétations cliquables, d'échec et d'explication partielle ; quand la langue détectée de la question diffère de la langue choisie et qu'elle est prise en charge, proposer de basculer (événement `meta`, champ `detected_language`).
   - Lire : design-system/eureka-motion/MASTER.md § 5.2, § 5.3, § 5.10 ; spec.md FR-005, FR-006, FR-014, FR-042. Dépend de T041 à T044.
   - Réussite : `apps/web/tests/e2e/ask.spec.ts` (T034) passe.
 - [X] T047 [P] [US1] [S] Écrire le colophon `apps/web/src/components/colophon/Colophon.tsx` : élément repliable fermé par défaut, plan (objectif, prérequis, étapes, analogie), verdict et motif par scène, modèle et durée de préparation ; sur une explication de référence, ajouter la ligne « Relue par … le … ».

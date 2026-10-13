@@ -1,0 +1,27 @@
+.line {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: trace var(--duration-draw) var(--ease-trace) forwards;
+  animation-delay: calc(var(--i) * var(--duration-stagger));
+}
+
+.axis {
+  stroke-width: var(--stroke-strong);
+}
+
+.grid {
+  stroke-width: var(--stroke-hairline);
+}
+
+@keyframes trace {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .line {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+}
