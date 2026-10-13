@@ -1,26 +1,10 @@
 import type { PrimitiveProps } from "../../composition/context";
 import { resolve } from "../../expr";
 import { Pictogram } from "../../pictograms";
-import { resolveAnchor, resolvePoint, vectorEnd } from "../../schema/geometry";
+import { resolvePoint } from "../../schema/geometry";
+import { OBJECT_REACH, objectLabelOffset, objectLabelSides } from "../../schema/object-labels";
 import { lerp } from "../../tokens";
-import { colourOf, FigureLabel, px, SvgHighlight } from "../shared";
-
-const HIGHLIGHT_REACH = 0.58;
-const LABEL_GAP_U = 3.2;
-
-// A label under the pictogram would sit on a vector that leaves it downwards.
-function hasVectorBelow(ctx: PrimitiveProps<"object">["ctx"], id: string): boolean {
-  for (const other of ctx.lookup.values()) {
-    if (other.type !== "vector" || other.from !== id) continue;
-    const start = resolveAnchor(other.from, ctx.lookup, ctx.scope);
-    const end = vectorEnd(other, ctx.lookup, ctx.scope);
-    if (!start || !end) continue;
-    const dx = end[0] - start[0];
-    const dy = end[1] - start[1];
-    if (dy < 0 && Math.abs(dx) < Math.abs(dy)) return true;
-  }
-  return false;
-}
+import { colourOf, FigureLabel, SvgHighlight, textSize } from "../shared";
 
 export function ObjectPrimitive({ element, ctx }: PrimitiveProps<"object">) {
   const { projection } = ctx;
@@ -35,9 +19,18 @@ export function ObjectPrimitive({ element, ctx }: PrimitiveProps<"object">) {
     : [fromX, fromY];
   const [cx, cy] = projection.toPx([x, y]);
   const size = projection.length(resolve(element.size, ctx.scope));
-  const reach = size * HIGHLIGHT_REACH;
+  const reach = size * OBJECT_REACH;
   const fade = state.how === "draw" ? state.progress : 1;
-  const labelSide = hasVectorBelow(ctx, element.id) ? -1 : 1;
+  const labelSide =
+    objectLabelSides({
+      lookup: ctx.lookup,
+      scope: ctx.scope,
+      slot: element.slot,
+      toPx: projection.toPx,
+      length: projection.length,
+      u: ctx.u,
+      labelSize: textSize(ctx, "label"),
+    }).get(element.id) ?? 1;
   // result is a fill, never a stroke
   const stroke = element.role === "result" ? "ink" : element.role;
 
@@ -67,7 +60,7 @@ export function ObjectPrimitive({ element, ctx }: PrimitiveProps<"object">) {
           ctx={ctx}
           state={state}
           x={cx}
-          y={cy + labelSide * (reach + px(ctx, LABEL_GAP_U))}
+          y={cy + objectLabelOffset(labelSide, size, ctx.u)}
           text={element.label}
         />
       ) : null}

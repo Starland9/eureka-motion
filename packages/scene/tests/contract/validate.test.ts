@@ -535,11 +535,21 @@ describe("rule 5 — framing", () => {
   );
   it(
     "rejects labels that overlap",
-    breaking(5, 'the labels of "earth" and "moon" overlap', (d) => {
-      el(d, "s1", "earth").at = [3.2, 0.5];
-      el(d, "s1", "earth").size = 0.8;
+    breaking(5, 'the labels of "p1" and "p2" overlap', (d) => {
+      scene(d, "s1").elements.push(
+        { id: "p1", slot: "figure_b", type: "point", at: [0, 2.4], label: "centre" },
+        { id: "p2", slot: "figure_b", type: "point", at: [0.1, 2.4], label: "milieu" },
+      );
+      showAll(d, "s1", "p1", "p2");
     }),
   );
+  it("accepts two neighbouring objects: the label of the first goes above its pictogram", () => {
+    const d = doc();
+    el(d, "s1", "earth").at = [2.2, 0.5];
+    el(d, "s1", "earth").size = 0.8;
+    const result = validateDocument(d);
+    expect(result.ok, result.ok ? "" : formatIssues(result.issues)).toBe(true);
+  });
   it(
     "rejects a curve mostly outside the frame",
     breaking(5, "less than half of the curve is inside the frame", (d) => {

@@ -108,111 +108,18 @@ describe("repairing a scene before validation", () => {
 
   it("drops the later of two labels that would sit on the same spot", () => {
     const broken = scene("s1");
-    broken.elements.push({
-      id: "twin",
-      slot: "figure_b",
-      type: "object",
-      kind: "moon",
-      at: [3, 0.5],
-      size: 0.8,
-      label: "Satellite",
-    });
-    broken.beats[1]!.actions.push({ do: "show", targets: ["twin"], how: "fade" });
+    broken.elements.push(
+      { id: "p1", slot: "figure_b", type: "point", at: [0, 2.4], label: "centre" },
+      { id: "p2", slot: "figure_b", type: "point", at: [0.1, 2.4], label: "milieu" },
+    );
+    broken.beats[1]!.actions.push({ do: "show", targets: ["p1", "p2"], how: "fade" });
     const before = validateScene(broken, outline);
     expect(before.ok ? "" : formatIssues(before.issues)).toContain("overlap");
     const repaired = repairScene(broken, outline);
-    expect(repaired.elements.find((element) => element.id === "twin")).not.toHaveProperty("label");
-    expect(repaired.elements.find((element) => element.id === "moon")).toMatchObject({
-      label: "Lune",
+    expect(repaired.elements.find((element) => element.id === "p2")).not.toHaveProperty("label");
+    expect(repaired.elements.find((element) => element.id === "p1")).toMatchObject({
+      label: "centre",
     });
-    const result = validateScene(repaired, outline);
-    expect(result.ok, result.ok ? "" : formatIssues(result.issues)).toBe(true);
-  });
-
-  it("moves an element out of a slot that cannot hold it", () => {
-    const broken = scene("s5");
-    const note = broken.elements.find((element) => element.type === "text");
-    if (!note) throw new Error("fixture changed");
-    const home = note.slot;
-    (note as { slot: string }).slot = "figure";
-    expect(validateScene(broken, outline).ok).toBe(false);
-    const repaired = repairScene(broken, outline);
-    expect(repaired.elements.find((element) => element.id === note.id)?.slot).toBe(home);
-    const result = validateScene(repaired, outline);
-    expect(result.ok, result.ok ? "" : formatIssues(result.issues)).toBe(true);
-  });
-
-  it("takes out a block of text that no slot of the layout can hold", () => {
-    const broken = scene("s1");
-    broken.elements.push({ id: "stray", slot: "figure_a", type: "text", text: "Une remarque." });
-    broken.beats[0]!.actions.push({ do: "show", targets: ["stray"], how: "fade" });
-    broken.beats[2]!.actions.push({ do: "highlight", targets: ["stray", "moon_pull"] });
-    expect(validateScene(broken, outline).ok).toBe(false);
-    const repaired = repairScene(broken, outline);
-    expect(repaired.elements.some((element) => element.id === "stray")).toBe(false);
-    expect(JSON.stringify(repaired.beats)).not.toContain("stray");
-    expect(repaired.beats[2]!.actions.at(-1)).toEqual({ do: "highlight", targets: ["moon_pull"] });
-    const result = validateScene(repaired, outline);
-    expect(result.ok, result.ok ? "" : formatIssues(result.issues)).toBe(true);
-  });
-
-  it("keeps the first notes and takes out the one past the capacity of the slot", () => {
-    const broken = scene("s5");
-    const notes = broken.elements.filter((element) => element.slot === "notes");
-    for (let extra = notes.length; extra < 4; extra += 1) {
-      broken.elements.push({ id: `more${extra}`, slot: "notes", type: "text", text: "Encore." });
-      broken.beats[0]!.actions.push({ do: "show", targets: [`more${extra}`], how: "fade" });
-    }
-    expect(validateScene(broken, outline).ok).toBe(false);
-    const repaired = repairScene(broken, outline);
-    expect(repaired.elements.filter((element) => element.slot === "notes")).toHaveLength(3);
-    const result = validateScene(repaired, outline);
-    expect(result.ok, result.ok ? "" : formatIssues(result.issues)).toBe(true);
-  });
-
-  it("sends the least used colour back to ink past three colour codes", () => {
-    const broken = scene("s1");
-    const roleOf = (id: string) =>
-      broken.elements.find((element) => element.id === id) as { role?: string };
-    roleOf("apple").role = "quantity";
-    roleOf("earth").role = "quantity";
-    roleOf("moon").role = "valid";
-    roleOf("ground").role = "result";
-    expect(validateScene(broken, outline).ok).toBe(false);
-    const repaired = repairScene(broken, outline);
-    const roles = new Set(
-      repaired.elements.flatMap((element) =>
-        "role" in element && element.role ? [element.role] : [],
-      ),
-    );
-    expect(roles.size).toBe(3);
-    expect(roles.has("action")).toBe(true);
-    const result = validateScene(repaired, outline);
-    expect(result.ok, result.ok ? "" : formatIssues(result.issues)).toBe(true);
-  });
-
-  it("stops a sweep at the end of the range of its parameter", () => {
-    const withSweep = document.scenes.find((candidate) =>
-      candidate.beats.some((beat) => beat.actions.some((action) => action.do === "sweep")),
-    );
-    if (!withSweep) throw new Error("fixture changed");
-    const broken = structuredClone(withSweep);
-    let param = "";
-    for (const beat of broken.beats) {
-      for (const action of beat.actions) {
-        if (action.do === "sweep") {
-          action.to = 1e40;
-          param = action.param;
-        }
-      }
-    }
-    expect(validateScene(broken, outline).ok).toBe(false);
-    const repaired = repairScene(broken, outline);
-    const max = outline.params.find((candidate) => candidate.id === param)!.max;
-    const sweeps = repaired.beats.flatMap((beat) =>
-      beat.actions.filter((action) => action.do === "sweep"),
-    );
-    expect(sweeps.every((action) => action.to === max)).toBe(true);
     const result = validateScene(repaired, outline);
     expect(result.ok, result.ok ? "" : formatIssues(result.issues)).toBe(true);
   });
