@@ -1,7 +1,7 @@
 import { readdir, readFile } from "node:fs/promises";
 import path from "node:path";
 import { notFound } from "next/navigation";
-import { DocumentSchema, type Language } from "scene";
+import { DocumentSchema, typesetTexts, type Language } from "scene";
 import { isDevRouteEnabled } from "@/lib/dev-reference";
 import { Gallery, type GalleryEntry } from "./Gallery";
 
@@ -35,7 +35,7 @@ function parseEntry(name: string, text: string): GalleryEntry {
     return { ok: false, name, issues };
   }
   const language: Language = envelope.language === "en" ? "en" : "fr";
-  return { ok: true, name, language, document: parsed.data };
+  return { ok: true, name, language, document: typesetTexts(parsed.data, language) };
 }
 
 async function loadEntries(): Promise<GalleryEntry[]> {
