@@ -53,6 +53,7 @@ function buildProvider(name: string, env: Env, options: VoiceOptions): VoiceProv
   return createKokoroProvider({
     ...options,
     baseUrl: env.KOKORO_BASE_URL || "http://127.0.0.1:8880",
+    apiKey: env.KOKORO_API_KEY || undefined,
     voices: { fr: env.KOKORO_VOICE_FR || "ff_siwis", en: env.KOKORO_VOICE_EN || "af_heart" },
   });
 }

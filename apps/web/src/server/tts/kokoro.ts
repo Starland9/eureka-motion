@@ -11,6 +11,7 @@ import {
 
 export interface KokoroConfig {
   baseUrl: string;
+  apiKey?: string | undefined;
   voices: Voices;
   timeoutMs?: number;
   concurrency?: number;
@@ -39,6 +40,9 @@ export function createKokoroProvider(config: KokoroConfig): VoiceProvider {
   const base = config.baseUrl.replace(/\/+$/, "");
   const timeoutMs = config.timeoutMs ?? TTS_TIMEOUT_MS;
   const gate = createGate(config.concurrency ?? 1);
+  const authorization: Record<string, string> = config.apiKey
+    ? { Authorization: `Bearer ${config.apiKey}` }
+    : {};
 
   return {
     name: "kokoro",
@@ -53,7 +57,7 @@ export function createKokoroProvider(config: KokoroConfig): VoiceProvider {
           url: `${base}/v1/audio/speech`,
           init: {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: { "Content-Type": "application/json", ...authorization },
             body: JSON.stringify({
               model: "kokoro",
               input: text,
@@ -71,6 +75,7 @@ export function createKokoroProvider(config: KokoroConfig): VoiceProvider {
     async health(): Promise<boolean> {
       try {
         const response = await send(`${base}/health`, {
+          headers: authorization,
           signal: AbortSignal.timeout(TTS_HEALTH_TIMEOUT_MS),
         });
         await response.body?.cancel();

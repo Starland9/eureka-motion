@@ -40,9 +40,18 @@ export function readJson(request: Request): Promise<unknown> {
   return request.json().catch(() => undefined);
 }
 
-// Used for the rate limit only: never logged, never stored.
-export function clientAddress(headers: Headers): string {
-  const forwarded = headers.get("x-forwarded-for")?.split(",")[0]?.trim();
+// Used for the rate limit only: never logged, never stored. Each proxy appends the address
+// it saw: with one trusted proxy the last entry is the visitor, and anything before it was
+// written by the visitor.
+export function clientAddress(
+  headers: Headers,
+  trustedHops: number = Number(process.env.TRUSTED_PROXY_HOPS) || 1,
+): string {
+  const chain = (headers.get("x-forwarded-for") ?? "")
+    .split(",")
+    .map((entry) => entry.trim())
+    .filter(Boolean);
+  const forwarded = chain[Math.max(0, chain.length - trustedHops)];
   return forwarded || headers.get("x-real-ip")?.trim() || "unknown";
 }
 

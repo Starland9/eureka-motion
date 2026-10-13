@@ -11,7 +11,7 @@ export const MEDIA_CONTENT_TYPES: Readonly<Record<string, string>> = {
 const SAFE_SEGMENT = /^[A-Za-z0-9][A-Za-z0-9._-]*$/;
 
 export function getMediaDir(env: Readonly<Record<string, string | undefined>> = process.env) {
-  return path.resolve(env.MEDIA_DIR || "./media");
+  return path.resolve(/* turbopackIgnore: true */ env.MEDIA_DIR || "./media");
 }
 
 export function isSafeSegment(segment: string): boolean {
@@ -25,8 +25,8 @@ export function resolveMediaPath(
   if (segments.length === 0 || !segments.every(isSafeSegment)) return null;
   const extension = path.extname(segments[segments.length - 1]!).toLowerCase();
   if (!Object.hasOwn(MEDIA_CONTENT_TYPES, extension)) return null;
-  const root = path.resolve(mediaDir);
-  const resolved = path.resolve(root, ...segments);
+  const root = path.resolve(/* turbopackIgnore: true */ mediaDir);
+  const resolved = path.resolve(/* turbopackIgnore: true */ root, ...segments);
   return resolved.startsWith(root + path.sep) ? resolved : null;
 }
 

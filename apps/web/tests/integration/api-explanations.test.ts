@@ -427,10 +427,11 @@ describe("POST /api/explanations: rate limit", () => {
 
   it.each<[string, Record<string, string>, string]>([
     [
-      "the first x-forwarded-for entry",
-      { "x-forwarded-for": " 203.0.113.7 , 10.0.0.1", "x-real-ip": "198.51.100.2" },
+      "the x-forwarded-for entry written by the proxy, not the ones the visitor sent",
+      { "x-forwarded-for": " 10.0.0.1 , 203.0.113.7 ", "x-real-ip": "198.51.100.2" },
       "203.0.113.7",
     ],
+    ["a single x-forwarded-for entry", { "x-forwarded-for": "203.0.113.9" }, "203.0.113.9"],
     ["x-real-ip without x-forwarded-for", { "x-real-ip": "198.51.100.2" }, "198.51.100.2"],
     [
       "x-real-ip when x-forwarded-for is empty",
