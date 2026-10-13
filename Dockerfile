@@ -6,7 +6,8 @@ WORKDIR /repo
 COPY pnpm-lock.yaml pnpm-workspace.yaml package.json ./
 COPY apps/web/package.json apps/web/
 COPY packages/scene/package.json packages/scene/
-RUN --mount=type=cache,target=/pnpm/store pnpm install --frozen-lockfile
+RUN --mount=type=cache,target=/pnpm/store \
+  pnpm install --frozen-lockfile --fetch-timeout=300000 --fetch-retries=5 --network-concurrency=8
 COPY . .
 RUN pnpm --filter web build
 

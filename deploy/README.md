@@ -18,13 +18,13 @@ Dans le projet Dokploy : **Create Service → Compose**, type **Docker Compose**
 
 Onglet **Environment** du service (modèle : `deploy/production.env.example`).
 
-| Variable | Valeur |
-|---|---|
-| `DATABASE_URL` | Adresse de connexion **interne** de la base PostgreSQL Dokploy |
-| `LLM_API_KEY` | Clé DeepSeek |
-| `RATE_LIMIT_SALT` | Une chaîne aléatoire : `openssl rand -hex 32` |
-| `KOKORO_BASE_URL` | Adresse du serveur Kokoro, sans `/v1` à la fin |
-| `KOKORO_API_KEY` | Seulement si le serveur Kokoro demande une clé |
+| Variable          | Valeur                                                         |
+| ----------------- | -------------------------------------------------------------- |
+| `DATABASE_URL`    | Adresse de connexion **interne** de la base PostgreSQL Dokploy |
+| `LLM_API_KEY`     | Clé DeepSeek                                                   |
+| `RATE_LIMIT_SALT` | Une chaîne aléatoire : `openssl rand -hex 32`                  |
+| `KOKORO_BASE_URL` | Adresse du serveur Kokoro, sans `/v1` à la fin                 |
+| `KOKORO_API_KEY`  | Seulement si le serveur Kokoro demande une clé                 |
 
 Sans `AZURE_SPEECH_KEY`, la voix passe directement par Kokoro. Sans voix joignable,
 l'explication se joue avec les sous-titres seuls.
