@@ -19,6 +19,7 @@ Check each point
 - The analogy does not teach something false.
 - The objective and the prerequisites fit the level.
 - Nothing contradicts what the discipline accepts at this level. A standard simplification is acceptable.
+- The outline is a teaching model, not a research claim: a model that is exact for the standard textbook case (glucose for "sugar", a point mass, a frictionless slope, a linear demand curve) is correct, even though it does not cover every real case.
 
 Verdict
 - "valid": nothing in it is false. This is the expected outcome for a careful outline.

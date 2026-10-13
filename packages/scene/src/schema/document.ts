@@ -4,31 +4,71 @@ export const SCHEMA_VERSION = 1;
 
 const IDENTIFIER = /^[A-Za-z_][A-Za-z0-9_]*$/;
 
+// Accents, hyphens and spaces in an id are rewritten the same way wherever the id is used.
+function plainId(raw: string): string {
+  const ascii = raw
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^A-Za-z0-9_]/g, "_");
+  return /^[0-9]/.test(ascii) ? `_${ascii}` : ascii;
+}
+
+function plainTarget(raw: string): string {
+  const dot = raw.indexOf(".");
+  if (dot === -1) return plainId(raw);
+  const part = raw
+    .slice(dot + 1)
+    .toLowerCase()
+    .replace(/[^a-z0-9_]/g, "_");
+  const id = plainId(raw.slice(0, dot));
+  return /^[a-z]/.test(part) ? `${id}.${part}` : id;
+}
+
 export const IdSchema = z
   .string()
-  .regex(
-    IDENTIFIER,
-    "must contain only letters, digits and underscores, and not start with a digit",
+  .min(1)
+  .transform(plainId)
+  .pipe(
+    z
+      .string()
+      .regex(
+        IDENTIFIER,
+        "must contain only letters, digits and underscores, and not start with a digit",
+      )
+      .max(40),
   )
-  .max(40)
   .meta({ id: "Id", description: "Letters, digits and underscores; does not start with a digit." });
 
 export const TargetSchema = z
   .string()
-  .regex(/^[A-Za-z_][A-Za-z0-9_]*(\.[a-z][a-z0-9_]*)?$/, 'must be an element id or "element.part"')
-  .max(80)
+  .min(1)
+  .transform(plainTarget)
+  .pipe(
+    z
+      .string()
+      .regex(
+        /^[A-Za-z_][A-Za-z0-9_]*(\.[a-z][a-z0-9_]*)?$/,
+        'must be an element id or "element.part"',
+      )
+      .max(80),
+  )
   .meta({ id: "Target", description: 'An element id, or "elementId.part" for a named part.' });
+
+// "{{a}}^2" is the syntax of texts; an expression names the value directly.
+function bareNames(expr: string): string {
+  return expr.replace(/\{\{\s*([A-Za-z_][A-Za-z0-9_]*)\s*(\|[^}]*)?\}\}/g, "$1");
+}
 
 export const BindableSchema = z
   .union(
     [
       z.number(),
-      z.object({ expr: z.string().min(1).max(200) }),
+      z.object({ expr: z.string().min(1).max(200).transform(bareNames) }),
       z
         .string()
         .min(1)
         .max(200)
-        .transform((expr) => ({ expr })),
+        .transform((expr) => ({ expr: bareNames(expr) })),
     ],
     {
       error: 'expected a number or { "expr": "…" }',
@@ -135,7 +175,7 @@ const ListElement = z
   .object({
     ...base,
     type: z.literal("list"),
-    items: z.array(z.string().min(1).max(80)).min(1).max(4),
+    items: z.array(z.string().min(1).max(100)).min(1).max(4),
   })
   .describe("Up to four short points.");
 
@@ -311,7 +351,7 @@ const BarsElement = z
       .array(z.object({ label: label(24), value: BindableSchema, role: ColourSchema.optional() }))
       .min(2)
       .max(6),
-    unit: z.string().max(24).optional(),
+    unit: z.string().max(40).optional(),
   })
   .describe("A bar chart; values are labelled directly.");
 
@@ -743,8 +783,8 @@ export const DerivedSchema = z.object({
       z.string().min(1).max(200),
     )
     .describe("Reads parameters, constants and derived values declared before it."),
-  unit: z.string().max(24).default(""),
-  label: z.string().max(60).default(""),
+  unit: z.string().max(40).default(""),
+  label: z.string().max(80).default(""),
   symbol: z.string().min(1).max(16).optional(),
   format: z
     .string()
@@ -779,7 +819,7 @@ export const SceneSchema = z.object({
   world: WorldSchema.optional(),
   derived: z
     .array(DerivedSchema)
-    .max(6)
+    .max(10)
     .default([])
     .describe(
       "Values computed for this scene only, from the parameters, constants and derived values of the outline. Declare here any number the scene shows that the outline does not provide.",
@@ -833,7 +873,7 @@ export const ParamSchema = z.object({
   id: IdSchema,
   symbol: z.string().min(1).max(16).describe("As printed, for example m₁."),
   label: label(60),
-  unit: z.string().max(24).default(""),
+  unit: z.string().max(40).default(""),
   min: z.number(),
   max: z.number(),
   step: z.number().positive(),
@@ -846,14 +886,14 @@ export type Param = z.infer<typeof ParamSchema>;
 export const ConstantSchema = z.object({
   id: IdSchema,
   value: z.number(),
-  unit: z.string().max(24).default(""),
+  unit: z.string().max(40).default(""),
   label: label(60),
   symbol: z.string().min(1).max(16).optional(),
 });
 
 export const ModelSchema = z.object({
-  constants: z.array(ConstantSchema).max(6).default([]),
-  derived: z.array(DerivedSchema).max(8).default([]),
+  constants: z.array(ConstantSchema).max(8).default([]),
+  derived: z.array(DerivedSchema).max(12).default([]),
 });
 
 export type Model = z.infer<typeof ModelSchema>;
