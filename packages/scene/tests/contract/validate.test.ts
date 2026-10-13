@@ -436,8 +436,16 @@ describe("rule 4 — readability", () => {
     breaking(4, "uses 4 colour roles", (d) => {
       el(d, "s1", "apple").role = "quantity";
       el(d, "s1", "earth").role = "valid";
+      el(d, "s1", "ground").role = "result";
     }),
   );
+  it("does not count the highlight as a colour role", () => {
+    const d = doc();
+    el(d, "s1", "apple").role = "quantity";
+    el(d, "s1", "earth").role = "valid";
+    const result = validateDocument(d);
+    expect(result.ok, result.ok ? "" : formatIssues(result.issues)).toBe(true);
+  });
   it("accepts the result role on a line: it is drawn in ink over a highlight", () => {
     const d = doc();
     el(d, "s2", "twice").role = "result";
@@ -445,18 +453,25 @@ describe("rule 4 — readability", () => {
     expect(result.ok, result.ok ? "" : formatIssues(result.issues)).toBe(true);
   });
   it(
-    "rejects more than six labels visible together",
+    "rejects more than eight labels visible together",
     breaking(4, "labels are visible together", (d) => {
       el(d, "s1", "ground").label = "sol";
       el(d, "s1", "moon_pull").label = "attraction";
-      scene(d, "s1").elements.push({
-        id: "extra",
-        slot: "figure_b",
-        type: "point",
-        at: [0, 2],
-        label: "centre",
-      });
-      showAll(d, "s1", "extra");
+      const extras = [
+        ["extra", 0, 2],
+        ["extra2", -4, -2],
+        ["extra3", 4, -2],
+      ] as const;
+      for (const [id, x, y] of extras) {
+        scene(d, "s1").elements.push({
+          id,
+          slot: "figure_b",
+          type: "point",
+          at: [x, y],
+          label: id,
+        });
+      }
+      showAll(d, "s1", "extra", "extra2", "extra3");
     }),
   );
   it("accepts labels that are never on screen together", (): void => {
@@ -479,8 +494,8 @@ describe("rule 4 — readability", () => {
     "rejects a note too long to sit beside a figure",
     breaking(
       4,
-      "a note beside a figure holds 70 at most",
-      (d) => (el(d, "s5", "meaning").text = "x".repeat(71)),
+      "a note beside a figure holds 100 at most",
+      (d) => (el(d, "s5", "meaning").text = "x".repeat(101)),
     ),
   );
   it(

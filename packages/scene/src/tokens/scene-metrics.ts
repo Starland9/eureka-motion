@@ -30,7 +30,7 @@ export const sceneMetrics = {
 
 export const sceneLimits = {
   maxElements: 14,
-  maxVisibleLabels: 6,
+  maxVisibleLabels: 8,
   maxColourRoles: 3,
   maxTitleChars: 60,
   maxTextChars: 140,

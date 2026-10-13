@@ -67,6 +67,44 @@ describe("repairing a scene before validation", () => {
     expect(result.ok, result.ok ? "" : formatIssues(result.issues)).toBe(true);
   });
 
+  it("draws an arrow given only a target all the way to it", () => {
+    const broken = scene("s1");
+    const pull = broken.elements.find((element) => element.id === "moon_pull");
+    if (pull?.type !== "vector") throw new Error("fixture changed");
+    delete pull.length;
+    expect(validateScene(broken, outline).ok).toBe(false);
+    const repaired = repairScene(broken, outline);
+    expect(repaired.elements.find((element) => element.id === "moon_pull")).toMatchObject({
+      to: "earth",
+    });
+    expect(repaired.elements.find((element) => element.id === "moon_pull")).not.toHaveProperty(
+      "toward",
+    );
+    const result = validateScene(repaired, outline);
+    expect(result.ok, result.ok ? "" : formatIssues(result.issues)).toBe(true);
+  });
+
+  it("falls back to the element when a target names a part it does not have", () => {
+    const broken = scene("s1");
+    broken.beats[2]!.actions = [
+      { do: "highlight", targets: ["apple_pull.label", "moon_pull.tip", "moon_pull"] },
+    ];
+    expect(validateScene(broken, outline).ok).toBe(false);
+    const repaired = repairScene(broken, outline);
+    expect(repaired.beats[2]!.actions).toEqual([
+      { do: "highlight", targets: ["apple_pull", "moon_pull"] },
+    ]);
+    const result = validateScene(repaired, outline);
+    expect(result.ok, result.ok ? "" : formatIssues(result.issues)).toBe(true);
+  });
+
+  it("keeps a target that names a real part", () => {
+    const recap = scene("s6");
+    expect(repairScene(recap, outline).beats[2]!.actions).toEqual([
+      { do: "highlight", targets: ["recap.i3"] },
+    ]);
+  });
+
   it("does not touch a scene without positioned elements", () => {
     expect(repairScene(scene("s3"), outline).world).toBeUndefined();
   });

@@ -1,7 +1,7 @@
 import { checkModel } from "../expr";
 import { WORLD_ELEMENT_TYPES, type Scene } from "./document";
 import { elementExtent, elementLookup, type Vec } from "./geometry";
-import { splitTarget } from "./inspect";
+import { elementParts, splitTarget } from "./inspect";
 import { sampleScopes, toModelDefinition, withSceneValues, type ModelSource } from "./model-scope";
 
 const WORLD_MARGIN = 0.08;
@@ -77,6 +77,50 @@ function fitWorld(scene: Scene, outline: ModelSource): Scene {
   };
 }
 
+// An arrow given only a target is drawn all the way to it.
+function completeVectors(scene: Scene): Scene {
+  let changed = false;
+  const elements = scene.elements.map((element) => {
+    if (element.type !== "vector") return element;
+    if (element.to !== undefined || element.toward === undefined || element.length !== undefined)
+      return element;
+    changed = true;
+    const { toward, ...rest } = element;
+    return { ...rest, to: toward };
+  });
+  return changed ? { ...scene, elements } : scene;
+}
+
+// A target that names a part the element does not have falls back to the element.
+function knownTargets(scene: Scene): Scene {
+  const parts = new Map(scene.elements.map((element) => [element.id, elementParts(element)]));
+  const fix = (target: string): string => {
+    const { id, part } = splitTarget(target);
+    const known = parts.get(id);
+    return part !== undefined && known && !known.includes(part) ? id : target;
+  };
+  let changed = false;
+  const beats = scene.beats.map((beat) => ({
+    ...beat,
+    actions: beat.actions.map((action) => {
+      if ("targets" in action) {
+        const targets = [...new Set(action.targets.map(fix))];
+        if (targets.join("|") === action.targets.join("|")) return action;
+        changed = true;
+        return { ...action, targets };
+      }
+      if ("target" in action && typeof action.target === "string") {
+        const target = fix(action.target);
+        if (target === action.target) return action;
+        changed = true;
+        return { ...action, target };
+      }
+      return action;
+    }),
+  }));
+  return changed ? { ...scene, beats } : scene;
+}
+
 export function repairScene(scene: Scene, outline: ModelSource): Scene {
-  return fitWorld(showMissing(scene), outline);
+  return fitWorld(showMissing(knownTargets(completeVectors(scene))), outline);
 }

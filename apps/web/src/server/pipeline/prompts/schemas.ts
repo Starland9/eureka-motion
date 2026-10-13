@@ -13,7 +13,7 @@ export const SUBJECTS = [
 ] as const;
 export type Subject = (typeof SUBJECTS)[number];
 
-export const TriageSchema = z.strictObject({
+export const TriageSchema = z.object({
   decision: z.enum(["accept", "clarify", "refuse"]),
   reason: z.string().max(240).default(""),
   concept: z
@@ -28,9 +28,7 @@ export const TriageSchema = z.strictObject({
     .nullable()
     .default(null),
   interpretations: z
-    .array(
-      z.strictObject({ label: z.string().min(1).max(60), question: z.string().min(1).max(140) }),
-    )
+    .array(z.object({ label: z.string().min(1).max(60), question: z.string().min(1).max(140) }))
     .max(3)
     .default([]),
   detected_language: z.enum(["fr", "en", "other"]).default("other"),
@@ -38,17 +36,17 @@ export const TriageSchema = z.strictObject({
 });
 export type Triage = z.infer<typeof TriageSchema>;
 
-export const JudgeSchema = z.strictObject({
+export const JudgeSchema = z.object({
   verdict: z.enum(["valid", "invalid"]),
   issues: z
-    .array(z.strictObject({ where: clipped(120), problem: clipped(400) }))
+    .array(z.object({ where: clipped(120), problem: clipped(400) }))
     .max(5)
     .default([]),
   reason: clipped(240).pipe(z.string().min(1)),
 });
 export type Judgement = z.infer<typeof JudgeSchema>;
 
-export const CheckSchema = z.strictObject({
+export const CheckSchema = z.object({
   verdict: z.enum(["valid", "invalid"]),
   problem: clipped(400).default(""),
   reason: clipped(240).pipe(z.string().min(1)),

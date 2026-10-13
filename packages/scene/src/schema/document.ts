@@ -311,7 +311,7 @@ const BarsElement = z
       .array(z.object({ label: label(24), value: BindableSchema, role: ColourSchema.optional() }))
       .min(2)
       .max(6),
-    unit: z.string().max(16).optional(),
+    unit: z.string().max(24).optional(),
   })
   .describe("A bar chart; values are labelled directly.");
 
@@ -739,7 +739,7 @@ export const DerivedSchema = z.object({
     .min(1)
     .max(200)
     .describe("Reads parameters, constants and derived values declared before it."),
-  unit: z.string().max(16).default(""),
+  unit: z.string().max(24).default(""),
   label: z.string().max(60).default(""),
   symbol: z.string().min(1).max(16).optional(),
   format: z
@@ -748,7 +748,8 @@ export const DerivedSchema = z.object({
       /^(int|(fixed|sig|sci|percent):\d{1,2})$/,
       'must be "int", "fixed:n", "sig:n", "sci:n" or "percent:n"',
     )
-    .optional(),
+    .optional()
+    .catch(undefined),
 });
 
 export const SCENE_ROLES = ["hook", "analogy", "mechanism", "formula", "example", "recap"] as const;
@@ -790,15 +791,15 @@ export const PlanSchema = z.object({
   objective: z
     .string()
     .min(1)
-    .max(200)
+    .max(300)
     .describe("What the student will know at the end, in one sentence."),
-  prerequisites: z.array(z.string().min(1).max(100)).max(4),
+  prerequisites: z.array(z.string().min(1).max(140)).max(4),
   analogy: z.object({
     name: z.string().min(1).max(60).describe("Short name, used to avoid repeating an analogy."),
-    mapping: z.string().min(1).max(300).describe("What stands for what."),
+    mapping: z.string().min(1).max(400).describe("What stands for what."),
   }),
   key_rule: z.object({
-    statement: z.string().min(1).max(240),
+    statement: z.string().min(1).max(320),
     formula: z
       .string()
       .min(1)
@@ -813,9 +814,9 @@ export const PlanSchema = z.object({
         intent: z
           .string()
           .min(1)
-          .max(200)
+          .max(260)
           .describe("What this scene must make the student understand."),
-        visual: z.string().min(1).max(200).describe("What is drawn."),
+        visual: z.string().min(1).max(260).describe("What is drawn."),
       }),
     )
     .min(1)
@@ -827,8 +828,8 @@ export type Plan = z.infer<typeof PlanSchema>;
 export const ParamSchema = z.object({
   id: IdSchema,
   symbol: z.string().min(1).max(16).describe("As printed, for example m₁."),
-  label: label(40),
-  unit: z.string().max(16).default(""),
+  label: label(60),
+  unit: z.string().max(24).default(""),
   min: z.number(),
   max: z.number(),
   step: z.number().positive(),
@@ -841,7 +842,7 @@ export type Param = z.infer<typeof ParamSchema>;
 export const ConstantSchema = z.object({
   id: IdSchema,
   value: z.number(),
-  unit: z.string().max(16).default(""),
+  unit: z.string().max(24).default(""),
   label: label(60),
   symbol: z.string().min(1).max(16).optional(),
 });

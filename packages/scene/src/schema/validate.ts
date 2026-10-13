@@ -84,7 +84,7 @@ const SLOT_CAPACITY: Partial<Record<SlotName, number>> = {
   readout: 3,
 };
 
-export const NOTES_TEXT_CHARS = 70;
+export const NOTES_TEXT_CHARS = 100;
 export const NOTES_ITEM_CHARS = 40;
 
 const FRAME_TOLERANCE = 0.02;
@@ -537,8 +537,6 @@ function readabilityIssues(scene: Scene): ValidationIssue[] {
   for (const element of scene.elements) {
     for (const role of elementRoles(element)) roles.add(role);
   }
-  if (scene.beats.some((beat) => beat.actions.some((action) => action.do === "highlight")))
-    roles.add("result");
   if (roles.size > sceneLimits.maxColourRoles) {
     issues.push(
       issue(
