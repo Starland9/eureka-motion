@@ -17,7 +17,7 @@ import {
   textSize,
 } from "../shared";
 import { clamp01, fadeOf } from "./motion";
-import { layoutRelations, type NodeBox } from "./relations-layout";
+import { layoutRelations, type NodeBox, type RelationsLayout } from "./relations-layout";
 
 const NODE_PHASE = 0.4;
 const HEAD_FROM = 0.85;
@@ -111,6 +111,61 @@ function NodeView({
   );
 }
 
+const MIN_STUB_U = 4;
+const BESIDE_GAP_U = 0.6;
+
+// On a short edge a plate would hide the arrow: the label then sits beside the line.
+function EdgeLabel({
+  ctx,
+  edge,
+  state,
+  opacity,
+  centreY,
+}: {
+  ctx: SceneContext;
+  edge: RelationsLayout["edges"][number];
+  state: ElementState;
+  opacity: number;
+  centreY: number;
+}) {
+  if (!edge.label) return null;
+  const { plate, mid } = edge;
+  const dx = edge.tip[0] - edge.start[0];
+  const dy = edge.tip[1] - edge.start[1];
+  const length = Math.hypot(dx, dy) || 1;
+  const along = Math.abs(dx / length) * plate.width + Math.abs(dy / length) * plate.height;
+  if (edge.length >= along + 2 * MIN_STUB_U * ctx.u) {
+    return (
+      <>
+        <rect
+          x={mid[0] - plate.width / 2}
+          y={mid[1] - plate.height / 2 + labelRise(ctx, state)}
+          width={plate.width}
+          height={plate.height}
+          fill={ctx.theme.surfaceRaised}
+          opacity={opacity}
+        />
+        <FigureLabel ctx={ctx} state={state} x={mid[0]} y={mid[1]} text={edge.label} />
+      </>
+    );
+  }
+  const outward = mid[1] > centreY ? 1 : -1;
+  const nx = -dy / length;
+  const ny = dx / length;
+  const side = Math.sign(ny || 1) === outward ? 1 : -1;
+  const reach =
+    (Math.abs(nx) * plate.width + Math.abs(ny) * plate.height) / 2 + BESIDE_GAP_U * ctx.u;
+  return (
+    <FigureLabel
+      ctx={ctx}
+      state={state}
+      x={mid[0] + side * nx * reach}
+      y={mid[1] + side * ny * reach}
+      text={edge.label}
+    />
+  );
+}
+
 export function RelationsPrimitive({ element, ctx }: PrimitiveProps<"relations">) {
   const stroke = strokeWidth(ctx, "regular");
   const layout = layoutRelations({
@@ -158,23 +213,13 @@ export function RelationsPrimitive({ element, ctx }: PrimitiveProps<"relations">
               <ArrowHead ctx={ctx} tip={edge.tip} from={edge.start} colour={ink} opacity={head} />
             </g>
             {edge.label ? (
-              <>
-                <rect
-                  x={edge.mid[0] - edge.plate.width / 2}
-                  y={edge.mid[1] - edge.plate.height / 2 + labelRise(ctx, state)}
-                  width={edge.plate.width}
-                  height={edge.plate.height}
-                  fill={ctx.theme.surfaceRaised}
-                  opacity={plateOpacity}
-                />
-                <FigureLabel
-                  ctx={ctx}
-                  state={state}
-                  x={edge.mid[0]}
-                  y={edge.mid[1]}
-                  text={edge.label}
-                />
-              </>
+              <EdgeLabel
+                ctx={ctx}
+                edge={edge}
+                state={state}
+                opacity={plateOpacity}
+                centreY={ctx.size.height / 2}
+              />
             ) : null}
           </g>
         );

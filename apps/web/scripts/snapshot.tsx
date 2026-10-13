@@ -8,6 +8,7 @@ import {
   buildTimeline,
   CANVAS,
   DocumentSchema,
+  typesetTexts,
   fontFaceCss,
   getTheme,
   SceneFrame,
@@ -68,7 +69,10 @@ function katexCss(): string {
 async function main(): Promise<void> {
   const options = parseArgs(process.argv.slice(2));
   const raw = JSON.parse(readFileSync(options.file, "utf8"));
-  const explanation = DocumentSchema.parse(raw.payload ?? raw);
+  const explanation = typesetTexts(
+    DocumentSchema.parse(raw.payload ?? raw),
+    raw.language === "en" ? "en" : "fr",
+  );
   const language: Language = raw.language === "en" ? "en" : "fr";
   const theme = getTheme(options.theme);
   const height = Math.round((options.width * CANVAS.height) / CANVAS.width);

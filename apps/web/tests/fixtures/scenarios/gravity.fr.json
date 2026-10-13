@@ -533,7 +533,7 @@
           {
             "id": "b3",
             "narration": "La pomme et la Lune obéissent toutes les deux à cette loi.",
-            "actions": [{ "do": "highlight", "targets": ["recap"] }]
+            "actions": [{ "do": "highlight", "targets": ["recap.i3"] }]
           }
         ]
       }
