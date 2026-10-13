@@ -15,6 +15,8 @@ export type Anchor = Parameters<typeof resolveAnchor>[0];
 export interface FigureSpace {
   lookup: ElementLookup;
   scale: number;
+  scaleX: number;
+  scaleY: number;
   worldHeight: number;
   px(point: Vec): Px;
   anchor(anchor: Anchor): Px | null;
@@ -62,6 +64,8 @@ export function figureSpace(ctx: SceneContext): FigureSpace | null {
   return {
     lookup,
     scale: projection.scale,
+    scaleX: projection.scaleX,
+    scaleY: projection.scaleY,
     worldHeight: projection.fitted.height / projection.scale,
     px: (point) => projection.toPx(point),
     anchor: (anchor) => {

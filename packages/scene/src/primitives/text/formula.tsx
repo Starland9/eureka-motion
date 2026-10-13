@@ -1,5 +1,5 @@
 import katex from "katex";
-import type { PrimitiveProps } from "../../composition/context";
+import type { PrimitiveProps, SceneContext } from "../../composition/context";
 import { KATEX_OPTIONS, roleMacros } from "../../schema/tex";
 import { Highlighted, highlightTextColour, px, textSize } from "../shared";
 import { katexHeightEm, texSource } from "./tex";
@@ -8,6 +8,14 @@ const NOTES_UNITS = 5;
 const CLIP_OVERSHOOT_EM = 0.25;
 // Glyphs of tall formulas overshoot their struts a little.
 const HEIGHT_MARGIN = 0.9;
+
+const PLAIN_HEIGHT_EM = 1.5;
+const FRACTION_HEIGHT_EM = 2.7;
+
+export function formulaHeight(tex: string, ctx: SceneContext): number {
+  const size = ctx.slot === "formula" ? textSize(ctx, "formula") : px(ctx, NOTES_UNITS);
+  return size * (/\\d?frac/.test(tex) ? FRACTION_HEIGHT_EM : PLAIN_HEIGHT_EM);
+}
 
 export function FormulaPrimitive({ element, ctx }: PrimitiveProps<"formula">) {
   const state = ctx.state.of(element.id);

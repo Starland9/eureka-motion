@@ -36,8 +36,8 @@ export function outlineOf(
       return {
         kind: "rect",
         centre,
-        width: resolve(element.width, scope) * space.scale,
-        height: resolve(element.height, scope) * space.scale,
+        width: resolve(element.width, scope) * space.scaleX,
+        height: resolve(element.height, scope) * space.scaleY,
       };
     }
     case "polygon":

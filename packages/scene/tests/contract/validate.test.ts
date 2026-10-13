@@ -476,17 +476,18 @@ describe("rule 4 — readability", () => {
   );
   it("accepts labels that are never on screen together", (): void => {
     const d = doc();
-    el(d, "s1", "ground").label = "sol";
-    el(d, "s1", "moon_pull").label = "attraction";
-    scene(d, "s1").elements.push({
-      id: "extra",
-      slot: "figure_b",
-      type: "point",
-      at: [0, 2],
-      label: "centre",
-    });
-    beat(d, "s1", "b1").actions.push({ do: "hide", targets: ["ground"] });
-    beat(d, "s1", "b3").actions.push({ do: "show", targets: ["extra"] });
+    const extras = [
+      ["p1", -4, 2.5],
+      ["p2", 0, 2.5],
+      ["p3", 4, 2.5],
+      ["p4", -4, -2.5],
+      ["p5", 4, -2.5],
+    ] as const;
+    for (const [id, x, y] of extras) {
+      scene(d, "s1").elements.push({ id, slot: "figure_b", type: "point", at: [x, y], label: id });
+    }
+    beat(d, "s1", "b2").actions.push({ do: "hide", targets: ["apple", "apple_pull"] });
+    beat(d, "s1", "b3").actions.push({ do: "show", targets: extras.map(([id]) => id) });
     const result = validateDocument(d);
     expect(result.ok, result.ok ? "" : formatIssues(result.issues)).toBe(true);
   });

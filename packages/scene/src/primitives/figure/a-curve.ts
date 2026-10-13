@@ -46,7 +46,7 @@ export function sampleCurve(
 ): Run[] {
   const { projection, rect, world } = figure;
   const samples = clamp(
-    Math.ceil(((range[1] - range[0]) * projection.scale) / SAMPLE_SPACING_PX),
+    Math.ceil(((range[1] - range[0]) * projection.scaleX) / SAMPLE_SPACING_PX),
     MIN_SAMPLES,
     MAX_SAMPLES,
   );

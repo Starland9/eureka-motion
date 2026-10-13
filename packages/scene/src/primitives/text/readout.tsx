@@ -1,4 +1,5 @@
 import type { PrimitiveProps, SceneContext } from "../../composition/context";
+import type { ElementOf } from "../../schema/document";
 import { formatNumberParts } from "../../expr";
 import { monoSafe } from "../../tokens";
 import { fontOf, Highlighted, highlightTextColour, px, textSize } from "../shared";
@@ -31,6 +32,23 @@ function layoutOf(ctx: SceneContext): { valueSize: number; row: boolean } {
     : { valueSize: textSize(ctx, "body"), row: true };
 }
 
+const LABEL_ADVANCE_EM = 0.66;
+
+export function readoutHeight(
+  element: ElementOf<"readout">,
+  ctx: SceneContext,
+  width = ctx.size.width,
+): number {
+  const labelSize = textSize(ctx, "label");
+  const { valueSize, row } = layoutOf(ctx);
+  const label = element.label ?? ctx.valueInfo(element.value)?.label ?? element.value;
+  const labelLines = Math.max(1, Math.ceil((label.length * LABEL_ADVANCE_EM * labelSize) / width));
+  const lines = row
+    ? Math.max(labelLines * labelSize * LABEL_LINE, valueSize * VALUE_LINE)
+    : labelLines * labelSize * LABEL_LINE + valueSize * VALUE_LINE;
+  return lines + 2 * px(ctx, PAD_UNITS);
+}
+
 export function ReadoutPrimitive({ element, ctx }: PrimitiveProps<"readout">) {
   const state = ctx.state.of(element.id);
   const info = ctx.valueInfo(element.value);
@@ -45,7 +63,7 @@ export function ReadoutPrimitive({ element, ctx }: PrimitiveProps<"readout">) {
   const soft = highlightTextColour(ctx, state, ctx.theme.inkSoft);
   return (
     <div lang={ctx.language} style={{ opacity: state.opacity, fontFamily: fontOf("mono") }}>
-      <Highlighted ctx={ctx} state={state} style={{ display: "block" }}>
+      <Highlighted ctx={ctx} state={state} style={{ display: row ? "block" : "inline-block" }}>
         <span
           style={{
             display: "flex",

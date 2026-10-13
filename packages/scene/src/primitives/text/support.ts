@@ -36,6 +36,26 @@ export function numeralColumn(ctx: SceneContext): number {
   return textSize(ctx, "label") * NUMERAL_COLUMN_EM;
 }
 
+function linesOf(length: number, width: number, size: number): number {
+  return Math.max(1, Math.ceil((length * CHARACTER_EM * WRAP_SLACK * size) / width));
+}
+
+export function textHeight(text: string, ctx: SceneContext, width = ctx.size.width): number {
+  const size = readingSize(ctx);
+  return linesOf(charactersOf(text), width, size) * size * LINE_HEIGHT;
+}
+
+export function listHeight(
+  items: readonly string[],
+  ctx: SceneContext,
+  slotWidth = ctx.size.width,
+): number {
+  const size = readingSize(ctx);
+  const width = slotWidth - numeralColumn(ctx);
+  const lines = items.reduce((sum, item) => sum + linesOf(charactersOf(item), width, size), 0);
+  return lines * size * LINE_HEIGHT + (items.length - 1) * BLOCK_GAP_EM * size;
+}
+
 // Reading size of the text and list elements that share this slot: large enough for the
 // slot, small enough for all of them to fit its height together.
 export function readingSize(ctx: SceneContext): number {
@@ -54,12 +74,7 @@ export function readingSize(ctx: SceneContext): number {
     }
   }
   const heightAt = (size: number): number => {
-    const lines = blocks.reduce(
-      (sum, block) =>
-        sum +
-        Math.max(1, Math.ceil((block.length * CHARACTER_EM * WRAP_SLACK * size) / block.width)),
-      0,
-    );
+    const lines = blocks.reduce((sum, block) => sum + linesOf(block.length, block.width, size), 0);
     return lines * size * LINE_HEIGHT + (blocks.length - 1) * BLOCK_GAP_EM * size;
   };
   for (let size = nominal; size > floor; size -= px(ctx, FIT_STEP_UNITS)) {

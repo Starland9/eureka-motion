@@ -23,6 +23,7 @@ import {
   type ThemeName,
 } from "../tokens";
 import type { SceneContext, ValueInfo } from "./context";
+import { stackScale } from "../primitives/text/fit";
 import { registry } from "./registry";
 import { computeSceneState } from "./state";
 import type { SceneTiming } from "./timeline";
@@ -148,6 +149,7 @@ export function createSceneRuntime(props: SceneFrameProps): SceneRuntime {
       return { ...found, highlight: Math.max(found.highlight, found.progress) };
     },
   };
+  const stretch = scene.elements.some((element) => element.type === "axes");
   const base = {
     frame,
     fps,
@@ -174,7 +176,7 @@ export function createSceneRuntime(props: SceneFrameProps): SceneRuntime {
         ...base,
         slot,
         size,
-        projection: scene.world ? createProjection(scene.world, size) : null,
+        projection: scene.world ? createProjection(scene.world, size, { stretch }) : null,
       };
     },
   };
@@ -191,6 +193,7 @@ function SlotView({
 }) {
   const svg = elements.filter((element) => registry[element.type].kind === "svg");
   const html = elements.filter((element) => registry[element.type].kind === "html");
+  const scale = stackScale(html, ctx, HTML_GAP_U * ctx.u);
   return (
     <div
       style={{
@@ -219,7 +222,12 @@ function SlotView({
         <div
           style={{
             position: "absolute",
-            inset: 0,
+            left: 0,
+            top: 0,
+            width: rect.width / scale,
+            height: rect.height / scale,
+            transform: scale < 1 ? `scale(${scale})` : undefined,
+            transformOrigin: "top left",
             display: "flex",
             flexDirection: "column",
             justifyContent: ctx.slot === "formula" || ctx.slot === "text" ? "center" : "flex-start",
