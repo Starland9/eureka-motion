@@ -708,7 +708,7 @@ const at = z
 
 const targets = z.preprocess(
   (value) => (typeof value === "string" ? [value] : value),
-  z.array(TargetSchema).min(1).max(6),
+  z.array(TargetSchema).min(1).max(10),
 );
 
 export const ActionSchema = z.discriminatedUnion("do", [
@@ -878,7 +878,7 @@ export const ParamSchema = z.object({
   max: z.number(),
   step: z.number().positive(),
   default: z.number(),
-  role: z.literal("quantity").default("quantity"),
+  role: z.literal("quantity").default("quantity").catch("quantity"),
 });
 
 export type Param = z.infer<typeof ParamSchema>;

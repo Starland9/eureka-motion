@@ -142,6 +142,34 @@ describe("repairing a scene before validation", () => {
     expect(result.ok, result.ok ? "" : formatIssues(result.issues)).toBe(true);
   });
 
+  it("takes out a block of text that no slot of the layout can hold", () => {
+    const broken = scene("s1");
+    broken.elements.push({ id: "stray", slot: "figure_a", type: "text", text: "Une remarque." });
+    broken.beats[0]!.actions.push({ do: "show", targets: ["stray"], how: "fade" });
+    broken.beats[2]!.actions.push({ do: "highlight", targets: ["stray", "moon_pull"] });
+    expect(validateScene(broken, outline).ok).toBe(false);
+    const repaired = repairScene(broken, outline);
+    expect(repaired.elements.some((element) => element.id === "stray")).toBe(false);
+    expect(JSON.stringify(repaired.beats)).not.toContain("stray");
+    expect(repaired.beats[2]!.actions.at(-1)).toEqual({ do: "highlight", targets: ["moon_pull"] });
+    const result = validateScene(repaired, outline);
+    expect(result.ok, result.ok ? "" : formatIssues(result.issues)).toBe(true);
+  });
+
+  it("keeps the first notes and takes out the one past the capacity of the slot", () => {
+    const broken = scene("s5");
+    const notes = broken.elements.filter((element) => element.slot === "notes");
+    for (let extra = notes.length; extra < 4; extra += 1) {
+      broken.elements.push({ id: `more${extra}`, slot: "notes", type: "text", text: "Encore." });
+      broken.beats[0]!.actions.push({ do: "show", targets: [`more${extra}`], how: "fade" });
+    }
+    expect(validateScene(broken, outline).ok).toBe(false);
+    const repaired = repairScene(broken, outline);
+    expect(repaired.elements.filter((element) => element.slot === "notes")).toHaveLength(3);
+    const result = validateScene(repaired, outline);
+    expect(result.ok, result.ok ? "" : formatIssues(result.issues)).toBe(true);
+  });
+
   it("sends the least used colour back to ink past three colour codes", () => {
     const broken = scene("s1");
     const roleOf = (id: string) =>

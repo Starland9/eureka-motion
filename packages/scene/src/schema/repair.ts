@@ -18,6 +18,7 @@ import { MAX_PARAM_STEPS, SLOT_CAPACITY } from "./validate";
 const WORLD_MARGIN = 0.08;
 const MAX_TARGETS = 6;
 const MAX_LABEL_DROPS = 4;
+const DROPPABLE: ReadonlySet<SceneElement["type"]> = new Set(["text", "list", "readout"]);
 
 function showMissing(scene: Scene): Scene {
   const shown = new Set<string>();
@@ -165,29 +166,55 @@ function dropCollidingLabels(scene: Scene, outline: ModelSource): Scene {
   return current;
 }
 
-// An element put in a slot that cannot hold it moves to one of its layout that can.
+function without(scene: Scene, ids: ReadonlySet<string>): Scene {
+  if (ids.size === 0) return scene;
+  const gone = (target: string): boolean => ids.has(splitTarget(target).id);
+  return {
+    ...scene,
+    elements: scene.elements.filter((element) => !ids.has(element.id)),
+    beats: scene.beats.map((beat) => ({
+      ...beat,
+      actions: beat.actions.flatMap((action): Scene["beats"][number]["actions"] => {
+        if ("targets" in action) {
+          const targets = action.targets.filter((target) => !gone(target));
+          return targets.length > 0 ? [{ ...action, targets }] : [];
+        }
+        if ("target" in action && typeof action.target === "string" && gone(action.target))
+          return [];
+        return [action];
+      }),
+    })),
+  };
+}
+
+// An element put in a slot that cannot hold it moves to one of its layout that can. A block
+// of text left without a seat, or past the capacity of its slot, is taken out: the narration
+// carries what it said.
 function reseat(scene: Scene): Scene {
   const available: readonly SlotName[] = LAYOUT_SLOTS[scene.layout];
   const fits = (element: SceneElement, slot: SlotName): boolean =>
     available.includes(slot) && ELEMENT_SLOTS[element.type].includes(slot);
   const load = new Map<SlotName, number>();
-  for (const element of scene.elements) {
-    if (fits(element, element.slot)) load.set(element.slot, (load.get(element.slot) ?? 0) + 1);
-  }
+  const room = (slot: SlotName): boolean =>
+    (load.get(slot) ?? 0) < (SLOT_CAPACITY[slot] ?? Infinity);
+  const dropped = new Set<string>();
   let changed = false;
   const elements = scene.elements.map((element) => {
-    if (fits(element, element.slot)) return element;
-    const slot = available.find(
-      (candidate) =>
-        fits(element, candidate) &&
-        (load.get(candidate) ?? 0) < (SLOT_CAPACITY[candidate] ?? Infinity),
-    );
-    if (!slot) return element;
-    load.set(slot, (load.get(slot) ?? 0) + 1);
+    const seat = fits(element, element.slot)
+      ? element.slot
+      : available.find((candidate) => fits(element, candidate) && room(candidate));
+    if (seat === undefined || !room(seat)) {
+      if (DROPPABLE.has(element.type)) dropped.add(element.id);
+      return element;
+    }
+    load.set(seat, (load.get(seat) ?? 0) + 1);
+    if (seat === element.slot) return element;
     changed = true;
-    return { ...element, slot };
+    return { ...element, slot: seat };
   });
-  return changed ? { ...scene, elements } : scene;
+  if (dropped.size >= scene.elements.length) return scene;
+  const seated = changed ? { ...scene, elements } : scene;
+  return without(seated, dropped);
 }
 
 // Past three colour codes a scene stops being readable: the least used one goes back to ink.
