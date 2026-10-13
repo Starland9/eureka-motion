@@ -125,11 +125,11 @@ describe("rule 1 — structure", () => {
   );
   it(
     "rejects a vector that gives both an end point and a direction",
-    breaking(1, 'either "to"', (d) => (el(d, "s1", "apple_pull").to = [0, 0])),
+    breaking(1, 'either "to"', (d) => (el(d, "s1", "moon_pull").to = [0, 0])),
   );
   it(
     "rejects a vector with a direction but no length",
-    breaking(1, 'either "to"', (d) => delete el(d, "s1", "apple_pull").length),
+    breaking(1, 'either "to"', (d) => delete el(d, "s1", "moon_pull").length),
   );
   it(
     "rejects a shape without the fields of its kind",
@@ -455,23 +455,24 @@ describe("rule 4 — readability", () => {
   it(
     "rejects more than eight labels visible together",
     breaking(4, "labels are visible together", (d) => {
-      el(d, "s1", "ground").label = "sol";
-      el(d, "s1", "moon_pull").label = "attraction";
       const extras = [
-        ["extra", 0, 2],
-        ["extra2", -4, -2],
-        ["extra3", 4, -2],
+        ["p1", -3.5, 2.8],
+        ["p2", 3.5, 2.8],
+        ["p3", -3.5, 0.9],
+        ["p4", 3.5, 0.9],
+        ["p5", -3.5, -1],
+        ["p6", 3.5, -1],
       ] as const;
       for (const [id, x, y] of extras) {
         scene(d, "s1").elements.push({
           id,
-          slot: "figure_b",
+          slot: "figure_a",
           type: "point",
           at: [x, y],
           label: id,
         });
       }
-      showAll(d, "s1", "extra", "extra2", "extra3");
+      showAll(d, "s1", ...extras.map(([id]) => id));
     }),
   );
   it("accepts labels that are never on screen together", (): void => {

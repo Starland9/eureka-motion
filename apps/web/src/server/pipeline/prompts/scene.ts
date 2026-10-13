@@ -75,12 +75,18 @@ The scene
 - beats: 2 to 4 beats, with ids "b1", "b2"… Each beat is one narrated sentence and the actions that happen while it is said.
 
 Narration
-- One sentence per beat, 10 to 18 words, 200 characters at most. It is spoken aloud and shown as a subtitle.
+- One or two short sentences per beat, 8 to 18 words in all, 200 characters at most. It is spoken aloud and shown as a subtitle.
+- Talk to the student: "look", "guess", "you have seen this". Vary the rhythm: a short question, then the answer the figure gives.
 - Say what the eye should look at, in the order it appears.
 - Never state a number that depends on a parameter: the student can move the sliders and the spoken number would become false. Show it with a readout, or with {{id|format}} in a text.
 - Stay within the intent of the step. Do not announce the next scene.
-- The "hook" scene always uses the "statement" layout: one striking sentence or question (a "text" with "emphasis": "strong"), optionally a second short line, two beats. It must be quick to read and needs no figure.
-- The "recap" scene uses the "statement" layout with a list of two or three ideas, three beats at most.
+
+Watched, not read
+- In every scene with a figure, something must move or change while the narration speaks: a "sweep" when the model has parameters, a "move" of an object (an apple that falls, a car that advances), a simulation that plays, or lines drawn one after the other as they are named. A figure that appears whole and then stays still is a failed scene.
+- Guess, then see: when it fits, one beat asks the student what will happen and the next beat shows it.
+- The screen does not repeat the voice. A note is a key word, a result or a live value, 6 words at most; two notes are usually enough. What the narration says in a sentence is not written again as a sentence.
+- The "hook" scene shows the concrete situation with a figure ("compare", "figure" or "figure-notes"): objects from the pictogram library, something that happens to them, and the question it raises in the last beat. Use "statement" for the hook only when nothing can be drawn.
+- The "recap" scene uses the "statement" layout with a list of two or three ideas, three beats at most; its last beat highlights the one item that answers the hook ("listId.i2" targets the second item).
 
 Actions
 - An element is invisible until a "show" action names it. Every element must be shown at some point.
@@ -88,11 +94,12 @@ Actions
 - Reveal progressively: what the sentence talks about appears while it is said.
 - When the model has parameters, use "sweep" to make the figure react while you state the relation ("if the distance doubles…"). A sweep moves the parameter from its current value to "to" while the sentence is spoken, then brings it back; { "expr": "2 * r" } doubles it exactly. The target must stay inside the range of the parameter: check min and max in the outline before writing it.
 - Never say something the scene does not show. If the range does not allow "three times as far", do not say it.
-- "highlight" marks what must be remembered. "focus" dims everything else for one beat.
+- "highlight" marks what must be remembered: one element or one item per scene, never a whole list. "focus" dims everything else for one beat.
+- "move" carries an object to another place of the frame while the sentence is spoken; what is attached to it follows.
 - Target one part of a simulation with "elementId.part".
 
 Limits: the scene is rejected otherwise
-- 14 elements at most; 6 labels at most visible together (hide what is no longer needed); 3 colour roles at most besides ink, so choose them: one for what varies, one for what acts, and the highlight.
+- 14 elements at most; 8 labels at most visible together (hide what is no longer needed); 3 colour roles at most besides ink, so choose them: one for what varies, one for what acts, and the highlight.
 - "result" is a highlighter: an element with the role "result" is drawn in ink over a yellow highlight. Use it for the one thing to remember, or use a "highlight" action.
 - A slot holds at most: text 2, notes 3, formula 1, readout 3 elements.
 - A simulation, a bar chart, a relations diagram, a table, a timeline or a list of steps fills its slot alone.

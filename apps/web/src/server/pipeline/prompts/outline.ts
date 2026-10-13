@@ -19,13 +19,18 @@ export const OUTLINE_MARKER = "OUTLINE";
 
 const FULL_SHAPE = `An explanation is a sequence of 5 or 6 short narrated scenes (4 at least, 7 at most), 60 to 100 seconds in total.
 Scene roles, in this order:
-- "hook" (always first): a concrete situation or question that makes the student want to know.
-- "analogy": an intuition taken from everyday life.
-- "mechanism": what actually happens, shown.
+- "hook" (always first): a concrete situation the student has seen, and the question it raises that they cannot answer yet. Something puzzling, shown, not an announcement of the lesson.
+- "analogy": an intuition taken from everyday life, drawn and set in motion.
+- "mechanism": what actually happens, shown step by step.
 - "formula": the key rule or formula. Leave this role out when the concept has no formula.
-- "example": a concrete worked case with real values.
-- "recap" (always last): the two or three ideas to remember.
-Every role except "formula" appears at least once. One idea per scene.`;
+- "example": a concrete worked case with real values, with one number that surprises.
+- "recap" (always last): the two or three ideas to remember, and the answer to the question of the hook.
+Every role except "formula" appears at least once. One idea per scene.
+
+Make it gripping
+- The explanation is a small story: the hook opens a question, each scene brings one piece of the answer, the recap closes it. A student should want to see the next scene.
+- It is watched, not read. For each step, "visual" says what is drawn AND what moves or changes while it is explained (an object that falls, a distance that doubles, bars that grow, a curve that is traced). A step where nothing moves is a weak step: find the movement.
+- Where it fits, let the student guess before seeing: the narration asks what will happen, the figure answers.`;
 
 const SHORT_SHAPE = `This is a short answer: 1 to 3 scenes, 10 to 40 seconds in total. Use the roles that fit ("mechanism", "example", "formula", "analogy"); no hook and no recap are required.`;
 
@@ -46,7 +51,7 @@ plan
 - prerequisites: 0 to 3 notions the student needs, fitted to the level, a few words each.
 - analogy: an everyday situation that behaves like the concept on the point that matters. "name" is short. "mapping" says in one sentence what stands for what. The analogy must be honest: prefer one that follows the same law.
 - key_rule.statement: the rule in one sentence. key_rule.formula: KaTeX source, only if the concept has a formula; otherwise leave the field out. Colour symbols by their role with \\q{…} for a quantity the student can vary, \\a{…} for a force, a flow or a cause, \\res{…} for the result. No other colour command.
-- steps: one per scene, with role, intent (what the student must understand, at most 15 words) and visual (what is drawn, concretely, at most 15 words).
+- steps: one per scene, with role, intent (what the student must understand, at most 15 words) and visual (what is drawn and what moves or changes, concretely, at most 20 words).
 
 params: 0 to 3 quantities of the concept that the student will vary with sliders.
 - Only real quantities whose variation teaches something (a mass, a distance, an angle, a rate, a price). For a concept with no meaningful quantity (a historical event, a grammar rule), use [].

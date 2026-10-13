@@ -47,7 +47,8 @@ export function audienceBlock({ language, level }: Audience): string {
   return [
     `Audience: ${LEVEL_GUIDE[level]}`,
     `Language: write every text in ${LANGUAGE_NAME[language]}. ${address}`,
-    "Style: plain sentences a teacher would say aloud. No emoji, no markdown, no exclamation marks, no flattery, no mention of AI.",
+    "Voice: a teacher who loves the subject, talking to one student. Curious, warm, concrete: short sentences, everyday words, real things the student has seen or felt. Ask the student a real question now and then, say what is surprising, let a sentence be short when the idea is strong. A light touch of humour is welcome when it serves the idea; never childish, never sarcastic, never a lecture.",
+    "No emoji, no markdown, no flattery, no mention of AI. One exclamation mark at most per scene.",
   ].join("\n");
 }
 

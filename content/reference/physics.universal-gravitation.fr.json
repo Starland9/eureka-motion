@@ -28,23 +28,23 @@
       "steps": [
         {
           "role": "hook",
-          "intent": "Faire voir que la chute d'une pomme et le mouvement de la Lune ont la même cause.",
-          "visual": "À gauche une pomme attirée vers le sol, à droite la Lune attirée par la Terre."
+          "intent": "Faire voir que la pomme tombe et se demander pourquoi la Lune, attirée aussi, ne tombe pas.",
+          "visual": "À gauche une pomme tombe au sol ; à droite la Lune, attirée par la Terre, reste en place."
         },
         {
           "role": "analogy",
           "intent": "Donner l'intuition qu'un effet peut s'affaiblir très vite avec la distance.",
-          "visual": "Trois barres : la lumière reçue d'une lampe à 1, 2 et 3 mètres."
+          "visual": "Trois barres qui poussent l'une après l'autre : la lumière reçue à 1, 2 et 3 mètres."
         },
         {
           "role": "mechanism",
           "intent": "Montrer que les deux corps s'attirent mutuellement et que la distance change la force.",
-          "visual": "La Terre et la Lune, deux flèches égales et opposées, la distance qui double."
+          "visual": "La Terre et la Lune, deux flèches égales et opposées ; la Lune s'éloigne, les flèches rétrécissent."
         },
         {
           "role": "formula",
           "intent": "Relier chaque symbole de la loi de Newton à ce qu'on vient de voir.",
-          "visual": "La formule en grand, les grandeurs en bleu, la force en rouge, les valeurs en direct."
+          "visual": "La formule s'écrit, puis la distance varie et la valeur de la force change en direct."
         },
         {
           "role": "example",
@@ -53,8 +53,8 @@
         },
         {
           "role": "recap",
-          "intent": "Fixer les trois idées à retenir.",
-          "visual": "Trois phrases courtes."
+          "intent": "Fixer les trois idées et répondre à la question de départ sur la Lune.",
+          "visual": "Trois phrases courtes ; la dernière, la réponse, est surlignée."
         }
       ]
     },
@@ -141,13 +141,13 @@
         "id": "s1",
         "index": 0,
         "role": "hook",
-        "title": "Une pomme, la Lune, une seule force",
+        "title": "La pomme tombe. Et la Lune ?",
         "layout": "compare",
         "world": { "x": [-5, 5], "y": [-3, 3] },
         "elements": [
           { "id": "ground", "slot": "figure_a", "type": "segment", "from": [-3, -2], "to": [3, -2] },
-          { "id": "apple", "slot": "figure_a", "type": "object", "kind": "apple", "at": [0, 1.5], "size": 1, "label": "Pomme" },
-          { "id": "apple_pull", "slot": "figure_a", "type": "vector", "from": "apple", "toward": [0, -2], "length": 1.6, "label": "attraction", "role": "action" },
+          { "id": "apple", "slot": "figure_a", "type": "object", "kind": "apple", "at": [0, 1.8], "size": 1, "label": "Pomme" },
+          { "id": "apple_pull", "slot": "figure_a", "type": "vector", "from": [1.3, 1.6], "to": [1.3, 0.2], "role": "action" },
           { "id": "earth", "slot": "figure_b", "type": "object", "kind": "planet", "at": [-2.5, 0], "size": 2, "label": "Terre" },
           { "id": "moon", "slot": "figure_b", "type": "object", "kind": "moon", "at": [3, 0.5], "size": 0.8, "label": "Lune" },
           { "id": "moon_pull", "slot": "figure_b", "type": "vector", "from": "moon", "toward": "earth", "length": 1.6, "role": "action" }
@@ -155,7 +155,7 @@
         "beats": [
           {
             "id": "b1",
-            "narration": "Une pomme lâchée tombe vers le sol : la Terre l'attire.",
+            "narration": "Lâche une pomme. La Terre l'attire…",
             "actions": [
               { "do": "show", "targets": ["ground", "apple"], "how": "fade" },
               { "do": "show", "targets": ["apple_pull"], "how": "draw" }
@@ -163,15 +163,20 @@
           },
           {
             "id": "b2",
-            "narration": "La Lune, elle, tourne autour de la Terre, retenue par une attraction.",
+            "narration": "…et elle tombe. Rien d'étonnant.",
+            "actions": [{ "do": "move", "target": "apple", "to": [0, -1.4] }]
+          },
+          {
+            "id": "b3",
+            "narration": "La Lune aussi est attirée par la Terre. Alors pourquoi ne tombe-t-elle pas ?",
             "actions": [
               { "do": "show", "targets": ["earth", "moon"], "how": "fade" },
               { "do": "show", "targets": ["moon_pull"], "how": "draw" }
             ]
           },
           {
-            "id": "b3",
-            "narration": "Dans les deux cas, c'est la même force : la gravitation.",
+            "id": "b4",
+            "narration": "Indice : la même force agit sur les deux. Son nom : la gravitation.",
             "actions": [{ "do": "highlight", "targets": ["apple_pull", "moon_pull"] }]
           }
         ]
@@ -199,17 +204,17 @@
         "beats": [
           {
             "id": "b1",
-            "narration": "Pense à une lampe : plus tu t'en éloignes, moins elle t'éclaire.",
+            "narration": "Pense à une lampe. Plus tu recules, moins elle t'éclaire : tu l'as déjà remarqué.",
             "actions": [{ "do": "show", "targets": ["light"], "how": "fade" }]
           },
           {
             "id": "b2",
-            "narration": "Deux fois plus loin, tu reçois quatre fois moins de lumière.",
+            "narration": "Recule deux fois plus loin. Deux fois moins de lumière ? Non : quatre fois moins.",
             "actions": [{ "do": "show", "targets": ["twice"], "how": "type" }]
           },
           {
             "id": "b3",
-            "narration": "La gravitation s'affaiblit de la même façon quand la distance augmente.",
+            "narration": "La gravitation fait pareil : elle s'affaiblit très vite quand on s'éloigne.",
             "actions": [{ "do": "show", "targets": ["thrice"], "how": "type" }]
           }
         ]
@@ -243,7 +248,7 @@
         "beats": [
           {
             "id": "b1",
-            "narration": "La Terre attire la Lune, et la Lune attire la Terre avec la même force.",
+            "narration": "La Terre attire la Lune. Et la Lune attire la Terre, exactement aussi fort.",
             "actions": [
               { "do": "show", "targets": ["sys.body_a", "sys.body_b"], "how": "fade" },
               { "do": "show", "targets": ["sys.force_a", "sys.force_b"], "how": "draw" }
@@ -251,7 +256,7 @@
           },
           {
             "id": "b2",
-            "narration": "Cette force dépend de la distance qui sépare leurs centres.",
+            "narration": "Ce qui compte, c'est la distance entre leurs centres.",
             "actions": [
               { "do": "show", "targets": ["sys.distance"], "how": "draw" },
               { "do": "show", "targets": ["force_now", "distance_now"], "how": "fade" }
@@ -259,7 +264,7 @@
           },
           {
             "id": "b3",
-            "narration": "Regarde : si la distance double, la force est divisée par quatre.",
+            "narration": "Regarde ce qui arrive quand la distance double : la force est divisée par quatre.",
             "actions": [
               { "do": "sweep", "param": "r", "to": { "expr": "2 * r" } },
               { "do": "show", "targets": ["rule"], "how": "type", "at": 0.6 }
@@ -294,7 +299,7 @@
         "beats": [
           {
             "id": "b1",
-            "narration": "Newton l'a écrit en une ligne : la force grandit avec chacune des deux masses.",
+            "narration": "Newton a tout fait tenir en une ligne. En haut, les deux masses : plus elles sont grosses, plus ça tire.",
             "actions": [
               { "do": "show", "targets": ["law"], "how": "type" },
               { "do": "show", "targets": ["sys"], "how": "fade" }
@@ -302,7 +307,7 @@
           },
           {
             "id": "b2",
-            "narration": "Et elle diminue avec le carré de la distance, comme la lumière de la lampe.",
+            "narration": "En bas, la distance au carré : c'est elle qui fait chuter la force, comme pour la lampe.",
             "actions": [
               { "do": "show", "targets": ["force_now", "distance_now"], "how": "fade" },
               { "do": "sweep", "param": "r", "to": { "expr": "2 * r" }, "at": 0.3 }
@@ -310,7 +315,7 @@
           },
           {
             "id": "b3",
-            "narration": "G est une constante minuscule : il faut des masses énormes pour sentir cette force.",
+            "narration": "Et G ? Un nombre minuscule. Voilà pourquoi tu ne sens pas l'attraction de ton voisin de table.",
             "actions": [{ "do": "highlight", "targets": ["force_now"] }]
           }
         ]
@@ -340,7 +345,7 @@
         "beats": [
           {
             "id": "b1",
-            "narration": "Entre la Terre et la Lune, cette force est gigantesque : lis sa valeur.",
+            "narration": "Entre la Terre et la Lune, la force est colossale. Lis sa valeur : elle donne le vertige.",
             "actions": [{ "do": "show", "targets": ["value", "where"], "how": "type" }]
           },
           {
@@ -350,7 +355,7 @@
           },
           {
             "id": "b3",
-            "narration": "C'est pourtant elle qui retient la Lune autour de la Terre.",
+            "narration": "C'est elle qui retient la Lune, comme une fronde retient sa pierre.",
             "actions": [{ "do": "show", "targets": ["meaning"], "how": "type" }]
           }
         ]
@@ -368,25 +373,25 @@
             "type": "list",
             "items": [
               "Deux masses s'attirent toujours, avec la même force.",
-              "Plus les masses sont grandes, plus la force est grande.",
-              "Deux fois plus loin : une force quatre fois plus faible."
+              "Plus de masse : plus de force. Deux fois plus loin : quatre fois moins.",
+              "La Lune tombe sans cesse vers la Terre, mais sa vitesse la fait tourner autour."
             ]
           }
         ],
         "beats": [
           {
             "id": "b1",
-            "narration": "Retiens trois idées. Deux masses s'attirent toujours, l'une l'autre.",
+            "narration": "Trois idées à garder. Un : deux masses s'attirent toujours, aussi fort l'une que l'autre.",
             "actions": [{ "do": "show", "targets": ["recap"], "how": "type" }]
           },
           {
             "id": "b2",
-            "narration": "Plus elles sont massives, plus la force est grande ; plus elles sont loin, plus elle est faible.",
+            "narration": "Deux : plus de masse, plus de force. Et deux fois plus loin, quatre fois moins.",
             "actions": []
           },
           {
             "id": "b3",
-            "narration": "La pomme et la Lune obéissent toutes les deux à cette loi.",
+            "narration": "Et la Lune ? Elle tombe sans cesse vers la Terre. Mais elle file si vite qu'elle tourne autour.",
             "actions": [{ "do": "highlight", "targets": ["recap.i3"] }]
           }
         ]

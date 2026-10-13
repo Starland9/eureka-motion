@@ -212,7 +212,7 @@ describe.skipIf(!kokoroUp)(
         ),
       ) as { payload: { scenes: Scene[] } };
       const s1 = reference.payload.scenes.find((candidate) => candidate.id === "s1")!;
-      expect(s1.beats).toHaveLength(3);
+      expect(s1.beats).toHaveLength(4);
 
       const realFetch = globalThis.fetch;
       const network = vi.fn<typeof fetch>((input, init) => realFetch(input, init));
@@ -223,12 +223,13 @@ describe.skipIf(!kokoroUp)(
       const service = createVoiceService({ chain, mediaDir });
 
       const first = await service.narrate("exp-physics", s1, "fr");
-      expect(network).toHaveBeenCalledTimes(3);
+      expect(network).toHaveBeenCalledTimes(4);
       expect(SceneSchema.parse(first)).toBeTruthy();
       expect((await readdir(path.join(mediaDir, "exp-physics"))).sort()).toEqual([
         "s1-b1.mp3",
         "s1-b2.mp3",
         "s1-b3.mp3",
+        "s1-b4.mp3",
       ]);
       for (const beat of first.beats) {
         const file = path.join(mediaDir, "exp-physics", `s1-${beat.id}.mp3`);
