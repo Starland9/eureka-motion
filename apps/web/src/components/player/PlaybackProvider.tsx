@@ -82,6 +82,11 @@ const AttachContext = createContext<AttachPlayer | null>(null);
 const ControlsContext = createContext<PlaybackControls | null>(null);
 const PositionContext = createContext<PlaybackPosition>({ frame: 0, location: null });
 
+const AUTOPLAY_SETTLE_MS = 200;
+const STALL_CHECK_MS = 1500;
+const STALL_REPLAY_MS = 50;
+const STALL_NUDGES = 2;
+
 const CAPTIONS_KEY = "eureka.captions";
 const MUTED_KEY = "eureka.muted";
 
@@ -110,7 +115,16 @@ export function PlaybackProvider({
   const [frame, setFrame] = useState(0);
   const [playing, setPlaying] = useState(false);
   const [ended, setEnded] = useState(false);
-  const [muted, setMuted] = useFlagPreference(MUTED_KEY, false);
+  const [mutedChoice, setMutedChoice] = useFlagPreference(MUTED_KEY, false);
+  const [silenced, setSilenced] = useState(false);
+  const muted = mutedChoice || silenced;
+  const setMuted = useCallback(
+    (next: boolean) => {
+      setSilenced(false);
+      setMutedChoice(next);
+    },
+    [setMutedChoice],
+  );
   const [captions, setCaptions] = useFlagPreference(CAPTIONS_KEY, true);
   const [volume, setVolumeState] = useState(1);
   const [values, setValues] = useState<Record<string, number>>({});
@@ -154,9 +168,39 @@ export function PlaybackProvider({
   useEffect(() => {
     if (!player || !hasScene || !fontsReady || autoStarted.current) return;
     if (!autoPlay || reducedMotion) return;
-    autoStarted.current = true;
-    player.play();
+    // A play order given in the commit that mounts the first scene and its audio is lost
+    // by the player: it is given once the scene has settled.
+    const timer = setTimeout(() => {
+      autoStarted.current = true;
+      player.play();
+    }, AUTOPLAY_SETTLE_MS);
+    return () => clearTimeout(timer);
   }, [player, hasScene, fontsReady, autoPlay, reducedMotion]);
+
+  // The player can report that it plays while its frame stands still, waiting for audio
+  // that will not start. Playing again clears it; failing that, it goes on without sound.
+  const stallNudges = useRef(0);
+  useEffect(() => {
+    if (!player || !playing || waiting) return;
+    let last = player.getCurrentFrame();
+    const timer = setInterval(() => {
+      const now = player.getCurrentFrame();
+      if (!player.isPlaying()) return;
+      if (now !== last) {
+        last = now;
+        stallNudges.current = 0;
+        return;
+      }
+      stallNudges.current += 1;
+      if (stallNudges.current <= STALL_NUDGES) {
+        player.pause();
+        setTimeout(() => player.play(), STALL_REPLAY_MS);
+      } else {
+        setSilenced(true);
+      }
+    }, STALL_CHECK_MS);
+    return () => clearInterval(timer);
+  }, [player, playing, waiting]);
 
   const landed = useRef(false);
   useEffect(() => {
