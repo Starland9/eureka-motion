@@ -1,1 +1,21 @@
-{}
+{
+  "Transport": {
+    "label": "Barre de lecture",
+    "ruler": "Position dans l’explication",
+    "rulerValue": "Scène {scene} sur {total}, {elapsed} sur {duration}{pending, plural, =0 {} one {, # scène en préparation} other {, # scènes en préparation}}",
+    "rulerEmpty": "Aucune scène prête",
+    "time": "{elapsed} / {total}",
+    "timePartial": "{elapsed} / {total}+",
+    "play": "Lecture",
+    "pause": "Pause",
+    "replay": "Rejouer",
+    "previousScene": "Scène précédente",
+    "nextScene": "Scène suivante",
+    "captions": "Sous-titres",
+    "captionsShort": "ST",
+    "sound": "Son",
+    "volume": "Volume",
+    "volumeValue": "{value} %",
+    "fullscreen": "Plein écran"
+  }
+}

@@ -241,7 +241,7 @@ commence à se jouer en moins de 15 secondes et se complète scène par scène.
 - [X] T042 [US1] [O] Écrire la planche `apps/web/src/components/player/Planche.tsx` : `<Player>` sur la composition de T020, durée recalculée à chaque scène reçue, attente sur la dernière image quand la suite n'est pas prête puis reprise automatique (méthode validée en T008), cadre et repères d'impression, attente des polices, pas de lecture automatique sans action de l'élève.
   - Lire : design-system/eureka-motion/MASTER.md § 4 et § 5.3 ; research.md § 2.3 ; spec.md FR-041.
   - Réussite : avec le scénario simulé ralenti, la lecture attend la scène suivante puis reprend seule, sans retour au début.
-- [ ] T043 [P] [US1] [S] Écrire la barre de lecture `apps/web/src/components/player/Transport.tsx` : règle graduée à une section par scène, lecture et pause, temps en chiffres tabulaires, sous-titres, volume, plein écran, raccourcis espace, flèches, `M`, `C`, `F`, cibles de 44 px.
+- [X] T043 [P] [US1] [S] Écrire la barre de lecture `apps/web/src/components/player/Transport.tsx` : règle graduée à une section par scène, lecture et pause, temps en chiffres tabulaires, sous-titres, volume, plein écran, raccourcis espace, flèches, `M`, `C`, `F`, cibles de 44 px.
   - Lire : design-system/eureka-motion/MASTER.md § 5.3 et § 6 ; spec.md FR-010.
   - Réussite : toutes les commandes sont utilisables au clavier ; chaque bouton a un nom accessible.
 - [X] T044 [P] [US1] [S] Écrire `apps/web/src/components/player/SceneList.tsx` (liste des scènes, scène courante, scènes en préparation, compteur de scènes prêtes), `FigureCaption.tsx` et `Subtitles.tsx` (texte HTML du temps de narration courant, masquable).

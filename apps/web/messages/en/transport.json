@@ -1,1 +1,21 @@
-{}
+{
+  "Transport": {
+    "label": "Playback bar",
+    "ruler": "Position in the explanation",
+    "rulerValue": "Scene {scene} of {total}, {elapsed} of {duration}{pending, plural, =0 {} one {, # scene in preparation} other {, # scenes in preparation}}",
+    "rulerEmpty": "No scene ready",
+    "time": "{elapsed} / {total}",
+    "timePartial": "{elapsed} / {total}+",
+    "play": "Play",
+    "pause": "Pause",
+    "replay": "Replay",
+    "previousScene": "Previous scene",
+    "nextScene": "Next scene",
+    "captions": "Captions",
+    "captionsShort": "CC",
+    "sound": "Sound",
+    "volume": "Volume",
+    "volumeValue": "{value}%",
+    "fullscreen": "Full screen"
+  }
+}
