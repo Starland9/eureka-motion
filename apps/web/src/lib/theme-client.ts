@@ -1,6 +1,6 @@
 "use client";
 
-import { useSyncExternalStore } from "react";
+import { useLayoutEffect, useSyncExternalStore } from "react";
 import type { ThemeName } from "scene";
 import { THEME_STORAGE_KEY } from "./theme";
 
@@ -47,4 +47,23 @@ export function useReducedMotion(): boolean {
     () => window.matchMedia(REDUCED_MOTION).matches,
     () => false,
   );
+}
+
+function storedTheme(): ThemeName {
+  try {
+    const stored = localStorage.getItem(THEME_STORAGE_KEY);
+    if (stored === "paper" || stored === "board") return stored;
+  } catch {
+    // Storage may be unavailable; the system preference decides.
+  }
+  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "board" : "paper";
+}
+
+// A change of locale replaces <html> and drops the class set by the init script.
+export function ThemeSync(): null {
+  useLayoutEffect(() => {
+    document.documentElement.classList.toggle("dark", storedTheme() === "board");
+    window.dispatchEvent(new Event(CHANGE_EVENT));
+  }, []);
+  return null;
 }

@@ -1,1 +1,26 @@
-{}
+{
+  "Ask": {
+    "metaTitle": "Eureka Motion — Animated explanations",
+    "metaDescription": "Say what you didn’t understand: an animated, narrated explanation, checked before it is shown, in French or English, from middle school to higher education.",
+    "questionLegend": "01 — Question",
+    "lead": "I didn’t understand",
+    "placeholder": "the law of gravity",
+    "hint": "Write it in your own words, as you would say it aloud. For example: why the sky is blue, what a derivative is, mitosis.",
+    "remaining": "{count, plural, one {# character left} other {# characters left}}",
+    "submit": "Explain →",
+    "pending": "Preparing the explanation…",
+    "errors": {
+      "rateLimitedSeconds": "You have asked a lot of questions in a short time. Try again in {seconds, plural, one {# second} other {# seconds}}.",
+      "rateLimitedMinutes": "You have asked a lot of questions in a short time. Try again in {minutes, plural, one {# minute} other {# minutes}}.",
+      "rateLimitedLater": "You have asked a lot of questions in a short time. Try again a little later.",
+      "unreachable": "The explanation could not start. Check your connection, then try again."
+    },
+    "preferences": {
+      "language": "Language",
+      "level": "Level",
+      "theme": "Theme"
+    },
+    "colophonLabel": "Colophon",
+    "colophon": "Every explanation is animated and read aloud; every scene is checked before it is shown."
+  }
+}

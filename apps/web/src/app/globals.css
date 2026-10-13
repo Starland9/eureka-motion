@@ -116,6 +116,7 @@
   font-size: var(--type-display-xl-size);
   line-height: var(--type-display-xl-leading);
   font-weight: var(--type-display-xl-weight);
+  font-variation-settings: "opsz" 48;
 }
 
 @utility text-display-l {
@@ -123,6 +124,7 @@
   font-size: var(--type-display-l-size);
   line-height: var(--type-display-l-leading);
   font-weight: var(--type-display-l-weight);
+  font-variation-settings: "opsz" 36;
 }
 
 @utility text-display-m {
@@ -130,6 +132,7 @@
   font-size: var(--type-display-m-size);
   line-height: var(--type-display-m-leading);
   font-weight: var(--type-display-m-weight);
+  font-variation-settings: "opsz" 24;
 }
 
 @utility text-title {
@@ -137,6 +140,7 @@
   font-size: var(--type-title-size);
   line-height: var(--type-title-leading);
   font-weight: var(--type-title-weight);
+  font-variation-settings: "opsz" 18;
 }
 
 @utility text-lead {

@@ -1,1 +1,26 @@
-{}
+{
+  "Ask": {
+    "metaTitle": "Eureka Motion — Explications animées",
+    "metaDescription": "Dis ce que tu n’as pas compris : une explication animée et racontée, vérifiée avant d’être affichée, en français ou en anglais, du collège au supérieur.",
+    "questionLegend": "01 — Question",
+    "lead": "Je n’ai pas compris",
+    "placeholder": "la loi de la gravité",
+    "hint": "Écris avec tes mots, comme tu le dirais à voix haute. Par exemple : pourquoi le ciel est bleu, ce qu’est une dérivée, la mitose.",
+    "remaining": "{count, plural, one {Il reste # caractère} other {Il reste # caractères}}",
+    "submit": "Expliquer →",
+    "pending": "Je prépare l’explication…",
+    "errors": {
+      "rateLimitedSeconds": "Tu as posé beaucoup de questions en peu de temps. Réessaie dans {seconds, plural, one {# seconde} other {# secondes}}.",
+      "rateLimitedMinutes": "Tu as posé beaucoup de questions en peu de temps. Réessaie dans {minutes, plural, one {# minute} other {# minutes}}.",
+      "rateLimitedLater": "Tu as posé beaucoup de questions en peu de temps. Réessaie un peu plus tard.",
+      "unreachable": "L’explication n’a pas pu démarrer. Vérifie ta connexion, puis réessaie."
+    },
+    "preferences": {
+      "language": "Langue",
+      "level": "Niveau",
+      "theme": "Thème"
+    },
+    "colophonLabel": "Colophon",
+    "colophon": "Chaque explication est animée et racontée à voix haute ; chaque scène est vérifiée avant d’être affichée."
+  }
+}

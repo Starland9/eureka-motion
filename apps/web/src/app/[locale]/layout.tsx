@@ -7,6 +7,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { localeFromParams } from "@/i18n/params";
 import { routing } from "@/i18n/routing";
 import { themeInitScript } from "@/lib/theme";
+import { ThemeSync } from "@/lib/theme-client";
 import "katex/dist/katex.min.css";
 import "../globals.css";
 
@@ -48,6 +49,7 @@ export default async function LocaleLayout({ children, params }: Props) {
         <a className="skip-link" href="#content">
           {t("skipToContent")}
         </a>
+        <ThemeSync />
         <NextIntlClientProvider>
           <ExplanationSessionProvider>{children}</ExplanationSessionProvider>
         </NextIntlClientProvider>

@@ -118,6 +118,10 @@ polices : confidentialité des mineurs et fonctionnement du mode démo).
 | `caption` | 13 | 1,4 | IBM Plex Mono 500, capitales, interlettrage 0,06 em | Légendes, étiquettes |
 | `data` | 15 | 1,3 | IBM Plex Mono 400, chiffres tabulaires | Valeurs, temps, unités |
 
+La Bodoni Moda est une police à taille optique : à l'écran, ses déliés disparaissent quand la
+taille optique suit le corps. Elle est donc fixée par style (`display-xl` 48, `display-l` 36,
+`display-m` 24, `title` 18) et à 18 dans les scènes, qui sont réduites dans la page.
+
 Mesure de lecture : 60 à 72 caractères. Les titres courts utilisent `text-wrap: balance`. Les
 symboles de grandeur (*m*, *F*, *r*) sont en italique de la police de texte, comme dans un
 manuel. Les nombres qui changent sont toujours en chiffres tabulaires.
@@ -237,7 +241,9 @@ largeur du canevas divisée par 120 en format 16:9 (16 px à 1920 de large).
 - La phrase à trou occupe le haut de page, alignée à gauche sur la colonne 2 :
   « Je n'ai pas compris » en `display-xl`, puis le champ sur la ligne suivante, souligné
   d'un filet de 2 px, dans le même corps. Texte d'exemple en `ink-faint` italique :
-  *la loi de la gravité*. Le bouton principal « Expliquer → » suit le champ.
+  *la loi de la gravité*. Le bouton principal « Expliquer → » suit le champ. Ce champ marque
+  le focus par l'épaississement de son filet (4 px), sans cadre : c'est une ligne sur
+  laquelle on écrit, pas une case de formulaire.
 - Sous le champ, en `caption` : niveau et langue courants, modifiables sur place.
 - **Sommaire** : les six matières en liste réglée sur deux colonnes (une sur téléphone).
   Chaque ligne : matière en `caption`, concept en texte, points de conduite, niveau de
