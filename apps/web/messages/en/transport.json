@@ -11,6 +11,8 @@
     "replay": "Replay",
     "previousScene": "Previous scene",
     "nextScene": "Next scene",
+    "stepPrevious": "Previous step",
+    "stepNext": "Next step",
     "captions": "Captions",
     "captionsShort": "CC",
     "sound": "Sound",

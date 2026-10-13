@@ -28,6 +28,7 @@ import type { ExplanationProps } from "scene/player";
 import { useFontsReady } from "@/lib/fonts-ready";
 import { useFlagPreference } from "@/lib/preferences";
 import { useReducedMotion, useTheme } from "@/lib/theme-client";
+import { beatEndFrames, nextStepFrame, previousStepFrame, sceneLandingFrame } from "./step-targets";
 import { useGrowingPlayback } from "./useGrowingPlayback";
 
 export interface PlayableExplanation {
@@ -59,6 +60,8 @@ export interface PlaybackControls {
   toggle(event?: SyntheticEvent): void;
   seekToFrame(frame: number): void;
   seekToScene(index: number): void;
+  stepForward(): number | null;
+  stepBack(): number | null;
   setMuted(muted: boolean): void;
   setVolume(volume: number): void;
   setCaptions(visible: boolean): void;
@@ -101,7 +104,8 @@ export function PlaybackProvider({
 
   const timeline = useMemo(() => buildTimeline(scenes, FPS), [scenes]);
   const durationInFrames = Math.max(1, timeline.duration);
-  const { waiting } = useGrowingPlayback(player, durationInFrames, complete);
+  // Resuming when scenes arrive would start playback without a press.
+  const { waiting } = useGrowingPlayback(reducedMotion ? null : player, durationInFrames, complete);
 
   const [frame, setFrame] = useState(0);
   const [playing, setPlaying] = useState(false);
@@ -120,7 +124,10 @@ export function PlaybackProvider({
 
   useEffect(() => {
     if (!player) return;
-    const onFrame = (event: { detail: { frame: number } }): void => setFrame(event.detail.frame);
+    // Remotion emits this from a passive effect; a synchronous setState there trips React's
+    // nested-update warning after about 50 frames of playback.
+    const onFrame = (event: { detail: { frame: number } }): void =>
+      queueMicrotask(() => setFrame(event.detail.frame));
     const onPlay = (): void => {
       setPlaying(true);
       setEnded(false);
@@ -151,6 +158,16 @@ export function PlaybackProvider({
     player.play();
   }, [player, hasScene, fontsReady, autoPlay, reducedMotion]);
 
+  const landed = useRef(false);
+  useEffect(() => {
+    const first = timeline.scenes[0];
+    if (!player || !first || !reducedMotion || landed.current) return;
+    landed.current = true;
+    player.seekTo(sceneLandingFrame(first, true));
+  }, [player, timeline, reducedMotion]);
+
+  const stepEnds = useMemo(() => beatEndFrames(timeline.scenes), [timeline]);
+
   const play = useCallback((event?: SyntheticEvent) => player?.play(event), [player]);
   const pause = useCallback(() => player?.pause(), [player]);
   const toggle = useCallback((event?: SyntheticEvent) => player?.toggle(event), [player]);
@@ -162,9 +179,26 @@ export function PlaybackProvider({
   const seekToScene = useCallback(
     (index: number) => {
       const scene = timeline.scenes[index];
-      if (scene) player?.seekTo(scene.start);
+      if (scene) player?.seekTo(sceneLandingFrame(scene, reducedMotion));
     },
-    [player, timeline],
+    [player, timeline, reducedMotion],
+  );
+  const stepTo = useCallback(
+    (target: number | null) => {
+      if (!player || target === null) return null;
+      player.pause();
+      player.seekTo(target);
+      return target;
+    },
+    [player],
+  );
+  const stepForward = useCallback(
+    () => stepTo(player ? nextStepFrame(stepEnds, player.getCurrentFrame()) : null),
+    [player, stepEnds, stepTo],
+  );
+  const stepBack = useCallback(
+    () => stepTo(player ? previousStepFrame(stepEnds, player.getCurrentFrame()) : null),
+    [player, stepEnds, stepTo],
   );
   const setVolume = useCallback(
     (next: number) => {
@@ -217,6 +251,8 @@ export function PlaybackProvider({
       toggle,
       seekToFrame,
       seekToScene,
+      stepForward,
+      stepBack,
       setMuted,
       setVolume,
       setCaptions,
@@ -245,6 +281,8 @@ export function PlaybackProvider({
       toggle,
       seekToFrame,
       seekToScene,
+      stepForward,
+      stepBack,
       setMuted,
       setVolume,
       setCaptions,

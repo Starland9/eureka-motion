@@ -1,4 +1,5 @@
-export type Shortcut = "toggle" | "back" | "forward" | "mute" | "captions" | "fullscreen";
+export type Shortcut =
+  "toggle" | "back" | "forward" | "mute" | "captions" | "fullscreen" | "stepNext" | "stepPrevious";
 export type TargetKind = "modal" | "text" | "slider" | "pressable" | "other";
 
 const BY_KEY = new Map<string, Shortcut>([
@@ -9,6 +10,8 @@ const BY_KEY = new Map<string, Shortcut>([
   ["m", "mute"],
   ["c", "captions"],
   ["f", "fullscreen"],
+  ["n", "stepNext"],
+  ["p", "stepPrevious"],
 ]);
 
 const REPEATABLE: readonly Shortcut[] = ["back", "forward"];

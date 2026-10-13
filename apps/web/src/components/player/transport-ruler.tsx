@@ -5,6 +5,7 @@ import { memo, useId, useMemo, type KeyboardEvent, type PointerEvent, type React
 import type { SceneTiming } from "scene";
 import { cn } from "@/lib/utils";
 import { usePlayback, usePlaybackPosition } from "./PlaybackProvider";
+import { previousSceneTarget } from "./step-targets";
 import {
   clockSeconds,
   formatClock,
@@ -12,7 +13,6 @@ import {
   frameAtFraction,
   minorTickFrames,
   nextSceneIndex,
-  previousSceneIndex,
   rulerLayout,
   SEEK_STEP_SECONDS,
   totalSeconds,
@@ -123,7 +123,7 @@ function Track({
   const t = useTranslations("Transport");
   const playback = usePlayback();
   const { frame, location } = usePlaybackPosition();
-  const { timeline, fps, ended, seekToFrame, seekToScene } = playback;
+  const { timeline, fps, ended, reducedMotion, seekToFrame, seekToScene } = playback;
   const scenes = timeline.scenes;
   const disabled = scenes.length === 0;
 
@@ -179,7 +179,7 @@ function Track({
         seekToFrame(layout.known - 1);
         break;
       case "PageUp": {
-        const index = previousSceneIndex(scenes, frame, fps);
+        const index = previousSceneTarget(scenes, frame, fps, reducedMotion);
         if (index !== null) seekToScene(index);
         break;
       }

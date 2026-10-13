@@ -1,11 +1,17 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { useEffect, useEffectEvent, type SyntheticEvent } from "react";
+import { useEffect, useEffectEvent, useMemo, useState, type SyntheticEvent } from "react";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { cn } from "@/lib/utils";
 import { usePlayback, usePlaybackPosition, type PlaybackControls } from "./PlaybackProvider";
+import {
+  beatEndFrames,
+  nextStepFrame,
+  previousSceneTarget,
+  previousStepFrame,
+} from "./step-targets";
 import {
   FullscreenGlyph,
   NextGlyph,
@@ -21,13 +27,16 @@ import {
   clockSeconds,
   formatClock,
   nextSceneIndex,
-  previousSceneIndex,
   SEEK_STEP_SECONDS,
   totalSeconds,
 } from "./transport-time";
 
 const PRESSED =
   "aria-pressed:enabled:bg-ink aria-pressed:enabled:text-surface aria-pressed:enabled:hover:bg-ink";
+const STEP_UNAVAILABLE =
+  "aria-disabled:cursor-default aria-disabled:border aria-disabled:border-ink-faint aria-disabled:bg-transparent aria-disabled:text-ink-faint aria-disabled:hover:bg-transparent aria-disabled:hover:no-underline aria-disabled:active:translate-y-0";
+
+type OnStep = (landed: number | null) => void;
 
 export interface TransportProps {
   plannedSceneCount?: number;
@@ -77,11 +86,11 @@ function PlayButton() {
 
 function SceneStep({ direction }: { direction: "previous" | "next" }) {
   const t = useTranslations("Transport");
-  const { timeline, fps, seekToScene } = usePlayback();
+  const { timeline, fps, seekToScene, reducedMotion } = usePlayback();
   const { frame } = usePlaybackPosition();
   const previous = direction === "previous";
   const target = previous
-    ? previousSceneIndex(timeline.scenes, frame, fps)
+    ? previousSceneTarget(timeline.scenes, frame, fps, reducedMotion)
     : nextSceneIndex(timeline.scenes, frame);
   const name = previous ? t("previousScene") : t("nextScene");
 
@@ -99,6 +108,44 @@ function SceneStep({ direction }: { direction: "previous" | "next" }) {
     >
       {previous ? <PreviousGlyph /> : <NextGlyph />}
     </Button>
+  );
+}
+
+function StepButton({ direction, onStep }: { direction: "previous" | "next"; onStep: OnStep }) {
+  const t = useTranslations("Transport");
+  const playback = usePlayback();
+  const { frame } = usePlaybackPosition();
+  const ends = useMemo(() => beatEndFrames(playback.timeline.scenes), [playback.timeline]);
+  const forward = direction === "next";
+  const available =
+    (forward ? nextStepFrame(ends, frame) : previousStepFrame(ends, frame)) !== null;
+
+  return (
+    <Button
+      type="button"
+      variant={forward ? "default" : "secondary"}
+      size="sm"
+      aria-disabled={!available || undefined}
+      aria-keyshortcuts={forward ? "N" : "P"}
+      className={available ? undefined : STEP_UNAVAILABLE}
+      onClick={() => {
+        if (available) onStep(forward ? playback.stepForward() : playback.stepBack());
+      }}
+    >
+      {forward ? t("stepNext") : t("stepPrevious")}
+    </Button>
+  );
+}
+
+function StepNarration({ stepped }: { stepped: number | null }) {
+  const { explanation, playing } = usePlayback();
+  const { frame, location } = usePlaybackPosition();
+  const announce = stepped !== null && frame === stepped && !playing;
+
+  return (
+    <p role="status" lang={explanation.language} className="sr-only">
+      {announce ? (location?.beat.narration ?? "") : ""}
+    </p>
   );
 }
 
@@ -204,7 +251,7 @@ function FullscreenButton() {
   );
 }
 
-function Shortcuts() {
+function Shortcuts({ onStep }: { onStep: OnStep }) {
   const playback = usePlayback();
   const { frame } = usePlaybackPosition();
 
@@ -215,6 +262,8 @@ function Shortcuts() {
     const shortcut = shortcutFor(event);
     if (!shortcut || handledByTarget(targetKind(event.target), shortcut)) return;
     if (event.repeat && !isRepeatable(shortcut)) return;
+    const stepping = shortcut === "stepNext" || shortcut === "stepPrevious";
+    if (stepping && !playback.reducedMotion) return;
     event.preventDefault();
     const step = SEEK_STEP_SECONDS * playback.fps;
     switch (shortcut) {
@@ -236,6 +285,12 @@ function Shortcuts() {
       case "fullscreen":
         toggleFullscreen(playback);
         break;
+      case "stepNext":
+        onStep(playback.stepForward());
+        break;
+      case "stepPrevious":
+        onStep(playback.stepBack());
+        break;
     }
   });
 
@@ -250,15 +305,29 @@ function Shortcuts() {
 
 export function Transport({ plannedSceneCount = 0, shortcuts = true, className }: TransportProps) {
   const t = useTranslations("Transport");
+  const { reducedMotion } = usePlayback();
+  const [stepped, setStepped] = useState<number | null>(null);
 
   return (
     <div role="group" aria-label={t("label")} className={cn("flex flex-col gap-2", className)}>
       <Ruler plannedSceneCount={plannedSceneCount} />
       <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
         <div className="flex flex-wrap items-center gap-2">
-          <SceneStep direction="previous" />
-          <PlayButton />
-          <SceneStep direction="next" />
+          {reducedMotion ? (
+            <>
+              <StepButton direction="previous" onStep={setStepped} />
+              <StepButton direction="next" onStep={setStepped} />
+              <PlayButton />
+              <SceneStep direction="previous" />
+              <SceneStep direction="next" />
+            </>
+          ) : (
+            <>
+              <SceneStep direction="previous" />
+              <PlayButton />
+              <SceneStep direction="next" />
+            </>
+          )}
           <Time />
         </div>
         <div className="flex flex-wrap items-center gap-2">
@@ -267,7 +336,8 @@ export function Transport({ plannedSceneCount = 0, shortcuts = true, className }
           <FullscreenButton />
         </div>
       </div>
-      {shortcuts ? <Shortcuts /> : null}
+      {reducedMotion ? <StepNarration stepped={stepped} /> : null}
+      {shortcuts ? <Shortcuts onStep={setStepped} /> : null}
     </div>
   );
 }

@@ -256,7 +256,7 @@ commence à se jouer en moins de 15 secondes et se complète scène par scène.
 - [X] T047 [P] [US1] [S] Écrire le colophon `apps/web/src/components/colophon/Colophon.tsx` : élément repliable fermé par défaut, plan (objectif, prérequis, étapes, analogie), verdict et motif par scène, modèle et durée de préparation ; sur une explication de référence, ajouter la ligne « Relue par … le … ».
   - Lire : design-system/eureka-motion/MASTER.md § 5.7 ; spec.md FR-048, FR-049.
   - Réussite : le colophon s'ouvre au clavier et affiche un verdict par scène du scénario simulé.
-- [ ] T048 [US1] [S] Gérer le mouvement réduit et le thème dans `apps/web/src/components/player/` : sans animation, chaque scène s'affiche dans son état final avec un bouton « Étape suivante », les tracés deviennent des fondus de 120 ms ; la bascule Papier / Tableau change le thème de la page et de la scène.
+- [X] T048 [US1] [S] Gérer le mouvement réduit et le thème dans `apps/web/src/components/player/` : sans animation, chaque scène s'affiche dans son état final avec un bouton « Étape suivante », les tracés deviennent des fondus de 120 ms ; la bascule Papier / Tableau change le thème de la page et de la scène.
   - Lire : design-system/eureka-motion/MASTER.md § 3 (Mouvement réduit) ; spec.md FR-036.
   - Réussite : avec `prefers-reduced-motion`, aucune lecture ne démarre seule et le parcours reste complet.
 - [ ] T049 [US1] [O] Point de contrôle : jouer cinq concepts avec le fournisseur réel et la voix Azure, mesurer le délai jusqu'à la première scène, ajuster les consignes et le parallélisme, relire le code de la phase.

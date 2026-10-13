@@ -151,6 +151,8 @@ describe("shortcutFor", () => {
     ["M", "mute"],
     ["c", "captions"],
     ["F", "fullscreen"],
+    ["n", "stepNext"],
+    ["P", "stepPrevious"],
   ])("maps %j to %s", (key, expected) => {
     expect(shortcutFor(keyEvent(key))).toBe(expected);
   });
@@ -168,12 +170,14 @@ describe("shortcutFor", () => {
     expect(isRepeatable("forward")).toBe(true);
     expect(isRepeatable("toggle")).toBe(false);
     expect(isRepeatable("mute")).toBe(false);
+    expect(isRepeatable("stepNext")).toBe(false);
+    expect(isRepeatable("stepPrevious")).toBe(false);
   });
 });
 
 describe("handledByTarget", () => {
   it("leaves every key to text fields and modal dialogs", () => {
-    for (const shortcut of ["toggle", "back", "mute", "fullscreen"] as const) {
+    for (const shortcut of ["toggle", "back", "mute", "fullscreen", "stepNext"] as const) {
       expect(handledByTarget("text", shortcut)).toBe(true);
       expect(handledByTarget("modal", shortcut)).toBe(true);
     }
@@ -184,6 +188,7 @@ describe("handledByTarget", () => {
     expect(handledByTarget("slider", "toggle")).toBe(false);
     expect(handledByTarget("pressable", "toggle")).toBe(true);
     expect(handledByTarget("pressable", "mute")).toBe(false);
+    expect(handledByTarget("pressable", "stepNext")).toBe(false);
     expect(handledByTarget("other", "toggle")).toBe(false);
   });
 });

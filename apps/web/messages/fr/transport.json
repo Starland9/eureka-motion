@@ -11,6 +11,8 @@
     "replay": "Rejouer",
     "previousScene": "Scène précédente",
     "nextScene": "Scène suivante",
+    "stepPrevious": "Étape précédente",
+    "stepNext": "Étape suivante",
     "captions": "Sous-titres",
     "captionsShort": "ST",
     "sound": "Son",
