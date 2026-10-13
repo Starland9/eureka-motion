@@ -125,3 +125,26 @@ n'a été montré. Une scène n'est émise que lorsque le plan et elle-même son
 Le rôle `judge` avec réflexion activée dépasse 20 secondes sur un plan complet : la réflexion
 est donc désactivée par défaut pour ce rôle, sur le modèle le plus fort. La marge sur les
 15 secondes est faible ; la voix s'y ajoute. Le jeu de référence suit cette mesure.
+
+### Mesures du 2026-10-13 (point de contrôle T049)
+
+Fournisseur réel, poste de développement, concepts variés (physique, mathématiques, biologie,
+histoire, économie, en français et en anglais).
+
+| Mesure | Sans voix (pipeline seul, 4 concepts) | Dans la page, voix Kokoro (3 concepts) |
+|---|---|---|
+| Première scène | 9,0 à 15,0 s | 14,1 à 26,9 s |
+| Explication complète | 15,6 à 30,4 s | 28,1 à 41,3 s |
+| Explications complètes | 4 sur 4 | 3 sur 3 |
+
+- Les scènes sont désormais acceptées du premier coup dans la plupart des cas : les défauts
+  de forme (flèche sans longueur, cible inexistante, élément mal rangé, étiquettes qui se
+  chevauchent, identifiant accentué, pas de curseur trop fin, virgule finale) sont réparés par
+  le pipeline au lieu d'être renvoyés au modèle.
+- Le dépassement des 15 secondes a deux causes. La voix Kokoro ajoute 2 à 3 secondes à la
+  première scène (une inférence à la fois) ; Azure Speech, plus rapide, n'a pas encore été
+  mesurée (action A2). Et quand le rôle `judge` refuse le premier plan, il faut le réécrire
+  et le vérifier de nouveau : 10 à 15 secondes de plus (deux cas sur trois dans la page, aucun
+  sur quatre sans voix).
+- Piste si ce cas reste fréquent : demander deux plans en parallèle dès le départ et retenir
+  le premier que le rôle `judge` valide.

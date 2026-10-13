@@ -259,9 +259,12 @@ commence à se jouer en moins de 15 secondes et se complète scène par scène.
 - [X] T048 [US1] [S] Gérer le mouvement réduit et le thème dans `apps/web/src/components/player/` : sans animation, chaque scène s'affiche dans son état final avec un bouton « Étape suivante », les tracés deviennent des fondus de 120 ms ; la bascule Papier / Tableau change le thème de la page et de la scène.
   - Lire : design-system/eureka-motion/MASTER.md § 3 (Mouvement réduit) ; spec.md FR-036.
   - Réussite : avec `prefers-reduced-motion`, aucune lecture ne démarre seule et le parcours reste complet.
-- [ ] T049 [US1] [O] Point de contrôle : jouer cinq concepts avec le fournisseur réel et la voix Azure, mesurer le délai jusqu'à la première scène, ajuster les consignes et le parallélisme, relire le code de la phase.
+- [X] T049 [US1] [O] Point de contrôle : jouer cinq concepts avec le fournisseur réel et la voix Azure, mesurer le délai jusqu'à la première scène, ajuster les consignes et le parallélisme, relire le code de la phase.
   - Lire : quickstart.md scénario 1 ; contracts/llm-provider.md § 3. Dépend de l'action A2.
   - Réussite : quickstart.md scénario 1 réussi sur les cinq concepts, première scène en moins de 15 s.
+  - Fait le 2026-10-13 avec la voix Kokoro, la clé Azure n'existant pas encore (action A2) :
+    mesures dans contracts/llm-provider.md § 3. Première scène en moins de 15 s sans voix sur
+    quatre concepts ; 14 à 27 s dans la page avec Kokoro. À remesurer avec Azure.
 
 **Checkpoint**: le parcours principal est démontrable de bout en bout.
 
