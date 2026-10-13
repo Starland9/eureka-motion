@@ -880,10 +880,11 @@ describe("structure snapshot document", () => {
       "sequence",
       "figure",
       "figure-notes",
+      "figure",
       "compare",
     ]);
     const types = new Set(document.scenes.flatMap((scene) => scene.elements.map((e) => e.type)));
-    expect([...types].sort()).toEqual(["relations", "steps", "table", "timeline"]);
+    expect([...types].sort()).toEqual(["relations", "steps", "table", "timeline", "tree"]);
   });
 
   it("renders every scene in both themes at the end of its last beat", () => {

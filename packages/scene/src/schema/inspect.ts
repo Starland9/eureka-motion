@@ -165,6 +165,7 @@ export function elementLabelCount(element: SceneElement): number {
     case "timeline":
     case "steps":
     case "relations":
+    case "tree":
     case "table":
       return 0;
     default: {
@@ -185,6 +186,8 @@ export function elementParts(element: SceneElement): readonly string[] {
       return element.items.map((_, i) => `s${i + 1}`);
     case "relations":
       return element.nodes.map((node) => node.id);
+    case "tree":
+      return element.nodes.flatMap((node) => [node.id, `${node.id}_value`]);
     case "sim.flow":
       return ["node", ...element.inputs.map((b) => b.id), ...element.outputs.map((b) => b.id)];
     default:

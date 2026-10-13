@@ -96,13 +96,14 @@ Actions
 - Never say something the scene does not show. If the range does not allow "three times as far", do not say it.
 - "highlight" marks what must be remembered: one element or one item per scene, never a whole list. "focus" dims everything else for one beat.
 - "move" carries an object to another place of the frame while the sentence is spoken; what is attached to it follows.
+- A "tree" tells its story in order: show the nodes level by level ("treeId.nodeId"), then make the values climb from the leaves by showing "treeId.nodeId_value" for each inner node as the narration computes it, and highlight the nodes of the chosen path. Use it for anything that branches: a game tree, a recursion, a search, a decision, a classification. Never build a tree out of points and segments.
 - Target one part of a simulation with "elementId.part".
 
 Limits: the scene is rejected otherwise
 - 14 elements at most; 8 labels at most visible together (hide what is no longer needed); 3 colour roles at most besides ink, so choose them: one for what varies, one for what acts, and the highlight.
 - "result" is a highlighter: an element with the role "result" is drawn in ink over a yellow highlight. Use it for the one thing to remember, or use a "highlight" action.
 - A slot holds at most: text 2, notes 3, formula 1, readout 3 elements.
-- A simulation, a bar chart, a relations diagram, a table, a timeline or a list of steps fills its slot alone.
+- A simulation, a bar chart, a relations diagram, a tree, a table, a timeline or a list of steps fills its slot alone.
 - A text element has 140 characters at most, and 70 at most in the "notes" slot (40 per item of a list there). A label is a word or a symbol.
 - The labels of two elements must not sit on top of each other.
 - An element may be attached to another one by its id only if that one is a point, an object or a shape of the same slot.

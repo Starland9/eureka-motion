@@ -30,6 +30,7 @@ import { TablePrimitive } from "../primitives/structure/table";
 import { TangentPrimitive } from "../primitives/figure/tangent";
 import { TextPrimitive } from "../primitives/text/text";
 import { TimelinePrimitive } from "../primitives/structure/timeline";
+import { TreePrimitive } from "../primitives/structure/tree";
 import { TwoBodySim } from "../primitives/sim/two-body";
 import { VectorPrimitive } from "../primitives/figure/vector";
 import { WaveSim } from "../primitives/sim/wave";
@@ -63,6 +64,7 @@ export const registry: Readonly<Record<ElementType, PrimitiveEntry>> = {
   shape: { kind: "svg", Component: ShapePrimitive as PrimitiveComponent },
   object: { kind: "svg", Component: ObjectPrimitive as PrimitiveComponent },
   relations: { kind: "svg", Component: RelationsPrimitive as PrimitiveComponent },
+  tree: { kind: "svg", Component: TreePrimitive as PrimitiveComponent },
   "sim.two-body": { kind: "svg", Component: TwoBodySim as PrimitiveComponent },
   "sim.fall": { kind: "svg", Component: FallSim as PrimitiveComponent },
   "sim.orbit": { kind: "svg", Component: OrbitSim as PrimitiveComponent },

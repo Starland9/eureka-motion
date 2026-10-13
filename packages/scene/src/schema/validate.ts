@@ -16,6 +16,7 @@ import {
   OutlineSchema,
   PLAYABLE_ELEMENT_TYPES,
   SceneSchema,
+  TREE_MAX_LEVELS,
   WORLD_ELEMENT_TYPES,
   type ExplanationDocument,
   type Outline,
@@ -243,6 +244,120 @@ function quizStructureIssues(quiz: Quiz): ValidationIssue[] {
   return issues;
 }
 
+const TREE_NODE_ID = /^[a-z][a-z0-9_]*$/;
+
+function treeIssues(
+  element: Extract<SceneElement, { type: "tree" }>,
+  where: (property?: string) => string,
+): ValidationIssue[] {
+  const issues: ValidationIssue[] = [];
+  const { nodes } = element;
+  const ids = nodes.map((node) => node.id);
+  const quoted = (list: readonly string[]): string => list.map((id) => `"${id}"`).join(", ");
+
+  const repeated = duplicates(ids);
+  for (const id of repeated) {
+    issues.push(issue(2, where("nodes"), `node id "${id}" is used more than once`));
+  }
+  for (const id of ids) {
+    if (!TREE_NODE_ID.test(id)) {
+      issues.push(
+        issue(
+          2,
+          where("nodes"),
+          `node id "${id}" must be lowercase letters, digits and underscores, starting with a letter: it names the part "${element.id}.<id>" that actions target`,
+        ),
+      );
+    } else if (id.endsWith("_value")) {
+      issues.push(
+        issue(
+          2,
+          where("nodes"),
+          `node id "${id}" cannot end with "_value": that suffix names the value part of a node`,
+        ),
+      );
+    }
+  }
+  let unknownParent = false;
+  nodes.forEach((node, i) => {
+    if (node.parent !== undefined && !ids.includes(node.parent)) {
+      unknownParent = true;
+      issues.push(
+        issue(
+          2,
+          where(`nodes[${i}]`),
+          `no node "${node.parent}", named as the parent of "${node.id}"; nodes are ${quoted(ids)}`,
+        ),
+      );
+    }
+  });
+  if (repeated.length > 0 || unknownParent) return issues;
+
+  const roots = nodes.filter((node) => node.parent === undefined).map((node) => node.id);
+  if (roots.length === 0) {
+    issues.push(
+      issue(
+        2,
+        where("nodes"),
+        'every node has a "parent", so the parents form a cycle and there is no root; remove "parent" from the node at the top of the tree',
+      ),
+    );
+  } else if (roots.length > 1) {
+    issues.push(
+      issue(
+        2,
+        where("nodes"),
+        `${roots.length} nodes have no "parent" (${quoted(roots)}); a tree has exactly one root, so give a "parent" to all but one`,
+      ),
+    );
+  }
+
+  const parentOf = new Map(nodes.map((node) => [node.id, node.parent]));
+  const depthOf = (id: string): number | undefined => {
+    const seen = new Set([id]);
+    let depth = 1;
+    for (let up = parentOf.get(id); up !== undefined; up = parentOf.get(up)) {
+      if (seen.has(up)) return undefined;
+      seen.add(up);
+      depth++;
+    }
+    return depth;
+  };
+  const depths = ids.map((id) => ({ id, depth: depthOf(id) }));
+  const looping = depths.filter((entry) => entry.depth === undefined).map((entry) => entry.id);
+  if (looping.length > 0 && roots.length > 0) {
+    issues.push(
+      issue(
+        2,
+        where("nodes"),
+        `the "parent" of ${quoted(looping)} forms a cycle; every node must lead up to the root`,
+      ),
+    );
+  }
+  const known = depths.flatMap((entry) => (entry.depth === undefined ? [] : [entry.depth]));
+  const deepest = Math.max(0, ...known);
+  if (deepest > TREE_MAX_LEVELS) {
+    const tooDeep = depths.filter((entry) => (entry.depth ?? 0) > TREE_MAX_LEVELS);
+    issues.push(
+      issue(
+        2,
+        where("nodes"),
+        `the tree has ${deepest} levels, at most ${TREE_MAX_LEVELS} (the root is level 1); ${quoted(tooDeep.map((entry) => entry.id))} ${tooDeep.length === 1 ? "is" : "are"} too deep, so remove or move up`,
+      ),
+    );
+  }
+  if (element.levels && element.levels.length > deepest) {
+    issues.push(
+      issue(
+        2,
+        where("levels"),
+        `has ${element.levels.length} captions but the tree has ${deepest} levels; give one caption per level at most`,
+      ),
+    );
+  }
+  return issues;
+}
+
 function referenceIssues(scene: Scene, outline: ModelSource): ValidationIssue[] {
   const issues: ValidationIssue[] = [];
   const modelIds = modelIdentifiers(toModelDefinition(outline));
@@ -337,6 +452,7 @@ function referenceIssues(scene: Scene, outline: ModelSource): ValidationIssue[] 
         }
       });
     }
+    if (element.type === "tree") issues.push(...treeIssues(element, where));
     if (element.type === "sim.flow") {
       const ids = [...element.inputs, ...element.outputs].map((branch) => branch.id);
       for (const id of duplicates(ids))

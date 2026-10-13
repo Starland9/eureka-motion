@@ -34,6 +34,11 @@
           "visual": "Un schéma de relations et un tableau de lecture."
         },
         {
+          "role": "mechanism",
+          "intent": "Voir comment minimax choisit un coup en remontant les notes de l'arbre.",
+          "visual": "Un arbre de sept noeuds dont les valeurs remontent des feuilles à la racine."
+        },
+        {
           "role": "recap",
           "intent": "Comparer la société avant et après 1789.",
           "visual": "Deux tableaux côte à côte."
@@ -363,8 +368,96 @@
         ]
       },
       {
-        "id": "societe",
+        "id": "minimax",
         "index": 4,
+        "role": "mechanism",
+        "title": "Minimax : choisir le meilleur coup",
+        "layout": "figure",
+        "elements": [
+          {
+            "id": "arbre",
+            "slot": "figure",
+            "type": "tree",
+            "nodes": [
+              { "id": "racine", "label": "MAX", "value": "3", "role": "quantity" },
+              { "id": "min_g", "parent": "racine", "label": "MIN", "value": "3", "role": "action" },
+              { "id": "min_d", "parent": "racine", "label": "MIN", "value": "2", "role": "action" },
+              { "id": "f1", "parent": "min_g", "value": "3" },
+              { "id": "f2", "parent": "min_g", "value": "5" },
+              { "id": "f3", "parent": "min_d", "value": "2" },
+              { "id": "f4", "parent": "min_d", "value": "9" }
+            ],
+            "levels": ["Toi : le plus grand", "Adversaire : plus petit", "Note de la position"]
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "À toi de jouer : deux coups possibles, et l'adversaire répond à chacun.",
+            "duration_ms": 4000,
+            "actions": [
+              {
+                "do": "show",
+                "targets": ["arbre.racine", "arbre.min_g", "arbre.min_d"],
+                "how": "draw",
+                "at": 0
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Au bout de chaque réponse, la position reçoit une note.",
+            "duration_ms": 3500,
+            "actions": [
+              {
+                "do": "show",
+                "targets": ["arbre.f1", "arbre.f2", "arbre.f3", "arbre.f4"],
+                "how": "draw",
+                "at": 0
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "L'adversaire prend la plus petite note : 3 à gauche, 2 à droite.",
+            "duration_ms": 4000,
+            "actions": [
+              {
+                "do": "show",
+                "targets": ["arbre.min_g_value", "arbre.min_d_value"],
+                "how": "fade",
+                "at": 0
+              },
+              {
+                "do": "highlight",
+                "targets": ["arbre.f1", "arbre.f3"],
+                "at": 0.4
+              }
+            ]
+          },
+          {
+            "id": "b4",
+            "narration": "Tu gardes la plus grande : 3, en jouant le coup de gauche.",
+            "duration_ms": 4000,
+            "actions": [
+              {
+                "do": "show",
+                "targets": ["arbre.racine_value"],
+                "how": "fade",
+                "at": 0
+              },
+              {
+                "do": "highlight",
+                "targets": ["arbre.racine", "arbre.min_g", "arbre.f1"],
+                "at": 0.4
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "societe",
+        "index": 5,
         "role": "recap",
         "title": "La société avant et après 1789",
         "layout": "compare",

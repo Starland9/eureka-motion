@@ -397,6 +397,39 @@ const RelationsElement = z
   })
   .describe("A diagram of relations between notions. Part names are the node ids.");
 
+export const TREE_MAX_LEVELS = 4;
+
+const TreeElement = z
+  .object({
+    ...base,
+    type: z.literal("tree"),
+    nodes: z
+      .array(
+        z.object({
+          id: IdSchema,
+          parent: IdSchema.optional(),
+          label: label(16).optional(),
+          value: label(8).optional(),
+          role: ColourSchema.optional(),
+        }),
+      )
+      .min(2)
+      .max(15)
+      .describe(
+        `Exactly one node has no "parent" (the root, drawn at the top); the others name their parent. At most ${TREE_MAX_LEVELS} levels, the root being level 1. Siblings are drawn in the order declared. A node id is lowercase letters, digits and underscores, starts with a letter and does not end in "_value": it names the part "<id>.<nodeId>". "value" is a short result written inside the circle (a number, "3", "+inf"); "label" is a short name written beside the node (a word or two; a dense tree has little room).`,
+      ),
+    levels: z
+      .array(label(24))
+      .max(TREE_MAX_LEVELS)
+      .optional()
+      .describe(
+        "Optional caption for each level from the root down, written at the left of the tree, for example the player who moves. Keep them to a few words: a tree of four levels leaves room for about 14 characters.",
+      ),
+  })
+  .describe(
+    'A tree drawn from the root down, to show minimax, recursion, binary search or a decision tree. Reveal it node by node: show "<id>.<nodeId>" for each node, and the edge to its parent is drawn with it. A leaf shows its value as soon as it is visible; an inner node keeps its value hidden until "<id>.<nodeId>_value" is shown (showing the whole element "<id>" shows every value). Highlight nodes to light up the chosen path: when a node and its parent are both highlighted, the edge between them is lit. Parts: <nodeId> and <nodeId>_value for each node.',
+  );
+
 const TableElement = z
   .object({
     ...base,
@@ -591,6 +624,7 @@ export const ElementSchema = z.discriminatedUnion("type", [
   TimelineElement,
   StepsElement,
   RelationsElement,
+  TreeElement,
   TableElement,
   SimTwoBody,
   SimFall,
@@ -633,6 +667,7 @@ export const ELEMENT_SLOTS: Readonly<Record<ElementType, readonly SlotName[]>> =
   timeline: ["track"],
   steps: ["track", "notes"],
   relations: FIGURE_SLOTS,
+  tree: FIGURE_SLOTS,
   table: [...FIGURE_SLOTS, "notes"],
   "sim.two-body": FIGURE_SLOTS,
   "sim.fall": FIGURE_SLOTS,
@@ -664,7 +699,8 @@ export const WORLD_ELEMENT_TYPES: ReadonlySet<ElementType> = new Set<ElementType
 export const BLOCK_ELEMENT_TYPES: ReadonlySet<ElementType> = new Set<ElementType>(
   ELEMENT_TYPES.filter(
     (type) =>
-      type.startsWith("sim.") || ["bars", "timeline", "steps", "relations", "table"].includes(type),
+      type.startsWith("sim.") ||
+      ["bars", "timeline", "steps", "relations", "tree", "table"].includes(type),
   ),
 );
 
@@ -847,7 +883,7 @@ export const PlanSchema = z.object({
     formula: z
       .string()
       .min(1)
-      .max(200)
+      .max(300)
       .optional()
       .describe("KaTeX source; omit if the concept has no formula."),
   }),

@@ -68,7 +68,7 @@ describe("a valid document", () => {
 
 describe("the schema covers every primitive", () => {
   it("declares slots for each element type", () => {
-    expect(ELEMENT_TYPES).toHaveLength(31);
+    expect(ELEMENT_TYPES).toHaveLength(32);
     for (const type of ELEMENT_TYPES) expect(ELEMENT_SLOTS[type].length).toBeGreaterThan(0);
   });
 });
