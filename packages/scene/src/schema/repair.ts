@@ -1,9 +1,19 @@
-import { checkModel } from "../expr";
-import { WORLD_ELEMENT_TYPES, type Scene } from "./document";
+import { checkModel, resolve } from "../expr";
+import { sceneLimits } from "../tokens";
+import {
+  ELEMENT_SLOTS,
+  LAYOUT_SLOTS,
+  WORLD_ELEMENT_TYPES,
+  type Outline,
+  type Scene,
+  type SceneElement,
+  type SlotName,
+} from "./document";
 import { elementExtent, elementLookup, type Vec } from "./geometry";
-import { elementParts, splitTarget } from "./inspect";
+import { elementParts, elementRoles, splitTarget } from "./inspect";
 import { collidingLabels } from "./labels";
 import { sampleScopes, toModelDefinition, withSceneValues, type ModelSource } from "./model-scope";
+import { MAX_PARAM_STEPS, SLOT_CAPACITY } from "./validate";
 
 const WORLD_MARGIN = 0.08;
 const MAX_TARGETS = 6;
@@ -155,7 +165,109 @@ function dropCollidingLabels(scene: Scene, outline: ModelSource): Scene {
   return current;
 }
 
+// An element put in a slot that cannot hold it moves to one of its layout that can.
+function reseat(scene: Scene): Scene {
+  const available: readonly SlotName[] = LAYOUT_SLOTS[scene.layout];
+  const fits = (element: SceneElement, slot: SlotName): boolean =>
+    available.includes(slot) && ELEMENT_SLOTS[element.type].includes(slot);
+  const load = new Map<SlotName, number>();
+  for (const element of scene.elements) {
+    if (fits(element, element.slot)) load.set(element.slot, (load.get(element.slot) ?? 0) + 1);
+  }
+  let changed = false;
+  const elements = scene.elements.map((element) => {
+    if (fits(element, element.slot)) return element;
+    const slot = available.find(
+      (candidate) =>
+        fits(element, candidate) &&
+        (load.get(candidate) ?? 0) < (SLOT_CAPACITY[candidate] ?? Infinity),
+    );
+    if (!slot) return element;
+    load.set(slot, (load.get(slot) ?? 0) + 1);
+    changed = true;
+    return { ...element, slot };
+  });
+  return changed ? { ...scene, elements } : scene;
+}
+
+// Past three colour codes a scene stops being readable: the least used one goes back to ink.
+function limitRoles(scene: Scene): Scene {
+  let current = scene;
+  for (let pass = 0; pass < 2; pass += 1) {
+    const used = new Set<string>();
+    const counts = new Map<string, number>();
+    for (const element of current.elements) {
+      for (const role of elementRoles(element)) used.add(role);
+      if ("role" in element && typeof element.role === "string")
+        counts.set(element.role, (counts.get(element.role) ?? 0) + 1);
+    }
+    if (used.size <= sceneLimits.maxColourRoles || counts.size === 0) return current;
+    const rarest = [...counts].sort((a, b) => a[1] - b[1])[0]?.[0];
+    if (!rarest) return current;
+    current = {
+      ...current,
+      elements: current.elements.map((element) => {
+        if (!("role" in element) || element.role !== rarest) return element;
+        const copy = { ...element };
+        delete copy.role;
+        return copy;
+      }),
+    };
+  }
+  return current;
+}
+
+// A sweep past the range of its parameter stops at the end of the range.
+function clampSweeps(scene: Scene, outline: ModelSource): Scene {
+  if (!scene.beats.some((beat) => beat.actions.some((action) => action.do === "sweep")))
+    return scene;
+  const source = withSceneValues(outline, scene);
+  if (checkModel(toModelDefinition(source)).length > 0) return scene;
+  const scope = sampleScopes(source)[0]?.scope;
+  if (!scope) return scene;
+  let changed = false;
+  const beats = scene.beats.map((beat) => ({
+    ...beat,
+    actions: beat.actions.map((action) => {
+      if (action.do !== "sweep") return action;
+      const param = outline.params.find((candidate) => candidate.id === action.param);
+      if (!param) return action;
+      let target: number;
+      try {
+        target = resolve(action.to, scope);
+      } catch {
+        return action;
+      }
+      if (!Number.isFinite(target) || (target >= param.min && target <= param.max)) return action;
+      changed = true;
+      return { ...action, to: Math.min(param.max, Math.max(param.min, target)) };
+    }),
+  }));
+  return changed ? { ...scene, beats } : scene;
+}
+
 export function repairScene(scene: Scene, outline: ModelSource): Scene {
-  const repaired = fitWorld(showMissing(knownTargets(completeVectors(scene))), outline);
-  return dropCollidingLabels(repaired, outline);
+  const seated = limitRoles(reseat(knownTargets(completeVectors(scene))));
+  const framed = fitWorld(showMissing(clampSweeps(seated, outline)), outline);
+  return dropCollidingLabels(framed, outline);
+}
+
+const REPAIRED_PARAM_STEPS = 200;
+
+// A slider with too fine a step, or a default outside its range, is adjusted rather than refused.
+export function repairOutline<T extends Pick<Outline, "params">>(outline: T): T {
+  let changed = false;
+  const params = outline.params.map((param) => {
+    if (!(param.max > param.min)) return param;
+    const span = param.max - param.min;
+    const step =
+      param.step > 0 && span / param.step <= MAX_PARAM_STEPS
+        ? param.step
+        : span / REPAIRED_PARAM_STEPS;
+    const start = Math.min(param.max, Math.max(param.min, param.default));
+    if (step === param.step && start === param.default) return param;
+    changed = true;
+    return { ...param, step, default: start };
+  });
+  return changed ? { ...outline, params } : outline;
 }

@@ -78,7 +78,7 @@ export const PEDAGOGY = {
 
 export const MAX_PARAM_STEPS = 400;
 
-const SLOT_CAPACITY: Partial<Record<SlotName, number>> = {
+export const SLOT_CAPACITY: Partial<Record<SlotName, number>> = {
   text: 2,
   notes: 3,
   formula: 1,

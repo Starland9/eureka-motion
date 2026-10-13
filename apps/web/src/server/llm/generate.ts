@@ -18,6 +18,8 @@ export function withJsonReminder(system: string): string {
   return /json/i.test(system) ? system : `${system}\n\n${JSON_REMINDER}`;
 }
 
+const TRAILING_COMMA = /,\s*([}\]])/g;
+
 export function extractJson(text: string): unknown {
   const trimmed = text.trim();
   if (trimmed === "") throw new Error("the reply was empty");
@@ -25,10 +27,17 @@ export function extractJson(text: string): unknown {
   const start = unfenced.indexOf("{");
   const end = unfenced.lastIndexOf("}");
   if (start === -1 || end <= start) throw new Error("the reply contains no JSON object");
+  const body = unfenced.slice(start, end + 1);
   try {
-    return JSON.parse(unfenced.slice(start, end + 1));
+    return JSON.parse(body);
   } catch (error) {
-    throw new Error(`the reply is not valid JSON (${(error as Error).message})`, { cause: error });
+    try {
+      return JSON.parse(body.replace(TRAILING_COMMA, "$1"));
+    } catch {
+      throw new Error(`the reply is not valid JSON (${(error as Error).message})`, {
+        cause: error,
+      });
+    }
   }
 }
 

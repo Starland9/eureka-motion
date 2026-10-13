@@ -71,6 +71,10 @@ describe("extractJson", () => {
     expect(extractJson('Here it is: {"a":1} Hope it helps.')).toEqual({ a: 1 });
   });
 
+  it("forgives a comma left before a closing brace or bracket", () => {
+    expect(extractJson('{"a":[1,2,],"b":{"c":"x, y",},}')).toEqual({ a: [1, 2], b: { c: "x, y" } });
+  });
+
   it("rejects an empty reply, a reply without an object and broken JSON", () => {
     expect(() => extractJson("   ")).toThrow("empty");
     expect(() => extractJson("no object here")).toThrow("no JSON object");

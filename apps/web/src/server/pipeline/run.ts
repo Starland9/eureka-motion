@@ -1,6 +1,7 @@
 import {
   formatIssues,
   OutlineSchema,
+  repairOutline,
   repairScene,
   SceneSchema,
   typesetTexts,
@@ -444,6 +445,7 @@ export class Pipeline {
       }),
       schema: OutlineSchema,
       validate: (value) => {
+        Object.assign(value, repairOutline(value));
         const result = validateOutline(value, { shape });
         if (!result.ok) return formatIssues(result.issues);
         Object.assign(value, typesetTexts(value, input.language));

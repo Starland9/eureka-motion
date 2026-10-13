@@ -662,11 +662,14 @@ export const PLAYABLE_ELEMENT_TYPES: ReadonlySet<ElementType> = new Set<ElementT
 const at = z
   .number()
   .min(0)
-  .max(1)
+  .transform((value) => Math.min(value, 1))
   .optional()
   .describe("When the action starts, as a fraction of the beat. Omit to spread actions evenly.");
 
-const targets = z.array(TargetSchema).min(1).max(6);
+const targets = z.preprocess(
+  (value) => (typeof value === "string" ? [value] : value),
+  z.array(TargetSchema).min(1).max(6),
+);
 
 export const ActionSchema = z.discriminatedUnion("do", [
   z
@@ -735,9 +738,10 @@ export type Beat = z.infer<typeof BeatSchema>;
 export const DerivedSchema = z.object({
   id: IdSchema,
   expr: z
-    .string()
-    .min(1)
-    .max(200)
+    .preprocess(
+      (value) => (typeof value === "number" ? String(value) : value),
+      z.string().min(1).max(200),
+    )
     .describe("Reads parameters, constants and derived values declared before it."),
   unit: z.string().max(24).default(""),
   label: z.string().max(60).default(""),
@@ -810,7 +814,7 @@ export const PlanSchema = z.object({
   steps: z
     .array(
       z.object({
-        role: SceneRoleSchema,
+        role: SceneRoleSchema.catch("mechanism"),
         intent: z
           .string()
           .min(1)

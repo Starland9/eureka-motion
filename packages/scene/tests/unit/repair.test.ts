@@ -4,6 +4,7 @@ import { describe, expect, it } from "vitest";
 import {
   DocumentSchema,
   formatIssues,
+  repairOutline,
   repairScene,
   validateOutline,
   validateScene,
@@ -128,7 +129,90 @@ describe("repairing a scene before validation", () => {
     expect(result.ok, result.ok ? "" : formatIssues(result.issues)).toBe(true);
   });
 
+  it("moves an element out of a slot that cannot hold it", () => {
+    const broken = scene("s5");
+    const note = broken.elements.find((element) => element.type === "text");
+    if (!note) throw new Error("fixture changed");
+    const home = note.slot;
+    (note as { slot: string }).slot = "figure";
+    expect(validateScene(broken, outline).ok).toBe(false);
+    const repaired = repairScene(broken, outline);
+    expect(repaired.elements.find((element) => element.id === note.id)?.slot).toBe(home);
+    const result = validateScene(repaired, outline);
+    expect(result.ok, result.ok ? "" : formatIssues(result.issues)).toBe(true);
+  });
+
+  it("sends the least used colour back to ink past three colour codes", () => {
+    const broken = scene("s1");
+    const roleOf = (id: string) =>
+      broken.elements.find((element) => element.id === id) as { role?: string };
+    roleOf("apple").role = "quantity";
+    roleOf("earth").role = "quantity";
+    roleOf("moon").role = "valid";
+    roleOf("ground").role = "result";
+    expect(validateScene(broken, outline).ok).toBe(false);
+    const repaired = repairScene(broken, outline);
+    const roles = new Set(
+      repaired.elements.flatMap((element) =>
+        "role" in element && element.role ? [element.role] : [],
+      ),
+    );
+    expect(roles.size).toBe(3);
+    expect(roles.has("action")).toBe(true);
+    const result = validateScene(repaired, outline);
+    expect(result.ok, result.ok ? "" : formatIssues(result.issues)).toBe(true);
+  });
+
+  it("stops a sweep at the end of the range of its parameter", () => {
+    const withSweep = document.scenes.find((candidate) =>
+      candidate.beats.some((beat) => beat.actions.some((action) => action.do === "sweep")),
+    );
+    if (!withSweep) throw new Error("fixture changed");
+    const broken = structuredClone(withSweep);
+    let param = "";
+    for (const beat of broken.beats) {
+      for (const action of beat.actions) {
+        if (action.do === "sweep") {
+          action.to = 1e40;
+          param = action.param;
+        }
+      }
+    }
+    expect(validateScene(broken, outline).ok).toBe(false);
+    const repaired = repairScene(broken, outline);
+    const max = outline.params.find((candidate) => candidate.id === param)!.max;
+    const sweeps = repaired.beats.flatMap((beat) =>
+      beat.actions.filter((action) => action.do === "sweep"),
+    );
+    expect(sweeps.every((action) => action.to === max)).toBe(true);
+    const result = validateScene(repaired, outline);
+    expect(result.ok, result.ok ? "" : formatIssues(result.issues)).toBe(true);
+  });
+
   it("does not touch a scene without positioned elements", () => {
     expect(repairScene(scene("s3"), outline).world).toBeUndefined();
+  });
+});
+
+describe("repairing an outline before validation", () => {
+  it("leaves a valid outline untouched", () => {
+    expect(repairOutline(outline)).toBe(outline);
+  });
+
+  it("widens a step too fine for a slider and brings the default back in range", () => {
+    const first = outline.params[0]!;
+    const broken = {
+      ...outline,
+      params: [
+        { ...first, step: (first.max - first.min) / 1e6, default: first.max * 2 },
+        ...outline.params.slice(1),
+      ],
+    };
+    expect(validateOutline(broken).ok).toBe(false);
+    const repaired = repairOutline(broken);
+    expect(repaired.params[0]!.default).toBe(first.max);
+    expect((first.max - first.min) / repaired.params[0]!.step).toBeLessThanOrEqual(400);
+    const result = validateOutline(repaired);
+    expect(result.ok, result.ok ? "" : formatIssues(result.issues)).toBe(true);
   });
 });
