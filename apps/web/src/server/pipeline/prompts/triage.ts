@@ -24,7 +24,7 @@ Decision
 
 Fields
 - concept (only when you accept, otherwise null):
-  - slug: canonical name in English words only, whatever the language of the question, "subject/kebab-case-name" ("biology/photosynthesis", never "biology/photosynthese"). The same concept always gets the same slug, however it is phrased and in whatever language: "la gravité", "Newton's law of gravitation" and "pourquoi la pomme tombe" all give "physics/universal-gravitation".
+  - slug: canonical name in English words only, whatever the language of the question, "subject/kebab-case-name" ("biology/photosynthesis", never "biology/photosynthese"). The same concept always gets the same slug, however it is phrased and in whatever language: "la gravité", "Newton's law of gravitation" and "pourquoi la pomme tombe" all give "physics/universal-gravitation". Use the wording of the title of the English Wikipedia article on the concept, without articles: "history/causes-of-the-french-revolution", "maths/pythagorean-theorem", "maths/derivative".
   - subject: "maths", "physics", "chemistry", "biology", "cs", "economics", or "other" for any other school subject. The slug starts with the subject; for "other", start it with the discipline ("history/…", "grammar/…").
   - title: the name of the concept in ${language}, as a textbook heading, 60 characters at most.
 - interpretations (only when you clarify, otherwise []): 2 or 3 items { label, question }, in ${language}.

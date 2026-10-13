@@ -231,7 +231,7 @@ async function checkBar(page: Page): Promise<void> {
   await bar.getByRole("button", { name: m.stepNext }).waitFor();
   await bar.getByRole("button", { name: m.stepPrevious }).waitFor();
   await bar.getByRole("button", { name: m.play }).waitFor();
-  const names = await focusByTab(page, m.fullscreen);
+  const names = await focusByTab(page, m.fullscreen ?? "");
   assert.deepEqual(names, [
     m.ruler,
     m.stepPrevious,
@@ -252,7 +252,7 @@ async function walkForward(page: Page, steps: Step[]): Promise<void> {
   const bar = barOf(page);
   const next = bar.getByRole("button", { name: m.stepNext });
   const region = bar.locator("[role=status]");
-  await focusByTab(page, m.stepNext);
+  await focusByTab(page, m.stepNext ?? "");
   assert.equal(await page.locator(":focus").getAttribute("aria-keyshortcuts"), "N");
   for (const [index, step] of steps.slice(1).entries()) {
     await page.keyboard.press(index % 2 === 0 ? "Enter" : "Space");
@@ -606,7 +606,7 @@ async function shots(browser: Browser, steps: Step[]): Promise<void> {
       await until("theme", async () => (await status(page)).theme === theme);
       await page.waitForTimeout(400);
       await page.screenshot({ path: `${OUT}/${width}-${theme}-landing.png`, fullPage: true });
-      await focusByTab(page, m.stepNext);
+      await focusByTab(page, m.stepNext ?? "");
       for (let press = 0; press < 7; press += 1) await page.keyboard.press("Enter");
       await until("stepped", async () => (await status(page)).frame === steps[7]!.frame);
       await page.waitForTimeout(400);
@@ -651,7 +651,7 @@ try {
   await checkBar(phone.page);
   await checkTargets(phone.page);
   await checkOverflow(phone.page, "360 px");
-  await focusByTab(phone.page, m.stepNext);
+  await focusByTab(phone.page, m.stepNext ?? "");
   for (let press = 0; press < 5; press += 1) await phone.page.keyboard.press("Enter");
   await landedOn(phone.page, steps[5]!, "step 6 at 360 px");
   await checkOverflow(phone.page, "360 px after steps");

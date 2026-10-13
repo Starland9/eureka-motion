@@ -26,7 +26,7 @@ for (const locale of ["fr", "en"]) {
   });
 }
 
-test("the h1 is set in Bodoni Moda and every font request stays on the origin", async ({
+test("the sentence is set in Bodoni Moda and every font request stays on the origin", async ({
   page,
   baseURL,
 }) => {
@@ -36,8 +36,9 @@ test("the h1 is set in Bodoni Moda and every font request stays on the origin", 
   });
 
   await page.goto("/fr");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveCount(1);
   const family = await page
-    .getByRole("heading", { level: 1 })
+    .locator("label", { hasText: "Je n’ai pas compris" })
     .evaluate((element) => getComputedStyle(element).fontFamily);
   expect(family.replace(/^["']/, "").startsWith("Bodoni Moda")).toBe(true);
 

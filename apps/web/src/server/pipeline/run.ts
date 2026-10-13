@@ -268,9 +268,16 @@ export class Pipeline {
           scenes = speculative;
         } else {
           speculative.abort();
-          feedback = `An examiner rejected your previous outline. Fix every point and write the outline again.\n${judgement.issues
-            .map((item) => `- ${item.where}: ${item.problem}`)
-            .join("\n")}`;
+          const issues = judgement.issues.map((item) => `- ${item.where}: ${item.problem}`);
+          this.deps.trace?.({
+            label: "plan refused",
+            role: "judge",
+            ms: 0,
+            attempts: round,
+            ok: false,
+            rejections: issues,
+          });
+          feedback = `An examiner rejected your previous outline. Fix every point and write the outline again.\n${issues.join("\n")}`;
         }
       }
       mark("verify_plan");

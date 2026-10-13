@@ -24,12 +24,7 @@ import {
   waitForEvent,
   type RecordedCall,
 } from "../helpers/fakes";
-import {
-  brokenScene,
-  draftSteps,
-  scenarioFromReference,
-  sceneIdKey,
-} from "../helpers/scenario";
+import { brokenScene, draftSteps, scenarioFromReference, sceneIdKey } from "../helpers/scenario";
 
 const document = typesetTexts(DocumentSchema.parse(reference.payload), "fr");
 const INPUT: StartInput = { question: reference.question, language: "fr", level: "lycee" };

@@ -20,6 +20,7 @@ const store: ExplanationStore = {
   update: async (id, patch) =>
     void records.set(id, { ...(records.get(id) as ExplanationRecord), ...patch }),
   get: async (id) => records.get(id) ?? null,
+  isExpired: async () => false,
   remove: async (id) => void records.delete(id),
 };
 

@@ -5,7 +5,11 @@ const out = ".snapshots/live";
 mkdirSync(out, { recursive: true });
 
 const CASES = [
-  { locale: "fr", field: "Je n’ai pas compris", question: process.argv[2] ?? "pourquoi il y a des saisons" },
+  {
+    locale: "fr",
+    field: "Je n’ai pas compris",
+    question: process.argv[2] ?? "pourquoi il y a des saisons",
+  },
   { locale: "fr", field: "Je n’ai pas compris", question: process.argv[3] ?? "la loi d'Ohm" },
   { locale: "en", field: "I didn’t understand", question: process.argv[4] ?? "what inflation is" },
 ];
@@ -30,10 +34,11 @@ for (const [index, item] of CASES.entries()) {
   await page.waitForURL(/\/e\//, { timeout: 15_000 });
   const accepted = seconds();
   const ruler = page.getByRole("slider").first();
-  let first = "never";
+  let first: string;
   try {
     await page.waitForFunction(
-      () => Number(document.querySelector('[role="slider"]')?.getAttribute("aria-valuenow") ?? 0) > 0,
+      () =>
+        Number(document.querySelector('[role="slider"]')?.getAttribute("aria-valuenow") ?? 0) > 0,
       undefined,
       { timeout: 70_000 },
     );
@@ -43,7 +48,7 @@ for (const [index, item] of CASES.entries()) {
   }
   await page.waitForTimeout(4000);
   await page.screenshot({ path: `${out}/${index + 1}-playing.png` });
-  let done = "never";
+  let done: string;
   try {
     await page.waitForFunction(
       () => {
@@ -59,11 +64,27 @@ for (const [index, item] of CASES.entries()) {
     done = "never";
   }
   const audio = await page.evaluate(() => document.querySelectorAll("audio").length);
-  const counter = await page.locator('[data-slot="scene-list"] [role="status"]').textContent().catch(() => null);
-  const title = await page.locator("h1").textContent().catch(() => null);
+  const counter = await page
+    .locator('[data-slot="scene-list"] [role="status"]')
+    .textContent()
+    .catch(() => null);
+  const title = await page
+    .locator("h1")
+    .textContent()
+    .catch(() => null);
   await page.screenshot({ path: `${out}/${index + 1}-done.png`, fullPage: true });
   console.log(
-    JSON.stringify({ question: item.question, accepted, first, done, audio, counter, title, value: await ruler.getAttribute("aria-valuetext").catch(() => null), errors: errors.slice(0, 3) }),
+    JSON.stringify({
+      question: item.question,
+      accepted,
+      first,
+      done,
+      audio,
+      counter,
+      title,
+      value: await ruler.getAttribute("aria-valuetext").catch(() => null),
+      errors: errors.slice(0, 3),
+    }),
   );
   await context.close();
 }
