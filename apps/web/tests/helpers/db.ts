@@ -38,6 +38,8 @@ async function ensureDatabase(url: URL): Promise<boolean> {
   try {
     const found = await admin`select 1 from pg_database where datname = ${name}`;
     if (found.length === 0) await admin.unsafe(`create database "${name}"`);
+    // Test data needs no durability, and waiting for the disk makes tests time out.
+    await admin.unsafe(`alter database "${name}" set synchronous_commit = off`);
     return true;
   } catch {
     return false;
