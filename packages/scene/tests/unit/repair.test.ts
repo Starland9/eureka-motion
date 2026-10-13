@@ -105,6 +105,29 @@ describe("repairing a scene before validation", () => {
     ]);
   });
 
+  it("drops the later of two labels that would sit on the same spot", () => {
+    const broken = scene("s1");
+    broken.elements.push({
+      id: "twin",
+      slot: "figure_b",
+      type: "object",
+      kind: "moon",
+      at: [3, 0.5],
+      size: 0.8,
+      label: "Satellite",
+    });
+    broken.beats[1]!.actions.push({ do: "show", targets: ["twin"], how: "fade" });
+    const before = validateScene(broken, outline);
+    expect(before.ok ? "" : formatIssues(before.issues)).toContain("overlap");
+    const repaired = repairScene(broken, outline);
+    expect(repaired.elements.find((element) => element.id === "twin")).not.toHaveProperty("label");
+    expect(repaired.elements.find((element) => element.id === "moon")).toMatchObject({
+      label: "Lune",
+    });
+    const result = validateScene(repaired, outline);
+    expect(result.ok, result.ok ? "" : formatIssues(result.issues)).toBe(true);
+  });
+
   it("does not touch a scene without positioned elements", () => {
     expect(repairScene(scene("s3"), outline).world).toBeUndefined();
   });

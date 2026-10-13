@@ -2,10 +2,12 @@ import { checkModel } from "../expr";
 import { WORLD_ELEMENT_TYPES, type Scene } from "./document";
 import { elementExtent, elementLookup, type Vec } from "./geometry";
 import { elementParts, splitTarget } from "./inspect";
+import { collidingLabels } from "./labels";
 import { sampleScopes, toModelDefinition, withSceneValues, type ModelSource } from "./model-scope";
 
 const WORLD_MARGIN = 0.08;
 const MAX_TARGETS = 6;
+const MAX_LABEL_DROPS = 4;
 
 function showMissing(scene: Scene): Scene {
   const shown = new Set<string>();
@@ -121,6 +123,39 @@ function knownTargets(scene: Scene): Scene {
   return changed ? { ...scene, beats } : scene;
 }
 
+// Two labels on the same spot: the later one goes, rather than asking for the scene again.
+function dropCollidingLabels(scene: Scene, outline: ModelSource): Scene {
+  const source = withSceneValues(outline, scene);
+  if (checkModel(toModelDefinition(source)).length > 0) return scene;
+  let current = scene;
+  for (let pass = 0; pass < MAX_LABEL_DROPS; pass += 1) {
+    let drop: string | undefined;
+    try {
+      const scope = sampleScopes(source)[0]?.scope;
+      if (!scope) return current;
+      for (const [a, b] of collidingLabels(current, scope)) {
+        drop = [b, a].find((element) => "label" in element && element.label !== undefined)?.id;
+        if (drop) break;
+      }
+    } catch {
+      return current;
+    }
+    if (!drop) return current;
+    const id = drop;
+    current = {
+      ...current,
+      elements: current.elements.map((element) => {
+        if (element.id !== id || !("label" in element)) return element;
+        const copy = { ...element };
+        delete copy.label;
+        return copy;
+      }),
+    };
+  }
+  return current;
+}
+
 export function repairScene(scene: Scene, outline: ModelSource): Scene {
-  return fitWorld(showMissing(knownTargets(completeVectors(scene))), outline);
+  const repaired = fitWorld(showMissing(knownTargets(completeVectors(scene))), outline);
+  return dropCollidingLabels(repaired, outline);
 }

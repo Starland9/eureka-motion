@@ -44,6 +44,7 @@ import {
   type ModelSource,
   type ScopeSample,
 } from "./model-scope";
+import { collidingLabels } from "./labels";
 import { checkTex } from "./tex";
 import { totalDurationMs } from "./timing";
 
@@ -88,7 +89,6 @@ export const NOTES_TEXT_CHARS = 100;
 export const NOTES_ITEM_CHARS = 40;
 
 const FRAME_TOLERANCE = 0.02;
-const LABEL_COLLISION = { x: 0.03, y: 0.04 };
 const MIN_VISIBLE_CURVE = 0.5;
 
 function issue(rule: RuleNumber, where: string, message: string): ValidationIssue {
@@ -696,36 +696,14 @@ function framingIssues(scene: Scene, outline: ModelSource): ValidationIssue[] {
     }
   }
 
-  const visibility = visibilityByBeat(scene);
-  const labelled = scene.elements
-    .filter((element) => WORLD_ELEMENT_TYPES.has(element.type))
-    .map((element) => ({ element, label: elementExtent(element, lookup, defaults, world).label }))
-    .filter(
-      (entry): entry is { element: SceneElement; label: readonly [number, number] } =>
-        entry.label !== null,
+  for (const [a, b] of collidingLabels(scene, defaults)) {
+    issues.push(
+      issue(
+        5,
+        at(scene),
+        `the labels of "${a.id}" and "${b.id}" overlap; move one of the elements or drop one label`,
+      ),
     );
-  for (let i = 0; i < labelled.length; i += 1) {
-    for (let j = i + 1; j < labelled.length; j += 1) {
-      const a = labelled[i] as (typeof labelled)[number];
-      const b = labelled[j] as (typeof labelled)[number];
-      if (a.element.slot !== b.element.slot) continue;
-      const together = [...(visibility.get(a.element.id) ?? [])].some((beat) =>
-        visibility.get(b.element.id)?.has(beat),
-      );
-      if (!together) continue;
-      if (
-        Math.abs(a.label[0] - b.label[0]) < width * LABEL_COLLISION.x &&
-        Math.abs(a.label[1] - b.label[1]) < height * LABEL_COLLISION.y
-      ) {
-        issues.push(
-          issue(
-            5,
-            at(scene),
-            `the labels of "${a.element.id}" and "${b.element.id}" overlap; move one of the elements or drop one label`,
-          ),
-        );
-      }
-    }
   }
   return issues;
 }
