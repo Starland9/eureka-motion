@@ -657,7 +657,7 @@ describe("relations layout", () => {
     expect(edge.plate.width).toBeLessThanOrEqual(gap(labelled));
   });
 
-  it("wraps long labels inside the node and never goes below the minimum text size", () => {
+  it("wraps long labels inside the node at the minimum text size or above when there is room", () => {
     const layout = layoutOf(
       [
         { id: "n0", label: "Inégalités sociales et fiscales" },
@@ -668,6 +668,33 @@ describe("relations layout", () => {
     expect(layout.textSize).toBeGreaterThanOrEqual(sceneMetrics.text.min * U);
     expect(layout.nodes[0]!.lines.length).toBeGreaterThan(1);
     expect(layout.nodes[0]!.lines.join(" ")).toBe("Inégalités sociales et fiscales");
+  });
+
+  it("shrinks the text rather than letting a label spill out of a narrow box", () => {
+    const layout = layoutOf(
+      [
+        { id: "a", label: "Équipe A veut le plus grand" },
+        { id: "c1", label: "Choix 1" },
+        { id: "c2", label: "Choix 2" },
+        { id: "b", label: "Équipe B veut le plus petit" },
+        { id: "v4", label: "v₄" },
+        { id: "v1", label: "v₁" },
+        { id: "v2", label: "v₂" },
+      ],
+      [
+        ["a", "c1"],
+        ["a", "c2"],
+        ["c1", "b"],
+        ["c2", "v4"],
+        ["b", "v1"],
+        ["b", "v2"],
+      ],
+      { width: 62 * U, height: 34 * U },
+    );
+    expect(layout.textSize).toBeLessThan(sceneMetrics.text.min * U);
+    const box = layout.nodes.find((node) => node.id === "a")!;
+    expect(box.lines.join(" ")).toBe("Équipe A veut le plus grand");
+    expect(box.lines.length * layout.textSize * layout.lineHeight).toBeLessThanOrEqual(box.height);
   });
 });
 

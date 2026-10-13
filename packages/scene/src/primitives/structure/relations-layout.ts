@@ -58,6 +58,7 @@ const CLEARANCE_U = 0.8;
 const LINE_HEIGHT = 1.2;
 const SWEEPS = 3;
 const CACHE_SIZE = 16;
+const SHRINK_STEPS = [1, 0.85, 0.72, 0.6, 0.5];
 
 interface Link {
   from: string;
@@ -251,7 +252,10 @@ function computeLayout(input: RelationsInput): RelationsLayout {
       input.nodes.map((node) => node.label),
       size,
     ) <= textArea;
-  const textSize = fits(input.sizes.body) ? input.sizes.body : input.sizes.min;
+  // Past the minimum size a label would spill out of its box or break inside a word:
+  // a smaller text is the lesser evil.
+  const sizes = [input.sizes.body, ...SHRINK_STEPS.map((step) => input.sizes.min * step)];
+  const textSize = sizes.find(fits) ?? (sizes.at(-1) as number);
   const nodeHeight = Math.min(available, Math.max(heightFor(textSize), NODE_MIN_HEIGHT_U * u));
 
   const centres = (order: readonly (readonly string[])[]): Map<string, Point> => {
