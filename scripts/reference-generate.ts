@@ -38,7 +38,7 @@ try {
 }
 
 const USAGE =
-  "Usage: reference-generate [--only=<slug>] [--lang=fr|en] [--force] [--allow-partial] [--dry-run] [--concurrency=<n>] [--set=<file>] [--out-dir=<dir>]";
+  "Usage: reference-generate [--only=<slug>] [--lang=fr|en] [--force] [--allow-partial] [--allow-long] [--dry-run] [--concurrency=<n>] [--set=<file>] [--out-dir=<dir>]";
 const SLUG = /^[a-z]+\/[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const CONCEPT_KEYS = new Set(["slug", "subject", "reference_level", "questions", "hand_written"]);
 
@@ -62,6 +62,7 @@ interface Settings {
   outDir: string;
   force: boolean;
   allowPartial: boolean;
+  allowLong: boolean;
 }
 
 type Disposition = "generate" | "exists" | "hand-written";
@@ -285,13 +286,55 @@ function problemsOfPartial(file: ReferenceFile): string[] {
   return checked.ok ? [] : [formatIssues(checked.issues)];
 }
 
+const TOO_LONG = /the explanation lasts about/;
+
 function verdictSummary(record: ExplanationRecord): string {
   const scenes = record.verdicts.filter((verdict) => verdict.target !== "plan");
   const count = (status: string): number => scenes.filter((v) => v.status === status).length;
   return `${record.payload.scenes.length} of ${record.scene_count_planned ?? "?"} scenes (${count("validated")} validated, ${count("corrected")} corrected, ${count("dropped")} dropped)`;
 }
 
-async function generate(job: Job, llm: LlmProvider, settings: Settings): Promise<Result> {
+interface TokenTally {
+  calls: number;
+  input: number;
+  output: number;
+  byRole: Map<string, { calls: number; input: number; output: number }>;
+}
+
+// Counts what the provider reports for the calls that returned; a failed call is not counted.
+function metered(llm: LlmProvider): { llm: LlmProvider; tally: TokenTally } {
+  const tally: TokenTally = { calls: 0, input: 0, output: 0, byRole: new Map() };
+  const counted: LlmProvider = {
+    get name() {
+      return llm.name;
+    },
+    modelFor: (role) => llm.modelFor(role),
+    health: () => llm.health(),
+    generateObject: async (request) => {
+      const result = await llm.generateObject(request);
+      const { inputTokens, outputTokens } = result.usage;
+      const role = tally.byRole.get(request.role) ?? { calls: 0, input: 0, output: 0 };
+      role.calls += 1;
+      role.input += inputTokens;
+      role.output += outputTokens;
+      tally.byRole.set(request.role, role);
+      tally.calls += 1;
+      tally.input += inputTokens;
+      tally.output += outputTokens;
+      return result;
+    },
+  };
+  return { llm: counted, tally };
+}
+
+function tokenSummary(tally: TokenTally): string {
+  const roles = [...tally.byRole]
+    .map(([role, n]) => `${role} ${n.calls} calls in ${n.input} / out ${n.output}`)
+    .join("; ");
+  return `tokens: in ${tally.input} / out ${tally.output} over ${tally.calls} calls (${roles})`;
+}
+
+async function generate(job: Job, provider: LlmProvider, settings: Settings): Promise<Result> {
   const say = (message: string): void => console.log(`[${job.label}] ${message}`);
   const fail = (reason: string): Result => {
     console.error(`[${job.label}] FAILED, nothing written:\n${indent(reason)}`);
@@ -299,8 +342,10 @@ async function generate(job: Job, llm: LlmProvider, settings: Settings): Promise
   };
 
   const started = Date.now();
+  const { llm, tally } = metered(provider);
   say(`asking: ${job.concept.questions[job.language]}`);
   const { end, record, traces } = await play(job, llm, say);
+  say(tokenSummary(tally));
   if (end?.type !== "done" || !record) return fail(whyNotDone(end, traces));
 
   const partial = end.status === "partial";
@@ -314,8 +359,15 @@ async function generate(job: Job, llm: LlmProvider, settings: Settings): Promise
   }
 
   const file = toFile(job, record);
-  const problems = partial ? problemsOfPartial(file) : await problemsOfComplete(file);
+  const found = partial ? problemsOfPartial(file) : await problemsOfComplete(file);
+  const tooLong = found.filter((problem) => TOO_LONG.test(problem));
+  const problems = settings.allowLong ? found.filter((problem) => !TOO_LONG.test(problem)) : found;
   if (problems.length > 0) return fail(`the document is not valid:\n${problems.join("\n")}`);
+  if (settings.allowLong && tooLong.length > 0) {
+    say(
+      "LONG: kept as written; reference:build rejects it until the narration is shortened by hand",
+    );
+  }
 
   if (record.concept_slug !== job.concept.slug || record.subject !== job.concept.subject) {
     say(
@@ -369,6 +421,7 @@ function parseOptions() {
         lang: { type: "string" },
         force: { type: "boolean", default: false },
         "allow-partial": { type: "boolean", default: false },
+        "allow-long": { type: "boolean", default: false },
         "dry-run": { type: "boolean", default: false },
         concurrency: { type: "string", default: "2" },
         set: { type: "string" },
@@ -404,6 +457,7 @@ async function main(): Promise<number> {
     outDir,
     force: options.force,
     allowPartial: options["allow-partial"],
+    allowLong: options["allow-long"],
   };
 
   let concepts: Concept[];
