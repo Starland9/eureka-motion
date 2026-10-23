@@ -29,6 +29,7 @@ export interface Jobs {
   setProgress(id: string, percent: number): Promise<void>;
   succeed(id: string, resultUrl: string): Promise<Job | null>;
   fail(id: string, error: string): Promise<Job | null>;
+  abandon(id: string, error: string): Promise<Job | null>;
   requeueStale(olderThanMs?: number): Promise<Job[]>;
 }
 
@@ -191,6 +192,16 @@ export function createJobs(db: Database, clock: Clock = {}): Jobs {
           .returning();
         return job ?? null;
       });
+    },
+
+    // Gives up on a deep version at once, whatever attempts remain.
+    async abandon(id, error) {
+      const [job] = await db
+        .update(jobs)
+        .set({ status: "abandoned", error, finished_at: now() })
+        .where(and(eq(jobs.id, id), eq(jobs.type, "deep"), eq(jobs.status, "running")))
+        .returning();
+      return job ?? null;
     },
 
     async requeueStale(olderThanMs = STALE_AFTER_MS) {

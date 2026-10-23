@@ -517,6 +517,49 @@ describe.skipIf(!database)(
       });
     });
 
+    describe("abandon", () => {
+      it("gives up on a running deep version at once, whatever attempts remain", async () => {
+        const { id } = await explanation();
+        const job = await queue.enqueue(id, "deep");
+        await queue.reserve("deep");
+        await queue.setProgress(job.id, 40);
+        advance(MINUTE);
+
+        const given = unwrap(await queue.abandon(job.id, "attempts_exhausted (render)"));
+        expect(given).toMatchObject({
+          status: "abandoned",
+          attempts: 1,
+          error: "attempts_exhausted (render)",
+          result_url: null,
+          finished_at: new Date(time),
+        });
+        expect(await queue.reserve("deep")).toBeNull();
+        expect(await queue.findActive(id, "deep")).toBeNull();
+        expect((await queue.latest(id, "deep"))?.id).toBe(job.id);
+      });
+
+      it("leaves a deep version that is not running alone", async () => {
+        const { id } = await explanation();
+        const job = await queue.enqueue(id, "deep");
+        expect(await queue.abandon(job.id, "late")).toBeNull();
+        expect(await queue.abandon("00000000-0000-4000-8000-000000000000", "late")).toBeNull();
+        expect(await reload(job)).toMatchObject({ status: "queued", error: null });
+
+        await queue.reserve("deep");
+        await queue.succeed(job.id, `/media/${id}/deep.mp4`);
+        expect(await queue.abandon(job.id, "late")).toBeNull();
+        expect(await reload(job)).toMatchObject({ status: "succeeded", error: null });
+      });
+
+      it("never abandons an export", async () => {
+        const { id } = await explanation();
+        const job = await queue.enqueue(id, "export");
+        await queue.reserve("export");
+        expect(await queue.abandon(job.id, "not for exports")).toBeNull();
+        expect(await reload(job)).toMatchObject({ status: "running", error: null });
+      });
+    });
+
     describe("requeueStale", () => {
       it("sends back a job that has been running for more than ten minutes", async () => {
         const { id } = await explanation();

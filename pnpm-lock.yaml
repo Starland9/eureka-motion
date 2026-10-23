@@ -205,6 +205,9 @@ importers:
       scene:
         specifier: workspace:*
         version: link:../../packages/scene
+      zod:
+        specifier: ^4.6.6
+        version: 4.6.6
     devDependencies:
       '@types/node':
         specifier: ^22
