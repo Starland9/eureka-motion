@@ -1,1 +1,37 @@
-{}
+{
+  "Reformulate": {
+    "title": "Je n’ai toujours pas compris",
+    "choices": {
+      "another_analogy": "Une autre image",
+      "simpler": "Plus simple",
+      "zoom": "Zoomer sur cette étape"
+    },
+    "sceneEntry": "{number} — {title}",
+    "sceneLegend": "Étape à zoomer",
+    "scenePlaceholder": "Choisir une étape",
+    "zoomNeedsScene": "Le zoom porte sur une étape : choisis-en une pour l’activer.",
+    "busy": "Une explication est déjà en préparation. Tu pourras en demander une autre dès qu’elle sera prête.",
+    "followUp": {
+      "lead": "Et si",
+      "tail": "?",
+      "placeholder": "la distance double",
+      "hint": "Pose ta question avec tes mots. La réponse tient en une à trois scènes et reprend cette explication.",
+      "remaining": "{count, plural, one {Il reste # caractère} other {Il reste # caractères}}",
+      "submit": "Demander →",
+      "busy": "Une explication est déjà en préparation. Ta question pourra partir dès qu’elle sera prête."
+    },
+    "versions": {
+      "label": "Versions de cette session",
+      "entry": "<v>V{number}</v> — {kind}",
+      "entryInitial": "<v>V{number}</v>",
+      "kinds": {
+        "another_analogy": "autre image",
+        "simpler": "plus simple",
+        "zoom": "zoom",
+        "followup": "suivi"
+      },
+      "zoomOf": "zoom : {scene}",
+      "current": "[Affichée]"
+    }
+  }
+}

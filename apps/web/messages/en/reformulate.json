@@ -1,1 +1,37 @@
-{}
+{
+  "Reformulate": {
+    "title": "I still don’t understand",
+    "choices": {
+      "another_analogy": "Another image",
+      "simpler": "Simpler",
+      "zoom": "Zoom in on this step"
+    },
+    "sceneEntry": "{number} — {title}",
+    "sceneLegend": "Step to zoom in on",
+    "scenePlaceholder": "Choose a step",
+    "zoomNeedsScene": "Zooming works on one step: choose one to turn it on.",
+    "busy": "An explanation is already being prepared. You can ask for another one as soon as it is ready.",
+    "followUp": {
+      "lead": "What if",
+      "tail": "?",
+      "placeholder": "the distance doubles",
+      "hint": "Ask it in your own words. The answer is one to three scenes that build on this explanation.",
+      "remaining": "{count, plural, one {# character left} other {# characters left}}",
+      "submit": "Ask →",
+      "busy": "An explanation is already being prepared. Your question can go out as soon as it is ready."
+    },
+    "versions": {
+      "label": "Versions from this session",
+      "entry": "<v>V{number}</v> — {kind}",
+      "entryInitial": "<v>V{number}</v>",
+      "kinds": {
+        "another_analogy": "another image",
+        "simpler": "simpler",
+        "zoom": "zoom",
+        "followup": "follow-up"
+      },
+      "zoomOf": "zoom: {scene}",
+      "current": "[Shown]"
+    }
+  }
+}
