@@ -59,7 +59,7 @@ services:
       timeout: 5s
       retries: 4
       # The first start downloads about 220 MB of weights per language.
-      start_period: 300s
+      start_period: 900s
 
   manim:
     build:

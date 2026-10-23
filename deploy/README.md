@@ -163,14 +163,14 @@ conteneur s'il tourne encore (`docker stop`, avec le filtre de `docker restart` 
 
 ### Premier démarrage
 
-Le service télécharge ses poids (environ 220 Mo par langue, français et anglais) depuis
+Le service télécharge ses poids (environ 216 Mo par langue, français et anglais) depuis
 Hugging Face dans le volume `pocket-weights`, puis les lit depuis le volume aux démarrages
 suivants. Le serveur doit donc joindre `huggingface.co` la première fois. Aucun jeton n'est
 nécessaire : le service charge la variante du modèle sans clonage de voix, en accès libre.
 
 Pendant le téléchargement et le chargement, `GET /health` répond `503 {"status":"loading"}` et
 le service refuse de parler (`503`). `voice-pocket` passe à « healthy » une fois les deux
-modèles chargés ; le contrôle de santé attend jusqu'à 5 minutes avant de compter les échecs.
+modèles chargés ; le contrôle de santé attend jusqu'à 15 minutes avant de compter les échecs (432 Mo à télécharger la première fois : 546 s mesurés sur une liaison lente, 4 s ensuite).
 Si un modèle ne se charge pas (pas de réseau, poids absents), la réponse est
 `503 {"status":"failed","missing":"model:french"}` et les journaux disent ce qui manque :
 corriger puis redémarrer le service.
