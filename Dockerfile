@@ -18,6 +18,7 @@ COPY --from=build --chown=node:node /repo/apps/web/.next/standalone ./
 COPY --from=build --chown=node:node /repo/apps/web/.next/static ./apps/web/.next/static
 COPY --from=build --chown=node:node /repo/apps/web/public ./apps/web/public
 COPY --from=build --chown=node:node /repo/apps/web/drizzle ./apps/web/drizzle
+COPY --from=build --chown=node:node /repo/content ./content
 RUN mkdir -p /data/media && chown node:node /data/media
 USER node
 WORKDIR /app/apps/web

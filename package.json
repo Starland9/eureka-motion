@@ -16,6 +16,7 @@
     "format:check": "prettier --check .",
     "test": "pnpm -r --if-present test",
     "snapshot": "pnpm --filter web exec tsx --tsconfig scripts/tsconfig.json scripts/snapshot.tsx",
+    "reference:build": "pnpm --filter web exec tsx --tsconfig scripts/tsconfig.json ../../scripts/reference-build.ts",
     "db:generate": "pnpm --filter web exec drizzle-kit generate",
     "db:migrate": "pnpm --filter web exec drizzle-kit migrate"
   },

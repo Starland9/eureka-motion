@@ -12,6 +12,7 @@
     "../../../content/**/*.json",
     "../../../packages/scene/src/**/*",
     "../../../scripts/tokens-to-css.ts",
+    "../../../scripts/reference-build.ts",
     "../src/server/**/*",
     "./**/*"
   ]
