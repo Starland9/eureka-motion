@@ -3,6 +3,7 @@ import { stat } from "node:fs/promises";
 import path from "node:path";
 import { Readable } from "node:stream";
 import { MEDIA_CONTENT_TYPES, resolveMediaPath } from "@/server/media";
+import { resolveReferenceAudio } from "@/server/reference";
 
 interface Context {
   params: Promise<{ path: string[] }>;
@@ -36,10 +37,14 @@ function parseRange(header: string | null, size: number): ByteRange | "unsatisfi
 }
 
 export async function GET(request: Request, { params }: Context): Promise<Response> {
-  const file = resolveMediaPath((await params).path);
-  if (!file) return notFound();
-  const info = await stat(file).catch(() => null);
-  if (!info?.isFile()) return notFound();
+  const segments = (await params).path;
+  let file = resolveMediaPath(segments);
+  let info = file ? await stat(file).catch(() => null) : null;
+  if (!info?.isFile()) {
+    file = resolveReferenceAudio(segments);
+    info = file ? await stat(file).catch(() => null) : null;
+  }
+  if (!file || !info?.isFile()) return notFound();
 
   const headers: Record<string, string> = {
     "Content-Type": MEDIA_CONTENT_TYPES[path.extname(file).toLowerCase()]!,

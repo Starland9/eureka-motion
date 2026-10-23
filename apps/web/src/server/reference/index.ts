@@ -7,6 +7,7 @@ export {
   resolveReferenceAudio,
   type ReferenceDocument,
 } from "./load";
+export { loadReferenceRecord } from "./record";
 export {
   compareEntries,
   INDEX_FILE,
