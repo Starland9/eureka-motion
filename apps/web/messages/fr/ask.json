@@ -21,6 +21,19 @@
       "theme": "Thème"
     },
     "colophonLabel": "Colophon",
-    "colophon": "Chaque explication est animée et racontée à voix haute ; chaque scène est vérifiée avant d’être affichée."
+    "colophon": "Chaque explication est animée et racontée à voix haute ; chaque scène est vérifiée avant d’être affichée.",
+    "sommaire": {
+      "title": "Sommaire",
+      "intro": "Des explications préparées et relues à l’avance. Ouvre-en une pour la voir tout de suite.",
+      "levelIntro": "Niveau de référence :",
+      "subjects": {
+        "maths": "Mathématiques",
+        "physics": "Physique",
+        "chemistry": "Chimie",
+        "biology": "SVT",
+        "cs": "Informatique",
+        "economics": "Économie"
+      }
+    }
   }
 }

@@ -21,6 +21,19 @@
       "theme": "Theme"
     },
     "colophonLabel": "Colophon",
-    "colophon": "Every explanation is animated and read aloud; every scene is checked before it is shown."
+    "colophon": "Every explanation is animated and read aloud; every scene is checked before it is shown.",
+    "sommaire": {
+      "title": "Contents",
+      "intro": "Explanations prepared and reviewed in advance. Open one to watch it right away.",
+      "levelIntro": "Reference level:",
+      "subjects": {
+        "maths": "Mathematics",
+        "physics": "Physics",
+        "chemistry": "Chemistry",
+        "biology": "Biology",
+        "cs": "Computer science",
+        "economics": "Economics"
+      }
+    }
   }
 }
