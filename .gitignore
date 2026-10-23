@@ -21,6 +21,7 @@ next-env.d.ts
 # workers/manim/sandbox are source directories and must stay tracked)
 /media/
 /sandbox/
+/out/
 
 # test output
 playwright-report/

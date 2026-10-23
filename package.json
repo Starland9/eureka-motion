@@ -19,6 +19,7 @@
     "snapshot": "pnpm --filter web exec tsx --tsconfig scripts/tsconfig.json scripts/snapshot.tsx",
     "reference:build": "pnpm --filter web exec tsx --tsconfig scripts/tsconfig.json ../../scripts/reference-build.ts",
     "reference:generate": "pnpm --filter web exec tsx --tsconfig scripts/tsconfig.json ../../scripts/reference-generate.ts",
+    "voices:compare": "pnpm --filter web exec tsx --tsconfig scripts/tsconfig.json ../../scripts/voices-compare.ts",
     "golden": "pnpm --filter web exec tsx --tsconfig scripts/tsconfig.json ../../scripts/golden.ts",
     "frame-budget": "pnpm --filter web exec tsx --tsconfig scripts/tsconfig.json ../../scripts/frame-budget.ts",
     "db:generate": "pnpm --filter web exec drizzle-kit generate",

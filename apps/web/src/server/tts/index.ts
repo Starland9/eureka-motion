@@ -24,6 +24,7 @@ export interface VoiceOptions {
 }
 
 const DEFAULT_PROVIDERS = "azure,kokoro";
+const KNOWN_PROVIDERS: readonly string[] = ["azure", "kokoro", "pocket"];
 
 function providerNames(env: Env): string[] {
   const names = (env.TTS_PROVIDERS || DEFAULT_PROVIDERS)
@@ -32,7 +33,7 @@ function providerNames(env: Env): string[] {
     .filter(Boolean);
   if (names.includes("none")) return [];
   for (const name of names) {
-    if (name !== "azure" && name !== "kokoro" && name !== "pocket") {
+    if (!KNOWN_PROVIDERS.includes(name)) {
       throw new Error(`Unknown voice provider "${name}" in TTS_PROVIDERS.`);
     }
   }
@@ -66,6 +67,15 @@ function buildProvider(name: string, env: Env, options: VoiceOptions): VoiceProv
     apiKey: env.KOKORO_API_KEY || undefined,
     voices: { fr: env.KOKORO_VOICE_FR || "ff_siwis", en: env.KOKORO_VOICE_EN || "af_heart" },
   });
+}
+
+export function createVoiceProvider(
+  name: string,
+  env: Env = process.env,
+  options: VoiceOptions = {},
+): VoiceProvider | null {
+  if (!KNOWN_PROVIDERS.includes(name)) throw new Error(`Unknown voice provider "${name}".`);
+  return buildProvider(name, env, options);
 }
 
 export function isPocketConfigured(env: Env = process.env): boolean {
