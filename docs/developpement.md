@@ -17,7 +17,7 @@ L'application répond sur <http://localhost:3000>, qui redirige vers `/fr` ou `/
 - `LLM_PROVIDER=fixture` rejoue des réponses enregistrées (`apps/web/tests/fixtures/scenarios/`) : en mode simulé, seule la question « la loi de la gravité » (en français) reçoit une réponse. `TTS_PROVIDERS=none` coupe la voix : sous-titres seuls.
 - `pnpm db:migrate` lit `DATABASE_URL` dans le shell, pas dans le `.env` de la racine. `pnpm dev` n'applique pas les migrations (seul le démarrage en production le fait).
 - Sans base de données, les exemples du sommaire se jouent encore ; les questions libres échouent (cache, limite de débit).
-- Pour un vrai fournisseur : renseigner `LLM_API_KEY` dans `.env` et lancer `pnpm dev` seul (`LLM_PROVIDER` vaut `deepseek` par défaut). Pour la voix : `AZURE_SPEECH_KEY`, ou `docker compose -f deploy/docker-compose.dev.yml up -d tts` pour Kokoro en local.
+- Pour un vrai fournisseur : renseigner `LLM_API_KEY` dans `.env` et lancer `pnpm dev` seul (`LLM_PROVIDER` vaut `deepseek` par défaut). Pour la voix : `AZURE_SPEECH_KEY`, ou `docker compose -f deploy/docker-compose.dev.yml up -d tts` pour Kokoro en local, ou `docker compose --profile pocket -f deploy/docker-compose.dev.yml up -d --build pocket` avec `TTS_PROVIDERS=pocket` pour Pocket TTS (voir [deploy/README.md](../deploy/README.md)).
 
 ## Commandes utiles
 
