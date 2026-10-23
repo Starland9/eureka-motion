@@ -36,6 +36,31 @@ services:
       retries: 6
       start_period: 90s
 
+  pocket:
+    profiles:
+      - pocket
+    build:
+      context: ../workers/voice-pocket
+    restart: unless-stopped
+    init: true
+    ports:
+      - "127.0.0.1:8890:8890"
+    environment:
+      POCKET_VOICES: ${POCKET_VOICE_FR:-estelle}:fr,${POCKET_VOICE_EN:-alba}:en
+    volumes:
+      - pocket-weights:/data/hf
+    healthcheck:
+      test:
+        - "CMD"
+        - "python"
+        - "-c"
+        - "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8890/health', timeout=3)"
+      interval: 15s
+      timeout: 5s
+      retries: 4
+      # The first start downloads about 220 MB of weights per language.
+      start_period: 300s
+
   manim:
     build:
       context: ../workers/manim
@@ -75,3 +100,4 @@ services:
 
 volumes:
   db-data:
+  pocket-weights:

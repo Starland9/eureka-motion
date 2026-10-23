@@ -13,6 +13,7 @@ services:
       LLM_API_KEY: ${LLM_API_KEY:?LLM_API_KEY is required}
       RATE_LIMIT_SALT: ${RATE_LIMIT_SALT:?RATE_LIMIT_SALT is required}
       MEDIA_DIR: /data/media
+      POCKET_BASE_URL: http://voice-pocket:8890
     expose:
       - "3000"
     cap_drop:
@@ -116,8 +117,45 @@ services:
       retries: 4
       start_period: 20s
 
+  # Optional voice, off unless the `pocket` profile is on. No env_file, no token: public weights.
+  voice-pocket:
+    profiles:
+      - pocket
+    build:
+      context: ../workers/voice-pocket
+    restart: unless-stopped
+    init: true
+    expose:
+      - "8890"
+    environment:
+      POCKET_VOICES: ${POCKET_VOICE_FR:-estelle}:fr,${POCKET_VOICE_EN:-alba}:en
+    cpus: 2
+    mem_limit: 2g
+    memswap_limit: 2g
+    pids_limit: 256
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    volumes:
+      - pocket-weights:/data/hf
+    networks:
+      - dokploy-network
+    healthcheck:
+      test:
+        - "CMD"
+        - "python"
+        - "-c"
+        - "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8890/health', timeout=3)"
+      interval: 15s
+      timeout: 5s
+      retries: 4
+      # The first start downloads about 220 MB of weights per language.
+      start_period: 300s
+
 volumes:
   media:
+  pocket-weights:
   # In memory and capped, so that hostile code cannot fill the disk; emptied once neither
   # worker nor manim holds it. Plain disk variant: `sandbox: {}`.
   sandbox:

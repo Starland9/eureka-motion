@@ -6,7 +6,7 @@ les oreilles.
 ## 1. Lancer le service de voix
 
 ```bash
-docker compose --profile pocket -f deploy/docker-compose.yml up -d --build voice-pocket
+docker compose --profile pocket -f deploy/docker-compose.dev.yml up -d --build pocket
 curl -s http://127.0.0.1:8890/health
 ```
 
