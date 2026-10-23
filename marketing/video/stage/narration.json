@@ -1,0 +1,34 @@
+[
+  {
+    "id": "s1",
+    "text": "Tu n’as pas compris ta leçon ? Écris-le, et regarde-le s’animer sous tes yeux."
+  },
+  {
+    "id": "s2",
+    "text": "Voici Eureka Motion. Je tape ce que je n’ai pas compris : le théorème de Pythagore. Quelques secondes plus tard, la première scène se joue, pendant que les suivantes se préparent."
+  },
+  {
+    "id": "s3",
+    "text": "Chaque explication est une petite histoire : une analogie du quotidien, une figure qui bouge, la règle écrite, puis un exemple chiffré. Elle est racontée à voix haute et sous-titrée, en français ou en anglais, du collège au supérieur."
+  },
+  {
+    "id": "s4",
+    "text": "Et surtout, on manipule. Je change la longueur d’un côté : la figure et le résultat se recalculent en direct, parce que les chiffres sont calculés, jamais devinés."
+  },
+  {
+    "id": "s5",
+    "text": "Si ce n’est toujours pas clair, un clic suffit : une autre image, une version plus simple, ou un zoom sur une scène. Chaque version reste disponible."
+  },
+  {
+    "id": "s6",
+    "text": "Un quiz vérifie ce qu’on a retenu. Je me trompe volontairement : la correction s’affiche, et un lien me ramène à la scène à revoir. Puis, mon score."
+  },
+  {
+    "id": "s7",
+    "text": "Et même sans réseau ni intelligence artificielle, douze exemples en deux langues sont prêts. Un clic, et ça joue."
+  },
+  {
+    "id": "s8",
+    "text": "Le modèle n’écrit pas de code : il produit un document que six règles vérifient avant l’affichage. On partage par lien, on exporte en vidéo, et tout se commande au clavier. Eureka Motion : comprendre, en images."
+  }
+]
