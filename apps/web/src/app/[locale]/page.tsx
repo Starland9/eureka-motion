@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { AskSentence } from "@/components/ask/AskSentence";
 import { Preferences } from "@/components/ask/Preferences";
+import { Sommaire } from "@/components/ask/Sommaire";
 import { localeFromParams } from "@/i18n/params";
+import { listReferences } from "@/server/reference";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -12,8 +14,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return { title: t("metaTitle"), description: t("metaDescription") };
 }
 
+async function referencesOf(locale: Awaited<ReturnType<typeof localeFromParams>>) {
+  try {
+    return await listReferences(locale);
+  } catch (error) {
+    console.error("Reference explanations are unreadable.", error);
+    return [];
+  }
+}
+
 export default async function HomePage({ params }: Props) {
   const locale = await localeFromParams(params);
+  const references = await referencesOf(locale);
   const common = await getTranslations({ locale, namespace: "Common" });
   const t = await getTranslations({ locale, namespace: "Ask" });
 
@@ -32,6 +44,9 @@ export default async function HomePage({ params }: Props) {
             <AskSentence />
             <div className="mt-12 border-t border-rule pt-6">
               <Preferences />
+            </div>
+            <div className="mt-12 border-t border-rule pt-8">
+              <Sommaire entries={references} />
             </div>
           </div>
         </div>

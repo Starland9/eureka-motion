@@ -272,8 +272,8 @@ async function submissions(browser: Browser): Promise<void> {
       locale: "fr",
       reply: {
         kind: "reject",
-        status: 503,
-        code: "generation_unavailable",
+        status: 500,
+        code: "internal_error",
         message: "Le service est indisponible pour le moment.",
       },
       expect: /Le service est indisponible pour le moment\./,
