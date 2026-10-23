@@ -62,6 +62,7 @@ export interface ExplanationStore {
   create(record: ExplanationRecord): Promise<void>;
   update(id: string, patch: Partial<Omit<ExplanationRecord, "id">>): Promise<void>;
   get(id: string): Promise<ExplanationRecord | null>;
+  listByRoot(rootId: string): Promise<ExplanationRecord[]>;
   isExpired(id: string): Promise<boolean>;
   remove(id: string): Promise<void>;
 }

@@ -18,6 +18,7 @@ import type {
   LlmTrace,
   PipelineDeps,
 } from "../apps/web/src/server/pipeline/ports";
+import { createQuizWriter } from "../apps/web/src/server/pipeline/quiz";
 import { Pipeline } from "../apps/web/src/server/pipeline/run";
 import { checkReferences, referenceFileName, referenceId } from "../apps/web/src/server/reference";
 import {
@@ -181,6 +182,8 @@ function memoryStore(): ExplanationStore {
     get: async (id) => records.get(id) ?? null,
     isExpired: async () => false,
     remove: async (id) => void records.delete(id),
+    listByRoot: async (rootId) =>
+      [...records.values()].filter((record) => record.root_id === rootId),
   };
 }
 
@@ -206,6 +209,7 @@ async function play(job: Job, llm: LlmProvider, say: (message: string) => void):
     now: () => new Date(),
     shareUrl: (id, language) => `/${language}/e/${id}`,
     trace: (entry) => traces.push(entry),
+    writeQuiz: createQuizWriter(llm, (entry) => traces.push(entry)),
   };
   const { concept, language } = job;
   const { id, log } = await new Pipeline(deps).start({

@@ -1,4 +1,4 @@
-import { and, eq, gt, isNull, lte, or } from "drizzle-orm";
+import { and, asc, eq, gt, isNull, lte, or } from "drizzle-orm";
 import type { ExplanationStore } from "../pipeline/ports";
 import type { Database } from "./client";
 import { explanations } from "./schema";
@@ -30,6 +30,14 @@ export function createExplanationStore(db: Database, clock: Clock = {}): Explana
         .where(and(eq(explanations.id, id), notExpired(now())))
         .limit(1);
       return row ?? null;
+    },
+
+    async listByRoot(rootId) {
+      return db
+        .select()
+        .from(explanations)
+        .where(and(eq(explanations.root_id, rootId), notExpired(now())))
+        .orderBy(asc(explanations.created_at), asc(explanations.id));
     },
 
     async isExpired(id) {

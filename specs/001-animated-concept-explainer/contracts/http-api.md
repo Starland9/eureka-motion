@@ -13,20 +13,25 @@ demandée et destiné à être affiché.
 
 | Champ | Type | Règles |
 |---|---|---|
-| `question` | texte | 1 à 500 caractères après nettoyage ; obligatoire sauf si `mode` est une reformulation |
+| `question` | texte | 1 à 500 caractères après nettoyage ; obligatoire pour `initial` et `followup`, refusée pour les autres modes |
 | `language` | `fr` \| `en` | Obligatoire |
 | `level` | `college` \| `lycee` \| `superieur` | Obligatoire |
 | `mode` | `initial` \| `another_analogy` \| `simpler` \| `zoom` \| `followup` | Défaut `initial` |
-| `parent_id` | identifiant d'explication | Obligatoire si `mode` ≠ `initial` |
-| `scene_id` | identifiant de scène | Obligatoire si `mode` = `zoom` |
-| `interpretation` | texte | Réponse à un événement `clarify` |
+| `parent_id` | identifiant d'explication | Obligatoire si `mode` ≠ `initial` ; 12 caractères de l'alphabet des identifiants |
+| `scene_id` | identifiant de scène | Obligatoire si `mode` = `zoom`, refusé pour les autres modes |
+| `interpretation` | texte | Réponse à un événement `clarify` ; `initial` seulement |
+
+Hors `initial`, un champ qui n'appartient pas au mode est une erreur `invalid_request` ; pour
+`initial`, les champs en trop sont ignorés. Une explication dérivée reprend la langue de son
+parent ; son niveau est celui demandé, borné par celui du parent (un niveau plus bas pour
+`simpler`).
 
 **Réponses immédiates (sans flux)**
 
 | Statut | Code d'erreur | Cas |
 |---|---|---|
 | 400 | `invalid_request` | Corps non conforme |
-| 404 | `parent_not_found` | `parent_id` ou `scene_id` inconnu |
+| 404 | `parent_not_found` | `parent_id` ou `scene_id` inconnu, parent expiré ou pas encore jouable |
 | 429 | `rate_limited` | Limite par visiteur atteinte ; en-tête `Retry-After` (FR-040) |
 | 503 | `generation_unavailable` | Service de génération indisponible ; le corps liste les explications de référence (FR-018) |
 
@@ -56,6 +61,10 @@ Chaque événement porte un numéro d'ordre croissant dans le champ `id` du flux
 
 - Les événements `scene` arrivent dans l'ordre des index ; une scène n'est jamais émise avant
   que son verdict soit `validated` ou `corrected`.
+- Les modes autres qu'`initial` ne passent jamais par le cache : ils sont comptés par la
+  limite par visiteur comme une question, avant le contrôle du parent, et le flux émet
+  `accepted` avec `cached: false`. Quand le service de génération est indisponible, ils
+  reçoivent le même 503 qu'une question.
 - Si l'explication vient du cache, le flux émet `accepted` avec `cached: true`, puis `meta`,
   `plan`, toutes les scènes, `quiz` et `done` sans attente.
 - La préparation continue côté serveur si le client se déconnecte.
@@ -79,8 +88,17 @@ coupure de connexion). Pour une explication terminée, renvoie les événements 
 
 `GET /api/explanations/{id}/versions`
 
-Liste compacte des explications de même `root_id` : `[{ id, kind, title, created_at }]`
-(FR-026).
+Liste compacte des explications de même `root_id` que `{id}` (la racine ou l'une des
+versions : la réponse est la session entière), de la plus ancienne à la plus récente :
+`[{ id, kind, title, created_at, scene_title }]` (FR-026). `scene_title` est le titre de la
+scène zoomée, lu dans le parent dont la version est issue, pour `kind` = `zoom` ; `null`
+pour les autres, et quand le parent n'est plus conservé. La liste des versions affiche
+« V4 — zoom : <scène> » sans avoir à charger chaque explication. Une explication de
+référence ouvre la liste de sa session, elle-même en tête. Les versions expirées, échouées,
+refusées ou en attente de précision n'y figurent pas ; la question du visiteur n'est jamais
+renvoyée.
+
+- 404 `not_found` si l'identifiant est inconnu ; 410 `expired` si le lien a expiré.
 
 ## 3. Exporter en vidéo
 

@@ -7,6 +7,7 @@ import { errorResponse, internalError, requestLanguage } from "@/server/http/err
 import { clientAddress, parseCreateRequest, readJson } from "@/server/http/request";
 import { replaySource, sseResponse } from "@/server/http/sse";
 import { isPlayable, replayEvents } from "@/server/pipeline/replay";
+import { ParentNotFoundError, type Started } from "@/server/pipeline/run";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -39,15 +40,17 @@ export async function POST(request: Request): Promise<Response> {
   try {
     const parsed = parseCreateRequest(body);
     if (!parsed.ok) return errorResponse(parsed.code, language);
-    const { question, level, interpretation } = parsed.value;
+    const create = parsed.value;
 
     // The references need no database: a failed lookup must not hide an unavailable generation.
     let lookupFailure: { error: unknown } | null = null;
-    try {
-      const cached = await within(fromCache(request, question, language, level));
-      if (cached) return cached;
-    } catch (error) {
-      lookupFailure = { error };
+    if (create.mode === "initial") {
+      try {
+        const cached = await within(fromCache(request, create.question, language, create.level));
+        if (cached) return cached;
+      } catch (error) {
+        lookupFailure = { error };
+      }
     }
 
     if (!(await isGenerationAvailable())) return generationUnavailableResponse(language);
@@ -62,7 +65,13 @@ export async function POST(request: Request): Promise<Response> {
       });
     }
 
-    const started = await container.pipeline.start({ question, language, level, interpretation });
+    let started: Started;
+    try {
+      started = await container.pipeline.start(create);
+    } catch (error) {
+      if (error instanceof ParentNotFoundError) return errorResponse("parent_not_found", language);
+      throw error;
+    }
     const { log } = started;
     if (log) return sseResponse((signal) => log.stream(0, signal), request.signal);
     return (

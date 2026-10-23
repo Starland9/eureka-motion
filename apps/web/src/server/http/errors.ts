@@ -4,6 +4,7 @@ import { pipelineMessage } from "../pipeline/messages";
 export type ErrorCode =
   | "invalid_request"
   | "mode_not_supported"
+  | "parent_not_found"
   | "not_found"
   | "expired"
   | "rate_limited"
@@ -13,6 +14,7 @@ export type ErrorCode =
 const STATUS: Readonly<Record<ErrorCode, number>> = {
   invalid_request: 400,
   mode_not_supported: 400,
+  parent_not_found: 404,
   not_found: 404,
   expired: 410,
   rate_limited: 429,
@@ -25,6 +27,8 @@ const MESSAGES: Readonly<Record<Language, Readonly<Record<ErrorCode, string>>>> 
     invalid_request:
       "Ta demande est incomplète. Vérifie ta question, la langue et le niveau, puis réessaie.",
     mode_not_supported: "Ce type de demande n'est pas encore disponible.",
+    parent_not_found:
+      "L'explication de départ ou la scène demandée est introuvable. Elle a peut-être expiré.",
     not_found: "Cette explication est introuvable.",
     expired: "Ce lien a expiré : l'explication n'est plus conservée.",
     rate_limited: "Tu as posé beaucoup de questions en peu de temps. Réessaie un peu plus tard.",
@@ -35,6 +39,8 @@ const MESSAGES: Readonly<Record<Language, Readonly<Record<ErrorCode, string>>>> 
     invalid_request:
       "Your request is incomplete. Check your question, the language and the level, then try again.",
     mode_not_supported: "This kind of request is not available yet.",
+    parent_not_found:
+      "The explanation to start from, or the scene asked for, could not be found. It may have expired.",
     not_found: "This explanation could not be found.",
     expired: "This link has expired: the explanation is no longer kept.",
     rate_limited: "You have asked a lot of questions in a short time. Try again a little later.",

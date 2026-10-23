@@ -303,22 +303,6 @@ describe("POST /api/explanations: request validation", () => {
     expect(llm.health).not.toHaveBeenCalled();
   });
 
-  it.each(["another_analogy", "simpler", "zoom", "followup"])(
-    "answers 400 mode_not_supported for the mode %s, before any work",
-    async (mode) => {
-      const h = boot();
-      const response = await POST(post({ ...valid, mode }));
-      expect(response.status).toBe(400);
-      const { error } = await readError(response);
-      expect(error).toEqual({
-        code: "mode_not_supported",
-        message: errorMessage("fr", "mode_not_supported"),
-      });
-      expect(h.limiter.checks).toEqual([]);
-      expect(h.store.operations).toEqual([]);
-    },
-  );
-
   it.each<[string, Record<string, string>, unknown, "fr" | "en"]>([
     ["the language of the body", {}, { ...valid, language: "en", level: "x" }, "en"],
     [
@@ -359,12 +343,6 @@ describe("POST /api/explanations: request validation", () => {
     const { error } = await readError(response);
     expect(error.message).toBe(errorMessage(language, "invalid_request"));
     expect(errorMessage("fr", "invalid_request")).not.toBe(errorMessage("en", "invalid_request"));
-  });
-
-  it("writes the unsupported mode message in the language of the body", async () => {
-    boot();
-    const { error } = await readError(await POST(post({ ...BODY, language: "en", mode: "zoom" })));
-    expect(error.message).toBe(errorMessage("en", "mode_not_supported"));
   });
 
   it("accepts the initial mode written out, and any extra field", async () => {

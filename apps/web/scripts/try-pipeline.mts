@@ -22,6 +22,7 @@ const store: ExplanationStore = {
   get: async (id) => records.get(id) ?? null,
   isExpired: async () => false,
   remove: async (id) => void records.delete(id),
+  listByRoot: async (rootId) => [...records.values()].filter((record) => record.root_id === rootId),
 };
 
 const deps: PipelineDeps = {

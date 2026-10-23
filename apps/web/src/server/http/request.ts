@@ -1,14 +1,18 @@
-import { LANGUAGES, LEVELS, type Language, type Level } from "scene";
+import { LANGUAGES, LEVELS } from "scene";
 import { z } from "zod";
-import type { ErrorCode } from "./errors";
+import { EXPLANATION_ID_PATTERN } from "../container";
+import type { ModeInput, StartInput } from "../pipeline/run";
 
-const MODES = ["initial", "another_analogy", "simpler", "zoom", "followup"] as const;
+const language = z.enum(LANGUAGES);
+const level = z.enum(LEVELS);
+const question = z.string().trim().min(1).max(500);
+const parent = { language, level, parent_id: z.string().regex(EXPLANATION_ID_PATTERN) };
 
-const CreateSchema = z.object({
-  question: z.string().trim().min(1).max(500),
-  language: z.enum(LANGUAGES),
-  level: z.enum(LEVELS),
-  mode: z.enum(MODES).default("initial"),
+const InitialSchema = z.object({
+  mode: z.literal("initial"),
+  question,
+  language,
+  level,
   interpretation: z
     .string()
     .trim()
@@ -17,23 +21,29 @@ const CreateSchema = z.object({
     .optional(),
 });
 
-export interface CreateRequest {
-  question: string;
-  language: Language;
-  level: Level;
-  interpretation?: string | undefined;
-}
+const CreateSchema = z.discriminatedUnion("mode", [
+  InitialSchema,
+  z.strictObject({ mode: z.enum(["another_analogy", "simpler"]), ...parent }),
+  z.strictObject({
+    mode: z.literal("zoom"),
+    ...parent,
+    scene_id: z.string().regex(/^[A-Za-z][A-Za-z0-9_]{0,39}$/),
+  }),
+  z.strictObject({ mode: z.literal("followup"), ...parent, question }),
+]);
+
+export type CreateRequest = (StartInput & { mode: "initial" }) | ModeInput;
 
 export type ParsedCreate =
-  | { ok: true; value: CreateRequest }
-  | { ok: false; code: Extract<ErrorCode, "invalid_request" | "mode_not_supported"> };
+  { ok: true; value: CreateRequest } | { ok: false; code: "invalid_request" };
 
 export function parseCreateRequest(body: unknown): ParsedCreate {
-  const parsed = CreateSchema.safeParse(body);
-  if (!parsed.success) return { ok: false, code: "invalid_request" };
-  const { mode, ...value } = parsed.data;
-  if (mode !== "initial") return { ok: false, code: "mode_not_supported" };
-  return { ok: true, value };
+  const withMode =
+    typeof body === "object" && body !== null && !Array.isArray(body) && !("mode" in body)
+      ? { ...body, mode: "initial" }
+      : body;
+  const parsed = CreateSchema.safeParse(withMode);
+  return parsed.success ? { ok: true, value: parsed.data } : { ok: false, code: "invalid_request" };
 }
 
 export function readJson(request: Request): Promise<unknown> {

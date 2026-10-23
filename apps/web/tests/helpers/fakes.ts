@@ -42,6 +42,18 @@ export class MemoryStore implements ExplanationStore {
     return record ? structuredClone(record) : null;
   }
 
+  async listByRoot(rootId: string): Promise<ExplanationRecord[]> {
+    const now = Date.now();
+    return [...this.records.values()]
+      .filter(
+        (record) =>
+          record.root_id === rootId &&
+          (record.expires_at === null || record.expires_at.getTime() > now),
+      )
+      .sort((a, b) => a.created_at.getTime() - b.created_at.getTime() || a.id.localeCompare(b.id))
+      .map((record) => structuredClone(record));
+  }
+
   async isExpired(id: string): Promise<boolean> {
     const expiresAt = this.records.get(id)?.expires_at;
     return expiresAt != null && expiresAt.getTime() <= Date.now();
