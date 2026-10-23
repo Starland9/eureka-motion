@@ -406,7 +406,7 @@ question de suivi libre.
 
 **Independent Test**: quickstart.md, scénario 6.
 
-- [ ] T078 [P] [US6] [S] Écrire le partage : action « Copier le lien » avec confirmation de 4 s en région d'état dans `apps/web/src/components/player/Share.tsx`, variante de la page de lecture pour un visiteur arrivant par lien (sans zone de saisie, « Poser ma propre question → »), pages 404 et 410, `expires_at` fixé à 90 jours.
+- [X] T078 [P] [US6] [S] Écrire le partage : action « Copier le lien » avec confirmation de 4 s en région d'état dans `apps/web/src/components/player/Share.tsx`, variante de la page de lecture pour un visiteur arrivant par lien (sans zone de saisie, « Poser ma propre question → »), pages 404 et 410, `expires_at` fixé à 90 jours.
   - Lire : design-system/eureka-motion/MASTER.md § 5.8 ; contracts/http-api.md § 2 et § 8 ; spec.md FR-030, FR-032.
   - Réussite : le lien ouvert en navigation privée rejoue l'explication avec ses curseurs ; un identifiant inconnu affiche la page prévue.
 - [ ] T079 [P] [US6] [S] Écrire l'accès aux travaux `apps/web/src/server/db/jobs.ts` (création unique par couple explication et type, réservation atomique sans attente des lignes verrouillées, progression, remise en file d'un travail `running` depuis plus de 10 minutes), la limite de débit des exports (`RATE_LIMIT_EXPORT_PER_HOUR`, défaut 5, réponse 429 `rate_limited`) et les routes `apps/web/src/app/api/explanations/[id]/export/route.ts` et `apps/web/src/app/api/jobs/[id]/route.ts` ; tests `apps/web/tests/integration/jobs.test.ts`.
@@ -472,16 +472,16 @@ sans jamais gêner l'explication immédiate.
 - [ ] T092 [P] [S] Écrire `apps/web/tests/e2e/a11y.spec.ts` (contrôle automatique sur l'accueil, la lecture et le quiz, dans les deux thèmes ; parcours au clavier seul ; 360 px ; zoom 200 %) avec le script `test:a11y`, et corriger les défauts relevés.
   - Lire : design-system/eureka-motion/MASTER.md § 6 ; spec.md FR-035, FR-037, SC-010, SC-011.
   - Réussite : `pnpm --filter web test:a11y` ne signale aucun défaut.
-- [ ] T093 [P] [S] Vérifier la complétude des langues : aucune chaîne en dur dans `apps/web/src/` (règle de lint), messages d'erreur de l'API dans la langue demandée, nombres et séparateurs décimaux selon la langue dans l'interface et dans les scènes.
+- [X] T093 [P] [S] Vérifier la complétude des langues : aucune chaîne en dur dans `apps/web/src/` (règle de lint), messages d'erreur de l'API dans la langue demandée, nombres et séparateurs décimaux selon la langue dans l'interface et dans les scènes.
   - Lire : spec.md FR-038 ; contracts/scene-schema.md § 2 (Interpolation).
   - Réussite : `pnpm lint` passe ; l'exemple gravitation affiche « 1,98 » en français et « 1.98 » en anglais.
-- [ ] T094 [P] [S] Écrire `scripts/design-lint.ts` : échoue sur une valeur de couleur brute, un `rounded-*`, un `shadow-*`, un dégradé, un flou d'arrière-plan ou un caractère emoji dans `apps/web/src/` et `packages/scene/src/` ; l'ajouter à `pnpm lint`.
+- [X] T094 [P] [S] Écrire `scripts/design-lint.ts` : échoue sur une valeur de couleur brute, un `rounded-*`, un `shadow-*`, un dégradé, un flou d'arrière-plan ou un caractère emoji dans `apps/web/src/` et `packages/scene/src/` ; l'ajouter à `pnpm lint`.
   - Lire : design-system/eureka-motion/MASTER.md § 7.
   - Réussite : `pnpm lint` passe sur le dépôt et échoue sur un fichier d'essai contenant `rounded-lg`.
 - [ ] T095 [P] [S] Écrire le nettoyage périodique `workers/render/src/cleanup.ts` : suppression des exports de plus de 7 jours et des explications expirées avec leurs fichiers ; test `workers/render/tests/cleanup.test.ts`.
   - Lire : data-model.md (Fichiers média ; Explication : `expires_at`).
   - Réussite : le test vérifie qu'une explication de référence n'est jamais supprimée.
-- [ ] T096 [P] [S] Écrire `README.md` (présentation, lancement, architecture en un schéma, variables) et `docs/demo-script.md` (déroulé de démonstration de 3 minutes : question libre, curseurs, « autre image », quiz, colophon, mode sans réseau).
+- [X] T096 [P] [S] Écrire `README.md` (présentation, lancement, architecture en un schéma, variables) et `docs/demo-script.md` (déroulé de démonstration de 3 minutes : question libre, curseurs, « autre image », quiz, colophon, mode sans réseau).
   - Lire : quickstart.md ; plan.md § Summary.
   - Réussite : en suivant le README sur une machine vierge, l'application démarre en mode simulé.
 - [ ] T097 [O] Exécuter `pnpm golden` sur l'adresse déployée, ajuster les consignes et la configuration des rôles jusqu'à tenir les seuils, et consigner les mesures finales dans research.md.
