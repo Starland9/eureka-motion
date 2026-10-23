@@ -83,10 +83,8 @@ const CURSOR = `
 })();
 `;
 
-let mouse = { x: 768, y: 430 };
 async function glide(page: Page, x: number, y: number, steps = 28): Promise<void> {
   await page.mouse.move(x, y, { steps });
-  mouse = { x, y };
   await pause(120);
 }
 async function center(locator: Locator): Promise<{ x: number; y: number }> {
@@ -118,7 +116,6 @@ async function setRange(page: Page, range: Locator, fraction: number): Promise<v
   await page.mouse.down();
   await pause(120);
   await page.mouse.move(xAt(fraction), y, { steps: 36 });
-  mouse = { x: xAt(fraction), y };
   await pause(120);
   await page.mouse.up();
   await pause(300);
@@ -199,7 +196,10 @@ async function main(): Promise<void> {
     mark("first_scene");
 
     // 3. L'explication joue : on laisse tourner.
-    const quizEntry = page.getByRole("button", { name: "Vérifier ce que j’ai compris", exact: true });
+    const quizEntry = page.getByRole("button", {
+      name: "Vérifier ce que j’ai compris",
+      exact: true,
+    });
     await quizEntry.waitFor({ timeout: 180_000 });
     mark("generation_done");
     const id = page.url().split("/").pop()!;
@@ -267,7 +267,11 @@ async function main(): Promise<void> {
     mark("reformulate_done");
     await page.mouse.move(1100, 240);
     await pause(5000);
-    await page.locator("text=/^V2/").first().scrollIntoViewIfNeeded().catch(() => undefined);
+    await page
+      .locator("text=/^V2/")
+      .first()
+      .scrollIntoViewIfNeeded()
+      .catch(() => undefined);
     await pause(1200);
     mark("versions_shown");
     await page.evaluate(() => window.scrollTo({ top: 0, behavior: "smooth" }));
@@ -284,8 +288,7 @@ async function main(): Promise<void> {
     mark("quiz_open");
     await pause(1600);
     const quiz = page.getByRole("region", { name: /Quiz/ });
-    const answerButtons = (): Locator =>
-      quiz.getByRole("list").first().getByRole("button");
+    const answerButtons = (): Locator => quiz.getByRole("list").first().getByRole("button");
     const wrongIndex = questions[0]!.choices.findIndex((c) => c.id !== questions[0]!.answer_id);
     await clickOn(page, answerButtons().nth(wrongIndex));
     mark("quiz_wrong");
@@ -328,7 +331,9 @@ async function main(): Promise<void> {
     const example = page.getByRole("link", { name: /Loi d.Ohm/ }).first();
     await clickOn(page, example);
     mark("example_click");
-    await page.getByRole("slider", { name: "Position dans l’explication" }).waitFor({ timeout: 10_000 });
+    await page
+      .getByRole("slider", { name: "Position dans l’explication" })
+      .waitFor({ timeout: 10_000 });
     mark("example_ready");
     await pause(4500);
 
@@ -428,7 +433,9 @@ async function tail(): Promise<void> {
     await pause(1800);
     await clickOn(page, page.getByRole("link", { name: /Loi d.Ohm/ }).first());
     mark("example_click");
-    await page.getByRole("slider", { name: "Position dans l’explication" }).waitFor({ timeout: 10_000 });
+    await page
+      .getByRole("slider", { name: "Position dans l’explication" })
+      .waitFor({ timeout: 10_000 });
     mark("example_ready");
     await pause(900);
     await clickOn(page, page.getByRole("button", { name: /Lire l’explication/ }));
@@ -444,7 +451,17 @@ async function tail(): Promise<void> {
     await clickOn(page, page.getByRole("button", { name: "Copier le lien" }));
     mark("share_copied");
     await pause(1800);
-    await glide(page, ...(Object.values(await center(page.getByRole("link", { name: /Télécharger la vidéo/ }).or(page.getByRole("button", { name: /Télécharger la vidéo/ })).first())) as [number, number]));
+    await glide(
+      page,
+      ...(Object.values(
+        await center(
+          page
+            .getByRole("link", { name: /Télécharger la vidéo/ })
+            .or(page.getByRole("button", { name: /Télécharger la vidéo/ }))
+            .first(),
+        ),
+      ) as [number, number]),
+    );
     await pause(2200);
     mark("end");
   } catch (error) {
