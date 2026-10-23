@@ -1,0 +1,1346 @@
+{
+  "slug": "maths/derivative",
+  "subject": "maths",
+  "reference_level": "lycee",
+  "language": "en",
+  "title": "Derivative",
+  "question": "What is a derivative?",
+  "reviewed_by": null,
+  "reviewed_at": null,
+  "verdicts": [
+    {
+      "target": "plan",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "The limit definition of the derivative, the tangent-line interpretation, the secant-to-tangent mechanism, and the x² example (slopes 4 at x=2, 6 at x=3) are all correct, the speedometer analogy is apt, and the prerequisites suit the level.",
+      "checks": [
+        "structure",
+        "model",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s1",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "The scene shows a car moving along with its distance-time curve and asks how fast it goes at t = 3 s, matching the hook's intent without stating anything false.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s2",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "The scene correctly shows the secant line's slope as the average rate of change and shrinks h so the secant rotates toward the tangent, matching the analogy's intent.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s3",
+      "status": "corrected",
+      "attempts": 2,
+      "reason": "The scene correctly shows that as h shrinks to 0.01 the secant through P and Q approaches the tangent, with the secant slope readout and the tangent slope f'(x₀)=2x₀ displayed under their proper names in English.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s4",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "The scene correctly presents the limit definition of the derivative, shows the secant line through the two points with its average rate of change, and shrinks h toward zero so the secant approaches the tangent whose slope is f'(x₀), matchin",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s5",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "The scene correctly shows the tangent to y=x² at x=2 with slope 4 and reports f'(3)=6, illustrating that the derivative of x² is 2x; the tangent line expression is computed consistently and no narration states anything false.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s6",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "The recap correctly states that the derivative is the instantaneous rate of change and the slope of the tangent line, and that the slope of y = x² at x = 2 is 4, all consistent with the outline and the speedometer analogy.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    }
+  ],
+  "payload": {
+    "version": 1,
+    "plan": {
+      "objective": "You will be able to explain that a derivative measures an instantaneous rate of change and compute it as the slope of the tangent line.",
+      "prerequisites": [
+        "Slope of a line: rise over run",
+        "Reading a graph of a function",
+        "Idea of an average rate of change"
+      ],
+      "analogy": {
+        "name": "Speedometer in a car",
+        "mapping": "The car’s position over time is the function; the average speed over a trip is the average rate of change; the speedometer at one instant is the derivative."
+      },
+      "key_rule": {
+        "statement": "The derivative of a function at a point is the slope of the tangent line to its graph at that point, i.e. the instantaneous rate of change.",
+        "formula": "\\a{f'(x)} = \\lim_{\\q{h} \\to 0} \\dfrac{f(x+\\q{h}) - f(x)}{\\q{h}}"
+      },
+      "steps": [
+        {
+          "role": "hook",
+          "intent": "Show a car’s distance curve and ask how fast it goes at one instant.",
+          "visual": "A car moves along a road; its distance-time curve is drawn simultaneously; a question mark appears at a specific time."
+        },
+        {
+          "role": "analogy",
+          "intent": "Connect average speed between two instants to the slope of a secant line.",
+          "visual": "Two points on a curve; a secant line is drawn between them; as the second point slides closer, the secant line rotates."
+        },
+        {
+          "role": "mechanism",
+          "intent": "Show that letting the interval shrink to zero gives the tangent line and its slope.",
+          "visual": "The second point slides toward the first; the secant line approaches a fixed line, the tangent; slopes are displayed live."
+        },
+        {
+          "role": "formula",
+          "intent": "Write the limit definition and relate each symbol to the shrinking interval.",
+          "visual": "The formula appears with colored symbols; h is highlighted and its value is animated from a large number to 0.001."
+        },
+        {
+          "role": "example",
+          "intent": "Compute the derivative of f(x)=x^2 at a point using the limit definition, showing a surprising number.",
+          "visual": "The parabola y=x^2 is drawn; a tangent line is drawn at x=2; the slope value 4 is displayed, then x=3 gives 6, showing the doubling."
+        },
+        {
+          "role": "recap",
+          "intent": "Summarize that derivative = instantaneous rate of change = slope of tangent, and answer the hook question.",
+          "visual": "Three key phrases appear; the car’s speedometer shows the instantaneous speed from the distance curve."
+        }
+      ]
+    },
+    "params": [
+      {
+        "id": "x0",
+        "symbol": "x₀",
+        "label": "x-coordinate of the point",
+        "unit": "",
+        "min": -2,
+        "max": 3,
+        "step": 0.1,
+        "default": 1,
+        "role": "quantity"
+      },
+      {
+        "id": "h",
+        "symbol": "h",
+        "label": "Step size",
+        "unit": "",
+        "min": 0.01,
+        "max": 2,
+        "step": 0.01,
+        "default": 1,
+        "role": "quantity"
+      }
+    ],
+    "model": {
+      "constants": [],
+      "derived": [
+        {
+          "id": "f_x0",
+          "expr": "x0^2",
+          "unit": "",
+          "label": "f(x₀)",
+          "symbol": "f(x₀)",
+          "format": "fixed:2"
+        },
+        {
+          "id": "f_x0h",
+          "expr": "(x0 + h)^2",
+          "unit": "",
+          "label": "f(x₀+h)",
+          "symbol": "f(x₀+h)",
+          "format": "fixed:2"
+        },
+        {
+          "id": "avg_rate",
+          "expr": "((x0 + h)^2 - x0^2) / h",
+          "unit": "",
+          "label": "Average rate of change",
+          "symbol": "Δf/Δx",
+          "format": "fixed:3"
+        },
+        {
+          "id": "derivative",
+          "expr": "2 * x0",
+          "unit": "",
+          "label": "Derivative at x₀",
+          "symbol": "f'(x₀)",
+          "format": "fixed:2"
+        },
+        {
+          "id": "derivative_at_2",
+          "expr": "2 * 2",
+          "unit": "",
+          "label": "Derivative at x=2",
+          "symbol": "f'(2)",
+          "format": "fixed:2"
+        }
+      ]
+    },
+    "scenes": [
+      {
+        "id": "s1",
+        "index": 0,
+        "role": "hook",
+        "title": "The car drives; the curve grows with it",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            -1.286,
+            10
+          ],
+          "y": [
+            -0.804,
+            6
+          ]
+        },
+        "derived": [
+          {
+            "id": "d_at_3",
+            "expr": "3^2 / 4",
+            "unit": "m",
+            "label": "d(3)",
+            "format": "fixed:2"
+          },
+          {
+            "id": "t_now",
+            "expr": "3",
+            "unit": "s",
+            "label": "Time",
+            "format": "fixed:0"
+          }
+        ],
+        "elements": [
+          {
+            "id": "axes",
+            "slot": "figure",
+            "type": "axes",
+            "xLabel": "time (s)",
+            "yLabel": "distance (m)",
+            "xTicks": 5,
+            "yTicks": 4,
+            "grid": false
+          },
+          {
+            "id": "motion",
+            "slot": "figure",
+            "type": "plot",
+            "fn": "x^2 / 4",
+            "domain": [
+              0,
+              8.5
+            ],
+            "role": "valid",
+            "label": "distance"
+          },
+          {
+            "id": "car",
+            "slot": "figure",
+            "type": "object",
+            "kind": "block",
+            "at": [
+              0,
+              0.15
+            ],
+            "size": 0.9,
+            "label": "car"
+          },
+          {
+            "id": "mark",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              3,
+              2.25
+            ],
+            "label": "?",
+            "role": "quantity"
+          },
+          {
+            "id": "note",
+            "slot": "notes",
+            "type": "text",
+            "text": "At t = 3 s, how fast?"
+          },
+          {
+            "id": "speed",
+            "slot": "notes",
+            "type": "readout",
+            "value": "d_at_3",
+            "label": "Distance so far"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Here is a car on a straight road. Its distance grows with time.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "axes"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "motion"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "car"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Watch the car and the curve together: one second, one new point.",
+            "actions": [
+              {
+                "do": "move",
+                "target": "car",
+                "to": [
+                  3,
+                  0.15
+                ]
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "But at exactly three seconds, how fast is it going? Guess first.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "mark"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "note",
+                  "speed"
+                ],
+                "how": "type"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s2",
+        "index": 1,
+        "role": "analogy",
+        "title": "Average speed is the slope of a secant",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            -2.6,
+            4.2
+          ],
+          "y": [
+            -1,
+            17.36
+          ]
+        },
+        "derived": [
+          {
+            "id": "slope_secant",
+            "expr": "((x0 + h)^2 - x0^2) / h",
+            "unit": "",
+            "label": "Slope of secant",
+            "symbol": "Δx/Δt",
+            "format": "fixed:2"
+          },
+          {
+            "id": "x0_right",
+            "expr": "x0 + h",
+            "unit": "",
+            "label": "Second instant",
+            "symbol": "t+h",
+            "format": "fixed:2"
+          },
+          {
+            "id": "f_x0_right",
+            "expr": "(x0 + h)^2",
+            "unit": "",
+            "label": "f(t + h)",
+            "symbol": "f(t+h)",
+            "format": "fixed:2"
+          }
+        ],
+        "elements": [
+          {
+            "id": "ax",
+            "slot": "figure",
+            "type": "axes",
+            "xLabel": "time t",
+            "yLabel": "distance",
+            "xTicks": 6,
+            "yTicks": 4
+          },
+          {
+            "id": "curve",
+            "slot": "figure",
+            "type": "plot",
+            "fn": "x^2",
+            "domain": [
+              -2.6,
+              3.2
+            ],
+            "role": "ink",
+            "label": "distance"
+          },
+          {
+            "id": "p1",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              {
+                "expr": "x0"
+              },
+              {
+                "expr": "f_x0"
+              }
+            ],
+            "label": "start",
+            "role": "quantity"
+          },
+          {
+            "id": "p2",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              {
+                "expr": "x0 + h"
+              },
+              {
+                "expr": "f_x0h"
+              }
+            ],
+            "label": "later",
+            "role": "action"
+          },
+          {
+            "id": "rise",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              {
+                "expr": "x0 + h"
+              },
+              {
+                "expr": "f_x0"
+              }
+            ],
+            "to": "p2",
+            "role": "action",
+            "style": "dashed"
+          },
+          {
+            "id": "secant",
+            "slot": "figure",
+            "type": "segment",
+            "from": "p1",
+            "to": "p2",
+            "role": "result"
+          },
+          {
+            "id": "slope_now",
+            "slot": "notes",
+            "type": "readout",
+            "value": "avg_rate",
+            "label": "Average speed"
+          },
+          {
+            "id": "slope_geo",
+            "slot": "notes",
+            "type": "readout",
+            "value": "slope_secant",
+            "label": "Rise over run"
+          },
+          {
+            "id": "note",
+            "slot": "notes",
+            "type": "text",
+            "text": "Same number, two names.",
+            "emphasis": "strong"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Your car’s distance over time. Pick your start, and a later instant.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "ax",
+                  "curve"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "p1"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "p2"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Join the two points: the secant gives your average speed over that trip.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "rise",
+                  "secant"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "slope_geo"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "And the speedometer? Slide the second point closer and watch the line turn.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "slope_now",
+                  "note"
+                ],
+                "how": "type"
+              },
+              {
+                "do": "sweep",
+                "param": "h",
+                "to": 0.05
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s3",
+        "index": 2,
+        "role": "mechanism",
+        "title": "Shrink the gap: the secant becomes the tangent",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            -2.5,
+            4.52
+          ],
+          "y": [
+            -1,
+            17.36
+          ]
+        },
+        "derived": [],
+        "elements": [
+          {
+            "id": "axes",
+            "slot": "figure",
+            "type": "axes",
+            "xLabel": "x",
+            "yLabel": "y",
+            "xTicks": 6,
+            "yTicks": 5
+          },
+          {
+            "id": "curve",
+            "slot": "figure",
+            "type": "plot",
+            "fn": "x^2",
+            "domain": [
+              -2.5,
+              3.5
+            ],
+            "role": "ink"
+          },
+          {
+            "id": "p1",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              {
+                "expr": "x0"
+              },
+              {
+                "expr": "f_x0"
+              }
+            ],
+            "label": "P",
+            "role": "quantity"
+          },
+          {
+            "id": "p2",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              {
+                "expr": "x0 + h"
+              },
+              {
+                "expr": "f_x0h"
+              }
+            ],
+            "label": "Q",
+            "role": "action"
+          },
+          {
+            "id": "secant",
+            "slot": "figure",
+            "type": "segment",
+            "from": "p1",
+            "to": "p2",
+            "role": "action"
+          },
+          {
+            "id": "gap",
+            "slot": "figure",
+            "type": "dimension",
+            "from": [
+              {
+                "expr": "x0"
+              },
+              {
+                "expr": "-0.8"
+              }
+            ],
+            "to": [
+              {
+                "expr": "x0 + h"
+              },
+              {
+                "expr": "-0.8"
+              }
+            ],
+            "label": "h",
+            "role": "quantity"
+          },
+          {
+            "id": "rise",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              {
+                "expr": "x0"
+              },
+              {
+                "expr": "f_x0h"
+              }
+            ],
+            "to": "p2",
+            "role": "quantity",
+            "style": "dashed"
+          },
+          {
+            "id": "run",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              {
+                "expr": "x0"
+              },
+              {
+                "expr": "f_x0h"
+              }
+            ],
+            "to": "p2",
+            "role": "quantity",
+            "style": "dashed"
+          },
+          {
+            "id": "avg",
+            "slot": "notes",
+            "type": "readout",
+            "value": "avg_rate",
+            "label": "Slope of secant"
+          },
+          {
+            "id": "deriv",
+            "slot": "notes",
+            "type": "readout",
+            "value": "derivative",
+            "label": "Slope of tangent"
+          },
+          {
+            "id": "rule",
+            "slot": "notes",
+            "type": "text",
+            "text": "As h shrinks, the secant settles on the tangent.",
+            "emphasis": "strong"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Two points on the curve, joined by a secant. Its slope is rise over run.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "axes",
+                  "curve"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "p1",
+                  "p2"
+                ],
+                "how": "fade",
+                "at": 0.5
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "secant",
+                  "rise",
+                  "run"
+                ],
+                "how": "draw",
+                "at": 1
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "avg"
+                ],
+                "how": "fade",
+                "at": 1
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Now slide Q toward P. Watch the secant turn, and the slope change.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "gap"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "sweep",
+                "param": "h",
+                "to": 0.01
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "When the gap closes, the secant becomes the tangent. That slope is the derivative.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "deriv"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "secant"
+                ]
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "rule"
+                ],
+                "how": "type",
+                "at": 0.8
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s4",
+        "index": 3,
+        "role": "formula",
+        "title": "The derivative: a limit as h shrinks",
+        "layout": "formula-focus",
+        "world": {
+          "x": [
+            -2,
+            4.48
+          ],
+          "y": [
+            -1,
+            17.36
+          ]
+        },
+        "derived": [],
+        "elements": [
+          {
+            "id": "def",
+            "slot": "formula",
+            "type": "formula",
+            "tex": "\\a{f'(x_0)} = \\lim_{\\q{h} \\to 0} \\dfrac{f(x_0+\\q{h}) - f(x_0)}{\\q{h}}"
+          },
+          {
+            "id": "curve",
+            "slot": "figure",
+            "type": "plot",
+            "fn": "x^2",
+            "domain": [
+              -2,
+              3
+            ],
+            "role": "ink",
+            "label": "f(x)=x²"
+          },
+          {
+            "id": "p0",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              {
+                "expr": "x0"
+              },
+              {
+                "expr": "f_x0"
+              }
+            ],
+            "label": "x₀",
+            "role": "quantity"
+          },
+          {
+            "id": "ph",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              {
+                "expr": "x0 + h"
+              },
+              {
+                "expr": "f_x0h"
+              }
+            ],
+            "label": "x₀+h",
+            "role": "action"
+          },
+          {
+            "id": "secant",
+            "slot": "figure",
+            "type": "segment",
+            "from": "p0",
+            "to": "ph",
+            "role": "action",
+            "style": "dashed"
+          },
+          {
+            "id": "slope",
+            "slot": "readout",
+            "type": "readout",
+            "value": "avg_rate",
+            "label": "Secant slope Δf/Δx"
+          },
+          {
+            "id": "h_now",
+            "slot": "readout",
+            "type": "readout",
+            "value": "h",
+            "label": "Step h"
+          },
+          {
+            "id": "deriv",
+            "slot": "readout",
+            "type": "readout",
+            "value": "derivative",
+            "label": "Tangent slope f'(x₀)"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Here is the definition. The green h is the step between the two points.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "curve"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "p0",
+                  "ph"
+                ],
+                "how": "fade",
+                "at": 0.4
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "secant"
+                ],
+                "how": "draw",
+                "at": 0.8
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "def"
+                ],
+                "how": "type",
+                "at": 1
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "That dashed line is the secant. Its slope is the average rate of change.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "slope",
+                  "h_now"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Now shrink h toward zero. Watch the secant settle into the tangent.",
+            "actions": [
+              {
+                "do": "sweep",
+                "param": "h",
+                "to": 0.01
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "deriv"
+                ],
+                "how": "fade",
+                "at": 1
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "deriv"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s5",
+        "index": 4,
+        "role": "example",
+        "title": "At x = 2, the slope of the tangent is 4",
+        "layout": "formula-focus",
+        "world": {
+          "x": [
+            -2.5,
+            4
+          ],
+          "y": [
+            -5.92,
+            21.92
+          ]
+        },
+        "derived": [
+          {
+            "id": "tangent_y_left",
+            "expr": "derivative_at_2 * (-2) - 2^2 + 2 * derivative_at_2",
+            "unit": "",
+            "label": "y on tangent at x = -2",
+            "format": "fixed:2"
+          },
+          {
+            "id": "tangent_y_right",
+            "expr": "derivative_at_2 * 4 - 2^2 + 2 * derivative_at_2",
+            "unit": "",
+            "label": "y on tangent at x = 4",
+            "format": "fixed:2"
+          },
+          {
+            "id": "slope_at_3",
+            "expr": "2 * 3",
+            "unit": "",
+            "label": "Derivative at x=3",
+            "symbol": "f'(3)",
+            "format": "fixed:2"
+          }
+        ],
+        "elements": [
+          {
+            "id": "axes",
+            "slot": "figure",
+            "type": "axes",
+            "xLabel": "x",
+            "yLabel": "y",
+            "xTicks": 5,
+            "yTicks": 4
+          },
+          {
+            "id": "curve",
+            "slot": "figure",
+            "type": "plot",
+            "fn": "x^2",
+            "domain": [
+              -2.5,
+              3.3
+            ],
+            "role": "ink"
+          },
+          {
+            "id": "tangent_at_2",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              -2,
+              {
+                "expr": "tangent_y_left"
+              }
+            ],
+            "to": [
+              4,
+              {
+                "expr": "tangent_y_right"
+              }
+            ],
+            "label": "tangent at x = 2",
+            "role": "quantity"
+          },
+          {
+            "id": "touch",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              2,
+              4
+            ],
+            "role": "result"
+          },
+          {
+            "id": "defn",
+            "slot": "formula",
+            "type": "formula",
+            "tex": "\\a{f'(x)} = \\lim_{\\q{h} \\to 0} \\dfrac{f(x+\\q{h}) - f(x)}{\\q{h}}"
+          },
+          {
+            "id": "slope2",
+            "slot": "readout",
+            "type": "readout",
+            "value": "derivative_at_2",
+            "label": "f'(2)"
+          },
+          {
+            "id": "slope3",
+            "slot": "readout",
+            "type": "readout",
+            "value": "slope_at_3",
+            "label": "f'(3)"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Here is the limit definition. It works for any function, at any point you choose.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "axes",
+                  "curve"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "defn"
+                ],
+                "how": "type"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Take f of x equals x squared, at x equal to two. Guess the slope before it appears.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "touch"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "tangent_at_2"
+                ],
+                "how": "draw",
+                "at": 0.8
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "The tangent rises four for each step right, so the derivative is four.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "slope2"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "slope2"
+                ],
+                "at": 0.8
+              }
+            ]
+          },
+          {
+            "id": "b4",
+            "narration": "At three, it climbs to six. Twice the x, twice the slope.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "slope3"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "touch"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s6",
+        "index": 5,
+        "role": "recap",
+        "title": "Derivative: the speedometer of a graph",
+        "layout": "statement",
+        "derived": [],
+        "elements": [
+          {
+            "id": "recap",
+            "slot": "text",
+            "type": "list",
+            "items": [
+              "The derivative is an instantaneous rate of change.",
+              "It is the slope of the tangent line at that point.",
+              "At x = 2 on y = x², that slope is exactly 4."
+            ]
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Three ideas to keep. One: the derivative is an instantaneous rate of change.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "recap"
+                ],
+                "how": "type"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Two: it is the slope of the tangent line. That is what your speedometer reads.",
+            "actions": []
+          },
+          {
+            "id": "b3",
+            "narration": "And at x equals two on the parabola, that slope is exactly four.",
+            "actions": [
+              {
+                "do": "highlight",
+                "targets": [
+                  "recap.i3"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "quiz": {
+      "questions": [
+        {
+          "prompt": "You slide the second point of a secant closer and closer to the first point along a curve. What happens to the secant line and its slope?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "The secant turns toward the tangent, and its slope approaches the derivative at that point."
+            },
+            {
+              "id": "b",
+              "text": "The secant stays fixed, and only the length of the segment between the points changes."
+            },
+            {
+              "id": "c",
+              "text": "The secant becomes parallel to the x-axis, so its slope approaches zero."
+            },
+            {
+              "id": "d",
+              "text": "The secant turns away from the tangent, and its slope grows without bound."
+            }
+          ],
+          "answer_id": "a",
+          "explanation": "As the gap shrinks, the secant settles onto the tangent, so its slope approaches the instantaneous rate of change at that point.",
+          "scene_id": "s3"
+        },
+        {
+          "prompt": "For f(x) = x², you know the derivative at x = 2 is 4. What is the derivative at x = 3, and why?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "6, because the derivative of x² is 2x and 2 × 3 = 6."
+            },
+            {
+              "id": "b",
+              "text": "9, because the function value at x = 3 is 9."
+            },
+            {
+              "id": "c",
+              "text": "3, because the slope increases by 1 when x increases by 1."
+            },
+            {
+              "id": "d",
+              "text": "4, because the slope of a parabola is the same everywhere."
+            }
+          ],
+          "answer_id": "a",
+          "explanation": "For f(x) = x², the derivative is 2x, so at x = 3 the slope of the tangent is 6.",
+          "scene_id": "s5"
+        },
+        {
+          "prompt": "What does the derivative of a function at a point represent?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "The slope of the secant line between two points on the graph."
+            },
+            {
+              "id": "b",
+              "text": "The instantaneous rate of change at that point, i.e. the slope of the tangent line."
+            },
+            {
+              "id": "c",
+              "text": "The average rate of change over an interval around that point."
+            },
+            {
+              "id": "d",
+              "text": "The value of the function at that point."
+            }
+          ],
+          "answer_id": "b",
+          "explanation": "The derivative gives the instantaneous rate of change at a point, which is the slope of the tangent line there.",
+          "scene_id": "s6"
+        }
+      ]
+    }
+  }
+}

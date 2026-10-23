@@ -1,0 +1,1373 @@
+{
+  "slug": "economics/supply-and-demand",
+  "subject": "economics",
+  "reference_level": "lycee",
+  "language": "en",
+  "title": "Supply and Demand",
+  "question": "How do supply and demand set a price?",
+  "reviewed_by": null,
+  "reviewed_at": null,
+  "verdicts": [
+    {
+      "target": "plan",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "The linear supply and demand model, the equilibrium formula P*=(a−c)/(b+d), the doubled-demand expressions, and the surplus/shortage (seesaw) intuition are all correct and consistent in units, and the range of c (including negative intercep",
+      "checks": [
+        "structure",
+        "model",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s1",
+      "status": "corrected",
+      "attempts": 2,
+      "reason": "The scene shows a tomato price falling from 3 € to 2 € on its own while unsold tomatoes are bought up, and asks who set the price — matching the hook that the price emerges without anyone deciding it, with no incorrect or contradictory stat",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s2",
+      "status": "corrected",
+      "attempts": 3,
+      "reason": "The seesaw analogy correctly conveys that two opposing forces—buyers pushing the price down and sellers pushing it up—balance at a single resting point, which matches the outline's key rule of equilibrium.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s3",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "The scene correctly shows demand falling and supply rising with price, illustrates that a surplus pushes price down and a shortage pushes it up, and marks the crossing point as the equilibrium at which the two quantities are equal.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s4",
+      "status": "corrected",
+      "attempts": 2,
+      "reason": "The scene correctly writes the demand and supply equations, draws the downward- and upward-sloping lines, and marks their crossing as the equilibrium price and quantity with matching readouts.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s5",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "The scene correctly computes the doubled-demand equilibrium with the given formulas, the sweep doubles a exactly, and all readouts match their labels.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s6",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "The recap states the correct economic ideas — demand falling and supply rising with price, surplus above equilibrium and shortage below, and price settling where quantities are equal — and ties them back to the tomato example without any fa",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    }
+  ],
+  "payload": {
+    "version": 1,
+    "plan": {
+      "objective": "Explain how the equilibrium price and quantity of a market emerge from the crossing of a downward-sloping demand curve and an upward-sloping supply curve, and predict how they shift when a parameter changes.",
+      "prerequisites": [
+        "Reading a graph with price on the vertical axis and quantity on the horizontal axis",
+        "Linear functions and their slope",
+        "Solving a two-equation system by substitution"
+      ],
+      "analogy": {
+        "name": "The seesaw of buyers and sellers",
+        "mapping": "Each buyer pushes the price down when it is too high, each seller pushes it up when it is too low; the price settles where the two pushes balance, like a seesaw coming to rest."
+      },
+      "key_rule": {
+        "statement": "The price settles where the quantity buyers want equals the quantity sellers offer; above it there is a surplus that pushes the price down, below it a shortage that pushes it up.",
+        "formula": "\\q{Q_d} = a - b\\,\\q{P} \\quad,\\quad \\q{Q_s} = c + d\\,\\q{P} \\quad,\\quad a - b\\,\\res{P^*} = c + d\\,\\res{P^*}"
+      },
+      "steps": [
+        {
+          "role": "hook",
+          "intent": "Show a real price that moves on its own without anyone deciding it.",
+          "visual": "A market stall: unsold tomatoes pile up, the price tag drops from 3 to 2, buyers rush in."
+        },
+        {
+          "role": "analogy",
+          "intent": "Give the intuition of two opposing pushes meeting at one resting point.",
+          "visual": "A seesaw with a buyer’s weight on one side and a seller’s on the other, tilting until it levels."
+        },
+        {
+          "role": "mechanism",
+          "intent": "Show step by step how surplus and shortage push the price toward the crossing.",
+          "visual": "Two curves drawn; a high price bar drops, a low one rises, arrows shrink as they near the crossing."
+        },
+        {
+          "role": "formula",
+          "intent": "Tie each symbol of the two linear equations to the curves just seen.",
+          "visual": "The two equations write themselves; the crossing point lights up with its coordinates."
+        },
+        {
+          "role": "example",
+          "intent": "Compute a real equilibrium and show a surprising near-doubling when demand doubles.",
+          "visual": "Sliders move: the demand curve slides right and the crossing jumps up and right, numbers update."
+        },
+        {
+          "role": "recap",
+          "intent": "Fix the three ideas and answer the hook about the tomato price.",
+          "visual": "Three short lines appear one by one; the equilibrium point pulses on the graph."
+        }
+      ]
+    },
+    "params": [
+      {
+        "id": "a",
+        "symbol": "a",
+        "label": "Quantity demanded at price zero",
+        "unit": "units",
+        "min": 50,
+        "max": 400,
+        "step": 5,
+        "default": 200,
+        "role": "quantity"
+      },
+      {
+        "id": "b",
+        "symbol": "b",
+        "label": "How much demand falls per unit of price",
+        "unit": "units per €",
+        "min": 5,
+        "max": 50,
+        "step": 1,
+        "default": 20,
+        "role": "quantity"
+      },
+      {
+        "id": "c",
+        "symbol": "c",
+        "label": "Quantity supplied at price zero",
+        "unit": "units",
+        "min": -100,
+        "max": 100,
+        "step": 5,
+        "default": -40,
+        "role": "quantity"
+      }
+    ],
+    "model": {
+      "constants": [
+        {
+          "id": "d",
+          "value": 10,
+          "unit": "units per €",
+          "label": "How much supply rises per unit of price",
+          "symbol": "d"
+        }
+      ],
+      "derived": [
+        {
+          "id": "P_star",
+          "expr": "(a - c) / (b + d)",
+          "unit": "€",
+          "label": "Equilibrium price",
+          "symbol": "P*",
+          "format": "fixed:2"
+        },
+        {
+          "id": "Q_star",
+          "expr": "a - b * ((a - c) / (b + d))",
+          "unit": "units",
+          "label": "Equilibrium quantity",
+          "symbol": "Q*",
+          "format": "int"
+        },
+        {
+          "id": "P_2a",
+          "expr": "(2 * a - c) / (b + d)",
+          "unit": "€",
+          "label": "Equilibrium price with demand doubled",
+          "symbol": "P*₂",
+          "format": "fixed:2"
+        },
+        {
+          "id": "Q_2a",
+          "expr": "2 * a - b * ((2 * a - c) / (b + d))",
+          "unit": "units",
+          "label": "Equilibrium quantity with demand doubled",
+          "symbol": "Q*₂",
+          "format": "int"
+        },
+        {
+          "id": "P_hi",
+          "expr": "(a - c) / (b + d) + 1",
+          "unit": "€",
+          "label": "Price above equilibrium",
+          "symbol": "P_hi",
+          "format": "fixed:2"
+        }
+      ]
+    },
+    "scenes": [
+      {
+        "id": "s1",
+        "index": 0,
+        "role": "hook",
+        "title": "The tomato price nobody decided",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            0,
+            10
+          ],
+          "y": [
+            -1,
+            6
+          ]
+        },
+        "derived": [
+          {
+            "id": "tom_low",
+            "expr": "0.9",
+            "unit": "",
+            "label": "Low pile height",
+            "format": "fixed:1"
+          },
+          {
+            "id": "tom_size",
+            "expr": "1.2",
+            "unit": "",
+            "label": "Tomato size",
+            "format": "fixed:1"
+          }
+        ],
+        "elements": [
+          {
+            "id": "stall",
+            "slot": "figure",
+            "type": "shape",
+            "kind": "rect",
+            "center": [
+              3.3,
+              1.2
+            ],
+            "width": 5.2,
+            "height": 2.4,
+            "label": "Tomatoes: 3 €"
+          },
+          {
+            "id": "tom1",
+            "slot": "figure",
+            "type": "object",
+            "kind": "apple",
+            "at": [
+              7.6,
+              0.9
+            ],
+            "size": {
+              "expr": "tom_size"
+            },
+            "role": "quantity"
+          },
+          {
+            "id": "tom2",
+            "slot": "figure",
+            "type": "object",
+            "kind": "apple",
+            "at": [
+              8.6,
+              0.9
+            ],
+            "size": {
+              "expr": "tom_size"
+            },
+            "role": "quantity"
+          },
+          {
+            "id": "tom3",
+            "slot": "figure",
+            "type": "object",
+            "kind": "apple",
+            "at": [
+              8.1,
+              1.6
+            ],
+            "size": {
+              "expr": "tom_size"
+            },
+            "role": "quantity"
+          },
+          {
+            "id": "tom4",
+            "slot": "figure",
+            "type": "object",
+            "kind": "apple",
+            "at": [
+              7.7,
+              2.3
+            ],
+            "size": {
+              "expr": "tom_size"
+            },
+            "role": "quantity"
+          },
+          {
+            "id": "buyer1",
+            "slot": "figure",
+            "type": "object",
+            "kind": "person",
+            "at": [
+              1.2,
+              0.2
+            ],
+            "size": 1.4,
+            "role": "action"
+          },
+          {
+            "id": "buyer2",
+            "slot": "figure",
+            "type": "object",
+            "kind": "person",
+            "at": [
+              9.2,
+              0.2
+            ],
+            "size": 1.4,
+            "role": "action"
+          },
+          {
+            "id": "tag",
+            "slot": "notes",
+            "type": "text",
+            "text": "Price tag: 3 €, then 2 €.",
+            "emphasis": "strong"
+          },
+          {
+            "id": "pile",
+            "slot": "notes",
+            "type": "text",
+            "text": "Unsold tomatoes pile up."
+          },
+          {
+            "id": "who",
+            "slot": "notes",
+            "type": "text",
+            "text": "Who sets the price?"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "A market stall at closing time. Three euros a kilo, and plenty of tomatoes left.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "stall",
+                  "tom1",
+                  "tom2",
+                  "buyer1"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "tag",
+                  "pile"
+                ],
+                "how": "type"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Nobody orders it, yet the tag drops to two euros, and the pile shrinks fast.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "tom3",
+                  "tom4",
+                  "buyer2"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "move",
+                "target": "tom4",
+                "to": [
+                  8.1,
+                  0.9
+                ]
+              },
+              {
+                "do": "move",
+                "target": "tom3",
+                "to": [
+                  7.6,
+                  0.9
+                ]
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Watch the tag slide down. Who decided that price? Nobody did, exactly.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "who"
+                ],
+                "how": "type"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s2",
+        "index": 1,
+        "role": "analogy",
+        "title": "A seesaw of buyers and sellers",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            -6,
+            6
+          ],
+          "y": [
+            -3,
+            3
+          ]
+        },
+        "derived": [],
+        "elements": [
+          {
+            "id": "ground",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              -4.6,
+              -2
+            ],
+            "to": [
+              4.6,
+              -2
+            ]
+          },
+          {
+            "id": "pivot",
+            "slot": "figure",
+            "type": "shape",
+            "kind": "polygon",
+            "points": [
+              [
+                -0.35,
+                -2
+              ],
+              [
+                0.35,
+                -2
+              ],
+              [
+                0,
+                0.2
+              ]
+            ],
+            "fill": "hatch"
+          },
+          {
+            "id": "board",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              -4,
+              0.5
+            ],
+            "to": [
+              4,
+              0.1
+            ]
+          },
+          {
+            "id": "buyer",
+            "slot": "figure",
+            "type": "object",
+            "kind": "person",
+            "at": [
+              -4,
+              1.3
+            ],
+            "size": 0.9,
+            "label": "buyer",
+            "role": "action"
+          },
+          {
+            "id": "seller",
+            "slot": "figure",
+            "type": "object",
+            "kind": "basket",
+            "at": [
+              4,
+              0.9
+            ],
+            "size": 0.9,
+            "label": "seller",
+            "role": "quantity"
+          },
+          {
+            "id": "push_down",
+            "slot": "figure",
+            "type": "vector",
+            "from": "buyer",
+            "to": [
+              -4,
+              -0.2
+            ],
+            "label": "lower",
+            "role": "action"
+          },
+          {
+            "id": "push_up",
+            "slot": "figure",
+            "type": "vector",
+            "from": "seller",
+            "to": [
+              4,
+              -0.4
+            ],
+            "label": "raise",
+            "role": "quantity"
+          },
+          {
+            "id": "level",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              -4,
+              0.3
+            ],
+            "to": [
+              4,
+              0.3
+            ],
+            "role": "result",
+            "style": "dashed"
+          },
+          {
+            "id": "balance",
+            "slot": "notes",
+            "type": "text",
+            "text": "Two opposite pushes, one resting price.",
+            "emphasis": "strong"
+          },
+          {
+            "id": "equal",
+            "slot": "notes",
+            "type": "text",
+            "text": "They balance: the price stops moving."
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Think of a seesaw: a buyer sits on one side, a seller on the other.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "ground",
+                  "pivot",
+                  "board"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "buyer",
+                  "seller"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Too high a price, and the buyer pushes down; too low, the seller pushes up.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "push_down",
+                  "push_up"
+                ],
+                "how": "draw"
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "When the two pushes match, the board levels off. That is the equilibrium price.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "level"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "balance",
+                  "equal"
+                ],
+                "how": "type"
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "balance"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s3",
+        "index": 2,
+        "role": "mechanism",
+        "title": "Surplus and shortage push the price to the crossing",
+        "layout": "formula-focus",
+        "world": {
+          "x": [
+            -30.8,
+            250
+          ],
+          "y": [
+            0,
+            20
+          ]
+        },
+        "derived": [
+          {
+            "id": "Q_d_hi",
+            "expr": "a - b * ((a - c) / (b + d) + 1)",
+            "unit": "units",
+            "label": "Demanded at the high price",
+            "format": "int"
+          },
+          {
+            "id": "Q_s_hi",
+            "expr": "c + 10 * ((a - c) / (b + d) + 1)",
+            "unit": "units",
+            "label": "Offered at the high price",
+            "format": "int"
+          }
+        ],
+        "elements": [
+          {
+            "id": "axes",
+            "slot": "figure",
+            "type": "axes",
+            "xLabel": "Quantity",
+            "yLabel": "Price",
+            "xTicks": 4,
+            "yTicks": 4
+          },
+          {
+            "id": "demand",
+            "slot": "figure",
+            "type": "plot",
+            "fn": "(a - x) / b",
+            "domain": [
+              0,
+              250
+            ],
+            "role": "quantity",
+            "label": "Demand"
+          },
+          {
+            "id": "supply",
+            "slot": "figure",
+            "type": "plot",
+            "fn": "(x - c) / 10",
+            "domain": [
+              0,
+              250
+            ],
+            "role": "quantity",
+            "label": "Supply"
+          },
+          {
+            "id": "cross",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              {
+                "expr": "a - b * ((a - c) / (b + d))"
+              },
+              {
+                "expr": "(a - c) / (b + d)"
+              }
+            ],
+            "label": "Equilibrium",
+            "role": "result"
+          },
+          {
+            "id": "eq",
+            "slot": "formula",
+            "type": "formula",
+            "tex": "a - b\\,\\q{P} = c + d\\,\\q{P} \\;\\Longrightarrow\\; \\res{P^*} = \\frac{a-c}{b+d}"
+          },
+          {
+            "id": "p_now",
+            "slot": "readout",
+            "type": "readout",
+            "value": "P_star",
+            "label": "Price"
+          },
+          {
+            "id": "q_now",
+            "slot": "readout",
+            "type": "readout",
+            "value": "Q_star",
+            "label": "Quantity traded"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Buyers want less as the price rises; sellers offer more. The two curves must cross.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "axes",
+                  "demand",
+                  "supply"
+                ],
+                "how": "draw"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Too high, unsold goods pile up and push the price down. Too low, buyers rush in.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "p_now"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "sweep",
+                "param": "a",
+                "to": {
+                  "expr": "a + 160"
+                }
+              },
+              {
+                "do": "sweep",
+                "param": "a",
+                "to": {
+                  "expr": "a - 150"
+                }
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "The pushes shrink until they cancel: that is the equilibrium price and quantity.",
+            "actions": [
+              {
+                "do": "sweep",
+                "param": "a",
+                "to": {
+                  "expr": "a + 150"
+                }
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "cross"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "eq",
+                  "q_now"
+                ],
+                "how": "type"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s4",
+        "index": 3,
+        "role": "formula",
+        "title": "Two equations, one crossing point",
+        "layout": "formula-focus",
+        "world": {
+          "x": [
+            0,
+            30
+          ],
+          "y": [
+            0,
+            11
+          ]
+        },
+        "derived": [
+          {
+            "id": "P_plot",
+            "expr": "clamp(P_star, 0.5, 10.5)",
+            "unit": "€",
+            "label": "Equilibrium price on the figure",
+            "format": "fixed:2"
+          },
+          {
+            "id": "Q_plot",
+            "expr": "clamp((a - P_plot) / b, 0.5, 29.5)",
+            "unit": "units",
+            "label": "Equilibrium quantity on the figure",
+            "format": "int"
+          }
+        ],
+        "elements": [
+          {
+            "id": "eqs",
+            "slot": "formula",
+            "type": "formula",
+            "tex": "\\q{Q_d} = a - b\\,\\q{P} \\qquad \\q{Q_s} = c + d\\,\\q{P}"
+          },
+          {
+            "id": "ax",
+            "slot": "figure",
+            "type": "axes",
+            "xLabel": "quantity",
+            "yLabel": "price",
+            "xTicks": 3,
+            "yTicks": 3
+          },
+          {
+            "id": "demand",
+            "slot": "figure",
+            "type": "plot",
+            "fn": "max(0, min(10.5, (a - x) / b))",
+            "domain": [
+              0,
+              30
+            ],
+            "role": "quantity",
+            "label": "Qd"
+          },
+          {
+            "id": "supply",
+            "slot": "figure",
+            "type": "plot",
+            "fn": "max(0, min(10.5, c + 10 * x))",
+            "domain": [
+              0,
+              30
+            ],
+            "role": "valid",
+            "label": "Qs"
+          },
+          {
+            "id": "cross",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              {
+                "expr": "Q_plot"
+              },
+              {
+                "expr": "P_plot"
+              }
+            ],
+            "label": "P*",
+            "role": "result"
+          },
+          {
+            "id": "p_read",
+            "slot": "readout",
+            "type": "readout",
+            "value": "P_star",
+            "label": "Equilibrium price"
+          },
+          {
+            "id": "q_read",
+            "slot": "readout",
+            "type": "readout",
+            "value": "Q_star",
+            "label": "Equilibrium quantity"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Two straight lines, two equations. The same symbols appear in both.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "eqs"
+                ],
+                "how": "type"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "ax"
+                ],
+                "how": "draw"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Buyers read the falling line: higher price, smaller quantity demanded.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "demand"
+                ],
+                "how": "draw"
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Sellers read the rising one. Where they cross, nobody wants to move.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "supply"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "cross"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "p_read",
+                  "q_read"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "cross"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s5",
+        "index": 4,
+        "role": "example",
+        "title": "Demand doubles: where does the price land?",
+        "layout": "formula-focus",
+        "world": {
+          "x": [
+            -21.466666666666665,
+            144.79999999999998
+          ],
+          "y": [
+            0,
+            22
+          ]
+        },
+        "derived": [
+          {
+            "id": "P_mid",
+            "expr": "(1.5 * a - c) / (b + d)",
+            "unit": "€",
+            "label": "Equilibrium price with demand up by half",
+            "format": "fixed:2"
+          },
+          {
+            "id": "Q_mid",
+            "expr": "1.5 * a - b * ((1.5 * a - c) / (b + d))",
+            "unit": "units",
+            "label": "Equilibrium quantity with demand up by half",
+            "format": "int"
+          }
+        ],
+        "elements": [
+          {
+            "id": "axes",
+            "slot": "figure",
+            "type": "axes",
+            "xLabel": "Q (units)",
+            "yLabel": "P (€)",
+            "xTicks": 4,
+            "yTicks": 4
+          },
+          {
+            "id": "demand",
+            "slot": "figure",
+            "type": "plot",
+            "fn": "(a - x) / b",
+            "domain": [
+              0,
+              {
+                "expr": "a"
+              }
+            ],
+            "role": "quantity",
+            "label": "Demand"
+          },
+          {
+            "id": "supply",
+            "slot": "figure",
+            "type": "plot",
+            "fn": "(x - c) / d",
+            "domain": [
+              0,
+              {
+                "expr": "a + 60"
+              }
+            ],
+            "role": "action",
+            "label": "Supply"
+          },
+          {
+            "id": "cross",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              {
+                "expr": "Q_star"
+              },
+              {
+                "expr": "P_star"
+              }
+            ],
+            "label": "P*"
+          },
+          {
+            "id": "law",
+            "slot": "formula",
+            "type": "formula",
+            "tex": "\\q{Q_d} = a - b\\,\\q{P} \\;,\\quad \\q{Q_s} = c + d\\,\\q{P} \\;,\\quad \\res{P^*} = \\frac{a-c}{b+d}"
+          },
+          {
+            "id": "p_now",
+            "slot": "readout",
+            "type": "readout",
+            "value": "P_star",
+            "label": "Price now (€)"
+          },
+          {
+            "id": "p_after",
+            "slot": "readout",
+            "type": "readout",
+            "value": "P_2a",
+            "label": "Price with demand doubled (€)"
+          },
+          {
+            "id": "q_after",
+            "slot": "readout",
+            "type": "readout",
+            "value": "Q_2a",
+            "label": "Quantity then"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Here the curves cross where supply meets demand: solve the two equations, and you have the price.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "axes"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "demand",
+                  "supply"
+                ],
+                "how": "draw",
+                "at": 0.3
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "cross"
+                ],
+                "how": "fade",
+                "at": 0.8
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "law"
+                ],
+                "how": "type",
+                "at": 1
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "p_now"
+                ],
+                "how": "fade",
+                "at": 1
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Now every buyer wants twice as much. Guess where the crossing lands.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "p_after",
+                  "q_after"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "sweep",
+                "param": "a",
+                "to": {
+                  "expr": "2 * a"
+                }
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Surprise: the quantity reaches {{Q_2a|int}}, but the price stops at {{P_2a|fixed:2}} euros.",
+            "actions": [
+              {
+                "do": "highlight",
+                "targets": [
+                  "cross"
+                ]
+              },
+              {
+                "do": "focus",
+                "targets": [
+                  "p_after"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s6",
+        "index": 5,
+        "role": "recap",
+        "title": "Three ideas, and the tomato price",
+        "layout": "statement",
+        "derived": [],
+        "elements": [
+          {
+            "id": "recap",
+            "slot": "text",
+            "type": "list",
+            "items": [
+              "Demand falls with price, supply rises with it.",
+              "Above the crossing: surplus. Below it: shortage.",
+              "The price rests where the two quantities are equal."
+            ]
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Three ideas. Buyers want less as the price climbs; sellers offer more.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "recap.i1"
+                ],
+                "how": "type"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Too expensive, tomatoes pile up. Too cheap, the stall empties fast.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "recap.i2"
+                ],
+                "how": "type"
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "So the tomato price settled on its own, where both sides agree.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "recap.i3"
+                ],
+                "how": "type"
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "recap.i3"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "quiz": {
+      "questions": [
+        {
+          "prompt": "At a price above the equilibrium, unsold goods pile up. What does that pile push the price to do?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "Rise, because sellers want more profit"
+            },
+            {
+              "id": "b",
+              "text": "Fall, because sellers cut prices to clear stock"
+            },
+            {
+              "id": "c",
+              "text": "Stay put, because the price is already set"
+            },
+            {
+              "id": "d",
+              "text": "Rise, because buyers see plenty available"
+            }
+          ],
+          "answer_id": "b",
+          "explanation": "A surplus means quantity supplied exceeds quantity demanded, so sellers lower the price to attract buyers.",
+          "scene_id": "s3"
+        },
+        {
+          "prompt": "If every buyer suddenly wants twice as much at every price, what happens to the equilibrium quantity and price?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "Quantity rises, price stays the same"
+            },
+            {
+              "id": "b",
+              "text": "Quantity falls, price rises"
+            },
+            {
+              "id": "c",
+              "text": "Quantity rises, price also rises"
+            },
+            {
+              "id": "d",
+              "text": "Both quantity and price stay the same"
+            }
+          ],
+          "answer_id": "c",
+          "explanation": "A demand increase shifts the demand curve right, raising both the equilibrium quantity and price along the upward-sloping supply curve.",
+          "scene_id": "s5"
+        },
+        {
+          "prompt": "On a seesaw of buyers and sellers, what happens when the two pushes match?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "The price keeps moving until one side gives up"
+            },
+            {
+              "id": "b",
+              "text": "The price becomes irrelevant to the market"
+            },
+            {
+              "id": "c",
+              "text": "The price oscillates wildly without settling"
+            },
+            {
+              "id": "d",
+              "text": "The price settles at the equilibrium level"
+            }
+          ],
+          "answer_id": "d",
+          "explanation": "When the upward push from sellers equals the downward push from buyers, the price stops moving at equilibrium.",
+          "scene_id": "s2"
+        }
+      ]
+    }
+  }
+}

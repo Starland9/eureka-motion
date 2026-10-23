@@ -1,0 +1,1322 @@
+{
+  "slug": "economics/compound-interest",
+  "subject": "economics",
+  "reference_level": "lycee",
+  "language": "en",
+  "title": "Compound Interest",
+  "question": "How does compound interest work?",
+  "reviewed_by": null,
+  "reviewed_at": null,
+  "verdicts": [
+    {
+      "target": "plan",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "The compound interest formula B = C(1+r)^n is correct, the derived expressions (interest, simple-interest comparison, doubled period, rate in percent) all compute what their labels say with consistent units, the parameter ranges are physica",
+      "checks": [
+        "structure",
+        "model",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s1",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "The scene correctly contrasts linear (simple interest) and exponential (compound interest) growth from the same capital and rate, and the sweep of n makes the compound curve visibly bend ahead, matching the hook's intent without any false c",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s2",
+      "status": "corrected",
+      "attempts": 2,
+      "reason": "The narration correctly likens compound interest to a snowball that grows faster as it picks up more snow, and the moving ball and rising curve show the acceleration; no false statement or wrong label appears.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s3",
+      "status": "corrected",
+      "attempts": 2,
+      "reason": "The scene correctly shows the second year's interest computed on the whole balance (capital plus first-year interest), and the second-year interest slice is thicker since it is r times the larger stack.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s4",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "The scene correctly shows the balance being multiplied by the same factor (1+r) each year, collapsing the repeated multiplication into the power B = C(1+r)^n, with readouts that match the model's quantities.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s5",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "The scene correctly plots compound growth B = C(1+r)^n curving upward against a straight simple-interest line, and the readouts correctly name the final balance B and the interest earned I = C(1+r)^n − C, consistent with the plan's key rule",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s6",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "The recap correctly restates the key rule—interest on the whole balance and repeated multiplication by (1+r)—and the upward-bending curve from compounding, matching the outline's intent.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    }
+  ],
+  "payload": {
+    "version": 1,
+    "plan": {
+      "objective": "Explain how interest added to the capital then earns interest itself, and predict a balance with the formula B = C(1+r)^n.",
+      "prerequisites": [
+        "Percentages: taking 5% of a number",
+        "Powers with a whole-number exponent",
+        "Multiplying a number by a repeated factor"
+      ],
+      "analogy": {
+        "name": "The snowball rolling downhill",
+        "mapping": "The snowball is the balance, the fresh snow it picks up each turn is the interest, and each roll is one year: the bigger the ball, the more snow it grabs, so growth speeds up."
+      },
+      "key_rule": {
+        "statement": "Each year the interest is calculated on the whole balance, capital plus interest already earned, so the balance is multiplied by the same factor (1 + rate) every period.",
+        "formula": "\\res{B} = \\q{C} \\times (1 + \\q{r})^{\\q{n}}"
+      },
+      "steps": [
+        {
+          "role": "hook",
+          "intent": "Show two savers with the same start where one pulls far ahead, and ask why.",
+          "visual": "Two bars grow year by year: the plain one rises in equal steps, the other bends upward and overtakes."
+        },
+        {
+          "role": "analogy",
+          "intent": "Give the feel that growth on growth accelerates, like a snowball.",
+          "visual": "A snowball rolls down a slope, each turn it grows and sweeps up more snow; its radius curve steepens."
+        },
+        {
+          "role": "mechanism",
+          "intent": "Show that interest is computed on the new balance, not only on the starting capital.",
+          "visual": "A stack of coins: 100, then 5% added on top, next year the 5% is taken from the whole new stack."
+        },
+        {
+          "role": "formula",
+          "intent": "Turn the repeated multiplication into one power and name each symbol.",
+          "visual": "The factor (1+r) is stamped year after year on the balance; the stamps collapse into an exponent n."
+        },
+        {
+          "role": "example",
+          "intent": "Compute a real case and reveal how much of the final sum is interest.",
+          "visual": "Table of balances year by year for the default values; the interest part grows faster than the deposits."
+        },
+        {
+          "role": "recap",
+          "intent": "Fix the two ideas and answer the hook.",
+          "visual": "Three short lines; the last one highlights the curved bar from the hook."
+        }
+      ]
+    },
+    "params": [
+      {
+        "id": "C",
+        "symbol": "C",
+        "label": "Starting capital",
+        "unit": "€",
+        "min": 100,
+        "max": 10000,
+        "step": 100,
+        "default": 1000,
+        "role": "quantity"
+      },
+      {
+        "id": "r",
+        "symbol": "r",
+        "label": "Annual interest rate",
+        "unit": "",
+        "min": 0.01,
+        "max": 0.15,
+        "step": 0.005,
+        "default": 0.05,
+        "role": "quantity"
+      },
+      {
+        "id": "n",
+        "symbol": "n",
+        "label": "Number of years",
+        "unit": "years",
+        "min": 1,
+        "max": 40,
+        "step": 1,
+        "default": 10,
+        "role": "quantity"
+      }
+    ],
+    "model": {
+      "constants": [],
+      "derived": [
+        {
+          "id": "B",
+          "expr": "C * (1 + r)^n",
+          "unit": "€",
+          "label": "Final balance",
+          "symbol": "B",
+          "format": "fixed:2"
+        },
+        {
+          "id": "gain",
+          "expr": "C * (1 + r)^n - C",
+          "unit": "€",
+          "label": "Interest earned",
+          "symbol": "I",
+          "format": "fixed:2"
+        },
+        {
+          "id": "B_simple",
+          "expr": "C * (1 + r * n)",
+          "unit": "€",
+          "label": "Balance with simple interest",
+          "symbol": "B_s",
+          "format": "fixed:2"
+        },
+        {
+          "id": "B_2n",
+          "expr": "C * (1 + r)^(2 * n)",
+          "unit": "€",
+          "label": "Balance at twice the years",
+          "symbol": "B₂ₙ",
+          "format": "fixed:2"
+        },
+        {
+          "id": "r_pct",
+          "expr": "r * 100",
+          "unit": "%",
+          "label": "Rate in percent",
+          "symbol": "r",
+          "format": "fixed:1"
+        }
+      ]
+    },
+    "scenes": [
+      {
+        "id": "s1",
+        "index": 0,
+        "role": "hook",
+        "title": "Same start, two savers: one pulls far ahead",
+        "layout": "compare",
+        "world": {
+          "x": [
+            0,
+            42
+          ],
+          "y": [
+            0,
+            1700
+          ]
+        },
+        "derived": [
+          {
+            "id": "y_end_simple",
+            "expr": "C * (1 + r * n)",
+            "unit": "€",
+            "label": "Plain saver after the years",
+            "format": "fixed:0"
+          },
+          {
+            "id": "y_end_compound",
+            "expr": "C * (1 + r)^n",
+            "unit": "€",
+            "label": "Snowball saver after the years",
+            "format": "fixed:0"
+          }
+        ],
+        "elements": [
+          {
+            "id": "axes_plain",
+            "slot": "figure_a",
+            "type": "axes",
+            "xLabel": "years",
+            "yLabel": "balance",
+            "xTicks": 4,
+            "yTicks": 3
+          },
+          {
+            "id": "plain_curve",
+            "slot": "figure_a",
+            "type": "plot",
+            "fn": "C * (1 + r * x)",
+            "domain": [
+              0,
+              {
+                "expr": "n"
+              }
+            ],
+            "role": "ink",
+            "label": "plain"
+          },
+          {
+            "id": "axes_comp",
+            "slot": "figure_b",
+            "type": "axes",
+            "xLabel": "years",
+            "yLabel": "balance",
+            "xTicks": 4,
+            "yTicks": 3
+          },
+          {
+            "id": "comp_curve",
+            "slot": "figure_b",
+            "type": "plot",
+            "fn": "C * (1 + r)^x",
+            "domain": [
+              0,
+              {
+                "expr": "n"
+              }
+            ],
+            "role": "quantity",
+            "label": "snowball"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Two friends set aside the same starting capital, at the same rate.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "axes_plain",
+                  "axes_comp"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "One grows in equal steps. The other bends upward, then overtakes.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "plain_curve"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "comp_curve"
+                ],
+                "how": "draw"
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Same money, same rate. So why does the second one end up so far ahead?",
+            "actions": [
+              {
+                "do": "sweep",
+                "param": "n",
+                "to": {
+                  "expr": "2 * n"
+                }
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "comp_curve"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s2",
+        "index": 1,
+        "role": "analogy",
+        "title": "The snowball picks up more snow each turn",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            -5,
+            5
+          ],
+          "y": [
+            -3,
+            3
+          ]
+        },
+        "derived": [
+          {
+            "id": "s1",
+            "expr": "-4",
+            "unit": "",
+            "label": "First stop x",
+            "format": "fixed:1"
+          },
+          {
+            "id": "s2",
+            "expr": "-1.2",
+            "unit": "",
+            "label": "Second stop x",
+            "format": "fixed:1"
+          },
+          {
+            "id": "s3",
+            "expr": "2",
+            "unit": "",
+            "label": "Third stop x",
+            "format": "fixed:1"
+          },
+          {
+            "id": "s4",
+            "expr": "4.4",
+            "unit": "",
+            "label": "Fourth stop x",
+            "format": "fixed:1"
+          }
+        ],
+        "elements": [
+          {
+            "id": "slope",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              -4.6,
+              1.6
+            ],
+            "to": [
+              4.6,
+              -1.8
+            ]
+          },
+          {
+            "id": "start",
+            "slot": "figure",
+            "type": "object",
+            "kind": "ball",
+            "at": [
+              -4.2,
+              1.4
+            ],
+            "size": 0.5,
+            "label": "Start"
+          },
+          {
+            "id": "p1",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              -1.6,
+              -1.4
+            ],
+            "role": "result"
+          },
+          {
+            "id": "p2",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              1.6,
+              -0.6
+            ],
+            "role": "result"
+          },
+          {
+            "id": "p3",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              4.2,
+              0.8
+            ],
+            "role": "result"
+          },
+          {
+            "id": "curve",
+            "slot": "figure",
+            "type": "plot",
+            "fn": "0.09*(x+4.6)^2-2.4",
+            "domain": [
+              -4.6,
+              4.6
+            ],
+            "role": "result",
+            "label": "Snow picked up"
+          },
+          {
+            "id": "note",
+            "slot": "notes",
+            "type": "text",
+            "text": "Bigger ball: more new snow.",
+            "emphasis": "strong",
+            "role": "result"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Picture a snowball rolling downhill, getting heavier with every turn.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "slope",
+                  "start"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Each turn it sweeps up fresh snow, so it grows faster and faster.",
+            "actions": [
+              {
+                "do": "move",
+                "target": "start",
+                "to": [
+                  -1.6,
+                  -1.4
+                ]
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "p1"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "move",
+                "target": "start",
+                "to": [
+                  1.6,
+                  -0.6
+                ],
+                "at": 0.45
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "p2"
+                ],
+                "how": "fade",
+                "at": 0.45
+              },
+              {
+                "do": "move",
+                "target": "start",
+                "to": [
+                  4.2,
+                  0.8
+                ],
+                "at": 0.7
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "p3"
+                ],
+                "how": "fade",
+                "at": 0.7
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Interest works the same way: it earns interest, and the curve steepens.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "curve"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "note"
+                ],
+                "how": "type",
+                "at": 0.5
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s3",
+        "index": 2,
+        "role": "mechanism",
+        "title": "Interest on the new stack, not the old one",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            0,
+            10
+          ],
+          "y": [
+            0,
+            6
+          ]
+        },
+        "derived": [
+          {
+            "id": "base_h",
+            "expr": "0.6",
+            "unit": "",
+            "label": "First-year base height",
+            "format": "fixed:2"
+          },
+          {
+            "id": "int1_h",
+            "expr": "0.6 * r",
+            "unit": "",
+            "label": "First-year interest height",
+            "format": "fixed:2"
+          },
+          {
+            "id": "base2_h",
+            "expr": "0.6 * (1 + r)",
+            "unit": "",
+            "label": "Second-year base height",
+            "format": "fixed:2"
+          },
+          {
+            "id": "int2_h",
+            "expr": "0.6 * (1 + r) * r",
+            "unit": "",
+            "label": "Second-year interest height",
+            "format": "fixed:2"
+          }
+        ],
+        "elements": [
+          {
+            "id": "stack1",
+            "slot": "figure",
+            "type": "shape",
+            "kind": "rect",
+            "center": [
+              2.5,
+              {
+                "expr": "base_h / 2"
+              }
+            ],
+            "width": 3,
+            "height": {
+              "expr": "base_h"
+            },
+            "fill": "quantity",
+            "label": "Year 1 capital"
+          },
+          {
+            "id": "gain1",
+            "slot": "figure",
+            "type": "shape",
+            "kind": "rect",
+            "center": [
+              2.5,
+              {
+                "expr": "base_h + int1_h / 2"
+              }
+            ],
+            "width": 3,
+            "height": {
+              "expr": "int1_h"
+            },
+            "fill": "action"
+          },
+          {
+            "id": "h2",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              2.5,
+              {
+                "expr": "base_h + int1_h"
+              }
+            ],
+            "to": [
+              7.5,
+              {
+                "expr": "base_h + int1_h"
+              }
+            ],
+            "style": "dashed"
+          },
+          {
+            "id": "stack1copy",
+            "slot": "figure",
+            "type": "shape",
+            "kind": "rect",
+            "center": [
+              6,
+              {
+                "expr": "(base_h + int1_h) / 2"
+              }
+            ],
+            "width": 3,
+            "height": {
+              "expr": "base_h + int1_h"
+            },
+            "fill": "quantity"
+          },
+          {
+            "id": "gain2",
+            "slot": "figure",
+            "type": "shape",
+            "kind": "rect",
+            "center": [
+              6,
+              {
+                "expr": "base_h + int1_h + int2_h / 2"
+              }
+            ],
+            "width": 3,
+            "height": {
+              "expr": "int2_h"
+            },
+            "fill": "action"
+          },
+          {
+            "id": "note",
+            "slot": "notes",
+            "type": "text",
+            "text": "The first year’s interest joins the capital.",
+            "emphasis": "strong"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Year one: the capital earns interest, and the slice is added on top.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "stack1"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "gain1"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "note"
+                ],
+                "how": "type"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Year two starts from the whole new stack, interest included.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "h2"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "stack1copy"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "So the same percentage gives a thicker slice, because it bites the bigger stack.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "gain2"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "gain2"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s4",
+        "index": 3,
+        "role": "formula",
+        "title": "Same factor every year becomes a power",
+        "layout": "formula-focus",
+        "world": {
+          "x": [
+            0,
+            11
+          ],
+          "y": [
+            0,
+            4
+          ]
+        },
+        "derived": [
+          {
+            "id": "f",
+            "expr": "1 + r",
+            "unit": "",
+            "label": "Yearly factor",
+            "symbol": "1+r",
+            "format": "fixed:3"
+          },
+          {
+            "id": "y1",
+            "expr": "C * (1 + r)",
+            "unit": "€",
+            "label": "After one year",
+            "format": "fixed:2"
+          }
+        ],
+        "elements": [
+          {
+            "id": "fm",
+            "slot": "formula",
+            "type": "formula",
+            "tex": "\\res{B} = \\q{C} \\times (1 + \\q{r})^{\\q{n}}"
+          },
+          {
+            "id": "coin",
+            "slot": "figure",
+            "type": "object",
+            "kind": "coin",
+            "at": [
+              1,
+              2
+            ],
+            "size": 1,
+            "label": "C"
+          },
+          {
+            "id": "st1",
+            "slot": "figure",
+            "type": "vector",
+            "from": [
+              2,
+              2
+            ],
+            "to": [
+              3,
+              2
+            ],
+            "label": "×(1+r)",
+            "role": "quantity"
+          },
+          {
+            "id": "st2",
+            "slot": "figure",
+            "type": "vector",
+            "from": [
+              3.2,
+              2
+            ],
+            "to": [
+              4.2,
+              2
+            ],
+            "role": "quantity"
+          },
+          {
+            "id": "st3",
+            "slot": "figure",
+            "type": "vector",
+            "from": [
+              5.5,
+              2
+            ],
+            "to": [
+              7,
+              2
+            ],
+            "role": "quantity"
+          },
+          {
+            "id": "dots",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              8.2,
+              2
+            ],
+            "label": "…",
+            "role": "quantity"
+          },
+          {
+            "id": "stn",
+            "slot": "figure",
+            "type": "vector",
+            "from": [
+              8.8,
+              2
+            ],
+            "to": [
+              10.2,
+              2
+            ],
+            "label": "×(1+r)",
+            "role": "quantity"
+          },
+          {
+            "id": "pow",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              4,
+              3.2
+            ],
+            "label": "(1+r)^n"
+          },
+          {
+            "id": "factor",
+            "slot": "readout",
+            "type": "readout",
+            "value": "f",
+            "label": "Yearly factor"
+          },
+          {
+            "id": "year1",
+            "slot": "readout",
+            "type": "readout",
+            "value": "y1",
+            "label": "After one year"
+          },
+          {
+            "id": "rate",
+            "slot": "readout",
+            "type": "readout",
+            "value": "r_pct",
+            "label": "Rate in percent"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Each year your whole balance is multiplied by the same factor, one plus the rate.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "fm"
+                ],
+                "how": "type"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "coin"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "st1",
+                  "st2"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "factor",
+                  "rate"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Repeat it year after year, and the stamps multiply: the same factor again, again.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "st3",
+                  "dots",
+                  "stn"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "year1"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "So the count of stamps becomes an exponent: B equals C times that factor to the n.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "pow"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "fm"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s5",
+        "index": 4,
+        "role": "example",
+        "title": "A real case: 1 000 € at 5% for ten years",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            0,
+            10
+          ],
+          "y": [
+            0,
+            1700
+          ]
+        },
+        "derived": [],
+        "elements": [
+          {
+            "id": "curve",
+            "slot": "figure",
+            "type": "plot",
+            "fn": "C * (1 + r)^x",
+            "domain": [
+              0,
+              10
+            ],
+            "role": "result",
+            "label": "Balance"
+          },
+          {
+            "id": "line",
+            "slot": "figure",
+            "type": "plot",
+            "fn": "C * (1 + r * x)",
+            "domain": [
+              0,
+              10
+            ],
+            "role": "ink",
+            "label": "Simple interest",
+            "style": "dashed"
+          },
+          {
+            "id": "axes",
+            "slot": "figure",
+            "type": "axes",
+            "xLabel": "years",
+            "yLabel": "€",
+            "xTicks": 5,
+            "yTicks": 4,
+            "grid": true
+          },
+          {
+            "id": "start",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              0,
+              1000
+            ],
+            "label": "C = 1 000 €",
+            "role": "quantity"
+          },
+          {
+            "id": "final",
+            "slot": "notes",
+            "type": "readout",
+            "value": "B",
+            "label": "Final balance"
+          },
+          {
+            "id": "interest",
+            "slot": "notes",
+            "type": "readout",
+            "value": "gain",
+            "label": "Of which interest"
+          },
+          {
+            "id": "note",
+            "slot": "notes",
+            "type": "text",
+            "text": "The gap is interest on interest.",
+            "emphasis": "strong"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Start with one thousand euros at five percent, for ten years.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "axes"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "start"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Watch the balance. It bends upward, while simple interest stays a straight line.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "line"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "curve"
+                ],
+                "how": "draw"
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Here is the total, and the part that is pure interest on interest.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "final",
+                  "interest"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "note"
+                ],
+                "how": "type",
+                "at": 0.6
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s6",
+        "index": 5,
+        "role": "recap",
+        "title": "Two ideas to keep",
+        "layout": "statement",
+        "derived": [],
+        "elements": [
+          {
+            "id": "recap",
+            "slot": "text",
+            "type": "list",
+            "items": [
+              "Each year interest is taken on the whole balance, not just on the starting capital.",
+              "The balance is multiplied by (1 + r) every year, so it becomes C times (1 + r) to the power n.",
+              "Growth on growth bends the curve upward: the saver earns more and more each year."
+            ]
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "First idea: each year, the interest is taken on the whole balance.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "recap"
+                ],
+                "how": "type"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Second: the balance is multiplied by one plus r, year after year.",
+            "actions": []
+          },
+          {
+            "id": "b3",
+            "narration": "That is why the second bar bends upward and overtakes the first.",
+            "actions": [
+              {
+                "do": "highlight",
+                "targets": [
+                  "recap.i3"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "quiz": {
+      "questions": [
+        {
+          "prompt": "Two savings accounts start with the same amount and earn the same yearly rate. One pays simple interest, the other compound interest. After many years, what makes the compound account pull ahead?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "It earns a higher yearly rate on the starting capital."
+            },
+            {
+              "id": "b",
+              "text": "Its interest also earns interest in later years."
+            },
+            {
+              "id": "c",
+              "text": "It adds the same interest amount every year."
+            },
+            {
+              "id": "d",
+              "text": "It avoids paying any interest on the original amount."
+            }
+          ],
+          "answer_id": "b",
+          "explanation": "With compound interest, each year’s interest joins the balance and then earns interest itself, so the growth speeds up.",
+          "scene_id": "s1"
+        },
+        {
+          "prompt": "You leave a sum in an account that earns compound interest. In year two, the interest added is larger than in year one. Why?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "The rate increases every year automatically."
+            },
+            {
+              "id": "b",
+              "text": "The interest is calculated on a larger balance that includes year-one interest."
+            },
+            {
+              "id": "c",
+              "text": "The bank adds a fixed bonus each year."
+            },
+            {
+              "id": "d",
+              "text": "The interest is calculated only on the original capital each year."
+            }
+          ],
+          "answer_id": "b",
+          "explanation": "In year two, the percentage is applied to the whole new stack, capital plus the first year’s interest, so the slice is thicker.",
+          "scene_id": "s3"
+        },
+        {
+          "prompt": "A balance grows by compound interest. If you double the number of years, what happens to the final balance?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "It doubles."
+            },
+            {
+              "id": "b",
+              "text": "It stays the same."
+            },
+            {
+              "id": "c",
+              "text": "It is squared."
+            },
+            {
+              "id": "d",
+              "text": "It is multiplied by the yearly factor raised to the extra years."
+            }
+          ],
+          "answer_id": "d",
+          "explanation": "The balance is C times (1+r) to the power n, so adding more years multiplies it by (1+r) for each extra year.",
+          "scene_id": "s4"
+        }
+      ]
+    }
+  }
+}

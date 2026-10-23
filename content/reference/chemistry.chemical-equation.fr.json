@@ -1,0 +1,1224 @@
+{
+  "slug": "chemistry/chemical-equation",
+  "subject": "chemistry",
+  "reference_level": "college",
+  "language": "fr",
+  "title": "Équilibrage d'une équation chimique",
+  "question": "Comment équilibrer une équation chimique ?",
+  "reviewed_by": null,
+  "reviewed_at": null,
+  "verdicts": [
+    {
+      "target": "plan",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "L'équation H₂ + O₂ → H₂O, les décomptes d'atomes (2a, 2b, 2c), les écarts et l'analogie de la recette sont corrects et adaptés au niveau indiqué.",
+      "checks": [
+        "structure",
+        "model",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s1",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "La scène montre bien H₂ + O₂ → H₂O avec deux atomes d’oxygène à gauche et un seul à droite, ce qui illustre correctement le déséquilibre annoncé.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s2",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "La scène illustre correctement l'analogie de la recette : doubler la pâte en gardant les proportions, et l'œuf manquant quand on double seulement la farine.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s3",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "La scène montre bien qu'en ajustant le coefficient c à 2, les comptages d'hydrogène et d'oxygène s'égalisent des deux côtés, ce qui est correct avec a=2 et b=1.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s4",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "La scène compte séparément les atomes de chaque élément des deux côtés, montre qu'on ajuste uniquement les coefficients (l'indice 2 des formules reste fixe) et illustre le retour à l'équilibre sans énoncé faux.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s5",
+      "status": "corrected",
+      "attempts": 2,
+      "reason": "La scène montre la combustion du méthane CH₄ + 2 O₂ → CO₂ + 2 H₂O, où chaque type d'atome est bien le même des deux côtés, et le comptage affiché est correct.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s6",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "Ce résumé énonce correctement les deux idées clés et l'équation 2 H₂ + O₂ → 2 H₂O est bien équilibrée (4 H et 2 O de chaque côté).",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    }
+  ],
+  "payload": {
+    "version": 1,
+    "plan": {
+      "objective": "Savoir équilibrer une équation chimique en ajustant les coefficients pour que chaque type d’atome soit identique des deux côtés.",
+      "prerequisites": [
+        "Reconnaître les formules des molécules simples (H₂, O₂, H₂O)",
+        "Lire un indice dans une formule (le 2 de H₂O)",
+        "Compter des objets identiques de part et d’autre"
+      ],
+      "analogy": {
+        "name": "La recette des crêpes",
+        "mapping": "Les atomes sont les ingrédients : on peut doubler la quantité de pâte, mais il faut garder les mêmes proportions, sinon il reste des œufs sur la table."
+      },
+      "key_rule": {
+        "statement": "Une équation est équilibrée quand le nombre d’atomes de chaque élément est le même dans les réactifs et dans les produits ; on y arrive en changeant seulement les coefficients devant les formules, jamais les indices.",
+        "formula": "\\q{a}\\,\\mathrm{A} + \\q{b}\\,\\mathrm{B} \\rightarrow \\res{c}\\,\\mathrm{AB}"
+      },
+      "steps": [
+        {
+          "role": "hook",
+          "intent": "Faire voir qu’une équation écrite au hasard ne compte pas pareil des deux côtés.",
+          "visual": "Formule H₂ + O₂ vers H₂O ; les atomes d’oxygène sont comptés à gauche et à droite, deux contre un."
+        },
+        {
+          "role": "analogy",
+          "intent": "Faire sentir qu’on peut tout agrandir tant que les proportions sont gardées.",
+          "visual": "Deux bols de pâte : un seul, puis doublé ; les œufs restent appariés aux farines."
+        },
+        {
+          "role": "mechanism",
+          "intent": "Montrer qu’on ajuste les coefficients un par un jusqu’à l’égalité des atomes.",
+          "visual": "Les boules H et O glissent d’un plateau à l’autre ; le coefficient 2 apparaît devant H₂O et rééquilibre."
+        },
+        {
+          "role": "formula",
+          "intent": "Énoncer la règle du comptage et l’interdiction de toucher aux indices.",
+          "visual": "Les comptages de H et O s’affichent en deux colonnes et passent au vert quand ils sont égaux."
+        },
+        {
+          "role": "example",
+          "intent": "Vérifier sur la combustion du méthane qu’un coefficient un peu plus grand suffit.",
+          "visual": "CH₄ + 2 O₂ vers CO₂ + 2 H₂O ; chaque type d’atome est coché à gauche et à droite."
+        },
+        {
+          "role": "recap",
+          "intent": "Fixer les deux idées : compter chaque élément, ajuster les coefficients seulement.",
+          "visual": "Deux phrases courtes, puis la formule H₂ + O₂ équilibrée en surbrillance."
+        }
+      ]
+    },
+    "params": [
+      {
+        "id": "a",
+        "symbol": "a",
+        "label": "Coefficient devant H₂",
+        "unit": "",
+        "min": 1,
+        "max": 4,
+        "step": 1,
+        "default": 2,
+        "role": "quantity"
+      },
+      {
+        "id": "b",
+        "symbol": "b",
+        "label": "Coefficient devant O₂",
+        "unit": "",
+        "min": 1,
+        "max": 4,
+        "step": 1,
+        "default": 1,
+        "role": "quantity"
+      },
+      {
+        "id": "c",
+        "symbol": "c",
+        "label": "Coefficient devant H₂O",
+        "unit": "",
+        "min": 1,
+        "max": 4,
+        "step": 1,
+        "default": 2,
+        "role": "quantity"
+      }
+    ],
+    "model": {
+      "constants": [],
+      "derived": [
+        {
+          "id": "H_gauche",
+          "expr": "2 * a",
+          "unit": "atomes",
+          "label": "Atomes d’hydrogène à gauche",
+          "symbol": "H",
+          "format": "int"
+        },
+        {
+          "id": "H_droite",
+          "expr": "2 * c",
+          "unit": "atomes",
+          "label": "Atomes d’hydrogène à droite",
+          "symbol": "H",
+          "format": "int"
+        },
+        {
+          "id": "O_gauche",
+          "expr": "2 * b",
+          "unit": "atomes",
+          "label": "Atomes d’oxygène à gauche",
+          "symbol": "O",
+          "format": "int"
+        },
+        {
+          "id": "O_droite",
+          "expr": "c",
+          "unit": "atomes",
+          "label": "Atomes d’oxygène à droite",
+          "symbol": "O",
+          "format": "int"
+        },
+        {
+          "id": "ecart_H",
+          "expr": "abs(2 * a - 2 * c)",
+          "unit": "atomes",
+          "label": "Écart d’hydrogène",
+          "symbol": "ΔH",
+          "format": "int"
+        },
+        {
+          "id": "ecart_O",
+          "expr": "abs(2 * b - c)",
+          "unit": "atomes",
+          "label": "Écart d’oxygène",
+          "symbol": "ΔO",
+          "format": "int"
+        }
+      ]
+    },
+    "scenes": [
+      {
+        "id": "s1",
+        "index": 0,
+        "role": "hook",
+        "title": "H₂ + O₂ → H₂O : ça ne compte pas ?",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            0,
+            10
+          ],
+          "y": [
+            0,
+            6
+          ]
+        },
+        "derived": [
+          {
+            "id": "y_res",
+            "expr": "4",
+            "unit": "",
+            "label": "Hauteur de la molécule de droite",
+            "format": "int"
+          },
+          {
+            "id": "y_rea",
+            "expr": "1.7",
+            "unit": "",
+            "label": "Hauteur des molécules de gauche",
+            "format": "int"
+          }
+        ],
+        "elements": [
+          {
+            "id": "labH2",
+            "slot": "figure",
+            "type": "shape",
+            "kind": "rect",
+            "center": [
+              1.4,
+              {
+                "expr": "y_rea"
+              }
+            ],
+            "width": 2.2,
+            "height": 1,
+            "fill": "quantity",
+            "label": "H₂"
+          },
+          {
+            "id": "labO2",
+            "slot": "figure",
+            "type": "shape",
+            "kind": "rect",
+            "center": [
+              5.2,
+              {
+                "expr": "y_rea"
+              }
+            ],
+            "width": 2.2,
+            "height": 1,
+            "fill": "quantity",
+            "label": "O₂"
+          },
+          {
+            "id": "labH2O",
+            "slot": "figure",
+            "type": "shape",
+            "kind": "rect",
+            "center": [
+              8.6,
+              {
+                "expr": "y_res"
+              }
+            ],
+            "width": 2.4,
+            "height": 1,
+            "fill": "none",
+            "label": "H₂O"
+          },
+          {
+            "id": "arrow1",
+            "slot": "figure",
+            "type": "vector",
+            "from": [
+              6.7,
+              {
+                "expr": "y_rea"
+              }
+            ],
+            "to": [
+              7.3,
+              {
+                "expr": "y_rea"
+              }
+            ],
+            "role": "action"
+          },
+          {
+            "id": "arrow2",
+            "slot": "figure",
+            "type": "vector",
+            "from": [
+              8.6,
+              {
+                "expr": "y_res"
+              }
+            ],
+            "to": [
+              6.7,
+              {
+                "expr": "y_res"
+              }
+            ],
+            "role": "action"
+          },
+          {
+            "id": "titre",
+            "slot": "notes",
+            "type": "text",
+            "text": "Une équation écrite au hasard ?",
+            "emphasis": "strong"
+          },
+          {
+            "id": "verdict",
+            "slot": "notes",
+            "type": "text",
+            "text": "2 atomes d’oxygène à gauche, 1 à droite : ça cloche."
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Voici une équation chimique écrite un peu vite. Regarde-la bien.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "labH2",
+                  "labO2",
+                  "arrow1",
+                  "labH2O"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "titre"
+                ],
+                "how": "type"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "arrow2"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Compte les boules d’oxygène : deux à gauche, une seule à droite.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "labH2O"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "labO2",
+                  "labH2O"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "labO2"
+                ],
+                "at": 0.5
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Il manque un atome. Comment rétablir l’équilibre, à ton avis ?",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "verdict"
+                ],
+                "how": "type"
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "labH2O"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s2",
+        "index": 1,
+        "role": "analogy",
+        "title": "Doubler la pâte, garder les proportions",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            0,
+            10
+          ],
+          "y": [
+            0,
+            6
+          ]
+        },
+        "derived": [
+          {
+            "id": "x_bol2",
+            "expr": "5",
+            "unit": "",
+            "label": "Position du second bol",
+            "format": "int"
+          },
+          {
+            "id": "x_oeufs2",
+            "expr": "6.5",
+            "unit": "",
+            "label": "Position des œufs doublés",
+            "format": "int"
+          }
+        ],
+        "elements": [
+          {
+            "id": "bol1",
+            "slot": "figure",
+            "type": "shape",
+            "kind": "circle",
+            "center": [
+              2.5,
+              3
+            ],
+            "radius": 1.1,
+            "fill": "none",
+            "label": "1 bol"
+          },
+          {
+            "id": "farine1",
+            "slot": "figure",
+            "type": "object",
+            "kind": "beaker",
+            "at": [
+              1.6,
+              3
+            ],
+            "size": 0.7
+          },
+          {
+            "id": "oeufs1",
+            "slot": "figure",
+            "type": "object",
+            "kind": "ball",
+            "at": [
+              3.4,
+              3
+            ],
+            "size": 0.5,
+            "label": "1 œuf"
+          },
+          {
+            "id": "bol2",
+            "slot": "figure",
+            "type": "shape",
+            "kind": "circle",
+            "center": [
+              7,
+              3
+            ],
+            "radius": 1.4,
+            "fill": "none",
+            "label": "2 bols"
+          },
+          {
+            "id": "farine2",
+            "slot": "figure",
+            "type": "object",
+            "kind": "beaker",
+            "at": [
+              5.9,
+              3
+            ],
+            "size": 0.9
+          },
+          {
+            "id": "oeufs2",
+            "slot": "figure",
+            "type": "object",
+            "kind": "ball",
+            "at": [
+              8.1,
+              3
+            ],
+            "size": 0.65,
+            "label": "2 œufs"
+          },
+          {
+            "id": "memo",
+            "slot": "notes",
+            "type": "text",
+            "text": "Tout double, rien ne reste seul.",
+            "emphasis": "strong"
+          },
+          {
+            "id": "lien",
+            "slot": "notes",
+            "type": "text",
+            "text": "Mêmes proportions, plus grande quantité."
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Pense à une recette de crêpes : un bol de farine, un œuf. Simple.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "bol1",
+                  "farine1",
+                  "oeufs1"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Tu veux deux fois plus de pâte ? Prends deux bols et deux œufs.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "bol2",
+                  "farine2",
+                  "oeufs2"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "lien"
+                ],
+                "how": "type",
+                "at": 0.8
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Mais si tu doubles la farine sans les œufs, il reste des œufs sur la table.",
+            "actions": [
+              {
+                "do": "hide",
+                "targets": [
+                  "oeufs2"
+                ]
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "memo"
+                ],
+                "how": "type",
+                "at": 0.7
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "memo"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s3",
+        "index": 2,
+        "role": "mechanism",
+        "title": "Ajuste le coefficient devant H₂O",
+        "layout": "formula-focus",
+        "derived": [],
+        "elements": [
+          {
+            "id": "eq",
+            "slot": "formula",
+            "type": "formula",
+            "tex": "\\q{a}\\,\\mathrm{H_2} + \\q{b}\\,\\mathrm{O_2} \\rightarrow \\res{c}\\,\\mathrm{H_2O}"
+          },
+          {
+            "id": "counts",
+            "slot": "figure",
+            "type": "bars",
+            "items": [
+              {
+                "label": "H à gauche",
+                "value": {
+                  "expr": "H_gauche"
+                },
+                "role": "quantity"
+              },
+              {
+                "label": "H à droite",
+                "value": {
+                  "expr": "H_droite"
+                },
+                "role": "quantity"
+              },
+              {
+                "label": "O à gauche",
+                "value": {
+                  "expr": "O_gauche"
+                },
+                "role": "quantity"
+              },
+              {
+                "label": "O à droite",
+                "value": {
+                  "expr": "O_droite"
+                },
+                "role": "quantity"
+              }
+            ],
+            "unit": "atomes"
+          },
+          {
+            "id": "hg",
+            "slot": "readout",
+            "type": "readout",
+            "value": "H_gauche",
+            "label": "H à gauche"
+          },
+          {
+            "id": "hd",
+            "slot": "readout",
+            "type": "readout",
+            "value": "H_droite",
+            "label": "H à droite"
+          },
+          {
+            "id": "og",
+            "slot": "readout",
+            "type": "readout",
+            "value": "O_gauche",
+            "label": "O à gauche"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Regarde les comptages en bas : deux colonnes, un barreau par type d’atome.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "eq"
+                ],
+                "how": "type"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "counts"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "hg",
+                  "hd",
+                  "og"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Devine : si je monte le coefficient c, les barreaux vont-ils se rejoindre ?",
+            "actions": [
+              {
+                "do": "sweep",
+                "param": "c",
+                "to": 4
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Essaie c égal à deux : l’hydrogène colle, et l’oxygène aussi.",
+            "actions": [
+              {
+                "do": "sweep",
+                "param": "c",
+                "to": 2
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "counts"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s4",
+        "index": 3,
+        "role": "formula",
+        "title": "Compter les atomes, ajuster les coefficients",
+        "layout": "formula-focus",
+        "world": {
+          "x": [
+            0,
+            10
+          ],
+          "y": [
+            0,
+            6
+          ]
+        },
+        "derived": [
+          {
+            "id": "x_Hg",
+            "expr": "1.6",
+            "unit": "",
+            "label": "Colonne H gauche",
+            "format": "int"
+          },
+          {
+            "id": "x_Hd",
+            "expr": "7.4",
+            "unit": "",
+            "label": "Colonne H droite",
+            "format": "int"
+          },
+          {
+            "id": "x_Og",
+            "expr": "1.6",
+            "unit": "",
+            "label": "Colonne O gauche",
+            "format": "int"
+          },
+          {
+            "id": "x_Od",
+            "expr": "7.4",
+            "unit": "",
+            "label": "Colonne O droite",
+            "format": "int"
+          }
+        ],
+        "elements": [
+          {
+            "id": "eq",
+            "slot": "formula",
+            "type": "formula",
+            "tex": "\\q{a}\\,\\mathrm{H_2} + \\q{b}\\,\\mathrm{O_2} \\rightarrow \\res{c}\\,\\mathrm{H_2O}"
+          },
+          {
+            "id": "dims",
+            "slot": "figure",
+            "type": "axes"
+          },
+          {
+            "id": "nHg",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              {
+                "expr": "x_Hg"
+              },
+              4.6
+            ],
+            "label": "H"
+          },
+          {
+            "id": "nHd",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              {
+                "expr": "x_Hd"
+              },
+              4.6
+            ],
+            "label": "H"
+          },
+          {
+            "id": "nOg",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              {
+                "expr": "x_Og"
+              },
+              2.2
+            ],
+            "label": "O"
+          },
+          {
+            "id": "nOd",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              {
+                "expr": "x_Od"
+              },
+              2.2
+            ],
+            "label": "O"
+          },
+          {
+            "id": "read_Hg",
+            "slot": "readout",
+            "type": "readout",
+            "value": "H_gauche",
+            "label": "H à gauche"
+          },
+          {
+            "id": "read_Hd",
+            "slot": "readout",
+            "type": "readout",
+            "value": "H_droite",
+            "label": "H à droite"
+          },
+          {
+            "id": "read_Og",
+            "slot": "readout",
+            "type": "readout",
+            "value": "O_gauche",
+            "label": "O à gauche"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Compte chaque élément séparément : à gauche, à droite.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "eq"
+                ],
+                "how": "type"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "dims",
+                  "nHg",
+                  "nHd"
+                ],
+                "how": "draw"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Tu peux changer les coefficients, devant les formules. Les petits indices, eux, ne bougent jamais.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "read_Hg",
+                  "read_Hd",
+                  "read_Og"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "nOg",
+                  "nOd"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "sweep",
+                "param": "c",
+                "to": 1
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Quand les deux comptages se rejoignent, l’équation est équilibrée.",
+            "actions": [
+              {
+                "do": "sweep",
+                "param": "c",
+                "to": 2
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "read_Og"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s5",
+        "index": 4,
+        "role": "example",
+        "title": "Le méthane qui brûle, bien compté",
+        "layout": "figure-notes",
+        "derived": [],
+        "elements": [
+          {
+            "id": "react",
+            "slot": "figure",
+            "type": "sim.reaction",
+            "reactants": [
+              {
+                "formula": "CH4",
+                "coefficient": 1
+              },
+              {
+                "formula": "O2",
+                "coefficient": 2
+              }
+            ],
+            "products": [
+              {
+                "formula": "CO2",
+                "coefficient": 1
+              },
+              {
+                "formula": "H2O",
+                "coefficient": 2
+              }
+            ]
+          },
+          {
+            "id": "n_C",
+            "slot": "notes",
+            "type": "readout",
+            "value": "ecart_H",
+            "label": "Atomes en trop ?"
+          },
+          {
+            "id": "rule",
+            "slot": "notes",
+            "type": "text",
+            "text": "Un 2 devant O2 et devant H2O.",
+            "emphasis": "strong"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Méthane qui brûle : CH4 plus O2, ça donne CO2 et de l’eau.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "react.reactants"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Compte : quatre hydrogènes à gauche, il en faut quatre à droite.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "react.products"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "react.tally"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Deux 2 devant O2 et H2O, et tout est coché des deux côtés.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "rule"
+                ],
+                "how": "type"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "n_C"
+                ],
+                "how": "fade",
+                "at": 1
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "rule"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s6",
+        "index": 5,
+        "role": "recap",
+        "title": "Compter, puis ajuster",
+        "layout": "statement",
+        "derived": [],
+        "elements": [
+          {
+            "id": "recap",
+            "slot": "text",
+            "type": "list",
+            "items": [
+              "Compte chaque type d’atome des deux côtés.",
+              "Ajuste seulement les coefficients devant les formules.",
+              "Jamais les indices : H₂ reste H₂."
+            ]
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "D’abord, compte chaque type d’atome, à gauche comme à droite.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "recap"
+                ],
+                "how": "type"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Ensuite, ajuste les coefficients devant les formules. Et jamais les indices.",
+            "actions": [
+              {
+                "do": "highlight",
+                "targets": [
+                  "recap.i2"
+                ]
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Deux H₂ plus un O₂ donnent deux H₂O. Les atomes sont tous casés.",
+            "actions": [
+              {
+                "do": "highlight",
+                "targets": [
+                  "recap.i3"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "quiz": {
+      "questions": [
+        {
+          "prompt": "Dans l’équation H₂ + O₂ → H₂O, pourquoi ça ne colle pas ?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "Il y a deux oxygènes à gauche et un seul à droite"
+            },
+            {
+              "id": "b",
+              "text": "Il y a trop d’hydrogène à droite"
+            },
+            {
+              "id": "c",
+              "text": "Il n’y a aucun atome d’oxygène à droite"
+            }
+          ],
+          "answer_id": "a",
+          "explanation": "À gauche on compte deux atomes d’oxygène, à droite un seul : il en manque un pour équilibrer.",
+          "scene_id": "s1"
+        },
+        {
+          "prompt": "Tu veux équilibrer une équation. Que peux-tu modifier ?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "Les petits indices collés aux symboles"
+            },
+            {
+              "id": "b",
+              "text": "Les coefficients devant les formules"
+            },
+            {
+              "id": "c",
+              "text": "Les symboles des éléments"
+            },
+            {
+              "id": "d",
+              "text": "Rien, l’équation est toujours juste"
+            }
+          ],
+          "answer_id": "b",
+          "explanation": "Seuls les coefficients devant les formules changent : les indices font partie de la molécule et restent intacts.",
+          "scene_id": "s4"
+        },
+        {
+          "prompt": "Pour brûler le méthane, on écrit CH₄ + 2 O₂ → CO₂ + 2 H₂O. Pourquoi le 2 devant H₂O ?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "Pour avoir autant d’hydrogène des deux côtés"
+            },
+            {
+              "id": "b",
+              "text": "Pour avoir autant de carbone des deux côtés"
+            },
+            {
+              "id": "c",
+              "text": "Pour faire deux fois plus de molécules d’oxygène"
+            },
+            {
+              "id": "d",
+              "text": "Parce que l’eau contient deux atomes d’oxygène"
+            }
+          ],
+          "answer_id": "a",
+          "explanation": "CH₄ apporte quatre hydrogènes ; avec le coefficient 2, deux H₂O en contiennent aussi quatre.",
+          "scene_id": "s5"
+        }
+      ]
+    }
+  }
+}

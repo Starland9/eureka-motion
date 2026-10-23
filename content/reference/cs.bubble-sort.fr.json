@@ -1,0 +1,1010 @@
+{
+  "slug": "cs/bubble-sort",
+  "subject": "cs",
+  "reference_level": "lycee",
+  "language": "fr",
+  "title": "Tri à bulles",
+  "question": "Comment fonctionne le tri à bulles ?",
+  "reviewed_by": null,
+  "reviewed_at": null,
+  "verdicts": [
+    {
+      "target": "plan",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "Les formules du tri à bulles (au plus n−1 passages, n(n−1)/2 comparaisons au pire) sont exactes, les expressions dérivées sont cohérentes et l'analogie des cailloux illustre correctement le mécanisme.",
+      "checks": [
+        "structure",
+        "model",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s1",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "La scène présente une liste en désordre, annonce le principe de comparaison et d’échange des voisins, et pose la question du nombre maximal de passages, ce qui correspond au rôle de l’accroche sans énoncé faux.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s2",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "La scène illustre correctement l'analogie : après une secousse, le plus gros caillou descend et un passage de tri pousse le plus grand nombre au bout, sans énoncé faux ni valeur mal nommée.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s3",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "La scène montre le curseur posé sur deux voisins à comparer, ce qui correspond au mécanisme décrit, sans énoncé faux.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s4",
+      "status": "corrected",
+      "attempts": 4,
+      "reason": "La boucle est correcte, les échanges et comparaisons cumulés atteignent bien n(n−1)/2 au dernier passage, et la narration reste en français sans énoncé faux.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s5",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "La scène déroule un tri à bulles sur six nombres avec un compteur d’échanges cohérent avec la formule du pire des cas, sans énoncé scientifique erroné.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s6",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "Le récapitulatif énonce correctement qu'un passage pousse le plus grand nombre en bout de liste, qu'on compare et échange les voisins, et qu'il faut au plus n − 1 passages puisque le dernier élément est déjà en place ; la narration est en f",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    }
+  ],
+  "payload": {
+    "version": 1,
+    "plan": {
+      "objective": "Savoir dérouler un tri à bulles à la main et dire pourquoi il faut au plus n−1 passages sur n nombres.",
+      "prerequisites": [
+        "Comparer deux nombres",
+        "Savoir ce qu’est une liste indicée",
+        "Suivre une boucle pas à pas"
+      ],
+      "analogy": {
+        "name": "Les gros cailloux qui coulent au fond du bocal",
+        "mapping": "Chaque caillou est un nombre ; secouer le bocal, c’est un passage ; le plus gros caillou tombe au fond à chaque secouage, comme le plus grand nombre finit en bout de liste."
+      },
+      "key_rule": {
+        "statement": "À chaque passage, on compare les voisins de gauche à droite et on les échange s’ils sont dans le mauvais ordre : le plus grand nombre restant remonte jusqu’au bout.",
+        "formula": "\\res{n_{passages}} \\leq \\q{n} - 1"
+      },
+      "steps": [
+        {
+          "role": "hook",
+          "intent": "Donner un besoin concret de tri et faire deviner combien d’échanges il faudra.",
+          "visual": "Une liste de nombres en désordre ; les voisins comparés s’illuminent et deux d’entre eux permutent."
+        },
+        {
+          "role": "analogy",
+          "intent": "Faire sentir qu’un seul passage suffit à pousser le plus grand tout au bout.",
+          "visual": "Des cailloux de tailles différentes dans un bocal ; le plus gros descend à chaque secousse."
+        },
+        {
+          "role": "mechanism",
+          "intent": "Montrer la comparaison des voisins et l’échange, un cran après l’autre.",
+          "visual": "Le curseur avance sur la liste ; les barres trop grandes glissent à droite, les autres restent."
+        },
+        {
+          "role": "formula",
+          "intent": "Écrire la boucle et compter les échanges maximaux.",
+          "visual": "La boucle s’affiche ; le compteur d’échanges grimpe jusqu’au nombre d’échanges maximal."
+        },
+        {
+          "role": "example",
+          "intent": "Dérouler un petit cas réel et faire voir le nombre surprenant d’échanges pour six nombres.",
+          "visual": "Six nombres triés pas à pas ; le compteur d’échanges affiche le total final."
+        },
+        {
+          "role": "recap",
+          "intent": "Fixer les idées et répondre à la question du départ sur le nombre de passages.",
+          "visual": "Trois phrases courtes ; la phrase réponse est encadrée."
+        }
+      ]
+    },
+    "params": [
+      {
+        "id": "n",
+        "symbol": "n",
+        "label": "Nombre d’éléments de la liste",
+        "unit": "",
+        "min": 2,
+        "max": 12,
+        "step": 1,
+        "default": 6,
+        "role": "quantity"
+      },
+      {
+        "id": "p",
+        "symbol": "p",
+        "label": "Nombre de passages",
+        "unit": "",
+        "min": 1,
+        "max": 11,
+        "step": 1,
+        "default": 5,
+        "role": "quantity"
+      }
+    ],
+    "model": {
+      "constants": [],
+      "derived": [
+        {
+          "id": "passages_max",
+          "expr": "n - 1",
+          "unit": "",
+          "label": "Passages maximaux",
+          "symbol": "P_max",
+          "format": "int"
+        },
+        {
+          "id": "comparaisons_max",
+          "expr": "n * (n - 1) / 2",
+          "unit": "",
+          "label": "Comparaisons dans le pire des cas",
+          "format": "int"
+        },
+        {
+          "id": "echanges_max",
+          "expr": "n * (n - 1) / 2",
+          "unit": "",
+          "label": "Échanges dans le pire des cas",
+          "format": "int"
+        },
+        {
+          "id": "comparaisons_p",
+          "expr": "p * (n - 1) - p * (p - 1) / 2",
+          "unit": "",
+          "label": "Comparaisons après p passages",
+          "format": "int"
+        },
+        {
+          "id": "echanges_p",
+          "expr": "p * (n - 1) - p * (p - 1) / 2",
+          "unit": "",
+          "label": "Échanges après p passages",
+          "format": "int"
+        }
+      ]
+    },
+    "scenes": [
+      {
+        "id": "s1",
+        "index": 0,
+        "role": "hook",
+        "title": "Six nombres en désordre à ranger",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            0,
+            10
+          ],
+          "y": [
+            0,
+            6
+          ]
+        },
+        "derived": [],
+        "elements": [
+          {
+            "id": "arr",
+            "slot": "figure",
+            "type": "sim.array",
+            "values": [
+              5,
+              2,
+              9,
+              1,
+              7,
+              3
+            ],
+            "algorithm": "bubble-sort",
+            "step": {
+              "expr": "0"
+            }
+          },
+          {
+            "id": "q1",
+            "slot": "notes",
+            "type": "text",
+            "text": "Tri à bulles : les voisins se comparent.",
+            "emphasis": "strong"
+          },
+          {
+            "id": "q2",
+            "slot": "notes",
+            "type": "text",
+            "text": "Combien de passages au plus ?"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Six nombres en désordre. Ton téléphone sait les ranger en une fraction de seconde.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "arr"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Une méthode simple : comparer deux voisins, et échanger s’ils sont à l’envers.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "q1"
+                ],
+                "how": "type"
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "À ton avis, combien de passages sur la liste faudra-t-il au maximum ?",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "q2"
+                ],
+                "how": "type"
+              },
+              {
+                "do": "play",
+                "target": "arr",
+                "from": 0,
+                "to": 2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s2",
+        "index": 1,
+        "role": "analogy",
+        "title": "Le plus gros caillou coule au fond",
+        "layout": "compare",
+        "world": {
+          "x": [
+            -5,
+            5
+          ],
+          "y": [
+            -3,
+            3.966
+          ]
+        },
+        "derived": [
+          {
+            "id": "taille_max",
+            "expr": "n - 1",
+            "unit": "",
+            "label": "Passages maximaux",
+            "format": "int"
+          }
+        ],
+        "elements": [
+          {
+            "id": "jar",
+            "slot": "figure_a",
+            "type": "shape",
+            "kind": "rect",
+            "center": [
+              0,
+              0
+            ],
+            "width": 6,
+            "height": 2.6,
+            "role": "ink"
+          },
+          {
+            "id": "big",
+            "slot": "figure_a",
+            "type": "shape",
+            "kind": "circle",
+            "center": [
+              -1.6,
+              2.6
+            ],
+            "radius": 0.85,
+            "role": "quantity",
+            "label": "grand"
+          },
+          {
+            "id": "mid",
+            "slot": "figure_a",
+            "type": "shape",
+            "kind": "circle",
+            "center": [
+              0.6,
+              2.5
+            ],
+            "radius": 0.6,
+            "role": "ink"
+          },
+          {
+            "id": "small",
+            "slot": "figure_a",
+            "type": "shape",
+            "kind": "circle",
+            "center": [
+              2.3,
+              2.4
+            ],
+            "radius": 0.4,
+            "role": "ink"
+          },
+          {
+            "id": "shake",
+            "slot": "figure_b",
+            "type": "vector",
+            "from": [
+              0,
+              0
+            ],
+            "to": [
+              2.6,
+              0
+            ],
+            "label": "secousse",
+            "role": "action"
+          },
+          {
+            "id": "big_low",
+            "slot": "figure_b",
+            "type": "shape",
+            "kind": "circle",
+            "center": [
+              -2,
+              1.6
+            ],
+            "radius": 0.85,
+            "role": "quantity",
+            "label": "grand"
+          },
+          {
+            "id": "others",
+            "slot": "figure_b",
+            "type": "shape",
+            "kind": "circle",
+            "center": [
+              1,
+              2.3
+            ],
+            "radius": 0.6,
+            "role": "ink"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Regarde ce bocal : des cailloux de tailles différentes, tous en tas.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "jar",
+                  "big",
+                  "mid",
+                  "small"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Une seule secousse : le plus gros coule au fond, les autres restent au-dessus.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "shake"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "big_low",
+                  "others"
+                ],
+                "how": "fade",
+                "at": 1
+              },
+              {
+                "do": "hide",
+                "targets": [
+                  "big",
+                  "mid",
+                  "small"
+                ],
+                "at": 1
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Un passage de tri fait pareil : il pousse le plus grand nombre tout au bout.",
+            "actions": [
+              {
+                "do": "highlight",
+                "targets": [
+                  "big_low"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s3",
+        "index": 2,
+        "role": "mechanism",
+        "title": "Le curseur avance, les grands glissent à droite",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            -1.448,
+            10
+          ],
+          "y": [
+            0,
+            6
+          ]
+        },
+        "derived": [
+          {
+            "id": "slot_w",
+            "expr": "8 / n",
+            "unit": "",
+            "label": "Largeur d’une case",
+            "format": "int"
+          },
+          {
+            "id": "x1",
+            "expr": "1 + 8 / n",
+            "unit": "",
+            "label": "Première frontière",
+            "format": "int"
+          }
+        ],
+        "elements": [
+          {
+            "id": "cursor",
+            "slot": "figure",
+            "type": "shape",
+            "kind": "rect",
+            "center": [
+              1.4,
+              3
+            ],
+            "width": {
+              "expr": "8 / n"
+            },
+            "height": 5,
+            "fill": "none",
+            "role": "action",
+            "label": "i"
+          },
+          {
+            "id": "left",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              1,
+              1
+            ],
+            "to": [
+              {
+                "expr": "1 + 8 / n"
+              },
+              1
+            ],
+            "label": "voisins",
+            "role": "quantity"
+          },
+          {
+            "id": "right",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              {
+                "expr": "1 + 8 / n"
+              },
+              1
+            ],
+            "to": [
+              {
+                "expr": "1 + 16 / n"
+              },
+              1
+            ],
+            "role": "quantity"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Le curseur se pose sur deux voisins. Lequel est le plus grand ?",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "cursor",
+                  "left",
+                  "right"
+                ],
+                "how": "draw"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s4",
+        "index": 3,
+        "role": "formula",
+        "title": "La boucle et le compte des échanges",
+        "layout": "formula-focus",
+        "world": {
+          "x": [
+            0,
+            11
+          ],
+          "y": [
+            0,
+            4
+          ]
+        },
+        "derived": [
+          {
+            "id": "x_pos",
+            "expr": "1 + p",
+            "unit": "",
+            "label": "Position du curseur",
+            "format": "int"
+          }
+        ],
+        "elements": [
+          {
+            "id": "loop",
+            "slot": "formula",
+            "type": "formula",
+            "tex": "\\text{pour } \\q{p} = 1 \\text{ à } \\q{n}-1 :\\quad \\text{pour } i = 1 \\text{ à } \\q{n}-p :\\quad \\text{si } a_i > a_{i+1} : \\text{ échanger}"
+          },
+          {
+            "id": "bars",
+            "slot": "figure",
+            "type": "bars",
+            "items": [
+              {
+                "label": "Comparaisons",
+                "value": {
+                  "expr": "comparaisons_p"
+                },
+                "role": "quantity"
+              },
+              {
+                "label": "Échanges",
+                "value": {
+                  "expr": "echanges_p"
+                },
+                "role": "action"
+              }
+            ],
+            "unit": "cumulés"
+          },
+          {
+            "id": "max_swaps",
+            "slot": "readout",
+            "type": "readout",
+            "value": "echanges_max",
+            "label": "Échanges maximaux"
+          },
+          {
+            "id": "max_pass",
+            "slot": "readout",
+            "type": "readout",
+            "value": "passages_max",
+            "label": "Passages maximaux"
+          },
+          {
+            "id": "cmp",
+            "slot": "readout",
+            "type": "readout",
+            "value": "comparaisons_max",
+            "label": "Comparaisons au pire"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Voici la boucle : deux compteurs imbriqués, et un échange dès que deux voisins sont à l’envers.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "loop"
+                ],
+                "how": "type"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Le pire des cas, c’est la liste déjà à l’envers : les échanges atteignent leur maximum.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "bars"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "max_swaps"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "sweep",
+                "param": "p",
+                "to": {
+                  "expr": "passages_max"
+                }
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Compare les deux compteurs : au pire, il y a autant d’échanges que de comparaisons.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "cmp",
+                  "max_pass"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "max_swaps"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s5",
+        "index": 4,
+        "role": "example",
+        "title": "Six nombres, et ça se trie tout seul",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            0,
+            10
+          ],
+          "y": [
+            0,
+            6
+          ]
+        },
+        "derived": [
+          {
+            "id": "echanges_fin",
+            "expr": "n * (n - 1) / 2",
+            "unit": "",
+            "label": "Échanges dans le pire des cas",
+            "format": "int"
+          }
+        ],
+        "elements": [
+          {
+            "id": "tri",
+            "slot": "figure",
+            "type": "sim.array",
+            "values": [
+              5,
+              3,
+              1,
+              6,
+              2,
+              4
+            ],
+            "algorithm": "bubble-sort",
+            "step": {
+              "expr": "p"
+            }
+          },
+          {
+            "id": "passages",
+            "slot": "notes",
+            "type": "readout",
+            "value": "p",
+            "label": "Passage en cours"
+          },
+          {
+            "id": "echanges",
+            "slot": "notes",
+            "type": "readout",
+            "value": "echanges_p",
+            "label": "Échanges cumulés"
+          },
+          {
+            "id": "fin",
+            "slot": "notes",
+            "type": "text",
+            "text": "Au pire : {{echanges_fin|int}} échanges pour {{n|int}} nombres.",
+            "emphasis": "strong"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Six nombres en désordre. Regarde le curseur avancer et les voisins se comparer.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "tri.cells"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "tri.compare"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "passages",
+                  "echanges"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Chaque échange rapproche du but. Le compteur grimpe, et la liste se range.",
+            "actions": [
+              {
+                "do": "play",
+                "target": "tri",
+                "to": 5
+              },
+              {
+                "do": "sweep",
+                "param": "p",
+                "to": 5
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Au pire, ça coûte ce nombre d’échanges : voilà le prix du tri à bulles.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "fin"
+                ],
+                "how": "type"
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "fin"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s6",
+        "index": 5,
+        "role": "recap",
+        "title": "Combien de passages au plus ?",
+        "layout": "statement",
+        "derived": [],
+        "elements": [
+          {
+            "id": "recap",
+            "slot": "text",
+            "type": "list",
+            "items": [
+              "Un passage pousse le plus grand nombre restant tout au bout.",
+              "À chaque passage, on compare les voisins et on échange si besoin.",
+              "Au plus n − 1 passages : le plus grand est déjà en place."
+            ]
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Un passage suffit à pousser le plus grand nombre tout au bout de la liste.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "recap"
+                ],
+                "how": "type"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Tu compares les voisins deux par deux, et tu échanges dès qu’ils sont dans le mauvais ordre.",
+            "actions": []
+          },
+          {
+            "id": "b3",
+            "narration": "Donc il faut au plus n moins un passages : le dernier nombre est déjà en place.",
+            "actions": [
+              {
+                "do": "highlight",
+                "targets": [
+                  "recap.i3"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "quiz": {
+      "questions": [
+        {
+          "prompt": "Après un premier passage de tri à bulles sur une liste, où se retrouve le plus grand nombre ?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "À sa place définitive, tout au début"
+            },
+            {
+              "id": "b",
+              "text": "À sa place définitive, tout au bout"
+            },
+            {
+              "id": "c",
+              "text": "Au milieu de la liste, à une place quelconque"
+            },
+            {
+              "id": "d",
+              "text": "Il a disparu de la liste après les échanges"
+            }
+          ],
+          "answer_id": "b",
+          "explanation": "Chaque passage pousse le plus grand nombre restant jusqu’à l’extrémité droite : il est alors bien placé pour de bon.",
+          "scene_id": "s6"
+        },
+        {
+          "prompt": "Pourquoi suffit-il de n − 1 passages au plus pour trier une liste de n nombres ?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "Parce qu’à chaque passage un nombre est déjà bien placé, et le dernier le sera aussi"
+            },
+            {
+              "id": "b",
+              "text": "Parce qu’un passage échange toujours exactement deux nombres"
+            },
+            {
+              "id": "c",
+              "text": "Parce que le premier nombre est déjà trié au départ"
+            },
+            {
+              "id": "d",
+              "text": "Parce qu’après n − 1 passages la liste est forcément à l’envers"
+            }
+          ],
+          "answer_id": "a",
+          "explanation": "Chaque passage place définitivement un nombre à sa place ; quand n − 1 sont placés, le dernier l’est aussi.",
+          "scene_id": "s6"
+        },
+        {
+          "prompt": "Dans quel cas le tri à bulles fait-il le plus d’échanges ?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "Quand la liste est déjà rangée dans l’ordre croissant"
+            },
+            {
+              "id": "b",
+              "text": "Quand la liste est rangée dans l’ordre décroissant"
+            },
+            {
+              "id": "c",
+              "text": "Quand la liste ne contient que deux nombres"
+            },
+            {
+              "id": "d",
+              "text": "Quand tous les nombres sont égaux"
+            }
+          ],
+          "answer_id": "b",
+          "explanation": "Une liste à l’envers fait échanger presque tous les voisins à chaque passage, c’est le pire des cas.",
+          "scene_id": "s4"
+        }
+      ]
+    }
+  }
+}

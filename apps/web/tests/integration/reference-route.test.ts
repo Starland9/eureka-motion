@@ -53,8 +53,10 @@ describe("GET /api/reference with the repository content and no database", () =>
   });
 
   it("lists only the files of the asked language", async () => {
-    const list = (await (await get("?language=en")).json()) as { slug: string }[];
-    expect(list.map((item) => item.slug)).not.toContain(reference.slug);
+    const list = (await (await get("?language=en")).json()) as { explanation_id: string }[];
+    expect(list.map((item) => item.explanation_id)).not.toContain(
+      referenceId(reference.slug, "fr"),
+    );
   });
 
   it("falls back on the language of the browser when none is asked", async () => {

@@ -1,0 +1,996 @@
+{
+  "slug": "physics/ohms-law",
+  "subject": "physics",
+  "reference_level": "college",
+  "language": "en",
+  "title": "Ohm's Law",
+  "question": "How does Ohm's law work?",
+  "reviewed_by": null,
+  "reviewed_at": null,
+  "verdicts": [
+    {
+      "target": "plan",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "Ohm's law U = R × I, the current I = U/R, doubling voltage doubling current, and power P = U²/R are all correct with consistent units (V, Ω, A, W), the parameter ranges keep R nonzero so nothing is undefined, the water-pipe analogy correctl",
+      "checks": [
+        "structure",
+        "model",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s1",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "The scene shows a torch bulb lit by one battery and then a second battery added, asking why it glows brighter, which matches the hook and states nothing wrong.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s2",
+      "status": "corrected",
+      "attempts": 2,
+      "reason": "The scene correctly shows that increasing pump pressure (voltage) increases flow (current) and that pinching the pipe (increasing resistance) reduces flow, matching the analogy and Ohm's law.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s3",
+      "status": "corrected",
+      "attempts": 2,
+      "reason": "The scene correctly shows that a bigger voltage pushes the same charges faster, so the current (in amperes) rises, consistent with Ohm's law.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s4",
+      "status": "corrected",
+      "attempts": 2,
+      "reason": "The scene states Ohm's law correctly and the sweep exactly doubles the voltage so the current readout doubles as described.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s5",
+      "status": "corrected",
+      "attempts": 2,
+      "reason": "The scene correctly shows that with the same 3 V battery, the 6 Ω bulb draws 0.5 A while the 0.1 Ω wire draws a much larger current, matching Ohm's law and the plan's example.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s6",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "The scene correctly recaps that voltage pushes, resistance holds back and current is the flow, and answers that two batteries double the voltage and therefore double the current, making the bulb brighter, consistent with U = R × I.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    }
+  ],
+  "payload": {
+    "version": 1,
+    "plan": {
+      "objective": "Explain what Ohm’s law says, how voltage pushes current through a resistance, and how to use U = R × I with real numbers.",
+      "prerequisites": [
+        "Voltage as a push, like a battery",
+        "Current as a flow of charge in a wire",
+        "Resistance as how strongly a component blocks the flow"
+      ],
+      "analogy": {
+        "name": "Water in a narrow pipe",
+        "mapping": "The pump’s pressure plays the role of voltage, the litres per second play the role of current, and the narrowness of the pipe plays the role of resistance."
+      },
+      "key_rule": {
+        "statement": "The voltage across a resistor equals its resistance multiplied by the current flowing through it, so for a fixed resistance the current doubles when the voltage doubles.",
+        "formula": "\\q{U} = \\q{R} \\times \\a{I}"
+      },
+      "steps": [
+        {
+          "role": "hook",
+          "intent": "Show that a bigger battery makes a torch bulb brighter and ask why.",
+          "visual": "A torch bulb glows dim with one battery, then dazzling as a second battery slides in beside it."
+        },
+        {
+          "role": "analogy",
+          "intent": "Give the feel that more push means more flow, and a narrower pipe means less.",
+          "visual": "Water pushed through a pipe: the pump pressure rises and the litres-per-second meter spins faster; then the pipe pinches."
+        },
+        {
+          "role": "mechanism",
+          "intent": "Show voltage as a push setting charges in motion, measured as current in amperes.",
+          "visual": "Charges queue at the battery, then stream through the wire; the ammeter needle rises as the battery voltage climbs."
+        },
+        {
+          "role": "formula",
+          "intent": "Read the rule U = R × I and see what happens when one quantity doubles.",
+          "visual": "The formula writes itself; then the voltage slider doubles and the current bar doubles with it."
+        },
+        {
+          "role": "example",
+          "intent": "Compute a real torch bulb current and show that a small voltage can still make a big current in a thin wire.",
+          "visual": "A 3 V battery with a 6 ohm bulb shows 0.5 A; a 0.1 ohm wire shows a huge current that heats it red."
+        },
+        {
+          "role": "recap",
+          "intent": "Fix the three ideas and answer why two batteries make the bulb brighter.",
+          "visual": "Three short lines appear; the last, the answer about the bulb, is highlighted."
+        }
+      ]
+    },
+    "params": [
+      {
+        "id": "U",
+        "symbol": "U",
+        "label": "Battery voltage",
+        "unit": "V",
+        "min": 0.5,
+        "max": 12,
+        "step": 0.1,
+        "default": 3,
+        "role": "quantity"
+      },
+      {
+        "id": "R",
+        "symbol": "R",
+        "label": "Resistance of the component",
+        "unit": "Ω",
+        "min": 0.1,
+        "max": 100,
+        "step": 0.49950000000000006,
+        "default": 6,
+        "role": "quantity"
+      }
+    ],
+    "model": {
+      "constants": [],
+      "derived": [
+        {
+          "id": "I",
+          "expr": "U / R",
+          "unit": "A",
+          "label": "Current",
+          "symbol": "I",
+          "format": "fixed:3"
+        },
+        {
+          "id": "U2",
+          "expr": "2 * U",
+          "unit": "V",
+          "label": "Double voltage",
+          "symbol": "U₂",
+          "format": "fixed:1"
+        },
+        {
+          "id": "I2",
+          "expr": "2 * U / R",
+          "unit": "A",
+          "label": "Current at double voltage",
+          "symbol": "I₂",
+          "format": "fixed:3"
+        },
+        {
+          "id": "P",
+          "expr": "U * U / R",
+          "unit": "W",
+          "label": "Power in the component",
+          "symbol": "P",
+          "format": "fixed:2"
+        }
+      ]
+    },
+    "scenes": [
+      {
+        "id": "s1",
+        "index": 0,
+        "role": "hook",
+        "title": "One battery, then two: the bulb blazes",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            -5,
+            5
+          ],
+          "y": [
+            -3,
+            3
+          ]
+        },
+        "derived": [],
+        "elements": [
+          {
+            "id": "wire",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              -3.2,
+              -1.2
+            ],
+            "to": [
+              2.2,
+              -1.2
+            ],
+            "role": "ink"
+          },
+          {
+            "id": "bulb",
+            "slot": "figure",
+            "type": "object",
+            "kind": "bulb",
+            "at": [
+              3,
+              -1.2
+            ],
+            "size": 1.6,
+            "label": "Bulb"
+          },
+          {
+            "id": "battery",
+            "slot": "figure",
+            "type": "object",
+            "kind": "battery",
+            "at": [
+              -2.4,
+              -1.2
+            ],
+            "size": 1.2,
+            "label": "Battery"
+          },
+          {
+            "id": "battery2",
+            "slot": "figure",
+            "type": "object",
+            "kind": "battery",
+            "at": [
+              -0.6,
+              -1.2
+            ],
+            "size": 1.2,
+            "label": "Second battery"
+          },
+          {
+            "id": "question",
+            "slot": "notes",
+            "type": "text",
+            "text": "Why does it glow brighter?",
+            "emphasis": "strong"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Here is a torch bulb, lit by one battery. Look how dim it glows.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "wire",
+                  "bulb",
+                  "battery"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Now slide a second battery in beside the first. Same bulb, same wire.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "battery2"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "The bulb blazes. Guess: what did the extra battery give the charges?",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "question"
+                ],
+                "how": "type"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s2",
+        "index": 1,
+        "role": "analogy",
+        "title": "More push, more flow; narrower pipe, less",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            -5,
+            5
+          ],
+          "y": [
+            -3,
+            3
+          ]
+        },
+        "derived": [
+          {
+            "id": "x_end",
+            "expr": "-1.5 + 0.5 * U",
+            "unit": "",
+            "label": "Pipe length drawn",
+            "format": "fixed:2"
+          },
+          {
+            "id": "half_gap",
+            "expr": "0.15 + R / 90",
+            "unit": "",
+            "label": "Half opening of the pipe",
+            "format": "fixed:3"
+          }
+        ],
+        "elements": [
+          {
+            "id": "pump",
+            "slot": "figure",
+            "type": "object",
+            "kind": "block",
+            "at": [
+              -4.2,
+              -1.6
+            ],
+            "size": 1.2,
+            "label": "Pump",
+            "role": "action"
+          },
+          {
+            "id": "pipe_top",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              -3.6,
+              {
+                "expr": "0.15 + R / 90"
+              }
+            ],
+            "to": [
+              {
+                "expr": "-1.5 + 0.5 * U"
+              },
+              {
+                "expr": "0.15 + R / 90"
+              }
+            ],
+            "role": "ink"
+          },
+          {
+            "id": "pipe_bottom",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              -3.6,
+              {
+                "expr": "-1 * (0.15 + R / 90)"
+              }
+            ],
+            "to": [
+              {
+                "expr": "-1.5 + 0.5 * U"
+              },
+              {
+                "expr": "-1 * (0.15 + R / 90)"
+              }
+            ],
+            "role": "ink"
+          },
+          {
+            "id": "flow",
+            "slot": "figure",
+            "type": "vector",
+            "from": [
+              -3.2,
+              0
+            ],
+            "to": [
+              {
+                "expr": "x_end"
+              },
+              0
+            ],
+            "label": "I",
+            "role": "quantity"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Picture water in a pipe. The pump pushes, and the water flows.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "pump",
+                  "pipe_top",
+                  "pipe_bottom"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "flow"
+                ],
+                "how": "draw",
+                "at": 0.6
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Push harder: the flow speeds up. More push means more flow.",
+            "actions": [
+              {
+                "do": "sweep",
+                "param": "U",
+                "to": 12,
+                "hold": true
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Now pinch the pipe. Same push, but much less water gets through.",
+            "actions": [
+              {
+                "do": "sweep",
+                "param": "R",
+                "to": 100,
+                "hold": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s3",
+        "index": 2,
+        "role": "mechanism",
+        "title": "Voltage pushes charges; the current is the flow",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            -5,
+            4
+          ],
+          "y": [
+            -3,
+            3
+          ]
+        },
+        "derived": [],
+        "elements": [
+          {
+            "id": "circuit",
+            "slot": "figure",
+            "type": "sim.circuit",
+            "voltage": {
+              "expr": "U"
+            },
+            "resistance": {
+              "expr": "R"
+            },
+            "current": {
+              "expr": "I"
+            }
+          },
+          {
+            "id": "current_now",
+            "slot": "notes",
+            "type": "readout",
+            "value": "I",
+            "label": "Current"
+          },
+          {
+            "id": "volts_now",
+            "slot": "notes",
+            "type": "readout",
+            "value": "U",
+            "label": "Voltage"
+          },
+          {
+            "id": "ohms_now",
+            "slot": "notes",
+            "type": "readout",
+            "value": "R",
+            "label": "Resistance"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Here is a battery and a resistor. Watch the charges inside the wire.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "circuit.source",
+                  "circuit.resistor",
+                  "circuit.wire"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "circuit.carriers"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "The battery pushes. For a bigger voltage, the same charges flow faster.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "current_now",
+                  "volts_now",
+                  "ohms_now"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "sweep",
+                "param": "U",
+                "to": {
+                  "expr": "2 * U"
+                },
+                "hold": true
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "That flow is the current, in amperes: the ammeter needle climbs.",
+            "actions": [
+              {
+                "do": "sweep",
+                "param": "U",
+                "to": 12,
+                "hold": true
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "current_now"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s4",
+        "index": 3,
+        "role": "formula",
+        "title": "Voltage equals resistance times current",
+        "layout": "formula-focus",
+        "world": {
+          "x": [
+            0,
+            30
+          ],
+          "y": [
+            0,
+            12
+          ]
+        },
+        "derived": [],
+        "elements": [
+          {
+            "id": "law",
+            "slot": "formula",
+            "type": "formula",
+            "tex": "\\q{U} = \\q{R} \\times \\a{I}"
+          },
+          {
+            "id": "axes",
+            "slot": "figure",
+            "type": "axes",
+            "xLabel": "current (A)",
+            "yLabel": "voltage (V)"
+          },
+          {
+            "id": "line",
+            "slot": "figure",
+            "type": "plot",
+            "fn": "R * x",
+            "domain": [
+              0,
+              2
+            ],
+            "role": "quantity",
+            "label": "U = R × I"
+          },
+          {
+            "id": "u_now",
+            "slot": "readout",
+            "type": "readout",
+            "value": "U",
+            "label": "Voltage"
+          },
+          {
+            "id": "i_now",
+            "slot": "readout",
+            "type": "readout",
+            "value": "I",
+            "label": "Current"
+          },
+          {
+            "id": "r_now",
+            "slot": "readout",
+            "type": "readout",
+            "value": "R",
+            "label": "Resistance"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Here is the whole rule: voltage equals resistance times current. Three letters, one line.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "law"
+                ],
+                "how": "type"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "axes"
+                ],
+                "how": "draw"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Fix the resistance, and the voltage line starts rising as the current grows.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "line"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "u_now",
+                  "i_now",
+                  "r_now"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Now double the voltage. Watch the current readout: it doubles too.",
+            "actions": [
+              {
+                "do": "sweep",
+                "param": "U",
+                "to": {
+                  "expr": "2 * U"
+                }
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "i_now"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s5",
+        "index": 4,
+        "role": "example",
+        "title": "Two circuits, same battery, very different current",
+        "layout": "compare",
+        "world": {
+          "x": [
+            0,
+            10
+          ],
+          "y": [
+            0,
+            6
+          ]
+        },
+        "derived": [
+          {
+            "id": "Ib",
+            "expr": "3 / 6",
+            "unit": "A",
+            "label": "Bulb current",
+            "format": "fixed:3"
+          },
+          {
+            "id": "Iw",
+            "expr": "3 / 0.1",
+            "unit": "A",
+            "label": "Wire current",
+            "format": "fixed:0"
+          }
+        ],
+        "elements": [
+          {
+            "id": "c1",
+            "slot": "figure_a",
+            "type": "sim.circuit",
+            "voltage": {
+              "expr": "3"
+            },
+            "resistance": {
+              "expr": "6"
+            },
+            "current": {
+              "expr": "Ib"
+            }
+          },
+          {
+            "id": "c2",
+            "slot": "figure_b",
+            "type": "sim.circuit",
+            "voltage": {
+              "expr": "3"
+            },
+            "resistance": {
+              "expr": "0.1"
+            },
+            "current": {
+              "expr": "Iw"
+            }
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Same 3 volt battery, two circuits. Guess which one carries more current.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "c1",
+                  "c2"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "The bulb has 6 ohms. Three volts divided by six gives half an amp.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "c1.carriers",
+                  "c1.resistor"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "c1.source"
+                ]
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "The thin wire has only 0.1 ohm. Same push, less resistance: the current explodes.",
+            "actions": [
+              {
+                "do": "highlight",
+                "targets": [
+                  "c2.carriers"
+                ]
+              },
+              {
+                "do": "focus",
+                "targets": [
+                  "c2.resistor"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s6",
+        "index": 5,
+        "role": "recap",
+        "title": "Three ideas to keep",
+        "layout": "statement",
+        "derived": [],
+        "elements": [
+          {
+            "id": "recap",
+            "slot": "text",
+            "type": "list",
+            "items": [
+              "Voltage pushes, resistance holds back, current is the flow.",
+              "U = R × I: with the same resistance, double voltage means double current.",
+              "Two batteries: double voltage, so double current, and a brighter bulb."
+            ]
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Three ideas to keep. Voltage pushes, resistance holds back, current is the flow.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "recap"
+                ],
+                "how": "type"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "And the rule links them: U equals R times I, every single time.",
+            "actions": []
+          },
+          {
+            "id": "b3",
+            "narration": "So why is the bulb brighter? Two batteries double the push, so double the flow.",
+            "actions": [
+              {
+                "do": "highlight",
+                "targets": [
+                  "recap.i3"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "quiz": {
+      "questions": [
+        {
+          "prompt": "You keep the same resistor in a circuit and double the voltage across it. What happens to the current?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "It stays the same"
+            },
+            {
+              "id": "b",
+              "text": "It doubles"
+            },
+            {
+              "id": "c",
+              "text": "It halves"
+            },
+            {
+              "id": "d",
+              "text": "It becomes four times larger"
+            }
+          ],
+          "answer_id": "b",
+          "explanation": "For a fixed resistance, current is proportional to voltage, so doubling the voltage doubles the current.",
+          "scene_id": "s4"
+        },
+        {
+          "prompt": "Two circuits use the same battery. One has a thick wire with very low resistance, the other a thin wire with high resistance. Which carries more current?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "The thin wire, because it resists more"
+            },
+            {
+              "id": "b",
+              "text": "Both carry the same current"
+            },
+            {
+              "id": "c",
+              "text": "The thick wire, because less resistance lets more current flow"
+            },
+            {
+              "id": "d",
+              "text": "Neither, because the battery is the same"
+            }
+          ],
+          "answer_id": "c",
+          "explanation": "With the same voltage, a smaller resistance allows a larger current, just like a wider pipe lets more water through.",
+          "scene_id": "s5"
+        },
+        {
+          "prompt": "You add a second battery to a torch, making the voltage twice as big. Why does the bulb glow brighter?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "The resistance of the bulb increases"
+            },
+            {
+              "id": "b",
+              "text": "The current through the bulb doubles"
+            },
+            {
+              "id": "c",
+              "text": "The current through the bulb halves"
+            },
+            {
+              "id": "d",
+              "text": "The bulb’s resistance stays the same, so the current stays the same"
+            }
+          ],
+          "answer_id": "b",
+          "explanation": "Doubling the voltage doubles the push on the charges, so twice as much current flows and the bulb shines brighter.",
+          "scene_id": "s1"
+        }
+      ]
+    }
+  }
+}

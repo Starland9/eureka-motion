@@ -1,0 +1,1152 @@
+{
+  "slug": "cs/binary-search",
+  "subject": "cs",
+  "reference_level": "superieur",
+  "language": "fr",
+  "title": "Recherche dichotomique",
+  "question": "Comment fonctionne la recherche dichotomique ?",
+  "reviewed_by": null,
+  "reviewed_at": null,
+  "verdicts": [
+    {
+      "target": "plan",
+      "status": "corrected",
+      "attempts": 2,
+      "reason": "Le principe de la dichotomie, la borne en ⌈log₂(n+1)⌉ comparaisons, les expressions dérivées et l'analogie du dictionnaire sont corrects et cohérents avec le niveau attendu.",
+      "checks": [
+        "structure",
+        "model",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s1",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "La scène illustre correctement le caractère absurde d'une recherche au hasard dans un dictionnaire et annonce le coût linéaire au pire (n pages), ce qui est cohérent avec l'étape d'accroche et ne contredit pas la règle clé.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s2",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "La scène illustre correctement le geste de la recherche dichotomique : on ouvre au milieu et la moitié inutile est écartée, la page cherchée restant du bon côté, ce qui est conforme au principe de l'analogie.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s3",
+      "status": "corrected",
+      "attempts": 2,
+      "reason": "La scène illustre correctement la répétition du geste de la recherche dichotomique avec un tableau trié et l'affichage du coût logarithmique comparé au coût linéaire.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s4",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "La scène illustre correctement que chaque étape divise l’intervalle par deux et que le nombre de comparaisons vaut ⌈log₂(n+1)⌉, sans énoncé faux.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s5",
+      "status": "corrected",
+      "attempts": 2,
+      "reason": "La scène illustre correctement qu'un million d'éléments se traite en vingt comparaisons et que doubler la taille n'ajoute qu'une comparaison, conformément à la borne logarithmique.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s6",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "Le récapitulatif énonce correctement les trois idées : réduction de moitié de l’intervalle, coût logarithmique ⌈log₂(n+1)⌉ et l’exemple d’un million d’entrées traité en vingt étapes, ce qui est cohérent avec la règle clé.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    }
+  ],
+  "payload": {
+    "version": 1,
+    "plan": {
+      "objective": "Savoir décrire la recherche dichotomique pas à pas et justifier que son nombre de comparaisons croît comme le logarithme de la taille du tableau.",
+      "prerequisites": [
+        "Notion de tableau trié et d’indice",
+        "Savoir ce qu’est un logarithme en base 2",
+        "Notion de comparaison et de coût d’un algorithme"
+      ],
+      "analogy": {
+        "name": "Le dictionnaire qu’on coupe en deux",
+        "mapping": "Le dictionnaire ouvert au milieu joue le rôle du tableau coupé en son milieu ; la page où l’on saute joue le rôle de l’intervalle de recherche, qui rétrécit de moitié à chaque fois."
+      },
+      "key_rule": {
+        "statement": "À chaque étape la recherche dichotomique divise par deux la taille de l’intervalle restant, si bien qu’il faut au plus ⌈log₂(n+1)⌉ comparaisons pour un tableau de n éléments.",
+        "formula": "T(n) = \\left\\lceil \\log_2(n+1) \\right\\rceil"
+      },
+      "steps": [
+        {
+          "role": "hook",
+          "intent": "Faire sentir que chercher une page au hasard dans un dictionnaire est absurde, et poser la question du bon geste.",
+          "visual": "Un dictionnaire fermé ; une main ouvre des pages au hasard, de plus en plus vite, sans jamais s’arrêter sur la bonne."
+        },
+        {
+          "role": "analogy",
+          "intent": "Faire découvrir le geste naturel : ouvrir au milieu et abandonner une moitié.",
+          "visual": "Le dictionnaire s’ouvre au milieu ; la moitié inutile s’efface, la page cherchée reste du bon côté."
+        },
+        {
+          "role": "mechanism",
+          "intent": "Montrer la répétition du même geste : milieu calculé, comparaison, intervalle réduit de moitié.",
+          "visual": "Un tableau de cases colorées ; l’intervalle se resserre en trois étapes, chaque moitié écartée s’éteint."
+        },
+        {
+          "role": "formula",
+          "intent": "Relier le nombre de divisions par deux au logarithme et poser la borne.",
+          "visual": "Une barre de longueur n coupée en deux à répétition jusqu’à une case ; le compteur d’étapes s’arrête sur la valeur du logarithme."
+        },
+        {
+          "role": "example",
+          "intent": "Donner un ordre de grandeur qui surprend : un million d’éléments en vingt étapes.",
+          "visual": "Un tableau de n=1 000 000 éléments ; le compteur passe de 1 000 000 à 500 000, 250 000… jusqu’à 1 en vingt découpes."
+        },
+        {
+          "role": "recap",
+          "intent": "Fixer les trois idées et répondre à la question du dictionnaire.",
+          "visual": "Trois phrases courtes ; la dernière, la réponse, est surlignée, le dictionnaire s’ouvre directement sur la page."
+        }
+      ]
+    },
+    "params": [
+      {
+        "id": "n",
+        "symbol": "n",
+        "label": "Taille du tableau",
+        "unit": "éléments",
+        "min": 1,
+        "max": 1000000,
+        "step": 4999.995,
+        "default": 100000,
+        "role": "quantity"
+      }
+    ],
+    "model": {
+      "constants": [],
+      "derived": [
+        {
+          "id": "T",
+          "expr": "ceil(log10(n+1)/log10(2))",
+          "unit": "comparaisons",
+          "label": "Comparaisons pour n",
+          "symbol": "T(n)",
+          "format": "int"
+        },
+        {
+          "id": "T_half",
+          "expr": "ceil(log10(n/2+1)/log10(2))",
+          "unit": "comparaisons",
+          "label": "Comparaisons pour n/2",
+          "symbol": "T(n/2)",
+          "format": "int"
+        },
+        {
+          "id": "T_double",
+          "expr": "ceil(log10(2*n+1)/log10(2))",
+          "unit": "comparaisons",
+          "label": "Comparaisons pour 2n",
+          "symbol": "T(2n)",
+          "format": "int"
+        },
+        {
+          "id": "T_lin",
+          "expr": "n",
+          "unit": "comparaisons",
+          "label": "Comparaisons d’une recherche linéaire",
+          "symbol": "n",
+          "format": "int"
+        }
+      ]
+    },
+    "scenes": [
+      {
+        "id": "s1",
+        "index": 0,
+        "role": "hook",
+        "title": "Chercher au hasard dans un dictionnaire",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            0,
+            10
+          ],
+          "y": [
+            0,
+            6
+          ]
+        },
+        "derived": [
+          {
+            "id": "x_mid",
+            "expr": "5",
+            "unit": "",
+            "label": "Milieu du dictionnaire",
+            "format": "int"
+          },
+          {
+            "id": "y_mid",
+            "expr": "3",
+            "unit": "",
+            "label": "Hauteur du livre",
+            "format": "int"
+          }
+        ],
+        "elements": [
+          {
+            "id": "cover",
+            "slot": "figure",
+            "type": "shape",
+            "kind": "rect",
+            "center": [
+              5,
+              3
+            ],
+            "width": 6,
+            "height": 3.6,
+            "fill": "none",
+            "role": "ink"
+          },
+          {
+            "id": "spine",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              2,
+              1.2
+            ],
+            "to": [
+              2,
+              4.8
+            ],
+            "role": "ink"
+          },
+          {
+            "id": "pages",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              2,
+              4.8
+            ],
+            "to": [
+              8,
+              4.8
+            ],
+            "role": "ink"
+          },
+          {
+            "id": "bottom",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              2,
+              1.2
+            ],
+            "to": [
+              8,
+              1.2
+            ],
+            "role": "ink"
+          },
+          {
+            "id": "finger",
+            "slot": "figure",
+            "type": "object",
+            "kind": "person",
+            "at": [
+              5,
+              5.4
+            ],
+            "size": 1.1,
+            "label": "Au hasard",
+            "role": "action"
+          },
+          {
+            "id": "dico",
+            "slot": "notes",
+            "type": "text",
+            "text": "Un dictionnaire, mille pages.",
+            "emphasis": "strong"
+          },
+          {
+            "id": "cost",
+            "slot": "notes",
+            "type": "readout",
+            "value": "T_lin",
+            "label": "Pages à feuilleter au pire"
+          },
+          {
+            "id": "question",
+            "slot": "notes",
+            "type": "text",
+            "text": "Quel geste adopter ?"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Un dictionnaire, mille pages. Vous cherchez un mot. Par où commencez-vous ?",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "cover",
+                  "spine",
+                  "pages",
+                  "bottom"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "dico"
+                ],
+                "how": "type"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Une main impatiente ouvre une page au hasard, puis une autre, encore une.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "finger"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "move",
+                "target": "finger",
+                "to": [
+                  2.6,
+                  3
+                ]
+              },
+              {
+                "do": "move",
+                "target": "finger",
+                "to": [
+                  7.4,
+                  3
+                ]
+              },
+              {
+                "do": "move",
+                "target": "finger",
+                "to": [
+                  3.4,
+                  3
+                ]
+              },
+              {
+                "do": "move",
+                "target": "finger",
+                "to": [
+                  6.6,
+                  3
+                ]
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Rien à faire : au pire, il faut tourner mille pages. Il existe sûrement mieux.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "cost",
+                  "question"
+                ],
+                "how": "type"
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "cost"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s2",
+        "index": 1,
+        "role": "analogy",
+        "title": "Ouvrir au milieu, jeter une moitié",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            0,
+            10
+          ],
+          "y": [
+            0,
+            6
+          ]
+        },
+        "derived": [],
+        "elements": [
+          {
+            "id": "pages",
+            "slot": "figure",
+            "type": "shape",
+            "kind": "rect",
+            "center": [
+              4.5,
+              3
+            ],
+            "width": 7,
+            "height": 4,
+            "label": "dictionnaire"
+          },
+          {
+            "id": "target",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              6.6,
+              3
+            ],
+            "role": "result"
+          },
+          {
+            "id": "cut",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              4.5,
+              1
+            ],
+            "to": [
+              4.5,
+              5
+            ],
+            "role": "action",
+            "style": "dashed"
+          },
+          {
+            "id": "jeter",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              4.5,
+              5.2
+            ],
+            "to": [
+              1,
+              5.2
+            ],
+            "label": "moitié écartée",
+            "role": "action",
+            "style": "dashed"
+          },
+          {
+            "id": "rule",
+            "slot": "notes",
+            "type": "text",
+            "text": "Ouvrir au milieu : une moitié disparaît.",
+            "emphasis": "strong"
+          },
+          {
+            "id": "keep",
+            "slot": "notes",
+            "type": "text",
+            "text": "La page cherchée est du bon côté."
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Tu cherches un mot. Tu ouvres le dictionnaire au milieu, pas au hasard.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "pages"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "target"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "cut"
+                ],
+                "how": "draw"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Regarde : d’un seul geste, une moitié entière devient inutile.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "jeter"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "rule"
+                ],
+                "how": "type"
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "La page cherchée, elle, reste toujours du bon côté du pli.",
+            "actions": [
+              {
+                "do": "highlight",
+                "targets": [
+                  "target"
+                ]
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "keep"
+                ],
+                "how": "type"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s3",
+        "index": 2,
+        "role": "mechanism",
+        "title": "Le même geste, trois fois de suite",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            0,
+            10
+          ],
+          "y": [
+            0,
+            6
+          ]
+        },
+        "derived": [],
+        "elements": [
+          {
+            "id": "cells",
+            "slot": "figure",
+            "type": "sim.array",
+            "values": [
+              3,
+              12,
+              17,
+              23,
+              29,
+              34,
+              41,
+              56,
+              70,
+              85
+            ],
+            "algorithm": "binary-search",
+            "target": 41
+          },
+          {
+            "id": "half",
+            "slot": "notes",
+            "type": "text",
+            "text": "Intervalle divisé par deux à chaque étape.",
+            "emphasis": "strong"
+          },
+          {
+            "id": "cost",
+            "slot": "notes",
+            "type": "readout",
+            "value": "T",
+            "label": "Comparaisons pour n"
+          },
+          {
+            "id": "lin",
+            "slot": "notes",
+            "type": "readout",
+            "value": "T_lin",
+            "label": "Recherche linéaire"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "On vise le 41. Premier geste : couper au milieu, et comparer.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "cells"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "play",
+                "target": "cells",
+                "to": 1
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Toute la moitié gauche s’éteint : elle ne contient rien d’utile.",
+            "actions": [
+              {
+                "do": "play",
+                "target": "cells",
+                "from": 1,
+                "to": 3
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Deuxième et troisième coupures : l’intervalle fond. Regarde le compteur à droite.",
+            "actions": [
+              {
+                "do": "play",
+                "target": "cells",
+                "from": 3,
+                "to": 6
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "half",
+                  "cost",
+                  "lin"
+                ],
+                "how": "fade"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s4",
+        "index": 3,
+        "role": "formula",
+        "title": "Chaque étape divise l’intervalle par deux",
+        "layout": "formula-focus",
+        "world": {
+          "x": [
+            0,
+            11
+          ],
+          "y": [
+            0,
+            4
+          ]
+        },
+        "derived": [
+          {
+            "id": "x_mid",
+            "expr": "0.5",
+            "unit": "",
+            "label": "Milieu de la barre"
+          },
+          {
+            "id": "n_demi",
+            "expr": "n/2",
+            "unit": "éléments",
+            "label": "Moitié de n",
+            "format": "int"
+          }
+        ],
+        "elements": [
+          {
+            "id": "borne",
+            "slot": "formula",
+            "type": "formula",
+            "tex": "T(n) = \\left\\lceil \\log_2(n+1) \\right\\rceil"
+          },
+          {
+            "id": "barre",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              0.5,
+              2
+            ],
+            "to": [
+              10.5,
+              2
+            ],
+            "label": "n",
+            "role": "quantity"
+          },
+          {
+            "id": "moitie",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              0.5,
+              1.1
+            ],
+            "to": [
+              5.5,
+              1.1
+            ],
+            "label": "n/2",
+            "role": "result"
+          },
+          {
+            "id": "coupe",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              5.5,
+              2
+            ]
+          },
+          {
+            "id": "compteur",
+            "slot": "readout",
+            "type": "readout",
+            "value": "T",
+            "label": "Comparaisons"
+          },
+          {
+            "id": "taille",
+            "slot": "readout",
+            "type": "readout",
+            "value": "n",
+            "label": "Taille du tableau"
+          },
+          {
+            "id": "demi",
+            "slot": "readout",
+            "type": "readout",
+            "value": "T_half",
+            "label": "Pour n/2"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Chaque comparaison coupe l’intervalle en deux. Regarde la barre rétrécir.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "barre",
+                  "coupe"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "taille"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Après k découpes, il reste n divisé par deux puissance k.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "moitie"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "sweep",
+                "param": "n",
+                "to": {
+                  "expr": "n/2"
+                },
+                "hold": false
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "On s’arrête à une case : le nombre d’étapes, c’est le logarithme en base deux.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "borne"
+                ],
+                "how": "type",
+                "at": 0.2
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "compteur",
+                  "demi"
+                ],
+                "how": "fade",
+                "at": 0.8
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s5",
+        "index": 4,
+        "role": "example",
+        "title": "Un million d’éléments en vingt étapes",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            0,
+            10
+          ],
+          "y": [
+            0,
+            6
+          ]
+        },
+        "derived": [],
+        "elements": [
+          {
+            "id": "axes",
+            "slot": "figure",
+            "type": "axes",
+            "xLabel": "n (échelle log)",
+            "yLabel": "comparaisons",
+            "xTicks": 5,
+            "yTicks": 3,
+            "grid": true
+          },
+          {
+            "id": "lin",
+            "slot": "figure",
+            "type": "plot",
+            "fn": "0.3 + 5 * x / 10",
+            "domain": [
+              0,
+              10
+            ],
+            "role": "quantity",
+            "label": "n",
+            "style": "solid"
+          },
+          {
+            "id": "logc",
+            "slot": "figure",
+            "type": "plot",
+            "fn": "0.1 + 0.95 * log10(1 + x) / log10(11) * 2",
+            "domain": [
+              0,
+              10
+            ],
+            "role": "action",
+            "label": "T(n)",
+            "style": "dashed"
+          },
+          {
+            "id": "now",
+            "slot": "notes",
+            "type": "readout",
+            "value": "T",
+            "label": "Comparaisons, T(n)"
+          },
+          {
+            "id": "linval",
+            "slot": "notes",
+            "type": "readout",
+            "value": "T_lin",
+            "label": "Recherche linéaire, n"
+          },
+          {
+            "id": "punch",
+            "slot": "notes",
+            "type": "text",
+            "text": "Un million, en vingt comparaisons.",
+            "emphasis": "strong"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Un million d’éléments : la recherche linéaire en compare un million. Devine ce que fait la dichotomie.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "axes",
+                  "lin"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "linval"
+                ],
+                "how": "fade",
+                "at": 0.5
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Vingt comparaisons, pas une de plus. Regarde la courbe : elle rampe.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "logc"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "now"
+                ],
+                "how": "fade",
+                "at": 0.5
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Double la taille du tableau : une comparaison de plus, à peine.",
+            "actions": [
+              {
+                "do": "sweep",
+                "param": "n",
+                "to": {
+                  "expr": "clamp(2*n,1,1000000)"
+                }
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "punch"
+                ],
+                "how": "type",
+                "at": 0.5
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s6",
+        "index": 5,
+        "role": "recap",
+        "title": "Trois idées, et la page du dictionnaire",
+        "layout": "statement",
+        "derived": [],
+        "elements": [
+          {
+            "id": "recap",
+            "slot": "text",
+            "type": "list",
+            "items": [
+              "On compare au milieu et l’intervalle perd la moitié de ses cases.",
+              "Le coût est logarithmique : au plus ⌈log₂(n+1)⌉ comparaisons.",
+              "Un million d’entrées se trouvent en vingt coups, pas en un million."
+            ]
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Un : on ouvre au milieu, et la moitié inutile disparaît.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "recap.i1"
+                ],
+                "how": "type"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Deux : l’intervalle est divisé par deux à chaque étape, d’où le logarithme.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "recap.i2"
+                ],
+                "how": "type"
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Trois : voilà la réponse au dictionnaire. Un million de pages, vingt coups.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "recap.i3"
+                ],
+                "how": "type"
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "recap.i3"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "quiz": {
+      "questions": [
+        {
+          "prompt": "À chaque étape, la recherche dichotomique compare l’élément cherché au milieu de l’intervalle. Que devient la taille de l’intervalle restant ?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "Elle diminue d’une unité"
+            },
+            {
+              "id": "b",
+              "text": "Elle est divisée par deux"
+            },
+            {
+              "id": "c",
+              "text": "Elle est divisée par le nombre d’étapes"
+            },
+            {
+              "id": "d",
+              "text": "Elle reste identique"
+            }
+          ],
+          "answer_id": "b",
+          "explanation": "La comparaison au milieu permet d’éliminer une moitié, donc l’intervalle est divisé par deux à chaque étape.",
+          "scene_id": "s4"
+        },
+        {
+          "prompt": "Si l’on double le nombre d’éléments du tableau trié, le nombre de comparaisons nécessaires à la recherche dichotomique…",
+          "choices": [
+            {
+              "id": "a",
+              "text": "double aussi"
+            },
+            {
+              "id": "b",
+              "text": "augmente d’environ une unité"
+            },
+            {
+              "id": "c",
+              "text": "est multiplié par quatre"
+            },
+            {
+              "id": "d",
+              "text": "ne change pas"
+            }
+          ],
+          "answer_id": "b",
+          "explanation": "Le coût est logarithmique : doubler n ajoute qu’une comparaison, car log₂(2n) = log₂(n) + 1.",
+          "scene_id": "s5"
+        },
+        {
+          "prompt": "Pourquoi la recherche linéaire est-elle bien moins efficace que la recherche dichotomique sur un grand tableau trié ?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "Elle compare les éléments un par un, sans réduire l’espace de recherche."
+            },
+            {
+              "id": "b",
+              "text": "Elle nécessite que le tableau soit trié, ce qui n’est pas le cas de la dichotomie."
+            },
+            {
+              "id": "c",
+              "text": "Elle divise l’intervalle par deux à chaque étape, mais plus lentement."
+            },
+            {
+              "id": "d",
+              "text": "Elle effectue un nombre de comparaisons proportionnel à la racine carrée de la taille."
+            }
+          ],
+          "answer_id": "a",
+          "explanation": "La recherche linéaire examine les éléments successivement : elle peut demander jusqu’à n comparaisons, tandis que la dichotomie n’en demande que de l’ordre de log₂(n).",
+          "scene_id": "s1"
+        }
+      ]
+    }
+  }
+}

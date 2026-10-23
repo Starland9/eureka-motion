@@ -1,0 +1,1232 @@
+{
+  "slug": "economics/supply-and-demand",
+  "subject": "economics",
+  "reference_level": "lycee",
+  "language": "fr",
+  "title": "Loi de l'offre et de la demande",
+  "question": "Comment l'offre et la demande fixent-elles un prix ?",
+  "reviewed_by": null,
+  "reviewed_at": null,
+  "verdicts": [
+    {
+      "target": "plan",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "L'outline est exact : la règle de l'égalité offre-demande, les unités (objets, objets/€, €), les expressions dérivées et l'analogie de la bourse d'échange sont cohérentes et adaptées au niveau, sans erreur factuelle.",
+      "checks": [
+        "structure",
+        "model",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s1",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "La scène illustre correctement les trois prix successifs (40, 90 puis 250 euros) et la narration, en français, annonce que ce sont l’offre et la demande qui fixent le prix, ce qui est conforme au principe du plan.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s2",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "La scène illustre correctement le principe de l'offre et de la demande : lorsque le prix affiché augmente, la quantité offerte augmente et la quantité demandée diminue, et inversement quand le prix baisse, ce qui correspond bien à la règle ",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s3",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "La scène montre correctement que la courbe d’offre est croissante et la courbe de demande décroissante en fonction du prix, et que leur intersection correspond au prix d’équilibre.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s4",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "La scène illustre correctement le prix d’équilibre : le curseur glisse jusqu’au croisement, où offre et demande s’égalisent, et les valeurs affichées portent bien les noms « prix d’équilibre » et « quantité échangée ».",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s5",
+      "status": "corrected",
+      "attempts": 2,
+      "reason": "La scène illustre correctement qu’à 8 € l’offre dépasse la demande (invendus, le prix baisse) et qu’à 2 € la demande dépasse l’offre (pénurie, le prix remonte), en accord avec la règle du prix d’équilibre.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s6",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "Le récapitulatif reprend correctement les trois idées clés et applique la règle à l'exemple du billet trop cher, sans erreur scientifique.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    }
+  ],
+  "payload": {
+    "version": 1,
+    "plan": {
+      "objective": "Expliquer comment la rencontre de l’offre et de la demande fixe un prix d’équilibre, et pourquoi un prix trop haut ou trop bas se corrige de lui-même.",
+      "prerequisites": [
+        "Lire un graphique avec un axe des quantités et un axe des prix",
+        "Savoir qu’une droite traduit une relation entre deux grandeurs",
+        "Comprendre qu’un vendeur veut vendre cher et un acheteur acheter bon marché"
+      ],
+      "analogy": {
+        "name": "La bourse d’échange de cartes",
+        "mapping": "Les élèves qui vendent des cartes sont l’offre, ceux qui en cherchent sont la demande, et le prix auquel les échanges se font vraiment est le prix d’équilibre ; si le prix affiché est trop haut, des cartes restent invendues et le prix baisse."
+      },
+      "key_rule": {
+        "statement": "Le prix d’équilibre est celui pour lequel la quantité offerte égale la quantité demandée ; au-dessus, il y a trop de marchandise et le prix baisse, en dessous, il en manque et le prix monte.",
+        "formula": "\\q{p} \\;\\text{tel que}\\; \\res{Q_o}(\\q{p}) = \\res{Q_d}(\\q{p})"
+      },
+      "steps": [
+        {
+          "role": "hook",
+          "intent": "Faire constater qu’un même objet n’a pas le même prix partout et au même moment, et se demander qui décide.",
+          "visual": "Un billet de concert affiché à 40, 90 puis 250 euros selon le jour ; le prix s’anime et grimpe."
+        },
+        {
+          "role": "analogy",
+          "intent": "Faire vivre la rencontre entre vendeurs et acheteurs autour d’un prix affiché.",
+          "visual": "Des élèves autour d’une table ; le prix affiché change et le nombre de cartes offertes et demandées bouge en sens inverse."
+        },
+        {
+          "role": "mechanism",
+          "intent": "Montrer que l’offre monte et la demande descend quand le prix augmente.",
+          "visual": "Deux courbes se tracent : la demande descend, l’offre monte ; un point de croisement apparaît."
+        },
+        {
+          "role": "formula",
+          "intent": "Nommer le point de croisement : le prix d’équilibre, et lire sa valeur sur le graphique.",
+          "visual": "Le curseur du prix glisse ; à la verticale du croisement, quantité offerte et quantité demandée s’alignent."
+        },
+        {
+          "role": "example",
+          "intent": "Vérifier sur des nombres qu’un prix trop haut laisse un surplus et qu’un prix trop bas crée une pénurie.",
+          "visual": "À 8 euros, 60 objets offerts mais 20 demandés : les invendus s’empilent ; à 2 euros, la file d’acheteurs s’allonge."
+        },
+        {
+          "role": "recap",
+          "intent": "Fixer les trois idées et répondre à la question du billet de concert.",
+          "visual": "Trois phrases courtes ; la dernière, la réponse, est surlignée pendant que le prix se stabilise."
+        }
+      ]
+    },
+    "params": [
+      {
+        "id": "p",
+        "symbol": "p",
+        "label": "Prix affiché",
+        "unit": "€",
+        "min": 1,
+        "max": 15,
+        "step": 0.5,
+        "default": 5,
+        "role": "quantity"
+      },
+      {
+        "id": "a",
+        "symbol": "a",
+        "label": "Offre à prix nul",
+        "unit": "objets",
+        "min": 0,
+        "max": 20,
+        "step": 1,
+        "default": 10,
+        "role": "quantity"
+      },
+      {
+        "id": "b",
+        "symbol": "b",
+        "label": "Réaction de l’offre au prix",
+        "unit": "objets/€",
+        "min": 1,
+        "max": 10,
+        "step": 0.5,
+        "default": 5,
+        "role": "quantity"
+      }
+    ],
+    "model": {
+      "constants": [
+        {
+          "id": "c",
+          "value": 50,
+          "unit": "objets",
+          "label": "Demande à prix nul",
+          "symbol": "c"
+        },
+        {
+          "id": "d",
+          "value": 5,
+          "unit": "objets/€",
+          "label": "Réaction de la demande au prix",
+          "symbol": "d"
+        }
+      ],
+      "derived": [
+        {
+          "id": "Qo",
+          "expr": "a + b * p",
+          "unit": "objets",
+          "label": "Quantité offerte",
+          "symbol": "Q_o",
+          "format": "int"
+        },
+        {
+          "id": "Qd",
+          "expr": "c - d * p",
+          "unit": "objets",
+          "label": "Quantité demandée",
+          "symbol": "Q_d",
+          "format": "int"
+        },
+        {
+          "id": "p_star",
+          "expr": "(c - a) / (b + d)",
+          "unit": "€",
+          "label": "Prix d’équilibre",
+          "symbol": "p*",
+          "format": "fixed:2"
+        },
+        {
+          "id": "Q_star",
+          "expr": "a + b * (c - a) / (b + d)",
+          "unit": "objets",
+          "label": "Quantité échangée à l’équilibre",
+          "symbol": "Q*",
+          "format": "int"
+        },
+        {
+          "id": "Qd_8",
+          "expr": "c - d * 8",
+          "unit": "objets",
+          "label": "Demande à 8 €",
+          "symbol": "Q_d(8)",
+          "format": "int"
+        },
+        {
+          "id": "Qo_8",
+          "expr": "a + b * 8",
+          "unit": "objets",
+          "label": "Offre à 8 €",
+          "symbol": "Q_o(8)",
+          "format": "int"
+        }
+      ]
+    },
+    "scenes": [
+      {
+        "id": "s1",
+        "index": 0,
+        "role": "hook",
+        "title": "Le même billet, trois prix",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            0,
+            10
+          ],
+          "y": [
+            -2.6310000000000002,
+            6
+          ]
+        },
+        "derived": [
+          {
+            "id": "y40",
+            "expr": "0.7 + 40 / 60",
+            "unit": "",
+            "label": "Hauteur du prix 40",
+            "format": "fixed:2"
+          },
+          {
+            "id": "y90",
+            "expr": "0.7 + 90 / 60",
+            "unit": "",
+            "label": "Hauteur du prix 90",
+            "format": "fixed:2"
+          },
+          {
+            "id": "y250",
+            "expr": "0.7 + 250 / 60",
+            "unit": "",
+            "label": "Hauteur du prix 250",
+            "format": "fixed:2"
+          },
+          {
+            "id": "y260",
+            "expr": "0.7 + 260 / 60",
+            "unit": "",
+            "label": "Hauteur max du cadre",
+            "format": "fixed:2"
+          }
+        ],
+        "elements": [
+          {
+            "id": "frame",
+            "slot": "figure",
+            "type": "shape",
+            "kind": "rect",
+            "center": [
+              5,
+              0.35
+            ],
+            "width": 9,
+            "height": {
+              "expr": "y260 - 0.35"
+            },
+            "fill": "none",
+            "role": "inkSoft"
+          },
+          {
+            "id": "day1",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              2,
+              0.7
+            ],
+            "to": [
+              2,
+              {
+                "expr": "y40"
+              }
+            ],
+            "label": "J-30",
+            "role": "quantity"
+          },
+          {
+            "id": "day2",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              5,
+              0.7
+            ],
+            "to": [
+              5,
+              {
+                "expr": "y90"
+              }
+            ],
+            "label": "J-7",
+            "role": "quantity"
+          },
+          {
+            "id": "day3",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              8,
+              0.7
+            ],
+            "to": [
+              8,
+              {
+                "expr": "y250"
+              }
+            ],
+            "label": "Jour J",
+            "role": "result"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Un billet de concert. Un mois avant, il s’affiche à 40 euros.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "frame",
+                  "day1"
+                ],
+                "how": "draw"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Une semaine avant, 90. Le jour même, 250. Devine qui a décidé ça.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "day2",
+                  "day3"
+                ],
+                "how": "draw"
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Personne ne l’a vraiment décidé : l’offre et la demande se sont rencontrées.",
+            "actions": [
+              {
+                "do": "highlight",
+                "targets": [
+                  "day3"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s2",
+        "index": 1,
+        "role": "analogy",
+        "title": "Vendeurs et acheteurs autour d’un prix",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            -1.0319999999999998,
+            11.032
+          ],
+          "y": [
+            0,
+            6
+          ]
+        },
+        "derived": [
+          {
+            "id": "x_p",
+            "expr": "1 + 8 * (p - 1) / 14",
+            "unit": "",
+            "label": "Position du panneau prix",
+            "format": "fixed:2"
+          }
+        ],
+        "elements": [
+          {
+            "id": "price_board",
+            "slot": "figure",
+            "type": "shape",
+            "kind": "rect",
+            "center": [
+              {
+                "expr": "x_p"
+              },
+              4.6
+            ],
+            "width": 2.4,
+            "height": 1.2,
+            "fill": "quantity",
+            "role": "quantity",
+            "label": "Prix"
+          },
+          {
+            "id": "sellers",
+            "slot": "figure",
+            "type": "object",
+            "kind": "person",
+            "at": [
+              1.4,
+              1
+            ],
+            "size": 1.2,
+            "label": "Vendeurs",
+            "role": "action"
+          },
+          {
+            "id": "buyers",
+            "slot": "figure",
+            "type": "object",
+            "kind": "person",
+            "at": [
+              8.4,
+              1
+            ],
+            "size": 1.2,
+            "label": "Acheteurs"
+          },
+          {
+            "id": "supply",
+            "slot": "figure",
+            "type": "vector",
+            "from": "sellers",
+            "to": [
+              1.4,
+              3.6
+            ],
+            "label": "offre",
+            "role": "action"
+          },
+          {
+            "id": "demand",
+            "slot": "figure",
+            "type": "vector",
+            "from": "buyers",
+            "to": [
+              8.4,
+              3.6
+            ],
+            "label": "demande",
+            "role": "valid"
+          },
+          {
+            "id": "price_now",
+            "slot": "notes",
+            "type": "readout",
+            "value": "p",
+            "label": "Prix affiché"
+          },
+          {
+            "id": "offer_now",
+            "slot": "notes",
+            "type": "readout",
+            "value": "Qo",
+            "label": "Cartes offertes"
+          },
+          {
+            "id": "ask_now",
+            "slot": "notes",
+            "type": "readout",
+            "value": "Qd",
+            "label": "Cartes demandées"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Imagine une table d’échange de cartes. À gauche, ceux qui vendent. À droite, ceux qui cherchent.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "sellers",
+                  "buyers"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Affiche un prix élevé : les vendeurs se pressent, les acheteurs reculent.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "price_board"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "supply",
+                  "demand"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "price_now",
+                  "offer_now",
+                  "ask_now"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "sweep",
+                "param": "p",
+                "to": 13
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Baisse le prix, et regarde : c’est l’inverse qui se produit.",
+            "actions": [
+              {
+                "do": "sweep",
+                "param": "p",
+                "to": 2
+              }
+            ]
+          },
+          {
+            "id": "b4",
+            "narration": "Alors, quel prix mettrait tout le monde d’accord ?",
+            "actions": [
+              {
+                "do": "highlight",
+                "targets": [
+                  "price_board"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s3",
+        "index": 2,
+        "role": "mechanism",
+        "title": "L’offre monte, la demande descend",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            0,
+            39.60000000000001
+          ],
+          "y": [
+            0,
+            90
+          ]
+        },
+        "derived": [],
+        "elements": [
+          {
+            "id": "ax",
+            "slot": "figure",
+            "type": "axes",
+            "xLabel": "quantité (objets)",
+            "yLabel": "prix (€)",
+            "xTicks": 5,
+            "yTicks": 4
+          },
+          {
+            "id": "supply",
+            "slot": "figure",
+            "type": "plot",
+            "fn": "(x - a) / b",
+            "domain": [
+              0,
+              15
+            ],
+            "role": "quantity",
+            "label": "offre"
+          },
+          {
+            "id": "demand",
+            "slot": "figure",
+            "type": "plot",
+            "fn": "(c - x) / d",
+            "domain": [
+              0,
+              15
+            ],
+            "role": "action",
+            "label": "demande"
+          },
+          {
+            "id": "cross",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              {
+                "expr": "Q_star"
+              },
+              {
+                "expr": "p_star"
+              }
+            ],
+            "label": "équilibre",
+            "role": "result"
+          },
+          {
+            "id": "p_now",
+            "slot": "notes",
+            "type": "readout",
+            "value": "p",
+            "label": "Prix affiché"
+          },
+          {
+            "id": "q_now",
+            "slot": "notes",
+            "type": "readout",
+            "value": "Qo",
+            "label": "Quantité offerte"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Un prix monte ? Les vendeurs en proposent davantage : la courbe d’offre grimpe.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "ax"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "supply"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "q_now"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Les acheteurs, eux, reculent : la demande descend quand le prix grimpe.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "demand"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "p_now"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "sweep",
+                "param": "p",
+                "to": 10
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Là où les deux courbes se croisent, offre et demande s’égalent : c’est l’équilibre.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "cross"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "cross"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s4",
+        "index": 3,
+        "role": "formula",
+        "title": "Le prix où offre et demande se croisent",
+        "layout": "formula-focus",
+        "world": {
+          "x": [
+            0,
+            16
+          ],
+          "y": [
+            -34.2,
+            90
+          ]
+        },
+        "derived": [
+          {
+            "id": "x_p",
+            "expr": "p",
+            "unit": "€",
+            "label": "position du curseur",
+            "format": "fixed:1"
+          },
+          {
+            "id": "x_star",
+            "expr": "p_star",
+            "unit": "€",
+            "label": "position du croisement",
+            "format": "fixed:2"
+          }
+        ],
+        "elements": [
+          {
+            "id": "ax",
+            "slot": "figure",
+            "type": "axes",
+            "xLabel": "prix (€)",
+            "yLabel": "quantité",
+            "xTicks": 4,
+            "yTicks": 3,
+            "grid": false
+          },
+          {
+            "id": "offre",
+            "slot": "figure",
+            "type": "plot",
+            "fn": "a + b * x",
+            "domain": [
+              0,
+              15
+            ],
+            "role": "action",
+            "label": "offre"
+          },
+          {
+            "id": "demande",
+            "slot": "figure",
+            "type": "plot",
+            "fn": "c - d * x",
+            "domain": [
+              0,
+              15
+            ],
+            "role": "quantity",
+            "label": "demande"
+          },
+          {
+            "id": "curseur",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              {
+                "expr": "x_p"
+              },
+              0
+            ],
+            "to": [
+              {
+                "expr": "x_p"
+              },
+              {
+                "expr": "min(Qo, Qd)"
+              }
+            ],
+            "role": "ink",
+            "style": "dashed"
+          },
+          {
+            "id": "eq",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              {
+                "expr": "x_star"
+              },
+              {
+                "expr": "Q_star"
+              }
+            ],
+            "label": "équilibre",
+            "role": "result"
+          },
+          {
+            "id": "rule",
+            "slot": "formula",
+            "type": "formula",
+            "tex": "\\q{p} \\;\\text{tel que}\\; \\res{Q_o}(\\q{p}) = \\res{Q_d}(\\q{p})"
+          },
+          {
+            "id": "price",
+            "slot": "readout",
+            "type": "readout",
+            "value": "p_star",
+            "label": "Prix d’équilibre"
+          },
+          {
+            "id": "amount",
+            "slot": "readout",
+            "type": "readout",
+            "value": "Q_star",
+            "label": "Quantité échangée"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Voici l’offre qui monte et la demande qui descend. Elles se croisent en un seul point.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "ax"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "offre",
+                  "demande"
+                ],
+                "how": "draw"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "À cette verticale, ce que les vendeurs offrent égale ce que les acheteurs demandent.",
+            "actions": [
+              {
+                "do": "sweep",
+                "param": "p",
+                "to": {
+                  "expr": "p_star"
+                }
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "curseur"
+                ],
+                "how": "draw",
+                "at": 0.3
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Ce prix porte un nom : le prix d’équilibre. Lis-le sur le graphique.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "eq"
+                ],
+                "how": "fade",
+                "at": 0.4
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "price",
+                  "amount"
+                ],
+                "how": "type",
+                "at": 1
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "rule"
+                ],
+                "how": "type",
+                "at": 1
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "eq"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s5",
+        "index": 4,
+        "role": "example",
+        "title": "Trop cher : invendus. Trop bon marché : pénurie",
+        "layout": "formula-focus",
+        "world": {
+          "x": [
+            0,
+            50
+          ],
+          "y": [
+            0,
+            16
+          ]
+        },
+        "derived": [
+          {
+            "id": "Qo_2",
+            "expr": "a + b * 2",
+            "unit": "objets",
+            "label": "Offre à 2 €",
+            "format": "int"
+          },
+          {
+            "id": "Qd_2",
+            "expr": "c - d * 2",
+            "unit": "objets",
+            "label": "Demande à 2 €",
+            "format": "int"
+          }
+        ],
+        "elements": [
+          {
+            "id": "graph",
+            "slot": "figure",
+            "type": "axes",
+            "xLabel": "Quantité",
+            "yLabel": "Prix",
+            "xTicks": 3,
+            "yTicks": 3
+          },
+          {
+            "id": "gap",
+            "slot": "formula",
+            "type": "formula",
+            "tex": "\\q{p}=8 \\;\\Rightarrow\\; \\res{Q_o}=\\q{Q_o(8)},\\; \\res{Q_d}=\\q{Q_d(8)}"
+          },
+          {
+            "id": "surplus",
+            "slot": "readout",
+            "type": "readout",
+            "value": "Qo_8",
+            "label": "Offerts à 8 €"
+          },
+          {
+            "id": "wanted",
+            "slot": "readout",
+            "type": "readout",
+            "value": "Qd_8",
+            "label": "Demandés à 8 €"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "À 8 euros, les vendeurs proposent beaucoup d’objets, mais peu d’acheteurs se présentent.",
+            "actions": [
+              {
+                "do": "sweep",
+                "param": "p",
+                "to": 8,
+                "hold": true
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "graph",
+                  "gap"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "surplus",
+                  "wanted"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Les invendus s’empilent. Alors les vendeurs baissent le prix, jusqu’au croisement.",
+            "actions": [
+              {
+                "do": "sweep",
+                "param": "p",
+                "to": {
+                  "expr": "p_star"
+                },
+                "hold": true
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Descends à 2 euros : la file d’acheteurs s’allonge. Le prix remonte tout seul vers son équilibre.",
+            "actions": [
+              {
+                "do": "sweep",
+                "param": "p",
+                "to": 2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s6",
+        "index": 5,
+        "role": "recap",
+        "title": "Trois idées, et la réponse du billet",
+        "layout": "statement",
+        "derived": [],
+        "elements": [
+          {
+            "id": "recap",
+            "slot": "text",
+            "type": "list",
+            "items": [
+              "L’offre monte avec le prix, la demande descend.",
+              "À l’équilibre, quantité offerte égale quantité demandée.",
+              "Trop cher : invendus, le prix baisse. Trop bon marché : pénurie, il monte."
+            ]
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Trois idées. L’offre monte quand le prix monte, la demande fait l’inverse.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "recap"
+                ],
+                "how": "type"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "À l’équilibre, la quantité offerte égale exactement la quantité demandée.",
+            "actions": [
+              {
+                "do": "focus",
+                "targets": [
+                  "recap.i2"
+                ]
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Ton billet à 250 euros ? Trop cher : des places restent, le prix redescend.",
+            "actions": [
+              {
+                "do": "highlight",
+                "targets": [
+                  "recap.i3"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "quiz": {
+      "questions": [
+        {
+          "prompt": "Un prix élevé s’affiche sur le marché. Comment réagissent vendeurs et acheteurs ?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "Les vendeurs proposent plus, les acheteurs demandent moins"
+            },
+            {
+              "id": "b",
+              "text": "Les vendeurs proposent plus, les acheteurs demandent plus"
+            },
+            {
+              "id": "c",
+              "text": "Les vendeurs proposent moins, les acheteurs demandent moins"
+            },
+            {
+              "id": "d",
+              "text": "Les vendeurs proposent moins, les acheteurs demandent plus"
+            }
+          ],
+          "answer_id": "a",
+          "explanation": "L’offre augmente avec le prix tandis que la demande diminue : les deux courbes vont en sens contraire.",
+          "scene_id": "s3"
+        },
+        {
+          "prompt": "Sur un marché, le prix affiché est au-dessus du prix d’équilibre. Que va-t-il se passer ?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "Il reste bloqué : personne ne veut bouger son prix"
+            },
+            {
+              "id": "b",
+              "text": "Il monte encore, car les vendeurs gagnent plus"
+            },
+            {
+              "id": "c",
+              "text": "Il redescend, car les invendus poussent les vendeurs à baisser"
+            },
+            {
+              "id": "d",
+              "text": "Il redescend, car les acheteurs sont trop nombreux"
+            }
+          ],
+          "answer_id": "c",
+          "explanation": "À ce prix, les vendeurs offrent plus que ce que les acheteurs veulent : les invendus s’accumulent et le prix baisse vers l’équilibre.",
+          "scene_id": "s5"
+        },
+        {
+          "prompt": "Que signifie exactement le prix d’équilibre sur le graphique de l’offre et de la demande ?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "C’est le prix le plus bas que les vendeurs acceptent"
+            },
+            {
+              "id": "b",
+              "text": "C’est le prix où la quantité offerte égale la quantité demandée"
+            },
+            {
+              "id": "c",
+              "text": "C’est le prix où l’offre est la plus forte possible"
+            },
+            {
+              "id": "d",
+              "text": "C’est le prix où tout le monde achète et personne ne vend"
+            }
+          ],
+          "answer_id": "b",
+          "explanation": "À l’équilibre, les deux courbes se croisent : ce que les vendeurs proposent correspond exactement à ce que les acheteurs veulent.",
+          "scene_id": "s4"
+        }
+      ]
+    }
+  }
+}

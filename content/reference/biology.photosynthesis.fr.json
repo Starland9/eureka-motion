@@ -1,0 +1,1393 @@
+{
+  "slug": "biology/photosynthesis",
+  "subject": "biology",
+  "reference_level": "college",
+  "language": "fr",
+  "title": "La photosynthèse",
+  "question": "Comment fonctionne la photosynthèse ?",
+  "reviewed_by": null,
+  "reviewed_at": null,
+  "verdicts": [
+    {
+      "target": "plan",
+      "status": "corrected",
+      "attempts": 2,
+      "reason": "Le modèle est correct : la photosynthèse y est bien décrite comme la transformation du dioxyde de carbone et de l'eau en sucre grâce à la lumière avec rejet d'oxygène, la proportionnalité à la lumière est standard, les unités et le rapport ",
+      "checks": [
+        "structure",
+        "model",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s1",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "La scène illustre correctement la question de départ : une graine minuscule devient un grand arbre alors que le sol ne change presque pas, ce qui pose la question de l'origine de la matière.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s2",
+      "status": "corrected",
+      "attempts": 2,
+      "reason": "La scène présente correctement l'analogie de la cuisine : ingrédients (eau et dioxyde de carbone), source d'énergie (le four allumé, associé à la lumière), produit formé et vapeur rejetée, sans énoncé faux du point de vue scientifique.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s3",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "La scène montre correctement les trois entrées (eau, dioxyde de carbone, lumière) et les deux sorties (sucre, oxygène) de la photosynthèse, en français et sans erreur scientifique.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s4",
+      "status": "corrected",
+      "attempts": 3,
+      "reason": "La scène montre correctement que le sucre fabriqué augmente avec la lumière puis atteint un palier, et les textes et valeurs affichés correspondent bien aux grandeurs nommées.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s5",
+      "status": "corrected",
+      "attempts": 2,
+      "reason": "Cette scène chiffre correctement le sucre fabriqué et l’oxygène rejeté en une heure, et l’oxygène y apparaît bien plus lourd que le sucre, conformément à la règle de la photosynthèse.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s6",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "Ce bilan reprend correctement les deux idées clés (entrées lumière, eau, dioxyde de carbone ; fabrication de sucre et rejet d'oxygène) et répond à la question du début en français.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    }
+  ],
+  "payload": {
+    "version": 1,
+    "plan": {
+      "objective": "Savoir que la photosynthèse fabrique du sucre à partir de lumière, d’eau et de dioxyde de carbone, et rejette de l’oxygène.",
+      "prerequisites": [
+        "Savoir que les plantes ont besoin de lumière et d’eau",
+        "Savoir que l’air contient du dioxyde de carbone",
+        "Savoir lire un tableau de valeurs"
+      ],
+      "analogy": {
+        "name": "La cuisine de la feuille",
+        "mapping": "La lumière est le four allumé, l’eau et le dioxyde de carbone sont les ingrédients, le sucre est le plat préparé et l’oxygène est la vapeur qui s’échappe : sans four, rien ne se cuisine."
+      },
+      "key_rule": {
+        "statement": "La photosynthèse transforme le dioxyde de carbone et l’eau en sucre grâce à la lumière, et rejette de l’oxygène ; plus il y a de lumière, plus la plante en fabrique, jusqu’à un maximum.",
+        "formula": "\\res{\\text{sucre}} \\;\\propto\\; \\q{\\text{lumière}}"
+      },
+      "steps": [
+        {
+          "role": "hook",
+          "intent": "Faire naître la question : d’où vient la matière qui fait grandir une plante ?",
+          "visual": "Une graine minuscule dans la terre ; en accéléré, un grand arbre sort d’elle alors que la terre n’a presque pas bougé."
+        },
+        {
+          "role": "analogy",
+          "intent": "Donner l’intuition qu’il faut des ingrédients et une source d’énergie.",
+          "visual": "Une cuisine : le four s’allume, l’eau et le gaz versent dans un saladier, un plat apparaît et de la vapeur s’échappe."
+        },
+        {
+          "role": "mechanism",
+          "intent": "Montrer les trois entrées et les deux sorties, étape par étape.",
+          "visual": "Une feuille grossie : l’eau monte par la tige, le dioxyde de carbone entre par les pores, la lumière frappe, le sucre descend et l’oxygène sort."
+        },
+        {
+          "role": "formula",
+          "intent": "Faire lire la règle : plus de lumière, plus de sucre, mais pas indéfiniment.",
+          "visual": "Une courbe se trace en direct : elle monte avec la lumière puis s’aplatit ; le curseur de lumière la fait parcourir."
+        },
+        {
+          "role": "example",
+          "intent": "Chiffrer un cas réel et surprendre avec la masse d’oxygène rejetée.",
+          "visual": "Une feuille de 1 dm² sous une lumière donnée ; des barres montrent le sucre fabriqué en une heure et l’oxygène rejeté, plus lourd que le sucre."
+        },
+        {
+          "role": "recap",
+          "intent": "Répondre à la question du début et fixer les deux idées clés.",
+          "visual": "Trois phrases courtes ; la réponse sur la graine est surlignée, une flèche relie la lumière au sucre."
+        }
+      ]
+    },
+    "params": [
+      {
+        "id": "surface",
+        "symbol": "S",
+        "label": "Surface de la feuille",
+        "unit": "dm²",
+        "min": 0.5,
+        "max": 10,
+        "step": 0.1,
+        "default": 2,
+        "role": "quantity"
+      },
+      {
+        "id": "lum",
+        "symbol": "L",
+        "label": "Lumière reçue",
+        "unit": "%",
+        "min": 10,
+        "max": 100,
+        "step": 1,
+        "default": 60,
+        "role": "quantity"
+      },
+      {
+        "id": "duree",
+        "symbol": "t",
+        "label": "Durée d’exposition",
+        "unit": "h",
+        "min": 1,
+        "max": 12,
+        "step": 0.5,
+        "default": 4,
+        "role": "quantity"
+      }
+    ],
+    "model": {
+      "constants": [
+        {
+          "id": "sucre_par_L",
+          "value": 0.5,
+          "unit": "g/(h·dm²)",
+          "label": "Sucre fabriqué par dm² et par heure à pleine lumière",
+          "symbol": "s"
+        },
+        {
+          "id": "facteur_O2",
+          "value": 1.067,
+          "unit": "",
+          "label": "Rapport masse d’oxygène sur masse de sucre",
+          "symbol": "k"
+        }
+      ],
+      "derived": [
+        {
+          "id": "sucre",
+          "expr": "sucre_par_L * surface * (lum / 100) * duree",
+          "unit": "g",
+          "label": "Sucre fabriqué",
+          "symbol": "m_sucre",
+          "format": "fixed:2"
+        },
+        {
+          "id": "oxygene",
+          "expr": "facteur_O2 * sucre_par_L * surface * (lum / 100) * duree",
+          "unit": "g",
+          "label": "Oxygène rejeté",
+          "symbol": "m_O2",
+          "format": "fixed:2"
+        },
+        {
+          "id": "sucre_double",
+          "expr": "sucre_par_L * surface * (2 * lum / 100) * duree",
+          "unit": "g",
+          "label": "Sucre si la lumière double",
+          "symbol": "m'",
+          "format": "fixed:2"
+        },
+        {
+          "id": "sucre_complet",
+          "expr": "sucre_par_L * surface * duree",
+          "unit": "g",
+          "label": "Sucre à pleine lumière",
+          "symbol": "m_max",
+          "format": "fixed:2"
+        }
+      ]
+    },
+    "scenes": [
+      {
+        "id": "s1",
+        "index": 0,
+        "role": "hook",
+        "title": "Une graine devient un arbre",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            0,
+            10
+          ],
+          "y": [
+            0,
+            6.804000000000001
+          ]
+        },
+        "derived": [
+          {
+            "id": "sol_y",
+            "expr": "0.9",
+            "unit": "",
+            "label": "Hauteur du sol"
+          },
+          {
+            "id": "graine_x",
+            "expr": "3.2",
+            "unit": "",
+            "label": "Position de la graine"
+          },
+          {
+            "id": "cime",
+            "expr": "5.2",
+            "unit": "",
+            "label": "Sommet de l’arbre"
+          }
+        ],
+        "elements": [
+          {
+            "id": "sol",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              0.2,
+              0.9
+            ],
+            "to": [
+              9.8,
+              0.9
+            ],
+            "role": "ink"
+          },
+          {
+            "id": "graine",
+            "slot": "figure",
+            "type": "object",
+            "kind": "block",
+            "at": [
+              {
+                "expr": "graine_x"
+              },
+              {
+                "expr": "sol_y"
+              }
+            ],
+            "size": 0.35,
+            "label": "graine",
+            "role": "quantity"
+          },
+          {
+            "id": "jeune",
+            "slot": "figure",
+            "type": "object",
+            "kind": "leaf",
+            "at": [
+              {
+                "expr": "graine_x"
+              },
+              1.8
+            ],
+            "size": 0.8
+          },
+          {
+            "id": "arbre_tronc",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              {
+                "expr": "graine_x"
+              },
+              {
+                "expr": "sol_y"
+              }
+            ],
+            "to": [
+              {
+                "expr": "graine_x"
+              },
+              {
+                "expr": "cime"
+              }
+            ],
+            "role": "ink"
+          },
+          {
+            "id": "arbre_tete",
+            "slot": "figure",
+            "type": "object",
+            "kind": "leaf",
+            "at": [
+              {
+                "expr": "graine_x"
+              },
+              {
+                "expr": "cime"
+              }
+            ],
+            "size": 2.2
+          },
+          {
+            "id": "sol_fleche",
+            "slot": "figure",
+            "type": "vector",
+            "from": [
+              7.5,
+              0.9
+            ],
+            "to": [
+              7.5,
+              1.6
+            ],
+            "label": "le sol ?",
+            "role": "action"
+          },
+          {
+            "id": "q1",
+            "slot": "notes",
+            "type": "text",
+            "text": "Une graine minuscule.",
+            "emphasis": "normal"
+          },
+          {
+            "id": "q2",
+            "slot": "notes",
+            "type": "text",
+            "text": "Un arbre immense.",
+            "emphasis": "normal"
+          },
+          {
+            "id": "q3",
+            "slot": "notes",
+            "type": "text",
+            "text": "La terre n’a presque pas bougé !",
+            "emphasis": "strong",
+            "role": "result"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Regarde cette graine minuscule, posée dans la terre. Elle pèse presque rien.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "sol"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "graine"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "q1"
+                ],
+                "how": "type"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Quelques années plus tard, en accéléré, voilà un arbre entier.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "jeune"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "arbre_tronc"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "arbre_tete"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "hide",
+                "targets": [
+                  "jeune",
+                  "graine"
+                ]
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "q2"
+                ],
+                "how": "type"
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Mais la terre n’a presque pas bougé. D’où vient toute cette matière ?",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "sol_fleche"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "q3"
+                ],
+                "how": "type"
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "q3"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s2",
+        "index": 1,
+        "role": "analogy",
+        "title": "La cuisine de la feuille",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            0,
+            10
+          ],
+          "y": [
+            0,
+            6
+          ]
+        },
+        "derived": [],
+        "elements": [
+          {
+            "id": "oven",
+            "slot": "figure",
+            "type": "shape",
+            "kind": "rect",
+            "center": [
+              8.2,
+              1.6
+            ],
+            "width": 3,
+            "height": 3,
+            "fill": "none",
+            "label": "Four"
+          },
+          {
+            "id": "light",
+            "slot": "figure",
+            "type": "object",
+            "kind": "bulb",
+            "at": [
+              8.2,
+              3.4
+            ],
+            "size": 0.9,
+            "label": "Lumière",
+            "role": "action"
+          },
+          {
+            "id": "bowl",
+            "slot": "figure",
+            "type": "shape",
+            "kind": "arc",
+            "center": [
+              3,
+              1.8
+            ],
+            "radius": 1.3,
+            "startDeg": 0,
+            "endDeg": 180,
+            "fill": "none",
+            "label": "Saladier"
+          },
+          {
+            "id": "water",
+            "slot": "figure",
+            "type": "object",
+            "kind": "beaker",
+            "at": [
+              1.8,
+              4.4
+            ],
+            "size": 0.8,
+            "label": "Eau",
+            "role": "quantity"
+          },
+          {
+            "id": "gas",
+            "slot": "figure",
+            "type": "object",
+            "kind": "molecule",
+            "at": [
+              4.4,
+              4.4
+            ],
+            "size": 0.8,
+            "label": "CO₂",
+            "role": "quantity"
+          },
+          {
+            "id": "dish",
+            "slot": "figure",
+            "type": "object",
+            "kind": "apple",
+            "at": [
+              3,
+              2.4
+            ],
+            "size": 0.9,
+            "role": "result"
+          },
+          {
+            "id": "steam",
+            "slot": "figure",
+            "type": "vector",
+            "from": [
+              3,
+              3
+            ],
+            "toward": [
+              3,
+              5
+            ],
+            "length": 1.2,
+            "label": "O₂",
+            "role": "action"
+          },
+          {
+            "id": "cook",
+            "slot": "notes",
+            "type": "text",
+            "text": "Ingrédients + four = plat.",
+            "emphasis": "strong"
+          },
+          {
+            "id": "no_oven",
+            "slot": "notes",
+            "type": "text",
+            "text": "Four éteint : rien ne cuit."
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Pense à une cuisine. Il faut des ingrédients, et il faut allumer le four.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "bowl",
+                  "water",
+                  "gas"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "oven"
+                ],
+                "how": "draw"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "L’eau et le gaz tombent dans le saladier. Le four allumé, le plat apparaît.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "light"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "move",
+                "target": "water",
+                "to": [
+                  2.6,
+                  2.6
+                ]
+              },
+              {
+                "do": "move",
+                "target": "gas",
+                "to": [
+                  3.4,
+                  2.6
+                ]
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "dish"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Et de la vapeur s’échappe. Sans four, rien ne cuit : c’est la lumière qui allume la feuille.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "steam"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "cook",
+                  "no_oven"
+                ],
+                "how": "type"
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "light"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s3",
+        "index": 2,
+        "role": "mechanism",
+        "title": "Dans la feuille : trois entrées, deux sorties",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            -5,
+            5
+          ],
+          "y": [
+            -3,
+            3
+          ]
+        },
+        "derived": [
+          {
+            "id": "haut_tige",
+            "expr": "1.2",
+            "unit": "",
+            "label": "Sommet de la tige",
+            "format": "fixed:1"
+          }
+        ],
+        "elements": [
+          {
+            "id": "tige",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              0,
+              -2.6
+            ],
+            "to": [
+              0,
+              1.2
+            ],
+            "label": "Eau",
+            "role": "valid"
+          },
+          {
+            "id": "feuille",
+            "slot": "figure",
+            "type": "shape",
+            "kind": "polygon",
+            "points": [
+              [
+                0,
+                1.2
+              ],
+              [
+                3.2,
+                2.2
+              ],
+              [
+                2.2,
+                0.2
+              ]
+            ],
+            "fill": "valid",
+            "label": "Feuille"
+          },
+          {
+            "id": "eau",
+            "slot": "figure",
+            "type": "vector",
+            "from": [
+              0,
+              -2.4
+            ],
+            "to": [
+              0,
+              0.6
+            ],
+            "label": "H2O",
+            "role": "valid"
+          },
+          {
+            "id": "co2",
+            "slot": "figure",
+            "type": "vector",
+            "from": [
+              4.2,
+              2.6
+            ],
+            "toward": [
+              2.6,
+              1.8
+            ],
+            "length": 1.3,
+            "label": "CO2",
+            "role": "quantity"
+          },
+          {
+            "id": "soleil",
+            "slot": "figure",
+            "type": "object",
+            "kind": "sun",
+            "at": [
+              -3.6,
+              2.2
+            ],
+            "size": 1.2,
+            "label": "Lumière"
+          },
+          {
+            "id": "rayon",
+            "slot": "figure",
+            "type": "vector",
+            "from": [
+              -3.2,
+              2.1
+            ],
+            "toward": [
+              1.4,
+              1.6
+            ],
+            "length": 2.4,
+            "label": "Lumière"
+          },
+          {
+            "id": "sucre",
+            "slot": "figure",
+            "type": "vector",
+            "from": [
+              1.2,
+              0.9
+            ],
+            "to": [
+              0.6,
+              -2.2
+            ],
+            "label": "Sucre",
+            "role": "result"
+          },
+          {
+            "id": "oxygene",
+            "slot": "figure",
+            "type": "vector",
+            "from": [
+              2.4,
+              1.4
+            ],
+            "to": [
+              4.2,
+              0.2
+            ],
+            "label": "O2",
+            "role": "quantity"
+          },
+          {
+            "id": "legende",
+            "slot": "notes",
+            "type": "text",
+            "text": "Entrées : eau, CO2, lumière.",
+            "emphasis": "strong"
+          },
+          {
+            "id": "bilan",
+            "slot": "notes",
+            "type": "text",
+            "text": "Sorties : sucre et oxygène."
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Regarde cette feuille grossie. L’eau monte par la tige, le dioxyde de carbone entre par les petits pores.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "tige",
+                  "feuille"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "eau",
+                  "co2"
+                ],
+                "how": "draw"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "La lumière frappe la feuille : c’est l’énergie qui lance la cuisine.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "soleil",
+                  "rayon"
+                ],
+                "how": "draw"
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Et voilà les deux sorties : le sucre descend vers la plante, l’oxygène s’échappe dans l’air.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "sucre",
+                  "oxygene"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "legende",
+                  "bilan"
+                ],
+                "how": "type",
+                "at": 0.8
+              }
+            ]
+          },
+          {
+            "id": "b4",
+            "narration": "Retiens les trois entrées et les deux sorties : la feuille est une petite usine.",
+            "actions": [
+              {
+                "do": "highlight",
+                "targets": [
+                  "sucre"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s4",
+        "index": 3,
+        "role": "formula",
+        "title": "Plus de lumière, plus de sucre",
+        "layout": "formula-focus",
+        "world": {
+          "x": [
+            0,
+            110
+          ],
+          "y": [
+            0,
+            26
+          ]
+        },
+        "derived": [
+          {
+            "id": "sucre_max",
+            "expr": "0.5 * surface * duree * 1.15",
+            "unit": "g",
+            "label": "Sucre maximum (palier)",
+            "format": "fixed:2"
+          }
+        ],
+        "elements": [
+          {
+            "id": "axes",
+            "slot": "figure",
+            "type": "axes",
+            "xLabel": "lumière (%)",
+            "yLabel": "sucre (g)",
+            "xTicks": 4,
+            "yTicks": 3,
+            "grid": true
+          },
+          {
+            "id": "curve",
+            "slot": "figure",
+            "type": "plot",
+            "fn": "sucre_max * (1 - exp(-x / 35))",
+            "domain": [
+              0,
+              100
+            ],
+            "role": "result",
+            "label": "sucre"
+          },
+          {
+            "id": "cursor",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              {
+                "expr": "lum"
+              },
+              {
+                "expr": "sucre_max * (1 - exp(-lum / 35))"
+              }
+            ],
+            "label": "toi"
+          },
+          {
+            "id": "spacer",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              105,
+              25
+            ]
+          },
+          {
+            "id": "rule",
+            "slot": "formula",
+            "type": "formula",
+            "tex": "\\res{\\text{sucre}} \\;\\propto\\; \\q{\\text{lumière}}"
+          },
+          {
+            "id": "light",
+            "slot": "readout",
+            "type": "readout",
+            "value": "lum",
+            "label": "Lumière"
+          },
+          {
+            "id": "made",
+            "slot": "readout",
+            "type": "readout",
+            "value": "sucre",
+            "label": "Sucre"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Regarde : plus la feuille reçoit de lumière, plus elle fabrique de sucre.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "axes"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "curve"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "spacer"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Le curseur se promène au-dessus : le résultat grimpe à chaque fois.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "cursor"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "light",
+                  "made"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "sweep",
+                "param": "lum",
+                "to": 100
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Mais à pleine lumière, la courbe s’aplatit : la plante a un plafond.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "rule"
+                ],
+                "how": "type"
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "curve"
+                ]
+              },
+              {
+                "do": "sweep",
+                "param": "lum",
+                "to": 10
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s5",
+        "index": 4,
+        "role": "example",
+        "title": "Une feuille qui travaille",
+        "layout": "figure-notes",
+        "derived": [
+          {
+            "id": "sucre_1h",
+            "expr": "sucre_par_L * surface * (lum / 100)",
+            "unit": "g",
+            "label": "Sucre fabriqué en une heure",
+            "symbol": "m_1h",
+            "format": "fixed:2"
+          },
+          {
+            "id": "oxygene_1h",
+            "expr": "facteur_O2 * sucre_par_L * (lum / 100)",
+            "unit": "g",
+            "label": "Oxygène rejeté en une heure",
+            "symbol": "o_1h",
+            "format": "fixed:2"
+          },
+          {
+            "id": "rapport",
+            "expr": "facteur_O2",
+            "unit": "",
+            "label": "Oxygène rejeté par gramme de sucre",
+            "symbol": "k",
+            "format": "fixed:2"
+          }
+        ],
+        "elements": [
+          {
+            "id": "bars",
+            "slot": "figure",
+            "type": "bars",
+            "items": [
+              {
+                "label": "Sucre fabriqué",
+                "value": {
+                  "expr": "sucre_1h"
+                },
+                "role": "result"
+              },
+              {
+                "label": "Oxygène rejeté",
+                "value": {
+                  "expr": "oxygene_1h"
+                },
+                "role": "action"
+              }
+            ],
+            "unit": "g par heure"
+          },
+          {
+            "id": "sucre_val",
+            "slot": "notes",
+            "type": "text",
+            "text": "Sucre : {{sucre_1h|fixed:2}} g en une heure."
+          },
+          {
+            "id": "oxy_val",
+            "slot": "notes",
+            "type": "text",
+            "text": "Oxygène : {{oxygene_1h|fixed:2}} g rejetés."
+          },
+          {
+            "id": "surprise",
+            "slot": "notes",
+            "type": "text",
+            "text": "L’oxygène pèse {{rapport|fixed:2}} fois plus.",
+            "emphasis": "strong"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Prends une feuille d’un décimètre carré, sous une lumière moyenne, pendant une heure.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "bars"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Deux barres : le sucre fabriqué, et l’oxygène rejeté. Devine laquelle est la plus haute.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "sucre_val",
+                  "oxy_val"
+                ],
+                "how": "type"
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Surprise : l’oxygène pèse plus lourd que le sucre. La feuille en rejette davantage.",
+            "actions": [
+              {
+                "do": "highlight",
+                "targets": [
+                  "bars"
+                ]
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "surprise"
+                ],
+                "how": "type"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s6",
+        "index": 5,
+        "role": "recap",
+        "title": "D’où vient le bois de l’arbre ?",
+        "layout": "statement",
+        "derived": [],
+        "elements": [
+          {
+            "id": "recap",
+            "slot": "text",
+            "type": "list",
+            "items": [
+              "La lumière, l’eau et le dioxyde de carbone entrent dans la feuille.",
+              "La feuille fabrique du sucre et rejette de l’oxygène.",
+              "L’arbre grandit surtout avec le carbone de l’air, pas avec la terre."
+            ]
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Trois idées à garder. La feuille reçoit de la lumière, de l’eau et du dioxyde de carbone.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "recap.i1"
+                ],
+                "how": "type"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Avec ça, elle fabrique du sucre. Et elle rejette de l’oxygène, que tu respires.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "recap.i2"
+                ],
+                "how": "type"
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Alors, d’où vient le bois ? Du carbone de l’air, pas de la terre.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "recap.i3"
+                ],
+                "how": "type"
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "recap.i3"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "quiz": {
+      "questions": [
+        {
+          "prompt": "Une graine minuscule devient un arbre immense, mais la terre autour ne baisse presque pas. D’où vient surtout la matière de l’arbre ?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "Du carbone pris dans l’air"
+            },
+            {
+              "id": "b",
+              "text": "De la terre qui se transforme en bois"
+            },
+            {
+              "id": "c",
+              "text": "De l’eau du sol seule"
+            },
+            {
+              "id": "d",
+              "text": "De la lumière qui devient de la matière"
+            }
+          ],
+          "answer_id": "a",
+          "explanation": "L’arbre grandit surtout avec le carbone du dioxyde de carbone de l’air, pas avec la terre.",
+          "scene_id": "s6"
+        },
+        {
+          "prompt": "Tu laisses une plante dans le noir complet pendant une journée. Que se passe-t-il pour le sucre qu’elle fabrique ?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "Elle en fabrique autant qu’en plein jour"
+            },
+            {
+              "id": "b",
+              "text": "Elle en fabrique un peu plus"
+            },
+            {
+              "id": "c",
+              "text": "Elle n’en fabrique presque plus"
+            }
+          ],
+          "answer_id": "c",
+          "explanation": "Sans lumière, la cuisine de la feuille s’arrête : la lumière est l’énergie qui lance la fabrication du sucre.",
+          "scene_id": "s2"
+        },
+        {
+          "prompt": "Tu doubles la lumière reçue par une feuille déjà bien éclairée. Pourquoi le sucre fabriqué n’augmente-t-il presque pas ?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "Parce que la plante a atteint son plafond"
+            },
+            {
+              "id": "b",
+              "text": "Parce que la lumière n’a jamais d’effet"
+            },
+            {
+              "id": "c",
+              "text": "Parce que trop de lumière détruit le sucre"
+            }
+          ],
+          "answer_id": "a",
+          "explanation": "Plus il y a de lumière, plus la plante fabrique de sucre, mais seulement jusqu’à un maximum.",
+          "scene_id": "s4"
+        }
+      ]
+    }
+  }
+}

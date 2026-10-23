@@ -1,0 +1,1221 @@
+{
+  "slug": "chemistry/chemical-equation",
+  "subject": "chemistry",
+  "reference_level": "college",
+  "language": "en",
+  "title": "Balancing Chemical Equations",
+  "question": "How do you balance a chemical equation?",
+  "reviewed_by": null,
+  "reviewed_at": null,
+  "verdicts": [
+    {
+      "target": "plan",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "The atom counts, coefficients, and the balancing rule are all correct, and the bicycle-factory analogy correctly shows that atoms are conserved and only whole molecules can be assembled.",
+      "checks": [
+        "structure",
+        "model",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s1",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "The scene shows the unbalanced equation H₂ + O₂ → H₂O with correct atom counts (left 2 H and 2 O, right 2 H and 1 O), then asks where the missing oxygen went, which matches the hook and states nothing false.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s2",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "The scene uses the factory analogy correctly: wheels are shown and counted as physical parts that are neither created nor destroyed, matching the outline's point about atoms being conserved.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s3",
+      "status": "corrected",
+      "attempts": 2,
+      "reason": "The scene correctly shows counting atoms and adding a coefficient to water to fix oxygen, then notes hydrogen still doesn't match, which matches the outline's mechanism step.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s4",
+      "status": "corrected",
+      "attempts": 3,
+      "reason": "The scene states the balancing rule correctly and shows that changing subscripts (making H₂O₂) adds atoms, which is not allowed.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s5",
+      "status": "corrected",
+      "attempts": 2,
+      "reason": "The scene correctly counts atoms on both sides, shows that doubling the water fixes oxygen but leaves hydrogen short, matching the outline's example.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s6",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "The scene correctly states that atoms are conserved and that coefficients, not subscripts, balance the count, and the final equation 2 H₂ + O₂ → 2 H₂O with 4 H and 2 O on each side is correct.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    }
+  ],
+  "payload": {
+    "version": 1,
+    "plan": {
+      "objective": "Balance a simple chemical equation by counting atoms and adding coefficients, knowing that the number of atoms of each element stays the same.",
+      "prerequisites": [
+        "Reading a chemical formula: H₂O means two hydrogen atoms and one oxygen atom",
+        "Knowing that atoms are not created or destroyed",
+        "Multiplying a small whole number by a group"
+      ],
+      "analogy": {
+        "name": "A bicycle factory",
+        "mapping": "Frames and wheels are atoms; a bicycle is a molecule; the factory floor is the equation, where you can order more frames or wheels but never change what a wheel is."
+      },
+      "key_rule": {
+        "statement": "In a balanced equation the number of atoms of each element is the same before and after the reaction; you balance by putting whole numbers (coefficients) in front of the formulas, never by changing the formulas.",
+        "formula": "\\q{\\text{H}_2} + \\q{\\text{O}_2} \\rightarrow \\q{\\text{H}_2\\text{O}} \\;\\text{with coefficients so that H and O counts match}"
+      },
+      "steps": [
+        {
+          "role": "hook",
+          "intent": "Show a burning reaction and ask why the equation as written seems to lose atoms.",
+          "visual": "A candle burns; the labels H₂ + O₂ → H₂O appear, then a counter shows oxygen atoms vanishing."
+        },
+        {
+          "role": "analogy",
+          "intent": "Make the balance intuitive with parts that cannot appear or disappear.",
+          "visual": "A factory floor: frames and wheels on the left, bicycles on the right; wheels pile up and a red 'shortage' flashes."
+        },
+        {
+          "role": "mechanism",
+          "intent": "Count atoms and add a coefficient to fix one element at a time.",
+          "visual": "A coefficient slider changes the number in front of H₂O; the H and O counters update and the O counter turns from red to green."
+        },
+        {
+          "role": "formula",
+          "intent": "State the balancing rule: same count per element, coefficients only.",
+          "visual": "The rule appears; a crossed-out H₂O → H₂O₂ shows you must not change subscripts."
+        },
+        {
+          "role": "example",
+          "intent": "Walk through H₂ + O₂ → H₂O with real counts and show the surprising result.",
+          "visual": "Counters: 2 H and 2 O on the left, 2 H and 1 O on the right, then doubling water gives 4 H and 2 O, so hydrogen also must be doubled."
+        },
+        {
+          "role": "recap",
+          "intent": "Fix the two ideas and answer the hook: atoms are conserved, coefficients balance them.",
+          "visual": "Two short lines, then the balanced equation 2H₂ + O₂ → 2H₂O lights up with all counters equal."
+        }
+      ]
+    },
+    "params": [
+      {
+        "id": "nH2",
+        "symbol": "nH₂",
+        "label": "Molecules of H₂ on the left",
+        "unit": "",
+        "min": 1,
+        "max": 6,
+        "step": 1,
+        "default": 2,
+        "role": "quantity"
+      },
+      {
+        "id": "nO2",
+        "symbol": "nO₂",
+        "label": "Molecules of O₂ on the left",
+        "unit": "",
+        "min": 1,
+        "max": 6,
+        "step": 1,
+        "default": 1,
+        "role": "quantity"
+      },
+      {
+        "id": "nH2O",
+        "symbol": "nH₂O",
+        "label": "Molecules of H₂O on the right",
+        "unit": "",
+        "min": 1,
+        "max": 6,
+        "step": 1,
+        "default": 2,
+        "role": "quantity"
+      }
+    ],
+    "model": {
+      "constants": [
+        {
+          "id": "H_per_H2",
+          "value": 2,
+          "unit": "atoms",
+          "label": "Hydrogen atoms per H₂ molecule"
+        },
+        {
+          "id": "O_per_O2",
+          "value": 2,
+          "unit": "atoms",
+          "label": "Oxygen atoms per O₂ molecule"
+        }
+      ],
+      "derived": [
+        {
+          "id": "H_left",
+          "expr": "nH2 * H_per_H2",
+          "unit": "atoms",
+          "label": "Hydrogen atoms on the left",
+          "symbol": "H",
+          "format": "int"
+        },
+        {
+          "id": "O_left",
+          "expr": "nO2 * O_per_O2",
+          "unit": "atoms",
+          "label": "Oxygen atoms on the left",
+          "symbol": "O",
+          "format": "int"
+        },
+        {
+          "id": "H_right",
+          "expr": "nH2O * 2",
+          "unit": "atoms",
+          "label": "Hydrogen atoms on the right",
+          "symbol": "H",
+          "format": "int"
+        },
+        {
+          "id": "O_right",
+          "expr": "nH2O * 1",
+          "unit": "atoms",
+          "label": "Oxygen atoms on the right",
+          "symbol": "O",
+          "format": "int"
+        },
+        {
+          "id": "balanced",
+          "expr": "H_left - H_right + O_left - O_right",
+          "unit": "",
+          "label": "Total atom imbalance (0 means balanced)",
+          "format": "int"
+        }
+      ]
+    },
+    "scenes": [
+      {
+        "id": "s1",
+        "index": 0,
+        "role": "hook",
+        "title": "A candle burns and the atoms do not vanish",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            0,
+            10
+          ],
+          "y": [
+            0,
+            6
+          ]
+        },
+        "derived": [
+          {
+            "id": "candle_base",
+            "expr": "1.2",
+            "unit": "",
+            "label": "Candle base height",
+            "format": "int"
+          },
+          {
+            "id": "candle_top",
+            "expr": "3.4",
+            "unit": "",
+            "label": "Candle top height",
+            "format": "int"
+          }
+        ],
+        "elements": [
+          {
+            "id": "table_line",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              0,
+              1.2
+            ],
+            "to": [
+              10,
+              1.2
+            ],
+            "role": "inkSoft"
+          },
+          {
+            "id": "candle",
+            "slot": "figure",
+            "type": "object",
+            "kind": "block",
+            "at": [
+              2,
+              3.4
+            ],
+            "size": 1.4,
+            "label": "Candle"
+          },
+          {
+            "id": "flame",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              2,
+              4.6
+            ],
+            "label": " Flame",
+            "role": "action"
+          },
+          {
+            "id": "molecule",
+            "slot": "figure",
+            "type": "object",
+            "kind": "molecule",
+            "at": [
+              7,
+              4.4
+            ],
+            "size": 1.2,
+            "label": "H₂O",
+            "role": "quantity"
+          },
+          {
+            "id": "lost",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              7,
+              2.2
+            ],
+            "label": "oxygen?",
+            "role": "result"
+          },
+          {
+            "id": "step_one",
+            "slot": "notes",
+            "type": "formula",
+            "tex": "\\q{\\text{H}_2} + \\a{\\text{O}_2} \\rightarrow \\q{\\text{H}_2\\text{O}}"
+          },
+          {
+            "id": "counts",
+            "slot": "notes",
+            "type": "text",
+            "text": "Left: 2 H, 2 O. Right: 2 H, 1 O."
+          },
+          {
+            "id": "question",
+            "slot": "notes",
+            "type": "text",
+            "text": "Where did the other oxygen go?",
+            "emphasis": "strong"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "A candle burns. Look at the equation people write for it.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "table_line",
+                  "candle",
+                  "flame"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "step_one"
+                ],
+                "how": "type",
+                "at": 1
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Count the atoms on each side. Hydrogen matches. Oxygen is short by one.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "counts",
+                  "molecule"
+                ],
+                "how": "type"
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Does a burning candle destroy oxygen atoms? Think before you answer.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "lost",
+                  "question"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "lost"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s2",
+        "index": 1,
+        "role": "analogy",
+        "title": "Frames and wheels: nothing appears from nowhere",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            0,
+            10
+          ],
+          "y": [
+            0,
+            6
+          ]
+        },
+        "derived": [
+          {
+            "id": "frame_x",
+            "expr": "2.2",
+            "unit": "",
+            "label": "Frame position",
+            "format": "int"
+          },
+          {
+            "id": "wheel_x",
+            "expr": "4.6",
+            "unit": "",
+            "label": "Wheel position",
+            "format": "int"
+          },
+          {
+            "id": "bike_x",
+            "expr": "8",
+            "unit": "",
+            "label": "Bike position",
+            "format": "int"
+          }
+        ],
+        "elements": [
+          {
+            "id": "floor",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              0.3,
+              0.6
+            ],
+            "to": [
+              9.7,
+              0.6
+            ],
+            "role": "inkSoft"
+          },
+          {
+            "id": "frame",
+            "slot": "figure",
+            "type": "object",
+            "kind": "block",
+            "at": [
+              {
+                "expr": "frame_x"
+              },
+              1.4
+            ],
+            "size": 0.9,
+            "label": "Frame"
+          },
+          {
+            "id": "wheel1",
+            "slot": "figure",
+            "type": "object",
+            "kind": "coin",
+            "at": [
+              {
+                "expr": "wheel_x"
+              },
+              1.4
+            ],
+            "size": 0.8,
+            "label": "Wheels"
+          },
+          {
+            "id": "wheel2",
+            "slot": "figure",
+            "type": "object",
+            "kind": "coin",
+            "at": [
+              {
+                "expr": "wheel_x"
+              },
+              2.9
+            ],
+            "size": 0.8
+          },
+          {
+            "id": "wheel3",
+            "slot": "figure",
+            "type": "object",
+            "kind": "coin",
+            "at": [
+              {
+                "expr": "wheel_x"
+              },
+              4.3
+            ],
+            "size": 0.8
+          },
+          {
+            "id": "arrow",
+            "slot": "figure",
+            "type": "vector",
+            "from": [
+              5.6,
+              2.6
+            ],
+            "to": [
+              6.9,
+              2.6
+            ],
+            "label": "assemble",
+            "role": "action"
+          },
+          {
+            "id": "bike",
+            "slot": "figure",
+            "type": "shape",
+            "kind": "circle",
+            "center": [
+              {
+                "expr": "bike_x"
+              },
+              2
+            ],
+            "radius": 0.75,
+            "role": "valid",
+            "label": "1 bike"
+          },
+          {
+            "id": "bike2",
+            "slot": "figure",
+            "type": "shape",
+            "kind": "circle",
+            "center": [
+              {
+                "expr": "bike_x"
+              },
+              3.6
+            ],
+            "radius": 0.75
+          },
+          {
+            "id": "shortage",
+            "slot": "notes",
+            "type": "text",
+            "text": "2 wheels short!",
+            "emphasis": "strong",
+            "role": "result"
+          },
+          {
+            "id": "frame_count",
+            "slot": "notes",
+            "type": "readout",
+            "value": "frame_x",
+            "label": "Frames on the bench"
+          },
+          {
+            "id": "rule",
+            "slot": "notes",
+            "type": "text",
+            "text": "Atoms: you can’t add or remove any."
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Picture a bike factory: frames and wheels on the bench, bikes on the other side.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "floor",
+                  "frame",
+                  "wheel1",
+                  "wheel2",
+                  "wheel3"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "bike",
+                  "bike2",
+                  "arrow"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "frame_count"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Each bike needs two wheels. You have three wheels and two bikes waiting.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "shortage"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "focus",
+                "targets": [
+                  "wheel3",
+                  "bike",
+                  "bike2"
+                ]
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "One wheel is left over, not lost. Atoms work the same way in an equation.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "rule"
+                ],
+                "how": "type"
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "shortage"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s3",
+        "index": 2,
+        "role": "mechanism",
+        "title": "Count atoms and add a coefficient",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            0,
+            10
+          ],
+          "y": [
+            0,
+            6
+          ]
+        },
+        "derived": [],
+        "elements": [
+          {
+            "id": "counts",
+            "slot": "figure",
+            "type": "bars",
+            "items": [
+              {
+                "label": "H left",
+                "value": {
+                  "expr": "H_left"
+                },
+                "role": "quantity"
+              },
+              {
+                "label": "H right",
+                "value": {
+                  "expr": "H_right"
+                },
+                "role": "result"
+              },
+              {
+                "label": "O left",
+                "value": {
+                  "expr": "O_left"
+                },
+                "role": "quantity"
+              },
+              {
+                "label": "O right",
+                "value": {
+                  "expr": "O_right"
+                },
+                "role": "result"
+              }
+            ],
+            "unit": "atoms"
+          },
+          {
+            "id": "hint",
+            "slot": "notes",
+            "type": "text",
+            "text": "Coefficient out front multiplies every atom.",
+            "emphasis": "normal"
+          },
+          {
+            "id": "o_status",
+            "slot": "notes",
+            "type": "text",
+            "text": "Oxygen atoms: {{O_left}} left, {{O_right}} right."
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Look at the bars: four hydrogen atoms on the left, but only two on the right.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "counts"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "hint"
+                ],
+                "how": "type"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Put a 2 in front of water to fix oxygen.",
+            "actions": [
+              {
+                "do": "sweep",
+                "param": "nH2O",
+                "to": {
+                  "expr": "nO2"
+                }
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "o_status"
+                ],
+                "how": "type",
+                "at": 0.5
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Now oxygen matches, but hydrogen is still too high.",
+            "actions": [
+              {
+                "do": "highlight",
+                "targets": [
+                  "counts"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s4",
+        "index": 3,
+        "role": "formula",
+        "title": "Same atoms, whole numbers in front",
+        "layout": "formula-focus",
+        "world": {
+          "x": [
+            0,
+            11
+          ],
+          "y": [
+            0,
+            4
+          ]
+        },
+        "derived": [
+          {
+            "id": "H2O2_H",
+            "expr": "2 * 2",
+            "unit": "atoms",
+            "label": "Hydrogen atoms in H₂O₂",
+            "format": "int"
+          },
+          {
+            "id": "H2O2_O",
+            "expr": "2 * 1",
+            "unit": "atoms",
+            "label": "Oxygen atoms in H₂O₂",
+            "format": "int"
+          },
+          {
+            "id": "arrow_x1",
+            "expr": "0",
+            "unit": "",
+            "label": "",
+            "format": "int"
+          }
+        ],
+        "elements": [
+          {
+            "id": "rule",
+            "slot": "formula",
+            "type": "formula",
+            "tex": "\\text{atoms before} = \\text{atoms after}\\quad\\text{only } \\q{\\text{coefficients}} \\text{ may change}"
+          },
+          {
+            "id": "cross",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              0.4,
+              2.2
+            ],
+            "to": [
+              3.6,
+              1.2
+            ],
+            "role": "result"
+          },
+          {
+            "id": "hcount",
+            "slot": "readout",
+            "type": "readout",
+            "value": "H_per_H2",
+            "label": "H in each H₂"
+          },
+          {
+            "id": "ocount",
+            "slot": "readout",
+            "type": "readout",
+            "value": "O_per_O2",
+            "label": "O in each O₂"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Here is the rule: the same count of each element, before and after.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "rule"
+                ],
+                "how": "type"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "You may put whole numbers in front. Watch this forbidden trick: changing the formula itself.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "cross"
+                ],
+                "how": "draw",
+                "at": 0.5
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "H₂O₂ has more atoms than water, so the trick is out.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "hcount",
+                  "ocount"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "cross"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s5",
+        "index": 4,
+        "role": "example",
+        "title": "Count the atoms: H2 + O2 → H2O",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            -5,
+            5
+          ],
+          "y": [
+            -3,
+            3
+          ]
+        },
+        "derived": [
+          {
+            "id": "H_gap",
+            "expr": "H_right - H_left",
+            "unit": "atoms",
+            "label": "Hydrogen to add on the left",
+            "format": "int"
+          },
+          {
+            "id": "O_gap",
+            "expr": "O_right - O_left",
+            "unit": "atoms",
+            "label": "Oxygen to add on the right",
+            "format": "int"
+          }
+        ],
+        "elements": [
+          {
+            "id": "reaction",
+            "slot": "figure",
+            "type": "sim.reaction",
+            "reactants": [
+              {
+                "formula": "H2",
+                "coefficient": {
+                  "expr": "nH2"
+                }
+              },
+              {
+                "formula": "O2",
+                "coefficient": {
+                  "expr": "nO2"
+                }
+              }
+            ],
+            "products": [
+              {
+                "formula": "H2O",
+                "coefficient": {
+                  "expr": "nH2O"
+                }
+              }
+            ]
+          },
+          {
+            "id": "h_left",
+            "slot": "notes",
+            "type": "readout",
+            "value": "H_left",
+            "label": "H atoms on the left"
+          },
+          {
+            "id": "h_right",
+            "slot": "notes",
+            "type": "readout",
+            "value": "H_right",
+            "label": "H atoms on the right"
+          },
+          {
+            "id": "gap",
+            "slot": "notes",
+            "type": "text",
+            "text": "Oxygen: {{O_left|int}} left, {{O_right|int}} right.",
+            "role": "quantity"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Start with two H2 and one O2. On the right, we wrote two waters. Now count.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "reaction.reactants",
+                  "reaction.arrow",
+                  "reaction.products"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "h_left",
+                  "h_right"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Hydrogen matches. But oxygen does not: the right side is short by one atom.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "gap"
+                ],
+                "how": "type"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "reaction.tally"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Double the water to fix oxygen, and now hydrogen is short. Counts have to match everywhere.",
+            "actions": [
+              {
+                "do": "sweep",
+                "param": "nH2O",
+                "to": {
+                  "expr": "2 * nH2O"
+                }
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "h_right"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s6",
+        "index": 5,
+        "role": "recap",
+        "title": "Atoms never vanish, coefficients fix the count",
+        "layout": "statement",
+        "derived": [],
+        "elements": [
+          {
+            "id": "recap",
+            "slot": "text",
+            "type": "list",
+            "items": [
+              "Atoms are never created or destroyed: count them on both sides.",
+              "You balance with whole numbers in front of the formulas.",
+              "Change a subscript and you make a different molecule."
+            ]
+          },
+          {
+            "id": "final",
+            "slot": "text",
+            "type": "text",
+            "text": "2 H₂ + O₂ → 2 H₂O : 4 H and 2 O on each side.",
+            "emphasis": "strong",
+            "role": "result"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Two things to keep. First, atoms are never lost: count them on each side.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "recap"
+                ],
+                "how": "type"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Second, you fix the count with whole numbers in front of the formulas, nothing else.",
+            "actions": []
+          },
+          {
+            "id": "b3",
+            "narration": "So the candle loses nothing: 2 H₂ plus O₂ gives 2 H₂O. Same atoms, new molecules.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "final"
+                ],
+                "how": "type"
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "final"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "quiz": {
+      "questions": [
+        {
+          "prompt": "When a candle burns, the oxygen seems to disappear from the equation. What really happens to those oxygen atoms?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "They are destroyed by the fire"
+            },
+            {
+              "id": "b",
+              "text": "They end up in the new molecules on the right"
+            },
+            {
+              "id": "c",
+              "text": "They turn into energy and vanish"
+            },
+            {
+              "id": "d",
+              "text": "They stay unchanged on the left side"
+            }
+          ],
+          "answer_id": "b",
+          "explanation": "Atoms are never lost in a reaction; the missing oxygen is simply counted in the products on the right.",
+          "scene_id": "s1"
+        },
+        {
+          "prompt": "You need to balance an equation but one element is short. Which move is allowed?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "Change a subscript inside a formula"
+            },
+            {
+              "id": "b",
+              "text": "Delete an atom from the crowded side"
+            },
+            {
+              "id": "c",
+              "text": "Put a whole number in front of a formula"
+            },
+            {
+              "id": "d",
+              "text": "Add a new element to make it fit"
+            }
+          ],
+          "answer_id": "c",
+          "explanation": "Only coefficients in front are allowed; changing a subscript would make a different molecule.",
+          "scene_id": "s4"
+        },
+        {
+          "prompt": "You have H₂ + O₂ → H₂O. Oxygen is short on the right. What happens if you double the water to 2 H₂O?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "Both hydrogen and oxygen now match"
+            },
+            {
+              "id": "b",
+              "text": "Oxygen matches but hydrogen is now short"
+            },
+            {
+              "id": "c",
+              "text": "Nothing changes because coefficients do nothing"
+            },
+            {
+              "id": "d",
+              "text": "Oxygen doubles but hydrogen stays the same"
+            }
+          ],
+          "answer_id": "b",
+          "explanation": "The coefficient 2 doubles every atom in water, so oxygen fits but hydrogen no longer matches the left side.",
+          "scene_id": "s5"
+        }
+      ]
+    }
+  }
+}

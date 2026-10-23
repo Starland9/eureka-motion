@@ -1,0 +1,1274 @@
+{
+  "slug": "maths/pythagorean-theorem",
+  "subject": "maths",
+  "reference_level": "college",
+  "language": "en",
+  "title": "Pythagorean Theorem",
+  "question": "What is the Pythagorean theorem?",
+  "reviewed_by": null,
+  "reviewed_at": null,
+  "verdicts": [
+    {
+      "target": "plan",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "All formulas, units, ranges, and the pizza analogy are correct and appropriate for middle school: squares on the two legs add to the square on the hypotenuse, and the derived areas and hypotenuse are computed correctly.",
+      "checks": [
+        "structure",
+        "model",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s1",
+      "status": "corrected",
+      "attempts": 2,
+      "reason": "The scene shows a right triangle with squares on its sides and uses the live area values (a², b², c²) that by the Pythagorean theorem do add up to the big square, matching the hook's intent.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s2",
+      "status": "corrected",
+      "attempts": 2,
+      "reason": "The scene shows two small pizzas and one big one, puts them on a balance scale that stays level, and states that two small areas can exactly equal one big area — which matches the intended intuition and contains no factual error.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s3",
+      "status": "corrected",
+      "attempts": 2,
+      "reason": "The scene shows the big square dissected into two smaller squares and triangles, consistent with the Pythagorean theorem, and the narration matches what is displayed.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s4",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "The scene correctly shows that the areas of the two small squares (a² and b²) add up to the area of the big square (c²), and this stays true while a is swept, matching the Pythagorean theorem.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s5",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "The scene correctly shows the 3-4-5 example (9 + 16 = 25, so c = 5) and then doubles side a to 6, where c becomes about 7.21, not 10, matching the outline's point that the long side does not simply double.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s6",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "The scene recalls correctly that in a right triangle the two small squares add up to the big one, notes that doubling a side makes its square grow four times, and states that only right triangles obey the rule — all consistent with the outl",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    }
+  ],
+  "payload": {
+    "version": 1,
+    "plan": {
+      "objective": "You will be able to state the Pythagorean theorem, see why it is true with squares on the sides, and use it to find a missing side of a right triangle.",
+      "prerequisites": [
+        "Right angle and right triangle",
+        "Area of a square (side × side)",
+        "Squaring a number"
+      ],
+      "analogy": {
+        "name": "Two small pizzas vs one big pizza",
+        "mapping": "The two short sides of the right triangle are the two small squares; the long side is the big square. The theorem says the two small squares together have exactly the area of the big one."
+      },
+      "key_rule": {
+        "statement": "In a right triangle, the squares built on the two short sides, added together, have exactly the same area as the square built on the longest side.",
+        "formula": "\\q{a}^2 + \\q{b}^2 = \\res{c}^2"
+      },
+      "steps": [
+        {
+          "role": "hook",
+          "intent": "Show a right triangle with squares on its sides and ask why the two small areas match the big one.",
+          "visual": "A right triangle, then three squares grow outward from its sides; the two small squares slide and fill the big square exactly."
+        },
+        {
+          "role": "analogy",
+          "intent": "Give the intuition that two smaller areas can exactly equal one bigger area.",
+          "visual": "Two small pizzas slide together, then a big pizza appears; a balance scale tips to show equal area."
+        },
+        {
+          "role": "mechanism",
+          "intent": "Show step by step that the two small squares are made of the same pieces as the big square.",
+          "visual": "The big square is cut into two small squares and four copies of the triangle; pieces fly apart and reassemble."
+        },
+        {
+          "role": "formula",
+          "intent": "Connect the side lengths to the areas with the formula a² + b² = c².",
+          "visual": "The letters a, b, c appear on the sides; squares are labeled a², b², c²; the formula writes itself with the numbers changing as a and b change."
+        },
+        {
+          "role": "example",
+          "intent": "Work a concrete example: legs 3 and 4 give hypotenuse 5, and see a surprising number when one leg is doubled.",
+          "visual": "A 3-4-5 triangle with squares of areas 9, 16, 25; then the leg 3 is stretched to 6, the squares grow, and the new hypotenuse is computed live."
+        },
+        {
+          "role": "recap",
+          "intent": "Recall that the two small squares add up to the big one, answer the hook, and emphasize that only right triangles obey it.",
+          "visual": "Three short sentences appear; the last one is highlighted, and a non-right triangle makes the big square slightly larger than the sum of the two small ones."
+        }
+      ]
+    },
+    "params": [
+      {
+        "id": "a",
+        "symbol": "a",
+        "label": "Length of one short side",
+        "unit": "cm",
+        "min": 1,
+        "max": 10,
+        "step": 0.5,
+        "default": 3,
+        "role": "quantity"
+      },
+      {
+        "id": "b",
+        "symbol": "b",
+        "label": "Length of the other short side",
+        "unit": "cm",
+        "min": 1,
+        "max": 10,
+        "step": 0.5,
+        "default": 4,
+        "role": "quantity"
+      }
+    ],
+    "model": {
+      "constants": [],
+      "derived": [
+        {
+          "id": "a2",
+          "expr": "a^2",
+          "unit": "cm²",
+          "label": "Area of the square on side a",
+          "symbol": "a²",
+          "format": "fixed:1"
+        },
+        {
+          "id": "b2",
+          "expr": "b^2",
+          "unit": "cm²",
+          "label": "Area of the square on side b",
+          "symbol": "b²",
+          "format": "fixed:1"
+        },
+        {
+          "id": "c2",
+          "expr": "a^2 + b^2",
+          "unit": "cm²",
+          "label": "Area of the square on the long side",
+          "symbol": "c²",
+          "format": "fixed:1"
+        },
+        {
+          "id": "c",
+          "expr": "sqrt(a^2 + b^2)",
+          "unit": "cm",
+          "label": "Length of the long side",
+          "symbol": "c",
+          "format": "fixed:2"
+        },
+        {
+          "id": "c2_double_a",
+          "expr": "(2 * a)^2 + b^2",
+          "unit": "cm²",
+          "label": "Area of the square on the long side when side a is doubled",
+          "symbol": "c²",
+          "format": "fixed:1"
+        }
+      ]
+    },
+    "scenes": [
+      {
+        "id": "s1",
+        "index": 0,
+        "role": "hook",
+        "title": "Two small squares, one big square",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            -6,
+            10
+          ],
+          "y": [
+            -5,
+            5
+          ]
+        },
+        "derived": [],
+        "elements": [
+          {
+            "id": "tri",
+            "slot": "figure",
+            "type": "sim.right-triangle",
+            "a": {
+              "expr": "a"
+            },
+            "b": {
+              "expr": "b"
+            },
+            "showSquares": true,
+            "labelA": "a",
+            "labelB": "b",
+            "labelC": "c"
+          },
+          {
+            "id": "q",
+            "slot": "notes",
+            "type": "text",
+            "text": "Do the two small squares fill the big one?",
+            "emphasis": "strong"
+          },
+          {
+            "id": "areas",
+            "slot": "notes",
+            "type": "text",
+            "text": "Small areas: {{a2|fixed:1}} and {{b2|fixed:1}}. Big area: {{c2|fixed:1}}."
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Here is a right triangle, with a square built on each of its three sides.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "tri"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "q"
+                ],
+                "how": "type",
+                "at": 1
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Guess: do the two small squares together cover the big square exactly?",
+            "actions": [
+              {
+                "do": "focus",
+                "targets": [
+                  "tri.square_a",
+                  "tri.square_b"
+                ]
+              },
+              {
+                "do": "sweep",
+                "param": "a",
+                "to": {
+                  "expr": "2 * a"
+                }
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Look at the areas: the two small ones really do add up to the big one.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "areas"
+                ],
+                "how": "type"
+              },
+              {
+                "do": "sweep",
+                "param": "b",
+                "to": {
+                  "expr": "6"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s2",
+        "index": 1,
+        "role": "analogy",
+        "title": "Two small pizzas, one big pizza",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            -6,
+            6
+          ],
+          "y": [
+            -3.5,
+            3.5
+          ]
+        },
+        "derived": [],
+        "elements": [
+          {
+            "id": "small_1",
+            "slot": "figure",
+            "type": "object",
+            "kind": "coin",
+            "at": [
+              -3.6,
+              0.9
+            ],
+            "size": 2,
+            "label": "small",
+            "role": "quantity"
+          },
+          {
+            "id": "small_2",
+            "slot": "figure",
+            "type": "object",
+            "kind": "coin",
+            "at": [
+              -3.6,
+              -1.3
+            ],
+            "size": 2,
+            "label": "small",
+            "role": "quantity"
+          },
+          {
+            "id": "big",
+            "slot": "figure",
+            "type": "object",
+            "kind": "coin",
+            "at": [
+              2.6,
+              0.4
+            ],
+            "size": 3,
+            "label": "big",
+            "role": "result"
+          },
+          {
+            "id": "beam",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              -4.6,
+              -3
+            ],
+            "to": [
+              4.6,
+              -3
+            ],
+            "role": "ink"
+          },
+          {
+            "id": "left_pan",
+            "slot": "figure",
+            "type": "shape",
+            "kind": "rect",
+            "center": [
+              -2.6,
+              -2.55
+            ],
+            "width": 2.4,
+            "height": 0.35,
+            "fill": "none",
+            "role": "ink"
+          },
+          {
+            "id": "right_pan",
+            "slot": "figure",
+            "type": "shape",
+            "kind": "rect",
+            "center": [
+              2.6,
+              -2.55
+            ],
+            "width": 2.4,
+            "height": 0.35,
+            "fill": "none",
+            "role": "ink"
+          },
+          {
+            "id": "centre",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              0,
+              -3
+            ],
+            "label": "balance"
+          },
+          {
+            "id": "guess",
+            "slot": "notes",
+            "type": "text",
+            "text": "Which is more pizza?"
+          },
+          {
+            "id": "answer",
+            "slot": "notes",
+            "type": "text",
+            "text": "Two small = one big.",
+            "emphasis": "strong"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Two small pizzas, one big pizza. Guess which gives you more to eat.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "small_1",
+                  "small_2",
+                  "big"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "guess"
+                ],
+                "how": "type"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Slide the two small ones onto the left pan, the big one on the right.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "beam",
+                  "left_pan",
+                  "right_pan",
+                  "centre"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "move",
+                "target": "small_1",
+                "to": [
+                  -3.1,
+                  -1.6
+                ]
+              },
+              {
+                "do": "move",
+                "target": "small_2",
+                "to": [
+                  -2.1,
+                  -1.6
+                ]
+              },
+              {
+                "do": "move",
+                "target": "big",
+                "to": [
+                  2.6,
+                  -1.2
+                ]
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "The scale stays level. Two small areas can equal one big area, exactly.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "answer"
+                ],
+                "how": "type"
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "big"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s3",
+        "index": 2,
+        "role": "mechanism",
+        "title": "Four triangles and two squares fill the big one",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            -1,
+            11
+          ],
+          "y": [
+            -1,
+            11.711955983410528
+          ]
+        },
+        "derived": [
+          {
+            "id": "ca",
+            "expr": "a^2/c",
+            "unit": "cm",
+            "label": "Offset along the bottom side",
+            "symbol": "p",
+            "format": "fixed:2"
+          },
+          {
+            "id": "cb",
+            "expr": "b^2/c",
+            "unit": "cm",
+            "label": "Offset along the left side",
+            "symbol": "q",
+            "format": "fixed:2"
+          },
+          {
+            "id": "h",
+            "expr": "a*b/c",
+            "unit": "cm",
+            "label": "Height of the tilted triangles",
+            "symbol": "h",
+            "format": "fixed:2"
+          }
+        ],
+        "elements": [
+          {
+            "id": "big",
+            "slot": "figure",
+            "type": "shape",
+            "kind": "polygon",
+            "points": [
+              [
+                0,
+                0
+              ],
+              [
+                {
+                  "expr": "c"
+                },
+                0
+              ],
+              [
+                {
+                  "expr": "c"
+                },
+                {
+                  "expr": "c"
+                }
+              ],
+              [
+                0,
+                {
+                  "expr": "c"
+                }
+              ]
+            ],
+            "fill": "none",
+            "label": "c"
+          },
+          {
+            "id": "t1",
+            "slot": "figure",
+            "type": "shape",
+            "kind": "polygon",
+            "points": [
+              [
+                0,
+                0
+              ],
+              [
+                {
+                  "expr": "c"
+                },
+                0
+              ],
+              [
+                {
+                  "expr": "c"
+                },
+                {
+                  "expr": "ca"
+                }
+              ]
+            ],
+            "fill": "hatch"
+          },
+          {
+            "id": "t2",
+            "slot": "figure",
+            "type": "shape",
+            "kind": "polygon",
+            "points": [
+              [
+                0,
+                0
+              ],
+              [
+                0,
+                {
+                  "expr": "c"
+                }
+              ],
+              [
+                {
+                  "expr": "cb"
+                },
+                0
+              ]
+            ],
+            "fill": "hatch"
+          },
+          {
+            "id": "sq_a",
+            "slot": "figure",
+            "type": "shape",
+            "kind": "polygon",
+            "points": [
+              [
+                0,
+                {
+                  "expr": "c"
+                }
+              ],
+              [
+                {
+                  "expr": "cb"
+                },
+                0
+              ],
+              [
+                {
+                  "expr": "c"
+                },
+                {
+                  "expr": "cb"
+                }
+              ],
+              [
+                {
+                  "expr": "cb"
+                },
+                {
+                  "expr": "c"
+                }
+              ]
+            ],
+            "fill": "quantity"
+          },
+          {
+            "id": "sq_b",
+            "slot": "figure",
+            "type": "shape",
+            "kind": "polygon",
+            "points": [
+              [
+                {
+                  "expr": "c"
+                },
+                {
+                  "expr": "ca"
+                }
+              ],
+              [
+                {
+                  "expr": "c"
+                },
+                {
+                  "expr": "c"
+                }
+              ],
+              [
+                {
+                  "expr": "ca"
+                },
+                {
+                  "expr": "c"
+                }
+              ]
+            ],
+            "fill": "result",
+            "label": "b²"
+          },
+          {
+            "id": "note_a",
+            "slot": "notes",
+            "type": "readout",
+            "value": "a2",
+            "label": "Square on a"
+          },
+          {
+            "id": "note_b",
+            "slot": "notes",
+            "type": "readout",
+            "value": "b2",
+            "label": "Square on b"
+          },
+          {
+            "id": "note_c",
+            "slot": "notes",
+            "type": "readout",
+            "value": "c2",
+            "label": "Big square"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Here is the big square, side c. Watch it get cut up, not guessed at.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "big"
+                ],
+                "how": "draw"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Two squares slide in, and four copies of your triangle fill every gap.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "t1",
+                  "t2"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "sq_a",
+                  "sq_b"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "No overlap, nothing missing: the two squares add up to the big one.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "note_a",
+                  "note_b",
+                  "note_c"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "sq_b"
+                ]
+              },
+              {
+                "do": "sweep",
+                "param": "a",
+                "to": {
+                  "expr": "a + 1"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s4",
+        "index": 3,
+        "role": "formula",
+        "title": "Each square’s area is a side times itself",
+        "layout": "formula-focus",
+        "world": {
+          "x": [
+            0,
+            11
+          ],
+          "y": [
+            0,
+            4
+          ]
+        },
+        "derived": [
+          {
+            "id": "sqA",
+            "expr": "a^2",
+            "unit": "cm²",
+            "label": "Area of square on a",
+            "format": "fixed:1"
+          },
+          {
+            "id": "sqB",
+            "expr": "b^2",
+            "unit": "cm²",
+            "label": "Area of square on b",
+            "format": "fixed:1"
+          },
+          {
+            "id": "sum",
+            "expr": "a^2 + b^2",
+            "unit": "cm²",
+            "label": "Sum of the two small squares",
+            "format": "fixed:1"
+          }
+        ],
+        "elements": [
+          {
+            "id": "f",
+            "slot": "formula",
+            "type": "formula",
+            "tex": "\\q{a}^2 + \\q{b}^2 = \\res{c}^2"
+          },
+          {
+            "id": "tri",
+            "slot": "figure",
+            "type": "sim.right-triangle",
+            "a": {
+              "expr": "a"
+            },
+            "b": {
+              "expr": "b"
+            },
+            "showSquares": true,
+            "labelA": "a",
+            "labelB": "b",
+            "labelC": "c"
+          },
+          {
+            "id": "ra",
+            "slot": "readout",
+            "type": "readout",
+            "value": "sqA",
+            "label": "Square on a"
+          },
+          {
+            "id": "rb",
+            "slot": "readout",
+            "type": "readout",
+            "value": "sqB",
+            "label": "Square on b"
+          },
+          {
+            "id": "rc",
+            "slot": "readout",
+            "type": "readout",
+            "value": "sum",
+            "label": "Both small squares"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Look at the sides: a, b, and the long one, c. Each square’s area is its side times itself.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "tri.square_a",
+                  "tri.square_b"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "ra",
+                  "rb"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "So the two small squares hold a squared plus b squared.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "f"
+                ],
+                "how": "type"
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "And that always equals the big square on c. Change a and b, it still holds.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "tri.square_c"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "rc"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "sweep",
+                "param": "a",
+                "to": {
+                  "expr": "2 * a"
+                }
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "f"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s5",
+        "index": 4,
+        "role": "example",
+        "title": "Legs 3 and 4: the long side is 5",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            0,
+            5
+          ],
+          "y": [
+            0,
+            3
+          ]
+        },
+        "derived": [
+          {
+            "id": "tri_x",
+            "expr": "3 + max(a, 1.5) * 0.35",
+            "unit": "",
+            "label": "x of the triangle corner",
+            "format": "fixed:2"
+          },
+          {
+            "id": "tri_y",
+            "expr": "0.3 + max(b, 1.5) * 0.28",
+            "unit": "",
+            "label": "y of the triangle top",
+            "format": "fixed:2"
+          }
+        ],
+        "elements": [
+          {
+            "id": "tri",
+            "slot": "figure",
+            "type": "sim.right-triangle",
+            "a": {
+              "expr": "a"
+            },
+            "b": {
+              "expr": "b"
+            },
+            "showSquares": true,
+            "labelA": "a",
+            "labelB": "b",
+            "labelC": "c"
+          },
+          {
+            "id": "c2_now",
+            "slot": "notes",
+            "type": "readout",
+            "value": "c2",
+            "label": "Big square area"
+          },
+          {
+            "id": "c_now",
+            "slot": "notes",
+            "type": "readout",
+            "value": "c",
+            "label": "Long side"
+          },
+          {
+            "id": "rule",
+            "slot": "notes",
+            "type": "text",
+            "text": "Draw side a twice as long: c grows too.",
+            "emphasis": "strong"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Take short sides three and four. The squares have areas nine and sixteen.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "tri.triangle",
+                  "tri.side_a",
+                  "tri.side_b",
+                  "tri.side_c"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "tri.square_a",
+                  "tri.square_b",
+                  "tri.square_c"
+                ],
+                "how": "draw"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Add them: twenty-five. The long side squared is twenty-five, so it measures five.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "c2_now",
+                  "c_now"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "tri.side_c"
+                ]
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Now double side three to six. Yet the long side does not double. Watch it.",
+            "actions": [
+              {
+                "do": "sweep",
+                "param": "a",
+                "to": 6
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "rule"
+                ],
+                "how": "type",
+                "at": 1
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "c_now"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s6",
+        "index": 5,
+        "role": "recap",
+        "title": "Two small squares fill the big one",
+        "layout": "statement",
+        "derived": [],
+        "elements": [
+          {
+            "id": "recap",
+            "slot": "text",
+            "type": "list",
+            "items": [
+              "In a right triangle, the two small squares add up to the big one.",
+              "Multiply a side by 2 and its square grows 4 times.",
+              "Only right triangles obey it. Tilt one corner and it fails."
+            ]
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "First idea: the two small squares fit exactly into the big one, corner to corner.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "recap"
+                ],
+                "how": "type"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Double a short side and its square grows four times, not two.",
+            "actions": [
+              {
+                "do": "highlight",
+                "targets": [
+                  "recap.i2"
+                ]
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "And this is the answer to our question: only right triangles obey it.",
+            "actions": [
+              {
+                "do": "highlight",
+                "targets": [
+                  "recap.i3"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "quiz": {
+      "questions": [
+        {
+          "prompt": "You double one short side of a right triangle and keep the other short side the same. What happens to the area of the square built on that doubled side?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "It doubles"
+            },
+            {
+              "id": "b",
+              "text": "It grows four times"
+            },
+            {
+              "id": "c",
+              "text": "It stays the same"
+            },
+            {
+              "id": "d",
+              "text": "It grows eight times"
+            }
+          ],
+          "answer_id": "b",
+          "explanation": "The square’s area is the side times itself, so doubling the side multiplies the area by 2 times 2, which is 4.",
+          "scene_id": "s6"
+        },
+        {
+          "prompt": "A triangle has sides 3, 4 and 5, but one corner is not a right angle. Do the two small squares still add up exactly to the big one?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "Yes, the rule works for every triangle"
+            },
+            {
+              "id": "b",
+              "text": "Yes, but only when the sides are whole numbers"
+            },
+            {
+              "id": "c",
+              "text": "No, the rule only holds when one corner is a right angle"
+            },
+            {
+              "id": "d",
+              "text": "No, the big square becomes smaller than the two small ones together"
+            }
+          ],
+          "answer_id": "c",
+          "explanation": "Tilt a corner away from a right angle and the two small squares no longer fill the big one exactly.",
+          "scene_id": "s6"
+        },
+        {
+          "prompt": "On the left pan of a scale you put two small squares, on the right one big square. The scale stays level. What does that tell you?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "The two small areas together equal the big area"
+            },
+            {
+              "id": "b",
+              "text": "The big area is larger than the two small ones together"
+            },
+            {
+              "id": "c",
+              "text": "The two small areas together are larger than the big one"
+            },
+            {
+              "id": "d",
+              "text": "Area cannot be compared on a scale"
+            }
+          ],
+          "answer_id": "a",
+          "explanation": "A level scale means both pans hold the same amount, so the two small areas add up exactly to the big one.",
+          "scene_id": "s2"
+        }
+      ]
+    }
+  }
+}

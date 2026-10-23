@@ -1,0 +1,1455 @@
+{
+  "slug": "biology/protein-synthesis",
+  "subject": "biology",
+  "reference_level": "lycee",
+  "language": "en",
+  "title": "Central dogma of molecular biology",
+  "question": "How does DNA become a protein?",
+  "reviewed_by": null,
+  "reviewed_at": null,
+  "verdicts": [
+    {
+      "target": "plan",
+      "status": "corrected",
+      "attempts": 2,
+      "reason": "The outline correctly states the central dogma, uses the standard three-bases-per-codon rule with consistent units, and its recipe analogy and numbers are accurate at the high school level.",
+      "checks": [
+        "structure",
+        "model",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s1",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "The scene correctly shows two cells with identical DNA while only the muscle cell displays a protein, matching the hook's intent without any false scientific claims.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s2",
+      "status": "corrected",
+      "attempts": 2,
+      "reason": "The scene correctly portrays the cookbook (DNA) staying locked up while only a copy (mRNA) travels to the kitchen (ribosome) to make the cake (protein), matching the outline's analogy, and the amino acid readout reflects the gene length.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s3",
+      "status": "corrected",
+      "attempts": 2,
+      "reason": "The scene correctly shows transcription: DNA unzips, free RNA bases pair complementarily (A-U, T-A, C-G) to build an mRNA copy that peels away, matching the outline's intent, and the readouts and labels are consistent.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s4",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "The scene correctly shows translation: the ribosome reads mRNA codons, tRNAs deliver amino acids, and the amino acids link into a growing protein chain, matching the outline's mechanism step.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s5",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "The scene correctly shows that each three-base codon specifies one amino acid, that AUG codes for methionine, and the sweep doubles the gene length so the number of amino acids doubles as stated.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s6",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "The scene shows a gene transcribed into mRNA and translated into protein, and the sweep doubling the gene correctly doubles the protein length at three bases per amino acid, consistent with the codon rule.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s7",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "The scene correctly summarizes transcription and translation, and the codon-to-amino-acid rule, and explains that different cells express different genes despite identical DNA, matching the outline's recap intent without any false statement",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    }
+  ],
+  "payload": {
+    "version": 1,
+    "plan": {
+      "objective": "Explain how the information in DNA is copied into mRNA and then translated into a protein, and why the base sequence matters.",
+      "prerequisites": [
+        "DNA is a double helix made of four bases (A, T, C, G)",
+        "Proteins are chains of amino acids",
+        "The cell contains a nucleus and ribosomes"
+      ],
+      "analogy": {
+        "name": "A recipe in a locked library",
+        "mapping": "DNA is the precious cookbook that never leaves the library (nucleus); mRNA is a photocopy of one recipe carried to the kitchen (ribosome); the protein is the cake you bake following that copy."
+      },
+      "key_rule": {
+        "statement": "The base sequence of DNA is copied into mRNA, and each three-base codon of mRNA specifies one amino acid in the protein.",
+        "formula": "\\q{\\text{DNA}} \\xrightarrow{\\text{transcription}} \\q{\\text{mRNA}} \\xrightarrow{\\text{translation}} \\res{\\text{protein}}"
+      },
+      "steps": [
+        {
+          "role": "hook",
+          "intent": "Show that a skin cell and a muscle cell look different yet contain the same DNA, raising the question of how DNA directs building proteins.",
+          "visual": "Two cells side by side, one skin cell and one muscle cell, both with identical DNA strands inside, then a protein molecule appears only in the muscle cell."
+        },
+        {
+          "role": "analogy",
+          "intent": "Introduce the idea of copying information to protect the original and carry it to where it is needed.",
+          "visual": "A cookbook locked in a glass case; a hand photocopies one page, the copy travels to a kitchen, and a cake is baked following the copy."
+        },
+        {
+          "role": "mechanism",
+          "intent": "Show transcription: RNA polymerase unzips DNA and builds a complementary mRNA strand.",
+          "visual": "DNA double helix unzips; free RNA nucleotides pair with the exposed bases (A with U, T with A, C with G, G with C) and link into an mRNA strand that peels away."
+        },
+        {
+          "role": "mechanism",
+          "intent": "Show translation: the ribosome reads each codon and a tRNA brings the matching amino acid, forming a chain.",
+          "visual": "mRNA attaches to a ribosome; tRNAs with anticodons enter, deposit amino acids, and the growing chain of amino acids folds into a protein."
+        },
+        {
+          "role": "formula",
+          "intent": "Connect the base sequence to the amino acid sequence using the codon table.",
+          "visual": "A chart shows the 64 codons and their amino acids; one codon (AUG) is highlighted and the corresponding amino acid (methionine) is shown."
+        },
+        {
+          "role": "example",
+          "intent": "Give a concrete example: a gene of a known length produces a protein of a predictable number of amino acids.",
+          "visual": "A gene of 300 base pairs is transcribed into a 300-base mRNA; the ribosome reads it in codons, producing a chain of 100 amino acids."
+        },
+        {
+          "role": "recap",
+          "intent": "Summarize the two steps and answer the hook: different cells express different genes, so they make different proteins.",
+          "visual": "Two panels: transcription (DNA to mRNA) and translation (mRNA to protein); the skin cell and muscle cell now show different proteins, with the muscle cell’s protein highlighted."
+        }
+      ]
+    },
+    "params": [
+      {
+        "id": "n_bases",
+        "symbol": "N",
+        "label": "Number of DNA bases in the gene",
+        "unit": "bases",
+        "min": 30,
+        "max": 3000,
+        "step": 30,
+        "default": 300,
+        "role": "quantity"
+      }
+    ],
+    "model": {
+      "constants": [
+        {
+          "id": "bases_per_codon",
+          "value": 3,
+          "unit": "bases/codon",
+          "label": "Bases per codon",
+          "symbol": "3"
+        }
+      ],
+      "derived": [
+        {
+          "id": "n_amino",
+          "expr": "n_bases / 3",
+          "unit": "amino acids",
+          "label": "Number of amino acids",
+          "symbol": "n",
+          "format": "int"
+        },
+        {
+          "id": "n_bases_double",
+          "expr": "2 * n_bases",
+          "unit": "bases",
+          "label": "Double the gene length",
+          "symbol": "2N",
+          "format": "int"
+        },
+        {
+          "id": "n_amino_double",
+          "expr": "(2 * n_bases) / 3",
+          "unit": "amino acids",
+          "label": "Amino acids for double length",
+          "symbol": "2n",
+          "format": "int"
+        }
+      ]
+    },
+    "scenes": [
+      {
+        "id": "s1",
+        "index": 0,
+        "role": "hook",
+        "title": "Same DNA. Two very different cells",
+        "layout": "compare",
+        "world": {
+          "x": [
+            -5,
+            5
+          ],
+          "y": [
+            -4,
+            4
+          ]
+        },
+        "derived": [],
+        "elements": [
+          {
+            "id": "skin_outline",
+            "slot": "figure_a",
+            "type": "shape",
+            "kind": "rect",
+            "center": [
+              0,
+              0
+            ],
+            "width": 6.4,
+            "height": 5.6,
+            "label": "Skin cell"
+          },
+          {
+            "id": "skin_dna",
+            "slot": "figure_a",
+            "type": "object",
+            "kind": "molecule",
+            "at": [
+              0,
+              0.6
+            ],
+            "size": 1.4,
+            "label": "DNA"
+          },
+          {
+            "id": "muscle_outline",
+            "slot": "figure_b",
+            "type": "shape",
+            "kind": "rect",
+            "center": [
+              0,
+              0
+            ],
+            "width": 6.4,
+            "height": 5.6,
+            "label": "Muscle cell"
+          },
+          {
+            "id": "muscle_dna",
+            "slot": "figure_b",
+            "type": "object",
+            "kind": "molecule",
+            "at": [
+              0,
+              0.6
+            ],
+            "size": 1.4,
+            "label": "DNA"
+          },
+          {
+            "id": "muscle_protein",
+            "slot": "figure_b",
+            "type": "object",
+            "kind": "block",
+            "at": [
+              0,
+              -2.4
+            ],
+            "size": 0.9,
+            "label": "Protein",
+            "role": "result"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Here are two of your cells: one from your skin, one from a muscle.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "skin_outline",
+                  "muscle_outline"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Look inside. Both hold exactly the same DNA.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "skin_dna",
+                  "muscle_dna"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Yet only the muscle cell makes this protein. How does DNA decide that?",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "muscle_protein"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "muscle_protein"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s2",
+        "index": 1,
+        "role": "analogy",
+        "title": "A recipe copied, never the original",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            0,
+            10
+          ],
+          "y": [
+            0,
+            6
+          ]
+        },
+        "derived": [],
+        "elements": [
+          {
+            "id": "shelf",
+            "slot": "figure",
+            "type": "shape",
+            "kind": "rect",
+            "center": [
+              2.4,
+              3.8
+            ],
+            "width": 2.2,
+            "height": 1.8,
+            "fill": "hatch",
+            "label": "Library"
+          },
+          {
+            "id": "book",
+            "slot": "figure",
+            "type": "object",
+            "kind": "block",
+            "at": [
+              2.4,
+              3.8
+            ],
+            "size": 0.9
+          },
+          {
+            "id": "copy",
+            "slot": "figure",
+            "type": "object",
+            "kind": "block",
+            "at": [
+              4.4,
+              2.6
+            ],
+            "size": 0.7,
+            "label": "Copy",
+            "role": "quantity"
+          },
+          {
+            "id": "kitchen",
+            "slot": "figure",
+            "type": "object",
+            "kind": "block",
+            "at": [
+              8.2,
+              3.8
+            ],
+            "size": 1.1,
+            "label": "Kitchen"
+          },
+          {
+            "id": "cake",
+            "slot": "figure",
+            "type": "object",
+            "kind": "apple",
+            "at": [
+              8.2,
+              2.2
+            ],
+            "size": 0.9,
+            "label": "Protein"
+          },
+          {
+            "id": "path",
+            "slot": "figure",
+            "type": "vector",
+            "from": [
+              4.9,
+              2.6
+            ],
+            "to": [
+              7.4,
+              3.6
+            ],
+            "role": "action"
+          },
+          {
+            "id": "locked",
+            "slot": "notes",
+            "type": "text",
+            "text": "The original stays locked up.",
+            "emphasis": "strong"
+          },
+          {
+            "id": "copied",
+            "slot": "notes",
+            "type": "text",
+            "text": "Only one page is copied.",
+            "emphasis": "normal"
+          },
+          {
+            "id": "rule",
+            "slot": "notes",
+            "type": "readout",
+            "value": "n_amino",
+            "label": "Amino acids"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Picture a cookbook locked in a glass case. Nobody takes it out.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "shelf",
+                  "book"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "locked"
+                ],
+                "how": "type"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "So you photocopy one page, and the copy leaves the library.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "copy"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "copied"
+                ],
+                "how": "type"
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "The copy reaches the kitchen, where it tells you how to bake the cake.",
+            "actions": [
+              {
+                "do": "move",
+                "target": "copy",
+                "to": [
+                  7.6,
+                  2.4
+                ]
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "path"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "kitchen",
+                  "cake"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "rule"
+                ],
+                "how": "fade"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s3",
+        "index": 2,
+        "role": "mechanism",
+        "title": "The DNA opens, mRNA is copied",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            0,
+            10
+          ],
+          "y": [
+            -2,
+            2
+          ]
+        },
+        "derived": [
+          {
+            "id": "pair_y",
+            "expr": "0",
+            "unit": "",
+            "label": "Base row height"
+          }
+        ],
+        "elements": [
+          {
+            "id": "dna_up",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              0.5,
+              0.9
+            ],
+            "to": [
+              9,
+              0.9
+            ],
+            "role": "ink"
+          },
+          {
+            "id": "dna_low",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              0.5,
+              -0.9
+            ],
+            "to": [
+              9,
+              -0.9
+            ],
+            "role": "ink"
+          },
+          {
+            "id": "copy",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              0.5,
+              0
+            ],
+            "to": [
+              9,
+              0
+            ],
+            "role": "result"
+          },
+          {
+            "id": "rna_base",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              2,
+              0
+            ],
+            "label": "U",
+            "role": "quantity"
+          },
+          {
+            "id": "dna_base",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              2,
+              0.9
+            ],
+            "label": "A",
+            "role": "ink"
+          },
+          {
+            "id": "gap",
+            "slot": "figure",
+            "type": "dimension",
+            "from": [
+              0.5,
+              0.9
+            ],
+            "to": [
+              9,
+              -0.9
+            ],
+            "label": "unzipped",
+            "offset": 0.6
+          },
+          {
+            "id": "n_dna",
+            "slot": "notes",
+            "type": "readout",
+            "value": "n_bases",
+            "label": "DNA bases copied"
+          },
+          {
+            "id": "n_read",
+            "slot": "notes",
+            "type": "readout",
+            "value": "n_amino",
+            "label": "Amino acids to come"
+          },
+          {
+            "id": "law",
+            "slot": "notes",
+            "type": "formula",
+            "tex": "\\q{\\text{DNA}} \\xrightarrow{\\text{transcription}} \\res{\\text{mRNA}}"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "The DNA helix unzips. One strand is now exposed, base by base.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "dna_up",
+                  "dna_low"
+                ],
+                "how": "draw",
+                "at": 0
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "gap"
+                ],
+                "how": "draw",
+                "at": 0.5
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "n_dna"
+                ],
+                "how": "fade",
+                "at": 1
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Free RNA bases pair up: A with U, T with A, C with G.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "dna_base",
+                  "rna_base"
+                ],
+                "how": "fade",
+                "at": 0.2
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "law"
+                ],
+                "how": "type",
+                "at": 0.8
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "That copy is mRNA. It peels away and leaves the nucleus.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "copy"
+                ],
+                "how": "draw",
+                "at": 0.3
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "n_read"
+                ],
+                "how": "fade",
+                "at": 0.8
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "copy"
+                ],
+                "at": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s4",
+        "index": 3,
+        "role": "mechanism",
+        "title": "The ribosome reads the codons",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            0,
+            10
+          ],
+          "y": [
+            0,
+            6
+          ]
+        },
+        "derived": [
+          {
+            "id": "x_ribo",
+            "expr": "1.6 + (n_amino / 1000) * 1.6",
+            "unit": "",
+            "label": "Ribosome position",
+            "format": "sci:2"
+          },
+          {
+            "id": "x_chain",
+            "expr": "7.6 - (n_amino / 1000) * 1.6",
+            "unit": "",
+            "label": "Chain end",
+            "format": "sci:2"
+          }
+        ],
+        "elements": [
+          {
+            "id": "mrna",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              0.3,
+              2.2
+            ],
+            "to": [
+              9.7,
+              2.2
+            ],
+            "label": "mRNA",
+            "role": "ink"
+          },
+          {
+            "id": "ribo",
+            "slot": "figure",
+            "type": "object",
+            "kind": "cell",
+            "at": [
+              {
+                "expr": "x_ribo"
+              },
+              3.6
+            ],
+            "size": 1.5,
+            "label": "Ribosome"
+          },
+          {
+            "id": "codon",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              {
+                "expr": "x_ribo"
+              },
+              2.2
+            ],
+            "role": "quantity"
+          },
+          {
+            "id": "trna",
+            "slot": "figure",
+            "type": "shape",
+            "kind": "arc",
+            "center": [
+              {
+                "expr": "x_ribo"
+              },
+              5.4
+            ],
+            "radius": 0.45,
+            "startDeg": 200,
+            "endDeg": 340,
+            "role": "action",
+            "label": "tRNA"
+          },
+          {
+            "id": "aa1",
+            "slot": "figure",
+            "type": "object",
+            "kind": "ball",
+            "at": [
+              5.2,
+              4.6
+            ],
+            "size": 0.5,
+            "role": "quantity"
+          },
+          {
+            "id": "aa2",
+            "slot": "figure",
+            "type": "object",
+            "kind": "ball",
+            "at": [
+              6,
+              4.9
+            ],
+            "size": 0.5,
+            "role": "quantity"
+          },
+          {
+            "id": "aa3",
+            "slot": "figure",
+            "type": "object",
+            "kind": "ball",
+            "at": [
+              6.8,
+              4.6
+            ],
+            "size": 0.5,
+            "role": "quantity"
+          },
+          {
+            "id": "chain",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              5.2,
+              4.6
+            ],
+            "to": [
+              {
+                "expr": "x_chain"
+              },
+              4.9
+            ],
+            "label": "Protein chain",
+            "role": "result"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "The mRNA slides into a ribosome, the machine that reads it.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "mrna"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "ribo",
+                  "codon"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Three bases at a time: each codon calls a tRNA carrying one amino acid.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "trna"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "aa1"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "The amino acids link up, and the chain folds into a protein.",
+            "actions": [
+              {
+                "do": "move",
+                "target": "aa1",
+                "to": [
+                  {
+                    "expr": "x_chain"
+                  },
+                  4.6
+                ]
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "aa2",
+                  "aa3"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "chain"
+                ],
+                "how": "draw"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s5",
+        "index": 4,
+        "role": "formula",
+        "title": "Three bases, one amino acid",
+        "layout": "formula-focus",
+        "world": {
+          "x": [
+            -5,
+            5
+          ],
+          "y": [
+            -2,
+            2
+          ]
+        },
+        "derived": [],
+        "elements": [
+          {
+            "id": "rule",
+            "slot": "formula",
+            "type": "formula",
+            "tex": "\\a{\\text{codon}} \\;=\\; \\q{3\\ \\text{bases}} \\;\\longrightarrow\\; \\res{1\\ \\text{amino acid}}"
+          },
+          {
+            "id": "codons",
+            "slot": "figure",
+            "type": "bars",
+            "items": [
+              {
+                "label": "AUG",
+                "value": 1,
+                "role": "result"
+              },
+              {
+                "label": "UUU",
+                "value": 1
+              },
+              {
+                "label": "GCA",
+                "value": 1
+              },
+              {
+                "label": "UAA",
+                "value": 1
+              }
+            ],
+            "unit": "amino acid each"
+          },
+          {
+            "id": "amino_now",
+            "slot": "readout",
+            "type": "readout",
+            "value": "n_amino",
+            "label": "Amino acids from this gene"
+          },
+          {
+            "id": "bases_now",
+            "slot": "readout",
+            "type": "readout",
+            "value": "n_bases",
+            "label": "DNA bases in the gene"
+          },
+          {
+            "id": "double_now",
+            "slot": "readout",
+            "type": "readout",
+            "value": "n_amino_double",
+            "label": "If the gene were twice as long"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Read the mRNA three bases at a time. Each triplet is a codon.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "codons"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "One codon, one amino acid. Here AUG calls methionine, and the chain starts.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "rule"
+                ],
+                "how": "type"
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "codons"
+                ]
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Count: three bases per amino acid. Double the gene, and you double the protein.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "bases_now",
+                  "amino_now"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "double_now"
+                ],
+                "how": "fade",
+                "at": 0.6
+              },
+              {
+                "do": "sweep",
+                "param": "n_bases",
+                "to": {
+                  "expr": "2 * n_bases"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s6",
+        "index": 5,
+        "role": "example",
+        "title": "A gene of N bases, a protein of N/3 amino acids",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            -1.124,
+            10
+          ],
+          "y": [
+            0,
+            6
+          ]
+        },
+        "derived": [
+          {
+            "id": "gene_w",
+            "expr": "3 * n_bases / 3000",
+            "unit": "",
+            "label": "Gene bar width"
+          },
+          {
+            "id": "prot_w",
+            "expr": "n_bases / 3000",
+            "unit": "",
+            "label": "Protein bar width"
+          }
+        ],
+        "elements": [
+          {
+            "id": "gene",
+            "slot": "figure",
+            "type": "shape",
+            "kind": "rect",
+            "center": [
+              1.2,
+              4.4
+            ],
+            "width": {
+              "expr": "clamp(gene_w, 0.2, 6.5)"
+            },
+            "height": 0.9,
+            "fill": "quantity",
+            "role": "quantity",
+            "label": "DNA gene"
+          },
+          {
+            "id": "mrna",
+            "slot": "figure",
+            "type": "shape",
+            "kind": "rect",
+            "center": [
+              1.2,
+              2.6
+            ],
+            "width": {
+              "expr": "clamp(gene_w, 0.2, 6.5)"
+            },
+            "height": 0.9,
+            "fill": "action",
+            "role": "action",
+            "label": "mRNA"
+          },
+          {
+            "id": "protein",
+            "slot": "figure",
+            "type": "shape",
+            "kind": "rect",
+            "center": [
+              1.2,
+              0.8
+            ],
+            "width": {
+              "expr": "clamp(prot_w, 0.2, 6.5)"
+            },
+            "height": 0.9,
+            "fill": "result",
+            "role": "result",
+            "label": "protein"
+          },
+          {
+            "id": "arrow1",
+            "slot": "figure",
+            "type": "vector",
+            "from": [
+              1.2,
+              3.75
+            ],
+            "to": [
+              1.2,
+              3.2
+            ],
+            "role": "ink"
+          },
+          {
+            "id": "arrow2",
+            "slot": "figure",
+            "type": "vector",
+            "from": [
+              1.2,
+              1.95
+            ],
+            "to": [
+              1.2,
+              1.4
+            ],
+            "role": "ink"
+          },
+          {
+            "id": "step1",
+            "slot": "notes",
+            "type": "text",
+            "text": "transcription"
+          },
+          {
+            "id": "step2",
+            "slot": "notes",
+            "type": "text",
+            "text": "translation"
+          },
+          {
+            "id": "bases",
+            "slot": "notes",
+            "type": "readout",
+            "value": "n_bases",
+            "label": "DNA bases"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Here is one gene. Count its bases: those letters are the recipe.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "bases"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "gene"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "step1",
+                  "step2"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Guess the protein’s size if you double the gene. Ready?",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "arrow1",
+                  "arrow2"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "mrna",
+                  "protein"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "sweep",
+                "param": "n_bases",
+                "to": {
+                  "expr": "2 * n_bases"
+                },
+                "hold": true
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Three bases per amino acid, so twice the gene gives twice the protein.",
+            "actions": []
+          }
+        ]
+      },
+      {
+        "id": "s7",
+        "index": 6,
+        "role": "recap",
+        "title": "Copy the recipe, bake the cake",
+        "layout": "statement",
+        "derived": [],
+        "elements": [
+          {
+            "id": "recap",
+            "slot": "text",
+            "type": "list",
+            "items": [
+              "Transcription: DNA is copied into mRNA in the nucleus.",
+              "Translation: each codon of mRNA adds one amino acid.",
+              "Same DNA in every cell, but different genes switched on."
+            ]
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Two steps. Transcription copies the DNA recipe into mRNA and carries it off.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "recap"
+                ],
+                "how": "type"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Translation reads each codon, three bases, and adds one amino acid to the protein.",
+            "actions": []
+          },
+          {
+            "id": "b3",
+            "narration": "Your skin and muscle cells hold the same DNA, but switch on different genes.",
+            "actions": [
+              {
+                "do": "highlight",
+                "targets": [
+                  "recap.i3"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "quiz": {
+      "questions": [
+        {
+          "prompt": "A skin cell and a muscle cell in your body hold the same DNA, yet the muscle cell makes a protein the skin cell does not. Why?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "The muscle cell switched on different genes"
+            },
+            {
+              "id": "b",
+              "text": "The muscle cell has a different set of DNA"
+            },
+            {
+              "id": "c",
+              "text": "The skin cell lost the gene for that protein"
+            },
+            {
+              "id": "d",
+              "text": "The skin cell copies its whole DNA into mRNA"
+            }
+          ],
+          "answer_id": "a",
+          "explanation": "Same DNA in every cell, but different genes are switched on, so only some proteins get made.",
+          "scene_id": "s1"
+        },
+        {
+          "prompt": "During transcription, the DNA template strand has the base sequence A-T-C. What does the matching mRNA strand carry?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "T-A-G"
+            },
+            {
+              "id": "b",
+              "text": "A-T-C"
+            },
+            {
+              "id": "c",
+              "text": "U-A-G"
+            },
+            {
+              "id": "d",
+              "text": "U-T-C"
+            }
+          ],
+          "answer_id": "c",
+          "explanation": "RNA pairs A with U, T with A and C with G, so A-T-C becomes U-A-G.",
+          "scene_id": "s3"
+        },
+        {
+          "prompt": "A gene is 300 bases long. Roughly how many amino acids does its protein chain contain?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "900, since each base adds one amino acid"
+            },
+            {
+              "id": "b",
+              "text": "100, since three bases make one codon"
+            },
+            {
+              "id": "c",
+              "text": "300, since each base is one amino acid"
+            },
+            {
+              "id": "d",
+              "text": "150, since two bases pair per amino acid"
+            }
+          ],
+          "answer_id": "b",
+          "explanation": "The ribosome reads three bases per codon, and each codon adds one amino acid, so 300 bases give about 100 amino acids.",
+          "scene_id": "s4"
+        }
+      ]
+    }
+  }
+}

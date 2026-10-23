@@ -1,0 +1,1120 @@
+{
+  "slug": "physics/universal-gravitation",
+  "subject": "physics",
+  "reference_level": "lycee",
+  "language": "en",
+  "title": "Newton's Law of Universal Gravitation",
+  "question": "What is the law of gravity?",
+  "reviewed_by": null,
+  "reviewed_at": null,
+  "verdicts": [
+    {
+      "target": "plan",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "The law, the constant G with its unit, the derived force expressions and their units are all correct and consistent, the inverse-square analogy is sound, and the ranges and level fit the audience.",
+      "checks": [
+        "structure",
+        "model",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s1",
+      "status": "corrected",
+      "attempts": 2,
+      "reason": "The scene compares a falling ball with the orbiting Moon and asks how a force can act across empty space, which matches the hook step; no false statement or wrong binding appears.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s2",
+      "status": "corrected",
+      "attempts": 2,
+      "reason": "The scene correctly illustrates the inverse-square dilution of the spray: a square at twice the distance catches a quarter of the paint and at three times the distance one ninth, matching the analogy and Newton's law.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s3",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "The scene correctly shows the mutual pull with equal opposite arrows, measures centre to centre, and sweeps the distance to double, where both arrows shrink by the inverse-square law to a quarter, matching the narration and the outline's ke",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s4",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "The scene shows Newton's law with masses in the numerator and distance squared in the denominator, draws the attraction along the line joining the bodies, and a sweep to double the distance makes the force arrow shrink to a quarter, consist",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s5",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "The scene correctly shows the Earth–Moon force and that at twice and three times the distance the force falls to a quarter and a ninth, matching the inverse-square law with correct values and English narration.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s6",
+      "status": "corrected",
+      "attempts": 2,
+      "reason": "The recap states correct physics—mutual equal attraction, force growing with mass and falling off as the inverse square, and the Moon continuously falling toward Earth—and the narration is in English with no false or mislabeled values.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    }
+  ],
+  "payload": {
+    "version": 1,
+    "plan": {
+      "objective": "You will be able to state Newton’s law of universal gravitation and say how the force between two masses changes when a mass or the distance changes.",
+      "prerequisites": [
+        "A force is a vector, drawn as an arrow with a direction and a length",
+        "Mass in kilograms, and the difference between mass and weight",
+        "Squaring a number, and powers of ten"
+      ],
+      "analogy": {
+        "name": "The paint sprayer",
+        "mapping": "The sprayer plays the role of the attracting mass, the paint landing on a small square plays the role of the force, and moving the square further away plays the role of increasing the distance. Twice as far, the same paint covers four small squares, so each one gets a quarter."
+      },
+      "key_rule": {
+        "statement": "Two masses attract each other with a force proportional to the product of their masses and inversely proportional to the square of the distance between their centres, along the line joining them.",
+        "formula": "\\a{F} = G \\, \\dfrac{\\q{m_1} \\, \\q{m_2}}{\\q{r}^2}"
+      },
+      "steps": [
+        {
+          "role": "hook",
+          "intent": "Make the student wonder how a force can act across empty space, with no string and no contact.",
+          "visual": "On the left a ball is dropped and falls; on the right the Moon circles the Earth and never flies off; both are drawn together."
+        },
+        {
+          "role": "analogy",
+          "intent": "Give the intuition that an effect spreading out in all directions fades like the square of the distance.",
+          "visual": "A sprayer sends paint outward; a small square slides from 1 to 2 to 3 metres and the paint it catches shrinks to a quarter, then a ninth."
+        },
+        {
+          "role": "mechanism",
+          "intent": "Show that the pull is mutual and that its length changes with distance.",
+          "visual": "Earth and Moon with two equal, opposite arrows; the Moon slides away and both arrows shrink in step."
+        },
+        {
+          "role": "formula",
+          "intent": "Attach each symbol of Newton’s law to what was just seen: masses in the numerator, distance squared below.",
+          "visual": "The formula writes itself symbol by symbol; then r slides and the arrow length on screen follows the value live."
+        },
+        {
+          "role": "example",
+          "intent": "Give a real order of magnitude and show how fast the pull collapses with distance.",
+          "visual": "Bars for the Earth-Moon force at the real distance, at double and at triple distance, shrinking to a quarter and a ninth."
+        },
+        {
+          "role": "recap",
+          "intent": "Fix the two or three ideas and answer the hook: gravity is the string that never touches.",
+          "visual": "Three short lines appear; the last one, the answer about the Moon, is highlighted and the Moon’s arrow pulses."
+        }
+      ]
+    },
+    "params": [
+      {
+        "id": "m1",
+        "symbol": "m₁",
+        "label": "Mass of the Earth",
+        "unit": "kg",
+        "min": 1e+24,
+        "max": 1.2e+25,
+        "step": 1e+23,
+        "default": 5.97e+24,
+        "role": "quantity"
+      },
+      {
+        "id": "m2",
+        "symbol": "m₂",
+        "label": "Mass of the Moon",
+        "unit": "kg",
+        "min": 1e+22,
+        "max": 1.5e+23,
+        "step": 1e+21,
+        "default": 7.35e+22,
+        "role": "quantity"
+      },
+      {
+        "id": "r",
+        "symbol": "r",
+        "label": "Distance between the centres",
+        "unit": "m",
+        "min": 150000000,
+        "max": 800000000,
+        "step": 5000000,
+        "default": 384000000,
+        "role": "quantity"
+      }
+    ],
+    "model": {
+      "constants": [
+        {
+          "id": "G",
+          "value": 6.674e-11,
+          "unit": "N·m²/kg²",
+          "label": "Gravitational constant",
+          "symbol": "G"
+        }
+      ],
+      "derived": [
+        {
+          "id": "F",
+          "expr": "G * m1 * m2 / r^2",
+          "unit": "N",
+          "label": "Force of attraction",
+          "symbol": "F",
+          "format": "sci:2"
+        },
+        {
+          "id": "r_km",
+          "expr": "r / 1000",
+          "unit": "km",
+          "label": "Distance between the centres",
+          "symbol": "r",
+          "format": "int"
+        },
+        {
+          "id": "F_2r",
+          "expr": "G * m1 * m2 / (2 * r)^2",
+          "unit": "N",
+          "label": "Force at double distance",
+          "symbol": "F",
+          "format": "sci:2"
+        },
+        {
+          "id": "F_3r",
+          "expr": "G * m1 * m2 / (3 * r)^2",
+          "unit": "N",
+          "label": "Force at triple distance",
+          "symbol": "F",
+          "format": "sci:2"
+        },
+        {
+          "id": "ratio_2r",
+          "expr": "(G * m1 * m2 / (2 * r)^2) / (G * m1 * m2 / r^2)",
+          "unit": "",
+          "label": "Share of the force kept at double distance",
+          "format": "percent:1"
+        }
+      ]
+    },
+    "scenes": [
+      {
+        "id": "s1",
+        "index": 0,
+        "role": "hook",
+        "title": "Une balle tombe, la Lune ne tombe pas",
+        "layout": "compare",
+        "world": {
+          "x": [
+            -5,
+            5
+          ],
+          "y": [
+            -5,
+            5
+          ]
+        },
+        "derived": [],
+        "elements": [
+          {
+            "id": "fall",
+            "slot": "figure_a",
+            "type": "sim.fall",
+            "height": 7,
+            "gravity": 9.81,
+            "object": "ball"
+          },
+          {
+            "id": "earth",
+            "slot": "figure_b",
+            "type": "object",
+            "kind": "planet",
+            "at": [
+              0,
+              0
+            ],
+            "size": 2.4,
+            "label": "Earth"
+          },
+          {
+            "id": "orbit",
+            "slot": "figure_b",
+            "type": "shape",
+            "kind": "circle",
+            "center": [
+              0,
+              0
+            ],
+            "radius": 3.4,
+            "role": "inkSoft"
+          },
+          {
+            "id": "moon",
+            "slot": "figure_b",
+            "type": "object",
+            "kind": "moon",
+            "at": [
+              3.4,
+              0
+            ],
+            "size": 0.9,
+            "label": "Moon"
+          },
+          {
+            "id": "moon_pull",
+            "slot": "figure_b",
+            "type": "vector",
+            "from": "moon",
+            "toward": "earth",
+            "length": 1.6,
+            "role": "action"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Let go of a ball. It falls straight down, no string needed.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "fall"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "play",
+                "target": "fall",
+                "from": 0,
+                "to": 1.2
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Now look at the Moon. Same Earth below it. Why does it never fall?",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "earth",
+                  "orbit",
+                  "moon"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "moon_pull"
+                ],
+                "how": "draw"
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Guess before you answer: what keeps pulling the Moon, across empty space?",
+            "actions": [
+              {
+                "do": "highlight",
+                "targets": [
+                  "moon_pull"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s2",
+        "index": 1,
+        "role": "analogy",
+        "title": "Twice as far, one quarter of the paint",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            -1,
+            11
+          ],
+          "y": [
+            -3,
+            3
+          ]
+        },
+        "derived": [],
+        "elements": [
+          {
+            "id": "nozzle",
+            "slot": "figure",
+            "type": "object",
+            "kind": "block",
+            "at": [
+              0.4,
+              0
+            ],
+            "size": 0.9,
+            "label": "Sprayer"
+          },
+          {
+            "id": "spread_a",
+            "slot": "figure",
+            "type": "vector",
+            "from": [
+              1,
+              0.2
+            ],
+            "to": [
+              2.2,
+              2.4
+            ],
+            "role": "action"
+          },
+          {
+            "id": "spread_b",
+            "slot": "figure",
+            "type": "vector",
+            "from": [
+              1,
+              -0.2
+            ],
+            "to": [
+              2.2,
+              -2.4
+            ],
+            "role": "action"
+          },
+          {
+            "id": "sq1",
+            "slot": "figure",
+            "type": "shape",
+            "kind": "rect",
+            "center": [
+              2.5,
+              0
+            ],
+            "width": 0.8,
+            "height": 0.8,
+            "fill": "quantity",
+            "role": "quantity"
+          },
+          {
+            "id": "sq2",
+            "slot": "figure",
+            "type": "shape",
+            "kind": "rect",
+            "center": [
+              5,
+              0
+            ],
+            "width": 0.8,
+            "height": 0.8,
+            "fill": "quantity",
+            "role": "quantity"
+          },
+          {
+            "id": "sq3",
+            "slot": "figure",
+            "type": "shape",
+            "kind": "rect",
+            "center": [
+              8.5,
+              0
+            ],
+            "width": 0.8,
+            "height": 0.8,
+            "fill": "quantity",
+            "role": "quantity"
+          },
+          {
+            "id": "note1",
+            "slot": "notes",
+            "type": "text",
+            "text": "Same paint, spread over a wider ring."
+          },
+          {
+            "id": "note2",
+            "slot": "notes",
+            "type": "text",
+            "text": "3 times as far: one ninth.",
+            "emphasis": "strong"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Watch the sprayer send paint out in every direction.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "nozzle"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "spread_a",
+                  "spread_b"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "note2"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Our little square sits one metre away. It catches a lot.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "sq1"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "note1"
+                ],
+                "how": "type"
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Now the paint reaches twice as far. Guess what the next square catches?",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "sq2"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b4",
+            "narration": "A quarter. Three times as far, and it’s only one ninth.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "sq3"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "note2"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s3",
+        "index": 2,
+        "role": "mechanism",
+        "title": "The pull is mutual, and it fades with distance",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            -5,
+            5
+          ],
+          "y": [
+            -3,
+            3
+          ]
+        },
+        "derived": [],
+        "elements": [
+          {
+            "id": "sys",
+            "slot": "figure",
+            "type": "sim.two-body",
+            "massA": {
+              "expr": "m1"
+            },
+            "massB": {
+              "expr": "m2"
+            },
+            "distance": {
+              "expr": "r"
+            },
+            "force": {
+              "expr": "F"
+            },
+            "objectA": "planet",
+            "objectB": "moon",
+            "labelA": "Earth",
+            "labelB": "Moon",
+            "forceLabel": "F",
+            "distanceLabel": "r"
+          },
+          {
+            "id": "force_now",
+            "slot": "notes",
+            "type": "readout",
+            "value": "F",
+            "label": "Attraction"
+          },
+          {
+            "id": "dist_now",
+            "slot": "notes",
+            "type": "readout",
+            "value": "r_km",
+            "label": "Centres apart"
+          },
+          {
+            "id": "rule",
+            "slot": "notes",
+            "type": "text",
+            "text": "Twice as far: a quarter of the pull.",
+            "emphasis": "strong"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "The Earth pulls the Moon. And the Moon pulls the Earth just as hard.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "sys.body_a",
+                  "sys.body_b"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "sys.force_a",
+                  "sys.force_b"
+                ],
+                "how": "draw"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Measure from centre to centre: that distance is what counts.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "sys.distance"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "force_now",
+                  "dist_now"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Now guess. Move the Moon twice as far. What does each arrow do?",
+            "actions": [
+              {
+                "do": "sweep",
+                "param": "r",
+                "to": {
+                  "expr": "2 * r"
+                }
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "rule"
+                ],
+                "how": "type",
+                "at": 0.7
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s4",
+        "index": 3,
+        "role": "formula",
+        "title": "Newton’s law: masses above, distance squared below",
+        "layout": "formula-focus",
+        "world": {
+          "x": [
+            -6,
+            6
+          ],
+          "y": [
+            -2,
+            2
+          ]
+        },
+        "derived": [],
+        "elements": [
+          {
+            "id": "law",
+            "slot": "formula",
+            "type": "formula",
+            "tex": "\\a{F} = G \\, \\dfrac{\\q{m_1} \\, \\q{m_2}}{\\q{r}^2}"
+          },
+          {
+            "id": "earth",
+            "slot": "figure",
+            "type": "object",
+            "kind": "planet",
+            "at": [
+              -3,
+              0
+            ],
+            "size": 1.6,
+            "label": "m₁"
+          },
+          {
+            "id": "moon",
+            "slot": "figure",
+            "type": "object",
+            "kind": "moon",
+            "at": [
+              2,
+              0
+            ],
+            "size": 0.7,
+            "label": "m₂"
+          },
+          {
+            "id": "pull",
+            "slot": "figure",
+            "type": "vector",
+            "from": [
+              -1.9,
+              0.35
+            ],
+            "toward": "earth",
+            "length": 1.6,
+            "label": "F",
+            "role": "action"
+          },
+          {
+            "id": "gap",
+            "slot": "figure",
+            "type": "dimension",
+            "from": "earth",
+            "to": "moon",
+            "label": "r",
+            "role": "quantity"
+          },
+          {
+            "id": "force_now",
+            "slot": "readout",
+            "type": "readout",
+            "value": "F",
+            "label": "Force"
+          },
+          {
+            "id": "distance_now",
+            "slot": "readout",
+            "type": "readout",
+            "value": "r_km",
+            "label": "Distance"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Here is the law in symbols. The masses sit on top, the distance squared below.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "law"
+                ],
+                "how": "type"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "earth"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "moon"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Look at the arrow: it points from the Moon to the Earth, along the line joining them.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "pull"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "gap"
+                ],
+                "how": "draw"
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Now push the Moon away. The arrow shrinks fast, because the distance is squared.",
+            "actions": [
+              {
+                "do": "sweep",
+                "param": "r",
+                "to": {
+                  "expr": "2 * r"
+                }
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "force_now",
+                  "distance_now"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "law"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s5",
+        "index": 4,
+        "role": "example",
+        "title": "La force Terre-Lune, et sa chute rapide",
+        "layout": "figure-notes",
+        "derived": [],
+        "elements": [
+          {
+            "id": "forces",
+            "slot": "figure",
+            "type": "bars",
+            "items": [
+              {
+                "label": "at r",
+                "value": {
+                  "expr": "F"
+                },
+                "role": "action"
+              },
+              {
+                "label": "at 2r",
+                "value": {
+                  "expr": "F_2r"
+                },
+                "role": "action"
+              },
+              {
+                "label": "at 3r",
+                "value": {
+                  "expr": "F_3r"
+                },
+                "role": "action"
+              }
+            ],
+            "unit": "N"
+          },
+          {
+            "id": "value",
+            "slot": "notes",
+            "type": "text",
+            "text": "Earth–Moon force: {{F|sci:2}} N."
+          },
+          {
+            "id": "where",
+            "slot": "notes",
+            "type": "text",
+            "text": "Distance: {{r_km|int}} km."
+          },
+          {
+            "id": "meaning",
+            "slot": "notes",
+            "type": "text",
+            "text": "Twice as far: a quarter of the force.",
+            "emphasis": "strong"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Between the Earth and the Moon, the pull is huge. Read the number.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "value",
+                  "where"
+                ],
+                "how": "type"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Now guess. Twice as far away, how much force is left?",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "forces"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "A quarter. Three times as far, a ninth. That is the inverse square.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "meaning"
+                ],
+                "how": "type"
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "meaning"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s6",
+        "index": 5,
+        "role": "recap",
+        "title": "Three ideas to keep",
+        "layout": "statement",
+        "derived": [],
+        "elements": [
+          {
+            "id": "recap",
+            "slot": "text",
+            "type": "list",
+            "items": [
+              "Two masses always pull on each other, equally hard.",
+              "More mass means more force; twice as far means one quarter.",
+              "The Moon keeps falling toward Earth, but its speed bends the fall into a circle."
+            ]
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Two ideas first: two masses always pull on each other, equally hard.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "recap.i1"
+                ],
+                "how": "type"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "More mass, more force. Twice as far, and you keep only a quarter.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "recap.i2"
+                ],
+                "how": "type"
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "And the Moon keeps falling toward Earth. Gravity is the string that never touches.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "recap.i3"
+                ],
+                "how": "type"
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "recap.i3"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "quiz": {
+      "questions": [
+        {
+          "prompt": "You double one of the two masses while the distance stays the same. What happens to the gravitational force between them?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "It stays the same"
+            },
+            {
+              "id": "b",
+              "text": "It doubles"
+            },
+            {
+              "id": "c",
+              "text": "It quadruples"
+            },
+            {
+              "id": "d",
+              "text": "It is halved"
+            }
+          ],
+          "answer_id": "b",
+          "explanation": "The force is proportional to the product of the masses, so doubling one mass doubles the product and the force.",
+          "scene_id": "s4"
+        },
+        {
+          "prompt": "Two satellites orbit Earth. One sits three times farther from Earth’s centre than the other. How does its gravitational pull compare?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "It is one third as strong"
+            },
+            {
+              "id": "b",
+              "text": "It is one ninth as strong"
+            },
+            {
+              "id": "c",
+              "text": "It is three times as strong"
+            },
+            {
+              "id": "d",
+              "text": "It is nine times as strong"
+            }
+          ],
+          "answer_id": "b",
+          "explanation": "With the distance squared below, tripling the distance divides the force by three squared, that is nine.",
+          "scene_id": "s5"
+        },
+        {
+          "prompt": "Earth pulls the Moon. What does the Moon do to Earth?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "It pulls Earth with an equally strong force, in the opposite direction"
+            },
+            {
+              "id": "b",
+              "text": "It pulls Earth, but much more weakly, since Earth is heavier"
+            },
+            {
+              "id": "c",
+              "text": "It pulls Earth in the same direction as Earth’s pull"
+            },
+            {
+              "id": "d",
+              "text": "It exerts no pull at all on Earth"
+            }
+          ],
+          "answer_id": "a",
+          "explanation": "The attraction is mutual: the two forces have the same magnitude and point toward each other along the joining line.",
+          "scene_id": "s3"
+        }
+      ]
+    }
+  }
+}

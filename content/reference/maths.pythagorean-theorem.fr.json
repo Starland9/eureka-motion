@@ -1,0 +1,1105 @@
+{
+  "slug": "maths/pythagorean-theorem",
+  "subject": "maths",
+  "reference_level": "college",
+  "language": "fr",
+  "title": "Théorème de Pythagore",
+  "question": "C'est quoi le théorème de Pythagore ?",
+  "reviewed_by": null,
+  "reviewed_at": null,
+  "verdicts": [
+    {
+      "target": "plan",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "L'énoncé, la formule, les unités et les calculs dérivés sont corrects et adaptés au niveau, et l'analogie de l'échelle illustre correctement la relation sans enseigner d'erreur.",
+      "checks": [
+        "structure",
+        "model",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s1",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "La scène présente un triangle rectangle de côtés 3, 4 et 5 (l'hypoténuse valant bien √(3²+4²)=5) et pose la question du lien entre ces nombres, sans énoncer d'affirmation fausse.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s2",
+      "status": "corrected",
+      "attempts": 2,
+      "reason": "La scène montre bien qu'en éloignant le pied du mur le haut de l'échelle descend, la longueur totale de l'échelle restant constante grâce à la formule appliquée.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s3",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "La scène montre les carrés construits sur les côtés du triangle rectangle et énonce correctement que le carré du plus grand côté égale la somme des carrés des deux autres, avec des valeurs cohérentes.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s4",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "La scène écrit correctement la règle a² + b² = c² et associe chaque lettre aux côtés du triangle rectangle, sans énoncé faux.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s5",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "La scène illustre correctement le triangle 3-4-5 : 3² + 4² = 9 + 16 = 25, et 5 × 5 = 25, donc l’échelle mesure bien 5 m.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s6",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "Le récapitulatif énonce correctement la règle de Pythagore et vérifie l'exemple 3-4-5 avec 9 + 16 = 25, donc le grand côté mesure 5.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    }
+  ],
+  "payload": {
+    "version": 1,
+    "plan": {
+      "objective": "Savoir que dans un triangle rectangle, le carré du plus grand côté égale la somme des carrés des deux autres, et savoir s’en servir pour trouver une longueur.",
+      "prerequisites": [
+        "Reconnaître un angle droit et un triangle rectangle",
+        "Savoir élever un nombre au carré",
+        "Savoir prendre une racine carrée simple"
+      ],
+      "analogy": {
+        "name": "L’échelle contre le mur",
+        "mapping": "Le mur et le sol forment l’angle droit, l’échelle est le grand côté ; reculer le pied de l’échelle allonge l’échelle exactement comme la règle le prévoit."
+      },
+      "key_rule": {
+        "statement": "Dans un triangle rectangle, l’aire du carré construit sur le plus grand côté égale la somme des aires des carrés construits sur les deux autres côtés.",
+        "formula": "\\q{a}^2 + \\q{b}^2 = \\res{c}^2"
+      },
+      "steps": [
+        {
+          "role": "hook",
+          "intent": "Faire sentir qu’un triangle 3-4-5 cache un rapport étonnant entre ses côtés.",
+          "visual": "Un triangle rectangle 3-4-5 se dessine ; les trois longueurs s’affichent et on demande ce qui les relie."
+        },
+        {
+          "role": "analogy",
+          "intent": "Montrer qu’une échelle contre un mur dépend de deux longueurs à la fois.",
+          "visual": "Une échelle glisse : le pied s’éloigne du mur, le haut descend, la longueur totale ne change pas."
+        },
+        {
+          "role": "mechanism",
+          "intent": "Faire voir que les carrés construits sur les côtés se remplissent exactement.",
+          "visual": "Trois carrés poussent sur les trois côtés ; l’eau des deux petits se verse et remplit pile le grand."
+        },
+        {
+          "role": "formula",
+          "intent": "Écrire la règle et relier chaque lettre au dessin.",
+          "visual": "La formule s’écrit ; les lettres a, b, c viennent se poser sur les côtés du triangle."
+        },
+        {
+          "role": "example",
+          "intent": "Calculer l’échelle pour un mur de 3 m et un pied à 4 m, avec un résultat qui surprend.",
+          "visual": "Le mur et le sol se dessinent à l’échelle ; le calcul s’affiche et l’échelle se déplie à 5 m."
+        },
+        {
+          "role": "recap",
+          "intent": "Fixer les deux idées et répondre à la question du début.",
+          "visual": "Deux phrases courtes ; le triangle 3-4-5 revient avec 9 + 16 = 25 surligné."
+        }
+      ]
+    },
+    "params": [
+      {
+        "id": "a",
+        "symbol": "a",
+        "label": "Un côté de l’angle droit",
+        "unit": "m",
+        "min": 1,
+        "max": 10,
+        "step": 0.1,
+        "default": 3,
+        "role": "quantity"
+      },
+      {
+        "id": "b",
+        "symbol": "b",
+        "label": "L’autre côté de l’angle droit",
+        "unit": "m",
+        "min": 1,
+        "max": 10,
+        "step": 0.1,
+        "default": 4,
+        "role": "quantity"
+      }
+    ],
+    "model": {
+      "constants": [],
+      "derived": [
+        {
+          "id": "c",
+          "expr": "sqrt(a^2 + b^2)",
+          "unit": "m",
+          "label": "Longueur du plus grand côté",
+          "symbol": "c",
+          "format": "fixed:2"
+        },
+        {
+          "id": "a2",
+          "expr": "a^2",
+          "unit": "m²",
+          "label": "Carré du premier côté",
+          "symbol": "a²",
+          "format": "fixed:2"
+        },
+        {
+          "id": "b2",
+          "expr": "b^2",
+          "unit": "m²",
+          "label": "Carré du second côté",
+          "symbol": "b²",
+          "format": "fixed:2"
+        },
+        {
+          "id": "c2",
+          "expr": "a^2 + b^2",
+          "unit": "m²",
+          "label": "Carré du plus grand côté",
+          "symbol": "c²",
+          "format": "fixed:2"
+        },
+        {
+          "id": "c_double",
+          "expr": "sqrt((2*a)^2 + (2*b)^2)",
+          "unit": "m",
+          "label": "Plus grand côté si on double les deux côtés",
+          "symbol": "c",
+          "format": "fixed:2"
+        }
+      ]
+    },
+    "scenes": [
+      {
+        "id": "s1",
+        "index": 0,
+        "role": "hook",
+        "title": "Le triangle 3-4-5 cache un secret",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            -1,
+            9
+          ],
+          "y": [
+            -1,
+            7
+          ]
+        },
+        "derived": [],
+        "elements": [
+          {
+            "id": "tri",
+            "slot": "figure",
+            "type": "sim.right-triangle",
+            "a": {
+              "expr": "a"
+            },
+            "b": {
+              "expr": "b"
+            },
+            "showSquares": false,
+            "labelA": "a",
+            "labelB": "b",
+            "labelC": "c"
+          },
+          {
+            "id": "cotes",
+            "slot": "notes",
+            "type": "text",
+            "text": "Côtés : {{a|fixed:1}} m, {{b|fixed:1}} m, {{c|fixed:2}} m."
+          },
+          {
+            "id": "question",
+            "slot": "notes",
+            "type": "text",
+            "text": "Quel rapport entre ces trois nombres ?",
+            "emphasis": "strong"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Regarde ce triangle : deux côtés mesurent trois et quatre mètres, et l’angle est droit.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "tri.triangle"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "tri.side_a",
+                  "tri.side_b",
+                  "tri.right_angle"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Son grand côté, lui, mesure cinq mètres. Trois, quatre, cinq : rien de bizarre en apparence.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "tri.side_c"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "cotes"
+                ],
+                "how": "type"
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Et pourtant, ces trois nombres sont reliés. Saurais-tu deviner par quoi ?",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "question"
+                ],
+                "how": "type"
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "tri.side_c"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s2",
+        "index": 1,
+        "role": "analogy",
+        "title": "L’échelle contre le mur",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            0,
+            12
+          ],
+          "y": [
+            0,
+            10.8
+          ]
+        },
+        "derived": [
+          {
+            "id": "foot_x",
+            "expr": "clamp(1 + b, 1.2, 9.8)",
+            "unit": "m",
+            "label": "Pied de l’échelle",
+            "format": "fixed:1"
+          },
+          {
+            "id": "top_y",
+            "expr": "sqrt(max(a^2 + b^2 - (clamp(1 + b, 1.2, 9.8) - 1)^2, 0.25))",
+            "unit": "m",
+            "label": "Haut de l’échelle",
+            "format": "fixed:1"
+          }
+        ],
+        "elements": [
+          {
+            "id": "ground",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              0,
+              0.4
+            ],
+            "to": [
+              11.5,
+              0.4
+            ]
+          },
+          {
+            "id": "wall",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              1,
+              0.4
+            ],
+            "to": [
+              1,
+              7
+            ]
+          },
+          {
+            "id": "right_angle",
+            "slot": "figure",
+            "type": "angle",
+            "vertex": [
+              1,
+              0.4
+            ],
+            "from": [
+              1,
+              3
+            ],
+            "to": [
+              4,
+              0.4
+            ],
+            "label": "90°"
+          },
+          {
+            "id": "ladder",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              1,
+              {
+                "expr": "top_y"
+              }
+            ],
+            "to": [
+              {
+                "expr": "foot_x"
+              },
+              0.4
+            ],
+            "label": "échelle",
+            "role": "quantity"
+          },
+          {
+            "id": "foot_pt",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              {
+                "expr": "foot_x"
+              },
+              0.4
+            ],
+            "label": "pied",
+            "role": "quantity"
+          },
+          {
+            "id": "top_pt",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              1,
+              {
+                "expr": "top_y"
+              }
+            ],
+            "role": "quantity"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Une échelle est posée contre un mur. Regarde bien ce qui peut bouger.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "ground",
+                  "wall"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "right_angle"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "ladder"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "foot_pt",
+                  "top_pt"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Si j’éloigne le pied du mur, le haut de l’échelle descend. Devine pourquoi.",
+            "actions": [
+              {
+                "do": "sweep",
+                "param": "b",
+                "to": 7
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Deux longueurs changent à la fois, mais l’échelle, elle, garde sa taille.",
+            "actions": [
+              {
+                "do": "sweep",
+                "param": "b",
+                "to": 3
+              },
+              {
+                "do": "focus",
+                "targets": [
+                  "ladder"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s3",
+        "index": 2,
+        "role": "mechanism",
+        "title": "Deux petits carrés remplissent le grand",
+        "layout": "formula-focus",
+        "world": {
+          "x": [
+            -0.5,
+            11.5
+          ],
+          "y": [
+            -0.5,
+            4
+          ]
+        },
+        "derived": [
+          {
+            "id": "sq_a_area",
+            "expr": "a^2",
+            "unit": "",
+            "label": "Aire du carré sur a",
+            "format": "fixed:2"
+          }
+        ],
+        "elements": [
+          {
+            "id": "tri",
+            "slot": "figure",
+            "type": "sim.right-triangle",
+            "a": {
+              "expr": "a"
+            },
+            "b": {
+              "expr": "b"
+            },
+            "showSquares": true,
+            "labelA": "a",
+            "labelB": "b",
+            "labelC": "c"
+          },
+          {
+            "id": "rule",
+            "slot": "formula",
+            "type": "formula",
+            "tex": "\\q{a}^2 + \\q{b}^2 = \\res{c}^2"
+          },
+          {
+            "id": "ra",
+            "slot": "readout",
+            "type": "readout",
+            "value": "a2",
+            "label": "Carré sur a"
+          },
+          {
+            "id": "rb",
+            "slot": "readout",
+            "type": "readout",
+            "value": "b2",
+            "label": "Carré sur b"
+          },
+          {
+            "id": "rc",
+            "slot": "readout",
+            "type": "readout",
+            "value": "c2",
+            "label": "Carré sur c"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Sur chaque côté du triangle, fais pousser un carré. Regarde bien leurs tailles.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "tri"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "tri.square_a",
+                  "tri.square_b",
+                  "tri.square_c"
+                ],
+                "how": "draw"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Les deux petits carrés se vident dans le grand. Devine : est-ce qu’il déborde ?",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "ra",
+                  "rb",
+                  "rc"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Non. Il est rempli pile : le grand carré vaut la somme des deux autres.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "rule"
+                ],
+                "how": "type"
+              },
+              {
+                "do": "focus",
+                "targets": [
+                  "rule",
+                  "rc"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s4",
+        "index": 3,
+        "role": "formula",
+        "title": "Écrire la règle sur le triangle",
+        "layout": "formula-focus",
+        "world": {
+          "x": [
+            -4,
+            8
+          ],
+          "y": [
+            -3,
+            3
+          ]
+        },
+        "derived": [],
+        "elements": [
+          {
+            "id": "tri",
+            "slot": "figure",
+            "type": "sim.right-triangle",
+            "a": {
+              "expr": "b"
+            },
+            "b": {
+              "expr": "a"
+            },
+            "showSquares": true,
+            "labelA": "a",
+            "labelB": "b",
+            "labelC": "c"
+          },
+          {
+            "id": "rule",
+            "slot": "formula",
+            "type": "formula",
+            "tex": "\\q{a}^2 + \\q{b}^2 = \\res{c}^2"
+          },
+          {
+            "id": "ra",
+            "slot": "readout",
+            "type": "readout",
+            "value": "a2",
+            "label": "a²"
+          },
+          {
+            "id": "rb",
+            "slot": "readout",
+            "type": "readout",
+            "value": "b2",
+            "label": "b²"
+          },
+          {
+            "id": "rc",
+            "slot": "readout",
+            "type": "readout",
+            "value": "c2",
+            "label": "c²"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Regarde les trois côtés : les deux petits portent a et b, le grand porte c.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "tri"
+                ],
+                "how": "draw"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "La règle s’écrit : a au carré plus b au carré égale c au carré.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "rule"
+                ],
+                "how": "type"
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Vérifie avec les aires des carrés : la somme des deux petits remplit le grand.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "ra",
+                  "rb",
+                  "rc"
+                ],
+                "how": "fade",
+                "at": 0.2
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "rule"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s5",
+        "index": 4,
+        "role": "example",
+        "title": "L’échelle contre le mur : 3 m, 4 m… et 5 m",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            0,
+            12
+          ],
+          "y": [
+            0,
+            7.5
+          ]
+        },
+        "derived": [
+          {
+            "id": "sx",
+            "expr": "4.5 + c",
+            "unit": "",
+            "label": "Position du haut de l’échelle",
+            "format": "fixed:2"
+          }
+        ],
+        "elements": [
+          {
+            "id": "ground",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              0.6,
+              0.5
+            ],
+            "to": [
+              11.4,
+              0.5
+            ]
+          },
+          {
+            "id": "wall",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              0.6,
+              0.5
+            ],
+            "to": [
+              0.6,
+              7
+            ]
+          },
+          {
+            "id": "foot",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              0.6,
+              0.5
+            ],
+            "to": [
+              4.5,
+              0.5
+            ],
+            "label": "4 m",
+            "role": "quantity"
+          },
+          {
+            "id": "height",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              0.6,
+              0.5
+            ],
+            "to": [
+              0.6,
+              3.5
+            ],
+            "label": "3 m",
+            "role": "quantity"
+          },
+          {
+            "id": "ladder",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              0.6,
+              3.5
+            ],
+            "to": [
+              4.5,
+              0.5
+            ],
+            "label": "c",
+            "role": "result"
+          },
+          {
+            "id": "c_now",
+            "slot": "notes",
+            "type": "readout",
+            "value": "c",
+            "label": "Longueur de l’échelle"
+          },
+          {
+            "id": "calc",
+            "slot": "notes",
+            "type": "formula",
+            "tex": "\\q{3}^2 + \\q{4}^2 = \\res{25}"
+          },
+          {
+            "id": "answer",
+            "slot": "notes",
+            "type": "text",
+            "text": "25 = 5 × 5, donc c = 5 m.",
+            "emphasis": "strong"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Un mur de trois mètres, un pied d’échelle à quatre mètres : dessinons à l’échelle.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "ground",
+                  "wall"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "foot",
+                  "height"
+                ],
+                "how": "draw"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "L’échelle se déplie du sol jusqu’au haut du mur, et mesure…",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "ladder"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "c_now"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Neuf plus seize font vingt-cinq. Vingt-cinq, c’est cinq fois cinq : l’échelle mesure cinq mètres.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "calc"
+                ],
+                "how": "type"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "answer"
+                ],
+                "how": "type"
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "answer"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s6",
+        "index": 5,
+        "role": "recap",
+        "title": "9 + 16 = 25 : le compte est bon",
+        "layout": "statement",
+        "derived": [],
+        "elements": [
+          {
+            "id": "recap",
+            "slot": "text",
+            "type": "list",
+            "items": [
+              "Le carré du plus grand côté égale la somme des carrés des deux autres.",
+              "Côtés 3 et 4 : 9 + 16 = 25, donc le grand côté mesure 5.",
+              "Ça marche pour tous les triangles rectangles, pas seulement celui-là."
+            ]
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Un : dans un triangle rectangle, le carré du grand côté égale la somme des deux autres carrés.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "recap.i1"
+                ],
+                "how": "type"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Deux : côté 3 et côté 4 donnent 9 plus 16, donc 25. Le grand côté vaut 5.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "recap.i2"
+                ],
+                "how": "type"
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Et ce n’est pas un hasard du 3-4-5 : ça marche pour tous les triangles rectangles.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "recap.i3"
+                ],
+                "how": "type"
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "recap.i2"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "quiz": {
+      "questions": [
+        {
+          "prompt": "Dans un triangle rectangle, si les deux petits côtés mesurent 6 cm et 8 cm, combien mesure le grand côté ?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "14 cm"
+            },
+            {
+              "id": "b",
+              "text": "10 cm"
+            },
+            {
+              "id": "c",
+              "text": "48 cm"
+            },
+            {
+              "id": "d",
+              "text": "7 cm"
+            }
+          ],
+          "answer_id": "b",
+          "explanation": "On additionne les carrés des deux petits côtés : 36 + 64 = 100, et 100 est le carré de 10.",
+          "scene_id": "s6"
+        },
+        {
+          "prompt": "Sur un triangle rectangle, on construit un carré sur chaque côté. Que peux-tu dire des aires de ces carrés ?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "Le grand carré a la même aire que chacun des deux petits."
+            },
+            {
+              "id": "b",
+              "text": "Le grand carré a une aire plus petite que la somme des deux petits."
+            },
+            {
+              "id": "c",
+              "text": "Le grand carré a une aire égale à la somme des deux petits."
+            },
+            {
+              "id": "d",
+              "text": "Le grand carré a une aire plus grande que la somme des deux petits."
+            }
+          ],
+          "answer_id": "c",
+          "explanation": "Les deux petits carrés remplissent exactement le grand, donc son aire est la somme des leurs.",
+          "scene_id": "s3"
+        },
+        {
+          "prompt": "Une échelle est posée contre un mur. Si on éloigne le pied du mur, que se passe-t-il pour le haut de l’échelle ?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "Il monte sur le mur."
+            },
+            {
+              "id": "b",
+              "text": "Il descend sur le mur."
+            },
+            {
+              "id": "c",
+              "text": "Il ne bouge pas."
+            }
+          ],
+          "answer_id": "b",
+          "explanation": "L’échelle garde sa longueur : si le pied s’éloigne, le haut doit descendre pour que le grand côté reste le même.",
+          "scene_id": "s2"
+        }
+      ]
+    }
+  }
+}

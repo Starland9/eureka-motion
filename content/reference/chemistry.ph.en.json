@@ -1,0 +1,1162 @@
+{
+  "slug": "chemistry/ph",
+  "subject": "chemistry",
+  "reference_level": "lycee",
+  "language": "en",
+  "title": "pH",
+  "question": "What is pH?",
+  "reviewed_by": null,
+  "reviewed_at": null,
+  "verdicts": [
+    {
+      "target": "plan",
+      "status": "corrected",
+      "attempts": 2,
+      "reason": "The formula pH = −log₁₀[H⁺], the logarithmic staircase analogy, the factor-of-ten per pH unit, the units in mol/L, and the pH 2/3 example with 10⁻²/10⁻³ mol/L are all correct and appropriate for this level.",
+      "checks": [
+        "structure",
+        "model",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s1",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "The scene shows lemon juice at pH 2 and vinegar at pH 3 with a one-unit gap and asks what the number counts, matching the hook step without stating anything scientifically wrong.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s2",
+      "status": "corrected",
+      "attempts": 2,
+      "reason": "The scene correctly shows a staircase of tens where each step up multiplies the count by ten (1, 10, 100, 1000), matching the analogy and the key rule that each pH unit corresponds to a factor of ten.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s3",
+      "status": "corrected",
+      "attempts": 2,
+      "reason": "The scene correctly shows that decreasing H⁺ concentration by a factor of ten raises the pH by one unit, consistent with pH = -log₁₀[H⁺], and all labels and bindings match their values.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s4",
+      "status": "corrected",
+      "attempts": 2,
+      "reason": "The scene correctly presents the formula pH = -log₁₀[H⁺], sweeps the concentration by a factor of ten, and shows the pH rising by one, matching the outlined key rule.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s5",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "The scene correctly shows lemon at pH 2 with 10⁻² mol/L and vinegar at pH 3 with 10⁻³ mol/L, and the bars (heights 2 and 0.2) display a tenfold difference, matching the narration that vinegar holds ten times fewer H⁺ ions.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s6",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "The scene correctly recaps that pH counts H⁺ ions per litre, that one pH unit multiplies [H⁺] by ten, and that pH 2 has ten times more H⁺ than pH 3, consistent with the outline.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    }
+  ],
+  "payload": {
+    "version": 1,
+    "plan": {
+      "objective": "Explain what pH measures, why the scale is logarithmic, and how one unit of pH corresponds to a factor of ten in the concentration of H⁺ ions.",
+      "prerequisites": [
+        "Powers of ten and scientific notation",
+        "The logarithm base 10 as 'which exponent of 10 gives this number'",
+        "Concentration in mol/L"
+      ],
+      "analogy": {
+        "name": "The staircase of tens",
+        "mapping": "Each step up the staircase multiplies the number of H⁺ ions per litre by ten, like a staircase where each step is ten times higher than the one before; a step down divides by ten."
+      },
+      "key_rule": {
+        "statement": "The pH is the opposite of the base-10 logarithm of the concentration of H⁺ ions in mol/L: each unit of pH means the concentration changes by a factor of ten.",
+        "formula": "\\mathrm{pH} = -\\log_{10}\\left(\\q{[\\mathrm{H^+}]}\\right)"
+      },
+      "steps": [
+        {
+          "role": "hook",
+          "intent": "Show that lemon juice and vinegar have close pH values, then ask what that number really counts.",
+          "visual": "Two beakers labelled lemon and vinegar; a pH meter needle slides to 2 and to 3; a question mark grows over the gap."
+        },
+        {
+          "role": "analogy",
+          "intent": "Give the intuition of a scale where each step is a multiplication, not an addition.",
+          "visual": "A staircase of tens: each step up makes a column of dots ten times taller, going 1, 10, 100, 1000."
+        },
+        {
+          "role": "mechanism",
+          "intent": "Show that pH counts the H⁺ ions per litre and turns a tiny number into a handy one.",
+          "visual": "A litre box fills with H⁺ dots; the count drops from 10⁻² to 10⁻³; the pH number rises from 2 to 3 as the dots thin out."
+        },
+        {
+          "role": "formula",
+          "intent": "Tie each symbol of the formula to the dots and the exponent just seen.",
+          "visual": "The formula writes itself; the concentration is dragged along a power-of-ten axis and the pH value follows live."
+        },
+        {
+          "role": "example",
+          "intent": "Compute a real case and reveal the surprising factor of ten between pH 2 and pH 3.",
+          "visual": "Lemon at pH 2 with 10⁻² mol/L, vinegar at pH 3 with 10⁻³ mol/L; a bar of ions shrinks by ten between them."
+        },
+        {
+          "role": "recap",
+          "intent": "Fix the three ideas and answer the hook: pH 2 and pH 3 differ by a factor of ten in H⁺.",
+          "visual": "Three short lines appear; the last one, the answer, is highlighted while the ion bar shrinks."
+        }
+      ]
+    },
+    "params": [
+      {
+        "id": "cH",
+        "symbol": "[H⁺]",
+        "label": "Concentration of H⁺ ions",
+        "unit": "mol/L",
+        "min": 1e-9,
+        "max": 1,
+        "step": 0.0049999999950000006,
+        "default": 0.01,
+        "role": "quantity"
+      }
+    ],
+    "model": {
+      "constants": [],
+      "derived": [
+        {
+          "id": "pH",
+          "expr": "-log10(cH)",
+          "unit": "",
+          "label": "pH",
+          "symbol": "pH",
+          "format": "fixed:2"
+        },
+        {
+          "id": "pH_ten",
+          "expr": "-log10(cH / 10)",
+          "unit": "",
+          "label": "pH if concentration is divided by ten",
+          "symbol": "pH/10",
+          "format": "fixed:2"
+        },
+        {
+          "id": "cH_display",
+          "expr": "cH",
+          "unit": "mol/L",
+          "label": "Concentration of H⁺ ions",
+          "symbol": "[H⁺]",
+          "format": "sci:2"
+        },
+        {
+          "id": "ratio",
+          "expr": "10",
+          "unit": "",
+          "label": "Factor between two neighbouring pH values",
+          "symbol": "×10",
+          "format": "int"
+        }
+      ]
+    },
+    "scenes": [
+      {
+        "id": "s1",
+        "index": 0,
+        "role": "hook",
+        "title": "Lemon, vinegar: two close numbers",
+        "layout": "figure",
+        "world": {
+          "x": [
+            -5,
+            5
+          ],
+          "y": [
+            -3,
+            3
+          ]
+        },
+        "derived": [],
+        "elements": [
+          {
+            "id": "lemon_beaker",
+            "slot": "figure",
+            "type": "object",
+            "kind": "beaker",
+            "at": [
+              -2.4,
+              -0.6
+            ],
+            "size": 2.2,
+            "label": "Lemon juice"
+          },
+          {
+            "id": "vinegar_beaker",
+            "slot": "figure",
+            "type": "object",
+            "kind": "beaker",
+            "at": [
+              2.4,
+              -0.6
+            ],
+            "size": 2.2,
+            "label": "Vinegar"
+          },
+          {
+            "id": "needle",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              -2.4,
+              -1.2
+            ],
+            "label": "pH 2",
+            "role": "quantity"
+          },
+          {
+            "id": "needle2",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              2.4,
+              -1.2
+            ],
+            "label": "pH 3",
+            "role": "quantity"
+          },
+          {
+            "id": "gap",
+            "slot": "figure",
+            "type": "dimension",
+            "from": "needle",
+            "to": "needle2",
+            "label": "one unit",
+            "role": "result",
+            "offset": 0.9
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Dip the meter into lemon juice: it reads pH 2. Vinegar reads pH 3.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "lemon_beaker",
+                  "vinegar_beaker"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "needle"
+                ],
+                "how": "fade",
+                "at": 1
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "needle2"
+                ],
+                "how": "fade",
+                "at": 1
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "One small step on the scale. Surely the two liquids are almost the same?",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "gap"
+                ],
+                "how": "draw"
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Not quite. What does that number count? Guess before you look.",
+            "actions": [
+              {
+                "do": "highlight",
+                "targets": [
+                  "gap"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s2",
+        "index": 1,
+        "role": "analogy",
+        "title": "A staircase where each step is ten times higher",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            0,
+            11
+          ],
+          "y": [
+            -289.5,
+            290.5
+          ]
+        },
+        "derived": [
+          {
+            "id": "h1",
+            "expr": "0.5 * 10 ^ 0",
+            "unit": "",
+            "label": "First column",
+            "format": "fixed:2"
+          },
+          {
+            "id": "h2",
+            "expr": "0.5 * 10 ^ 1",
+            "unit": "",
+            "label": "Second column",
+            "format": "fixed:2"
+          },
+          {
+            "id": "h3",
+            "expr": "0.5 * 10 ^ 2",
+            "unit": "",
+            "label": "Third column",
+            "format": "fixed:2"
+          },
+          {
+            "id": "h4",
+            "expr": "0.5 * 10 ^ 3",
+            "unit": "",
+            "label": "Fourth column",
+            "format": "fixed:2"
+          }
+        ],
+        "elements": [
+          {
+            "id": "ground",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              0.5,
+              0.5
+            ],
+            "to": [
+              10.5,
+              0.5
+            ]
+          },
+          {
+            "id": "col1",
+            "slot": "figure",
+            "type": "shape",
+            "kind": "rect",
+            "center": [
+              2.2,
+              0.5
+            ],
+            "width": 0.7,
+            "height": {
+              "expr": "h1"
+            },
+            "fill": "quantity"
+          },
+          {
+            "id": "col2",
+            "slot": "figure",
+            "type": "shape",
+            "kind": "rect",
+            "center": [
+              4.4,
+              0.5
+            ],
+            "width": 0.7,
+            "height": {
+              "expr": "h2"
+            },
+            "fill": "quantity"
+          },
+          {
+            "id": "col3",
+            "slot": "figure",
+            "type": "shape",
+            "kind": "rect",
+            "center": [
+              6.6,
+              0.5
+            ],
+            "width": 0.7,
+            "height": {
+              "expr": "h3"
+            },
+            "fill": "quantity"
+          },
+          {
+            "id": "col4",
+            "slot": "figure",
+            "type": "shape",
+            "kind": "rect",
+            "center": [
+              8.8,
+              0.5
+            ],
+            "width": 0.7,
+            "height": {
+              "expr": "h4"
+            },
+            "fill": "quantity"
+          },
+          {
+            "id": "lab1",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              2.2,
+              0.75
+            ],
+            "label": "1"
+          },
+          {
+            "id": "lab2",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              4.4,
+              3.6
+            ]
+          },
+          {
+            "id": "lab3",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              6.6,
+              4.6
+            ]
+          },
+          {
+            "id": "lab4",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              8.8,
+              5.6
+            ]
+          },
+          {
+            "id": "step_note",
+            "slot": "notes",
+            "type": "text",
+            "text": "One step up: ×10.",
+            "emphasis": "strong"
+          },
+          {
+            "id": "back_note",
+            "slot": "notes",
+            "type": "text",
+            "text": "One step down: ÷10."
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Climb a staircase of tens: each step up multiplies by ten.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "ground",
+                  "col1",
+                  "lab1"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "step_note"
+                ],
+                "how": "type",
+                "at": 0.5
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "The next columns rise ten, then a hundred times higher.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "col2",
+                  "lab2"
+                ],
+                "how": "fade",
+                "at": 0.3
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "col3",
+                  "lab3"
+                ],
+                "how": "fade",
+                "at": 1
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "col4",
+                  "lab4"
+                ],
+                "how": "fade",
+                "at": 1
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "That is the whole trick: you count multiplications, not grams.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "back_note"
+                ],
+                "how": "type",
+                "at": 0.4
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "step_note"
+                ],
+                "at": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s3",
+        "index": 2,
+        "role": "mechanism",
+        "title": "One litre, and a count of H⁺ ions",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            -5,
+            5
+          ],
+          "y": [
+            -3,
+            3
+          ]
+        },
+        "derived": [
+          {
+            "id": "cH_sci",
+            "expr": "cH",
+            "unit": "mol/L",
+            "label": "Concentration of H⁺ ions",
+            "format": "sci:2"
+          }
+        ],
+        "elements": [
+          {
+            "id": "ions",
+            "slot": "figure",
+            "type": "bars",
+            "items": [
+              {
+                "label": "pH 2",
+                "value": {
+                  "expr": "0.01"
+                },
+                "role": "quantity"
+              },
+              {
+                "label": "your beaker",
+                "value": {
+                  "expr": "cH"
+                },
+                "role": "result"
+              },
+              {
+                "label": "pH 3",
+                "value": {
+                  "expr": "0.001"
+                },
+                "role": "quantity"
+              }
+            ],
+            "unit": "mol/L"
+          },
+          {
+            "id": "cH_now",
+            "slot": "notes",
+            "type": "readout",
+            "value": "cH_sci",
+            "label": "H⁺ per litre"
+          },
+          {
+            "id": "pH_now",
+            "slot": "notes",
+            "type": "readout",
+            "value": "pH",
+            "label": "pH"
+          },
+          {
+            "id": "rule",
+            "slot": "notes",
+            "type": "text",
+            "text": "×10 fewer ions, +1 on the pH.",
+            "emphasis": "strong"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Each bar counts the H⁺ ions in one litre of a beaker.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "ions"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Guess what happens to the pH when the ions become ten times rarer?",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "cH_now",
+                  "pH_now"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "The count turns into a small handy number: pH goes up by one.",
+            "actions": [
+              {
+                "do": "sweep",
+                "param": "cH",
+                "to": {
+                  "expr": "cH / 10"
+                }
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "rule"
+                ],
+                "how": "type",
+                "at": 0.5
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s4",
+        "index": 3,
+        "role": "formula",
+        "title": "pH: minus the exponent of ten",
+        "layout": "formula-focus",
+        "world": {
+          "x": [
+            -1,
+            11
+          ],
+          "y": [
+            -2,
+            2
+          ]
+        },
+        "derived": [
+          {
+            "id": "log_cH",
+            "expr": "log10(cH)",
+            "unit": "",
+            "label": "log of the concentration",
+            "symbol": "log₁₀[H⁺]",
+            "format": "fixed:2"
+          }
+        ],
+        "elements": [
+          {
+            "id": "rule",
+            "slot": "formula",
+            "type": "formula",
+            "tex": "\\mathrm{pH} = -\\log_{10}\\left(\\q{[\\mathrm{H^+}]}\\right)"
+          },
+          {
+            "id": "axis",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              0,
+              0
+            ],
+            "to": [
+              10,
+              0
+            ],
+            "label": "pH",
+            "role": "ink"
+          },
+          {
+            "id": "tick9",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              9,
+              0
+            ],
+            "label": "9",
+            "role": "ink"
+          },
+          {
+            "id": "tick0",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              0,
+              0
+            ],
+            "label": "0",
+            "role": "ink"
+          },
+          {
+            "id": "marker",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              {
+                "expr": "pH"
+              },
+              0.9
+            ],
+            "label": "pH",
+            "role": "result"
+          },
+          {
+            "id": "ph_now",
+            "slot": "readout",
+            "type": "readout",
+            "value": "pH",
+            "label": "pH"
+          },
+          {
+            "id": "ch_now",
+            "slot": "readout",
+            "type": "readout",
+            "value": "cH_display",
+            "label": "[H⁺]"
+          },
+          {
+            "id": "log_now",
+            "slot": "readout",
+            "type": "readout",
+            "value": "log_cH",
+            "label": "log₁₀[H⁺]"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Here is the whole rule: pH is minus the base-ten log of the H⁺ concentration.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "rule"
+                ],
+                "how": "type"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "axis",
+                  "tick0",
+                  "tick9"
+                ],
+                "how": "draw"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Watch the marker ride the scale as the ion concentration changes by a factor of ten.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "marker"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "ph_now",
+                  "ch_now",
+                  "log_now"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "sweep",
+                "param": "cH",
+                "to": {
+                  "expr": "cH / 10"
+                }
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Divide the ions by ten, and the pH climbs by exactly one step.",
+            "actions": [
+              {
+                "do": "highlight",
+                "targets": [
+                  "marker"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s5",
+        "index": 4,
+        "role": "example",
+        "title": "pH 2 and pH 3: a factor of ten in H⁺",
+        "layout": "compare",
+        "world": {
+          "x": [
+            -5,
+            5
+          ],
+          "y": [
+            -4,
+            4
+          ]
+        },
+        "derived": [
+          {
+            "id": "bar_lemon",
+            "expr": "2",
+            "unit": "",
+            "label": "Bar height, lemon",
+            "format": "fixed:1"
+          },
+          {
+            "id": "bar_vinegar",
+            "expr": "0.2",
+            "unit": "",
+            "label": "Bar height, vinegar",
+            "format": "fixed:1"
+          }
+        ],
+        "elements": [
+          {
+            "id": "lemon_beaker",
+            "slot": "figure_a",
+            "type": "object",
+            "kind": "beaker",
+            "at": [
+              -1.6,
+              -2.2
+            ],
+            "size": 2.2,
+            "label": "Lemon"
+          },
+          {
+            "id": "lemon_bar",
+            "slot": "figure_a",
+            "type": "shape",
+            "kind": "rect",
+            "center": [
+              1.6,
+              -0.8
+            ],
+            "width": 1.2,
+            "height": {
+              "expr": "bar_lemon"
+            },
+            "fill": "quantity",
+            "label": "pH 2"
+          },
+          {
+            "id": "vinegar_beaker",
+            "slot": "figure_b",
+            "type": "object",
+            "kind": "beaker",
+            "at": [
+              -1.6,
+              -2.2
+            ],
+            "size": 2.2,
+            "label": "Vinegar"
+          },
+          {
+            "id": "vinegar_bar",
+            "slot": "figure_b",
+            "type": "shape",
+            "kind": "rect",
+            "center": [
+              1.6,
+              -1.7
+            ],
+            "width": 1.2,
+            "height": {
+              "expr": "bar_vinegar"
+            },
+            "fill": "quantity",
+            "label": "pH 3"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Lemon juice sits at pH 2: ten to the minus two mol per litre of H⁺ ions.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "lemon_beaker",
+                  "lemon_bar"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Vinegar sits at pH 3, ten to the minus three. One step, ten times fewer ions.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "vinegar_beaker",
+                  "vinegar_bar"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Look at the two bars: vinegar holds ten times fewer H⁺ ions than lemon.",
+            "actions": [
+              {
+                "do": "highlight",
+                "targets": [
+                  "lemon_bar",
+                  "vinegar_bar"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s6",
+        "index": 5,
+        "role": "recap",
+        "title": "pH: three ideas to keep",
+        "layout": "statement",
+        "derived": [],
+        "elements": [
+          {
+            "id": "recap",
+            "slot": "text",
+            "type": "list",
+            "items": [
+              "pH counts the H⁺ ions per litre, from 0 to 14.",
+              "Each pH unit multiplies [H⁺] by ten.",
+              "pH 2 and pH 3 differ by ten times more H⁺."
+            ]
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "First: pH counts the H⁺ ions in one litre, from 0 to 14.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "recap"
+                ],
+                "how": "type"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Second: one step of pH multiplies the H⁺ concentration by ten.",
+            "actions": []
+          },
+          {
+            "id": "b3",
+            "narration": "So lemon at pH 2 holds ten times more H⁺ than vinegar at pH 3.",
+            "actions": [
+              {
+                "do": "highlight",
+                "targets": [
+                  "recap.i3"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "quiz": {
+      "questions": [
+        {
+          "prompt": "If the H⁺ concentration becomes ten times smaller, what happens to the pH?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "It goes up by one unit."
+            },
+            {
+              "id": "b",
+              "text": "It goes down by one unit."
+            },
+            {
+              "id": "c",
+              "text": "It stays the same."
+            },
+            {
+              "id": "d",
+              "text": "It goes up by ten units."
+            }
+          ],
+          "answer_id": "a",
+          "explanation": "Because pH is minus the logarithm of the concentration, dividing the H⁺ ions by ten adds exactly one to the pH.",
+          "scene_id": "s3"
+        },
+        {
+          "prompt": "A liquid has pH 2. Another has pH 4. How does the H⁺ concentration of the first compare to the second?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "It is two times larger."
+            },
+            {
+              "id": "b",
+              "text": "It is one hundred times larger."
+            },
+            {
+              "id": "c",
+              "text": "It is ten times larger."
+            },
+            {
+              "id": "d",
+              "text": "It is half as large."
+            }
+          ],
+          "answer_id": "b",
+          "explanation": "Two pH units mean two steps of ten, and ten times ten gives a hundred times more H⁺ ions.",
+          "scene_id": "s5"
+        },
+        {
+          "prompt": "Which statement best describes what the pH number measures?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "The mass of acid in one litre of solution."
+            },
+            {
+              "id": "b",
+              "text": "The total number of ions in one litre of solution."
+            },
+            {
+              "id": "c",
+              "text": "The concentration of H⁺ ions in one litre of solution."
+            },
+            {
+              "id": "d",
+              "text": "The volume of H⁺ ions in one litre of solution."
+            }
+          ],
+          "answer_id": "c",
+          "explanation": "pH is a handy way to write the concentration of H⁺ ions per litre, not a mass or a volume.",
+          "scene_id": "s6"
+        }
+      ]
+    }
+  }
+}

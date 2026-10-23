@@ -1,0 +1,1301 @@
+{
+  "slug": "biology/photosynthesis",
+  "subject": "biology",
+  "reference_level": "college",
+  "language": "en",
+  "title": "Photosynthesis",
+  "question": "How does photosynthesis work?",
+  "reviewed_by": null,
+  "reviewed_at": null,
+  "verdicts": [
+    {
+      "target": "plan",
+      "status": "corrected",
+      "attempts": 3,
+      "reason": "The formula, constants, units and derived expressions are consistent and correct: sugar per hour scales with light, leaf area and CO₂ with a plausible saturation at about 400 ppm, and the analogy of a solar kitchen neither contradicts the s",
+      "checks": [
+        "structure",
+        "model",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s1",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "The scene correctly shows a tree growing from a seed built mostly from air, and as light (and so sugar) increases the tree grows taller, which matches the key rule.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s2",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "The scene correctly shows that covering the window cuts the light to zero and the sugar pile stops growing, matching the rule that sugar production grows with light and needs all ingredients.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s3",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "The scene correctly shows water climbing into the leaf, carbon dioxide entering through pores, and sugar and oxygen leaving, which matches photosynthesis and the outline's key rule.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s4",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "The scene correctly links each letter of the formula to the kitchen picture, and the sweeps of light and carbon dioxide change the sugar amounts in the right direction, with the day total simply being twelve times the hourly sugar.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s5",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "The scene correctly shows sugar per hour rising with light and then flattening once carbon dioxide becomes the limiting factor, matching the outline's key rule.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s6",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "The scene lists the three recap ideas correctly, showing sugar from water, air and light, growth with more light, leaf and carbon dioxide up to a limit, and that the tree's wood comes mostly from carbon dioxide in the air.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    }
+  ],
+  "payload": {
+    "version": 1,
+    "plan": {
+      "objective": "You can explain how a leaf makes sugar from sunlight, water and air, and say what speeds the process up or slows it down.",
+      "prerequisites": [
+        "Plants need light and water to grow",
+        "Air contains a gas called carbon dioxide",
+        "Food gives your body energy"
+      ],
+      "analogy": {
+        "name": "The leaf as a solar kitchen",
+        "mapping": "Sunlight is the cooker’s power, water and air are the ingredients, and sugar is the meal that comes out; more power and more ingredients mean more food, up to the cooker’s limit."
+      },
+      "key_rule": {
+        "statement": "A leaf makes sugar from water and carbon dioxide using light energy, and the amount of sugar made grows with light, with leaf area and with carbon dioxide, but slows to a limit when one ingredient runs short.",
+        "formula": "\\res{S} = k \\, \\q{L} \\, \\q{A} \\, \\min\\left(1, \\dfrac{\\q{C}}{400}\\right)"
+      },
+      "steps": [
+        {
+          "role": "hook",
+          "intent": "Ask where the stuff a tree is made of actually comes from.",
+          "visual": "A huge tree beside a tiny seed; an arrow from the air to the trunk fills slowly with sugar grains."
+        },
+        {
+          "role": "analogy",
+          "intent": "Show that a kitchen needs power and ingredients, and runs out if one is missing.",
+          "visual": "A sunny kitchen: light on the cooker, water and air poured in, sugar piling up; cover the window and the pile stops."
+        },
+        {
+          "role": "mechanism",
+          "intent": "Show water climbing, gas entering pores, and sugar plus oxygen leaving.",
+          "visual": "Zoom into a leaf: water rises through veins, air puffs enter pores, arrows carry sugar out and oxygen away."
+        },
+        {
+          "role": "formula",
+          "intent": "Link each letter to the kitchen picture.",
+          "visual": "The formula writes itself; when a letter changes, one bar on the kitchen panel grows or shrinks."
+        },
+        {
+          "role": "example",
+          "intent": "Give a realistic number and show the limit when light keeps rising.",
+          "visual": "A graph traced live: sugar per hour rises with light, then flattens when a second ingredient runs short."
+        },
+        {
+          "role": "recap",
+          "intent": "Fix the three ideas and answer the hook.",
+          "visual": "Three short lines; the last one shows the air arrow turning into the tree’s wood, highlighted."
+        }
+      ]
+    },
+    "params": [
+      {
+        "id": "L",
+        "symbol": "L",
+        "label": "Light strength",
+        "unit": "%",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 50,
+        "role": "quantity"
+      },
+      {
+        "id": "A",
+        "symbol": "A",
+        "label": "Leaf area",
+        "unit": "dm²",
+        "min": 1,
+        "max": 100,
+        "step": 1,
+        "default": 50,
+        "role": "quantity"
+      },
+      {
+        "id": "C",
+        "symbol": "C",
+        "label": "Carbon dioxide in the air",
+        "unit": "ppm",
+        "min": 100,
+        "max": 1200,
+        "step": 10,
+        "default": 400,
+        "role": "quantity"
+      }
+    ],
+    "model": {
+      "constants": [
+        {
+          "id": "k",
+          "value": 0.002,
+          "unit": "g/(dm²·%·h)",
+          "label": "Rate constant for leaf sugar production",
+          "symbol": "k"
+        },
+        {
+          "id": "C0",
+          "value": 400,
+          "unit": "ppm",
+          "label": "Reference carbon dioxide level",
+          "symbol": "C₀"
+        }
+      ],
+      "derived": [
+        {
+          "id": "lim",
+          "expr": "min(1, C / C0)",
+          "unit": "",
+          "label": "Carbon dioxide limitation factor",
+          "symbol": "f",
+          "format": "fixed:2"
+        },
+        {
+          "id": "S",
+          "expr": "k * L * A * min(1, C / C0)",
+          "unit": "g",
+          "label": "Sugar made in one hour",
+          "symbol": "S",
+          "format": "fixed:2"
+        },
+        {
+          "id": "S_full",
+          "expr": "k * 100 * A * min(1, C / C0)",
+          "unit": "g",
+          "label": "Sugar made in one hour at full light",
+          "symbol": "S(full)",
+          "format": "fixed:2"
+        },
+        {
+          "id": "S_lowC",
+          "expr": "k * L * A * min(1, 200 / C0)",
+          "unit": "g",
+          "label": "Sugar made in one hour at low carbon dioxide",
+          "symbol": "S(low CO₂)",
+          "format": "fixed:2"
+        },
+        {
+          "id": "S_day",
+          "expr": "k * L * A * min(1, C / C0) * 12",
+          "unit": "g",
+          "label": "Sugar made in a 12-hour sunny day",
+          "symbol": "S(day)",
+          "format": "fixed:2"
+        }
+      ]
+    },
+    "scenes": [
+      {
+        "id": "s1",
+        "index": 0,
+        "role": "hook",
+        "title": "A giant tree from a tiny seed: where does it come from?",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            0,
+            10
+          ],
+          "y": [
+            -2.208,
+            6
+          ]
+        },
+        "derived": [
+          {
+            "id": "tree_h",
+            "expr": "1.6 + 3.2 * S / 10",
+            "unit": "",
+            "label": "Tree height on the figure",
+            "format": "fixed:2"
+          }
+        ],
+        "elements": [
+          {
+            "id": "ground",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              0.3,
+              0.6
+            ],
+            "to": [
+              9.7,
+              0.6
+            ],
+            "role": "ink"
+          },
+          {
+            "id": "tree",
+            "slot": "figure",
+            "type": "object",
+            "kind": "leaf",
+            "at": [
+              3.2,
+              0.8
+            ],
+            "size": {
+              "expr": "tree_h"
+            },
+            "label": "The tree"
+          },
+          {
+            "id": "seed",
+            "slot": "figure",
+            "type": "object",
+            "kind": "apple",
+            "at": [
+              8,
+              0.9
+            ],
+            "size": 0.5,
+            "label": "The seed"
+          },
+          {
+            "id": "air_arrow",
+            "slot": "figure",
+            "type": "vector",
+            "from": [
+              8.5,
+              5.4
+            ],
+            "to": [
+              3.8,
+              3.6
+            ],
+            "label": "From the air",
+            "role": "action"
+          },
+          {
+            "id": "sugar_now",
+            "slot": "notes",
+            "type": "readout",
+            "value": "S",
+            "label": "Sugar made in an hour"
+          },
+          {
+            "id": "question",
+            "slot": "notes",
+            "type": "text",
+            "text": "What is the tree made of?",
+            "emphasis": "strong"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "This huge tree started as a tiny seed. Where did all that wood come from?",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "ground",
+                  "tree",
+                  "seed"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "question"
+                ],
+                "how": "type",
+                "at": 0.6
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Most of it comes from the air, not from the soil you see below.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "air_arrow"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "sugar_now"
+                ],
+                "how": "fade",
+                "at": 0.6
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Watch: the more sugar the leaf makes, the taller the tree grows.",
+            "actions": [
+              {
+                "do": "sweep",
+                "param": "L",
+                "to": 100
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s2",
+        "index": 1,
+        "role": "analogy",
+        "title": "The leaf as a solar kitchen",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            0,
+            10
+          ],
+          "y": [
+            0,
+            6
+          ]
+        },
+        "derived": [
+          {
+            "id": "pile_h",
+            "expr": "0.3 + 2.7 * S / 10",
+            "unit": "",
+            "label": "Height of the sugar pile",
+            "format": "fixed:2"
+          },
+          {
+            "id": "pile_top",
+            "expr": "0.3 + 2.7 * S / 10",
+            "unit": "",
+            "label": "Top of the sugar pile",
+            "format": "fixed:2"
+          }
+        ],
+        "elements": [
+          {
+            "id": "counter",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              0.3,
+              0.3
+            ],
+            "to": [
+              9.7,
+              0.3
+            ]
+          },
+          {
+            "id": "window",
+            "slot": "figure",
+            "type": "shape",
+            "kind": "rect",
+            "center": [
+              8.4,
+              3.9
+            ],
+            "width": 2.4,
+            "height": 2.6,
+            "fill": "quantity",
+            "role": "quantity",
+            "label": "Light"
+          },
+          {
+            "id": "cooker",
+            "slot": "figure",
+            "type": "object",
+            "kind": "bulb",
+            "at": [
+              2.2,
+              3.6
+            ],
+            "size": 1.4,
+            "label": "Power"
+          },
+          {
+            "id": "water",
+            "slot": "figure",
+            "type": "object",
+            "kind": "beaker",
+            "at": [
+              4.6,
+              3.6
+            ],
+            "size": 1.2,
+            "label": "Water"
+          },
+          {
+            "id": "air",
+            "slot": "figure",
+            "type": "object",
+            "kind": "leaf",
+            "at": [
+              6.2,
+              3.6
+            ],
+            "size": 1.2,
+            "label": "Air"
+          },
+          {
+            "id": "sugar",
+            "slot": "figure",
+            "type": "shape",
+            "kind": "rect",
+            "center": [
+              2.2,
+              {
+                "expr": "pile_h / 2 + 0.3"
+              }
+            ],
+            "width": 1.2,
+            "height": {
+              "expr": "pile_h"
+            },
+            "fill": "result",
+            "role": "result"
+          },
+          {
+            "id": "light_level",
+            "slot": "notes",
+            "type": "readout",
+            "value": "L",
+            "label": "Light strength"
+          },
+          {
+            "id": "sugar_now",
+            "slot": "notes",
+            "type": "readout",
+            "value": "S",
+            "label": "Sugar made in one hour"
+          },
+          {
+            "id": "rule",
+            "slot": "notes",
+            "type": "text",
+            "text": "No light, no sugar.",
+            "emphasis": "strong"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Think of a leaf as a tiny kitchen. Light is the cooker, water and air are the ingredients.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "counter",
+                  "window",
+                  "cooker",
+                  "water",
+                  "air"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "light_level",
+                  "sugar_now"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Here is the sugar piling up on the counter while the light shines.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "sugar"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Now guess: cover the window. Does the pile keep growing?",
+            "actions": [
+              {
+                "do": "sweep",
+                "param": "L",
+                "to": 0,
+                "hold": true
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "rule"
+                ],
+                "how": "type",
+                "at": 0.5
+              }
+            ]
+          },
+          {
+            "id": "b4",
+            "narration": "It stops. No power, no meal, however much water and air you pour in.",
+            "actions": [
+              {
+                "do": "highlight",
+                "targets": [
+                  "sugar"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s3",
+        "index": 2,
+        "role": "mechanism",
+        "title": "Water up, air in, sugar out",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            0,
+            10
+          ],
+          "y": [
+            0,
+            6
+          ]
+        },
+        "derived": [],
+        "elements": [
+          {
+            "id": "leaf",
+            "slot": "figure",
+            "type": "object",
+            "kind": "leaf",
+            "at": [
+              5,
+              3.4
+            ],
+            "size": 2.6,
+            "label": "Leaf"
+          },
+          {
+            "id": "water",
+            "slot": "figure",
+            "type": "vector",
+            "from": [
+              1.2,
+              0.6
+            ],
+            "to": [
+              4.4,
+              2.6
+            ],
+            "label": "water",
+            "role": "action"
+          },
+          {
+            "id": "air",
+            "slot": "figure",
+            "type": "vector",
+            "from": [
+              8.8,
+              5.4
+            ],
+            "to": [
+              6.4,
+              3.9
+            ],
+            "label": "CO₂",
+            "role": "action"
+          },
+          {
+            "id": "sugar",
+            "slot": "figure",
+            "type": "vector",
+            "from": [
+              6.2,
+              2.2
+            ],
+            "to": [
+              9.2,
+              1
+            ],
+            "label": "sugar",
+            "role": "result"
+          },
+          {
+            "id": "oxygen",
+            "slot": "figure",
+            "type": "vector",
+            "from": [
+              2.4,
+              4.4
+            ],
+            "to": [
+              0.9,
+              5.3
+            ],
+            "label": "O₂",
+            "role": "valid"
+          },
+          {
+            "id": "where",
+            "slot": "notes",
+            "type": "text",
+            "text": "Water in the veins, air through the pores."
+          },
+          {
+            "id": "what",
+            "slot": "notes",
+            "type": "text",
+            "text": "Light is the cooker. Sugar is the meal.",
+            "emphasis": "strong"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Zoom in on a leaf. Water climbs up the veins, like a drink through a straw.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "leaf"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "water"
+                ],
+                "how": "draw"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Tiny pores open to the air, and carbon dioxide slips in.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "air"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "where"
+                ],
+                "how": "type"
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Inside, light powers the kitchen: sugar leaves for the plant, oxygen leaks out.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "sugar",
+                  "oxygen"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "what"
+                ],
+                "how": "type"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s4",
+        "index": 3,
+        "role": "formula",
+        "title": "Sugar in, letter by letter",
+        "layout": "formula-focus",
+        "world": {
+          "x": [
+            0,
+            11
+          ],
+          "y": [
+            0,
+            4
+          ]
+        },
+        "derived": [
+          {
+            "id": "k1000",
+            "expr": "k * 1000",
+            "unit": "g/(dm²·%·h)",
+            "label": "Rate constant, times a thousand",
+            "symbol": "k×1000",
+            "format": "fixed:1"
+          }
+        ],
+        "elements": [
+          {
+            "id": "law",
+            "slot": "formula",
+            "type": "formula",
+            "tex": "\\res{S} = k \\, \\q{L} \\, \\q{A} \\, \\min\\left(1, \\dfrac{\\q{C}}{400}\\right)"
+          },
+          {
+            "id": "bars",
+            "slot": "figure",
+            "type": "bars",
+            "items": [
+              {
+                "label": "light L",
+                "value": {
+                  "expr": "S_full"
+                },
+                "role": "quantity"
+              },
+              {
+                "label": "leaf area A",
+                "value": {
+                  "expr": "S_full"
+                },
+                "role": "quantity"
+              },
+              {
+                "label": "air C",
+                "value": {
+                  "expr": "S"
+                },
+                "role": "quantity"
+              },
+              {
+                "label": "sugar S",
+                "value": {
+                  "expr": "S"
+                },
+                "role": "result"
+              }
+            ],
+            "unit": "g per hour"
+          },
+          {
+            "id": "sugar_now",
+            "slot": "readout",
+            "type": "readout",
+            "value": "S",
+            "label": "Sugar per hour"
+          },
+          {
+            "id": "sugar_day",
+            "slot": "readout",
+            "type": "readout",
+            "value": "S_day",
+            "label": "Sugar in a sunny day"
+          },
+          {
+            "id": "k_note",
+            "slot": "readout",
+            "type": "readout",
+            "value": "k1000",
+            "label": "k, times a thousand"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Here is the kitchen rule. Big S is the sugar that comes out.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "law"
+                ],
+                "how": "type"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "sugar_now"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Light times leaf area: more power and more worktop, more sugar.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "bars"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "sweep",
+                "param": "L",
+                "to": 100
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Air is the ingredient that runs out first. Watch the bars when it drops.",
+            "actions": [
+              {
+                "do": "sweep",
+                "param": "C",
+                "to": 100
+              }
+            ]
+          },
+          {
+            "id": "b4",
+            "narration": "And a whole sunny day multiplies the sugar by twelve.",
+            "actions": [
+              {
+                "do": "sweep",
+                "param": "C",
+                "to": 400
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "sugar_day",
+                  "k_note"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "sugar_now"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s5",
+        "index": 4,
+        "role": "example",
+        "title": "More light, then the curve flattens",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            0,
+            100
+          ],
+          "y": [
+            0,
+            25
+          ]
+        },
+        "derived": [
+          {
+            "id": "L_hi",
+            "expr": "100",
+            "unit": "%",
+            "label": "Full light",
+            "format": "int"
+          },
+          {
+            "id": "L_low",
+            "expr": "10",
+            "unit": "%",
+            "label": "Weak light",
+            "format": "int"
+          },
+          {
+            "id": "S_hi",
+            "expr": "k * 100 * A * min(1, C / C0)",
+            "unit": "g",
+            "label": "Sugar at full light",
+            "format": "fixed:1"
+          },
+          {
+            "id": "S_here",
+            "expr": "k * L * A * min(1, C / C0)",
+            "unit": "g",
+            "label": "Sugar now",
+            "format": "fixed:1"
+          }
+        ],
+        "elements": [
+          {
+            "id": "ax",
+            "slot": "figure",
+            "type": "axes",
+            "xLabel": "Light strength (%)",
+            "yLabel": "Sugar per hour (g)",
+            "xTicks": 4,
+            "yTicks": 4
+          },
+          {
+            "id": "curve",
+            "slot": "figure",
+            "type": "plot",
+            "fn": "k * x * A * min(1, C / C0)",
+            "domain": [
+              0,
+              100
+            ],
+            "role": "result",
+            "label": "sugar per hour"
+          },
+          {
+            "id": "now_dot",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              {
+                "expr": "L"
+              },
+              {
+                "expr": "S_here"
+              }
+            ],
+            "label": "now",
+            "role": "quantity"
+          },
+          {
+            "id": "full_dot",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              {
+                "expr": "L_hi"
+              },
+              {
+                "expr": "S_hi"
+              }
+            ],
+            "label": "full light",
+            "role": "action"
+          },
+          {
+            "id": "read_now",
+            "slot": "notes",
+            "type": "readout",
+            "value": "S",
+            "label": "Sugar per hour now"
+          },
+          {
+            "id": "read_full",
+            "slot": "notes",
+            "type": "readout",
+            "value": "S_full",
+            "label": "At full light"
+          },
+          {
+            "id": "key",
+            "slot": "notes",
+            "type": "text",
+            "text": "Ceiling: light is no longer the limit.",
+            "emphasis": "strong"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Here is sugar per hour as the light gets stronger, with your leaf area and air.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "ax"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "curve"
+                ],
+                "how": "draw"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Weak light, little sugar. Twice the light, roughly twice the sugar. Guess what comes next.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "now_dot"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "read_now"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "sweep",
+                "param": "L",
+                "to": {
+                  "expr": "L_low"
+                }
+              },
+              {
+                "do": "sweep",
+                "param": "L",
+                "to": {
+                  "expr": "2 * L_low"
+                }
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Now push the light to the max: the curve flattens. Something else is running short.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "full_dot"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "read_full",
+                  "key"
+                ],
+                "how": "type"
+              },
+              {
+                "do": "sweep",
+                "param": "L",
+                "to": {
+                  "expr": "L_hi"
+                }
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "key"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s6",
+        "index": 5,
+        "role": "recap",
+        "title": "Three ideas to keep",
+        "layout": "statement",
+        "derived": [],
+        "elements": [
+          {
+            "id": "recap",
+            "slot": "text",
+            "type": "list",
+            "items": [
+              "A leaf builds sugar from water, air and light.",
+              "More light, more leaf, more gas: more sugar, up to a limit.",
+              "The tree’s wood and fruit come mostly from the air."
+            ]
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "First idea: a leaf builds sugar from water, from air and from light.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "recap"
+                ],
+                "how": "type"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Second: more light, more leaf, more carbon dioxide means more sugar. Until something runs short.",
+            "actions": []
+          },
+          {
+            "id": "b3",
+            "narration": "And your big tree? Most of its wood was once air, pulled into the leaves.",
+            "actions": [
+              {
+                "do": "highlight",
+                "targets": [
+                  "recap.i3"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "quiz": {
+      "questions": [
+        {
+          "prompt": "You put a healthy plant in a dark cupboard and give it plenty of water. What happens to the sugar it makes?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "It makes sugar faster, because there is no sunlight to dry it out"
+            },
+            {
+              "id": "b",
+              "text": "It makes sugar more slowly, but still some"
+            },
+            {
+              "id": "c",
+              "text": "It makes none, because the leaf has no light energy to power the kitchen"
+            },
+            {
+              "id": "d",
+              "text": "It makes sugar from the water alone"
+            }
+          ],
+          "answer_id": "c",
+          "explanation": "Light is the cooker in the leaf’s kitchen; without it, water and air alone cannot make sugar.",
+          "scene_id": "s2"
+        },
+        {
+          "prompt": "Two leaves get the same light and the same air, but one has twice the area. How does the bigger leaf’s sugar output compare?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "About twice as much sugar"
+            },
+            {
+              "id": "b",
+              "text": "The same amount of sugar"
+            },
+            {
+              "id": "c",
+              "text": "Half as much sugar"
+            },
+            {
+              "id": "d",
+              "text": "Four times as much sugar"
+            }
+          ],
+          "answer_id": "a",
+          "explanation": "More leaf area means more worktop, so twice the area roughly doubles the sugar, as long as nothing else runs short.",
+          "scene_id": "s4"
+        },
+        {
+          "prompt": "You keep making the light brighter and brighter, but the sugar per hour stops rising. Why?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "Too much light damages the leaf, so sugar falls"
+            },
+            {
+              "id": "b",
+              "text": "Another ingredient, like carbon dioxide, has run short"
+            },
+            {
+              "id": "c",
+              "text": "The leaf has used up all its water and can no longer work"
+            },
+            {
+              "id": "d",
+              "text": "Bright light makes the leaf close its pores, so no air gets in"
+            }
+          ],
+          "answer_id": "b",
+          "explanation": "Once something else, such as carbon dioxide, runs short, extra light cannot increase sugar, so the curve flattens.",
+          "scene_id": "s5"
+        }
+      ]
+    }
+  }
+}

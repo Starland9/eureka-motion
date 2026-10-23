@@ -1,0 +1,1416 @@
+{
+  "slug": "biology/protein-synthesis",
+  "subject": "biology",
+  "reference_level": "lycee",
+  "language": "fr",
+  "title": "De l'ADN à la protéine : expression génétique",
+  "question": "Comment passe-t-on de l'ADN à une protéine ?",
+  "reviewed_by": null,
+  "reviewed_at": null,
+  "verdicts": [
+    {
+      "target": "plan",
+      "status": "corrected",
+      "attempts": 3,
+      "reason": "Le schéma ADN→ARNm→protéine, la transcription, le rôle du ribosome, la correspondance codon–acide aminé et l'analogie de la recette recopiée sont conformes à ce qui est enseigné à ce niveau, et les expressions dérivées sont cohérentes en un",
+      "checks": [
+        "structure",
+        "model",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s1",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "La scène montre correctement que l’ADN reste dans le noyau, que seul l’ARN messager en sort et que la protéine est assemblée par le ribosome à l’extérieur, ce qui correspond au rôle d’accroche demandé.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s2",
+      "status": "corrected",
+      "attempts": 2,
+      "reason": "La scène illustre correctement l'analogie : le livre (ADN) reste en place, une fiche recopiée (ARNm) voyage, et les ingrédients (acides aminés) s'alignent pour former le plat (protéine), sans énoncé scientifiquement faux.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s3",
+      "status": "corrected",
+      "attempts": 2,
+      "reason": "La scène montre correctement la transcription : l’enzyme ouvre la double hélice et pose les nucléotides complémentaires de l’ARNm (A avec U, C avec G), et les lectures affichées correspondent aux grandeurs annoncées.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s4",
+      "status": "corrected",
+      "attempts": 2,
+      "reason": "La scène montre bien le ribosome lisant les codons un à un, avec un acide aminé ajouté par codon et les lectures cohérentes (1 codon = 3 bases = 1 acide aminé), sans affirmation fausse.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s5",
+      "status": "corrected",
+      "attempts": 2,
+      "reason": "La scène lit correctement les codons UGG (un acide aminé) et UAA (codon-stop), et illustre bien qu'un changement de lettre peut arrêter la traduction ; le tout est en français.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s6",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "Ce récapitulatif énonce correctement les trois étapes — transcription de l’ADN en ARNm, traduction des codons en acides aminés, et ARNm qui sort du noyau tandis que l’ADN y reste — sans erreur scientifique ni effet annoncé impossible à mont",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    }
+  ],
+  "payload": {
+    "version": 1,
+    "plan": {
+      "objective": "Expliquer que l’information de l’ADN est copiée en ARN messager puis traduite en une suite d’acides aminés, et savoir utiliser le code génétique pour lire un codon.",
+      "prerequisites": [
+        "Savoir que l’ADN est une double hélice de nucléotides A, T, G, C",
+        "Savoir qu’une protéine est une chaîne d’acides aminés",
+        "Savoir lire un triplet de lettres dans un tableau"
+      ],
+      "analogy": {
+        "name": "La recette recopiée puis cuisinée",
+        "mapping": "Le livre de recettes impossible à sortir de la cuisine joue le rôle de l’ADN ; la fiche recopiée qu’on emporte joue le rôle de l’ARNm ; les ingrédients ajoutés dans l’ordre jouent le rôle des acides aminés assemblés par le ribosome."
+      },
+      "key_rule": {
+        "statement": "L’ADN est transcrit en ARN messager dans le noyau, puis chaque triplet de l’ARNm (un codon) est traduit en un acide aminé par le ribosome, ce qui donne une chaîne d’acides aminés : la protéine.",
+        "formula": "\\text{ADN} \\rightarrow \\text{ARNm} \\rightarrow \\text{protéine}"
+      },
+      "steps": [
+        {
+          "role": "hook",
+          "intent": "Faire sentir que l’ADN reste dans le noyau alors que la protéine est fabriquée ailleurs.",
+          "visual": "Le noyau avec son ADN, puis un ribosome au-dehors qui assemble une chaîne ; une seule molécule traverse, pas l’ADN."
+        },
+        {
+          "role": "analogy",
+          "intent": "Donner l’intuition d’une copie transportable d’une information intouchable.",
+          "visual": "Un grand livre reste posé ; la fiche recopiée sort, et les ingrédients s’alignent un à un sur le comptoir."
+        },
+        {
+          "role": "mechanism",
+          "intent": "Montrer la transcription : une enzyme ouvre l’ADN et pose les nucléotides complémentaires de l’ARNm.",
+          "visual": "La double hélice s’ouvre ; un brin d’ARNm se construit lettre par lettre, A avec U, C avec G."
+        },
+        {
+          "role": "mechanism",
+          "intent": "Montrer la traduction : le ribosome lit chaque codon et choisit l’acide aminé correspondant.",
+          "visual": "Le ribosome glisse le long de l’ARNm ; à chaque triplet, un acide aminé s’accroche à la chaîne qui s’allonge."
+        },
+        {
+          "role": "example",
+          "intent": "Lire un vrai codon et observer qu’un changement de lettre peut suffire à changer ou arrêter la protéine.",
+          "visual": "Le codon est lu dans le tableau : un acide aminé apparaît ; la dernière lettre change, la chaîne s’arrête."
+        },
+        {
+          "role": "recap",
+          "intent": "Fixer les trois étapes et répondre à la question de départ.",
+          "visual": "Trois mots reliés par deux flèches ; l’ARNm en surbrillance traverse le noyau puis la porte du ribosome."
+        }
+      ]
+    },
+    "params": [
+      {
+        "id": "n_codons",
+        "symbol": "n",
+        "label": "Nombre de codons lus",
+        "unit": "codons",
+        "min": 1,
+        "max": 20,
+        "step": 1,
+        "default": 8,
+        "role": "quantity"
+      }
+    ],
+    "model": {
+      "constants": [
+        {
+          "id": "aa_par_codon",
+          "value": 1,
+          "unit": "acide aminé par codon",
+          "label": "Acides aminés par codon",
+          "symbol": "1"
+        }
+      ],
+      "derived": [
+        {
+          "id": "n_aa",
+          "expr": "n_codons * aa_par_codon",
+          "unit": "acides aminés",
+          "label": "Acides aminés assemblés",
+          "symbol": "n_aa",
+          "format": "int"
+        },
+        {
+          "id": "n_bases",
+          "expr": "n_codons * 3",
+          "unit": "bases",
+          "label": "Bases d’ARNm lues",
+          "symbol": "N",
+          "format": "int"
+        },
+        {
+          "id": "n_aa_double",
+          "expr": "2 * n_codons",
+          "unit": "acides aminés",
+          "label": "Acides aminés pour deux fois plus de codons",
+          "format": "int"
+        }
+      ]
+    },
+    "scenes": [
+      {
+        "id": "s1",
+        "index": 0,
+        "role": "hook",
+        "title": "L’ADN reste au noyau, la protéine se fabrique dehors",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            -5,
+            5
+          ],
+          "y": [
+            -3,
+            3
+          ]
+        },
+        "derived": [
+          {
+            "id": "arn_x",
+            "expr": "-0.6",
+            "unit": "",
+            "label": "Position de l’ARNm"
+          },
+          {
+            "id": "ribo_x",
+            "expr": "2.2",
+            "unit": "",
+            "label": "Position du ribosome"
+          }
+        ],
+        "elements": [
+          {
+            "id": "nucleus",
+            "slot": "figure",
+            "type": "shape",
+            "kind": "circle",
+            "center": [
+              -2.4,
+              0
+            ],
+            "radius": 2.1,
+            "role": "inkSoft",
+            "label": "Noyau"
+          },
+          {
+            "id": "dna",
+            "slot": "figure",
+            "type": "object",
+            "kind": "spring",
+            "at": [
+              -2.9,
+              0.2
+            ],
+            "size": 1.6,
+            "label": "ADN",
+            "role": "quantity"
+          },
+          {
+            "id": "arn",
+            "slot": "figure",
+            "type": "object",
+            "kind": "molecule",
+            "at": [
+              {
+                "expr": "arn_x"
+              },
+              0
+            ],
+            "size": 0.9,
+            "label": "ARNm",
+            "role": "action"
+          },
+          {
+            "id": "ribo",
+            "slot": "figure",
+            "type": "object",
+            "kind": "cell",
+            "at": [
+              {
+                "expr": "ribo_x"
+              },
+              0.9
+            ],
+            "size": 1.4,
+            "label": "Ribosome"
+          },
+          {
+            "id": "chain",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              {
+                "expr": "ribo_x"
+              },
+              -0.9
+            ],
+            "to": [
+              {
+                "expr": "ribo_x + 1.4"
+              },
+              -0.9
+            ],
+            "role": "result"
+          },
+          {
+            "id": "note_dna",
+            "slot": "notes",
+            "type": "text",
+            "text": "L’ADN ne sort jamais du noyau.",
+            "emphasis": "strong"
+          },
+          {
+            "id": "note_arn",
+            "slot": "notes",
+            "type": "text",
+            "text": "Seul l’ARNm traverse."
+          },
+          {
+            "id": "note_prot",
+            "slot": "notes",
+            "type": "text",
+            "text": "La protéine naît dehors."
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Dans le noyau, l’ADN garde le mode d’emploi. Il ne sort jamais.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "nucleus"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "dna"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "note_dna"
+                ],
+                "how": "type"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Pourtant, la protéine est fabriquée dehors. Devine ce qui traverse la membrane.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "ribo"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "chain"
+                ],
+                "how": "draw"
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Une copie, l’ARN messager, sort et porte le message jusqu’au ribosome.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "arn"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "move",
+                "target": "arn",
+                "to": [
+                  {
+                    "expr": "ribo_x - 1.6"
+                  },
+                  0
+                ]
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "note_arn",
+                  "note_prot"
+                ],
+                "how": "type"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s2",
+        "index": 1,
+        "role": "analogy",
+        "title": "Le livre reste, la fiche voyage",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            0,
+            10
+          ],
+          "y": [
+            0,
+            6
+          ]
+        },
+        "derived": [
+          {
+            "id": "x_carte",
+            "expr": "6.6",
+            "unit": "",
+            "label": "Position de la fiche",
+            "format": "int"
+          }
+        ],
+        "elements": [
+          {
+            "id": "livre",
+            "slot": "figure",
+            "type": "object",
+            "kind": "block",
+            "at": [
+              1.8,
+              3.2
+            ],
+            "size": 1.6,
+            "label": "Livre"
+          },
+          {
+            "id": "comptoir",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              4.2,
+              1.4
+            ],
+            "to": [
+              9.6,
+              1.4
+            ]
+          },
+          {
+            "id": "ing1",
+            "slot": "figure",
+            "type": "object",
+            "kind": "coin",
+            "at": [
+              6.4,
+              2.1
+            ],
+            "size": 0.5
+          },
+          {
+            "id": "ing2",
+            "slot": "figure",
+            "type": "object",
+            "kind": "coin",
+            "at": [
+              7.3,
+              2.1
+            ],
+            "size": 0.5
+          },
+          {
+            "id": "ing3",
+            "slot": "figure",
+            "type": "object",
+            "kind": "coin",
+            "at": [
+              8.2,
+              2.1
+            ],
+            "size": 0.5
+          },
+          {
+            "id": "fiche",
+            "slot": "figure",
+            "type": "object",
+            "kind": "leaf",
+            "at": [
+              5.2,
+              4.4
+            ],
+            "size": 1.2,
+            "label": "Fiche",
+            "role": "result"
+          },
+          {
+            "id": "idee1",
+            "slot": "notes",
+            "type": "text",
+            "text": "Le livre ne sort jamais."
+          },
+          {
+            "id": "idee2",
+            "slot": "notes",
+            "type": "text",
+            "text": "Une fiche recopiée voyage.",
+            "emphasis": "strong"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Ton livre de recettes reste dans la cuisine, impossible à sortir.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "livre"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "idee1"
+                ],
+                "how": "type",
+                "at": 0.8
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Alors tu recopies la recette sur une fiche, et elle sort.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "fiche"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "idee2"
+                ],
+                "how": "type",
+                "at": 0.9
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Au comptoir, les ingrédients s’alignent un à un : le plat se prépare.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "comptoir"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "ing1"
+                ],
+                "how": "fade",
+                "at": 0.5
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "ing2"
+                ],
+                "how": "fade",
+                "at": 1
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "ing3"
+                ],
+                "how": "fade",
+                "at": 1
+              },
+              {
+                "do": "move",
+                "target": "fiche",
+                "to": [
+                  {
+                    "expr": "x_carte"
+                  },
+                  3.4
+                ]
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "fiche"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s3",
+        "index": 2,
+        "role": "mechanism",
+        "title": "L’ADN ouvre, l’ARNm se copie",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            0,
+            11.988
+          ],
+          "y": [
+            0,
+            6
+          ]
+        },
+        "derived": [
+          {
+            "id": "x_bulge",
+            "expr": "2.6 + 0.25 * n_codons",
+            "unit": "",
+            "label": "Position de l’ouverture"
+          },
+          {
+            "id": "w_zone",
+            "expr": "1.4 + 0.28 * n_codons",
+            "unit": "",
+            "label": "Largeur de l’ouverture"
+          },
+          {
+            "id": "x_rna_tip",
+            "expr": "min(8.6, 6.9 + 0.08 * n_codons)",
+            "unit": "",
+            "label": "Bout de l’ARNm"
+          }
+        ],
+        "elements": [
+          {
+            "id": "strand_a",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              0.6,
+              3.9
+            ],
+            "to": [
+              9.4,
+              3.9
+            ],
+            "role": "ink"
+          },
+          {
+            "id": "strand_b",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              0.6,
+              2.1
+            ],
+            "to": [
+              9.4,
+              2.1
+            ],
+            "role": "ink"
+          },
+          {
+            "id": "open_zone",
+            "slot": "figure",
+            "type": "shape",
+            "kind": "rect",
+            "center": [
+              {
+                "expr": "x_bulge"
+              },
+              3
+            ],
+            "width": {
+              "expr": "w_zone"
+            },
+            "height": 2.4,
+            "fill": "quantity",
+            "role": "quantity",
+            "label": "ouverture"
+          },
+          {
+            "id": "rna",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              {
+                "expr": "x_bulge - w_zone / 2"
+              },
+              3
+            ],
+            "to": [
+              {
+                "expr": "x_rna_tip"
+              },
+              3
+            ],
+            "role": "action"
+          },
+          {
+            "id": "enzyme",
+            "slot": "figure",
+            "type": "object",
+            "kind": "molecule",
+            "at": [
+              {
+                "expr": "x_bulge"
+              },
+              3
+            ],
+            "size": 1.1,
+            "label": "enzyme",
+            "role": "action"
+          },
+          {
+            "id": "rule",
+            "slot": "notes",
+            "type": "text",
+            "text": "A se copie en U ; C se copie en G.",
+            "emphasis": "strong"
+          },
+          {
+            "id": "aa_now",
+            "slot": "notes",
+            "type": "readout",
+            "value": "n_aa",
+            "label": "Acides aminés assemblés"
+          },
+          {
+            "id": "bases_now",
+            "slot": "notes",
+            "type": "readout",
+            "value": "n_bases",
+            "label": "Bases d’ARNm lues"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "L’enzyme ouvre la double hélice. Regarde : les deux brins se séparent.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "strand_a",
+                  "strand_b"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "enzyme"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "open_zone"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Sur un brin, elle pose les bases complémentaires : A avec U, C avec G.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "rna"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "rule",
+                  "bases_now"
+                ],
+                "how": "type"
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "L’ARNm s’allonge lettre par lettre. Saisis un autre nombre de codons, et regarde.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "aa_now"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "sweep",
+                "param": "n_codons",
+                "to": 20
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "rna"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s4",
+        "index": 3,
+        "role": "mechanism",
+        "title": "Le ribosome lit les codons",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            0,
+            10
+          ],
+          "y": [
+            0,
+            6
+          ]
+        },
+        "derived": [
+          {
+            "id": "x_read",
+            "expr": "3.4 + 0.35 * (n_codons - 8)",
+            "unit": "",
+            "label": "Position du ribosome",
+            "format": "sci:1"
+          }
+        ],
+        "elements": [
+          {
+            "id": "arnm",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              0.3,
+              3
+            ],
+            "to": [
+              9.7,
+              3
+            ],
+            "label": "ARNm",
+            "role": "ink"
+          },
+          {
+            "id": "codon1",
+            "slot": "figure",
+            "type": "shape",
+            "kind": "rect",
+            "center": [
+              2.2,
+              3
+            ],
+            "width": 1,
+            "height": 0.7,
+            "fill": "none"
+          },
+          {
+            "id": "ribo",
+            "slot": "figure",
+            "type": "object",
+            "kind": "block",
+            "at": [
+              3.4,
+              3
+            ],
+            "size": 1.6,
+            "label": "ribosome",
+            "role": "quantity"
+          },
+          {
+            "id": "new_aa",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              3.4,
+              4.8
+            ],
+            "label": "acide aminé",
+            "role": "action"
+          },
+          {
+            "id": "chain",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              4.2,
+              4.9
+            ],
+            "to": [
+              9,
+              4.9
+            ],
+            "role": "result"
+          },
+          {
+            "id": "count",
+            "slot": "notes",
+            "type": "readout",
+            "value": "n_aa",
+            "label": "Acides aminés"
+          },
+          {
+            "id": "bases",
+            "slot": "notes",
+            "type": "readout",
+            "value": "n_bases",
+            "label": "Bases lues"
+          },
+          {
+            "id": "rule",
+            "slot": "notes",
+            "type": "text",
+            "text": "1 codon = 1 acide aminé.",
+            "emphasis": "strong"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Le ribosome se pose sur l’ARNm et repère le premier triplet : un codon.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "arnm",
+                  "codon1"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "ribo"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "À chaque codon lu, un acide aminé s’accroche et la chaîne s’allonge.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "new_aa"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "chain"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "count",
+                  "bases"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Le ribosome avance, codon après codon : plus de codons lus, plus la protéine grandit.",
+            "actions": [
+              {
+                "do": "sweep",
+                "param": "n_codons",
+                "to": 18
+              },
+              {
+                "do": "move",
+                "target": "ribo",
+                "to": [
+                  {
+                    "expr": "x_read"
+                  },
+                  3
+                ]
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "rule"
+                ],
+                "how": "type"
+              }
+            ]
+          },
+          {
+            "id": "b4",
+            "narration": "Compte : trois bases par codon, un acide aminé ajouté à chaque fois.",
+            "actions": [
+              {
+                "do": "highlight",
+                "targets": [
+                  "rule"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s5",
+        "index": 4,
+        "role": "example",
+        "title": "Un codon, un acide aminé… ou un signal d’arrêt",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            0,
+            10
+          ],
+          "y": [
+            0,
+            6
+          ]
+        },
+        "derived": [
+          {
+            "id": "fin_x",
+            "expr": "8",
+            "unit": "",
+            "label": "Position du signal d’arrêt",
+            "format": "int"
+          }
+        ],
+        "elements": [
+          {
+            "id": "arn",
+            "slot": "figure",
+            "type": "shape",
+            "kind": "rect",
+            "center": [
+              5,
+              4.4
+            ],
+            "width": 9,
+            "height": 1.1,
+            "fill": "quantity",
+            "role": "quantity"
+          },
+          {
+            "id": "codon1",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              0.6,
+              3.85
+            ],
+            "to": [
+              0.6,
+              4.95
+            ],
+            "role": "ink"
+          },
+          {
+            "id": "codon2",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              3.6,
+              3.85
+            ],
+            "to": [
+              3.6,
+              4.95
+            ],
+            "role": "ink"
+          },
+          {
+            "id": "codon3",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              6.6,
+              3.85
+            ],
+            "to": [
+              6.6,
+              4.95
+            ],
+            "role": "ink"
+          },
+          {
+            "id": "lettres",
+            "slot": "notes",
+            "type": "text",
+            "text": "A U G   U A A   U G G"
+          },
+          {
+            "id": "aa1",
+            "slot": "figure",
+            "type": "object",
+            "kind": "ball",
+            "at": [
+              2.1,
+              1.6
+            ],
+            "size": 0.9,
+            "label": "Acide aminé",
+            "role": "valid"
+          },
+          {
+            "id": "stop",
+            "slot": "figure",
+            "type": "object",
+            "kind": "block",
+            "at": [
+              6.6,
+              1.6
+            ],
+            "size": 0.9,
+            "label": "STOP",
+            "role": "result"
+          },
+          {
+            "id": "aa2",
+            "slot": "figure",
+            "type": "object",
+            "kind": "ball",
+            "at": [
+              8.4,
+              1.6
+            ],
+            "size": 0.9,
+            "label": "Acide aminé",
+            "role": "valid"
+          },
+          {
+            "id": "chaine",
+            "slot": "figure",
+            "type": "segment",
+            "from": "aa1",
+            "to": "stop",
+            "role": "ink",
+            "style": "dashed"
+          },
+          {
+            "id": "code",
+            "slot": "notes",
+            "type": "text",
+            "text": "UGG : un acide aminé. UAA : fin de la lecture.",
+            "emphasis": "strong"
+          },
+          {
+            "id": "regle",
+            "slot": "notes",
+            "type": "text",
+            "text": "Changer la dernière lettre peut tout changer."
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Lis ce codon dans le tableau : UGG, un acide aminé s’accroche à la chaîne.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "arn",
+                  "lettres"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "aa1"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "chaine"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "codon1",
+                  "codon2",
+                  "codon3"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Maintenant UAA : c’est un codon-stop, la traduction s’arrête net.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "stop"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "stop"
+                ]
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "code"
+                ],
+                "how": "type",
+                "at": 0.5
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Une seule lettre de changée, et la protéine s’arrête trop tôt.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "aa2"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "regle"
+                ],
+                "how": "type"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s6",
+        "index": 5,
+        "role": "recap",
+        "title": "ADN, ARNm, protéine : la chaîne du vivant",
+        "layout": "statement",
+        "derived": [],
+        "elements": [
+          {
+            "id": "recap",
+            "slot": "text",
+            "type": "list",
+            "items": [
+              "La transcription copie l’ADN en ARN messager, dans le noyau.",
+              "La traduction lit chaque codon et pose un acide aminé.",
+              "L’ARNm est la copie transportable ; l’ADN reste au chaud."
+            ]
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Trois étapes à garder. Un : la transcription copie l’ADN en ARN messager.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "recap"
+                ],
+                "how": "type"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Deux : la traduction lit chaque codon et pose un acide aminé après l’autre.",
+            "actions": []
+          },
+          {
+            "id": "b3",
+            "narration": "Et voilà la réponse : c’est l’ARNm, la copie, qui sort du noyau. L’ADN, lui, reste.",
+            "actions": [
+              {
+                "do": "highlight",
+                "targets": [
+                  "recap.i3"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "quiz": {
+      "questions": [
+        {
+          "prompt": "Une cellule doit fabriquer une protéine, mais l’ADN ne quitte jamais le noyau. Que traverse la membrane du noyau pour porter le message ?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "L’ADN lui-même, sous forme repliée"
+            },
+            {
+              "id": "b",
+              "text": "Un ARN messager, copie d’un gène"
+            },
+            {
+              "id": "c",
+              "text": "La protéine déjà fabriquée dans le noyau"
+            },
+            {
+              "id": "d",
+              "text": "Un ribosome venu chercher l’ADN"
+            }
+          ],
+          "answer_id": "b",
+          "explanation": "L’ADN reste dans le noyau, et c’est sa copie, l’ARN messager, qui sort pour porter le message jusqu’au ribosome.",
+          "scene_id": "s1"
+        },
+        {
+          "prompt": "Au moment de la transcription, un brin d’ADN porte la base A. Quelle base l’ARN messager reçoit-il en face, et pourquoi ?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "A, car l’ARNm recopie l’ADN à l’identique"
+            },
+            {
+              "id": "b",
+              "text": "T, car A s’apparie toujours avec T"
+            },
+            {
+              "id": "c",
+              "text": "U, car dans l’ARNm l’uracile remplace la thymine"
+            },
+            {
+              "id": "d",
+              "text": "G, car les bases complémentaires s’inversent"
+            }
+          ],
+          "answer_id": "c",
+          "explanation": "L’enzyme pose les bases complémentaires sur le brin copié, et dans l’ARN messager l’uracile (U) prend la place de la thymine face à l’adénine (A).",
+          "scene_id": "s3"
+        },
+        {
+          "prompt": "Le ribosome lit l’ARN messager codon après codon. Si l’ARNm contient plus de codons avant le signal d’arrêt, la protéine obtenue…",
+          "choices": [
+            {
+              "id": "a",
+              "text": "compte moins d’acides aminés"
+            },
+            {
+              "id": "b",
+              "text": "compte plus d’acides aminés"
+            },
+            {
+              "id": "c",
+              "text": "garde le même nombre d’acides aminés"
+            },
+            {
+              "id": "d",
+              "text": "n’est plus faite d’acides aminés"
+            }
+          ],
+          "answer_id": "b",
+          "explanation": "Chaque codon lu ajoute un acide aminé à la chaîne : plus de codons lus avant l’arrêt, plus la protéine est longue.",
+          "scene_id": "s4"
+        }
+      ]
+    }
+  }
+}

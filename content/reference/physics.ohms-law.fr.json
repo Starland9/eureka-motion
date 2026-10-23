@@ -1,0 +1,1033 @@
+{
+  "slug": "physics/ohms-law",
+  "subject": "physics",
+  "reference_level": "college",
+  "language": "fr",
+  "title": "Loi d'Ohm",
+  "question": "Comment fonctionne la loi d'Ohm ?",
+  "reviewed_by": null,
+  "reviewed_at": null,
+  "verdicts": [
+    {
+      "target": "plan",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "L'énoncé de la loi d'Ohm, la formule U = R × I, les unités et les calculs dérivés (I = U/R, doublement de R ou de U) sont corrects, et l'analogie hydraulique comme les prérequis conviennent au niveau collège.",
+      "checks": [
+        "structure",
+        "model",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s1",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "La scène illustre correctement l'observation de départ : avec la même pile, une petite lampe brille fort et une grosse brille à peine, ce qui pose la question sans énoncer de règle fausse.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s2",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "Cette scène illustre correctement l'analogie : à poussée constante, un tuyau plus étroit laisse passer moins de débit, ce qui correspond à l'idée qu'une résistance plus grande réduit l'intensité.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s3",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "La scène montre correctement que la pile pousse les charges et que l'augmentation de la résistance fait baisser l'intensité, ce qui est conforme à la règle U = R × I.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s4",
+      "status": "corrected",
+      "attempts": 2,
+      "reason": "La scène énonce correctement la loi d’Ohm, et le doublement de la résistance divise bien l’intensité par deux, comme le montrent les valeurs affichées.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s5",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "La scène calcule correctement I = U/R = 12 ÷ 24 = 0,5 A et le résultat affiché correspond bien à la formule.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s6",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "Cette scène récapitule correctement la règle U = R × I et explique la lampe faible par une grande résistance, sans aucune affirmation fausse.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    }
+  ],
+  "payload": {
+    "version": 1,
+    "plan": {
+      "objective": "Savoir que dans un circuit la tension, l’intensité et la résistance sont liées par U = R × I, et prévoir ce qui change quand on modifie l’une des trois grandeurs.",
+      "prerequisites": [
+        "Savoir ce qu’est un circuit électrique fermé",
+        "Connaître les unités volt, ampère et ohm",
+        "Savoir multiplier deux nombres simples"
+      ],
+      "analogy": {
+        "name": "L’eau dans un tuyau étroit",
+        "mapping": "La pompe qui pousse l’eau joue le rôle de la tension, le débit d’eau celui de l’intensité, et l’étroitesse du tuyau celui de la résistance : plus le tuyau est étroit, moins il passe d’eau pour la même poussée."
+      },
+      "key_rule": {
+        "statement": "La tension aux bornes d’une résistance est égale à sa résistance multipliée par l’intensité qui la traverse.",
+        "formula": "\\q{U} = \\q{R} \\times \\q{I}"
+      },
+      "steps": [
+        {
+          "role": "hook",
+          "intent": "Faire remarquer qu’avec la même pile, une petite lampe brille fort et une grosse brille faible.",
+          "visual": "Deux lampes branchées sur deux piles identiques ; l’une éclaire fort, l’autre à peine, et la question s’affiche."
+        },
+        {
+          "role": "analogy",
+          "intent": "Donner l’intuition qu’un obstacle plus étroit laisse passer moins de débit pour la même poussée.",
+          "visual": "Une pompe pousse l’eau dans un tuyau ; on rétrécit le tuyau et le jet qui sort faiblit."
+        },
+        {
+          "role": "mechanism",
+          "intent": "Montrer que la tension pousse les charges et que la résistance freine leur passage.",
+          "visual": "Des billes chargées avancent dans un fil ; un rétrécissement ralentit le flot, le compteur d’intensité baisse."
+        },
+        {
+          "role": "formula",
+          "intent": "Relier les trois symboles et voir que doubler la résistance divise l’intensité par deux.",
+          "visual": "La formule s’écrit, puis R double et l’aiguille de l’ampèremètre tombe de moitié, en direct."
+        },
+        {
+          "role": "example",
+          "intent": "Calculer un cas réel et montrer qu’une lampe de 12 V laisse passer un courant étonnamment petit.",
+          "visual": "Pile de 12 V et résistance de 24 ohms ; le calcul s’affiche et l’aiguille se place sur 0,5 A."
+        },
+        {
+          "role": "recap",
+          "intent": "Fixer la règle et répondre à la question des deux lampes du début.",
+          "visual": "Trois phrases courtes ; la dernière explique la lampe faible par sa grande résistance, surlignée."
+        }
+      ]
+    },
+    "params": [
+      {
+        "id": "U",
+        "symbol": "U",
+        "label": "Tension de la pile",
+        "unit": "V",
+        "min": 1,
+        "max": 24,
+        "step": 0.5,
+        "default": 12,
+        "role": "quantity"
+      },
+      {
+        "id": "R",
+        "symbol": "R",
+        "label": "Résistance du composant",
+        "unit": "Ω",
+        "min": 2,
+        "max": 100,
+        "step": 1,
+        "default": 24,
+        "role": "quantity"
+      }
+    ],
+    "model": {
+      "constants": [],
+      "derived": [
+        {
+          "id": "I",
+          "expr": "U / R",
+          "unit": "A",
+          "label": "Intensité du courant",
+          "symbol": "I",
+          "format": "fixed:3"
+        },
+        {
+          "id": "R_2",
+          "expr": "2 * R",
+          "unit": "Ω",
+          "label": "Résistance doublée",
+          "symbol": "R×2",
+          "format": "int"
+        },
+        {
+          "id": "I_2R",
+          "expr": "U / (2 * R)",
+          "unit": "A",
+          "label": "Intensité avec résistance doublée",
+          "format": "fixed:3"
+        },
+        {
+          "id": "U_2",
+          "expr": "2 * U",
+          "unit": "V",
+          "label": "Tension doublée",
+          "symbol": "U×2",
+          "format": "int"
+        },
+        {
+          "id": "I_2U",
+          "expr": "(2 * U) / R",
+          "unit": "A",
+          "label": "Intensité avec tension doublée",
+          "format": "fixed:3"
+        }
+      ]
+    },
+    "scenes": [
+      {
+        "id": "s1",
+        "index": 0,
+        "role": "hook",
+        "title": "Même pile, deux lampes très différentes",
+        "layout": "compare",
+        "derived": [],
+        "elements": [
+          {
+            "id": "pile_a",
+            "slot": "figure_a",
+            "type": "object",
+            "kind": "battery",
+            "at": [
+              0,
+              1.4
+            ],
+            "size": 0.9,
+            "label": "Même pile"
+          },
+          {
+            "id": "lamp_a",
+            "slot": "figure_a",
+            "type": "object",
+            "kind": "bulb",
+            "at": [
+              0,
+              -0.8
+            ],
+            "size": 1.5,
+            "label": "Petite lampe"
+          },
+          {
+            "id": "rayon_a",
+            "slot": "figure_a",
+            "type": "segment",
+            "from": [
+              -2.2,
+              -0.8
+            ],
+            "to": [
+              -3.4,
+              -1.8
+            ],
+            "role": "result"
+          },
+          {
+            "id": "pile_b",
+            "slot": "figure_b",
+            "type": "object",
+            "kind": "battery",
+            "at": [
+              0,
+              1.4
+            ],
+            "size": 0.9,
+            "label": "Même pile"
+          },
+          {
+            "id": "lamp_b",
+            "slot": "figure_b",
+            "type": "object",
+            "kind": "bulb",
+            "at": [
+              0,
+              -0.8
+            ],
+            "size": 1.5,
+            "label": "Grosse lampe"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Deux lampes, deux piles identiques. Regarde laquelle brille le plus.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "pile_a",
+                  "pile_b"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "lamp_a",
+                  "lamp_b"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "La petite éclaire fort. La grosse, à peine : on la distingue mal.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "rayon_a"
+                ],
+                "how": "draw"
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Même pile pourtant. Qu’est-ce qui freine le courant dans la grosse ?",
+            "actions": [
+              {
+                "do": "focus",
+                "targets": [
+                  "lamp_b"
+                ]
+              }
+            ]
+          }
+        ],
+        "world": {
+          "x": [
+            -3.7319999999999998,
+            1.082
+          ],
+          "y": [
+            -2.092,
+            2.142
+          ]
+        }
+      },
+      {
+        "id": "s2",
+        "index": 1,
+        "role": "analogy",
+        "title": "Plus le tuyau est étroit, moins il passe d’eau",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            -5,
+            5
+          ],
+          "y": [
+            -16.008,
+            3
+          ]
+        },
+        "derived": [
+          {
+            "id": "jet_len",
+            "expr": "0.6 * U + 0.4",
+            "unit": "",
+            "label": "Longueur du jet",
+            "format": "fixed:1"
+          }
+        ],
+        "elements": [
+          {
+            "id": "pipe",
+            "slot": "figure",
+            "type": "shape",
+            "kind": "rect",
+            "center": [
+              -2.4,
+              0.2
+            ],
+            "width": 1.6,
+            "height": 1,
+            "fill": "none",
+            "role": "ink",
+            "label": "Tuyau"
+          },
+          {
+            "id": "jet",
+            "slot": "figure",
+            "type": "vector",
+            "from": [
+              1.6,
+              0.2
+            ],
+            "to": [
+              1.6,
+              {
+                "expr": "0.2 - jet_len"
+              }
+            ],
+            "label": "Débit",
+            "role": "action"
+          },
+          {
+            "id": "pump",
+            "slot": "figure",
+            "type": "vector",
+            "from": [
+              -3.9,
+              0.2
+            ],
+            "to": [
+              -3.2,
+              0.2
+            ],
+            "role": "quantity"
+          },
+          {
+            "id": "squeeze",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              0.6,
+              1
+            ],
+            "to": [
+              0.6,
+              -1
+            ],
+            "role": "quantity",
+            "style": "dashed"
+          },
+          {
+            "id": "flow",
+            "slot": "notes",
+            "type": "readout",
+            "value": "R",
+            "label": "Étroitesse du tuyau (Ω)"
+          },
+          {
+            "id": "same_push",
+            "slot": "notes",
+            "type": "text",
+            "text": "Même pompe, même poussée.",
+            "emphasis": "strong"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Une pompe pousse l’eau dans un tuyau bien large. Regarde le jet qui sort.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "pipe",
+                  "pump",
+                  "jet"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "flow",
+                  "same_push"
+                ],
+                "how": "type"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Maintenant je serre le tuyau. Devine : le jet va-t-il faiblir ?",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "squeeze"
+                ],
+                "how": "draw"
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Il faiblit. Même poussée, mais plus d’obstacle : moins d’eau passe.",
+            "actions": [
+              {
+                "do": "sweep",
+                "param": "R",
+                "to": 90,
+                "hold": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s3",
+        "index": 2,
+        "role": "mechanism",
+        "title": "La tension pousse, la résistance freine",
+        "layout": "figure-notes",
+        "derived": [
+          {
+            "id": "R_big",
+            "expr": "2 * R",
+            "unit": "Ω",
+            "label": "Résistance plus grande",
+            "format": "int"
+          }
+        ],
+        "elements": [
+          {
+            "id": "circuit",
+            "slot": "figure",
+            "type": "sim.circuit",
+            "voltage": {
+              "expr": "U"
+            },
+            "resistance": {
+              "expr": "R"
+            },
+            "current": {
+              "expr": "I"
+            }
+          },
+          {
+            "id": "i_now",
+            "slot": "notes",
+            "type": "readout",
+            "value": "I",
+            "label": "Intensité"
+          },
+          {
+            "id": "r_now",
+            "slot": "notes",
+            "type": "readout",
+            "value": "R",
+            "label": "Résistance"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "La pile pousse les charges ; elles défilent dans le fil.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "circuit.source"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "circuit.wire"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "circuit.carriers"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Le rétrécissement, lui, les freine : regarde le compteur baisser.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "circuit.resistor"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "i_now",
+                  "r_now"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "sweep",
+                "param": "R",
+                "to": {
+                  "expr": "2 * R"
+                }
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Plus la résistance est grande, plus le courant passe faiblement.",
+            "actions": [
+              {
+                "do": "highlight",
+                "targets": [
+                  "i_now"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s4",
+        "index": 3,
+        "role": "formula",
+        "title": "Tension, résistance, intensité : la loi d’Ohm",
+        "layout": "formula-focus",
+        "world": {
+          "x": [
+            0,
+            11
+          ],
+          "y": [
+            0,
+            4
+          ]
+        },
+        "derived": [
+          {
+            "id": "arrow_x",
+            "expr": "0.5 + 10 * I / 6",
+            "unit": "",
+            "label": "Position de l’aiguille",
+            "format": "fixed:2"
+          }
+        ],
+        "elements": [
+          {
+            "id": "loi",
+            "slot": "formula",
+            "type": "formula",
+            "tex": "\\q{U} = \\q{R} \\times \\q{I}"
+          },
+          {
+            "id": "billes",
+            "slot": "figure",
+            "type": "sim.circuit",
+            "voltage": {
+              "expr": "U"
+            },
+            "resistance": {
+              "expr": "R"
+            },
+            "current": {
+              "expr": "I"
+            }
+          },
+          {
+            "id": "U_now",
+            "slot": "readout",
+            "type": "readout",
+            "value": "U",
+            "label": "Tension U"
+          },
+          {
+            "id": "R_now",
+            "slot": "readout",
+            "type": "readout",
+            "value": "R",
+            "label": "Résistance R"
+          },
+          {
+            "id": "I_now",
+            "slot": "readout",
+            "type": "readout",
+            "value": "I",
+            "label": "Intensité I"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Trois lettres, une seule règle : la tension vaut la résistance fois l’intensité.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "loi"
+                ],
+                "how": "type"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "billes"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "U_now",
+                  "R_now",
+                  "I_now"
+                ],
+                "how": "fade",
+                "at": 0.5
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "La pile pousse, la résistance freine, et l’intensité suit les deux.",
+            "actions": [
+              {
+                "do": "sweep",
+                "param": "U",
+                "to": {
+                  "expr": "min(24, 1.6 * U)"
+                }
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Regarde : je double la résistance… l’intensité tombe de moitié, exactement.",
+            "actions": [
+              {
+                "do": "sweep",
+                "param": "R",
+                "to": {
+                  "expr": "2 * R"
+                }
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "I_now"
+                ],
+                "at": 0.7
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s5",
+        "index": 4,
+        "role": "example",
+        "title": "Une lampe de 12 V, un courant minuscule",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            -5,
+            5
+          ],
+          "y": [
+            -3,
+            3
+          ]
+        },
+        "derived": [
+          {
+            "id": "I_def",
+            "expr": "12 / 24",
+            "unit": "A",
+            "label": "Intensité du courant",
+            "format": "fixed:3"
+          },
+          {
+            "id": "U_def",
+            "expr": "12",
+            "unit": "V",
+            "label": "Tension de la pile",
+            "format": "int"
+          },
+          {
+            "id": "R_def",
+            "expr": "24",
+            "unit": "Ω",
+            "label": "Résistance de la lampe",
+            "format": "int"
+          }
+        ],
+        "elements": [
+          {
+            "id": "circuit",
+            "slot": "figure",
+            "type": "sim.circuit",
+            "voltage": {
+              "expr": "U_def"
+            },
+            "resistance": {
+              "expr": "R_def"
+            },
+            "current": {
+              "expr": "I_def"
+            }
+          },
+          {
+            "id": "values",
+            "slot": "notes",
+            "type": "text",
+            "text": "U = 12 V, R = 24 Ω.",
+            "emphasis": "normal"
+          },
+          {
+            "id": "calc",
+            "slot": "notes",
+            "type": "text",
+            "text": "I = 12 ÷ 24",
+            "emphasis": "strong"
+          },
+          {
+            "id": "result",
+            "slot": "notes",
+            "type": "text",
+            "text": "I = {{I_def|fixed:2}} A, un demi-ampère.",
+            "role": "result"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Ici, une pile de douze volts alimente une lampe de vingt-quatre ohms.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "circuit"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "values"
+                ],
+                "how": "type"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "On divise la tension par la résistance : douze divisé par vingt-quatre.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "circuit.carriers"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "calc"
+                ],
+                "how": "type"
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Résultat : un demi-ampère. Bien moins que ce que tu imaginais, non ?",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "result"
+                ],
+                "how": "type"
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "result"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s6",
+        "index": 5,
+        "role": "recap",
+        "title": "À retenir : U = R × I",
+        "layout": "statement",
+        "derived": [],
+        "elements": [
+          {
+            "id": "recap",
+            "slot": "text",
+            "type": "list",
+            "items": [
+              "La tension pousse, la résistance freine : U = R × I.",
+              "Plus R est grand, plus I est petit, pour la même pile.",
+              "La lampe faible du début avait une grande résistance."
+            ]
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Trois idées à garder. La tension pousse les charges, la résistance les freine : U égale R fois I.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "recap"
+                ],
+                "how": "type"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Avec la même pile, une grande résistance laisse passer un courant plus petit.",
+            "actions": []
+          },
+          {
+            "id": "b3",
+            "narration": "La lampe qui brillait à peine ? Sa résistance était grande. Voilà toute l’histoire.",
+            "actions": [
+              {
+                "do": "highlight",
+                "targets": [
+                  "recap.i3"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "quiz": {
+      "questions": [
+        {
+          "prompt": "Avec la même pile, tu remplaces une résistance par une autre, deux fois plus grande. Que devient l’intensité du courant ?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "Elle est divisée par deux"
+            },
+            {
+              "id": "b",
+              "text": "Elle double"
+            },
+            {
+              "id": "c",
+              "text": "Elle ne change pas"
+            },
+            {
+              "id": "d",
+              "text": "Elle est divisée par quatre"
+            }
+          ],
+          "answer_id": "a",
+          "explanation": "À tension fixe, doubler la résistance freine deux fois plus le courant : l’intensité tombe de moitié.",
+          "scene_id": "s4"
+        },
+        {
+          "prompt": "Dans le tuyau, la pompe pousse toujours pareil mais on serre le tuyau. Que représente ce serrage ?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "Une tension plus faible"
+            },
+            {
+              "id": "b",
+              "text": "Une résistance plus grande"
+            },
+            {
+              "id": "c",
+              "text": "Une intensité plus grande"
+            },
+            {
+              "id": "d",
+              "text": "Une pile plus puissante"
+            }
+          ],
+          "answer_id": "b",
+          "explanation": "Le tuyau serré freine l’eau comme une grande résistance freine les charges, sans changer la poussée.",
+          "scene_id": "s2"
+        },
+        {
+          "prompt": "Deux lampes branchées sur la même pile : celle qui brille le plus fort, c’est…",
+          "choices": [
+            {
+              "id": "a",
+              "text": "celle qui a la plus grande résistance"
+            },
+            {
+              "id": "b",
+              "text": "celle qui a la plus petite résistance"
+            },
+            {
+              "id": "c",
+              "text": "celle qui n’a aucune résistance"
+            },
+            {
+              "id": "d",
+              "text": "celle qui a la même résistance que l’autre"
+            }
+          ],
+          "answer_id": "b",
+          "explanation": "Une petite résistance laisse passer un courant plus fort, donc la lampe brille davantage avec la même pile.",
+          "scene_id": "s6"
+        }
+      ]
+    }
+  }
+}

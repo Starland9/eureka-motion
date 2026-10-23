@@ -1,0 +1,1303 @@
+{
+  "slug": "chemistry/ph",
+  "subject": "chemistry",
+  "reference_level": "lycee",
+  "language": "fr",
+  "title": "Le pH",
+  "question": "C'est quoi le pH ?",
+  "reviewed_by": null,
+  "reviewed_at": null,
+  "verdicts": [
+    {
+      "target": "plan",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "L'échelle de pH, sa formule pH = −log[H₃O⁺] avec concentration de référence, les valeurs et unités sont correctes, l'analogie des décibels est fidèle et le niveau correspond bien au lycée.",
+      "checks": [
+        "structure",
+        "model",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s1",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "Le curseur balaie bien le pH de 2 à 12, la concentration en ions H₃O⁺ chute d'un facteur 10¹⁰ (de 10⁻² à 10⁻¹² mol/L), et la narration française est cohérente avec l'échelle logarithmique.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s2",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "La scène illustre correctement l'échelle logarithmique : chaque +10 dB multiplie par 10 le bruit, et une unité de pH en moins multiplie par 10 la concentration en ions H₃O⁺, ce qui est conforme à la règle clé.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s3",
+      "status": "corrected",
+      "attempts": 2,
+      "reason": "La scène montre correctement qu’une concentration plus élevée en ions H₃O⁺ correspond à une solution plus acide, sans énoncé faux.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s4",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "La scène énonce correctement pH = −log[H₃O⁺] et montre qu’en multipliant la concentration par dix, le pH diminue d’une unité, ce qui est cohérent avec la règle et le balayage annoncé.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s5",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "La scène montre correctement que pH 3 correspond à 10⁻³ mol/L et pH 5 à 10⁻⁵ mol/L, soit cent fois plus d'ions H₃O⁺ dans le premier vinaigre, ce qui illustre bien l'échelle logarithmique du pH.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s6",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "La scène énonce correctement que le pH est l'opposé du logarithme de la concentration en ions H₃O⁺, qu'une unité de pH en moins multiplie la concentration par dix et que pH 3 correspond à cent fois plus d'ions que pH 5, ce qui est cohérent ",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    }
+  ],
+  "payload": {
+    "version": 1,
+    "plan": {
+      "objective": "Savoir ce que mesure le pH, le relier à la concentration en ions H₃O⁺ et calculer pH = −log[H₃O⁺].",
+      "prerequisites": [
+        "Connaître les ions H₃O⁺ (ion oxonium) et HO⁻ (ion hydroxyde)",
+        "Savoir que l’eau pure contient très peu d’ions",
+        "Savoir lire une puissance de dix et un logarithme décimal"
+      ],
+      "analogy": {
+        "name": "L’échelle des bruits",
+        "mapping": "Chaque +10 décibels multiplie par 10 le bruit reçu ; chaque unité de pH en moins multiplie par 10 la concentration en ions H₃O⁺. Dans les deux cas une échelle logarithmique compresse des valeurs énormes."
+      },
+      "key_rule": {
+        "statement": "Le pH mesure l’acidité : pH = −log de la concentration en ions H₃O⁺, une échelle de 0 à 14 où 7 est neutre, en dessous acide, au-dessus basique.",
+        "formula": "\\res{pH} = -\\log_{10}\\!\\left(\\frac{\\q{\\left[H_3O^+\\right]}}{C^\\circ}\\right)"
+      },
+      "steps": [
+        {
+          "role": "hook",
+          "intent": "Faire sentir qu’un simple 2 ou 12 cache un facteur énorme.",
+          "visual": "Un citron et un savon sur une bande pH de 0 à 14 ; un curseur de 2 à 12 et un compteur d’ions qui explose."
+        },
+        {
+          "role": "analogy",
+          "intent": "Donner l’idée d’une échelle qui multiplie au lieu d’additionner.",
+          "visual": "Des barres de bruit qui poussent : à chaque cran de 10 dB, la barre est 10 fois plus haute."
+        },
+        {
+          "role": "mechanism",
+          "intent": "Montrer que l’acidité vient du nombre d’ions H₃O⁺ dans un litre.",
+          "visual": "Dans un bécher, les ions H₃O⁺ se multiplient quand on ajoute de l’acide ; la concentration s’affiche."
+        },
+        {
+          "role": "formula",
+          "intent": "Relier le pH au logarithme de la concentration.",
+          "visual": "La formule s’écrit ; la concentration varie et les deux chiffres bougent ensemble, l’un linéaire, l’autre en pH."
+        },
+        {
+          "role": "example",
+          "intent": "Faire calculer un pH réel et montrer l’écart étonnant entre pH 3 et pH 5.",
+          "visual": "Vinaigre à 10⁻³ mol/L : pH 3 ; à 10⁻⁵ mol/L : pH 5 ; une zone surlignée 100 fois plus d’ions."
+        },
+        {
+          "role": "recap",
+          "intent": "Fixer les trois idées et répondre : le pH n’est pas une quantité mais un logarithme.",
+          "visual": "Trois phrases courtes ; l’échelle 0-14 s’affiche avec neutre, acide, basique."
+        }
+      ]
+    },
+    "params": [
+      {
+        "id": "H",
+        "symbol": "[H₃O⁺]",
+        "label": "Concentration en ions H₃O⁺",
+        "unit": "mol/L",
+        "min": 1e-14,
+        "max": 1,
+        "step": 0.00499999999999995,
+        "default": 0.001,
+        "role": "quantity"
+      }
+    ],
+    "model": {
+      "constants": [
+        {
+          "id": "C0",
+          "value": 1,
+          "unit": "mol/L",
+          "label": "Concentration de référence",
+          "symbol": "C°"
+        }
+      ],
+      "derived": [
+        {
+          "id": "pH",
+          "expr": "-log10(H / C0)",
+          "unit": "",
+          "label": "pH de la solution",
+          "symbol": "pH",
+          "format": "fixed:1"
+        },
+        {
+          "id": "H_10",
+          "expr": "H * 10",
+          "unit": "mol/L",
+          "label": "Concentration 10 fois plus forte",
+          "symbol": "10×[H₃O⁺]",
+          "format": "sci:1"
+        },
+        {
+          "id": "pH_10",
+          "expr": "-log10(H * 10 / C0)",
+          "unit": "",
+          "label": "pH 10 fois plus fort",
+          "format": "fixed:1"
+        }
+      ]
+    },
+    "scenes": [
+      {
+        "id": "s1",
+        "index": 0,
+        "role": "hook",
+        "title": "pH 2, pH 12 : un monde d’écart",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            0,
+            14
+          ],
+          "y": [
+            0,
+            6
+          ]
+        },
+        "derived": [
+          {
+            "id": "H_pH",
+            "expr": "10^(-pH)",
+            "unit": "mol/L",
+            "label": "Concentration en ions H₃O⁺",
+            "format": "sci:1"
+          },
+          {
+            "id": "pH_fixed",
+            "expr": "pH",
+            "unit": "",
+            "label": "pH",
+            "format": "fixed:0"
+          }
+        ],
+        "elements": [
+          {
+            "id": "band",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              0,
+              1
+            ],
+            "to": [
+              14,
+              1
+            ],
+            "role": "ink"
+          },
+          {
+            "id": "acid",
+            "slot": "figure",
+            "type": "shape",
+            "kind": "rect",
+            "center": [
+              3.5,
+              1
+            ],
+            "width": 7,
+            "height": 0.5,
+            "fill": "quantity",
+            "role": "quantity"
+          },
+          {
+            "id": "base",
+            "slot": "figure",
+            "type": "shape",
+            "kind": "rect",
+            "center": [
+              10.5,
+              1
+            ],
+            "width": 7,
+            "height": 0.5,
+            "fill": "valid",
+            "role": "valid"
+          },
+          {
+            "id": "marker",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              {
+                "expr": "pH"
+              },
+              2.6
+            ],
+            "label": "curseur",
+            "role": "action"
+          },
+          {
+            "id": "lemon",
+            "slot": "figure",
+            "type": "object",
+            "kind": "apple",
+            "at": [
+              2,
+              4.6
+            ],
+            "size": 1.2
+          },
+          {
+            "id": "soap",
+            "slot": "figure",
+            "type": "object",
+            "kind": "block",
+            "at": [
+              12,
+              4.6
+            ],
+            "size": 1.2,
+            "label": "Savon"
+          },
+          {
+            "id": "t0",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              0,
+              1
+            ],
+            "label": "0"
+          },
+          {
+            "id": "t7",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              7,
+              1
+            ],
+            "label": "7"
+          },
+          {
+            "id": "t14",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              14,
+              1
+            ],
+            "label": "14"
+          },
+          {
+            "id": "read_pH",
+            "slot": "notes",
+            "type": "readout",
+            "value": "pH_fixed",
+            "label": "pH"
+          },
+          {
+            "id": "read_H",
+            "slot": "notes",
+            "type": "readout",
+            "value": "H_pH",
+            "label": "Ions H₃O⁺ (mol/L)"
+          },
+          {
+            "id": "note",
+            "slot": "notes",
+            "type": "text",
+            "text": "Une unité de pH = un facteur 10",
+            "emphasis": "strong"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Un citron affiche pH 2, un savon pH 12. Un simple chiffre ?",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "band",
+                  "acid",
+                  "base",
+                  "lemon",
+                  "soap"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "t0",
+                  "t7",
+                  "t14"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Regarde le compteur d’ions quand le curseur glisse de 2 à 12.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "marker",
+                  "read_pH",
+                  "read_H"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "sweep",
+                "param": "H",
+                "to": {
+                  "expr": "0.01"
+                }
+              },
+              {
+                "do": "sweep",
+                "param": "H",
+                "to": {
+                  "expr": "1e-12"
+                }
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Dix unités d’écart : dix milliards de fois moins d’ions. Que cache ce chiffre ?",
+            "actions": [
+              {
+                "do": "sweep",
+                "param": "H",
+                "to": {
+                  "expr": "1e-2"
+                }
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "note"
+                ],
+                "how": "type"
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "read_H"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s2",
+        "index": 1,
+        "role": "analogy",
+        "title": "Une échelle qui multiplie au lieu d’additionner",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            0,
+            10
+          ],
+          "y": [
+            0,
+            6
+          ]
+        },
+        "derived": [
+          {
+            "id": "n_max",
+            "expr": "4",
+            "unit": "",
+            "label": "Nombres de barres",
+            "format": "int"
+          }
+        ],
+        "elements": [
+          {
+            "id": "bars",
+            "slot": "figure",
+            "type": "bars",
+            "items": [
+              {
+                "label": "chuchotement",
+                "value": {
+                  "expr": "1"
+                },
+                "role": "quantity"
+              },
+              {
+                "label": "rue",
+                "value": {
+                  "expr": "10"
+                },
+                "role": "quantity"
+              },
+              {
+                "label": "concert",
+                "value": {
+                  "expr": "100"
+                },
+                "role": "quantity"
+              },
+              {
+                "label": "décollage",
+                "value": {
+                  "expr": "1000"
+                },
+                "role": "quantity"
+              }
+            ],
+            "unit": "× le bruit de départ"
+          },
+          {
+            "id": "rule",
+            "slot": "notes",
+            "type": "text",
+            "text": "+10 dB revient à × 10.",
+            "emphasis": "strong"
+          },
+          {
+            "id": "same",
+            "slot": "notes",
+            "type": "text",
+            "text": "Au pH, une unité en moins : × 10 aussi."
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Un chuchotement, une rue, un concert, un décollage : ça change de volume, non ?",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "bars"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "bars"
+                ],
+                "how": "fade",
+                "at": 1
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "bars"
+                ],
+                "how": "fade",
+                "at": 1
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "bars"
+                ],
+                "how": "fade",
+                "at": 1
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Chaque barre est dix fois plus haute. On additionne dix, mais on multiplie le bruit.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "rule"
+                ],
+                "how": "type",
+                "at": 0.5
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Le pH fait pareil : une unité de moins, et les ions sont dix fois plus nombreux.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "same"
+                ],
+                "how": "type"
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "same"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s3",
+        "index": 2,
+        "role": "mechanism",
+        "title": "Plus d’ions H₃O⁺, solution plus acide",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            0,
+            10
+          ],
+          "y": [
+            0,
+            6
+          ]
+        },
+        "derived": [
+          {
+            "id": "n_ions",
+            "expr": "round(2 + 9 * (log10(H) + 14) / 14)",
+            "unit": "",
+            "label": "Ions dessinés",
+            "format": "int"
+          }
+        ],
+        "elements": [
+          {
+            "id": "beaker",
+            "slot": "figure",
+            "type": "shape",
+            "kind": "polygon",
+            "points": [
+              [
+                1.2,
+                0.4
+              ],
+              [
+                8.8,
+                0.4
+              ],
+              [
+                8.8,
+                4.6
+              ],
+              [
+                7.6,
+                4.6
+              ],
+              [
+                7.6,
+                1.6
+              ],
+              [
+                2.4,
+                1.6
+              ],
+              [
+                2.4,
+                4.6
+              ],
+              [
+                1.2,
+                4.6
+              ]
+            ],
+            "role": "ink"
+          },
+          {
+            "id": "liquid",
+            "slot": "figure",
+            "type": "shape",
+            "kind": "rect",
+            "center": [
+              5,
+              1
+            ],
+            "width": 5.2,
+            "height": 1.2,
+            "fill": "quantity",
+            "role": "quantity"
+          },
+          {
+            "id": "ion_a",
+            "slot": "figure",
+            "type": "object",
+            "kind": "molecule",
+            "at": [
+              3.4,
+              2.9
+            ],
+            "size": 0.6,
+            "role": "quantity"
+          },
+          {
+            "id": "ion_b",
+            "slot": "figure",
+            "type": "object",
+            "kind": "molecule",
+            "at": [
+              5,
+              3.6
+            ],
+            "size": 0.6,
+            "role": "quantity"
+          },
+          {
+            "id": "ion_c",
+            "slot": "figure",
+            "type": "object",
+            "kind": "molecule",
+            "at": [
+              6.6,
+              2.9
+            ],
+            "size": 0.6,
+            "role": "quantity"
+          },
+          {
+            "id": "count",
+            "slot": "notes",
+            "type": "readout",
+            "value": "n_ions",
+            "label": "Ions H₃O⁺ dessinés"
+          },
+          {
+            "id": "conc",
+            "slot": "notes",
+            "type": "readout",
+            "value": "H",
+            "label": "Concentration"
+          },
+          {
+            "id": "rule",
+            "slot": "notes",
+            "type": "text",
+            "text": "Plus d’ions H₃O⁺ : plus acide.",
+            "emphasis": "strong"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Voici un bécher. Les petites boules sont les ions H₃O⁺, l’ion oxonium.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "beaker",
+                  "liquid"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "ion_a",
+                  "ion_b",
+                  "ion_c"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Ces ions portent l’acidité. Compte-les, puis augmente leur nombre.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "count",
+                  "conc"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "sweep",
+                "param": "H",
+                "to": 0.1
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Le curseur monte : les ions se multiplient dans le litre. Plus il y en a, plus c’est acide.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "rule"
+                ],
+                "how": "type",
+                "at": 0.4
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "conc"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s4",
+        "index": 3,
+        "role": "formula",
+        "title": "Le pH, c’est un logarithme",
+        "layout": "formula-focus",
+        "world": {
+          "x": [
+            0,
+            11
+          ],
+          "y": [
+            0,
+            4
+          ]
+        },
+        "derived": [
+          {
+            "id": "x_H",
+            "expr": "1 + 9 * (log10(H) + 14) / 14",
+            "unit": "",
+            "label": "Position de la concentration sur l’axe",
+            "format": "fixed:2"
+          },
+          {
+            "id": "x_pH",
+            "expr": "1 + 9 * pH / 14",
+            "unit": "",
+            "label": "Position du pH sur l’axe",
+            "format": "fixed:2"
+          }
+        ],
+        "elements": [
+          {
+            "id": "law",
+            "slot": "formula",
+            "type": "formula",
+            "tex": "\\res{pH} = -\\log_{10}\\!\\left(\\frac{\\q{\\left[H_3O^+\\right]}}{C^\\circ}\\right)"
+          },
+          {
+            "id": "axis",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              1,
+              2
+            ],
+            "to": [
+              10,
+              2
+            ],
+            "label": "concentration"
+          },
+          {
+            "id": "dot_H",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              {
+                "expr": "x_H"
+              },
+              2
+            ],
+            "role": "quantity"
+          },
+          {
+            "id": "dot_pH",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              {
+                "expr": "x_pH"
+              },
+              2
+            ],
+            "role": "result"
+          },
+          {
+            "id": "H_val",
+            "slot": "readout",
+            "type": "readout",
+            "value": "H",
+            "label": "Concentration (mol/L)"
+          },
+          {
+            "id": "pH_val",
+            "slot": "readout",
+            "type": "readout",
+            "value": "pH",
+            "label": "pH"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Voici la règle : le pH, c’est moins le logarithme de la concentration en ions H₃O⁺.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "law"
+                ],
+                "how": "type"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Deux curseurs sur une même règle : la concentration d’un côté, le pH de l’autre.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "axis"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "dot_H",
+                  "dot_pH",
+                  "H_val",
+                  "pH_val"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Dix fois plus d’ions : la concentration bondit, le pH descend d’un seul cran.",
+            "actions": [
+              {
+                "do": "sweep",
+                "param": "H",
+                "to": {
+                  "expr": "H_10"
+                }
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "pH_val"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s5",
+        "index": 4,
+        "role": "example",
+        "title": "pH 3 ou pH 5 : cent fois plus d’ions",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            0,
+            10
+          ],
+          "y": [
+            0,
+            6
+          ]
+        },
+        "derived": [
+          {
+            "id": "x1",
+            "expr": "3",
+            "unit": "",
+            "label": "Position du vinaigre pH 3",
+            "format": "fixed:0"
+          },
+          {
+            "id": "x2",
+            "expr": "5",
+            "unit": "",
+            "label": "Position du vinaigre pH 5",
+            "format": "fixed:0"
+          },
+          {
+            "id": "H3",
+            "expr": "0.001",
+            "unit": "mol/L",
+            "label": "Concentration à pH 3",
+            "format": "sci:1"
+          },
+          {
+            "id": "H5",
+            "expr": "0.00001",
+            "unit": "mol/L",
+            "label": "Concentration à pH 5",
+            "format": "sci:1"
+          },
+          {
+            "id": "ratio",
+            "expr": "H3 / H5",
+            "unit": "",
+            "label": "Rapport des concentrations",
+            "format": "fixed:0"
+          }
+        ],
+        "elements": [
+          {
+            "id": "axis",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              0.5,
+              1
+            ],
+            "to": [
+              9.5,
+              1
+            ]
+          },
+          {
+            "id": "tick3",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              3,
+              1
+            ],
+            "label": "pH 3"
+          },
+          {
+            "id": "tick5",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              5,
+              1
+            ],
+            "label": "pH 5"
+          },
+          {
+            "id": "zone",
+            "slot": "figure",
+            "type": "shape",
+            "kind": "rect",
+            "center": [
+              4,
+              2.6
+            ],
+            "width": 2,
+            "height": 2.4,
+            "fill": "result"
+          },
+          {
+            "id": "bottle3",
+            "slot": "figure",
+            "type": "object",
+            "kind": "beaker",
+            "at": [
+              3,
+              4.6
+            ],
+            "size": 1.2,
+            "label": "Vinaigre"
+          },
+          {
+            "id": "bottle5",
+            "slot": "figure",
+            "type": "object",
+            "kind": "beaker",
+            "at": [
+              5,
+              4.6
+            ],
+            "size": 1.2,
+            "label": "Dilué"
+          },
+          {
+            "id": "c3",
+            "slot": "notes",
+            "type": "text",
+            "text": "pH 3 → {{H3|sci:1}} mol/L",
+            "emphasis": "strong"
+          },
+          {
+            "id": "c5",
+            "slot": "notes",
+            "type": "text",
+            "text": "pH 5 → {{H5|sci:1}} mol/L",
+            "emphasis": "strong"
+          },
+          {
+            "id": "factor",
+            "slot": "notes",
+            "type": "text",
+            "text": "Deux unités de pH : ×{{ratio|fixed:0}} d’ions.",
+            "emphasis": "strong",
+            "role": "result"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Un vinaigre à pH 3, un autre dilué à pH 5. Deux crans d’écart, rien de plus ?",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "axis",
+                  "tick3",
+                  "tick5"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "bottle3",
+                  "bottle5"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "factor"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Lis les concentrations : dix puissance moins trois, et dix puissance moins cinq.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "c3",
+                  "c5"
+                ],
+                "how": "type"
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Cent fois plus d’ions dans le premier. Voilà ce que cache un petit écart de pH.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "zone"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "factor"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s6",
+        "index": 5,
+        "role": "recap",
+        "title": "Le pH, une échelle logarithmique",
+        "layout": "statement",
+        "derived": [],
+        "elements": [
+          {
+            "id": "recap",
+            "slot": "text",
+            "type": "list",
+            "items": [
+              "Le pH mesure l’acidité : pH = −log[H₃O⁺].",
+              "Une unité de pH en moins, c’est 10 fois plus d’ions H₃O⁺.",
+              "Échelle de 0 à 14 : 7 neutre, moins acide, plus basique."
+            ]
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Trois idées à garder. Le pH, c’est moins le log de la concentration en ions H₃O⁺.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "recap"
+                ],
+                "how": "type"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Une unité de pH en moins, et la concentration est dix fois plus grande.",
+            "actions": [
+              {
+                "do": "highlight",
+                "targets": [
+                  "recap.i2"
+                ]
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Alors pH 3 ou pH 5 : cent fois plus d’ions, pas deux fois plus.",
+            "actions": []
+          }
+        ]
+      }
+    ],
+    "quiz": {
+      "questions": [
+        {
+          "prompt": "Deux solutions : l’une a un pH de 4, l’autre un pH de 6. Combien de fois la première contient-elle plus d’ions H₃O⁺ ?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "2 fois plus"
+            },
+            {
+              "id": "b",
+              "text": "10 fois plus"
+            },
+            {
+              "id": "c",
+              "text": "100 fois plus"
+            },
+            {
+              "id": "d",
+              "text": "1000 fois plus"
+            }
+          ],
+          "answer_id": "c",
+          "explanation": "Deux unités de pH d’écart, c’est 10 × 10 = 100 fois plus d’ions dans la solution la plus acide.",
+          "scene_id": "s5"
+        },
+        {
+          "prompt": "Tu ajoutes de l’eau à une solution acide : sa concentration en ions H₃O⁺ diminue. Que fait son pH ?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "Il diminue"
+            },
+            {
+              "id": "b",
+              "text": "Il augmente"
+            },
+            {
+              "id": "c",
+              "text": "Il ne change pas"
+            }
+          ],
+          "answer_id": "b",
+          "explanation": "Le pH vaut −log[H₃O⁺] : moins d’ions H₃O⁺ signifie un logarithme plus petit, donc un pH plus grand.",
+          "scene_id": "s4"
+        },
+        {
+          "prompt": "Une solution a un pH de 9. Que peux-tu dire de sa concentration en ions H₃O⁺ par rapport à une solution neutre ?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "Elle est plus faible"
+            },
+            {
+              "id": "b",
+              "text": "Elle est plus élevée"
+            },
+            {
+              "id": "c",
+              "text": "Elle est identique"
+            },
+            {
+              "id": "d",
+              "text": "Elle est nulle"
+            }
+          ],
+          "answer_id": "a",
+          "explanation": "Au-dessus de pH 7, la solution est basique : les ions H₃O⁺ y sont moins nombreux que dans une solution neutre.",
+          "scene_id": "s6"
+        }
+      ]
+    }
+  }
+}

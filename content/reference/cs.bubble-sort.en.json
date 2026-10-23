@@ -1,0 +1,1093 @@
+{
+  "slug": "cs/bubble-sort",
+  "subject": "cs",
+  "reference_level": "lycee",
+  "language": "en",
+  "title": "Bubble Sort",
+  "question": "How does bubble sort work?",
+  "reviewed_by": null,
+  "reviewed_at": null,
+  "verdicts": [
+    {
+      "target": "plan",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "The bubble sort rule, the pass count n−1, the worst-case comparison count n(n−1)/2, and the best-case count with early exit (n−1) are all correct, the analogy faithfully illustrates neighbour-wise rising of the largest element, and the obje",
+      "checks": [
+        "structure",
+        "model",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s1",
+      "status": "corrected",
+      "attempts": 2,
+      "reason": "The scene shows neighbouring cards 9 and 2 swapping, then 9 and 4 swapping, so the largest card keeps moving right as bubble sort requires; no statement contradicts the key rule.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s2",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "The scene uses rising bubbles to show that only neighbours meet and the bigger one wins each swap, with the biggest bubble reaching the surface, which correctly illustrates the analogy without contradicting the bubble sort rule.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s3",
+      "status": "corrected",
+      "attempts": 3,
+      "reason": "The scene shows one left-to-right bubble-sort pass where the largest card climbs to the end and locks, and the next pass leaves it alone so the sorted tail grows, matching the outline's mechanism without any false statement.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s4",
+      "status": "corrected",
+      "attempts": 2,
+      "reason": "The scene correctly shows that the passes shrink by one comparison each time and that their sum gives n(n−1)/2 comparisons, with consistent readouts for the worst case, the number of passes, and the already-sorted case.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s5",
+      "status": "corrected",
+      "attempts": 2,
+      "reason": "The scene correctly shows 28 comparisons for the unsorted eight-card list and 7 for the already sorted list, matching n(n-1)/2 and the early-exit check, with the narration consistent with the displayed values.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s6",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "The recap correctly states the neighbour-comparison rule, the locking of the largest remaining value each pass, and the n-squared growth of comparisons, all consistent with the outline.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    }
+  ],
+  "payload": {
+    "version": 1,
+    "plan": {
+      "objective": "You will be able to trace bubble sort step by step, say why each pass pushes the largest remaining value to the end, and estimate how many comparisons a list of n items needs.",
+      "prerequisites": [
+        "Reading a list of numbers from left to right",
+        "Knowing what a comparison and a swap are",
+        "Knowing that n(n-1)/2 counts pairs"
+      ],
+      "analogy": {
+        "name": "Bubbles rising through water",
+        "mapping": "A bubble that is bigger than the one above it keeps rising past it; the largest bubble of all reaches the surface, and the next pass does the same with the rest of the pool."
+      },
+      "key_rule": {
+        "statement": "Compare each neighbouring pair from left to right and swap them when they are out of order; after one full pass the largest value has bubbled to the end, so n-1 passes sort the list.",
+        "formula": "\\res{C} = \\dfrac{\\q{n}(\\q{n}-1)}{2}"
+      },
+      "steps": [
+        {
+          "role": "hook",
+          "intent": "Show an unsorted list being rearranged one pair at a time, and ask how the biggest value always ends up at the right.",
+          "visual": "A row of numbered cards; two neighbours glow and swap, the biggest card drifts right and stops at the end."
+        },
+        {
+          "role": "analogy",
+          "intent": "Give the intuition that only neighbours matter and the biggest one wins every swap.",
+          "visual": "Bubbles of different sizes rise; a small one gives way, the biggest climbs past every other bubble to the surface."
+        },
+        {
+          "role": "mechanism",
+          "intent": "Walk through one pass, showing that the sorted tail grows by one card each time.",
+          "visual": "A highlight moves left to right along the cards; swapped pairs flip, the last card locks in grey, then the next."
+        },
+        {
+          "role": "formula",
+          "intent": "Relate the number of comparisons to the number of items and the number of passes.",
+          "visual": "On the left the passes stack up; on the right a column of comparisons grows as the pass number is raised."
+        },
+        {
+          "role": "example",
+          "intent": "Count the work for a real list and see the surprise: early exit can make a big difference.",
+          "visual": "Eight cards sort themselves; a counter ticks up to 28 comparisons, then the same already-sorted list stops after 7."
+        },
+        {
+          "role": "recap",
+          "intent": "Fix the three ideas and answer the opening question about the biggest card.",
+          "visual": "Three short lines appear; the sorted row of cards settles into place and the last line is highlighted."
+        }
+      ]
+    },
+    "params": [
+      {
+        "id": "n",
+        "symbol": "n",
+        "label": "Number of items in the list",
+        "unit": "items",
+        "min": 2,
+        "max": 20,
+        "step": 1,
+        "default": 8,
+        "role": "quantity"
+      }
+    ],
+    "model": {
+      "constants": [],
+      "derived": [
+        {
+          "id": "p",
+          "expr": "n - 1",
+          "unit": "passes",
+          "label": "Passes needed",
+          "symbol": "p",
+          "format": "int"
+        },
+        {
+          "id": "C",
+          "expr": "n * (n - 1) / 2",
+          "unit": "comparisons",
+          "label": "Comparisons in the worst case",
+          "symbol": "C",
+          "format": "int"
+        },
+        {
+          "id": "C_best",
+          "expr": "n - 1",
+          "unit": "comparisons",
+          "label": "Comparisons when the list is already sorted",
+          "symbol": "C",
+          "format": "int"
+        },
+        {
+          "id": "C_dbl",
+          "expr": "(2 * n) * (2 * n - 1) / 2",
+          "unit": "comparisons",
+          "label": "Comparisons for a list twice as long",
+          "symbol": "C",
+          "format": "int"
+        }
+      ]
+    },
+    "scenes": [
+      {
+        "id": "s1",
+        "index": 0,
+        "role": "hook",
+        "title": "How does the biggest card always end up at the end",
+        "layout": "figure",
+        "world": {
+          "x": [
+            0,
+            10
+          ],
+          "y": [
+            0,
+            6
+          ]
+        },
+        "derived": [],
+        "elements": [
+          {
+            "id": "card_5",
+            "slot": "figure",
+            "type": "object",
+            "kind": "block",
+            "at": [
+              1,
+              3.6
+            ],
+            "size": 1.2,
+            "label": "5"
+          },
+          {
+            "id": "card_9",
+            "slot": "figure",
+            "type": "object",
+            "kind": "block",
+            "at": [
+              3,
+              3.6
+            ],
+            "size": 1.2,
+            "label": "9"
+          },
+          {
+            "id": "card_2",
+            "slot": "figure",
+            "type": "object",
+            "kind": "block",
+            "at": [
+              5,
+              3.6
+            ],
+            "size": 1.2,
+            "label": "2"
+          },
+          {
+            "id": "card_4",
+            "slot": "figure",
+            "type": "object",
+            "kind": "block",
+            "at": [
+              7,
+              3.6
+            ],
+            "size": 1.2,
+            "label": "4"
+          },
+          {
+            "id": "card_7",
+            "slot": "figure",
+            "type": "object",
+            "kind": "block",
+            "at": [
+              9,
+              3.6
+            ],
+            "size": 1.2,
+            "label": "7"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Five cards in a row, out of order. Watch the two neighbours in the middle.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "card_5",
+                  "card_9",
+                  "card_2",
+                  "card_4",
+                  "card_7"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Nine is bigger than two, so they swap. Nine moves right, two moves left.",
+            "actions": [
+              {
+                "do": "move",
+                "target": "card_9",
+                "to": [
+                  5,
+                  3.6
+                ]
+              },
+              {
+                "do": "move",
+                "target": "card_2",
+                "to": [
+                  3,
+                  3.6
+                ]
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Again: nine against four, swap. Nine keeps drifting right. Where will it stop?",
+            "actions": [
+              {
+                "do": "move",
+                "target": "card_9",
+                "to": [
+                  7,
+                  3.6
+                ]
+              },
+              {
+                "do": "move",
+                "target": "card_4",
+                "to": [
+                  5,
+                  3.6
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s2",
+        "index": 1,
+        "role": "analogy",
+        "title": "The biggest bubble wins every swap",
+        "layout": "figure",
+        "world": {
+          "x": [
+            0,
+            10
+          ],
+          "y": [
+            0,
+            6
+          ]
+        },
+        "derived": [
+          {
+            "id": "big_cross",
+            "expr": "0.5 + n * 0.9",
+            "unit": "",
+            "label": "Where the big bubble passes"
+          }
+        ],
+        "elements": [
+          {
+            "id": "water",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              0,
+              1
+            ],
+            "to": [
+              10,
+              1
+            ],
+            "label": "water",
+            "role": "inkSoft"
+          },
+          {
+            "id": "surface",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              0,
+              5
+            ],
+            "to": [
+              10,
+              5
+            ],
+            "role": "ink"
+          },
+          {
+            "id": "b1",
+            "slot": "figure",
+            "type": "object",
+            "kind": "ball",
+            "at": [
+              2,
+              1.6
+            ],
+            "size": 0.6
+          },
+          {
+            "id": "b2",
+            "slot": "figure",
+            "type": "object",
+            "kind": "ball",
+            "at": [
+              3.5,
+              1.6
+            ],
+            "size": 0.7
+          },
+          {
+            "id": "b3",
+            "slot": "figure",
+            "type": "object",
+            "kind": "ball",
+            "at": [
+              5,
+              1.6
+            ],
+            "size": 0.8
+          },
+          {
+            "id": "b4",
+            "slot": "figure",
+            "type": "object",
+            "kind": "ball",
+            "at": [
+              6.5,
+              1.6
+            ],
+            "size": 0.9
+          },
+          {
+            "id": "b5",
+            "slot": "figure",
+            "type": "object",
+            "kind": "ball",
+            "at": [
+              8,
+              1.6
+            ],
+            "size": 1.2,
+            "label": "biggest",
+            "role": "result"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Watch the bubbles rise. When a big one meets a small one, who gives way?",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "water",
+                  "surface"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "b1",
+                  "b2",
+                  "b3",
+                  "b4",
+                  "b5"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "The small one gives way, every time. Only neighbours meet, and the bigger wins.",
+            "actions": [
+              {
+                "do": "move",
+                "target": "b3",
+                "to": [
+                  3.5,
+                  3
+                ],
+                "at": 0.2
+              },
+              {
+                "do": "move",
+                "target": "b2",
+                "to": [
+                  6.5,
+                  3
+                ],
+                "at": 0.2
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "So the biggest bubble climbs past everyone, and it reaches the surface first.",
+            "actions": [
+              {
+                "do": "move",
+                "target": "b5",
+                "to": [
+                  {
+                    "expr": "big_cross"
+                  },
+                  4.4
+                ]
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "b5"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s3",
+        "index": 2,
+        "role": "mechanism",
+        "title": "One left-to-right pass, one card locked in",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            0,
+            10
+          ],
+          "y": [
+            0,
+            6
+          ]
+        },
+        "derived": [
+          {
+            "id": "j1",
+            "expr": "2 * n - 2",
+            "unit": "",
+            "label": "Last pair position, first pass",
+            "format": "int"
+          },
+          {
+            "id": "j2",
+            "expr": "2 * n - 4",
+            "unit": "",
+            "label": "Last pair position, second pass",
+            "format": "int"
+          }
+        ],
+        "elements": [
+          {
+            "id": "cmp",
+            "slot": "figure",
+            "type": "sim.array",
+            "values": [
+              7,
+              3,
+              5,
+              1
+            ],
+            "algorithm": "bubble-sort",
+            "step": {
+              "expr": "j1"
+            }
+          },
+          {
+            "id": "locked",
+            "slot": "notes",
+            "type": "text",
+            "text": "The 7 is locked in place.",
+            "emphasis": "strong"
+          },
+          {
+            "id": "dpair",
+            "slot": "notes",
+            "type": "text",
+            "text": "Compare the two neighbours, swap if the left is bigger."
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "One pass, left to right: compare each pair of neighbours and swap when the left is bigger.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "dpair"
+                ],
+                "how": "type",
+                "at": 0
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "cmp"
+                ],
+                "how": "fade",
+                "at": 0.2
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "The 7 loses no swap: it climbs to the end and locks there, in place.",
+            "actions": [
+              {
+                "do": "focus",
+                "targets": [
+                  "cmp"
+                ],
+                "at": 0
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "locked"
+                ],
+                "how": "type",
+                "at": 0.3
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "locked"
+                ],
+                "at": 0.7
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "The next pass leaves that card alone and locks the next one. The sorted tail grows.",
+            "actions": [
+              {
+                "do": "hide",
+                "targets": [
+                  "locked"
+                ],
+                "at": 0
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "dpair"
+                ],
+                "how": "type",
+                "at": 0.2
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "cmp"
+                ],
+                "at": 0.5
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s4",
+        "index": 3,
+        "role": "formula",
+        "title": "Comparisons: one per neighbour pair, one pass at a time",
+        "layout": "formula-focus",
+        "world": {
+          "x": [
+            0,
+            11
+          ],
+          "y": [
+            0,
+            4
+          ]
+        },
+        "derived": [
+          {
+            "id": "n_safe",
+            "expr": "clamp(n, 2, 10)",
+            "unit": "items",
+            "label": "List length used in the sweep",
+            "format": "int"
+          }
+        ],
+        "elements": [
+          {
+            "id": "rule",
+            "slot": "formula",
+            "type": "formula",
+            "tex": "\\res{C} = \\dfrac{\\q{n}(\\q{n}-1)}{2}"
+          },
+          {
+            "id": "passes",
+            "slot": "figure",
+            "type": "bars",
+            "items": [
+              {
+                "label": "pass 1",
+                "value": {
+                  "expr": "n_safe - 1"
+                },
+                "role": "action"
+              },
+              {
+                "label": "pass 2",
+                "value": {
+                  "expr": "n_safe - 2"
+                },
+                "role": "action"
+              },
+              {
+                "label": "pass 3",
+                "value": {
+                  "expr": "n_safe - 3"
+                },
+                "role": "action"
+              },
+              {
+                "label": "pass 4",
+                "value": {
+                  "expr": "n_safe - 4"
+                },
+                "role": "action"
+              }
+            ],
+            "unit": "comparisons"
+          },
+          {
+            "id": "r_C",
+            "slot": "readout",
+            "type": "readout",
+            "value": "C",
+            "label": "Comparisons, worst case"
+          },
+          {
+            "id": "r_p",
+            "slot": "readout",
+            "type": "readout",
+            "value": "p",
+            "label": "Passes"
+          },
+          {
+            "id": "r_best",
+            "slot": "readout",
+            "type": "readout",
+            "value": "C_best",
+            "label": "If already sorted"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Each pass compares every neighbouring pair still in play, and the work shrinks.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "rule"
+                ],
+                "how": "type"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "passes"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "r_p",
+                  "r_C"
+                ],
+                "how": "fade",
+                "at": 0.5
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Add the shrinking passes: n minus one, then n minus two, down to one.",
+            "actions": [
+              {
+                "do": "highlight",
+                "targets": [
+                  "passes"
+                ]
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "So the total is n times n minus one, all over two. Watch n grow.",
+            "actions": [
+              {
+                "do": "sweep",
+                "param": "n",
+                "to": {
+                  "expr": "clamp(n + 3, 2, 10)"
+                },
+                "hold": true
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "r_best"
+                ],
+                "how": "fade",
+                "at": 0.4
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s5",
+        "index": 4,
+        "role": "example",
+        "title": "Sorting eight cards: 28 comparisons, or 7?",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            0,
+            10
+          ],
+          "y": [
+            0,
+            4
+          ]
+        },
+        "derived": [],
+        "elements": [
+          {
+            "id": "sort",
+            "slot": "figure",
+            "type": "sim.array",
+            "values": [
+              5,
+              2,
+              9,
+              1,
+              7,
+              3,
+              8,
+              4
+            ],
+            "algorithm": "bubble-sort",
+            "step": {
+              "expr": "0"
+            }
+          },
+          {
+            "id": "worst",
+            "slot": "notes",
+            "type": "readout",
+            "value": "C",
+            "label": "Worst case, unsorted list"
+          },
+          {
+            "id": "best",
+            "slot": "notes",
+            "type": "readout",
+            "value": "C_best",
+            "label": "Already sorted list"
+          },
+          {
+            "id": "meaning",
+            "slot": "notes",
+            "type": "text",
+            "text": "Same cards. One pass with no swap: stop.",
+            "emphasis": "strong"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Eight cards, all mixed up. Watch the counter climb as the pairs get compared.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "sort"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "play",
+                "target": "sort",
+                "to": 28
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "worst"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Twenty-eight comparisons. Now guess for an already sorted list.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "best"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Seven! One pass finds no swap, so the algorithm knows it can stop.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "meaning"
+                ],
+                "how": "type",
+                "at": 0.3
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "best"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s6",
+        "index": 5,
+        "role": "recap",
+        "title": "What to keep from bubble sort",
+        "layout": "statement",
+        "derived": [],
+        "elements": [
+          {
+            "id": "recap",
+            "slot": "text",
+            "type": "list",
+            "items": [
+              "Only neighbours are compared, and swapped when out of order.",
+              "After each pass the largest remaining value is locked at the end.",
+              "The work counts pairs, so it grows like n squared."
+            ]
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Three ideas to keep. One: bubble sort only ever compares neighbours, and swaps them when they are out of order.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "recap"
+                ],
+                "how": "type"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Two: each pass locks the largest remaining value at the end. That is why the biggest card settles.",
+            "actions": []
+          },
+          {
+            "id": "b3",
+            "narration": "And the work? It counts every pair, so a list twice as long costs about four times the comparisons.",
+            "actions": [
+              {
+                "do": "highlight",
+                "targets": [
+                  "recap.i3"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "quiz": {
+      "questions": [
+        {
+          "prompt": "You run one full left-to-right pass of bubble sort on a list. What is guaranteed to be true afterward?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "The whole list is sorted"
+            },
+            {
+              "id": "b",
+              "text": "The smallest value sits at the front"
+            },
+            {
+              "id": "c",
+              "text": "The largest value sits at the end"
+            },
+            {
+              "id": "d",
+              "text": "Every value has moved at least once"
+            }
+          ],
+          "answer_id": "c",
+          "explanation": "Each comparison pushes the bigger of the two rightward, so the largest value keeps bubbling right and locks at the end after the pass.",
+          "scene_id": "s3"
+        },
+        {
+          "prompt": "You run bubble sort on a list of n items. Why is the total number of comparisons n(n−1)/2?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "Each pass does n comparisons and there are n−1 passes"
+            },
+            {
+              "id": "b",
+              "text": "The passes compare n−1, n−2, …, 1 pairs, and that sum is n(n−1)/2"
+            },
+            {
+              "id": "c",
+              "text": "Each pair is compared twice, once in each direction"
+            },
+            {
+              "id": "d",
+              "text": "Each pass compares about half the neighbours, so it is n times n/2 minus one"
+            }
+          ],
+          "answer_id": "b",
+          "explanation": "The sorted tail grows by one per pass, so the pairs still in play shrink by one each time, and 1+2+…+(n−1) = n(n−1)/2.",
+          "scene_id": "s4"
+        },
+        {
+          "prompt": "A list is already in order when you start. What does bubble sort do?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "It still makes all n−1 passes, since none can be skipped"
+            },
+            {
+              "id": "b",
+              "text": "It stops after one pass, because no swap happens"
+            },
+            {
+              "id": "c",
+              "text": "It finishes after comparing only the first pair"
+            },
+            {
+              "id": "d",
+              "text": "It reverses the list by swapping every pair"
+            }
+          ],
+          "answer_id": "b",
+          "explanation": "A pass with no swap means nothing was out of order, so the algorithm can stop early instead of running the remaining passes.",
+          "scene_id": "s5"
+        }
+      ]
+    }
+  }
+}

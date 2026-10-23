@@ -1,0 +1,1173 @@
+{
+  "slug": "economics/compound-interest",
+  "subject": "economics",
+  "reference_level": "lycee",
+  "language": "fr",
+  "title": "Intérêts composés",
+  "question": "Comment fonctionnent les intérêts composés ?",
+  "reviewed_by": null,
+  "reviewed_at": null,
+  "verdicts": [
+    {
+      "target": "plan",
+      "status": "corrected",
+      "attempts": 2,
+      "reason": "La formule des intérêts composés, les expressions dérivées et leurs unités sont correctes, les paramètres sont plausibles et l'analogie de la boule de neige illustre fidèlement une croissance qui s'auto-entretient.",
+      "checks": [
+        "structure",
+        "model",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s1",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "La scène compare correctement des intérêts simples fixes et des intérêts composés croissants, sans affirmation fausse, et la narration est en français.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s2",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "La scène illustre correctement l'analogie de la boule de neige qui grossit de plus en plus à chaque tour, ce qui traduit l'idée que plus le capital grossit, plus il rapporte, conformément à l'étape d'analogie du plan.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s3",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "La scène illustre correctement l’ajout annuel des intérêts au capital, avec des barres et des valeurs calculées par la formule des intérêts composés, et la narration en français est cohérente avec la règle clé.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s4",
+      "status": "corrected",
+      "attempts": 5,
+      "reason": "La scène illustre correctement la formule des intérêts composés : la courbe du facteur (1+i)^x, la règle Cₙ = C₀ × (1+i)ⁿ et les lectures du capital final et des intérêts gagnés sont cohérentes, et la narration en français est exacte.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s5",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "La scène illustre un placement à intérêts composés avec une courbe croissante et un capital final cohérent, et l’affirmation sur la dernière année qui rapporte plus que la première est correcte.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s6",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "Le récapitulatif reprend correctement les trois idées du cours (multiplication annuelle par (1 + i), intérêts qui grossissent avec le capital, formule Cₙ = C₀ × (1 + i)ⁿ) et la narration est en français.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    }
+  ],
+  "payload": {
+    "version": 1,
+    "plan": {
+      "objective": "Savoir calculer un capital placé à intérêts composés avec la formule C × (1 + i)^n et expliquer pourquoi la croissance s’accélère.",
+      "prerequisites": [
+        "Savoir calculer un pourcentage d’une quantité",
+        "Savoir élever un nombre à une puissance entière",
+        "Comprendre qu’une suite de multiplications répétées fait grossir vite"
+      ],
+      "analogy": {
+        "name": "La boule de neige qui roule",
+        "mapping": "La neige collée à chaque tour joue le rôle des intérêts ; plus la boule grossit, plus elle ramasse de neige au tour suivant, comme un capital plus gros rapporte plus d’intérêts."
+      },
+      "key_rule": {
+        "statement": "Chaque année, les intérêts s’ajoutent au capital et rapportent eux aussi des intérêts l’année suivante : après n années, le capital est multiplié n fois par (1 + i).",
+        "formula": "\\res{C_n} = \\q{C_0} \\times (1 + \\q{i})^{\\q{n}}"
+      },
+      "steps": [
+        {
+          "role": "hook",
+          "intent": "Faire sentir qu’un même taux donne des gains qui grossissent sans qu’on ajoute d’argent.",
+          "visual": "Deux compteurs côte à côte : gains d’intérêts simples fixes, gains composés qui grimpent de plus en plus."
+        },
+        {
+          "role": "analogy",
+          "intent": "Donner l’intuition d’une croissance qui s’entretient elle-même.",
+          "visual": "Une boule de neige roule et grossit ; à chaque tour elle ramasse une couche plus épaisse."
+        },
+        {
+          "role": "mechanism",
+          "intent": "Dérouler année par année l’ajout des intérêts au capital.",
+          "visual": "Trois barres empilées an 1, an 2, an 3 : la part des intérêts s’ajoute au capital et grandit."
+        },
+        {
+          "role": "formula",
+          "intent": "Relier la formule aux multiplications successives vues à l’étape précédente.",
+          "visual": "La formule s’écrit ; le taux varie et la courbe se redessine en direct."
+        },
+        {
+          "role": "example",
+          "intent": "Chiffrer un placement réel et montrer le saut final surprenant.",
+          "visual": "1 000 € à 5 % : les lignes des années défilent, le dernier montant est surligné."
+        },
+        {
+          "role": "recap",
+          "intent": "Fixer les trois idées et répondre à la question de départ.",
+          "visual": "Trois phrases courtes ; la dernière, la réponse, est surlignée."
+        }
+      ]
+    },
+    "params": [
+      {
+        "id": "C0",
+        "symbol": "C₀",
+        "label": "Capital de départ",
+        "unit": "€",
+        "min": 100,
+        "max": 10000,
+        "step": 100,
+        "default": 1000,
+        "role": "quantity"
+      },
+      {
+        "id": "i",
+        "symbol": "i",
+        "label": "Taux d’intérêt annuel",
+        "unit": "",
+        "min": 0.01,
+        "max": 0.1,
+        "step": 0.005,
+        "default": 0.05,
+        "role": "quantity"
+      },
+      {
+        "id": "n",
+        "symbol": "n",
+        "label": "Durée du placement",
+        "unit": "ans",
+        "min": 1,
+        "max": 30,
+        "step": 1,
+        "default": 10,
+        "role": "quantity"
+      }
+    ],
+    "model": {
+      "constants": [],
+      "derived": [
+        {
+          "id": "Cn",
+          "expr": "C0 * (1 + i)^n",
+          "unit": "€",
+          "label": "Capital final",
+          "symbol": "Cₙ",
+          "format": "fixed:2"
+        },
+        {
+          "id": "gain",
+          "expr": "C0 * (1 + i)^n - C0",
+          "unit": "€",
+          "label": "Intérêts gagnés",
+          "symbol": "I",
+          "format": "fixed:2"
+        },
+        {
+          "id": "simple",
+          "expr": "C0 * (1 + i * n)",
+          "unit": "€",
+          "label": "Capital à intérêts simples",
+          "symbol": "Cₛ",
+          "format": "fixed:2"
+        },
+        {
+          "id": "C2n",
+          "expr": "C0 * (1 + i)^(2 * n)",
+          "unit": "€",
+          "label": "Capital à durée double",
+          "symbol": "C₂ₙ",
+          "format": "fixed:2"
+        }
+      ]
+    },
+    "scenes": [
+      {
+        "id": "s1",
+        "index": 0,
+        "role": "hook",
+        "title": "Deux placements, même taux : qui gagne ?",
+        "layout": "compare",
+        "derived": [
+          {
+            "id": "g_simple",
+            "expr": "C0 * i",
+            "unit": "€",
+            "label": "Intérêts simples par an",
+            "format": "fixed:2"
+          },
+          {
+            "id": "g_comp_3",
+            "expr": "C0 * (1 + i)^3 - C0 * (1 + i)^2",
+            "unit": "€",
+            "label": "Intérêts composés an 3",
+            "format": "fixed:2"
+          }
+        ],
+        "elements": [
+          {
+            "id": "bars_simple",
+            "slot": "figure_a",
+            "type": "bars",
+            "items": [
+              {
+                "label": "an 1",
+                "value": {
+                  "expr": "g_simple"
+                },
+                "role": "quantity"
+              },
+              {
+                "label": "an 2",
+                "value": {
+                  "expr": "g_simple"
+                },
+                "role": "quantity"
+              },
+              {
+                "label": "an 3",
+                "value": {
+                  "expr": "g_simple"
+                },
+                "role": "quantity"
+              }
+            ],
+            "unit": "€"
+          },
+          {
+            "id": "bars_comp",
+            "slot": "figure_b",
+            "type": "bars",
+            "items": [
+              {
+                "label": "an 1",
+                "value": {
+                  "expr": "g_simple"
+                },
+                "role": "result"
+              },
+              {
+                "label": "an 2",
+                "value": {
+                  "expr": "C0 * (1 + i)^2 - C0 * (1 + i)"
+                },
+                "role": "result"
+              },
+              {
+                "label": "an 3",
+                "value": {
+                  "expr": "g_comp_3"
+                },
+                "role": "result"
+              }
+            ],
+            "unit": "€"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Même capital, même taux. À gauche, les intérêts sont retirés chaque année.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "bars_simple"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "À droite, ils restent sur le compte et rapportent à leur tour.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "bars_comp"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Regarde la barre de l’an 3 : sans verser un euro de plus, elle est plus haute. Pourquoi ?",
+            "actions": [
+              {
+                "do": "highlight",
+                "targets": [
+                  "bars_comp"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s2",
+        "index": 1,
+        "role": "analogy",
+        "title": "La boule de neige qui grossit toute seule",
+        "layout": "compare",
+        "world": {
+          "x": [
+            -5,
+            6.015999999999999
+          ],
+          "y": [
+            -3,
+            3
+          ]
+        },
+        "derived": [
+          {
+            "id": "r1",
+            "expr": "0.5",
+            "unit": "",
+            "label": "Rayon tour 1",
+            "format": "fixed:2"
+          },
+          {
+            "id": "r2",
+            "expr": "1",
+            "unit": "",
+            "label": "Rayon tour 2",
+            "format": "fixed:2"
+          },
+          {
+            "id": "r3",
+            "expr": "1.9",
+            "unit": "",
+            "label": "Rayon tour 3",
+            "format": "fixed:2"
+          }
+        ],
+        "elements": [
+          {
+            "id": "slope",
+            "slot": "figure_a",
+            "type": "segment",
+            "from": [
+              -4.5,
+              -2
+            ],
+            "to": [
+              4.5,
+              -2
+            ],
+            "role": "ink"
+          },
+          {
+            "id": "ball1",
+            "slot": "figure_a",
+            "type": "shape",
+            "kind": "circle",
+            "center": [
+              -3.4,
+              -0.9
+            ],
+            "radius": {
+              "expr": "r1"
+            },
+            "fill": "quantity",
+            "label": "1"
+          },
+          {
+            "id": "ball2",
+            "slot": "figure_a",
+            "type": "shape",
+            "kind": "circle",
+            "center": [
+              0.2,
+              -0.4
+            ],
+            "radius": {
+              "expr": "r2"
+            },
+            "fill": "quantity",
+            "label": "2"
+          },
+          {
+            "id": "ball3",
+            "slot": "figure_a",
+            "type": "shape",
+            "kind": "circle",
+            "center": [
+              3.3,
+              -0.2
+            ],
+            "radius": {
+              "expr": "r3"
+            },
+            "fill": "quantity",
+            "label": "3"
+          },
+          {
+            "id": "track",
+            "slot": "figure_b",
+            "type": "segment",
+            "from": [
+              -4.5,
+              -2.2
+            ],
+            "to": [
+              4.5,
+              -2.2
+            ]
+          },
+          {
+            "id": "core",
+            "slot": "figure_b",
+            "type": "shape",
+            "kind": "circle",
+            "center": [
+              -3.2,
+              -1
+            ],
+            "radius": {
+              "expr": "r1"
+            },
+            "fill": "none"
+          },
+          {
+            "id": "layer1",
+            "slot": "figure_b",
+            "type": "shape",
+            "kind": "arc",
+            "center": [
+              -3.2,
+              -1
+            ],
+            "radius": 0.8,
+            "startDeg": 200,
+            "endDeg": 340,
+            "role": "action",
+            "label": "+1"
+          },
+          {
+            "id": "lay",
+            "slot": "figure_b",
+            "type": "shape",
+            "kind": "arc",
+            "center": [
+              0.5,
+              -1
+            ],
+            "radius": 1.3,
+            "startDeg": 200,
+            "endDeg": 340,
+            "role": "action",
+            "label": "+2"
+          },
+          {
+            "id": "lay2",
+            "slot": "figure_b",
+            "type": "shape",
+            "kind": "arc",
+            "center": [
+              2.9,
+              -1
+            ],
+            "radius": 1.9,
+            "startDeg": 200,
+            "endDeg": 340,
+            "role": "action",
+            "label": "+4"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Une boule de neige roule sur une pente. Regarde sa taille à chaque tour.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "slope",
+                  "ball1"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Chaque tour, elle ramasse une couche de neige, et la couche est plus épaisse.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "ball2",
+                  "ball3"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "C’est ça, les intérêts composés : plus le capital grossit, plus il rapporte.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "track",
+                  "core"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "layer1",
+                  "lay",
+                  "lay2"
+                ],
+                "how": "draw",
+                "at": 0.8
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "lay2"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s3",
+        "index": 2,
+        "role": "mechanism",
+        "title": "Les intérêts s’ajoutent au capital",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            0,
+            10
+          ],
+          "y": [
+            0,
+            6
+          ]
+        },
+        "derived": [
+          {
+            "id": "C1",
+            "expr": "C0 * (1 + i)",
+            "unit": "€",
+            "label": "Capital après un an",
+            "format": "fixed:2"
+          },
+          {
+            "id": "C2",
+            "expr": "C0 * (1 + i)^2",
+            "unit": "€",
+            "label": "Capital après deux ans",
+            "format": "fixed:2"
+          },
+          {
+            "id": "C3",
+            "expr": "C0 * (1 + i)^3",
+            "unit": "€",
+            "label": "Capital après trois ans",
+            "format": "fixed:2"
+          },
+          {
+            "id": "scale",
+            "expr": "max(C3, 1)",
+            "unit": "",
+            "label": "Échelle des barres",
+            "format": "fixed:2"
+          }
+        ],
+        "elements": [
+          {
+            "id": "parts",
+            "slot": "figure",
+            "type": "bars",
+            "items": [
+              {
+                "label": "An 1",
+                "value": {
+                  "expr": "C1 / scale * 5"
+                },
+                "role": "quantity"
+              },
+              {
+                "label": "An 2",
+                "value": {
+                  "expr": "C2 / scale * 5"
+                },
+                "role": "quantity"
+              },
+              {
+                "label": "An 3",
+                "value": {
+                  "expr": "C3 / scale * 5"
+                },
+                "role": "valid"
+              }
+            ],
+            "unit": "€"
+          },
+          {
+            "id": "read1",
+            "slot": "notes",
+            "type": "readout",
+            "value": "C1",
+            "label": "Après 1 an"
+          },
+          {
+            "id": "read3",
+            "slot": "notes",
+            "type": "readout",
+            "value": "C3",
+            "label": "Après 3 ans"
+          },
+          {
+            "id": "rule",
+            "slot": "notes",
+            "type": "text",
+            "text": "Les intérêts rapportent des intérêts.",
+            "emphasis": "strong"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "An un : les intérêts tombent et viennent s’ajouter au capital.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "parts"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "read1"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "An deux : c’est le nouveau capital, plus gros, qui rapporte.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "rule"
+                ],
+                "how": "type"
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "An trois : chaque année ajoute un peu plus. Regarde le saut final.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "read3"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "parts"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s4",
+        "index": 3,
+        "role": "formula",
+        "title": "La formule des intérêts composés",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            0,
+            30
+          ],
+          "y": [
+            0,
+            4
+          ]
+        },
+        "derived": [
+          {
+            "id": "ratio",
+            "expr": "(1 + i)^n",
+            "unit": "",
+            "label": "Facteur final",
+            "format": "fixed:2"
+          }
+        ],
+        "elements": [
+          {
+            "id": "axes",
+            "slot": "figure",
+            "type": "axes",
+            "xLabel": "années",
+            "yLabel": "capital / C₀",
+            "xTicks": 5,
+            "yTicks": 4
+          },
+          {
+            "id": "curve",
+            "slot": "figure",
+            "type": "plot",
+            "fn": "(1 + i)^x",
+            "domain": [
+              0,
+              {
+                "expr": "n"
+              }
+            ],
+            "role": "quantity",
+            "label": "(1+i)ⁿ"
+          },
+          {
+            "id": "rule",
+            "slot": "notes",
+            "type": "formula",
+            "tex": "\\res{C_n} = \\q{C_0} \\times (1 + \\q{i})^{\\q{n}}"
+          },
+          {
+            "id": "final",
+            "slot": "notes",
+            "type": "readout",
+            "value": "Cn",
+            "label": "Capital final"
+          },
+          {
+            "id": "gained",
+            "slot": "notes",
+            "type": "readout",
+            "value": "gain",
+            "label": "Intérêts gagnés"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Chaque année, le capital est multiplié par un plus i.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "axes"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "curve"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "rule"
+                ],
+                "how": "type"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Répète n fois : la puissance résume ces multiplications en chaîne.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "final",
+                  "gained"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "La courbe monte de plus en plus raide : les intérêts rapportent des intérêts.",
+            "actions": [
+              {
+                "do": "highlight",
+                "targets": [
+                  "rule"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s5",
+        "index": 4,
+        "role": "example",
+        "title": "1 000 € à 5 % : la dernière année surprend",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            0,
+            12
+          ],
+          "y": [
+            0,
+            17592.061969196377
+          ]
+        },
+        "derived": [
+          {
+            "id": "x10",
+            "expr": "10",
+            "unit": "",
+            "label": "Année 10",
+            "format": "int"
+          },
+          {
+            "id": "capital_x10",
+            "expr": "C0 * (1 + i)^10",
+            "unit": "€",
+            "label": "Capital après 10 ans",
+            "format": "fixed:2"
+          }
+        ],
+        "elements": [
+          {
+            "id": "curve",
+            "slot": "figure",
+            "type": "plot",
+            "fn": "C0 * (1 + i)^x",
+            "domain": [
+              0,
+              10
+            ],
+            "role": "quantity",
+            "label": "Capital (€)"
+          },
+          {
+            "id": "axes",
+            "slot": "figure",
+            "type": "axes",
+            "xLabel": "années",
+            "yLabel": "€",
+            "xTicks": 5,
+            "yTicks": 4,
+            "grid": false
+          },
+          {
+            "id": "mark",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              {
+                "expr": "x10"
+              },
+              {
+                "expr": "capital_x10"
+              }
+            ],
+            "label": "an 10",
+            "role": "result"
+          },
+          {
+            "id": "start_now",
+            "slot": "notes",
+            "type": "readout",
+            "value": "C0",
+            "label": "Capital de départ"
+          },
+          {
+            "id": "final_now",
+            "slot": "notes",
+            "type": "readout",
+            "value": "Cn",
+            "label": "Capital final"
+          },
+          {
+            "id": "jump",
+            "slot": "notes",
+            "type": "text",
+            "text": "Les intérêts rapportent des intérêts.",
+            "emphasis": "strong"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Tu places ton capital à un taux fixe, et tu n’y touches plus.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "axes",
+                  "curve"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "start_now"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Année après année, la courbe se redresse au lieu de rester droite.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "final_now"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "mark"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Regarde la dernière année : ce qu’elle rapporte dépasse la première.",
+            "actions": [
+              {
+                "do": "highlight",
+                "targets": [
+                  "mark",
+                  "final_now"
+                ]
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "jump"
+                ],
+                "how": "type"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s6",
+        "index": 5,
+        "role": "recap",
+        "title": "Trois idées à garder",
+        "layout": "statement",
+        "derived": [],
+        "elements": [
+          {
+            "id": "recap",
+            "slot": "text",
+            "type": "list",
+            "items": [
+              "Tu multiplies chaque année le capital par (1 + i).",
+              "Le capital grossit, donc les intérêts grossissent aussi.",
+              "La formule : Cₙ = C₀ × (1 + i)ⁿ."
+            ]
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Une idée simple : chaque année, tu multiplies ton capital par le même facteur.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "recap.i1"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Et comme le capital grossit, les intérêts grossissent avec lui. La boule de neige.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "recap.i2"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Tu as ta formule, et la réponse : la croissance s’accélère toute seule.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "recap.i3"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "recap.i3"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "quiz": {
+      "questions": [
+        {
+          "prompt": "Deux placements de même capital et même taux : l’un retire les intérêts chaque année, l’autre les laisse sur le compte. Au bout de plusieurs années, lequel a le plus gros capital ?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "Celui qui retire les intérêts"
+            },
+            {
+              "id": "b",
+              "text": "Celui qui laisse les intérêts"
+            },
+            {
+              "id": "c",
+              "text": "Les deux ont exactement le même capital"
+            },
+            {
+              "id": "d",
+              "text": "Cela dépend du taux d’intérêt"
+            }
+          ],
+          "answer_id": "b",
+          "explanation": "Les intérêts laissés sur le compte rapportent eux aussi des intérêts, donc le capital croît plus vite.",
+          "scene_id": "s1"
+        },
+        {
+          "prompt": "Dans la formule du capital après n années, que représente le facteur (1 + i) ?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "Le capital initial"
+            },
+            {
+              "id": "b",
+              "text": "Le taux d’intérêt annuel"
+            },
+            {
+              "id": "c",
+              "text": "Le multiplicateur annuel du capital"
+            },
+            {
+              "id": "d",
+              "text": "Le nombre d’années de placement"
+            }
+          ],
+          "answer_id": "c",
+          "explanation": "Chaque année, le capital est multiplié par (1 + i), qui vaut 1 augmenté du taux.",
+          "scene_id": "s4"
+        },
+        {
+          "prompt": "Sur un placement à intérêts composés, que devient le montant des intérêts gagnés d’une année sur l’autre ?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "Il diminue chaque année"
+            },
+            {
+              "id": "b",
+              "text": "Il reste constant"
+            },
+            {
+              "id": "c",
+              "text": "Il augmente chaque année"
+            },
+            {
+              "id": "d",
+              "text": "Il double chaque année"
+            }
+          ],
+          "answer_id": "c",
+          "explanation": "Comme le capital grossit, les intérêts calculés dessus grossissent aussi, donc ils augmentent chaque année.",
+          "scene_id": "s3"
+        }
+      ]
+    }
+  }
+}

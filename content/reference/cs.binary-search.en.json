@@ -1,0 +1,1264 @@
+{
+  "slug": "cs/binary-search",
+  "subject": "cs",
+  "reference_level": "superieur",
+  "language": "en",
+  "title": "Binary search algorithm",
+  "question": "How does binary search work?",
+  "reviewed_by": null,
+  "reviewed_at": null,
+  "verdicts": [
+    {
+      "target": "plan",
+      "status": "corrected",
+      "attempts": 2,
+      "reason": "The halving rule, the worst-case count floor(log2 n)+1, and every derived expression (including the floor(log2 n)+1 formula computed via log10 ratios, and the doubled/halved variants) are mathematically correct and standard, the units and a",
+      "checks": [
+        "structure",
+        "model",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s1",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "The scene uses a sorted list, a target, and the correct worst-case comparison readout L = floor(log2 n) + 1, and the sweep simply varies n to invite a prediction; no statement is scientificially wrong or contradicted by the visuals.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s2",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "The scene correctly illustrates the guess-my-number analogy: guessing 50, then discarding the left half when told \"too low,\" and guessing 75 (too high) narrows the interval, which is the halving behavior the outline intends.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s3",
+      "status": "corrected",
+      "attempts": 3,
+      "reason": "The scene correctly shows the binary search loop: comparing with the midpoint, discarding the half that cannot contain the target by moving lo past mid, and the interval halving each step, all consistent with the outline's key rule.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s4",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "The scene correctly links halving the interval to log base two and shows the worst-case comparison count L = floor(log2 n) + 1, with sweeps and readouts consistent with the standard binary search result.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s5",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "The scene correctly illustrates that binary search on 8 sorted elements takes floor(log2 8)+1 = 4 comparisons, matching the outline's formula, and the narration is consistent with the animation.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s6",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "The recap correctly states that each comparison discards half the candidates, that the worst case grows logarithmically, and that at most L = floor(log2 n)+1 comparisons suffice for n elements.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    }
+  ],
+  "payload": {
+    "version": 1,
+    "plan": {
+      "objective": "Explain why binary search on a sorted array halves the search interval each step, and let you predict the worst-case number of comparisons for n elements.",
+      "prerequisites": [
+        "Sorted array and random access by index",
+        "Floor and ceiling, and logarithms base 2",
+        "Loop invariants: the target, if present, stays inside [lo, hi]"
+      ],
+      "analogy": {
+        "name": "Guessing a number between 1 and 100",
+        "mapping": "Each guess is a comparison at the midpoint; a 'higher' or 'lower' answer discards the half you no longer need, exactly as the algorithm discards half the index range."
+      },
+      "key_rule": {
+        "statement": "Binary search compares the target with the middle element, then keeps only the half that can still contain it, so the interval length roughly halves each step and the worst case is logarithmic in n.",
+        "formula": "L_{\\q{n}} = \\left\\lfloor \\log_2 \\q{n} \\right\\rfloor + 1"
+      },
+      "steps": [
+        {
+          "role": "hook",
+          "intent": "Show a huge sorted list and ask how few checks could find one name.",
+          "visual": "A column of 1024 sorted names; a hand points at one target, then the list shrinks as halves are greyed out."
+        },
+        {
+          "role": "analogy",
+          "intent": "Make halving feel natural through the guess-my-number game.",
+          "visual": "A number line from 1 to 100; a marker jumps to 50, then 25 or 75, while the impossible half fades."
+        },
+        {
+          "role": "mechanism",
+          "intent": "Show the loop: compare with mid, then move lo or hi past mid.",
+          "visual": "Array boxes with lo and hi arrows; mid lights up, one side is crossed out, arrows slide inward each iteration."
+        },
+        {
+          "role": "formula",
+          "intent": "Link the halving to a logarithm and give the exact worst-case count for this loop variant.",
+          "visual": "The interval length n, n/2, n/4 is drawn as bars that shrink; the formula L = floor(log2 n) + 1 writes itself."
+        },
+        {
+          "role": "example",
+          "intent": "Let you predict and then check the count for a concrete n, with a surprising extra comparison.",
+          "visual": "n = 8 boxes; each step greys half, and a counter ticks 1, 2, 3, 4 as the last single box is checked."
+        },
+        {
+          "role": "recap",
+          "intent": "Fix the halving, the log count and the answer to how few checks a huge list needs.",
+          "visual": "Three short lines appear; the last one, the comparison count for the 1024-name list, is highlighted."
+        }
+      ]
+    },
+    "params": [
+      {
+        "id": "n",
+        "symbol": "n",
+        "label": "Number of sorted elements",
+        "unit": "elements",
+        "min": 1,
+        "max": 1000000,
+        "step": 4999.995,
+        "default": 1024,
+        "role": "quantity"
+      }
+    ],
+    "model": {
+      "constants": [],
+      "derived": [
+        {
+          "id": "L",
+          "expr": "floor(log10(n)/log10(2)) + 1",
+          "unit": "comparisons",
+          "label": "Worst-case comparisons",
+          "symbol": "L",
+          "format": "int"
+        },
+        {
+          "id": "L_half",
+          "expr": "floor(log10(max(1,round(n/2)))/log10(2)) + 1",
+          "unit": "comparisons",
+          "label": "Worst case for half the elements",
+          "symbol": "L(n/2)",
+          "format": "int"
+        },
+        {
+          "id": "L_double",
+          "expr": "floor(log10(2*n)/log10(2)) + 1",
+          "unit": "comparisons",
+          "label": "Worst case for double the elements",
+          "symbol": "L(2n)",
+          "format": "int"
+        },
+        {
+          "id": "ratio",
+          "expr": "n / L",
+          "unit": "elements per comparison",
+          "label": "Elements handled per comparison",
+          "symbol": "n/L",
+          "format": "int"
+        }
+      ]
+    },
+    "scenes": [
+      {
+        "id": "s1",
+        "index": 0,
+        "role": "hook",
+        "title": "One name among a million sorted ones",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            0,
+            10
+          ],
+          "y": [
+            0,
+            10
+          ]
+        },
+        "derived": [
+          {
+            "id": "lo_hi",
+            "expr": "1",
+            "unit": "",
+            "label": "Lowest index",
+            "format": "int"
+          },
+          {
+            "id": "hi_hi",
+            "expr": "n",
+            "unit": "",
+            "label": "Highest index",
+            "format": "int"
+          }
+        ],
+        "elements": [
+          {
+            "id": "block",
+            "slot": "figure",
+            "type": "shape",
+            "kind": "rect",
+            "center": [
+              3.2,
+              5
+            ],
+            "width": 1.6,
+            "height": 8.2,
+            "fill": "quantity"
+          },
+          {
+            "id": "marker",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              3.2,
+              7.2
+            ],
+            "label": "target",
+            "role": "action"
+          },
+          {
+            "id": "guess",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              5.6,
+              5
+            ],
+            "label": "mid",
+            "role": "result"
+          },
+          {
+            "id": "half_top",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              3.2,
+              7.2
+            ],
+            "to": [
+              3.2,
+              9.1
+            ],
+            "role": "inkSoft",
+            "style": "dashed"
+          },
+          {
+            "id": "n_now",
+            "slot": "notes",
+            "type": "readout",
+            "value": "n",
+            "label": "Sorted elements"
+          },
+          {
+            "id": "L_now",
+            "slot": "notes",
+            "type": "readout",
+            "value": "L",
+            "label": "Worst-case comparisons"
+          },
+          {
+            "id": "ask",
+            "slot": "notes",
+            "type": "text",
+            "text": "How many checks at most?",
+            "emphasis": "strong"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Here is a sorted list: a million names, one target you need.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "block"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "n_now"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "marker"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "half_top"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Reading it from the top would take a million checks. Happy?",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "guess"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "ask"
+                ],
+                "how": "type"
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Guess how few checks are enough. Watch these numbers while you think.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "L_now"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "sweep",
+                "param": "n",
+                "to": {
+                  "expr": "n / 4"
+                }
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "guess"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s2",
+        "index": 1,
+        "role": "analogy",
+        "title": "Guess a number: each answer erases half",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            0,
+            100
+          ],
+          "y": [
+            -3,
+            3
+          ]
+        },
+        "derived": [
+          {
+            "id": "lo2",
+            "expr": "51",
+            "unit": "",
+            "label": "",
+            "format": "int"
+          },
+          {
+            "id": "mid2",
+            "expr": "75",
+            "unit": "",
+            "label": "",
+            "format": "int"
+          },
+          {
+            "id": "lo3",
+            "expr": "51",
+            "unit": "",
+            "label": "",
+            "format": "int"
+          },
+          {
+            "id": "hi3",
+            "expr": "62",
+            "unit": "",
+            "label": "",
+            "format": "int"
+          },
+          {
+            "id": "mid3",
+            "expr": "56",
+            "unit": "",
+            "label": "",
+            "format": "int"
+          },
+          {
+            "id": "len3",
+            "expr": "12",
+            "unit": "",
+            "label": "",
+            "format": "int"
+          }
+        ],
+        "elements": [
+          {
+            "id": "axis",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              2,
+              0
+            ],
+            "to": [
+              98,
+              0
+            ],
+            "role": "ink"
+          },
+          {
+            "id": "tick1",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              1,
+              0
+            ],
+            "label": "1"
+          },
+          {
+            "id": "tick100",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              100,
+              0
+            ],
+            "label": "100"
+          },
+          {
+            "id": "marker1",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              50,
+              1.2
+            ],
+            "label": "50",
+            "role": "quantity"
+          },
+          {
+            "id": "drop1",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              50,
+              0
+            ],
+            "to": [
+              50,
+              1.2
+            ],
+            "style": "dashed"
+          },
+          {
+            "id": "marker2",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              75,
+              1.2
+            ],
+            "label": "75",
+            "role": "quantity"
+          },
+          {
+            "id": "drop2",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              75,
+              0
+            ],
+            "to": [
+              75,
+              1.2
+            ],
+            "role": "quantity",
+            "style": "dashed"
+          },
+          {
+            "id": "left_half",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              2,
+              0
+            ],
+            "to": [
+              50,
+              0
+            ],
+            "role": "inkSoft",
+            "style": "dashed"
+          },
+          {
+            "id": "marker3",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              56,
+              1.2
+            ],
+            "role": "quantity"
+          },
+          {
+            "id": "drop3",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              56,
+              0
+            ],
+            "to": [
+              56,
+              1.2
+            ],
+            "role": "quantity",
+            "style": "dashed"
+          },
+          {
+            "id": "tick51",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              51,
+              0
+            ]
+          },
+          {
+            "id": "tick62",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              62,
+              0
+            ],
+            "label": "62"
+          },
+          {
+            "id": "game",
+            "slot": "notes",
+            "type": "text",
+            "text": "1–100. Each answer erases half.",
+            "emphasis": "strong"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "I think of a number between one and a hundred. Your first guess is fifty.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "axis",
+                  "tick1",
+                  "tick100"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "marker1",
+                  "drop1"
+                ],
+                "how": "fade",
+                "at": 0.5
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Too low, I say. Everything left of fifty is now impossible.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "left_half"
+                ],
+                "how": "draw",
+                "at": 0.2
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "marker2",
+                  "drop2"
+                ],
+                "how": "fade",
+                "at": 0.6
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "You guess seventy-five: too high. The floor has already shortened the list.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "tick51",
+                  "tick62"
+                ],
+                "how": "fade",
+                "at": 0.2
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "marker3",
+                  "drop3",
+                  "game"
+                ],
+                "how": "type",
+                "at": 0.6
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s3",
+        "index": 2,
+        "role": "mechanism",
+        "title": "Keep the half that can still hold the target",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            0,
+            10
+          ],
+          "y": [
+            0,
+            6
+          ]
+        },
+        "derived": [
+          {
+            "id": "n0",
+            "expr": "clamp(round(log10(max(2,n))/log10(2)),3,16)",
+            "unit": "cells",
+            "label": "Array length shown",
+            "format": "int"
+          },
+          {
+            "id": "hi0",
+            "expr": "n0 - 1",
+            "unit": "",
+            "label": "Last index",
+            "format": "int"
+          },
+          {
+            "id": "mid0",
+            "expr": "floor((n0 - 1)/2)",
+            "unit": "",
+            "label": "First midpoint",
+            "format": "int"
+          }
+        ],
+        "elements": [
+          {
+            "id": "cells",
+            "slot": "figure",
+            "type": "bars",
+            "items": [
+              {
+                "label": "a0",
+                "value": 1
+              },
+              {
+                "label": "a1",
+                "value": 1
+              },
+              {
+                "label": "a2",
+                "value": 1
+              },
+              {
+                "label": "a3",
+                "value": 1
+              },
+              {
+                "label": "a4",
+                "value": 1
+              },
+              {
+                "label": "a5",
+                "value": 1
+              }
+            ],
+            "unit": "sorted"
+          },
+          {
+            "id": "n_now",
+            "slot": "notes",
+            "type": "readout",
+            "value": "n0",
+            "label": "Cells still in range"
+          },
+          {
+            "id": "mid_now",
+            "slot": "notes",
+            "type": "readout",
+            "value": "mid0",
+            "label": "Index of mid"
+          },
+          {
+            "id": "rule",
+            "slot": "notes",
+            "type": "text",
+            "text": "Keep only the half that can hold the target.",
+            "emphasis": "strong"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Compare the target with the middle box: that is your one look inside.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "cells"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "mid_now"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Too small? Everything left of mid is impossible, so lo jumps past mid.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "n_now"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "cells"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "The interval you still must search has just halved. Feel how fast that shrinks.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "rule"
+                ],
+                "how": "type"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "cells"
+                ],
+                "how": "fade"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s4",
+        "index": 3,
+        "role": "formula",
+        "title": "Halving the interval is a logarithm",
+        "layout": "formula-focus",
+        "world": {
+          "x": [
+            0,
+            12
+          ],
+          "y": [
+            0,
+            4
+          ]
+        },
+        "derived": [
+          {
+            "id": "half_n",
+            "expr": "max(1, round(n/2))",
+            "unit": "elements",
+            "label": "Half the interval",
+            "symbol": "n/2",
+            "format": "int"
+          },
+          {
+            "id": "quarter_n",
+            "expr": "max(1, round(n/4))",
+            "unit": "elements",
+            "label": "A quarter of the interval",
+            "symbol": "n/4",
+            "format": "int"
+          }
+        ],
+        "elements": [
+          {
+            "id": "bars",
+            "slot": "figure",
+            "type": "bars",
+            "items": [
+              {
+                "label": "n",
+                "value": {
+                  "expr": "n"
+                },
+                "role": "quantity"
+              },
+              {
+                "label": "n/2",
+                "value": {
+                  "expr": "half_n"
+                },
+                "role": "quantity"
+              },
+              {
+                "label": "n/4",
+                "value": {
+                  "expr": "quarter_n"
+                },
+                "role": "quantity"
+              }
+            ],
+            "unit": "elements"
+          },
+          {
+            "id": "rule",
+            "slot": "formula",
+            "type": "formula",
+            "tex": "L_{\\q{n}} = \\left\\lfloor \\log_2 \\q{n} \\right\\rfloor + 1"
+          },
+          {
+            "id": "read_n",
+            "slot": "readout",
+            "type": "readout",
+            "value": "n",
+            "label": "Elements"
+          },
+          {
+            "id": "read_L",
+            "slot": "readout",
+            "type": "readout",
+            "value": "L",
+            "label": "Worst-case comparisons"
+          },
+          {
+            "id": "read_ratio",
+            "slot": "readout",
+            "type": "readout",
+            "value": "ratio",
+            "label": "Elements per comparison"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Each step halves the interval. So how many halvings until one element is left?",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "bars"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "read_n"
+                ],
+                "how": "fade",
+                "at": 0.5
+              },
+              {
+                "do": "sweep",
+                "param": "n",
+                "to": {
+                  "expr": "2 * n"
+                },
+                "at": 0.4
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "That number is the logarithm base two. Guess what happens when n doubles.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "rule"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "read_L"
+                ],
+                "how": "fade",
+                "at": 0.4
+              },
+              {
+                "do": "sweep",
+                "param": "n",
+                "to": {
+                  "expr": "max(1, round(n/2))"
+                },
+                "at": 0.6
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "The count only grows by one, while n doubles. That is the whole point.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "read_ratio"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "rule"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s5",
+        "index": 4,
+        "role": "example",
+        "title": "Eight boxes, four checks: count them",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            0,
+            10
+          ],
+          "y": [
+            0,
+            6
+          ]
+        },
+        "derived": [
+          {
+            "id": "n8_L",
+            "expr": "3+1",
+            "unit": "comparisons",
+            "label": "Worst case for n = 8",
+            "symbol": "L(8)",
+            "format": "int"
+          }
+        ],
+        "elements": [
+          {
+            "id": "arr",
+            "slot": "figure",
+            "type": "sim.array",
+            "values": [
+              3,
+              8,
+              12,
+              17,
+              23,
+              31,
+              44,
+              58
+            ],
+            "algorithm": "binary-search",
+            "target": 44,
+            "step": 0
+          },
+          {
+            "id": "worst",
+            "slot": "notes",
+            "type": "readout",
+            "value": "n8_L",
+            "label": "Worst case, n = 8"
+          },
+          {
+            "id": "note",
+            "slot": "notes",
+            "type": "text",
+            "text": "Eight, four, two, one.",
+            "emphasis": "strong"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Eight sorted boxes, target 44. Predict the number of comparisons before I run it.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "arr"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Watch the interval shrink: eight, four, two, one.",
+            "actions": [
+              {
+                "do": "play",
+                "target": "arr",
+                "from": 0,
+                "to": 3
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "note"
+                ],
+                "how": "type"
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Four checks, one of them on the last single box. That extra one surprises you.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "worst"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "worst"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s6",
+        "index": 5,
+        "role": "recap",
+        "title": "Halve, count the log, check few",
+        "layout": "statement",
+        "derived": [],
+        "elements": [
+          {
+            "id": "recap",
+            "slot": "text",
+            "type": "list",
+            "items": [
+              "Each comparison against the middle discards half the candidates.",
+              "The interval halves every step, so the worst case grows like log base 2 of n.",
+              "For a sorted list of {{n|int}} names, at most {{L|int}} comparisons suffice."
+            ]
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "One: compare with the middle, and half the list is gone for good.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "recap"
+                ],
+                "how": "type"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Two: the interval halves each step, so the worst case grows like a logarithm.",
+            "actions": []
+          },
+          {
+            "id": "b3",
+            "narration": "Three: your huge list needs at most {{L|int}} checks. Logarithmic, not thousands.",
+            "actions": [
+              {
+                "do": "highlight",
+                "targets": [
+                  "recap.i3"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "quiz": {
+      "questions": [
+        {
+          "prompt": "You search a sorted array by comparing the target with the middle element and keeping only the half that could still contain it. What happens to the size of the remaining search interval after each comparison?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "It decreases by one element"
+            },
+            {
+              "id": "b",
+              "text": "It roughly halves"
+            },
+            {
+              "id": "c",
+              "text": "It stays the same until the end"
+            },
+            {
+              "id": "d",
+              "text": "It roughly doubles"
+            }
+          ],
+          "answer_id": "b",
+          "explanation": "Discarding the impossible half leaves an interval about half as long, which is why the search shrinks so fast.",
+          "scene_id": "s3"
+        },
+        {
+          "prompt": "If you double the number of sorted elements n, how does the worst-case number of comparisons for binary search change?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "It doubles"
+            },
+            {
+              "id": "b",
+              "text": "It stays exactly the same"
+            },
+            {
+              "id": "c",
+              "text": "It increases by one"
+            },
+            {
+              "id": "d",
+              "text": "It quadruples"
+            }
+          ],
+          "answer_id": "c",
+          "explanation": "Doubling n adds exactly one more halving, so the worst-case count grows by one comparison.",
+          "scene_id": "s4"
+        },
+        {
+          "prompt": "For a sorted array of 8 elements, the interval sizes during binary search are 8, 4, 2, 1. Why does the worst case need 4 comparisons, not 3?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "Because the final interval of size one still requires a comparison"
+            },
+            {
+              "id": "b",
+              "text": "Because the interval sometimes fails to halve exactly"
+            },
+            {
+              "id": "c",
+              "text": "Because the first comparison does not count"
+            },
+            {
+              "id": "d",
+              "text": "Because the target can be found only at the last step"
+            }
+          ],
+          "answer_id": "a",
+          "explanation": "The count includes the check on the last single element, so it is one more than the number of halvings.",
+          "scene_id": "s5"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,1231 @@
+{
+  "slug": "maths/derivative",
+  "subject": "maths",
+  "reference_level": "lycee",
+  "language": "fr",
+  "title": "Dérivée d'une fonction",
+  "question": "C'est quoi une dérivée ?",
+  "reviewed_by": null,
+  "reviewed_at": null,
+  "verdicts": [
+    {
+      "target": "plan",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "Le cours est exact : la dérivée est bien définie comme limite du taux de variation et coefficient directeur de la tangente, le calcul sur x² donne f'(a)=2a et f'(2a)=4a, et l'analogie du compteur de vitesse illustre correctement la vitesse ",
+      "checks": [
+        "structure",
+        "model",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s1",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "La scène illustre correctement le questionnement du plan : la voiture roule, le compteur est présenté et la question de la vitesse instantanée est posée, sans énoncé scientifique faux.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s2",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "La scène illustre correctement la distinction entre vitesse moyenne sur un trajet et vitesse instantanée au compteur, sans énoncé faux.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s3",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "La scène montre correctement la corde AB qui se rapproche de la tangente lorsque h rétrécit, et la pente de la corde tend bien vers la dérivée f'(a)=2a ; les noms et valeurs affichés sont exacts et la narration est en français.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s4",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "La scène illustre correctement le taux de variation et sa limite : quand h tend vers zéro, la corde tend vers la tangente et le quotient se stabilise sur f'(a), en cohérence avec la règle clé et une narration en français.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s5",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "La scène montre correctement que pour f(x)=x², la pente en 2a vaut 4a, soit le double de la pente en a valant 2a, et la narration est en français.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    },
+    {
+      "target": "s6",
+      "status": "validated",
+      "attempts": 1,
+      "reason": "Ce récapitulatif énonce correctement les trois idées clés — pente de la tangente, limite du taux de variation quand h tend vers zéro, et vitesse instantanée — en français et sans contradiction avec la règle du cours.",
+      "checks": [
+        "structure",
+        "references",
+        "model",
+        "readability",
+        "framing",
+        "pedagogy",
+        "accuracy"
+      ]
+    }
+  ],
+  "payload": {
+    "version": 1,
+    "plan": {
+      "objective": "Savoir que la dérivée d’une fonction en un point est la pente de la tangente, et qu’elle mesure la vitesse de variation.",
+      "prerequisites": [
+        "Lire un graphique : abscisse, ordonnée",
+        "Calculer un coefficient directeur avec (y₂−y₁)/(x₂−x₁)",
+        "Notion de fonction"
+      ],
+      "analogy": {
+        "name": "Le compteur de vitesse",
+        "mapping": "La position en fonction du temps joue le rôle de la courbe ; la vitesse affichée sur le compteur joue le rôle de la dérivée à cet instant ; une portion raide est une vitesse élevée."
+      },
+      "key_rule": {
+        "statement": "La dérivée de f en a est le coefficient directeur de la tangente à la courbe au point d’abscisse a ; c’est la limite du taux de variation quand h tend vers 0.",
+        "formula": "f'(\\q{a}) = \\lim_{h \\to 0} \\dfrac{f(\\q{a}+h) - f(\\q{a})}{h}"
+      },
+      "steps": [
+        {
+          "role": "hook",
+          "intent": "Faire remarquer que la vitesse affichée change tout le temps, et se demander laquelle choisir.",
+          "visual": "Une voiture roule, le compteur grimpe puis redescend ; la question « vitesse à l’instant t ? » clignote."
+        },
+        {
+          "role": "analogy",
+          "intent": "Faire sentir qu’on peut parler de vitesse à un instant précis, pas seulement en moyenne.",
+          "visual": "Le trajet dessiné sur une carte avec deux bornes ; le chrono entre les bornes donne la vitesse moyenne, le compteur donne l’instantané."
+        },
+        {
+          "role": "mechanism",
+          "intent": "Montrer la corde entre deux points qui se rapproche de la tangente quand h rétrécit.",
+          "visual": "Sur la courbe, le point B glisse vers A ; la corde AB pivote et devient la tangente."
+        },
+        {
+          "role": "formula",
+          "intent": "Nommer le taux de variation et sa limite, et relier h à zéro.",
+          "visual": "La formule s’écrit ; h rétrécit en direct et la valeur du quotient se stabilise sur un nombre."
+        },
+        {
+          "role": "example",
+          "intent": "Calculer une dérivée sur un cas simple et faire apparaître un résultat contre-intuitif.",
+          "visual": "La parabole y = x², tangente en x = 1, pente 2 ; le curseur s’éloigne et la pente double."
+        },
+        {
+          "role": "recap",
+          "intent": "Fixer les trois idées : pente de la tangente, limite du taux de variation, vitesse instantanée.",
+          "visual": "Trois phrases courtes ; la dernière répond à la question du compteur, surlignée."
+        }
+      ]
+    },
+    "params": [
+      {
+        "id": "a",
+        "symbol": "a",
+        "label": "Abscisse du point étudié",
+        "unit": "",
+        "min": -3,
+        "max": 3,
+        "step": 0.1,
+        "default": 1,
+        "role": "quantity"
+      },
+      {
+        "id": "h",
+        "symbol": "h",
+        "label": "Écart entre les deux points",
+        "unit": "",
+        "min": 0.01,
+        "max": 2,
+        "step": 0.01,
+        "default": 1,
+        "role": "quantity"
+      }
+    ],
+    "model": {
+      "constants": [],
+      "derived": [
+        {
+          "id": "fa",
+          "expr": "a^2",
+          "unit": "",
+          "label": "f(a)",
+          "symbol": "f(a)",
+          "format": "fixed:2"
+        },
+        {
+          "id": "taux",
+          "expr": "((a+h)^2 - a^2) / h",
+          "unit": "",
+          "label": "Taux de variation",
+          "symbol": "(f(a+h)−f(a))/h",
+          "format": "fixed:2"
+        },
+        {
+          "id": "fp",
+          "expr": "2 * a",
+          "unit": "",
+          "label": "Dérivée f'(a)",
+          "symbol": "f'(a)",
+          "format": "fixed:2"
+        },
+        {
+          "id": "fp_double",
+          "expr": "2 * (2 * a)",
+          "unit": "",
+          "label": "Dérivée au double de a",
+          "symbol": "f'(2a)",
+          "format": "fixed:2"
+        }
+      ]
+    },
+    "scenes": [
+      {
+        "id": "s1",
+        "index": 0,
+        "role": "hook",
+        "title": "Le compteur ne tient pas en place",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            0,
+            10
+          ],
+          "y": [
+            0,
+            6
+          ]
+        },
+        "derived": [],
+        "elements": [
+          {
+            "id": "road",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              0,
+              1.2
+            ],
+            "to": [
+              10,
+              1.2
+            ],
+            "role": "inkSoft"
+          },
+          {
+            "id": "car",
+            "slot": "figure",
+            "type": "object",
+            "kind": "block",
+            "at": [
+              1.5,
+              2.3
+            ],
+            "size": 1.2,
+            "label": "La voiture"
+          },
+          {
+            "id": "sped",
+            "slot": "notes",
+            "type": "text",
+            "text": "x",
+            "role": "quantity"
+          },
+          {
+            "id": "gauge",
+            "slot": "notes",
+            "type": "readout",
+            "value": "fp",
+            "label": "Compteur (km/h)"
+          },
+          {
+            "id": "question",
+            "slot": "notes",
+            "type": "text",
+            "text": "Vitesse à cet instant : laquelle ?",
+            "emphasis": "strong"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "La voiture roule. Regarde le compteur : il grimpe, puis il redescend.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "road",
+                  "car"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "sped"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Ta vitesse change à chaque seconde. Alors laquelle afficher ?",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "gauge"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Il existe pourtant une vitesse précise à cet instant. Où la lire ?",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "question"
+                ],
+                "how": "type"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s2",
+        "index": 1,
+        "role": "analogy",
+        "title": "Moyenne sur le trajet, instant sur le compteur",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            0,
+            10
+          ],
+          "y": [
+            0,
+            6
+          ]
+        },
+        "derived": [
+          {
+            "id": "x_car",
+            "expr": "1.5 + 6.5 * 0.5",
+            "unit": "",
+            "label": "position de la voiture",
+            "format": "fixed:2"
+          },
+          {
+            "id": "x_mid",
+            "expr": "1.5 + 3.25",
+            "unit": "",
+            "label": "milieu du trajet",
+            "format": "fixed:2"
+          }
+        ],
+        "elements": [
+          {
+            "id": "road",
+            "slot": "figure",
+            "type": "segment",
+            "from": [
+              0.8,
+              2
+            ],
+            "to": [
+              9.2,
+              2
+            ],
+            "role": "ink"
+          },
+          {
+            "id": "borne_dep",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              0.8,
+              2
+            ],
+            "label": "Départ"
+          },
+          {
+            "id": "borne_arr",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              9.2,
+              2
+            ],
+            "label": "Arrivée"
+          },
+          {
+            "id": "car",
+            "slot": "figure",
+            "type": "object",
+            "kind": "block",
+            "at": [
+              1.5,
+              3
+            ],
+            "size": 0.9,
+            "role": "action"
+          },
+          {
+            "id": "borne_dep_v",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              0.8,
+              3
+            ],
+            "label": "0 km",
+            "role": "quantity"
+          },
+          {
+            "id": "borne_arr_v",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              9.2,
+              3
+            ],
+            "label": "9 km",
+            "role": "quantity"
+          },
+          {
+            "id": "moment",
+            "slot": "notes",
+            "type": "text",
+            "text": "Un instant précis, pas une moyenne.",
+            "emphasis": "strong"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Deux bornes, un chrono : tu obtiens la vitesse moyenne du trajet.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "road",
+                  "borne_dep",
+                  "borne_arr"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "borne_dep_v",
+                  "borne_arr_v"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Mais le compteur, lui, bouge sans arrêt pendant que tu roules.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "car"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "move",
+                "target": "car",
+                "to": [
+                  {
+                    "expr": "x_car"
+                  },
+                  3
+                ]
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Vitesse moyenne sur un trajet, vitesse instantanée sur le compteur : deux mots différents.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "moment"
+                ],
+                "how": "type"
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "car"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s3",
+        "index": 2,
+        "role": "mechanism",
+        "title": "La corde glisse vers la tangente",
+        "layout": "figure-notes",
+        "world": {
+          "x": [
+            -3.4,
+            4.5920000000000005
+          ],
+          "y": [
+            -2.2,
+            17.456
+          ]
+        },
+        "derived": [
+          {
+            "id": "xb",
+            "expr": "a + h",
+            "unit": "",
+            "label": "Abscisse de B",
+            "format": "fixed:2"
+          },
+          {
+            "id": "fb",
+            "expr": "(a+h)^2",
+            "unit": "",
+            "label": "f(a+h)",
+            "format": "fixed:2"
+          },
+          {
+            "id": "pt_bx",
+            "expr": "a + h",
+            "unit": "",
+            "label": "x de B",
+            "format": "fixed:2"
+          },
+          {
+            "id": "pt_by",
+            "expr": "(a+h)^2",
+            "unit": "",
+            "label": "y de B",
+            "format": "fixed:2"
+          }
+        ],
+        "elements": [
+          {
+            "id": "ax",
+            "slot": "figure",
+            "type": "axes",
+            "xLabel": "x",
+            "yLabel": "y",
+            "xTicks": 6,
+            "yTicks": 4,
+            "grid": true
+          },
+          {
+            "id": "curve",
+            "slot": "figure",
+            "type": "plot",
+            "fn": "x^2",
+            "domain": [
+              -3.15,
+              3.15
+            ],
+            "role": "ink"
+          },
+          {
+            "id": "ptA",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              {
+                "expr": "a"
+              },
+              {
+                "expr": "fa"
+              }
+            ],
+            "label": "A",
+            "role": "quantity"
+          },
+          {
+            "id": "ptB",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              {
+                "expr": "pt_bx"
+              },
+              {
+                "expr": "pt_by"
+              }
+            ],
+            "label": "B",
+            "role": "action"
+          },
+          {
+            "id": "chord",
+            "slot": "figure",
+            "type": "segment",
+            "from": "ptA",
+            "to": "ptB",
+            "role": "action"
+          },
+          {
+            "id": "tan",
+            "slot": "figure",
+            "type": "tangent",
+            "plot": "curve",
+            "at": {
+              "expr": "a"
+            },
+            "showSlope": true,
+            "role": "result"
+          },
+          {
+            "id": "h_now",
+            "slot": "notes",
+            "type": "readout",
+            "value": "h",
+            "label": "Écart h"
+          },
+          {
+            "id": "taux_now",
+            "slot": "notes",
+            "type": "readout",
+            "value": "taux",
+            "label": "Pente de la corde"
+          },
+          {
+            "id": "idea",
+            "slot": "notes",
+            "type": "text",
+            "text": "Quand h rétrécit, la corde devient la tangente.",
+            "emphasis": "strong"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Voici A et B sur la parabole. La corde qui les relie a une pente précise.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "ax",
+                  "curve"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "ptA"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "ptB",
+                  "chord"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "h_now",
+                  "taux_now"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Fais glisser B vers A : l’écart h rétrécit. Devine ce que devient la corde.",
+            "actions": [
+              {
+                "do": "sweep",
+                "param": "h",
+                "to": 0.05
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Elle se confond avec la tangente. Sa pente, elle, se stabilise : c’est la dérivée.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "tan"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "idea"
+                ],
+                "how": "type"
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "tan",
+                  "idea"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s4",
+        "index": 3,
+        "role": "formula",
+        "title": "Le taux de variation et sa limite",
+        "layout": "formula-focus",
+        "world": {
+          "x": [
+            -3,
+            4.5600000000000005
+          ],
+          "y": [
+            -1,
+            17.36
+          ]
+        },
+        "derived": [],
+        "elements": [
+          {
+            "id": "def",
+            "slot": "formula",
+            "type": "formula",
+            "tex": "f'(\\q{a}) = \\lim_{h \\to 0} \\dfrac{f(\\q{a}+h) - f(\\q{a})}{h}"
+          },
+          {
+            "id": "curve",
+            "slot": "figure",
+            "type": "plot",
+            "fn": "x^2",
+            "domain": [
+              -3,
+              3
+            ],
+            "role": "ink",
+            "label": "y = x²"
+          },
+          {
+            "id": "A",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              {
+                "expr": "a"
+              },
+              {
+                "expr": "fa"
+              }
+            ],
+            "label": "A",
+            "role": "quantity"
+          },
+          {
+            "id": "B",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              {
+                "expr": "a + h"
+              },
+              {
+                "expr": "(a + h)^2"
+              }
+            ],
+            "label": "B",
+            "role": "quantity"
+          },
+          {
+            "id": "corde",
+            "slot": "figure",
+            "type": "segment",
+            "from": "A",
+            "to": "B",
+            "role": "quantity"
+          },
+          {
+            "id": "rate",
+            "slot": "readout",
+            "type": "readout",
+            "value": "taux",
+            "label": "Taux de variation"
+          },
+          {
+            "id": "limit",
+            "slot": "readout",
+            "type": "readout",
+            "value": "fp",
+            "label": "Limite : f'(a)"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Le quotient de la corde, c’est le taux de variation. Regarde-le pendant que h rétrécit.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "curve",
+                  "A",
+                  "rate"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "B",
+                  "corde"
+                ],
+                "how": "draw",
+                "at": 0.8
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "def"
+                ],
+                "how": "type",
+                "at": 1
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Quand h tend vers zéro, B glisse vers A et la corde devient la tangente.",
+            "actions": [
+              {
+                "do": "sweep",
+                "param": "h",
+                "to": 0.01
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Le quotient se stabilise : sa limite, c’est la dérivée. La pente de la tangente.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "limit"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "def"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s5",
+        "index": 4,
+        "role": "example",
+        "title": "La pente double quand x double",
+        "layout": "formula-focus",
+        "world": {
+          "x": [
+            -6.96,
+            6.96
+          ],
+          "y": [
+            -1,
+            38.96
+          ]
+        },
+        "derived": [
+          {
+            "id": "a2",
+            "expr": "2 * a",
+            "unit": "",
+            "label": "Abscisse doublée",
+            "format": "fixed:2"
+          },
+          {
+            "id": "fa2",
+            "expr": "(2*a)^2",
+            "unit": "",
+            "label": "f(2a)",
+            "format": "fixed:2"
+          }
+        ],
+        "elements": [
+          {
+            "id": "axes",
+            "slot": "figure",
+            "type": "axes",
+            "xLabel": "x",
+            "yLabel": "y",
+            "xTicks": 5,
+            "yTicks": 3
+          },
+          {
+            "id": "parabola",
+            "slot": "figure",
+            "type": "plot",
+            "fn": "x^2",
+            "domain": [
+              -3,
+              3
+            ],
+            "role": "ink"
+          },
+          {
+            "id": "pt_a",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              {
+                "expr": "a"
+              },
+              {
+                "expr": "a^2"
+              }
+            ],
+            "label": "A"
+          },
+          {
+            "id": "tan_a",
+            "slot": "figure",
+            "type": "tangent",
+            "plot": "parabola",
+            "at": {
+              "expr": "a"
+            },
+            "showSlope": true,
+            "role": "action"
+          },
+          {
+            "id": "pt_b",
+            "slot": "figure",
+            "type": "point",
+            "at": [
+              {
+                "expr": "a2"
+              },
+              {
+                "expr": "fa2"
+              }
+            ],
+            "role": "quantity"
+          },
+          {
+            "id": "tan_b",
+            "slot": "figure",
+            "type": "tangent",
+            "plot": "parabola",
+            "at": {
+              "expr": "a2"
+            },
+            "showSlope": true,
+            "role": "quantity"
+          },
+          {
+            "id": "form",
+            "slot": "formula",
+            "type": "formula",
+            "tex": "f(x)=x^2 \\quad\\Rightarrow\\quad f'(\\q{a}) = 2\\q{a}"
+          },
+          {
+            "id": "r_a",
+            "slot": "readout",
+            "type": "readout",
+            "value": "a",
+            "label": "Abscisse a"
+          },
+          {
+            "id": "r_fp",
+            "slot": "readout",
+            "type": "readout",
+            "value": "fp",
+            "label": "Pente en a"
+          },
+          {
+            "id": "r_fp2",
+            "slot": "readout",
+            "type": "readout",
+            "value": "fp_double",
+            "label": "Pente en 2a"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Prends la parabole y égale x au carré. En a, la tangente monte de deux a.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "axes",
+                  "parabola"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "pt_a",
+                  "tan_a"
+                ],
+                "how": "draw"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "form"
+                ],
+                "how": "type"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "r_a",
+                  "r_fp"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Devine : si l’abscisse double, la pente fait quoi ?",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "pt_b",
+                  "tan_b"
+                ],
+                "how": "fade"
+              },
+              {
+                "do": "show",
+                "targets": [
+                  "r_fp2"
+                ],
+                "how": "fade"
+              }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Elle double aussi. La pente, elle, grandit deux fois plus vite.",
+            "actions": [
+              {
+                "do": "sweep",
+                "param": "a",
+                "to": {
+                  "expr": "2 * a"
+                }
+              },
+              {
+                "do": "highlight",
+                "targets": [
+                  "tan_b"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s6",
+        "index": 5,
+        "role": "recap",
+        "title": "Trois idées à garder",
+        "layout": "statement",
+        "derived": [],
+        "elements": [
+          {
+            "id": "recap",
+            "slot": "text",
+            "type": "list",
+            "items": [
+              "La dérivée en a, c’est la pente de la tangente en ce point.",
+              "C’est la limite du taux de variation quand l’écart h tend vers zéro.",
+              "C’est la vitesse instantanée : celle que le compteur affiche."
+            ]
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "Première idée : la dérivée en a, c’est la pente de la tangente.",
+            "actions": [
+              {
+                "do": "show",
+                "targets": [
+                  "recap"
+                ],
+                "how": "type"
+              }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Deuxième idée : c’est la limite du taux de variation quand h fond vers zéro.",
+            "actions": []
+          },
+          {
+            "id": "b3",
+            "narration": "Et la troisième répond au compteur : la dérivée, c’est la vitesse instantanée.",
+            "actions": [
+              {
+                "do": "highlight",
+                "targets": [
+                  "recap.i3"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "quiz": {
+      "questions": [
+        {
+          "prompt": "Sur une route de montagne, le compteur de vitesse bouge sans arrêt. Quelle grandeur la dérivée de la position par rapport au temps représente-t-elle ?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "La vitesse moyenne sur tout le trajet"
+            },
+            {
+              "id": "b",
+              "text": "La vitesse instantanée à cet instant"
+            },
+            {
+              "id": "c",
+              "text": "La distance totale parcourue"
+            },
+            {
+              "id": "d",
+              "text": "L’accélération moyenne du trajet"
+            }
+          ],
+          "answer_id": "b",
+          "explanation": "La dérivée donne la vitesse à un instant précis, celle que le compteur affiche, pas une moyenne sur un trajet.",
+          "scene_id": "s2"
+        },
+        {
+          "prompt": "Sur une courbe, tu rapproches de plus en plus le point B du point A. Que devient la pente de la corde AB ?",
+          "choices": [
+            {
+              "id": "a",
+              "text": "Elle se rapproche de la pente de la tangente en A"
+            },
+            {
+              "id": "b",
+              "text": "Elle augmente sans limite"
+            },
+            {
+              "id": "c",
+              "text": "Elle tend vers zéro"
+            },
+            {
+              "id": "d",
+              "text": "Elle devient égale à la pente de l’axe des abscisses"
+            }
+          ],
+          "answer_id": "a",
+          "explanation": "Quand l’écart h tend vers zéro, la corde se confond avec la tangente et sa pente se stabilise vers la dérivée.",
+          "scene_id": "s3"
+        },
+        {
+          "prompt": "Pour la parabole y = x², la pente de la tangente vaut 2a au point d’abscisse a. Si tu doubles l’abscisse a, la pente…",
+          "choices": [
+            {
+              "id": "a",
+              "text": "reste la même"
+            },
+            {
+              "id": "b",
+              "text": "est divisée par deux"
+            },
+            {
+              "id": "c",
+              "text": "est multipliée par quatre"
+            },
+            {
+              "id": "d",
+              "text": "double"
+            }
+          ],
+          "answer_id": "d",
+          "explanation": "La pente vaut 2a : elle est proportionnelle à a, donc elle double quand a double.",
+          "scene_id": "s5"
+        }
+      ]
+    }
+  }
+}
