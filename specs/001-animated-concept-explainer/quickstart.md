@@ -26,7 +26,7 @@ pnpm reference:build               # valide et indexe les 24 explications de ré
 |---|---|---|
 | Simulé (défaut pour développer et tester) | `LLM_PROVIDER=fixture pnpm dev` | Aucune |
 | Réel | `pnpm dev` | DeepSeek, Azure Speech |
-| Complet, comme en production | `docker compose -f deploy/docker-compose.yml -f deploy/docker-compose.dev.yml up --build` | DeepSeek, Azure Speech |
+| Complet, comme en production | `docker compose --env-file deploy/local.env -f deploy/docker-compose.yml -f deploy/docker-compose.local.yml up --build` (voir `deploy/README.md`, « Essai local ») | DeepSeek, Azure Speech |
 
 L'application répond sur `http://localhost:3000`.
 

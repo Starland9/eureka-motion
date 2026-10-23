@@ -4,6 +4,7 @@ services:
       context: ..
       dockerfile: Dockerfile
     restart: unless-stopped
+    init: true
     env_file:
       - path: .env
         required: false
@@ -11,18 +12,119 @@ services:
       DATABASE_URL: ${DATABASE_URL:?DATABASE_URL is required}
       LLM_API_KEY: ${LLM_API_KEY:?LLM_API_KEY is required}
       RATE_LIMIT_SALT: ${RATE_LIMIT_SALT:?RATE_LIMIT_SALT is required}
-      TTS_PROVIDERS: ${TTS_PROVIDERS:-azure,kokoro}
-      KOKORO_BASE_URL: ${KOKORO_BASE_URL:-}
       MEDIA_DIR: /data/media
     expose:
       - "3000"
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
     volumes:
+      # Narration audio is written here; exports and the worker heartbeat are read from here.
       - media:/data/media
     networks:
       - dokploy-network
+    healthcheck:
+      test:
+        - "CMD"
+        - "node"
+        - "-e"
+        - "fetch('http://127.0.0.1:3000/api/health').then((r) => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))"
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 40s
+
+  worker:
+    build:
+      context: ..
+      dockerfile: workers/render/Dockerfile
+    restart: unless-stopped
+    init: true
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      DATABASE_URL: ${DATABASE_URL:?DATABASE_URL is required}
+      LLM_API_KEY: ${LLM_API_KEY:?LLM_API_KEY is required}
+      MEDIA_DIR: /data/media
+      SANDBOX_DIR: /data/sandbox
+    depends_on:
+      manim:
+        condition: service_started
+        required: false
+    # Lets the current export finish after SIGTERM.
+    stop_grace_period: 3m
+    # Measured: 96 s for the gravity reference with 3 processors, 205 s with 2; peak 1.6 GB.
+    cpus: ${WORKER_CPUS:-3}
+    mem_limit: ${WORKER_MEMORY:-3g}
+    memswap_limit: ${WORKER_MEMORY:-3g}
+    pids_limit: 1024
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    volumes:
+      - media:/data/media
+      - sandbox:/data/sandbox
+    networks:
+      - dokploy-network
+    healthcheck:
+      test:
+        - "CMD"
+        - "node"
+        - "-e"
+        - "const beat = JSON.parse(require('node:fs').readFileSync(process.env.MEDIA_DIR + '/.health/worker.json', 'utf8')); process.exit(Date.now() - Date.parse(beat.render_at) < 60000 ? 0 : 1)"
+      interval: 15s
+      timeout: 5s
+      retries: 4
+      start_period: 60s
+
+  # Runs the Manim code written by the language model: no network, no secret, no env_file.
+  manim:
+    build:
+      context: ../workers/manim
+    restart: unless-stopped
+    init: true
+    network_mode: none
+    ipc: none
+    read_only: true
+    user: "1000:1000"
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    cpus: 2
+    mem_limit: 2g
+    memswap_limit: 2g
+    pids_limit: 256
+    ulimits:
+      core: 0
+    tmpfs:
+      - /tmp:size=1g,mode=1777,noexec,nosuid,nodev
+    volumes:
+      - sandbox:/data/sandbox
+    healthcheck:
+      test:
+        - "CMD"
+        - "python"
+        - "-I"
+        - "-c"
+        - "import os, sys, time; beat = open(os.environ['SANDBOX_DIR'] + '/out/.heartbeat').read(); sys.exit(0 if time.time() - int(beat) < 60 else 1)"
+      interval: 15s
+      timeout: 5s
+      retries: 4
+      start_period: 20s
 
 volumes:
   media:
+  # In memory and capped, so that hostile code cannot fill the disk; emptied once neither
+  # worker nor manim holds it. Plain disk variant: `sandbox: {}`.
+  sandbox:
+    driver_opts:
+      type: tmpfs
+      device: tmpfs
+      o: size=512m,uid=1000,gid=1000,mode=0770,noexec,nosuid,nodev
 
 networks:
   dokploy-network:

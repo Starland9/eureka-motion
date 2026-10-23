@@ -1,0 +1,47 @@
+# Local rehearsal of the production stack (web, worker, manim) with its own database.
+#   docker network create dokploy-network        (once)
+#   cp deploy/local.env.example deploy/local.env
+#   docker compose --env-file deploy/local.env \
+#     -f deploy/docker-compose.yml -f deploy/docker-compose.local.yml up --build
+# The application answers on http://127.0.0.1:3900.
+name: eureka-local
+
+services:
+  db:
+    image: postgres:18-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: eureka
+      POSTGRES_USER: eureka
+      POSTGRES_PASSWORD: eureka
+    volumes:
+      - db-data:/var/lib/postgresql
+    networks:
+      - dokploy-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U eureka -d eureka"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      start_period: 5s
+
+  web:
+    env_file:
+      - path: local.env
+        required: true
+    ports:
+      - "127.0.0.1:3900:3000"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  worker:
+    env_file:
+      - path: local.env
+        required: true
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  db-data:
