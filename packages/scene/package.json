@@ -7,7 +7,9 @@
   "types": "./src/index.ts",
   "exports": {
     ".": "./src/index.ts",
-    "./player": "./src/player.ts"
+    "./player": "./src/player.ts",
+    "./export": "./src/composition/Export.tsx",
+    "./remotion": "./src/remotion/index.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit",
