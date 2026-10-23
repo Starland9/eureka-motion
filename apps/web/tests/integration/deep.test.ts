@@ -466,6 +466,7 @@ describe.skipIf(!database)(
               render_worker: renderWorker,
               deep_worker: false,
             },
+            voices: { kokoro: true },
           });
         },
       );

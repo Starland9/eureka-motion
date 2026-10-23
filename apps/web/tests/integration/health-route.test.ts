@@ -90,7 +90,7 @@ describe("GET /api/health with every dependency stopped", () => {
     const { response, body } = await health();
     expect(response.status).toBe(200);
     expect(response.headers.get("cache-control")).toBe("no-store");
-    expect(body).toEqual({ status: "degraded", checks: STOPPED });
+    expect(body).toEqual({ status: "degraded", checks: STOPPED, voices: {} });
   });
 
   it("lists the five checks of the contract", async () => {
@@ -232,6 +232,127 @@ describe("GET /api/health: voice", () => {
   });
 });
 
+describe("GET /api/health: voices", () => {
+  const POCKET = "http://pocket.test/health";
+  const KOKORO = "http://kokoro.test/health";
+
+  function configureVoices(answers: Record<string, boolean>) {
+    const send = vi.fn(async (url: string) => {
+      if (answers[url] === undefined) throw new Error(`Unexpected request to ${url}`);
+      if (!answers[url]) throw new TypeError("fetch failed");
+      return new Response("ok", { status: 200 });
+    });
+    vi.stubGlobal("fetch", send);
+    vi.stubEnv("TTS_PROVIDERS", "pocket,kokoro");
+    vi.stubEnv("POCKET_BASE_URL", "http://pocket.test");
+    vi.stubEnv("KOKORO_BASE_URL", "http://kokoro.test");
+    return send;
+  }
+
+  const voices = async () => (await health()).body.voices as Record<string, boolean>;
+
+  it("lists a configured voice under its name", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async () => new Response("ok", { status: 200 })),
+    );
+    vi.stubEnv("TTS_PROVIDERS", "kokoro");
+    vi.stubEnv("KOKORO_BASE_URL", "http://kokoro.test");
+    expect(await voices()).toEqual({ kokoro: true });
+  });
+
+  it("lists one entry per configured voice, in the order of the chain", async () => {
+    configureVoices({ [POCKET]: true, [KOKORO]: true });
+    const result = await voices();
+    expect(Object.keys(result)).toEqual(["pocket", "kokoro"]);
+    expect(result).toEqual({ pocket: true, kokoro: true });
+  });
+
+  it("reports a stopped voice as false without lowering checks.voice while another answers", async () => {
+    configureVoices({ [POCKET]: false, [KOKORO]: true });
+    const { body } = await health();
+    expect(body.voices).toEqual({ pocket: false, kokoro: true });
+    expect((body.checks as Record<string, boolean>).voice).toBe(true);
+  });
+
+  it("lowers checks.voice only when every voice is stopped", async () => {
+    configureVoices({ [POCKET]: false, [KOKORO]: false });
+    const { body } = await health();
+    expect(body.voices).toEqual({ pocket: false, kokoro: false });
+    expect((body.checks as Record<string, boolean>).voice).toBe(false);
+  });
+
+  it("is empty when no voice is configured", async () => {
+    const { response, body } = await health();
+    expect(response.status).toBe(200);
+    expect(body.voices).toEqual({});
+  });
+
+  it("does not list a voice that is not configured", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async () => new Response("ok", { status: 200 })),
+    );
+    vi.stubEnv("TTS_PROVIDERS", "azure,kokoro");
+    vi.stubEnv("AZURE_SPEECH_KEY", "");
+    vi.stubEnv("KOKORO_BASE_URL", "http://kokoro.test");
+    expect(await voices()).toEqual({ kokoro: true });
+  });
+
+  it("is empty, without an error, when the chain cannot even be built", async () => {
+    vi.stubEnv("TTS_PROVIDERS", "nonexistent");
+    const { response, body } = await health();
+    expect(response.status).toBe(200);
+    expect(body.voices).toEqual({});
+  });
+
+  it("is not one of the checks", async () => {
+    configureVoices({ [POCKET]: true, [KOKORO]: true });
+    const { body } = await health();
+    expect(Object.keys(body.checks as object)).not.toContain("voices");
+    expect(Object.keys(body)).toEqual(["status", "checks", "voices"]);
+  });
+
+  it("keeps status ok when every check is true, even if a listed voice is stopped", async () => {
+    await writeFile(
+      path.join(scenarioDir, "recorded.json"),
+      JSON.stringify({ name: "recorded", question: "gravité", steps: [] }),
+    );
+    await writeBeat({ render_at: ago(1), deep_at: ago(1) });
+    configureVoices({ [POCKET]: false, [KOKORO]: true });
+    database.ping.mockResolvedValueOnce(true);
+    const { body } = await health();
+    expect(body.voices).toEqual({ pocket: false, kokoro: true });
+    expect(body.status).toBe("ok");
+  });
+
+  it("asks each voice once in 30 seconds across health checks", async () => {
+    const send = configureVoices({ [POCKET]: true, [KOKORO]: true });
+    await health();
+    await health();
+    await health();
+    expect(send.mock.calls.map((call) => call[0]).sort()).toEqual([KOKORO, POCKET]);
+  });
+
+  it("answers 200 with no voices, and a voice check at false, when no voice ever answers", async () => {
+    vi.useFakeTimers({ toFake: ["setTimeout", "clearTimeout"] });
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(() => new Promise<Response>(() => undefined)),
+    );
+    vi.stubEnv("TTS_PROVIDERS", "pocket,kokoro");
+    vi.stubEnv("POCKET_BASE_URL", "http://pocket.test");
+    vi.stubEnv("KOKORO_BASE_URL", "http://kokoro.test");
+    database.ping.mockResolvedValueOnce(false);
+    const pending = health();
+    await vi.advanceTimersByTimeAsync(3_000);
+    const { response, body } = await pending;
+    expect(response.status).toBe(200);
+    expect(body.voices).toEqual({});
+    expect((body.checks as Record<string, boolean>).voice).toBe(false);
+  });
+});
+
 describe("GET /api/health: workers", () => {
   const checks = async () => (await health()).body.checks as Record<string, boolean>;
 
@@ -336,6 +457,7 @@ describe("GET /api/health when everything is available", () => {
         render_worker: true,
         deep_worker: true,
       },
+      voices: { kokoro: true },
     });
   });
 });
