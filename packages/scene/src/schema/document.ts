@@ -468,7 +468,7 @@ const SimFall = z
     height: BindableSchema.describe("Drop height, metres."),
     gravity: BindableSchema.describe("Acceleration, m/s²."),
     object: PictogramSchema.optional(),
-    showVelocity: z.boolean().optional(),
+    showVelocity: z.boolean().optional().describe("The velocity arrow; shown unless false."),
   })
   .describe(
     "Free fall following ½·g·t². Driven by a `play` action. Parts: body, velocity, height, ground.",
@@ -482,8 +482,8 @@ const SimOrbit = z
     period: BindableSchema.describe("Time of one revolution."),
     center: PictogramSchema.optional(),
     body: PictogramSchema.optional(),
-    showVelocity: z.boolean().optional(),
-    showForce: z.boolean().optional(),
+    showVelocity: z.boolean().optional().describe("The velocity arrow; shown unless false."),
+    showForce: z.boolean().optional().describe("The force arrow; shown only when true."),
   })
   .describe(
     "Uniform circular motion. Driven by a `play` action. Parts: center, body, path, velocity, force, radius.",

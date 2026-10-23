@@ -157,6 +157,8 @@ export function elementLabelCount(element: SceneElement): number {
       return element.items.length;
     case "sim.flow":
       return 1 + element.inputs.length + element.outputs.length;
+    case "sim.orbit":
+      return element.showForce === true ? 3 : 2;
     case "axes":
     case "text":
     case "list":
