@@ -19,6 +19,8 @@ export interface QuizProps {
   onExit(): void;
   onAnswersChange?(answers: readonly string[]): void;
   onFinish?(score: number): void;
+  // Puts the focus on the current question or on the score as soon as the quiz is shown.
+  focusOnOpen?: boolean;
   className?: string;
 }
 
@@ -30,6 +32,7 @@ export function Quiz({
   onExit,
   onAnswersChange,
   onFinish,
+  focusOnOpen = false,
   className,
 }: QuizProps) {
   const t = useTranslations("Quiz");
@@ -38,7 +41,7 @@ export function Quiz({
   const total = questions.length;
   const [answers, setAnswers] = useState<readonly string[]>(() => initialAnswers.slice(0, total));
   const [step, setStep] = useState(() => Math.min(initialAnswers.length, total));
-  const [moved, setMoved] = useState(false);
+  const [focusContent, setFocusContent] = useState(focusOnOpen);
   const question = questions[step];
 
   function choose(choiceId: string) {
@@ -50,7 +53,7 @@ export function Quiz({
   }
 
   function advance() {
-    setMoved(true);
+    setFocusContent(true);
     setStep(step + 1);
   }
 
@@ -73,7 +76,7 @@ export function Quiz({
           score={scoreOf(quiz, answers)}
           captionId={captionId}
           sceneNumbers={sceneNumbers}
-          focusOnMount={moved}
+          focusOnMount={focusContent}
           onReview={onReviewScene}
         />
       ) : (
@@ -84,7 +87,7 @@ export function Quiz({
           last={step === total - 1}
           captionId={captionId}
           sceneNumber={sceneNumbers?.[question.scene_id]}
-          focusOnMount={moved}
+          focusOnMount={focusContent}
           onChoose={choose}
           onReview={() => onReviewScene(question.scene_id)}
           onNext={advance}

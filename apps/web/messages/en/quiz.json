@@ -1,5 +1,6 @@
 {
   "Quiz": {
+    "open": "Check what I understood",
     "label": "Comprehension quiz",
     "exercise": "Exercise {current} of {total}",
     "exit": "Leave the quiz",

@@ -67,6 +67,7 @@ export interface PlaybackControls {
   setVolume(volume: number): void;
   setCaptions(visible: boolean): void;
   requestFullscreen(): void;
+  playerElement(): HTMLElement | null;
   setValue(id: string, value: number): void;
   resetValues(): void;
   setAdjusting(adjusting: boolean): void;
@@ -262,6 +263,7 @@ export function PlaybackProvider({
     [player],
   );
   const requestFullscreen = useCallback(() => player?.requestFullscreen(), [player]);
+  const playerElement = useCallback(() => player?.getContainerNode() ?? null, [player]);
 
   const controls = useMemo<PlaybackControls>(
     () => ({
@@ -291,6 +293,7 @@ export function PlaybackProvider({
       setVolume,
       setCaptions,
       requestFullscreen,
+      playerElement,
       setValue,
       resetValues,
       setAdjusting,
@@ -321,6 +324,7 @@ export function PlaybackProvider({
       setVolume,
       setCaptions,
       requestFullscreen,
+      playerElement,
       setValue,
       resetValues,
       setAdjusting,

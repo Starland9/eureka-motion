@@ -20,6 +20,7 @@ import { LevelChoice } from "./LevelChoice";
 import { Notices } from "./Notices";
 import { PlancheOverlay } from "./PlancheOverlay";
 import { PreparationRule, PreparationSteps } from "./Preparation";
+import { QuizPanel } from "./QuizPanel";
 import {
   isComplete,
   type ExplanationState,
@@ -150,10 +151,12 @@ export function ExplanationView({ id }: { id: string }) {
                 ) : null}
                 <div className="min-w-0 lg:col-span-4 lg:col-start-9 lg:row-start-2">
                   {hasScenes ? (
-                    <SceneList
-                      plannedCount={state?.sceneCount ?? undefined}
-                      dropped={state?.dropped}
-                    />
+                    <QuizPanel quiz={state?.quiz ?? null} explanationId={state?.id ?? null}>
+                      <SceneList
+                        plannedCount={state?.sceneCount ?? undefined}
+                        dropped={state?.dropped}
+                      />
+                    </QuizPanel>
                   ) : (
                     <PreparationSteps
                       steps={state?.steps ?? {}}
