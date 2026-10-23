@@ -73,6 +73,38 @@ async function putScenarios(prepend: ScenarioStep[] = []): Promise<void> {
   }
 }
 
+const FILLER = "Regarde bien la figure et suis ce qui bouge sous tes yeux.";
+
+type SceneOfReference = ReturnType<typeof scenesOf>[number];
+
+function stretched(scene: SceneOfReference): SceneOfReference {
+  return {
+    ...scene,
+    beats: scene.beats.map((beat) => ({ ...beat, narration: `${beat.narration} ${FILLER}` })),
+  };
+}
+
+async function putStretchedScenarios(): Promise<void> {
+  for (const language of LANGUAGES) {
+    const scenario = scenarioFromReference(reference, {
+      name: `test.${language}`,
+      question: QUESTIONS[language],
+      replace: {
+        triage: { repeat: true },
+        outline: { repeat: true },
+        judge: { repeat: true },
+        scenes: Object.fromEntries(
+          scenesOf(reference).map((scene) => [
+            scene.index,
+            { response: stretched(scene), repeat: true },
+          ]),
+        ),
+      },
+    });
+    await writeFile(path.join(scenarios, `${scenario.name}.json`), JSON.stringify(scenario));
+  }
+}
+
 function tsx(script: string, args: string[], env: Record<string, string> = {}): Promise<Outcome> {
   return run(
     process.execPath,
@@ -293,6 +325,31 @@ describe("reference-generate script", () => {
     expect(document.scenes).toHaveLength(5);
     expect((await problems()).join("\n")).toContain("5 scenes for 6 steps");
   }, 90_000);
+
+  it("tries again when only the duration is out of range, then keeps it with --allow-long", async () => {
+    await putSet(entry());
+    await putStretchedScenarios();
+
+    const once = await generate(["--lang=fr", "--attempts=1"]);
+    expect(once.code).toBe(1);
+    expect(once.stdout).not.toContain("attempt 2");
+    expect(once.stderr).toContain("the explanation lasts about");
+    expect(await files()).toEqual([]);
+
+    const twice = await generate(["--lang=fr", "--attempts=2"]);
+    expect(twice.code).toBe(1);
+    expect(twice.stdout).toContain("too long");
+    expect(twice.stdout).toContain("attempt 2 of 2");
+    expect(twice.stdout.match(/tokens:/g)).toHaveLength(2);
+    expect(twice.stderr).toContain("the explanation lasts about");
+    expect(await files()).toEqual([]);
+
+    const kept = await generate(["--lang=fr", "--attempts=2", "--allow-long"]);
+    expect(kept.code).toBe(0);
+    expect(kept.stdout).toContain("LONG");
+    expect(await files()).toEqual([FR_NAME]);
+    expect((await problems()).join("\n")).toContain("the explanation lasts about");
+  }, 120_000);
 
   it("rejects wrong options and a set that does not parse, with exit code 2", async () => {
     await putSet(entry());

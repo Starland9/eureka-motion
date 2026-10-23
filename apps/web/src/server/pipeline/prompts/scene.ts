@@ -50,6 +50,13 @@ export function sceneMarker(index: number): string {
   return `SCENE ${index}`;
 }
 
+const EXPLANATION_SECONDS = 95;
+const MAX_SCENE_SECONDS = 16;
+
+function sceneSeconds(sceneCount: number): number {
+  return Math.min(MAX_SCENE_SECONDS, Math.round(EXPLANATION_SECONDS / Math.max(1, sceneCount)));
+}
+
 export function buildScenePrompt(input: SceneInput): Prompt {
   const step = input.outline.plan.steps[input.index];
   if (!step) throw new Error(`The plan has no step ${input.index}`);
@@ -72,10 +79,10 @@ The scene
 - world: the mathematical frame of the figure, { "x": [min, max], "y": [min, max] }. Required as soon as one element is positioned by coordinates; leave it out otherwise. Give it about the proportions of the figure slot (figure 8:3, figure-notes 5:3, formula-focus 11:4, compare 5:4) and keep every element inside 90 % of it for every value the parameters can take.
 - derived: optional, up to 4 values computed for this scene only: [{ "id", "expr", "unit", "label", "format" }]. Use it for any number the scene needs that the outline does not provide (a position on screen, a ratio, a value at another point). An expression may read the parameters, constants and derived values of the outline, and the scene values declared before it. Give each a new id.
 - elements: the primitives, each with a unique id and the slot it sits in.
-- beats: 2 to 4 beats, with ids "b1", "b2"… Each beat is one narrated sentence and the actions that happen while it is said.
+- beats: 3 beats (4 at most, only when every sentence is very short), with ids "b1", "b2"… Each beat is one narrated sentence and the actions that happen while it is said.
 
 Narration
-- One or two short sentences per beat, 8 to 18 words in all, 200 characters at most. It is spoken aloud and shown as a subtitle.
+- One short sentence per beat, 8 to 14 words, 120 characters at most. It is spoken aloud and shown as a subtitle. Speech runs at about 2.6 words a second: 12 words last 5 seconds.
 - Talk to the student: "look", "guess", "you have seen this". Vary the rhythm: a short question, then the answer the figure gives.
 - Say what the eye should look at, in the order it appears.
 - Never state a number that depends on a parameter: the student can move the sliders and the spoken number would become false. Show it with a readout, or with {{id|format}} in a text.
@@ -129,6 +136,7 @@ ${EXAMPLE_SCENES.map((scene) => JSON.stringify(scene)).join("\n")}`;
     sceneMarker(input.index),
     `Write the scene with index ${input.index}, id "s${input.index + 1}", role "${step.role}".`,
     `Step of the plan: ${JSON.stringify(step)}`,
+    `Time: the whole explanation is spoken in 100 seconds at most; this scene in ${sceneSeconds(input.outline.plan.steps.length)} seconds at most, so about 3 beats of 12 words.`,
   ];
   if (input.extra) lines.push(input.extra);
   return { system, messages: [{ role: "user", content: lines.join("\n") }] };

@@ -17,7 +17,7 @@ export interface OutlineInput extends Audience {
 
 export const OUTLINE_MARKER = "OUTLINE";
 
-const FULL_SHAPE = `An explanation is a sequence of 5 or 6 short narrated scenes (4 at least, 7 at most), 60 to 100 seconds in total.
+const FULL_SHAPE = `An explanation is a sequence of 5 or 6 short narrated scenes (4 at least, 7 at most), 60 to 100 seconds in total: that is 18 spoken sentences at most in all (about 5 seconds each), so 3 per scene.
 Scene roles, in this order:
 - "hook" (always first): a concrete situation the student has seen, and the question it raises that they cannot answer yet. Something puzzling, shown, not an announcement of the lesson.
 - "analogy": an intuition taken from everyday life, drawn and set in motion.

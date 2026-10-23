@@ -38,7 +38,7 @@ try {
 }
 
 const USAGE =
-  "Usage: reference-generate [--only=<slug>] [--lang=fr|en] [--force] [--allow-partial] [--allow-long] [--dry-run] [--concurrency=<n>] [--set=<file>] [--out-dir=<dir>]";
+  "Usage: reference-generate [--only=<slug>] [--lang=fr|en] [--force] [--allow-partial] [--allow-long] [--attempts=<n>] [--dry-run] [--concurrency=<n>] [--set=<file>] [--out-dir=<dir>]";
 const SLUG = /^[a-z]+\/[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const CONCEPT_KEYS = new Set(["slug", "subject", "reference_level", "questions", "hand_written"]);
 
@@ -63,6 +63,7 @@ interface Settings {
   force: boolean;
   allowPartial: boolean;
   allowLong: boolean;
+  attempts: number;
 }
 
 type Disposition = "generate" | "exists" | "hand-written";
@@ -344,53 +345,63 @@ async function generate(job: Job, provider: LlmProvider, settings: Settings): Pr
   const started = Date.now();
   const { llm, tally } = metered(provider);
   say(`asking: ${job.concept.questions[job.language]}`);
-  const { end, record, traces } = await play(job, llm, say);
-  say(tokenSummary(tally));
-  if (end?.type !== "done" || !record) return fail(whyNotDone(end, traces));
+  for (let attempt = 1; ; attempt += 1) {
+    const { end, record, traces } = await play(job, llm, say);
+    say(tokenSummary(tally));
+    if (end?.type !== "done" || !record) return fail(whyNotDone(end, traces));
 
-  const partial = end.status === "partial";
-  const dropped = record.verdicts
-    .filter((verdict) => verdict.status === "dropped" && verdict.target !== "plan")
-    .map((verdict) => verdict.target);
-  if (partial && !settings.allowPartial) {
-    return fail(
-      `partial explanation, scenes dropped: ${dropped.join(", ")}; use --allow-partial to keep it for hand repair`,
-    );
-  }
+    const partial = end.status === "partial";
+    const dropped = record.verdicts
+      .filter((verdict) => verdict.status === "dropped" && verdict.target !== "plan")
+      .map((verdict) => verdict.target);
+    if (partial && !settings.allowPartial) {
+      return fail(
+        `partial explanation, scenes dropped: ${dropped.join(", ")}; use --allow-partial to keep it for hand repair`,
+      );
+    }
 
-  const file = toFile(job, record);
-  const found = partial ? problemsOfPartial(file) : await problemsOfComplete(file);
-  const tooLong = found.filter((problem) => TOO_LONG.test(problem));
-  const problems = settings.allowLong ? found.filter((problem) => !TOO_LONG.test(problem)) : found;
-  if (problems.length > 0) return fail(`the document is not valid:\n${problems.join("\n")}`);
-  if (settings.allowLong && tooLong.length > 0) {
-    say(
-      "LONG: kept as written; reference:build rejects it until the narration is shortened by hand",
-    );
-  }
+    const file = toFile(job, record);
+    const found = partial ? problemsOfPartial(file) : await problemsOfComplete(file);
+    const tooLong = found.filter((problem) => TOO_LONG.test(problem));
+    if (found.length > 0 && tooLong.length === found.length && attempt < settings.attempts) {
+      say(
+        `too long (${tooLong[0]?.match(/about (\d+) s/)?.[1] ?? "?"} s): attempt ${attempt + 1} of ${settings.attempts}`,
+      );
+      continue;
+    }
+    const problems = settings.allowLong
+      ? found.filter((problem) => !TOO_LONG.test(problem))
+      : found;
+    if (problems.length > 0) return fail(`the document is not valid:\n${problems.join("\n")}`);
+    if (settings.allowLong && tooLong.length > 0) {
+      say(
+        "LONG: kept as written; reference:build rejects it until the narration is shortened by hand",
+      );
+    }
 
-  if (record.concept_slug !== job.concept.slug || record.subject !== job.concept.subject) {
-    say(
-      `warning: the pipeline named the concept ${record.concept_slug} (${record.subject}), the file keeps ${job.concept.slug}`,
-    );
-  }
+    if (record.concept_slug !== job.concept.slug || record.subject !== job.concept.subject) {
+      say(
+        `warning: the pipeline named the concept ${record.concept_slug} (${record.subject}), the file keeps ${job.concept.slug}`,
+      );
+    }
 
-  await mkdir(settings.outDir, { recursive: true });
-  try {
-    await writeFile(job.target, serialize(file), { flag: settings.force ? "w" : "wx" });
-  } catch (error) {
-    if ((error as NodeJS.ErrnoException).code !== "EEXIST") throw error;
-    say("kept, the file appeared in the meantime (use --force to replace it)");
-    return { job, status: "exists" };
+    await mkdir(settings.outDir, { recursive: true });
+    try {
+      await writeFile(job.target, serialize(file), { flag: settings.force ? "w" : "wx" });
+    } catch (error) {
+      if ((error as NodeJS.ErrnoException).code !== "EEXIST") throw error;
+      say("kept, the file appeared in the meantime (use --force to replace it)");
+      return { job, status: "exists" };
+    }
+    const seconds = ((Date.now() - started) / 1000).toFixed(1);
+    say(`written ${shown(job.target)}: ${verdictSummary(record)} in ${seconds} s`);
+    if (partial) {
+      say(
+        `PARTIAL: reference:build rejects it until the dropped scenes (${dropped.join(", ")}) are fixed by hand`,
+      );
+    }
+    return { job, status: partial ? "partial" : "written" };
   }
-  const seconds = ((Date.now() - started) / 1000).toFixed(1);
-  say(`written ${shown(job.target)}: ${verdictSummary(record)} in ${seconds} s`);
-  if (partial) {
-    say(
-      `PARTIAL: reference:build rejects it until the dropped scenes (${dropped.join(", ")}) are fixed by hand`,
-    );
-  }
-  return { job, status: partial ? "partial" : "written" };
 }
 
 async function pool<T, R>(items: readonly T[], limit: number, work: (item: T) => Promise<R>) {
@@ -424,6 +435,7 @@ function parseOptions() {
         "allow-long": { type: "boolean", default: false },
         "dry-run": { type: "boolean", default: false },
         concurrency: { type: "string", default: "2" },
+        attempts: { type: "string", default: "2" },
         set: { type: "string" },
         "out-dir": { type: "string" },
       },
@@ -445,6 +457,11 @@ async function main(): Promise<number> {
     throw new UsageError(`--concurrency must be a positive integer\n${USAGE}`);
   }
 
+  const attempts = Number(options.attempts);
+  if (!Number.isInteger(attempts) || attempts < 1 || attempts > 5) {
+    throw new UsageError(`--attempts must be an integer from 1 to 5\n${USAGE}`);
+  }
+
   const setFile = options.set
     ? path.resolve(base, options.set)
     : path.join(root, "scripts/reference-set.json");
@@ -458,6 +475,7 @@ async function main(): Promise<number> {
     force: options.force,
     allowPartial: options["allow-partial"],
     allowLong: options["allow-long"],
+    attempts,
   };
 
   let concepts: Concept[];
