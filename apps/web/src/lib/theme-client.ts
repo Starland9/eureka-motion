@@ -54,9 +54,9 @@ function storedTheme(): ThemeName {
     const stored = localStorage.getItem(THEME_STORAGE_KEY);
     if (stored === "paper" || stored === "board") return stored;
   } catch {
-    // Storage may be unavailable; the system preference decides.
+    // Storage may be unavailable; paper is the default.
   }
-  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "board" : "paper";
+  return "paper";
 }
 
 // A change of locale replaces <html> and drops the class set by the init script.

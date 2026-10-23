@@ -69,14 +69,14 @@ test("the class dark switches the page to the board surface", async ({ page }) =
 test.describe("system preference is dark", () => {
   test.use({ colorScheme: "dark" });
 
-  test("the board theme applies before paint", async ({ page }) => {
-    await page.goto("/fr");
-    await expect(page.locator("html")).toHaveClass(/dark/);
-  });
-
-  test("a stored paper choice wins over the system preference", async ({ page }) => {
-    await page.addInitScript(() => localStorage.setItem("eureka.theme", "paper"));
+  test("the paper theme still applies by default", async ({ page }) => {
     await page.goto("/fr");
     await expect(page.locator("html")).not.toHaveClass(/dark/);
+  });
+
+  test("a stored board choice applies before paint", async ({ page }) => {
+    await page.addInitScript(() => localStorage.setItem("eureka.theme", "board"));
+    await page.goto("/fr");
+    await expect(page.locator("html")).toHaveClass(/dark/);
   });
 });
