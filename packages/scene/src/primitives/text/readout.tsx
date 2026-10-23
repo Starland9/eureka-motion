@@ -2,51 +2,48 @@ import type { PrimitiveProps, SceneContext } from "../../composition/context";
 import type { ElementOf } from "../../schema/document";
 import { formatNumberParts } from "../../expr";
 import { monoSafe } from "../../tokens";
-import { fontOf, Highlighted, highlightTextColour, px, textSize } from "../shared";
+import { fontOf, Highlighted, highlightTextColour, px } from "../shared";
+import {
+  COLUMN_GAP_U,
+  LABEL_LINE,
+  measureReadout,
+  PAD_U,
+  planReadouts,
+  VALUE_LINE,
+  widestValue,
+  type ReadoutPlan,
+  type ReadoutSpec,
+} from "./readout-fit";
 
-const VALUE_UNITS = 6;
-const UNIT_ALLOWANCE_UNITS = 4;
-const LABEL_LINE = 1.25;
-const VALUE_LINE = 1.15;
-const PAD_UNITS = 0.3;
-// Gap that SceneFrame leaves between the html elements of a slot.
-const SLOT_GAP_UNITS = 2.5;
-// "1,98 × 10⁻²⁰" in IBM Plex Mono, with the exponent set at 0.6 em.
-const WIDEST_VALUE_EM = 6.5;
-
-// The readouts of a slot all stack their label above the value, or none does: when they do
-// not fit the slot together, label and value share a line and the value drops to the body size.
-function layoutOf(ctx: SceneContext): { valueSize: number; row: boolean } {
-  const stacked = Math.min(
-    px(ctx, VALUE_UNITS),
-    (ctx.size.width - px(ctx, UNIT_ALLOWANCE_UNITS)) / WIDEST_VALUE_EM,
+function specOf(element: ElementOf<"readout">, ctx: SceneContext): ReadoutSpec {
+  const info = ctx.valueInfo(element.value);
+  // The widest of the current and the reference value: a slider does not reshuffle the slot.
+  const values = [ctx.scope, ctx.refScope].map((scope) =>
+    formatNumberParts(scope[element.value] ?? Number.NaN, info?.format, ctx.language),
   );
-  let count = 0;
-  for (const element of ctx.lookup.values()) {
-    if (element.type === "readout" && element.slot === ctx.slot) count += 1;
-  }
-  const each = textSize(ctx, "label") * LABEL_LINE + stacked * VALUE_LINE + 2 * px(ctx, PAD_UNITS);
-  const total = count * each + (count - 1) * px(ctx, SLOT_GAP_UNITS);
-  return total <= ctx.size.height
-    ? { valueSize: stacked, row: false }
-    : { valueSize: textSize(ctx, "body"), row: true };
+  return {
+    label: element.label ?? info?.label ?? element.value,
+    ...widestValue(values),
+    unitChars: info ? monoSafe(info.unit).length : 0,
+  };
 }
 
-const LABEL_ADVANCE_EM = 0.66;
+// The readouts of a slot share one plan: stacked when they all fit, then label and value on a
+// line, then smaller, so that none of them runs past the slot.
+function planOf(ctx: SceneContext): ReadoutPlan {
+  const specs: ReadoutSpec[] = [];
+  for (const element of ctx.lookup.values()) {
+    if (element.type === "readout" && element.slot === ctx.slot) specs.push(specOf(element, ctx));
+  }
+  return planReadouts(specs, { ...ctx.size, u: ctx.u });
+}
 
 export function readoutHeight(
   element: ElementOf<"readout">,
   ctx: SceneContext,
   width = ctx.size.width,
 ): number {
-  const labelSize = textSize(ctx, "label");
-  const { valueSize, row } = layoutOf(ctx);
-  const label = element.label ?? ctx.valueInfo(element.value)?.label ?? element.value;
-  const labelLines = Math.max(1, Math.ceil((label.length * LABEL_ADVANCE_EM * labelSize) / width));
-  const lines = row
-    ? Math.max(labelLines * labelSize * LABEL_LINE, valueSize * VALUE_LINE)
-    : labelLines * labelSize * LABEL_LINE + valueSize * VALUE_LINE;
-  return lines + 2 * px(ctx, PAD_UNITS);
+  return measureReadout(specOf(element, ctx), planOf(ctx), { width, u: ctx.u }).height;
 }
 
 export function ReadoutPrimitive({ element, ctx }: PrimitiveProps<"readout">) {
@@ -57,13 +54,14 @@ export function ReadoutPrimitive({ element, ctx }: PrimitiveProps<"readout">) {
     info?.format,
     ctx.language,
   );
-  const labelSize = textSize(ctx, "label");
-  const { valueSize, row } = layoutOf(ctx);
+  const plan = planOf(ctx);
+  const { labelSize, valueSize, stacked } = plan;
+  const { row } = measureReadout(specOf(element, ctx), plan, { width: ctx.size.width, u: ctx.u });
   const unit = info ? monoSafe(info.unit) : "";
   const soft = highlightTextColour(ctx, state, ctx.theme.inkSoft);
   return (
     <div lang={ctx.language} style={{ opacity: state.opacity, fontFamily: fontOf("mono") }}>
-      <Highlighted ctx={ctx} state={state} style={{ display: row ? "block" : "inline-block" }}>
+      <Highlighted ctx={ctx} state={state} style={{ display: stacked ? "inline-block" : "block" }}>
         <span
           style={{
             display: "flex",
@@ -71,8 +69,8 @@ export function ReadoutPrimitive({ element, ctx }: PrimitiveProps<"readout">) {
             flexWrap: "wrap",
             alignItems: row ? "baseline" : "flex-start",
             justifyContent: "space-between",
-            columnGap: px(ctx, 2),
-            padding: `${px(ctx, PAD_UNITS)}px 0`,
+            columnGap: px(ctx, COLUMN_GAP_U),
+            padding: `${px(ctx, PAD_U)}px 0`,
           }}
         >
           <span

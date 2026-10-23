@@ -425,7 +425,7 @@ describe("readout", () => {
     expect(unit.style.color).toBe(rgb(theme.inkSoft));
   });
 
-  it("stacks the label above the value, or shares a line when the slot is short", () => {
+  it("stacks the label above the value, or shares a line at a smaller size when the slot is short", () => {
     const readout = (id: string, value: string): ElementOf<"readout"> => ({
       ...energy,
       id,
@@ -443,7 +443,9 @@ describe("readout", () => {
     expect(Number.parseFloat(lone.value.style.fontSize)).toBeGreaterThan(
       Number.parseFloat(crowded.value.style.fontSize),
     );
-    expect(crowded.value.style.fontSize).toBe(`${px(sceneMetrics.text.body)}px`);
+    expect(Number.parseFloat(crowded.value.style.fontSize)).toBeLessThanOrEqual(
+      px(sceneMetrics.text.body),
+    );
   });
 
   it("is hidden before its show and visible after", () => {
