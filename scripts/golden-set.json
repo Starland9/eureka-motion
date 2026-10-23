@@ -1,0 +1,402 @@
+[
+  {
+    "id": "maths-thales",
+    "subject": "maths",
+    "kind": "core",
+    "level": "college",
+    "questions": {
+      "fr": "À quoi sert le théorème de Thalès ?",
+      "en": "What is Thales's theorem for?"
+    }
+  },
+  {
+    "id": "maths-quadratic-equation",
+    "subject": "maths",
+    "kind": "core",
+    "level": "lycee",
+    "questions": {
+      "fr": "Comment résoudre une équation du second degré ?",
+      "en": "How do I solve a quadratic equation?"
+    }
+  },
+  {
+    "id": "maths-conditional-probability",
+    "subject": "maths",
+    "kind": "core",
+    "level": "lycee",
+    "questions": {
+      "fr": "Je ne comprends pas les probabilités conditionnelles, tu peux m'expliquer ?",
+      "en": "I don't get conditional probability, can you explain it?"
+    }
+  },
+  {
+    "id": "maths-integral-area",
+    "subject": "maths",
+    "kind": "core",
+    "level": "superieur",
+    "questions": {
+      "fr": "Pourquoi une intégrale donne-t-elle une aire ?",
+      "en": "Why does an integral give an area?"
+    }
+  },
+  {
+    "id": "maths-eigenvector",
+    "subject": "maths",
+    "kind": "core",
+    "level": "superieur",
+    "questions": {
+      "fr": "C'est quoi un vecteur propre ?",
+      "en": "What is an eigenvector?"
+    }
+  },
+  {
+    "id": "physics-refraction",
+    "subject": "physics",
+    "kind": "core",
+    "level": "college",
+    "questions": {
+      "fr": "Pourquoi un crayon a l'air cassé dans un verre d'eau ?",
+      "en": "Why does a pencil look broken in a glass of water?"
+    }
+  },
+  {
+    "id": "physics-newton-second-law",
+    "subject": "physics",
+    "kind": "core",
+    "level": "lycee",
+    "questions": {
+      "fr": "Comment une force fait-elle changer la vitesse d'un objet ?",
+      "en": "How does a force change the speed of an object?"
+    }
+  },
+  {
+    "id": "physics-projectile",
+    "subject": "physics",
+    "kind": "core",
+    "level": "lycee",
+    "questions": {
+      "fr": "Comment calculer où va retomber un ballon lancé en l'air ?",
+      "en": "How do I work out where a ball thrown in the air will land?"
+    }
+  },
+  {
+    "id": "physics-doppler",
+    "subject": "physics",
+    "kind": "core",
+    "level": "lycee",
+    "questions": {
+      "fr": "Pourquoi la sirène d'une ambulance change de son quand elle me dépasse ?",
+      "en": "Why does an ambulance siren change pitch when it drives past me?"
+    }
+  },
+  {
+    "id": "physics-uncertainty-principle",
+    "subject": "physics",
+    "kind": "core",
+    "level": "superieur",
+    "questions": {
+      "fr": "C'est quoi le principe d'incertitude de Heisenberg ?",
+      "en": "What is Heisenberg's uncertainty principle?"
+    }
+  },
+  {
+    "id": "chemistry-states-of-matter",
+    "subject": "chemistry",
+    "kind": "core",
+    "level": "college",
+    "questions": {
+      "fr": "Comment la matière passe-t-elle de solide à liquide puis à gaz ?",
+      "en": "How does matter go from solid to liquid to gas?"
+    }
+  },
+  {
+    "id": "chemistry-periodic-table",
+    "subject": "chemistry",
+    "kind": "core",
+    "level": "college",
+    "questions": {
+      "fr": "Comment est organisé le tableau périodique des éléments ?",
+      "en": "How is the periodic table of elements organised?"
+    }
+  },
+  {
+    "id": "chemistry-titration",
+    "subject": "chemistry",
+    "kind": "core",
+    "level": "lycee",
+    "questions": {
+      "fr": "Comment fonctionne un dosage acido-basique ?",
+      "en": "How does an acid-base titration work?"
+    }
+  },
+  {
+    "id": "chemistry-reaction-rate",
+    "subject": "chemistry",
+    "kind": "core",
+    "level": "lycee",
+    "questions": {
+      "fr": "Pourquoi une réaction chimique va plus vite quand on chauffe ?",
+      "en": "Why does a chemical reaction go faster when it is heated?"
+    }
+  },
+  {
+    "id": "chemistry-le-chatelier",
+    "subject": "chemistry",
+    "kind": "core",
+    "level": "superieur",
+    "questions": {
+      "fr": "Que dit le principe de Le Chatelier sur l'équilibre chimique ?",
+      "en": "What does Le Chatelier's principle say about chemical equilibrium?"
+    }
+  },
+  {
+    "id": "biology-digestion",
+    "subject": "biology",
+    "kind": "core",
+    "level": "college",
+    "questions": {
+      "fr": "Comment fonctionne la digestion ?",
+      "en": "How does digestion work?"
+    }
+  },
+  {
+    "id": "biology-heredity",
+    "subject": "biology",
+    "kind": "core",
+    "level": "college",
+    "questions": {
+      "fr": "Comment les caractères passent-ils des parents aux enfants ?",
+      "en": "How are traits passed from parents to children?"
+    }
+  },
+  {
+    "id": "biology-mitosis",
+    "subject": "biology",
+    "kind": "core",
+    "level": "lycee",
+    "questions": {
+      "fr": "Comment une cellule se divise-t-elle en deux cellules identiques ?",
+      "en": "How does a cell divide into two identical cells?"
+    }
+  },
+  {
+    "id": "biology-natural-selection",
+    "subject": "biology",
+    "kind": "core",
+    "level": "lycee",
+    "questions": {
+      "fr": "Comment fonctionne la sélection naturelle ?",
+      "en": "How does natural selection work?"
+    }
+  },
+  {
+    "id": "biology-action-potential",
+    "subject": "biology",
+    "kind": "core",
+    "level": "superieur",
+    "questions": {
+      "fr": "Comment un neurone transmet-il un signal nerveux ?",
+      "en": "How does a neuron transmit a nerve signal?"
+    }
+  },
+  {
+    "id": "cs-binary",
+    "subject": "cs",
+    "kind": "core",
+    "level": "college",
+    "questions": {
+      "fr": "Comment un ordinateur compte-t-il en binaire ?",
+      "en": "How does a computer count in binary?"
+    }
+  },
+  {
+    "id": "cs-recursion",
+    "subject": "cs",
+    "kind": "core",
+    "level": "lycee",
+    "questions": {
+      "fr": "C'est quoi la récursivité en programmation ?",
+      "en": "What is recursion in programming?"
+    }
+  },
+  {
+    "id": "cs-hash-table",
+    "subject": "cs",
+    "kind": "core",
+    "level": "lycee",
+    "questions": {
+      "fr": "Comment marche une table de hachage ?",
+      "en": "How does a hash table work?"
+    }
+  },
+  {
+    "id": "cs-web-request",
+    "subject": "cs",
+    "kind": "core",
+    "level": "lycee",
+    "questions": {
+      "fr": "Que se passe-t-il quand je tape une adresse dans mon navigateur ?",
+      "en": "What happens when I type an address into my browser?"
+    }
+  },
+  {
+    "id": "cs-dijkstra",
+    "subject": "cs",
+    "kind": "core",
+    "level": "superieur",
+    "questions": {
+      "fr": "Comment l'algorithme de Dijkstra trouve-t-il le plus court chemin ?",
+      "en": "How does Dijkstra's algorithm find the shortest path?"
+    }
+  },
+  {
+    "id": "economics-inflation",
+    "subject": "economics",
+    "kind": "core",
+    "level": "college",
+    "questions": {
+      "fr": "Pourquoi les prix augmentent-ils avec l'inflation ?",
+      "en": "Why do prices go up with inflation?"
+    }
+  },
+  {
+    "id": "economics-gdp",
+    "subject": "economics",
+    "kind": "core",
+    "level": "lycee",
+    "questions": {
+      "fr": "Comment calcule-t-on le PIB d'un pays ?",
+      "en": "How is a country's GDP calculated?"
+    }
+  },
+  {
+    "id": "economics-price-elasticity",
+    "subject": "economics",
+    "kind": "core",
+    "level": "lycee",
+    "questions": {
+      "fr": "C'est quoi l'élasticité-prix de la demande ?",
+      "en": "What is the price elasticity of demand?"
+    }
+  },
+  {
+    "id": "economics-comparative-advantage",
+    "subject": "economics",
+    "kind": "core",
+    "level": "superieur",
+    "questions": {
+      "fr": "C'est quoi l'avantage comparatif de Ricardo ?",
+      "en": "What is Ricardo's comparative advantage?"
+    }
+  },
+  {
+    "id": "economics-keynesian-multiplier",
+    "subject": "economics",
+    "kind": "core",
+    "level": "superieur",
+    "questions": {
+      "fr": "Comment fonctionne le multiplicateur keynésien ?",
+      "en": "How does the Keynesian multiplier work?"
+    }
+  },
+  {
+    "id": "history-french-revolution",
+    "subject": "history",
+    "kind": "other",
+    "level": "college",
+    "questions": {
+      "fr": "Pourquoi la Révolution française a-t-elle éclaté en 1789 ?",
+      "en": "Why did the French Revolution break out in 1789?"
+    }
+  },
+  {
+    "id": "history-cold-war",
+    "subject": "history",
+    "kind": "other",
+    "level": "lycee",
+    "questions": {
+      "fr": "Comment la guerre froide a-t-elle commencé ?",
+      "en": "How did the Cold War begin?"
+    }
+  },
+  {
+    "id": "geography-climate-zones",
+    "subject": "geography",
+    "kind": "other",
+    "level": "college",
+    "questions": {
+      "fr": "Pourquoi fait-il plus chaud à l'équateur qu'aux pôles ?",
+      "en": "Why is it hotter at the equator than at the poles?"
+    }
+  },
+  {
+    "id": "geography-demographic-transition",
+    "subject": "geography",
+    "kind": "other",
+    "level": "lycee",
+    "questions": {
+      "fr": "C'est quoi la transition démographique ?",
+      "en": "What is the demographic transition?"
+    }
+  },
+  {
+    "id": "grammar-past-participle",
+    "subject": "grammar",
+    "kind": "other",
+    "level": "college",
+    "questions": {
+      "fr": "Comment accorder le participe passé avec l'auxiliaire avoir ?",
+      "en": "How do you make the past participle agree with the auxiliary avoir in French?"
+    }
+  },
+  {
+    "id": "grammar-present-perfect",
+    "subject": "grammar",
+    "kind": "other",
+    "level": "lycee",
+    "questions": {
+      "fr": "Quelle est la différence entre le present perfect et le prétérit en anglais ?",
+      "en": "What is the difference between the present perfect and the simple past in English?"
+    }
+  },
+  {
+    "id": "philosophy-social-contract",
+    "subject": "philosophy",
+    "kind": "other",
+    "level": "superieur",
+    "questions": {
+      "fr": "Qu'est-ce que le contrat social selon Rousseau ?",
+      "en": "What is the social contract according to Rousseau?"
+    }
+  },
+  {
+    "id": "literature-metaphor",
+    "subject": "literature",
+    "kind": "other",
+    "level": "college",
+    "questions": {
+      "fr": "Quelle est la différence entre une comparaison et une métaphore ?",
+      "en": "What is the difference between a simile and a metaphor?"
+    }
+  },
+  {
+    "id": "civics-separation-of-powers",
+    "subject": "civics",
+    "kind": "other",
+    "level": "lycee",
+    "questions": {
+      "fr": "C'est quoi la séparation des pouvoirs ?",
+      "en": "What is the separation of powers?"
+    }
+  },
+  {
+    "id": "music-major-minor",
+    "subject": "music",
+    "kind": "other",
+    "level": "lycee",
+    "questions": {
+      "fr": "Pourquoi une gamme majeure sonne gaie et une gamme mineure triste ?",
+      "en": "Why does a major scale sound happy and a minor one sad?"
+    }
+  }
+]

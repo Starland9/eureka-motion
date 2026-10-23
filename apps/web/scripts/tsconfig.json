@@ -14,6 +14,7 @@
     "../../../scripts/tokens-to-css.ts",
     "../../../scripts/reference-build.ts",
     "../../../scripts/reference-generate.ts",
+    "../../../scripts/golden.ts",
     "../src/server/**/*",
     "./**/*"
   ]
