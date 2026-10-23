@@ -1,1 +1,19 @@
-{}
+{
+  "Share": {
+    "copy": "Copier le lien",
+    "copied": "Lien copié.",
+    "copyFailed": "Le lien n’a pas pu être copié. Copie l’adresse de cette page depuis la barre du navigateur.",
+    "ask": "Poser ma propre question →",
+    "visitorLead": "Cette explication répond à la question de quelqu’un d’autre. Tu as la tienne ?",
+    "missing": {
+      "title": "Explication introuvable",
+      "lead": "Cette explication n’existe pas, ou le lien est incomplet.",
+      "next": "Vérifie l’adresse que l’on t’a envoyée, ou pose ta propre question pour obtenir une explication."
+    },
+    "expired": {
+      "title": "Ce lien a expiré",
+      "lead": "Une explication partagée reste consultable {days, plural, one {# jour} other {# jours}} ; celui-ci a dépassé ce délai.",
+      "next": "Pose de nouveau ta question pour obtenir une explication."
+    }
+  }
+}

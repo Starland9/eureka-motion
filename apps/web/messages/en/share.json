@@ -1,1 +1,19 @@
-{}
+{
+  "Share": {
+    "copy": "Copy link",
+    "copied": "Link copied.",
+    "copyFailed": "The link could not be copied. Copy the address of this page from the browser bar.",
+    "ask": "Ask my own question →",
+    "visitorLead": "This explanation answers someone else’s question. Do you have your own?",
+    "missing": {
+      "title": "Explanation not found",
+      "lead": "This explanation does not exist, or the link is incomplete.",
+      "next": "Check the address you were sent, or ask your own question to get an explanation."
+    },
+    "expired": {
+      "title": "This link has expired",
+      "lead": "A shared explanation stays available for {days, plural, one {# day} other {# days}}; this one is past that.",
+      "next": "Ask your question again to get an explanation."
+    }
+  }
+}

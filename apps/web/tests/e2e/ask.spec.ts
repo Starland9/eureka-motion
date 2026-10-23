@@ -153,12 +153,15 @@ test("a page opened from a link waits for a press", async ({ page }) => {
 });
 
 test("an unknown explanation shows the missing state with a link home", async ({ page }) => {
-  const errors = trackConsole(page, [/Failed to load resource.*404/]);
+  // React logs the script of the theme in development on any 404 page, Next's own included.
+  const errors = trackConsole(page, [/Failed to load resource.*404/, /Encountered a script tag/]);
   await page.goto("/fr/e/doesnotexist1");
 
-  const home = page.getByRole("link", { name: /Revenir à l’accueil/ });
+  const home = page.getByRole("link", { name: /Poser ma propre question/ });
   await expect(home).toBeVisible({ timeout: 10_000 });
-  await expect(page.getByText("Cette explication n’existe pas")).toBeVisible();
+  await expect(
+    page.getByText("Cette explication n’existe pas, ou le lien est incomplet."),
+  ).toBeVisible();
   await expect(page.getByRole("heading", { level: 1 })).toHaveCount(1);
   await home.click();
   await expect(page).toHaveURL(/\/fr$/);

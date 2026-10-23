@@ -9,6 +9,7 @@ import { ParamsPanel } from "@/components/player/ParamsPanel";
 import { Planche } from "@/components/player/Planche";
 import { PlaybackProvider, type PlayableExplanation } from "@/components/player/PlaybackProvider";
 import { SceneList } from "@/components/player/SceneList";
+import { Share } from "@/components/player/Share";
 import { Subtitles } from "@/components/player/Subtitles";
 import { Transport } from "@/components/player/Transport";
 import { useRouter } from "@/i18n/navigation";
@@ -16,12 +17,14 @@ import { cn } from "@/lib/utils";
 import { useExplanationSession } from "./ExplanationSession";
 import { ExplanationHeader } from "./ExplanationHeader";
 import { FinalState } from "./FinalState";
+import { GonePage } from "./GonePage";
 import { LevelChoice } from "./LevelChoice";
 import { Notices } from "./Notices";
 import { PlancheOverlay } from "./PlancheOverlay";
 import { PreparationRule, PreparationSteps } from "./Preparation";
 import { QuizPanel } from "./QuizPanel";
 import { ReformulatePanel } from "./ReformulatePanel";
+import { sharePathOf } from "./share-path";
 import {
   isComplete,
   type ExplanationState,
@@ -29,17 +32,13 @@ import {
   type StartOutcome,
   type StartRequest,
 } from "./types";
+import { useIsVisitor } from "./useIsVisitor";
+import { VisitorAsk } from "./VisitorAsk";
 
 const NO_SCENES: readonly Scene[] = [];
 const NO_PARAMS: readonly Param[] = [];
 const NO_MODEL: Model = { constants: [], derived: [] };
-const BLOCKING: ReadonlySet<ExplanationStatus> = new Set([
-  "refused",
-  "clarify",
-  "failed",
-  "missing",
-  "expired",
-]);
+const BLOCKING: ReadonlySet<ExplanationStatus> = new Set(["refused", "clarify", "failed"]);
 
 function titleSize(text: string): string {
   if (text.length <= 36) return "text-title sm:text-display-m";
@@ -103,6 +102,11 @@ export function ExplanationView({ id }: { id: string }) {
   const fromState = state?.meta?.title || state?.question || "";
   const heading = fromState || t("neutralTitle");
   const autoPlay = frozen === null && session.startedHere;
+  const visitor = useIsVisitor(state, session.startedHere);
+
+  if (state?.status === "missing" || state?.status === "expired") {
+    return <GonePage kind={state.status} />;
+  }
 
   return (
     <PlaybackProvider explanation={explanation} autoPlay={autoPlay}>
@@ -151,6 +155,7 @@ export function ExplanationView({ id }: { id: string }) {
                   <ParamsPanel className="lg:col-span-12 lg:col-start-1 lg:row-start-3 lg:mt-6" />
                 ) : null}
                 <div className="min-w-0 lg:col-span-4 lg:col-start-9 lg:row-start-2">
+                  <Share path={sharePathOf(state)} className="mb-6" />
                   {hasScenes ? (
                     <QuizPanel quiz={state?.quiz ?? null} explanationId={state?.id ?? null}>
                       <SceneList
@@ -164,9 +169,15 @@ export function ExplanationView({ id }: { id: string }) {
                       sceneCount={state?.sceneCount ?? null}
                     />
                   )}
-                  {state === null ? null : <LevelChoice state={state} className="mt-8" />}
+                  {state === null || visitor ? null : (
+                    <LevelChoice state={state} className="mt-8" />
+                  )}
                 </div>
-                <ReformulatePanel state={state} restart={restart} className="lg:col-span-12" />
+                {visitor ? (
+                  <VisitorAsk className="lg:col-span-12" />
+                ) : (
+                  <ReformulatePanel state={state} restart={restart} className="lg:col-span-12" />
+                )}
               </>
             )}
           </div>
