@@ -664,6 +664,41 @@ describe.skipIf(!database)(
         const later = createExplanationStore(db, { now: () => new Date(T0.getTime() + 900 * DAY) });
         expect(await later.get(original.id)).toEqual(original);
       });
+
+      it("lists the explanations of one session, oldest first, and no other session", async () => {
+        const root = record({ created_at: T0 });
+        const other = record({ created_at: T0 });
+        const second = child(root, "simpler", { created_at: new Date(T0.getTime() + 2_000) });
+        const first = child(root, "another_analogy", {
+          created_at: new Date(T0.getTime() + 1_000),
+        });
+        const stranger = child(other, "simpler", { created_at: new Date(T0.getTime() + 500) });
+        for (const item of [root, other, second, first, stranger]) await store.create(item);
+
+        const listed = await store.listByRoot(root.id);
+        expect(listed.map((item) => item.id)).toEqual([root.id, first.id, second.id]);
+        expect((await store.listByRoot(other.id)).map((item) => item.id)).toEqual([
+          other.id,
+          stranger.id,
+        ]);
+        expect(await store.listByRoot("unknownroot")).toEqual([]);
+      });
+
+      it("leaves the expired explanations out of the list of a session", async () => {
+        const root = record({ created_at: T0, expires_at: null });
+        const alive = child(root, "simpler", { created_at: new Date(T0.getTime() + 1_000) });
+        const expired = child(root, "zoom", {
+          focus_scene_id: "s1",
+          scene_count_planned: 2,
+          created_at: new Date(T0.getTime() + 2_000),
+          expires_at: new Date(Date.now() - DAY),
+        });
+        for (const item of [root, alive, expired]) await store.create(item);
+        expect((await store.listByRoot(root.id)).map((item) => item.id)).toEqual([
+          root.id,
+          alive.id,
+        ]);
+      });
     });
 
     describe("explanation cache", () => {
