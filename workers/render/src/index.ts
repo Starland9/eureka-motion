@@ -2,6 +2,7 @@ import { rm } from "node:fs/promises";
 import path from "node:path";
 import { createConnection } from "../../../apps/web/src/server/db/client";
 import { createJobs } from "../../../apps/web/src/server/db/jobs";
+import { isCleanupEnabled, startCleanup } from "./cleanup";
 import { startHealth } from "./health";
 import { startLoop } from "./loop";
 import { bundleComposition, createRenderer } from "./render";
@@ -32,6 +33,8 @@ async function main(): Promise<void> {
     mediaDir,
     render: createRenderer({ serveUrl, mediaDir, referenceDir, browserExecutable }),
   });
+  const cleanup = isCleanupEnabled() ? startCleanup({ db: connection.db, mediaDir }) : null;
+  if (!cleanup) console.info("The periodic cleanup is switched off (CLEANUP=off).");
   console.info(`Waiting for export jobs. Media directory: ${mediaDir}`);
 
   let signals = 0;
@@ -44,7 +47,7 @@ async function main(): Promise<void> {
     console.info(`${signal} received: finishing the current render, then leaving.`);
     health.stop();
     try {
-      await loop.stop();
+      await Promise.all([loop.stop(), cleanup?.stop()]);
       await connection.client.end({ timeout: 5 });
       await rm(serveUrl, { recursive: true, force: true });
       process.exit(0);
