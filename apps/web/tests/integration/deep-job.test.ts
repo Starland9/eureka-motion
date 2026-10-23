@@ -307,6 +307,20 @@ describe("the deep version at the end of the pipeline", () => {
     expect(error).toHaveBeenCalledWith(expect.stringContaining(id), failure);
   });
 
+  it("queues the job but announces nothing when there is no worker to take it", async () => {
+    const queuedIds: string[] = [];
+    const h = memoryPipeline([MATHS], async (id) => {
+      queuedIds.push(id);
+      return false;
+    });
+    const { id, events, record } = await h.run();
+
+    expect(queuedIds).toEqual([id]);
+    expect(record?.status).toBe("ready");
+    expect(typesOf(events)).not.toContain("deep");
+    expect(endOf(events)).toMatchObject({ type: "done", status: "ready" });
+  });
+
   it("does not let a queue that throws before returning a promise fail the explanation", async () => {
     vi.spyOn(console, "error").mockImplementation(() => undefined);
     const h = memoryPipeline([MATHS], () => {
@@ -495,10 +509,22 @@ describe.skipIf(!database)(
       vi.stubEnv("MEDIA_DIR", mediaDir);
     });
 
+    async function workerBeats(beating: boolean) {
+      const health = path.join(mediaDir, ".health");
+      await rm(health, { recursive: true, force: true });
+      if (!beating) return;
+      await mkdir(health, { recursive: true });
+      await writeFile(
+        path.join(health, "worker.json"),
+        JSON.stringify({ render_at: new Date().toISOString(), deep_at: null }),
+      );
+    }
+
     beforeEach(async () => {
       time = T0.getTime();
       queue = createJobs(db, { now });
       await database?.reset();
+      await workerBeats(true);
       useRoutes();
     });
 
@@ -594,6 +620,19 @@ describe.skipIf(!database)(
       it("answers queued for a job nobody has taken", async () => {
         const { id } = await explanation();
         await queue.enqueue(id, "deep");
+        expect(await (await requestDeep(id)).json()).toEqual({
+          status: "queued",
+          result_url: null,
+        });
+      });
+
+      it("announces nothing while no worker beats, and again once one does", async () => {
+        const { id } = await explanation();
+        await queue.enqueue(id, "deep");
+        await workerBeats(false);
+        expect(await (await requestDeep(id)).json()).toEqual({ status: "none", result_url: null });
+        expect((await replayed(id)).map((event) => event.type)).not.toContain("deep");
+        await workerBeats(true);
         expect(await (await requestDeep(id)).json()).toEqual({
           status: "queued",
           result_url: null,

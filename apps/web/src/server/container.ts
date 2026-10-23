@@ -14,6 +14,7 @@ import { EventLogRegistry } from "./pipeline/events";
 import type { ExplanationCache, ExplanationStore } from "./pipeline/ports";
 import { createQuizWriter } from "./pipeline/quiz";
 import { Pipeline } from "./pipeline/run";
+import { readWorkerHealth } from "./health/workers";
 import { loadReferenceRecord } from "./reference";
 import { createVoiceService } from "./pipeline/voice";
 import { getVoice } from "./tts";
@@ -59,6 +60,7 @@ function build(): Container {
       writeQuiz: createQuizWriter(getLlm()),
       enqueueDeep: async (explanationId) => {
         await getJobs().enqueue(explanationId, "deep");
+        return (await readWorkerHealth()).render_worker;
       },
     },
     logs,

@@ -586,8 +586,7 @@ export class Pipeline {
     const { enqueueDeep } = this.deps;
     if (!enqueueDeep) return false;
     try {
-      await enqueueDeep(id);
-      return true;
+      return (await enqueueDeep(id)) !== false;
     } catch (error) {
       console.error(`The deep version of explanation ${id} could not be queued.`, error);
       return false;

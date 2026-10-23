@@ -2,6 +2,7 @@ import { stat } from "node:fs/promises";
 import { getJobs } from "./container";
 import type { DeepEventStatus } from "./pipeline/events";
 import type { ExplanationRecord } from "./pipeline/ports";
+import { readWorkerHealth } from "./health/workers";
 import { resolveMediaPath } from "./media";
 
 export type DeepStatus = "none" | "queued" | "running" | "ready" | "abandoned";
@@ -39,7 +40,10 @@ export async function readDeepVersion(
   switch (job.status) {
     case "queued":
     case "running":
-      return { status: job.status, result_url: null };
+      // Nothing is announced while no worker is there to take the job.
+      return (await readWorkerHealth()).render_worker
+        ? { status: job.status, result_url: null }
+        : NONE;
     case "succeeded":
       return readyIfFile(record.id);
     default:

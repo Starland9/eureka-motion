@@ -106,7 +106,8 @@ export interface PipelineDeps {
     level: Level;
     traceId: string;
   }) => Promise<Quiz | null>;
-  enqueueDeep?: (explanationId: string) => Promise<void>;
+  // Resolves to false when the job is queued but must not be announced (no worker to take it).
+  enqueueDeep?: (explanationId: string) => Promise<boolean | void>;
   trace?: (entry: LlmTrace) => void;
   findReference?: (id: string) => Promise<ExplanationRecord | null>;
 }
