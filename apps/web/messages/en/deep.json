@@ -1,1 +1,8 @@
-{}
+{
+  "Deep": {
+    "preparing": "In-depth version [in preparation]",
+    "ready": "The in-depth version is ready.",
+    "watch": "Watch the full demonstration →",
+    "newTab": "Opens in a new tab."
+  }
+}

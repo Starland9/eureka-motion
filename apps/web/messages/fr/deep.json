@@ -1,1 +1,8 @@
-{}
+{
+  "Deep": {
+    "preparing": "Version approfondie [en préparation]",
+    "ready": "La version approfondie est prête.",
+    "watch": "Regarder la démonstration complète →",
+    "newTab": "S’ouvre dans un nouvel onglet."
+  }
+}

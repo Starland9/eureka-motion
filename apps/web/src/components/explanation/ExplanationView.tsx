@@ -4,6 +4,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useEffectEvent, useMemo, useState } from "react";
 import type { Language, Model, Param, Scene } from "scene";
 import { Colophon } from "@/components/colophon/Colophon";
+import { DeepVersion } from "@/components/player/DeepVersion";
 import { Export } from "@/components/player/Export";
 import { FigureCaption } from "@/components/player/FigureCaption";
 import { ParamsPanel } from "@/components/player/ParamsPanel";
@@ -171,6 +172,9 @@ export function ExplanationView({ id }: { id: string }) {
                   {state === null || visitor ? null : (
                     <LevelChoice state={state} className="mt-8" />
                   )}
+                  {state?.id != null && (state.status === "ready" || state.status === "partial") ? (
+                    <DeepVersion explanationId={state.id} initial={state.deep} className="mt-6" />
+                  ) : null}
                 </div>
                 {hasScenes ? (
                   <ParamsPanel className="lg:col-span-12 lg:col-start-1 lg:row-start-3 lg:mt-6" />
