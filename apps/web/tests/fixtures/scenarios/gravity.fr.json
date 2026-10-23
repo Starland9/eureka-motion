@@ -560,6 +560,48 @@
         "issues": [],
         "reason": "Le plan est exact : la force varie bien comme l'inverse du carré de la distance."
       }
+    },
+    {
+      "role": "author",
+      "when": "QUIZ",
+      "response": {
+        "questions": [
+          {
+            "prompt": "Si la distance entre deux corps double, la force de gravitation…",
+            "choices": [
+              { "id": "a", "text": "est divisée par deux" },
+              { "id": "b", "text": "est divisée par quatre" },
+              { "id": "c", "text": "double" },
+              { "id": "d", "text": "ne change pas" }
+            ],
+            "answer_id": "b",
+            "explanation": "La force varie comme l'inverse du carré de la distance, et le carré de 2 vaut 4.",
+            "scene_id": "s3"
+          },
+          {
+            "prompt": "La Terre attire la Lune. Et la Lune ?",
+            "choices": [
+              { "id": "a", "text": "Elle n'attire pas la Terre" },
+              { "id": "b", "text": "Elle attire la Terre, mais moins fort" },
+              { "id": "c", "text": "Elle attire la Terre avec la même force" }
+            ],
+            "answer_id": "c",
+            "explanation": "Les deux forces ont toujours la même valeur et des sens opposés.",
+            "scene_id": "s3"
+          },
+          {
+            "prompt": "Dans la loi de Newton, que devient la force si l'une des deux masses double ?",
+            "choices": [
+              { "id": "a", "text": "Elle double" },
+              { "id": "b", "text": "Elle est multipliée par quatre" },
+              { "id": "c", "text": "Elle est divisée par deux" }
+            ],
+            "answer_id": "a",
+            "explanation": "La force est proportionnelle à chacune des masses : une masse double donne une force double.",
+            "scene_id": "s4"
+          }
+        ]
+      }
     }
   ]
 }

@@ -1,6 +1,7 @@
-import { DocumentSchema, type Outline, type Scene } from "scene";
+import { DocumentSchema, type Outline, type Quiz, type Scene } from "scene";
 import type { Scenario, ScenarioStep } from "../../src/server/llm/fixture";
 import { OUTLINE_MARKER } from "../../src/server/pipeline/prompts/outline";
+import { QUIZ_MARKER } from "../../src/server/pipeline/prompts/quiz";
 import { sceneMarker } from "../../src/server/pipeline/prompts/scene";
 import { TriageSchema } from "../../src/server/pipeline/prompts/schemas";
 
@@ -25,6 +26,7 @@ export interface ScenarioOptions {
     judge?: StepPatch;
     scenes?: Record<number, StepPatch>;
   };
+  quiz?: StepPatch;
 }
 
 const SCENE_CHECK_KEY = "Step of the plan for this scene";
@@ -37,6 +39,12 @@ export function outlineOf(reference: ReferenceFile): Outline {
 
 export function scenesOf(reference: ReferenceFile): Scene[] {
   return DocumentSchema.parse(reference.payload).scenes;
+}
+
+export function quizOf(reference: ReferenceFile): Quiz {
+  const { quiz } = DocumentSchema.parse(reference.payload);
+  if (!quiz) throw new Error(`Reference ${reference.slug} has no quiz`);
+  return quiz;
 }
 
 export function acceptance(reference: ReferenceFile): unknown {
@@ -144,9 +152,12 @@ export function scenarioFromReference(
       },
     },
   ];
+  const quiz: ScenarioStep[] = options.quiz
+    ? [{ role: "author", when: QUIZ_MARKER, response: quizOf(reference), ...options.quiz }]
+    : [];
   return {
     name: options.name ?? reference.slug,
     question: options.question ?? reference.question,
-    steps: [...(options.prepend ?? []), triage, outline, judge, ...scenes, ...checkers],
+    steps: [...(options.prepend ?? []), triage, outline, judge, ...scenes, ...checkers, ...quiz],
   };
 }

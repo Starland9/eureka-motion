@@ -10,6 +10,7 @@ import { getLlm } from "./llm";
 import { getMediaDir } from "./media";
 import { EventLogRegistry } from "./pipeline/events";
 import type { ExplanationCache, ExplanationStore } from "./pipeline/ports";
+import { createQuizWriter } from "./pipeline/quiz";
 import { Pipeline } from "./pipeline/run";
 import { loadReferenceRecord } from "./reference";
 import { createVoiceService } from "./pipeline/voice";
@@ -53,6 +54,7 @@ function build(): Container {
       now: () => new Date(),
       shareUrl: sharePath,
       findReference: loadReferenceRecord,
+      writeQuiz: createQuizWriter(getLlm()),
     },
     logs,
   );

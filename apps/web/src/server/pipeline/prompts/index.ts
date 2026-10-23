@@ -4,6 +4,7 @@ export * from "./examples";
 export * from "./judge";
 export * from "./modes";
 export * from "./outline";
+export * from "./quiz";
 export * from "./scene";
 export * from "./schemas";
 export * from "./shared";

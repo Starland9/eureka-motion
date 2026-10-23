@@ -9,7 +9,7 @@ const target = path.join(root, "apps/web/tests/fixtures/scenarios/gravity.fr.jso
 
 async function main(): Promise<void> {
   const reference = JSON.parse(readFileSync(source, "utf8")) as ReferenceFile;
-  const scenario = scenarioFromReference(reference, { name: "gravity.fr" });
+  const scenario = scenarioFromReference(reference, { name: "gravity.fr", quiz: {} });
   const options = await resolveConfig(target);
   const text = await format(JSON.stringify(scenario), { ...options, filepath: target });
   mkdirSync(path.dirname(target), { recursive: true });

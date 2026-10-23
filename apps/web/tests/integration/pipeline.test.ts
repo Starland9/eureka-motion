@@ -335,7 +335,9 @@ describe("nominal run", () => {
     const committed = loadScenarios(directory).find((scenario) => scenario.name === "gravity.fr");
     expect(committed).toBeDefined();
     expect(committed).toEqual(
-      JSON.parse(JSON.stringify(scenarioFromReference(reference, { name: "gravity.fr" }))),
+      JSON.parse(
+        JSON.stringify(scenarioFromReference(reference, { name: "gravity.fr", quiz: {} })),
+      ),
     );
     const h = harness([committed!]);
     const { events, record } = await h.run();
