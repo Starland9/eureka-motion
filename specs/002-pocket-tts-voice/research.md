@@ -168,3 +168,17 @@ chaque voix configurée et range `out/voices/<voix>/<langue>-NN.mp3`. La décisi
 - Qualité et naturel de `estelle` face à `ff_siwis`.
 - Prononciation des chiffres, unités et formules (`a²`, `m²`, `5,00`).
 - Choix de la voix anglaise.
+
+### Charge simultanée (2026-10-23)
+
+30 phrases parmi les plus longues de `scripts/voice-phrases.json` (jusqu'à 195 caractères, français et anglais), trois appelants en parallèle sur le service lancé par `docker-compose.dev.yml` (processeur seul, i7-11700KF) :
+
+| Mesure                 | Valeur |
+| ---------------------- | ------ |
+| Phrases                | 30     |
+| Durée totale           | 27,3 s |
+| Médiane par phrase     | 2,61 s |
+| 95e centile            | 3,89 s |
+| Maximum                | 5,20 s |
+
+Le critère SC-002 (95 % sous 6 s avec trois explications simultanées) est tenu, avec une marge faible sur le maximum : avec plus de trois appelants, les phrases attendent leur tour dans le service (un calcul à la fois) et le délai de 6 s peut être dépassé ; la voix suivante prend alors le relais.

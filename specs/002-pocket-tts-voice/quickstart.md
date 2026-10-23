@@ -50,3 +50,19 @@ dans `specs/002-pocket-tts-voice/decision.md`.
 - `pnpm test`, `pnpm typecheck`, `pnpm lint` passent.
 - Les 24 explications de référence se jouent avec `TTS_PROVIDERS=none`.
 - La mention d'attribution apparaît seulement quand `pocket` est dans `TTS_PROVIDERS`.
+
+## Résultat de l'essai (2026-10-23)
+
+Essai fait avec le LLM enregistré (`LLM_PROVIDER=fixture`), une base vierge par étape, le service lancé par `deploy/docker-compose.dev.yml --profile pocket` et Kokoro de développement.
+
+| Étape | Configuration | Observé |
+| ----- | ------------- | ------- |
+| 1 | `TTS_PROVIDERS=pocket,kokoro`, les deux services en marche | 19 phrases sur 19 dites par Pocket (19 appels `200` dans les journaux du service) ; `/api/health` : `voices: {pocket: true, kokoro: true}` ; écart entre durée annoncée et durée réelle des fichiers : 0 ms |
+| 2 | Service Pocket arrêté, cache audio vide | 19 phrases sur 19 dites par Kokoro (fichiers du cache de Kokoro, aucun de Pocket) ; `voices: {pocket: false, kokoro: true}` ; `checks.voice` reste `true` |
+| 3 | `TTS_PROVIDERS=pocket`, service arrêté | Explication prête (28 événements, `done`), 0 phrase sur 19 avec son : sous-titres seuls ; `voices: {pocket: false}`, `checks.voice: false` |
+| 4 | `TTS_PROVIDERS=pocket` | Pied de page de `/fr` et `/en` : crédit rendu avec ses liens |
+| 5 | `TTS_PROVIDERS=azure,kokoro` (défaut) | Aucun lien de crédit rendu ; `voices: {kokoro: true}` (Azure sans clé n'est pas listée) |
+
+Une première tentative d'étape 2 avec le même cache audio a servi les sons de Pocket sans appeler le service : le cache réutilise les phrases identiques (FR-007), c'est voulu. Le relais n'est observable qu'avec une phrase non mémorisée.
+
+Les 24 références avec `TTS_PROVIDERS=none` n'ont pas été rejouées ici : le comportement hors voix est couvert par la suite de tests (étape 3 ci-dessus et tests d'intégration existants).
