@@ -23,6 +23,8 @@
     },
     "colophonLabel": "Colophon",
     "colophon": "Chaque explication est animée et racontée à voix haute ; chaque scène est vérifiée avant d’être affichée.",
+    "voiceCreditLabel": "Voix",
+    "voiceCredit": "Voix de synthèse : <model>Pocket TTS</model>, un modèle de Kyutai, sous licence <licence>CC BY 4.0</licence>. Voix anglaise : <voices>Alba MacKenna</voices>, licence <licence>CC BY 4.0</licence>.",
     "sommaire": {
       "title": "Sommaire",
       "intro": "Des explications préparées et relues à l’avance. Ouvre-en une pour la voir tout de suite.",

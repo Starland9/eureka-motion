@@ -3,8 +3,13 @@ import { getTranslations } from "next-intl/server";
 import { AskSentence } from "@/components/ask/AskSentence";
 import { Preferences } from "@/components/ask/Preferences";
 import { Sommaire } from "@/components/ask/Sommaire";
+import { VoiceCredit } from "@/components/ask/VoiceCredit";
 import { localeFromParams } from "@/i18n/params";
 import { listReferences } from "@/server/reference";
+import { isPocketConfigured } from "@/server/tts";
+
+// TTS_PROVIDERS is read at run time, so the page is not prerendered at build.
+export const dynamic = "force-dynamic";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -59,6 +64,7 @@ export default async function HomePage({ params }: Props) {
             {t("colophon")}
           </p>
         </div>
+        <VoiceCredit configured={isPocketConfigured()} />
       </footer>
     </div>
   );

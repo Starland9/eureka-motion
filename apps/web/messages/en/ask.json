@@ -23,6 +23,8 @@
     },
     "colophonLabel": "Colophon",
     "colophon": "Every explanation is animated and read aloud; every scene is checked before it is shown.",
+    "voiceCreditLabel": "Voice",
+    "voiceCredit": "Synthetic voice: <model>Pocket TTS</model>, a model by Kyutai, licensed under <licence>CC BY 4.0</licence>. English voice: <voices>Alba MacKenna</voices>, licensed under <licence>CC BY 4.0</licence>.",
     "sommaire": {
       "title": "Contents",
       "intro": "Explanations prepared and reviewed in advance. Open one to watch it right away.",
