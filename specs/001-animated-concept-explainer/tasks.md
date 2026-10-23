@@ -277,31 +277,31 @@ service externe.
 
 **Independent Test**: quickstart.md, scénario 2.
 
-- [ ] T050 [P] [US2] [S] Écrire le chargeur `apps/web/src/server/reference/` (lecture de `content/reference/*.json` et de leur audio, sans base de données), le script `scripts/reference-build.ts` (`pnpm reference:build` : valide chaque fichier par les six règles et produit l'index), et la route `apps/web/src/app/api/reference/route.ts`.
+- [X] T050 [P] [US2] [S] Écrire le chargeur `apps/web/src/server/reference/` (lecture de `content/reference/*.json` et de leur audio, sans base de données), le script `scripts/reference-build.ts` (`pnpm reference:build` : valide chaque fichier par les six règles et produit l'index), et la route `apps/web/src/app/api/reference/route.ts`.
   - Lire : data-model.md (Explication de référence) ; contracts/http-api.md § 5 ; spec.md FR-017, FR-018.
   - Réussite : `pnpm reference:build` échoue sur un fichier non conforme ; la route répond base de données arrêtée.
-- [ ] T051 [P] [US2] [S] Écrire le sommaire `apps/web/src/components/ask/Sommaire.tsx` : six matières en liste réglée sur deux colonnes (une sur téléphone), concept, points de conduite, niveau de référence ; un clic ouvre l'explication.
+- [X] T051 [P] [US2] [S] Écrire le sommaire `apps/web/src/components/ask/Sommaire.tsx` : six matières en liste réglée sur deux colonnes (une sur téléphone), concept, points de conduite, niveau de référence ; un clic ouvre l'explication.
   - Lire : design-system/eureka-motion/MASTER.md § 5.1 ; spec.md FR-016.
   - Réussite : chaque ligne est un lien atteignable au clavier ; aucune carte, aucune icône décorative.
-- [ ] T052 [P] [US2] [S] Écrire `packages/scene/src/primitives/sim/circuit.tsx` (source, résistance, intensité `I = U/R` montrée par le débit des porteurs) et son test.
+- [X] T052 [P] [US2] [S] Écrire `packages/scene/src/primitives/sim/circuit.tsx` (source, résistance, intensité `I = U/R` montrée par le débit des porteurs) et son test.
   - Lire : contracts/scene-schema.md § 4.1 (Simulations) ; design-system/eureka-motion/MASTER.md § 4.
   - Réussite : le test vérifie que doubler `R` divise l'intensité affichée par deux.
-- [ ] T053 [P] [US2] [S] Écrire `packages/scene/src/primitives/sim/right-triangle.tsx` (triangle rectangle et carrés construits sur ses côtés, aires affichées) et son test.
+- [X] T053 [P] [US2] [S] Écrire `packages/scene/src/primitives/sim/right-triangle.tsx` (triangle rectangle et carrés construits sur ses côtés, aires affichées) et son test.
   - Lire : contracts/scene-schema.md § 4.1 (Simulations).
   - Réussite : le test vérifie que la somme des deux petites aires égale la grande pour trois jeux de côtés.
-- [ ] T054 [P] [US2] [S] Écrire `packages/scene/src/primitives/sim/reaction.tsx` (molécules des réactifs réarrangées en produits, décompte des atomes de chaque côté) et son test.
+- [X] T054 [P] [US2] [S] Écrire `packages/scene/src/primitives/sim/reaction.tsx` (molécules des réactifs réarrangées en produits, décompte des atomes de chaque côté) et son test.
   - Lire : contracts/scene-schema.md § 4.1 (Simulations).
   - Réussite : le test vérifie l'égalité du décompte d'atomes pour une équation équilibrée et son inégalité sinon.
-- [ ] T055 [P] [US2] [S] Écrire `packages/scene/src/primitives/sim/flow.tsx` (nœuds et flux entrants et sortants dont le débit dépend d'un paramètre) et son test.
+- [X] T055 [P] [US2] [S] Écrire `packages/scene/src/primitives/sim/flow.tsx` (nœuds et flux entrants et sortants dont le débit dépend d'un paramètre) et son test.
   - Lire : contracts/scene-schema.md § 4.1 (Simulations).
   - Réussite : le test vérifie que le débit des sorties suit celui de l'entrée limitante.
-- [ ] T056 [P] [US2] [S] Écrire `packages/scene/src/primitives/sim/array.tsx` (tableau de valeurs, comparaisons, échanges et bornes de recherche pas à pas) et son test.
+- [X] T056 [P] [US2] [S] Écrire `packages/scene/src/primitives/sim/array.tsx` (tableau de valeurs, comparaisons, échanges et bornes de recherche pas à pas) et son test.
   - Lire : contracts/scene-schema.md § 4.1 (Simulations).
   - Réussite : le test déroule un tri à bulles et une recherche dichotomique jusqu'à l'état final attendu.
-- [ ] T057 [P] [US2] [S] Écrire `packages/scene/src/primitives/sim/market.tsx` (courbes d'offre et de demande, point d'équilibre, décalage par paramètre) et son test.
+- [X] T057 [P] [US2] [S] Écrire `packages/scene/src/primitives/sim/market.tsx` (courbes d'offre et de demande, point d'équilibre, décalage par paramètre) et son test.
   - Lire : contracts/scene-schema.md § 4.1 (Simulations).
   - Réussite : le test vérifie qu'un décalage de la demande vers la droite augmente le prix et la quantité d'équilibre.
-- [ ] T058 [US2] [S] Écrire `scripts/reference-generate.ts` : pour une liste de concepts (`scripts/reference-set.json` : théorème de Pythagore et loi d'Ohm, équation chimique et photosynthèse au niveau collège ; dérivée, gravitation, pH, de l'ADN à la protéine, tri à bulles, offre et demande, intérêts composés au niveau lycée ; recherche dichotomique au niveau supérieur), jouer le pipeline réel en français et en anglais et écrire les documents, verdicts compris, dans `content/reference/` ; ne jamais écraser un fichier existant sans l'option `--force` (le document de T029 est écrit à la main).
+- [X] T058 [US2] [S] Écrire `scripts/reference-generate.ts` : pour une liste de concepts (`scripts/reference-set.json` : théorème de Pythagore et loi d'Ohm, équation chimique et photosynthèse au niveau collège ; dérivée, gravitation, pH, de l'ADN à la protéine, tri à bulles, offre et demande, intérêts composés au niveau lycée ; recherche dichotomique au niveau supérieur), jouer le pipeline réel en français et en anglais et écrire les documents, verdicts compris, dans `content/reference/` ; ne jamais écraser un fichier existant sans l'option `--force` (le document de T029 est écrit à la main).
   - Lire : spec.md FR-017 ; data-model.md (Explication de référence).
   - Réussite : le script produit un fichier par concept et par langue, chacun accepté par `pnpm reference:build`.
 - [ ] T059 [US2] [O] Produire et corriger à la main les 24 explications de référence : exactitude, qualité de l'analogie, lisibilité de chaque scène, curseurs pertinents, quiz ; renseigner `reviewed_by` et `reviewed_at`.
@@ -310,13 +310,13 @@ service externe.
 - [ ] T060 [US2] [S] Écrire et exécuter `scripts/reference-audio.ts` : synthétiser avec Azure l'audio de chaque temps de narration des 24 documents vers `content/reference/audio/`, et inscrire les durées dans les documents.
   - Lire : contracts/llm-provider.md § 2 ; data-model.md (Fichiers média). Dépend de l'action A2.
   - Réussite : chaque temps de narration des 24 documents a un fichier audio et une durée.
-- [ ] T061 [US2] [S] Écrire la route de santé `apps/web/src/app/api/health/route.ts` (l'état du worker et du bac à sable est lu dans `media/.health/worker.json` ; un battement de plus de 60 secondes vaut indisponible) et le mode dégradé : `POST /api/explanations` répond 503 `generation_unavailable` avec la liste des références quand le fournisseur est indisponible, et l'accueil affiche le message et le sommaire.
+- [X] T061 [US2] [S] Écrire la route de santé `apps/web/src/app/api/health/route.ts` (l'état du worker et du bac à sable est lu dans `media/.health/worker.json` ; un battement de plus de 60 secondes vaut indisponible) et le mode dégradé : `POST /api/explanations` répond 503 `generation_unavailable` avec la liste des références quand le fournisseur est indisponible, et l'accueil affiche le message et le sommaire.
   - Lire : contracts/http-api.md § 1 (503) et § 7 ; spec.md FR-018.
   - Réussite : fournisseur simulé sans scénario, une question libre affiche le message et le sommaire ; la santé répond 200.
-- [ ] T062 [US2] [S] Gérer le changement de niveau sur une explication de référence dans `apps/web/src/app/[locale]/e/[id]/page.tsx` : la demande part comme une question libre et l'explication de référence reste jouable pendant l'attente.
+- [X] T062 [US2] [S] Gérer le changement de niveau sur une explication de référence dans `apps/web/src/app/[locale]/e/[id]/page.tsx` : la demande part comme une question libre et l'explication de référence reste jouable pendant l'attente.
   - Lire : spec.md FR-047 et User Story 2, scénario 5.
   - Réussite : changer de niveau lance une préparation sans interrompre la lecture en cours.
-- [ ] T063 [US2] [S] Écrire le test de parcours `apps/web/tests/e2e/reference.spec.ts` : base de données arrêtée, `LLM_PROVIDER=fixture`, `TTS_PROVIDERS=none` ; les douze exemples démarrent en moins de 2 secondes et se jouent en français et en anglais.
+- [X] T063 [US2] [S] Écrire le test de parcours `apps/web/tests/e2e/reference.spec.ts` : base de données arrêtée, `LLM_PROVIDER=fixture`, `TTS_PROVIDERS=none` ; les douze exemples démarrent en moins de 2 secondes et se jouent en français et en anglais.
   - Lire : quickstart.md scénario 2 ; spec.md SC-002, SC-009.
   - Réussite : `pnpm --filter web test:e2e reference` passe.
 - [ ] T064 [US2] [O] Point de contrôle : dérouler quickstart.md scénario 2, relire le code de la phase, transmettre les 24 explications au porteur pour relecture (action A5) et intégrer ses corrections.
@@ -333,16 +333,16 @@ service externe.
 
 **Independent Test**: quickstart.md, scénario 3.
 
-- [ ] T065 [P] [US3] [S] Écrire le panneau `apps/web/src/components/controls/Params.tsx` : une ligne par grandeur (symbole en italique, nom, règle graduée en couleur `role-quantity`, valeur et unité en chiffres tabulaires), contrôle natif de type intervalle, champ numérique, « Réinitialiser », résultat surligné ; rien ne s'affiche sans paramètre.
+- [X] T065 [P] [US3] [S] Écrire le panneau `apps/web/src/components/controls/Params.tsx` : une ligne par grandeur (symbole en italique, nom, règle graduée en couleur `role-quantity`, valeur et unité en chiffres tabulaires), contrôle natif de type intervalle, champ numérique, « Réinitialiser », résultat surligné ; rien ne s'affiche sans paramètre.
   - Lire : design-system/eureka-motion/MASTER.md § 5.4 et § 6 ; spec.md FR-020 à FR-023.
   - Réussite : chaque curseur se règle aux flèches, à début et à fin ; sa valeur est annoncée avec son unité.
-- [ ] T066 [US3] [S] Relier les paramètres au lecteur dans `apps/web/src/components/player/useParams.ts` et `Planche.tsx` : valeurs passées en propriétés mémorisées sans relancer la lecture ; pendant une action `sweep`, le curseur suit la valeur animée et un geste de l'élève reprend la main.
+- [X] T066 [US3] [S] Relier les paramètres au lecteur dans `apps/web/src/components/player/useParams.ts` et `Planche.tsx` : valeurs passées en propriétés mémorisées sans relancer la lecture ; pendant une action `sweep`, le curseur suit la valeur animée et un geste de l'élève reprend la main.
   - Lire : research.md § 2.2 ; contracts/scene-schema.md § 4.2 (`sweep`).
   - Réussite : déplacer un curseur pendant la lecture ne remet pas la scène à zéro ; la figure suit dans la même image.
-- [ ] T067 [P] [US3] [S] Écrire `packages/scene/src/primitives/sim/fall.tsx` et `orbit.tsx` (positions calculées par `½gt²` et par le mouvement circulaire uniforme) et leurs tests.
+- [X] T067 [P] [US3] [S] Écrire `packages/scene/src/primitives/sim/fall.tsx` et `orbit.tsx` (positions calculées par `½gt²` et par le mouvement circulaire uniforme) et leurs tests.
   - Lire : contracts/scene-schema.md § 4.1 (Simulations) ; design-system/eureka-motion/MASTER.md § 1 (principe 3).
   - Réussite : les tests comparent les positions à la loi pour trois instants.
-- [ ] T068 [P] [US3] [S] Écrire `packages/scene/src/primitives/sim/pendulum.tsx` et `wave.tsx` et leurs tests.
+- [X] T068 [P] [US3] [S] Écrire `packages/scene/src/primitives/sim/pendulum.tsx` et `wave.tsx` et leurs tests.
   - Lire : contracts/scene-schema.md § 4.1 (Simulations).
   - Réussite : les tests vérifient que la période du pendule croît avec la racine de la longueur et que la longueur d'onde est inversement proportionnelle à la fréquence.
 - [ ] T069 [US3] [S] Écrire `apps/web/tests/e2e/params.spec.ts` (curseurs à la souris et au clavier sur l'exemple gravitation, réinitialisation, absence de curseurs sur un concept sans grandeur) et `scripts/frame-budget.ts`, qui mesure le temps de rendu d'une image des 24 références.
