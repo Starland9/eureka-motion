@@ -1,1 +1,30 @@
-{}
+{
+  "Quiz": {
+    "label": "Quiz de vérification",
+    "exercise": "Exercice {current} sur {total}",
+    "exit": "Quitter le quiz",
+    "close": "Fermer le quiz",
+    "tag": {
+      "right": "[Bonne réponse]",
+      "yours": "[Ta réponse]"
+    },
+    "verdict": {
+      "correct": "Correct.",
+      "incorrect": "Pas tout à fait."
+    },
+    "rightAnswer": "La bonne réponse est {letter}.",
+    "review": "Revoir la scène {number} →",
+    "reviewPlain": "Revoir la scène →",
+    "next": "Exercice suivant →",
+    "seeScore": "Voir mon score →",
+    "score": {
+      "caption": "Résultat",
+      "value": "{score} sur {total}",
+      "perfect": "Toutes les réponses sont justes.",
+      "missed": "{count, plural, one {# réponse est à revoir.} other {# réponses sont à revoir.}}",
+      "details": "Détail des exercices",
+      "exerciseNumber": "Exercice {number}",
+      "again": "Un point reste flou ? Utilise « Je n’ai toujours pas compris » pour demander une autre explication."
+    }
+  }
+}

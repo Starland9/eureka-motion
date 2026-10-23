@@ -1,1 +1,30 @@
-{}
+{
+  "Quiz": {
+    "label": "Comprehension quiz",
+    "exercise": "Exercise {current} of {total}",
+    "exit": "Leave the quiz",
+    "close": "Close the quiz",
+    "tag": {
+      "right": "[Right answer]",
+      "yours": "[Your answer]"
+    },
+    "verdict": {
+      "correct": "Correct.",
+      "incorrect": "Not quite."
+    },
+    "rightAnswer": "The right answer is {letter}.",
+    "review": "Review scene {number} →",
+    "reviewPlain": "Review the scene →",
+    "next": "Next exercise →",
+    "seeScore": "See my score →",
+    "score": {
+      "caption": "Result",
+      "value": "{score} out of {total}",
+      "perfect": "Every answer is right.",
+      "missed": "{count, plural, one {# answer to review.} other {# answers to review.}}",
+      "details": "Exercise details",
+      "exerciseNumber": "Exercise {number}",
+      "again": "Still unclear? Use “I still don’t understand” to ask for another explanation."
+    }
+  }
+}
