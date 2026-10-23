@@ -45,14 +45,6 @@
       "retry": "Try again",
       "pending": "Starting the explanation again…"
     },
-    "missing": {
-      "lead": "This explanation does not exist, or the link is incomplete.",
-      "next": "Ask your question on the home page to get one."
-    },
-    "expired": {
-      "lead": "This link has expired.",
-      "next": "Ask your question again to get an explanation."
-    },
     "partial": {
       "notice": "Part of the explanation is missing: a scene could not be verified, so it is not shown.",
       "action": "Start again",

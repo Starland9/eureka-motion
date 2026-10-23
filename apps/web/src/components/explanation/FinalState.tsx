@@ -152,17 +152,6 @@ function Failed({ state, restart }: { state: ExplanationState; restart: Restart 
   );
 }
 
-function Gone({ kind }: { kind: "missing" | "expired" }) {
-  const t = useTranslations("Explanation");
-  return (
-    <>
-      <Lead>{kind === "missing" ? t("missing.lead") : t("expired.lead")}</Lead>
-      <Next>{kind === "missing" ? t("missing.next") : t("expired.next")}</Next>
-      <HomeLink label={t("backHome")} />
-    </>
-  );
-}
-
 export function FinalState({ state, restart }: { state: ExplanationState; restart: Restart }) {
   switch (state.status) {
     case "refused":
@@ -171,9 +160,6 @@ export function FinalState({ state, restart }: { state: ExplanationState; restar
       return <Clarify state={state} restart={restart} />;
     case "failed":
       return <Failed state={state} restart={restart} />;
-    case "missing":
-    case "expired":
-      return <Gone kind={state.status} />;
     default:
       return null;
   }
