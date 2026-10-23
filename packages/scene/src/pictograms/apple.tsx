@@ -50,6 +50,20 @@ const leaf = cubics(
   ],
 );
 
+const SHADING_CACHE_LIMIT = 16;
+const shadingByGap = new Map<number, string>();
+
+// Sampling the hatching costs about 20 ms and depends on the gap alone.
+function shading(gap: number): string {
+  let d = shadingByGap.get(gap);
+  if (d === undefined) {
+    d = hatch(shaded(inPolygon(body.polygon), [50, 50], 9), gap);
+    if (shadingByGap.size >= SHADING_CACHE_LIMIT) shadingByGap.clear();
+    shadingByGap.set(gap, d);
+  }
+  return d;
+}
+
 export function Apple({ pen }: DrawingProps) {
   return (
     <>
@@ -57,7 +71,7 @@ export function Apple({ pen }: DrawingProps) {
       <Solid pen={pen} d={leaf.d} />
       <Fine pen={pen} d={open([53, 21], [80, 10])} />
       <Solid pen={pen} d={body.d} />
-      <Fine pen={pen} d={hatch(shaded(inPolygon(body.polygon), [50, 50], 9), hatchGap(pen, 4))} />
+      <Fine pen={pen} d={shading(hatchGap(pen, 4))} />
     </>
   );
 }

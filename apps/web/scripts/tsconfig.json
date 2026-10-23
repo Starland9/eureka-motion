@@ -15,6 +15,7 @@
     "../../../scripts/reference-build.ts",
     "../../../scripts/reference-generate.ts",
     "../../../scripts/golden.ts",
+    "../../../scripts/frame-budget.ts",
     "../src/server/**/*",
     "./**/*"
   ]
