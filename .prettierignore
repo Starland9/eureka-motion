@@ -16,3 +16,4 @@ packages/scene/assets
 .vscode
 content
 .snapshots
+apps/web/drizzle/meta

@@ -21,7 +21,9 @@ function check(condition: boolean, message: string, detail?: unknown): void {
 const browser = await chromium.launch();
 try {
   for (const size of SIZES) {
-    const context = await browser.newContext({ viewport: { width: size.width, height: size.height } });
+    const context = await browser.newContext({
+      viewport: { width: size.width, height: size.height },
+    });
     const page = await context.newPage();
     const failed: string[] = [];
     page.on("response", (response) => {
