@@ -1,0 +1,111 @@
+[
+  {
+    "slug": "maths/pythagorean-theorem",
+    "subject": "maths",
+    "reference_level": "college",
+    "questions": {
+      "fr": "C'est quoi le théorème de Pythagore ?",
+      "en": "What is the Pythagorean theorem?"
+    }
+  },
+  {
+    "slug": "physics/ohms-law",
+    "subject": "physics",
+    "reference_level": "college",
+    "questions": {
+      "fr": "Comment fonctionne la loi d'Ohm ?",
+      "en": "How does Ohm's law work?"
+    }
+  },
+  {
+    "slug": "chemistry/chemical-equation",
+    "subject": "chemistry",
+    "reference_level": "college",
+    "questions": {
+      "fr": "Comment équilibrer une équation chimique ?",
+      "en": "How do you balance a chemical equation?"
+    }
+  },
+  {
+    "slug": "biology/photosynthesis",
+    "subject": "biology",
+    "reference_level": "college",
+    "questions": {
+      "fr": "Comment fonctionne la photosynthèse ?",
+      "en": "How does photosynthesis work?"
+    }
+  },
+  {
+    "slug": "maths/derivative",
+    "subject": "maths",
+    "reference_level": "lycee",
+    "questions": {
+      "fr": "C'est quoi une dérivée ?",
+      "en": "What is a derivative?"
+    }
+  },
+  {
+    "slug": "physics/universal-gravitation",
+    "subject": "physics",
+    "reference_level": "lycee",
+    "questions": {
+      "fr": "la loi de la gravité",
+      "en": "What is the law of gravity?"
+    },
+    "hand_written": ["fr"]
+  },
+  {
+    "slug": "chemistry/ph",
+    "subject": "chemistry",
+    "reference_level": "lycee",
+    "questions": {
+      "fr": "C'est quoi le pH ?",
+      "en": "What is pH?"
+    }
+  },
+  {
+    "slug": "biology/protein-synthesis",
+    "subject": "biology",
+    "reference_level": "lycee",
+    "questions": {
+      "fr": "Comment passe-t-on de l'ADN à une protéine ?",
+      "en": "How does DNA become a protein?"
+    }
+  },
+  {
+    "slug": "cs/bubble-sort",
+    "subject": "cs",
+    "reference_level": "lycee",
+    "questions": {
+      "fr": "Comment fonctionne le tri à bulles ?",
+      "en": "How does bubble sort work?"
+    }
+  },
+  {
+    "slug": "economics/supply-and-demand",
+    "subject": "economics",
+    "reference_level": "lycee",
+    "questions": {
+      "fr": "Comment l'offre et la demande fixent-elles un prix ?",
+      "en": "How do supply and demand set a price?"
+    }
+  },
+  {
+    "slug": "economics/compound-interest",
+    "subject": "economics",
+    "reference_level": "lycee",
+    "questions": {
+      "fr": "Comment fonctionnent les intérêts composés ?",
+      "en": "How does compound interest work?"
+    }
+  },
+  {
+    "slug": "cs/binary-search",
+    "subject": "cs",
+    "reference_level": "superieur",
+    "questions": {
+      "fr": "Comment fonctionne la recherche dichotomique ?",
+      "en": "How does binary search work?"
+    }
+  }
+]

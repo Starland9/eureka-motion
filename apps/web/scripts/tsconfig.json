@@ -13,6 +13,7 @@
     "../../../packages/scene/src/**/*",
     "../../../scripts/tokens-to-css.ts",
     "../../../scripts/reference-build.ts",
+    "../../../scripts/reference-generate.ts",
     "../src/server/**/*",
     "./**/*"
   ]
