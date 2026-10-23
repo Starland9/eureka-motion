@@ -442,10 +442,10 @@ sans jamais gêner l'explication immédiate.
 - [ ] T085 [US7] [O] Écrire l'orchestration de la version approfondie `workers/render/src/deep/` : consigne d'écriture du code Manim depuis le plan vérifié (`prompt.ts`), dépôt dans `sandbox/in/`, attente du `.json`, réparation avec le code et l'erreur, trois tentatives et 6 minutes au plus, déplacement vers `media/{explanation_id}/deep.mp4`, état `abandoned` sinon.
   - Lire : contracts/workers.md § 4 ; research.md § 7. Dépend de T084 et T079.
   - Réussite : pour « la dérivée d'une fonction », une vidéo est produite en moins de 5 minutes ; une erreur de rendu provoquée déclenche une réparation.
-- [ ] T086 [P] [US7] [S] Créer un travail `deep` à la fin du pipeline quand le tri indique `deep_eligible`, émettre l'événement `deep`, et écrire `apps/web/src/app/api/explanations/[id]/deep/route.ts`.
+- [X] T086 [P] [US7] [S] Créer un travail `deep` à la fin du pipeline quand le tri indique `deep_eligible`, émettre l'événement `deep`, et écrire `apps/web/src/app/api/explanations/[id]/deep/route.ts`.
   - Lire : contracts/http-api.md § 1 (`deep`) et § 4 ; spec.md FR-033, FR-034.
   - Réussite : un concept de maths crée un travail `deep` ; un sujet d'histoire n'en crée pas.
-- [ ] T087 [P] [US7] [S] Écrire `apps/web/src/components/player/DeepVersion.tsx` : ligne de marge `VERSION APPROFONDIE [EN PRÉPARATION]`, devenant le lien « Regarder la démonstration complète → » ; rien pour `none` et `abandoned`.
+- [X] T087 [P] [US7] [S] Écrire `apps/web/src/components/player/DeepVersion.tsx` : ligne de marge `VERSION APPROFONDIE [EN PRÉPARATION]`, devenant le lien « Regarder la démonstration complète → » ; rien pour `none` et `abandoned`.
   - Lire : design-system/eureka-motion/MASTER.md § 5.9.
   - Réussite : la ligne disparaît sans message quand le travail est abandonné.
 - [ ] T088 [US7] [S] Écrire `apps/web/tests/integration/deep.test.ts` : service `manim` arrêté ou travail abandonné, l'explication immédiate aboutit normalement et l'interface n'annonce rien.
@@ -478,7 +478,7 @@ sans jamais gêner l'explication immédiate.
 - [X] T094 [P] [S] Écrire `scripts/design-lint.ts` : échoue sur une valeur de couleur brute, un `rounded-*`, un `shadow-*`, un dégradé, un flou d'arrière-plan ou un caractère emoji dans `apps/web/src/` et `packages/scene/src/` ; l'ajouter à `pnpm lint`.
   - Lire : design-system/eureka-motion/MASTER.md § 7.
   - Réussite : `pnpm lint` passe sur le dépôt et échoue sur un fichier d'essai contenant `rounded-lg`.
-- [ ] T095 [P] [S] Écrire le nettoyage périodique `workers/render/src/cleanup.ts` : suppression des exports de plus de 7 jours et des explications expirées avec leurs fichiers ; test `workers/render/tests/cleanup.test.ts`.
+- [X] T095 [P] [S] Écrire le nettoyage périodique `workers/render/src/cleanup.ts` : suppression des exports de plus de 7 jours et des explications expirées avec leurs fichiers ; test `workers/render/tests/cleanup.test.ts`.
   - Lire : data-model.md (Fichiers média ; Explication : `expires_at`).
   - Réussite : le test vérifie qu'une explication de référence n'est jamais supprimée.
 - [X] T096 [P] [S] Écrire `README.md` (présentation, lancement, architecture en un schéma, variables) et `docs/demo-script.md` (déroulé de démonstration de 3 minutes : question libre, curseurs, « autre image », quiz, colophon, mode sans réseau).
