@@ -11,6 +11,7 @@ import frReformulate from "../../messages/fr/reformulate.json";
 import frQuiz from "../../messages/fr/quiz.json";
 import frShare from "../../messages/fr/share.json";
 import frDeep from "../../messages/fr/deep.json";
+import frExport from "../../messages/fr/export.json";
 import enCommon from "../../messages/en/common.json";
 import enAsk from "../../messages/en/ask.json";
 import enPlanche from "../../messages/en/planche.json";
@@ -24,6 +25,7 @@ import enReformulate from "../../messages/en/reformulate.json";
 import enQuiz from "../../messages/en/quiz.json";
 import enShare from "../../messages/en/share.json";
 import enDeep from "../../messages/en/deep.json";
+import enExport from "../../messages/en/export.json";
 
 export const messages = {
   fr: {
@@ -40,6 +42,7 @@ export const messages = {
     ...frQuiz,
     ...frShare,
     ...frDeep,
+    ...frExport,
   },
   en: {
     ...enCommon,
@@ -55,6 +58,7 @@ export const messages = {
     ...enQuiz,
     ...enShare,
     ...enDeep,
+    ...enExport,
   },
 } as const;
 

@@ -1,0 +1,26 @@
+{
+  "Export": {
+    "action": "Download the video",
+    "retry": "Try again",
+    "cancel": "Cancel",
+    "unavailable": "Downloading the video is temporarily unavailable.",
+    "progress": {
+      "label": "Preparing the video",
+      "starting": "Preparing the video…",
+      "text": "Preparing the video… {percent}%",
+      "busy": "The rendering service is busy: the video will start as soon as it is free.",
+      "cancelled": "The video is still being prepared: ask again to pick it up."
+    },
+    "ready": "The video is ready.",
+    "download": "Download the video (MP4) →",
+    "errors": {
+      "failed": "The video could not be prepared. Try again in a moment.",
+      "lost": "Following the preparation was interrupted. The video may still be preparing: try again to pick it up.",
+      "notReady": "This explanation is not ready yet: the video will be available once it has finished loading.",
+      "unreachable": "The request could not be sent. Check your connection, then try again.",
+      "rateLimitedSeconds": "You have asked for a lot of videos in a short time. Try again in {seconds, plural, one {# second} other {# seconds}}.",
+      "rateLimitedMinutes": "You have asked for a lot of videos in a short time. Try again in {minutes, plural, one {# minute} other {# minutes}}.",
+      "rateLimitedLater": "You have asked for a lot of videos in a short time. Try again a little later."
+    }
+  }
+}

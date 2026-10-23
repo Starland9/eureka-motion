@@ -1,0 +1,26 @@
+{
+  "Export": {
+    "action": "Télécharger la vidéo",
+    "retry": "Réessayer",
+    "cancel": "Annuler",
+    "unavailable": "Le téléchargement de la vidéo est momentanément indisponible.",
+    "progress": {
+      "label": "Préparation de la vidéo",
+      "starting": "Préparation de la vidéo…",
+      "text": "Préparation de la vidéo… {percent} %",
+      "busy": "Le service de rendu est occupé ; la vidéo démarrera dès qu’il sera libre.",
+      "cancelled": "La vidéo continue de se préparer ; relance pour la retrouver."
+    },
+    "ready": "La vidéo est prête.",
+    "download": "Télécharger la vidéo (MP4) →",
+    "errors": {
+      "failed": "La vidéo n’a pas pu être préparée. Réessaie dans un instant.",
+      "lost": "Le suivi de la préparation a été interrompu. La vidéo continue peut-être de se préparer : réessaie pour la retrouver.",
+      "notReady": "Cette explication n’est pas encore prête : la vidéo sera disponible à la fin de sa préparation.",
+      "unreachable": "La demande n’a pas pu partir. Vérifie ta connexion, puis réessaie.",
+      "rateLimitedSeconds": "Tu as demandé beaucoup de vidéos en peu de temps. Réessaie dans {seconds, plural, one {# seconde} other {# secondes}}.",
+      "rateLimitedMinutes": "Tu as demandé beaucoup de vidéos en peu de temps. Réessaie dans {minutes, plural, one {# minute} other {# minutes}}.",
+      "rateLimitedLater": "Tu as demandé beaucoup de vidéos en peu de temps. Réessaie un peu plus tard."
+    }
+  }
+}

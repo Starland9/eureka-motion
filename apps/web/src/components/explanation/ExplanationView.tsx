@@ -4,6 +4,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useEffectEvent, useMemo, useState } from "react";
 import type { Language, Model, Param, Scene } from "scene";
 import { Colophon } from "@/components/colophon/Colophon";
+import { Export } from "@/components/player/Export";
 import { FigureCaption } from "@/components/player/FigureCaption";
 import { ParamsPanel } from "@/components/player/ParamsPanel";
 import { Planche } from "@/components/player/Planche";
@@ -153,6 +154,7 @@ export function ExplanationView({ id }: { id: string }) {
                 </div>
                 <div className="min-w-0 lg:col-span-4 lg:col-start-9 lg:row-start-2">
                   <Share path={sharePathOf(state)} className="mb-6" />
+                  <Export state={state} className="-mt-6 mb-6" />
                   {hasScenes ? (
                     <QuizPanel quiz={state?.quiz ?? null} explanationId={state?.id ?? null}>
                       <SceneList
