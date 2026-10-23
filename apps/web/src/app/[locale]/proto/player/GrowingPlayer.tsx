@@ -1,6 +1,7 @@
 "use client";
 
 import { Player, type PlayerRef } from "@remotion/player";
+import { useTranslations } from "next-intl";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { CANVAS, FPS, type ExplanationDocument } from "scene";
 import { Explanation, explanationDurationInFrames } from "scene/player";
@@ -17,6 +18,7 @@ interface LogEntry {
 }
 
 export function GrowingPlayer({ document }: { document: ExplanationDocument }) {
+  const t = useTranslations("Transport");
   const [player, setPlayer] = useState<PlayerRef | null>(null);
   const started = useRef(0);
   const [count, setCount] = useState(1);
@@ -95,7 +97,7 @@ export function GrowingPlayer({ document }: { document: ExplanationDocument }) {
         acknowledgeRemotionLicense
       />
       <button type="button" data-testid="play" onClick={(event) => player?.play(event)}>
-        play
+        {t("play")}
       </button>
       <output data-testid="status">
         {JSON.stringify({ scenes: count, duration, waiting, complete })}

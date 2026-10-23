@@ -26,11 +26,11 @@ const MESSAGES: Readonly<Record<Language, Readonly<Record<ErrorCode, string>>>> 
   fr: {
     invalid_request:
       "Ta demande est incomplète. Vérifie ta question, la langue et le niveau, puis réessaie.",
-    mode_not_supported: "Ce type de demande n'est pas encore disponible.",
+    mode_not_supported: "Ce type de demande n’est pas encore disponible.",
     parent_not_found:
-      "L'explication de départ ou la scène demandée est introuvable. Elle a peut-être expiré.",
+      "L’explication de départ ou la scène demandée est introuvable. Elle a peut-être expiré.",
     not_found: "Cette explication est introuvable.",
-    expired: "Ce lien a expiré : l'explication n'est plus conservée.",
+    expired: "Ce lien a expiré\u00a0: l’explication n’est plus conservée.",
     rate_limited: "Tu as posé beaucoup de questions en peu de temps. Réessaie un peu plus tard.",
     generation_unavailable: pipelineMessage("fr", "unavailable"),
     internal_error: "Un problème est survenu de notre côté. Réessaie dans un instant.",

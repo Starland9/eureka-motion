@@ -8,6 +8,25 @@ import tseslint from "typescript-eslint";
 
 const SOURCE_FILES = "**/*.{js,jsx,mjs,cjs,ts,tsx,mts,cts}";
 
+const LETTER = "/\\p{L}/u";
+const USER_TEXT_ATTRIBUTES =
+  "aria-label|aria-description|aria-placeholder|aria-roledescription|aria-valuetext|title|placeholder|alt";
+const HARDCODED_TEXT =
+  "Visible text must come from the translation files (apps/web/messages), not from a literal in the source (FR-038).";
+
+const wordsIn = (container) => [
+  `${container} > Literal[value=${LETTER}]`,
+  `${container} > TemplateLiteral > TemplateElement[value.cooked=${LETTER}]`,
+  `${container} > :matches(ConditionalExpression, LogicalExpression, BinaryExpression) > Literal[value=${LETTER}]`,
+];
+
+const HARDCODED_TEXT_SELECTORS = [
+  `JSXText[value=${LETTER}]`,
+  ...wordsIn(":matches(JSXElement, JSXFragment) > JSXExpressionContainer"),
+  `JSXAttribute[name.name=/^(${USER_TEXT_ATTRIBUTES})$/] > Literal[value=${LETTER}]`,
+  ...wordsIn(`JSXAttribute[name.name=/^(${USER_TEXT_ATTRIBUTES})$/] > JSXExpressionContainer`),
+];
+
 export default defineConfig([
   globalIgnores([
     "**/node_modules",
@@ -77,6 +96,19 @@ export default defineConfig([
           message:
             "Do not use className in packages/scene: scene primitives are styled from tokens with inline styles (style={...}), not CSS or Tailwind classes.",
         },
+      ],
+    },
+  },
+
+  // FR-038: every visible text of the web application lives in the translation files.
+  // The workbenches under dev/ are development tools and keep their texts as literals.
+  {
+    files: ["apps/web/src/**/*.{jsx,tsx}"],
+    ignores: ["apps/web/src/app/*/dev/**", "apps/web/src/components/dev/**"],
+    rules: {
+      "no-restricted-syntax": [
+        "error",
+        ...HARDCODED_TEXT_SELECTORS.map((selector) => ({ selector, message: HARDCODED_TEXT })),
       ],
     },
   },
