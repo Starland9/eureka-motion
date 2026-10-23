@@ -16,6 +16,7 @@
     "../../../scripts/reference-generate.ts",
     "../../../scripts/golden.ts",
     "../../../scripts/frame-budget.ts",
+    "../../../scripts/design-lint.ts",
     "../src/server/**/*",
     "./**/*"
   ]

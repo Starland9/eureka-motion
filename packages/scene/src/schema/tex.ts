@@ -1,5 +1,6 @@
 import katex from "katex";
 import { templateReferences } from "../expr";
+import { roles } from "../tokens";
 
 export const ROLE_MACRO_NAMES = {
   quantity: "\\q",
@@ -51,12 +52,7 @@ const FORBIDDEN = [
 ];
 const FORBIDDEN_PATTERN = new RegExp(`\\\\(?:${FORBIDDEN.join("|")})(?![A-Za-z])`);
 
-const PLACEHOLDER_COLOURS: RoleColours = {
-  quantity: "#000001",
-  action: "#000002",
-  result: "#000003",
-  valid: "#000004",
-};
+const PLACEHOLDER_COLOURS: RoleColours = roles.paper;
 
 export const KATEX_OPTIONS = {
   throwOnError: true,
