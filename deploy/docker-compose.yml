@@ -56,10 +56,10 @@ services:
         required: false
     # Lets the current export finish after SIGTERM.
     stop_grace_period: 3m
-    # Measured: 96 s for the gravity reference with 3 processors, 205 s with 2; peak 1.6 GB.
-    cpus: ${WORKER_CPUS:-3}
-    mem_limit: ${WORKER_MEMORY:-3g}
-    memswap_limit: ${WORKER_MEMORY:-3g}
+    # Measured: 96 s for the gravity reference with 2 processors, 205 s with 2; peak 1.6 GB.
+    cpus: ${WORKER_CPUS:-2}
+    mem_limit: ${WORKER_MEMORY:-2g}
+    memswap_limit: ${WORKER_MEMORY:-2g}
     pids_limit: 1024
     cap_drop:
       - ALL
