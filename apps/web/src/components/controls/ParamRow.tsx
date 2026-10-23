@@ -108,7 +108,7 @@ export function ParamRow({
   return (
     <li className="grid gap-x-6 gap-y-1 border-b border-rule py-4 @xl:grid-cols-[minmax(0,13rem)_minmax(0,1fr)_minmax(0,12rem)] @xl:items-start">
       <label id={nameId} htmlFor={rangeId} className="text-body min-w-0 @xl:pt-2">
-        <i className="pr-2 text-role-quantity">{param.symbol}</i>
+        <i className="pr-1 text-role-quantity after:content-['_']">{param.symbol}</i>
         {param.label}
       </label>
 

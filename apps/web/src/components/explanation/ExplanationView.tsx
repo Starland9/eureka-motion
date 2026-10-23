@@ -151,9 +151,6 @@ export function ExplanationView({ id }: { id: string }) {
                   )}
                   {state === null ? null : <Notices state={state} restart={restart} />}
                 </div>
-                {hasScenes ? (
-                  <ParamsPanel className="lg:col-span-12 lg:col-start-1 lg:row-start-3 lg:mt-6" />
-                ) : null}
                 <div className="min-w-0 lg:col-span-4 lg:col-start-9 lg:row-start-2">
                   <Share path={sharePathOf(state)} className="mb-6" />
                   {hasScenes ? (
@@ -173,6 +170,9 @@ export function ExplanationView({ id }: { id: string }) {
                     <LevelChoice state={state} className="mt-8" />
                   )}
                 </div>
+                {hasScenes ? (
+                  <ParamsPanel className="lg:col-span-12 lg:col-start-1 lg:row-start-3 lg:mt-6" />
+                ) : null}
                 {visitor ? (
                   <VisitorAsk className="lg:col-span-12" />
                 ) : (

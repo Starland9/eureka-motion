@@ -20,7 +20,9 @@ export interface ParamsProps {
 }
 
 function ResultSymbol({ result }: { result: ParamResult }) {
-  return result.symbol === undefined ? null : <i className="pr-2">{result.symbol}</i>;
+  return result.symbol === undefined ? null : (
+    <i className="pr-1 after:content-['_']">{result.symbol}</i>
+  );
 }
 
 function Results({ results, language }: { results: readonly ParamResult[]; language: Language }) {
