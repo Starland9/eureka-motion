@@ -14,8 +14,9 @@ export interface TestDatabase {
   close(): Promise<void>;
 }
 
-export function testDatabaseUrl(): URL {
+export function testDatabaseUrl(name?: string): URL {
   const url = new URL(process.env.TEST_DATABASE_URL ?? DEFAULT_URL);
+  if (name !== undefined) url.pathname = `/${name}`;
   if (!/^[a-z0-9_]+_test$/.test(url.pathname.slice(1))) {
     throw new Error("The test database name must end with _test: refusing to wipe it");
   }
@@ -49,8 +50,9 @@ async function ensureDatabase(url: URL): Promise<boolean> {
 }
 
 // Resolves to null when PostgreSQL cannot be reached, so that the suite can skip itself.
-export async function openTestDatabase(): Promise<TestDatabase | null> {
-  const url = testDatabaseUrl();
+// Test files run in parallel: each one that resets the schema needs a database of its own.
+export async function openTestDatabase(name?: string): Promise<TestDatabase | null> {
+  const url = testDatabaseUrl(name);
   if (!(await ensureDatabase(url))) return null;
 
   const connection: Connection = createConnection(url.href, { max: 10 });

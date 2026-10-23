@@ -3,6 +3,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { GET as getReference } from "../../src/app/api/reference/route";
 import { POST } from "../../src/app/api/explanations/route";
 import { GET as getEvents } from "../../src/app/api/explanations/[id]/events/route";
+import { POST as postExport } from "../../src/app/api/explanations/[id]/export/route";
 import { GET as getExplanation } from "../../src/app/api/explanations/[id]/route";
 import { GET as getVersions } from "../../src/app/api/explanations/[id]/versions/route";
 import type { RateLimiter, RateLimitResult } from "../../src/server/db/rate-limit";
@@ -28,6 +29,7 @@ const ORIGIN = "http://localhost:3000";
 const LANGUAGES: Language[] = ["fr", "en"];
 const UNKNOWN_ID = "u".repeat(12);
 const EXPIRED_ID = "e".repeat(12);
+const NOT_READY_ID = "p".repeat(12);
 const QUESTION = "pourquoi la Lune ne tombe pas sur la Terre";
 
 class ExpiringStore extends MemoryStore {
@@ -84,6 +86,13 @@ let limiter: FakeLimiter;
 async function boot(): Promise<void> {
   const store = new ExpiringStore();
   await store.create(expiredRecord());
+  await store.create({
+    ...expiredRecord(),
+    id: NOT_READY_ID,
+    root_id: NOT_READY_ID,
+    status: "streaming",
+    expires_at: null,
+  });
   const cache = new MemoryCache();
   const logs = new EventLogRegistry();
   limiter = new FakeLimiter();
@@ -138,6 +147,15 @@ const getById = (
     context(id),
   );
 
+const exportById = (id: string, language: Language): Promise<Response> =>
+  postExport(
+    new Request(`${ORIGIN}/api/explanations/${id}/export`, {
+      method: "POST",
+      headers: acceptLanguage(language),
+    }),
+    context(id),
+  );
+
 const valid = (language: Language) => ({ question: QUESTION, language, level: "lycee" });
 
 interface Trigger {
@@ -183,6 +201,7 @@ const TRIGGERS: Record<Exclude<ErrorCode, "mode_not_supported">, Trigger[]> = {
     { status: 410, call: (language) => getById(getEvents, EXPIRED_ID, language) },
     { status: 410, call: (language) => getById(getVersions, EXPIRED_ID, language) },
   ],
+  not_ready: [{ status: 409, call: (language) => exportById(NOT_READY_ID, language) }],
   rate_limited: [
     {
       status: 429,

@@ -14,6 +14,7 @@ const STATUS: Record<ErrorCode, number> = {
   parent_not_found: 404,
   not_found: 404,
   expired: 410,
+  not_ready: 409,
   rate_limited: 429,
   generation_unavailable: 503,
   internal_error: 500,

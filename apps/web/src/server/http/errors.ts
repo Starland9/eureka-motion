@@ -7,6 +7,7 @@ export type ErrorCode =
   | "parent_not_found"
   | "not_found"
   | "expired"
+  | "not_ready"
   | "rate_limited"
   | "generation_unavailable"
   | "internal_error";
@@ -17,6 +18,7 @@ const STATUS: Readonly<Record<ErrorCode, number>> = {
   parent_not_found: 404,
   not_found: 404,
   expired: 410,
+  not_ready: 409,
   rate_limited: 429,
   generation_unavailable: 503,
   internal_error: 500,
@@ -31,6 +33,7 @@ const MESSAGES: Readonly<Record<Language, Readonly<Record<ErrorCode, string>>>> 
       "L’explication de départ ou la scène demandée est introuvable. Elle a peut-être expiré.",
     not_found: "Cette explication est introuvable.",
     expired: "Ce lien a expiré\u00a0: l’explication n’est plus conservée.",
+    not_ready: "Cette explication n’est pas encore prête\u00a0: attends la fin de sa préparation.",
     rate_limited: "Tu as posé beaucoup de questions en peu de temps. Réessaie un peu plus tard.",
     generation_unavailable: pipelineMessage("fr", "unavailable"),
     internal_error: "Un problème est survenu de notre côté. Réessaie dans un instant.",
@@ -43,6 +46,7 @@ const MESSAGES: Readonly<Record<Language, Readonly<Record<ErrorCode, string>>>> 
       "The explanation to start from, or the scene asked for, could not be found. It may have expired.",
     not_found: "This explanation could not be found.",
     expired: "This link has expired: the explanation is no longer kept.",
+    not_ready: "This explanation is not ready yet: wait until it has finished loading.",
     rate_limited: "You have asked a lot of questions in a short time. Try again a little later.",
     generation_unavailable: pipelineMessage("en", "unavailable"),
     internal_error: "Something went wrong on our side. Try again in a moment.",

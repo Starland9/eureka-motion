@@ -2,8 +2,10 @@ import { randomInt } from "node:crypto";
 import {
   createExplanationCache,
   createExplanationStore,
+  createJobs,
   createRateLimiter,
   getDb,
+  type Jobs,
   type RateLimiter,
 } from "./db";
 import { getLlm } from "./llm";
@@ -70,4 +72,15 @@ export function getContainer(): Container {
 
 export function setContainerForTests(container: Container | undefined): void {
   holder.__eurekaContainer = container;
+}
+
+const jobsHolder = globalThis as typeof globalThis & { __eurekaJobs?: Jobs };
+
+export function getJobs(): Jobs {
+  jobsHolder.__eurekaJobs ??= createJobs(getDb());
+  return jobsHolder.__eurekaJobs;
+}
+
+export function setJobsForTests(jobs: Jobs | undefined): void {
+  jobsHolder.__eurekaJobs = jobs;
 }
