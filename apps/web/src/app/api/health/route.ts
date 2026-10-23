@@ -1,12 +1,8 @@
-import { pingDb } from "@/server/db/client";
+import { checkHealth } from "@/server/health";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 export async function GET(): Promise<Response> {
-  const database = await pingDb();
-  return Response.json(
-    { status: database ? "ok" : "degraded", checks: { database } },
-    { headers: { "Cache-Control": "no-store" } },
-  );
+  return Response.json(await checkHealth(), { headers: { "Cache-Control": "no-store" } });
 }

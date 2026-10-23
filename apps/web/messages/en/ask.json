@@ -13,7 +13,8 @@
       "rateLimitedSeconds": "You have asked a lot of questions in a short time. Try again in {seconds, plural, one {# second} other {# seconds}}.",
       "rateLimitedMinutes": "You have asked a lot of questions in a short time. Try again in {minutes, plural, one {# minute} other {# minutes}}.",
       "rateLimitedLater": "You have asked a lot of questions in a short time. Try again a little later.",
-      "unreachable": "The explanation could not start. Check your connection, then try again."
+      "unreachable": "The explanation could not start. Check your connection, then try again.",
+      "generationUnavailable": "Generation is unavailable for the moment. The explanations prepared in advance are still available: open one in the meantime."
     },
     "preferences": {
       "language": "Language",

@@ -453,7 +453,7 @@ describe("POST /api/explanations: rate limit", () => {
 });
 
 describe("POST /api/explanations: generation unavailable", () => {
-  it("answers 503 with an empty list of references, using no rate limit hit", async () => {
+  it("answers 503 with the list of references, using no rate limit hit", async () => {
     const h = boot();
     llm.health.mockResolvedValue({ ok: false, latencyMs: 0 });
     const response = await POST(post(BODY));
@@ -464,7 +464,7 @@ describe("POST /api/explanations: generation unavailable", () => {
         code: "generation_unavailable",
         message: errorMessage("fr", "generation_unavailable"),
       },
-      references: [],
+      references: expect.any(Array),
     });
     expect(h.limiter.checks).toEqual([]);
     expect(h.store.operations).toEqual([]);

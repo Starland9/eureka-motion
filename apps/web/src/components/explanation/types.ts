@@ -1,4 +1,5 @@
 import type { Language, Level, Model, Outline, Param, Quiz, Scene } from "scene";
+import type { ReferenceEntry } from "@/components/ask/Sommaire";
 import type { StepName, Verdict } from "@/server/pipeline/events";
 import type { Subject } from "@/server/pipeline/prompts/schemas";
 
@@ -108,7 +109,13 @@ export function isComplete(state: Pick<ExplanationState, "status">): boolean {
 
 export type StartOutcome =
   | { kind: "accepted"; id: string }
-  | { kind: "rejected"; code: string; message: string; retryAfterSeconds?: number };
+  | {
+      kind: "rejected";
+      code: string;
+      message: string;
+      retryAfterSeconds?: number;
+      references?: ReferenceEntry[];
+    };
 
 export interface ExplanationStream {
   state: ExplanationState | null;

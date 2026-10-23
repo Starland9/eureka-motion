@@ -1,4 +1,7 @@
+import type { Language, Level } from "scene";
 import { getContainer, sharePath, type Container } from "@/server/container";
+import { generationUnavailableResponse } from "@/server/health/degraded";
+import { within } from "@/server/health/timeout";
 import { isGenerationAvailable } from "@/server/http/availability";
 import { errorResponse, internalError, requestLanguage } from "@/server/http/errors";
 import { clientAddress, parseCreateRequest, readJson } from "@/server/http/request";
@@ -19,6 +22,17 @@ async function serveCached(
   return sseResponse(() => replaySource(events), signal);
 }
 
+async function fromCache(
+  request: Request,
+  question: string,
+  language: Language,
+  level: Level,
+): Promise<Response | null> {
+  const container = getContainer();
+  const hit = await container.cache.findByQuestion(question, { language, level });
+  return hit ? serveCached(container, hit, request.signal) : null;
+}
+
 export async function POST(request: Request): Promise<Response> {
   const body = await readJson(request);
   const language = requestLanguage(request, body);
@@ -26,17 +40,20 @@ export async function POST(request: Request): Promise<Response> {
     const parsed = parseCreateRequest(body);
     if (!parsed.ok) return errorResponse(parsed.code, language);
     const { question, level, interpretation } = parsed.value;
-    const container = getContainer();
 
-    const hit = await container.cache.findByQuestion(question, { language, level });
-    if (hit) {
-      const cached = await serveCached(container, hit, request.signal);
+    // The references need no database: a failed lookup must not hide an unavailable generation.
+    let lookupFailure: { error: unknown } | null = null;
+    try {
+      const cached = await within(fromCache(request, question, language, level));
       if (cached) return cached;
+    } catch (error) {
+      lookupFailure = { error };
     }
 
-    if (!(await isGenerationAvailable())) {
-      return errorResponse("generation_unavailable", language, { extra: { references: [] } });
-    }
+    if (!(await isGenerationAvailable())) return generationUnavailableResponse(language);
+    if (lookupFailure) throw lookupFailure.error;
+
+    const container = getContainer();
 
     const allowance = await container.limiter.check(clientAddress(request.headers), "generation");
     if (!allowance.allowed) {

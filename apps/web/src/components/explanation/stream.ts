@@ -1,4 +1,5 @@
 import { LANGUAGES, LEVELS, type Language, type Level } from "scene";
+import type { ReferenceEntry } from "@/components/ask/Sommaire";
 import type { PipelineEvent, SequencedEvent } from "@/server/pipeline/events";
 import { reduceExplanation } from "./reducer";
 import {
@@ -116,13 +117,31 @@ function parseRetryAfter(header: string | null): number | undefined {
   return Number.isFinite(seconds) && seconds >= 0 ? seconds : undefined;
 }
 
-async function readFailure(response: Response): Promise<{ code: string; message: string }> {
+// Sommaire ignores a subject it does not know, so only the shape is checked here.
+function isReferenceEntry(value: unknown): value is ReferenceEntry {
+  return (
+    ["slug", "subject", "title", "explanation_id"].every(
+      (key) => typeof field(value, key) === "string",
+    ) && LEVELS.some((level) => level === field(value, "reference_level"))
+  );
+}
+
+async function readFailure(
+  response: Response,
+): Promise<{ code: string; message: string; references?: ReferenceEntry[] }> {
   try {
-    const error = field(await response.json(), "error");
+    const body: unknown = await response.json();
+    const error = field(body, "error");
     const code = field(error, "code");
     const message = field(error, "message");
-    if (typeof code === "string")
-      return { code, message: typeof message === "string" ? message : "" };
+    const references = field(body, "references");
+    if (typeof code === "string") {
+      return {
+        code,
+        message: typeof message === "string" ? message : "",
+        ...(Array.isArray(references) ? { references: references.filter(isReferenceEntry) } : {}),
+      };
+    }
   } catch {
     // The body is not the documented error shape.
   }
@@ -191,16 +210,11 @@ export function createExplanationClient(options: ExplanationClientOptions = {}):
     signal: AbortSignal,
     code: string,
     message: string,
-    retryAfterSeconds?: number,
+    details: { retryAfterSeconds?: number; references?: ReferenceEntry[] } = {},
   ): StartOutcome => {
     if (signal.aborted) return { kind: "rejected", code: "superseded", message: "" };
     publish(EMPTY);
-    return {
-      kind: "rejected",
-      code,
-      message,
-      ...(retryAfterSeconds === undefined ? {} : { retryAfterSeconds }),
-    };
+    return { kind: "rejected", code, message, ...details };
   };
 
   const fetchRecord = async (
@@ -219,7 +233,10 @@ export function createExplanationClient(options: ExplanationClientOptions = {}):
     }
     if (response.status === 404) return { kind: "missing" };
     if (response.status === 410) return { kind: "expired" };
-    if (!response.ok) return { kind: "failed", ...(await readFailure(response)) };
+    if (!response.ok) {
+      const { code, message } = await readFailure(response);
+      return { kind: "failed", code, message };
+    }
     try {
       return { kind: "found", stored: parseStored(await response.json(), language) };
     } catch {
@@ -331,8 +348,12 @@ export function createExplanationClient(options: ExplanationClientOptions = {}):
       return reject(signal, "network", "");
     }
     if (!response.ok) {
-      const { code, message } = await readFailure(response);
-      return reject(signal, code, message, parseRetryAfter(response.headers.get("Retry-After")));
+      const { code, message, references } = await readFailure(response);
+      const retryAfterSeconds = parseRetryAfter(response.headers.get("Retry-After"));
+      return reject(signal, code, message, {
+        ...(retryAfterSeconds === undefined ? {} : { retryAfterSeconds }),
+        ...(references === undefined ? {} : { references }),
+      });
     }
     const stream = response.body;
     if (!stream) return reject(signal, "network", "");

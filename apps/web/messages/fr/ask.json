@@ -13,7 +13,8 @@
       "rateLimitedSeconds": "Tu as posé beaucoup de questions en peu de temps. Réessaie dans {seconds, plural, one {# seconde} other {# secondes}}.",
       "rateLimitedMinutes": "Tu as posé beaucoup de questions en peu de temps. Réessaie dans {minutes, plural, one {# minute} other {# minutes}}.",
       "rateLimitedLater": "Tu as posé beaucoup de questions en peu de temps. Réessaie un peu plus tard.",
-      "unreachable": "L’explication n’a pas pu démarrer. Vérifie ta connexion, puis réessaie."
+      "unreachable": "L’explication n’a pas pu démarrer. Vérifie ta connexion, puis réessaie.",
+      "generationUnavailable": "La génération est momentanément indisponible. Les explications préparées à l’avance restent disponibles : ouvre-en une en attendant."
     },
     "preferences": {
       "language": "Langue",
