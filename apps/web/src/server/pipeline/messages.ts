@@ -7,6 +7,7 @@ interface Messages {
   planDropped: string;
   unavailable: string;
   failed: string;
+  versionFailed: string;
 }
 
 const MESSAGES: Readonly<Record<Language, Messages>> = {
@@ -19,6 +20,8 @@ const MESSAGES: Readonly<Record<Language, Messages>> = {
       "La génération est momentanément indisponible. Essaie un des exemples en attendant.",
     failed:
       "Cette explication n'a pas pu être préparée correctement. Reformule ta question ou essaie un exemple voisin.",
+    versionFailed:
+      "Cette nouvelle version n'a pas pu être préparée correctement. Réessaie, ou choisis une autre façon de réexpliquer.",
   },
   en: {
     validated: "Validated as first written.",
@@ -28,6 +31,8 @@ const MESSAGES: Readonly<Record<Language, Messages>> = {
     unavailable: "Generation is unavailable for the moment. Try one of the examples meanwhile.",
     failed:
       "This explanation could not be prepared properly. Rephrase your question or try a related example.",
+    versionFailed:
+      "This new version could not be prepared properly. Try again, or choose another way to explain it again.",
   },
 };
 

@@ -11,6 +11,7 @@ import { getMediaDir } from "./media";
 import { EventLogRegistry } from "./pipeline/events";
 import type { ExplanationCache, ExplanationStore } from "./pipeline/ports";
 import { Pipeline } from "./pipeline/run";
+import { loadReferenceRecord } from "./reference";
 import { createVoiceService } from "./pipeline/voice";
 import { getVoice } from "./tts";
 
@@ -51,6 +52,7 @@ function build(): Container {
       newId: newExplanationId,
       now: () => new Date(),
       shareUrl: sharePath,
+      findReference: loadReferenceRecord,
     },
     logs,
   );

@@ -107,6 +107,7 @@ export interface PipelineDeps {
   }) => Promise<Quiz | null>;
   enqueueDeep?: (explanationId: string) => Promise<void>;
   trace?: (entry: LlmTrace) => void;
+  findReference?: (id: string) => Promise<ExplanationRecord | null>;
 }
 
 export const SHARE_RETENTION_DAYS = 90;

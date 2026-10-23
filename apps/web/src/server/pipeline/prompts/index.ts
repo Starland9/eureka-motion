@@ -2,6 +2,7 @@ export * from "./catalog";
 export * from "./checker";
 export * from "./examples";
 export * from "./judge";
+export * from "./modes";
 export * from "./outline";
 export * from "./scene";
 export * from "./schemas";
