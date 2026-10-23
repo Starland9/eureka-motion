@@ -1,0 +1,38 @@
+{
+  "fr": [
+    "Regarde ce triangle : un côté de 3 m, un autre de 4 m, et un angle droit.",
+    "Un triangle de 3 m sur 4 m a un grand côté de 5 m.",
+    "Un carré de 5,00 m² se découpe en quatre morceaux égaux.",
+    "La règle s’écrit : a² + b² = c².",
+    "Vérifie avec les nombres : 3² + 4² = 5², donc 9 + 16 = 25.",
+    "Saurais-tu deviner ce qui relie ces trois nombres ?",
+    "Il est rempli pile : le grand carré vaut la somme des deux autres.",
+    "Regarde bien.",
+    "Sur chaque côté du triangle, fais pousser un carré, puis regarde bien leurs tailles : les deux petits carrés se vident dans le grand, et il est rempli pile, sans déborder, sans qu’il manque rien.",
+    "Une pile de 12 V alimente une lampe de 24 Ω : le courant vaut 0,5 A.",
+    "Si j’éloigne le pied du mur, le haut de l’échelle descend.",
+    "Une échelle de 5 m est posée contre un mur de 3 m de haut.",
+    "Double un côté, et son carré devient quatre fois plus grand.",
+    "Ça marche pour tous les triangles rectangles.",
+    "Trois idées à garder : la tension pousse, la résistance freine, l’intensité suit.",
+    "Neuf plus seize font vingt-cinq, donc l’échelle mesure cinq mètres."
+  ],
+  "en": [
+    "Take a triangle of 3 m by 4 m: the long side measures 5 m.",
+    "A square of 5.00 m² splits into four equal pieces.",
+    "The rule is written: a² + b² = c².",
+    "Check it with the numbers: 3² + 4² = 5², so 9 + 16 = 25.",
+    "Can you guess what links these three numbers?",
+    "No overlap, nothing missing: the two squares add up to the big one.",
+    "Watch closely.",
+    "Build a square on each side of the triangle, then look closely at their sizes: the two small squares slide into the big one, and it fills up exactly, with no gap and nothing left over at all.",
+    "A 12 V battery lights a 24 ohm bulb, and the current is 0.5 A.",
+    "The ladder is 5 m long and the wall is 3 m high.",
+    "Double a short side and its square grows four times, not two.",
+    "Pinch the pipe and much less water gets through.",
+    "Same push, less resistance: the current explodes.",
+    "The thin wire has only 0.1 ohm, so the current is huge.",
+    "Only right triangles obey this rule.",
+    "The bulb’s resistance is large, so the same battery gives a small current."
+  ]
+}
