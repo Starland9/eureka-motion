@@ -345,7 +345,7 @@ service externe.
 - [X] T068 [P] [US3] [S] Écrire `packages/scene/src/primitives/sim/pendulum.tsx` et `wave.tsx` et leurs tests.
   - Lire : contracts/scene-schema.md § 4.1 (Simulations).
   - Réussite : les tests vérifient que la période du pendule croît avec la racine de la longueur et que la longueur d'onde est inversement proportionnelle à la fréquence.
-- [ ] T069 [US3] [S] Écrire `apps/web/tests/e2e/params.spec.ts` (curseurs à la souris et au clavier sur l'exemple gravitation, réinitialisation, absence de curseurs sur un concept sans grandeur) et `scripts/frame-budget.ts`, qui mesure le temps de rendu d'une image des 24 références.
+- [X] T069 [US3] [S] Écrire `apps/web/tests/e2e/params.spec.ts` (curseurs à la souris et au clavier sur l'exemple gravitation, réinitialisation, absence de curseurs sur un concept sans grandeur) et `scripts/frame-budget.ts`, qui mesure le temps de rendu d'une image des 24 références.
   - Lire : quickstart.md scénario 3 ; spec.md SC-007.
   - Réussite : le test passe ; aucune image de référence ne dépasse 16 ms en moyenne.
 
@@ -360,16 +360,16 @@ question de suivi libre.
 
 **Independent Test**: quickstart.md, scénario 4.
 
-- [ ] T070 [US4] [O] Étendre les consignes et l'orchestration pour les modes `another_analogy`, `simpler`, `zoom` et `followup` dans `apps/web/src/server/pipeline/prompts/modes.ts` et `run.ts` : contexte du parent (plan, analogies déjà employées dans la session), niveau égal ou inférieur, zoom limité à la scène désignée, réponse de suivi de une à trois scènes reprenant objets et notations, détection d'un suivi sans rapport (événement `redirected`).
+- [X] T070 [US4] [O] Étendre les consignes et l'orchestration pour les modes `another_analogy`, `simpler`, `zoom` et `followup` dans `apps/web/src/server/pipeline/prompts/modes.ts` et `run.ts` : contexte du parent (plan, analogies déjà employées dans la session), niveau égal ou inférieur, zoom limité à la scène désignée, réponse de suivi de une à trois scènes reprenant objets et notations, détection d'un suivi sans rapport (événement `redirected`).
   - Lire : spec.md User Story 4 et FR-024, FR-025, FR-043, FR-044 ; data-model.md (Explication, règles de validation).
   - Réussite : sur l'explication de la gravité, les trois reformulations diffèrent et le suivi « et si la distance double ? » réutilise `m1`, `m2`, `r`.
-- [ ] T071 [P] [US4] [S] Étendre `apps/web/src/app/api/explanations/route.ts` (validation de `mode`, `parent_id`, `scene_id` ; 404 `parent_not_found`) et écrire `apps/web/src/app/api/explanations/[id]/versions/route.ts` ; tests `apps/web/tests/integration/api-modes.test.ts`.
+- [X] T071 [P] [US4] [S] Étendre `apps/web/src/app/api/explanations/route.ts` (validation de `mode`, `parent_id`, `scene_id` ; 404 `parent_not_found`) et écrire `apps/web/src/app/api/explanations/[id]/versions/route.ts` ; tests `apps/web/tests/integration/api-modes.test.ts`.
   - Lire : contracts/http-api.md § 1 et § 2 ; data-model.md (Explication : `parent_id`, `root_id`, `focus_scene_id`).
   - Réussite : les tests couvrent chaque mode, le parent inconnu et la liste des versions d'une session.
-- [ ] T072 [P] [US4] [S] Écrire `apps/web/src/components/controls/Reformulate.tsx` (trois choix en ligne segmentée, désignation de la scène pour le zoom), `FollowUp.tsx` (phrase à trou « Et si ______ ? ») et `Versions.tsx` (liste compacte `V1`, `V2 — autre image`…), sans bulle de conversation.
+- [X] T072 [P] [US4] [S] Écrire `apps/web/src/components/controls/Reformulate.tsx` (trois choix en ligne segmentée, désignation de la scène pour le zoom), `FollowUp.tsx` (phrase à trou « Et si ______ ? ») et `Versions.tsx` (liste compacte `V1`, `V2 — autre image`…), sans bulle de conversation.
   - Lire : design-system/eureka-motion/MASTER.md § 5.5 ; spec.md FR-026, FR-045.
   - Réussite : une seule explication est affichée à la fois ; chaque version de la liste se rejoue.
-- [ ] T073 [US4] [S] Écrire les scénarios simulés des quatre modes dans `apps/web/tests/fixtures/scenarios/` et le test `apps/web/tests/e2e/reformulate.spec.ts`.
+- [X] T073 [US4] [S] Écrire les scénarios simulés des quatre modes dans `apps/web/tests/fixtures/scenarios/` et le test `apps/web/tests/e2e/reformulate.spec.ts`.
   - Lire : quickstart.md scénario 4.
   - Réussite : `pnpm --filter web test:e2e reformulate` passe.
 - [ ] T074 [US4] [O] Point de contrôle : dérouler quickstart.md scénarios 3 et 4 avec le fournisseur réel, ajuster les consignes des modes, relire le code des phases 5 et 6.
@@ -386,13 +386,13 @@ question de suivi libre.
 
 **Independent Test**: quickstart.md, scénario 5.
 
-- [ ] T075 [US5] [S] Écrire l'étape `apps/web/src/server/pipeline/quiz.ts` et sa consigne `prompts/quiz.ts` : produite après les scènes, 2 ou 3 questions, 3 ou 4 choix, une seule bonne réponse, explication d'une phrase, `scene_id` existant parmi les scènes valides ; une question dont la scène a été écartée est retirée, et un quiz de moins de deux questions n'est pas émis ; tests `apps/web/tests/unit/quiz.test.ts`.
+- [X] T075 [US5] [S] Écrire l'étape `apps/web/src/server/pipeline/quiz.ts` et sa consigne `prompts/quiz.ts` : produite après les scènes, 2 ou 3 questions, 3 ou 4 choix, une seule bonne réponse, explication d'une phrase, `scene_id` existant parmi les scènes valides ; une question dont la scène a été écartée est retirée, et un quiz de moins de deux questions n'est pas émis ; tests `apps/web/tests/unit/quiz.test.ts`.
   - Lire : data-model.md (Quiz) ; spec.md FR-027, FR-028.
   - Réussite : les tests couvrent le retrait d'une question orpheline et l'absence de quiz sous deux questions.
-- [ ] T076 [P] [US5] [S] Écrire `apps/web/src/components/quiz/Quiz.tsx` : mise en page d'exercice de manuel, réponses lettrées, correction immédiate avec icône, texte et filet, bonne réponse surlignée, lien « Revoir la scène → », score final, sortie possible à tout moment.
+- [X] T076 [P] [US5] [S] Écrire `apps/web/src/components/quiz/Quiz.tsx` : mise en page d'exercice de manuel, réponses lettrées, correction immédiate avec icône, texte et filet, bonne réponse surlignée, lien « Revoir la scène → », score final, sortie possible à tout moment.
   - Lire : design-system/eureka-motion/MASTER.md § 5.6 ; spec.md FR-028, FR-029.
   - Réussite : le résultat d'une réponse est compréhensible sans la couleur ; le quiz est utilisable au clavier.
-- [ ] T077 [US5] [S] Écrire `apps/web/tests/e2e/quiz.spec.ts` : réponse juste, réponse fausse, renvoi à la scène, score.
+- [X] T077 [US5] [S] Écrire `apps/web/tests/e2e/quiz.spec.ts` : réponse juste, réponse fausse, renvoi à la scène, score.
   - Lire : quickstart.md scénario 5.
   - Réussite : `pnpm --filter web test:e2e quiz` passe.
 
@@ -466,7 +466,7 @@ sans jamais gêner l'explication immédiate.
 - [ ] T090 [O] Écrire le déploiement `deploy/` : `web.Dockerfile` (sortie autonome de Next.js), `docker-compose.yml` pour Dokploy avec `web`, `worker`, `manim`, `tts` — `env_file: .env`, volumes nommés `media` et `sandbox`, contrôles de santé, réseau externe `dokploy-network` pour `web` et `worker`, aucun `container_name`, isolation complète du service `manim`.
   - Lire : research.md § 8 ; contracts/workers.md § 1 et § 5 ; quickstart.md (« Déploiement Dokploy »). Dépend de l'action A3.
   - Réussite : `docker compose -f deploy/docker-compose.yml -f deploy/docker-compose.dev.yml up --build` rend tous les services « healthy » ; `/api/health` annonce chaque dépendance disponible.
-- [ ] T091 [P] [S] Écrire `scripts/golden.ts` et `scripts/golden-set.json` (30 concepts répartis sur les six matières et 10 sujets scolaires hors de ces matières, en français et en anglais) : jouer chaque question contre le fournisseur réel et produire un rapport — taux d'aboutissement, délai jusqu'à la première scène (médiane et 90ᵉ centile), scènes corrigées et écartées, coût, et durée de la version approfondie quand elle est lancée.
+- [X] T091 [P] [S] Écrire `scripts/golden.ts` et `scripts/golden-set.json` (30 concepts répartis sur les six matières et 10 sujets scolaires hors de ces matières, en français et en anglais) : jouer chaque question contre le fournisseur réel et produire un rapport — taux d'aboutissement, délai jusqu'à la première scène (médiane et 90ᵉ centile), scènes corrigées et écartées, coût, et durée de la version approfondie quand elle est lancée.
   - Lire : quickstart.md (« Jeu de référence ») ; spec.md SC-001, SC-003, SC-012.
   - Réussite : `pnpm golden --limit 3` produit un rapport lisible.
 - [ ] T092 [P] [S] Écrire `apps/web/tests/e2e/a11y.spec.ts` (contrôle automatique sur l'accueil, la lecture et le quiz, dans les deux thèmes ; parcours au clavier seul ; 360 px ; zoom 200 %) avec le script `test:a11y`, et corriger les défauts relevés.
