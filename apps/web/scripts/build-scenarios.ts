@@ -1,20 +1,32 @@
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { format, resolveConfig } from "prettier";
-import { scenarioFromReference, type ReferenceFile } from "../tests/helpers/scenario";
+import type { Scenario } from "../src/server/llm/fixture";
+import {
+  modeScenarios,
+  scenarioFromReference,
+  type ReferenceFile,
+} from "../tests/helpers/scenario";
 
 const root = path.resolve(import.meta.dirname, "../../..");
 const source = path.join(root, "content/reference/physics.universal-gravitation.fr.json");
-const target = path.join(root, "apps/web/tests/fixtures/scenarios/gravity.fr.json");
+const directory = path.join(root, "apps/web/tests/fixtures/scenarios");
+const target = path.join(directory, "gravity.fr.json");
+
+async function write(scenario: Scenario, file: string): Promise<void> {
+  const options = await resolveConfig(file);
+  const text = await format(JSON.stringify(scenario), { ...options, filepath: file });
+  mkdirSync(path.dirname(file), { recursive: true });
+  writeFileSync(file, text);
+  console.log(`${path.relative(root, file)}: ${scenario.steps.length} steps`);
+}
 
 async function main(): Promise<void> {
   const reference = JSON.parse(readFileSync(source, "utf8")) as ReferenceFile;
-  const scenario = scenarioFromReference(reference, { name: "gravity.fr", quiz: {} });
-  const options = await resolveConfig(target);
-  const text = await format(JSON.stringify(scenario), { ...options, filepath: target });
-  mkdirSync(path.dirname(target), { recursive: true });
-  writeFileSync(target, text);
-  console.log(`${path.relative(root, target)}: ${scenario.steps.length} steps`);
+  await write(scenarioFromReference(reference, { name: "gravity.fr", quiz: {} }), target);
+  for (const scenario of modeScenarios(reference)) {
+    await write(scenario, path.join(directory, `${scenario.name}.json`));
+  }
 }
 
 main().catch((error: unknown) => {

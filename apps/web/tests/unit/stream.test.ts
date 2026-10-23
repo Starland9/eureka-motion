@@ -274,13 +274,17 @@ describe("reduceExplanation", () => {
     });
   });
 
-  it("only advances the sequence number on redirected, deep and unknown events", () => {
+  it("only advances the sequence number on deep and unknown events", () => {
     const state = fold([
-      { type: "redirected", reason: "unrelated_followup" },
       { type: "deep", status: "queued" },
       { type: "future" } as unknown as PipelineEvent,
     ]);
-    expect(state).toEqual({ ...fresh, lastSeq: 3 });
+    expect(state).toEqual({ ...fresh, lastSeq: 2 });
+  });
+
+  it("notes that an unrelated follow-up was redirected", () => {
+    const state = fold([{ type: "redirected", reason: "unrelated_followup" }]);
+    expect(state).toEqual({ ...fresh, redirected: true, lastSeq: 1 });
   });
 
   it("ignores an item whose sequence number is not newer, and returns the same state", () => {

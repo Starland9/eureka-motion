@@ -72,6 +72,15 @@ function Partial({ state, restart }: Omit<NoticesProps, "className">) {
   );
 }
 
+function Redirected() {
+  const t = useTranslations("Explanation.redirected");
+  return (
+    <Notice>
+      <p>{t("notice")}</p>
+    </Notice>
+  );
+}
+
 function LanguageSuggestion({
   state,
   language,
@@ -104,9 +113,10 @@ export function Notices({ state, restart, className }: NoticesProps) {
   const failed = state.status === "failed" && state.scenes.length > 0;
   const partial = state.status === "partial";
 
-  if (!failed && !partial && language === null) return null;
+  if (!failed && !partial && language === null && !state.redirected) return null;
   return (
     <div data-slot="notices" className={className}>
+      {state.redirected ? <Redirected /> : null}
       {failed ? <Failure state={state} restart={restart} /> : null}
       {partial ? <Partial state={state} restart={restart} /> : null}
       {language === null ? null : (

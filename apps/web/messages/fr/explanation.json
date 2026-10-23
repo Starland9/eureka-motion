@@ -74,6 +74,9 @@
       "progress": "Préparation au niveau {level} : {done} sur {total, plural, one {# scène} other {# scènes}}…",
       "ready": "L’explication au niveau {level} est prête.",
       "open": "Ouvrir au niveau {level} →"
+    },
+    "redirected": {
+      "notice": "Cette question n’a pas de rapport avec l’explication : elle est traitée à part."
     }
   }
 }

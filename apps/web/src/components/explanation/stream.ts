@@ -2,6 +2,7 @@ import { LANGUAGES, LEVELS, type Language, type Level } from "scene";
 import type { ReferenceEntry } from "@/components/ask/Sommaire";
 import type { PipelineEvent, SequencedEvent } from "@/server/pipeline/events";
 import { reduceExplanation } from "./reducer";
+import { startBody } from "./request-body";
 import {
   initialExplanationState,
   isComplete,
@@ -185,6 +186,7 @@ export function createExplanationClient(options: ExplanationClientOptions = {}):
 
   let snapshot = EMPTY;
   let controller: AbortController | null = null;
+  let redirectedInto: string | null = null;
   const listeners = new Set<() => void>();
 
   const publish = (next: ExplanationSnapshot): void => {
@@ -294,8 +296,8 @@ export function createExplanationClient(options: ExplanationClientOptions = {}):
   const enrich = async (signal: AbortSignal, id: string, language: Language): Promise<void> => {
     const result = await fetchRecord(signal, id, language);
     if (result.kind !== "found") return;
-    const { generator, timings } = result.stored;
-    edit(signal, (state) => ({ ...state, generator, timings }));
+    const { generator, timings, level } = result.stored;
+    edit(signal, (state) => ({ ...state, generator, timings, level }));
   };
 
   const follow = async (
@@ -336,6 +338,7 @@ export function createExplanationClient(options: ExplanationClientOptions = {}):
 
   const start = async (request: StartRequest): Promise<StartOutcome> => {
     const signal = begin();
+    redirectedInto = null;
     publish({ state: initialExplanationState(request), startedHere: true });
 
     let response: Response;
@@ -343,12 +346,7 @@ export function createExplanationClient(options: ExplanationClientOptions = {}):
       response = await doFetch("/api/explanations", {
         method: "POST",
         headers: { "Content-Type": "application/json", "Accept-Language": request.language },
-        body: JSON.stringify({
-          question: request.question,
-          language: request.language,
-          level: request.level,
-          interpretation: request.interpretation,
-        }),
+        body: JSON.stringify(startBody(request)),
         signal,
       });
     } catch {
@@ -380,7 +378,7 @@ export function createExplanationClient(options: ExplanationClientOptions = {}):
     });
   };
 
-  const load = async (signal: AbortSignal, id: string): Promise<void> => {
+  const load = async (signal: AbortSignal, id: string, redirected: boolean): Promise<void> => {
     const language = interfaceLanguage();
     const result = await fetchRecord(signal, id, language);
     if (result.kind === "found") {
@@ -392,6 +390,7 @@ export function createExplanationClient(options: ExplanationClientOptions = {}):
           level: stored.level,
         }),
         id,
+        redirected,
         reference: stored.reference,
         status: "preparing",
         generator: stored.generator,
@@ -416,8 +415,11 @@ export function createExplanationClient(options: ExplanationClientOptions = {}):
     const { state, startedHere } = snapshot;
     if (state?.id === id) return;
     const signal = begin();
+    const arrives = state?.redirectTo === id && state.redirected;
+    if (arrives) redirectedInto = id;
+    else if (redirectedInto !== id) redirectedInto = null;
     publish({ state: null, startedHere: startedHere && state?.redirectTo === id });
-    void load(signal, id);
+    void load(signal, id, redirectedInto === id);
   };
 
   const abort = (): void => {

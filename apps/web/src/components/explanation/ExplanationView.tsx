@@ -21,6 +21,7 @@ import { Notices } from "./Notices";
 import { PlancheOverlay } from "./PlancheOverlay";
 import { PreparationRule, PreparationSteps } from "./Preparation";
 import { QuizPanel } from "./QuizPanel";
+import { ReformulatePanel } from "./ReformulatePanel";
 import {
   isComplete,
   type ExplanationState,
@@ -165,6 +166,7 @@ export function ExplanationView({ id }: { id: string }) {
                   )}
                   {state === null ? null : <LevelChoice state={state} className="mt-8" />}
                 </div>
+                <ReformulatePanel state={state} restart={restart} className="lg:col-span-12" />
               </>
             )}
           </div>

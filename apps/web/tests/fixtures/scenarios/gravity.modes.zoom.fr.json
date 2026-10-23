@@ -1,0 +1,276 @@
+{
+  "name": "gravity.modes.zoom.fr",
+  "question": "MODE zoom",
+  "steps": [
+    {
+      "role": "author",
+      "when": "MODE zoom",
+      "response": {
+        "plan": {
+          "objective": "Comprendre pourquoi les deux flèches restent égales quand la distance change.",
+          "prerequisites": [
+            "Savoir ce qu'est une force et la représenter par une flèche",
+            "Connaître la notion de masse",
+            "Savoir calculer le carré d'un nombre"
+          ],
+          "analogy": {
+            "name": "La lampe qui éclaire moins de loin",
+            "mapping": "La lampe joue le rôle de la masse qui attire ; la lumière reçue joue le rôle de la force ; s'éloigner de la lampe, c'est augmenter la distance. À distance double, on reçoit quatre fois moins."
+          },
+          "key_rule": {
+            "statement": "La Terre et la Lune s'attirent avec des forces égales et opposées."
+          },
+          "steps": [
+            {
+              "role": "mechanism",
+              "intent": "Voir que les deux flèches ont toujours la même longueur.",
+              "visual": "La Terre et la Lune, deux flèches F égales ; la Lune s'éloigne."
+            },
+            {
+              "role": "mechanism",
+              "intent": "Voir que la distance change les deux flèches à la fois.",
+              "visual": "r double, les deux flèches F rétrécissent ensemble."
+            }
+          ]
+        },
+        "params": [
+          {
+            "id": "m1",
+            "symbol": "m₁",
+            "label": "Masse de la Terre",
+            "unit": "kg",
+            "min": 1e24,
+            "max": 1.2e25,
+            "step": 1e23,
+            "default": 5.97e24,
+            "role": "quantity"
+          },
+          {
+            "id": "m2",
+            "symbol": "m₂",
+            "label": "Masse de la Lune",
+            "unit": "kg",
+            "min": 1e22,
+            "max": 1.5e23,
+            "step": 1e21,
+            "default": 7.35e22,
+            "role": "quantity"
+          },
+          {
+            "id": "r",
+            "symbol": "r",
+            "label": "Distance entre les centres",
+            "unit": "m",
+            "min": 150000000,
+            "max": 800000000,
+            "step": 5000000,
+            "default": 384000000,
+            "role": "quantity"
+          }
+        ],
+        "model": {
+          "constants": [
+            {
+              "id": "G",
+              "value": 6.674e-11,
+              "unit": "N·m²/kg²",
+              "label": "Constante de gravitation",
+              "symbol": "G"
+            }
+          ],
+          "derived": [
+            {
+              "id": "F",
+              "expr": "G * m1 * m2 / r^2",
+              "unit": "N",
+              "label": "Force d'attraction",
+              "symbol": "F",
+              "format": "sci:2"
+            },
+            {
+              "id": "r_km",
+              "expr": "r / 1000",
+              "unit": "km",
+              "label": "Distance",
+              "symbol": "r",
+              "format": "int"
+            },
+            {
+              "id": "F_2r",
+              "expr": "G * m1 * m2 / (2 * r)^2",
+              "unit": "N",
+              "label": "Force à distance double",
+              "format": "sci:2"
+            },
+            {
+              "id": "F_3r",
+              "expr": "G * m1 * m2 / (3 * r)^2",
+              "unit": "N",
+              "label": "Force à distance triple",
+              "format": "sci:2"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "role": "author",
+      "when": "SCENE 0",
+      "response": {
+        "id": "s3",
+        "index": 2,
+        "role": "mechanism",
+        "title": "Deux flèches égales",
+        "layout": "figure-notes",
+        "derived": [],
+        "elements": [
+          {
+            "id": "sys",
+            "slot": "figure",
+            "type": "sim.two-body",
+            "massA": { "expr": "m1" },
+            "massB": { "expr": "m2" },
+            "distance": { "expr": "r" },
+            "force": { "expr": "F" },
+            "objectA": "planet",
+            "objectB": "moon",
+            "labelA": "Terre",
+            "labelB": "Lune",
+            "forceLabel": "F",
+            "distanceLabel": "r"
+          },
+          { "id": "force_now", "slot": "notes", "type": "readout", "value": "F", "label": "Force" },
+          {
+            "id": "distance_now",
+            "slot": "notes",
+            "type": "readout",
+            "value": "r_km",
+            "label": "Distance"
+          },
+          {
+            "id": "rule",
+            "slot": "notes",
+            "type": "text",
+            "text": "Distance × 2 : force ÷ 4.",
+            "emphasis": "strong"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "La Terre attire la Lune. Et la Lune attire la Terre, exactement aussi fort.",
+            "actions": [
+              { "do": "show", "targets": ["sys.body_a", "sys.body_b"], "how": "fade" },
+              { "do": "show", "targets": ["sys.force_a", "sys.force_b"], "how": "draw" }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Ce qui compte, c'est la distance entre leurs centres.",
+            "actions": [
+              { "do": "show", "targets": ["sys.distance"], "how": "draw" },
+              { "do": "show", "targets": ["force_now", "distance_now"], "how": "fade" }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Regarde ce qui arrive quand la distance double : la force est divisée par quatre.",
+            "actions": [
+              { "do": "sweep", "param": "r", "to": { "expr": "2 * r" } },
+              { "do": "show", "targets": ["rule"], "how": "type", "at": 0.6 }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "role": "author",
+      "when": "SCENE 1",
+      "response": {
+        "id": "s3",
+        "index": 2,
+        "role": "mechanism",
+        "title": "La distance change les deux flèches",
+        "layout": "figure-notes",
+        "derived": [],
+        "elements": [
+          {
+            "id": "sys",
+            "slot": "figure",
+            "type": "sim.two-body",
+            "massA": { "expr": "m1" },
+            "massB": { "expr": "m2" },
+            "distance": { "expr": "r" },
+            "force": { "expr": "F" },
+            "objectA": "planet",
+            "objectB": "moon",
+            "labelA": "Terre",
+            "labelB": "Lune",
+            "forceLabel": "F",
+            "distanceLabel": "r"
+          },
+          { "id": "force_now", "slot": "notes", "type": "readout", "value": "F", "label": "Force" },
+          {
+            "id": "distance_now",
+            "slot": "notes",
+            "type": "readout",
+            "value": "r_km",
+            "label": "Distance"
+          },
+          {
+            "id": "rule",
+            "slot": "notes",
+            "type": "text",
+            "text": "Distance × 2 : force ÷ 4.",
+            "emphasis": "strong"
+          }
+        ],
+        "beats": [
+          {
+            "id": "b1",
+            "narration": "La Terre attire la Lune. Et la Lune attire la Terre, exactement aussi fort.",
+            "actions": [
+              { "do": "show", "targets": ["sys.body_a", "sys.body_b"], "how": "fade" },
+              { "do": "show", "targets": ["sys.force_a", "sys.force_b"], "how": "draw" }
+            ]
+          },
+          {
+            "id": "b2",
+            "narration": "Ce qui compte, c'est la distance entre leurs centres.",
+            "actions": [
+              { "do": "show", "targets": ["sys.distance"], "how": "draw" },
+              { "do": "show", "targets": ["force_now", "distance_now"], "how": "fade" }
+            ]
+          },
+          {
+            "id": "b3",
+            "narration": "Regarde ce qui arrive quand la distance double : la force est divisée par quatre.",
+            "actions": [
+              { "do": "sweep", "param": "r", "to": { "expr": "2 * r" } },
+              { "do": "show", "targets": ["rule"], "how": "type", "at": 0.6 }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "role": "judge",
+      "repeat": true,
+      "response": {
+        "verdict": "valid",
+        "issues": [],
+        "reason": "Le plan est exact : la force varie bien comme l'inverse du carré de la distance."
+      }
+    },
+    {
+      "role": "checker",
+      "when": "Step of the plan for this scene",
+      "repeat": true,
+      "response": {
+        "verdict": "valid",
+        "problem": "",
+        "reason": "La narration dit ce que dit le plan, sans rien y ajouter."
+      }
+    }
+  ]
+}

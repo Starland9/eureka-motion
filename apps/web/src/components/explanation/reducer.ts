@@ -73,12 +73,14 @@ export function reduceExplanation(
       return { ...next, status: "refused", refusal: event.reason };
     case "cached":
       return { ...next, redirectTo: event.explanation_id };
+    case "redirected":
+      return { ...next, redirected: true };
     case "done":
       return { ...next, status: event.status, shareUrl: event.share_url };
     case "error":
       return { ...next, status: "failed", error: { code: event.code, message: event.message } };
     default:
-      // redirected, deep, and any event type this client does not know
+      // deep, and any event type this client does not know
       return next;
   }
 }

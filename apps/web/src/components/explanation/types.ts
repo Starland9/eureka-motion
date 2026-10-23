@@ -33,6 +33,7 @@ export interface ExplanationState {
   status: ExplanationStatus;
   cached: boolean;
   redirectTo: string | null;
+  redirected: boolean;
   question: string;
   reference: { question: string } | null;
   language: Language;
@@ -56,11 +57,17 @@ export interface ExplanationState {
   lastSeq: number;
 }
 
+export type Derivation =
+  | { mode: "another_analogy" | "simpler"; parentId: string }
+  | { mode: "zoom"; parentId: string; sceneId: string }
+  | { mode: "followup"; parentId: string };
+
 export interface StartRequest {
   question: string;
   language: Language;
   level: Level;
   interpretation?: string;
+  derive?: Derivation;
 }
 
 export const FINAL_STATUSES: ReadonlySet<ExplanationStatus> = new Set([
@@ -81,6 +88,7 @@ export function initialExplanationState(
     status: "connecting",
     cached: false,
     redirectTo: null,
+    redirected: false,
     question: request.question,
     reference: null,
     language: request.language,
