@@ -30,6 +30,7 @@ import { useFlagPreference } from "@/lib/preferences";
 import { useReducedMotion, useTheme } from "@/lib/theme-client";
 import { beatEndFrames, nextStepFrame, previousStepFrame, sceneLandingFrame } from "./step-targets";
 import { useGrowingPlayback } from "./useGrowingPlayback";
+import { useParams } from "./useParams";
 
 export interface PlayableExplanation {
   scenes: readonly Scene[];
@@ -127,8 +128,16 @@ export function PlaybackProvider({
   );
   const [captions, setCaptions] = useFlagPreference(CAPTIONS_KEY, true);
   const [volume, setVolumeState] = useState(1);
-  const [values, setValues] = useState<Record<string, number>>({});
-  const [adjusting, setAdjusting] = useState(false);
+  const location = useMemo(() => locate(timeline, frame), [frame, timeline]);
+  const { values, inputProps, setValue, resetValues, setAdjusting } = useParams({
+    scenes,
+    params,
+    model,
+    language,
+    theme,
+    reducedMotion,
+    location,
+  });
 
   useEffect(() => {
     if (!player) return;
@@ -253,25 +262,6 @@ export function PlaybackProvider({
     [player],
   );
   const requestFullscreen = useCallback(() => player?.requestFullscreen(), [player]);
-  const setValue = useCallback(
-    (id: string, value: number) => setValues((current) => ({ ...current, [id]: value })),
-    [],
-  );
-  const resetValues = useCallback(() => setValues({}), []);
-
-  const inputProps = useMemo<ExplanationProps>(
-    () => ({
-      scenes,
-      params,
-      model,
-      language,
-      theme,
-      values,
-      reducedMotion,
-      disableSweeps: adjusting,
-    }),
-    [scenes, params, model, language, theme, values, reducedMotion, adjusting],
-  );
 
   const controls = useMemo<PlaybackControls>(
     () => ({
@@ -333,13 +323,11 @@ export function PlaybackProvider({
       requestFullscreen,
       setValue,
       resetValues,
+      setAdjusting,
     ],
   );
 
-  const position = useMemo<PlaybackPosition>(
-    () => ({ frame, location: locate(timeline, frame) }),
-    [frame, timeline],
-  );
+  const position = useMemo<PlaybackPosition>(() => ({ frame, location }), [frame, location]);
 
   return (
     <AttachContext.Provider value={attachPlayer}>

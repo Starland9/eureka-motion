@@ -5,6 +5,7 @@ import { useEffect, useEffectEvent, useMemo, useState } from "react";
 import type { Language, Model, Param, Scene } from "scene";
 import { Colophon } from "@/components/colophon/Colophon";
 import { FigureCaption } from "@/components/player/FigureCaption";
+import { ParamsPanel } from "@/components/player/ParamsPanel";
 import { Planche } from "@/components/player/Planche";
 import { PlaybackProvider, type PlayableExplanation } from "@/components/player/PlaybackProvider";
 import { SceneList } from "@/components/player/SceneList";
@@ -144,6 +145,9 @@ export function ExplanationView({ id }: { id: string }) {
                   )}
                   {state === null ? null : <Notices state={state} restart={restart} />}
                 </div>
+                {hasScenes ? (
+                  <ParamsPanel className="lg:col-span-12 lg:col-start-1 lg:row-start-3 lg:mt-6" />
+                ) : null}
                 <div className="min-w-0 lg:col-span-4 lg:col-start-9 lg:row-start-2">
                   {hasScenes ? (
                     <SceneList
