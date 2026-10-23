@@ -436,10 +436,10 @@ sans jamais gêner l'explication immédiate.
 
 **Independent Test**: quickstart.md, scénario 7.
 
-- [ ] T084 [US7] [O] Durcir le bac à sable `workers/manim/sandbox/` à partir du prototype T010 : `runner.py` (surveillance de `in/`, un fichier à la fois, sous-processus tué à 150 secondes, résultat `.json` toujours écrit en dernier, nettoyage, battement `sandbox/out/.heartbeat` toutes les 15 secondes), `static_check.py` (analyse de l'arbre syntaxique, liste d'importations et de constructions du contrat, sans jamais importer le fichier), `preamble.py` (thème Tableau imposé), `Dockerfile` à version épinglée ; tests `workers/manim/tests/`.
+- [X] T084 [US7] [O] Durcir le bac à sable `workers/manim/sandbox/` à partir du prototype T010 : `runner.py` (surveillance de `in/`, un fichier à la fois, sous-processus tué à 150 secondes, résultat `.json` toujours écrit en dernier, nettoyage, battement `sandbox/out/.heartbeat` toutes les 15 secondes), `static_check.py` (analyse de l'arbre syntaxique, liste d'importations et de constructions du contrat, sans jamais importer le fichier), `preamble.py` (thème Tableau imposé), `Dockerfile` à version épinglée ; tests `workers/manim/tests/`.
   - Lire : contracts/workers.md § 5.
   - Réussite : pytest passe — rendu d'un exemple réussi ; code important `os` refusé au contrôle statique ; code tentant une connexion ou une écriture hors volume sans effet ; boucle infinie tuée.
-- [ ] T085 [US7] [O] Écrire l'orchestration de la version approfondie `workers/render/src/deep/` : consigne d'écriture du code Manim depuis le plan vérifié (`prompt.ts`), dépôt dans `sandbox/in/`, attente du `.json`, réparation avec le code et l'erreur, trois tentatives et 6 minutes au plus, déplacement vers `media/{explanation_id}/deep.mp4`, état `abandoned` sinon.
+- [X] T085 [US7] [O] Écrire l'orchestration de la version approfondie `workers/render/src/deep/` : consigne d'écriture du code Manim depuis le plan vérifié (`prompt.ts`), dépôt dans `sandbox/in/`, attente du `.json`, réparation avec le code et l'erreur, trois tentatives et 6 minutes au plus, déplacement vers `media/{explanation_id}/deep.mp4`, état `abandoned` sinon.
   - Lire : contracts/workers.md § 4 ; research.md § 7. Dépend de T084 et T079.
   - Réussite : pour « la dérivée d'une fonction », une vidéo est produite en moins de 5 minutes ; une erreur de rendu provoquée déclenche une réparation.
 - [X] T086 [P] [US7] [S] Créer un travail `deep` à la fin du pipeline quand le tri indique `deep_eligible`, émettre l'événement `deep`, et écrire `apps/web/src/app/api/explanations/[id]/deep/route.ts`.
@@ -448,7 +448,7 @@ sans jamais gêner l'explication immédiate.
 - [X] T087 [P] [US7] [S] Écrire `apps/web/src/components/player/DeepVersion.tsx` : ligne de marge `VERSION APPROFONDIE [EN PRÉPARATION]`, devenant le lien « Regarder la démonstration complète → » ; rien pour `none` et `abandoned`.
   - Lire : design-system/eureka-motion/MASTER.md § 5.9.
   - Réussite : la ligne disparaît sans message quand le travail est abandonné.
-- [ ] T088 [US7] [S] Écrire `apps/web/tests/integration/deep.test.ts` : service `manim` arrêté ou travail abandonné, l'explication immédiate aboutit normalement et l'interface n'annonce rien.
+- [X] T088 [US7] [S] Écrire `apps/web/tests/integration/deep.test.ts` : service `manim` arrêté ou travail abandonné, l'explication immédiate aboutit normalement et l'interface n'annonce rien.
   - Lire : contracts/workers.md § 6 ; spec.md User Story 7, scénario 3.
   - Réussite : le test passe.
 - [ ] T089 [US7] [O] Point de contrôle : dérouler quickstart.md scénarios 5, 6 et 7, vérifier l'isolation du bac à sable, relire le code des phases 7 à 9.
@@ -463,7 +463,7 @@ sans jamais gêner l'explication immédiate.
 
 **Purpose**: déploiement, mesure et finitions.
 
-- [ ] T090 [O] Écrire le déploiement `deploy/` : `web.Dockerfile` (sortie autonome de Next.js), `docker-compose.yml` pour Dokploy avec `web`, `worker`, `manim`, `tts` — `env_file: .env`, volumes nommés `media` et `sandbox`, contrôles de santé, réseau externe `dokploy-network` pour `web` et `worker`, aucun `container_name`, isolation complète du service `manim`.
+- [X] T090 [O] Écrire le déploiement `deploy/` : `web.Dockerfile` (sortie autonome de Next.js), `docker-compose.yml` pour Dokploy avec `web`, `worker`, `manim`, `tts` — `env_file: .env`, volumes nommés `media` et `sandbox`, contrôles de santé, réseau externe `dokploy-network` pour `web` et `worker`, aucun `container_name`, isolation complète du service `manim`.
   - Lire : research.md § 8 ; contracts/workers.md § 1 et § 5 ; quickstart.md (« Déploiement Dokploy »). Dépend de l'action A3.
   - Réussite : `docker compose -f deploy/docker-compose.yml -f deploy/docker-compose.dev.yml up --build` rend tous les services « healthy » ; `/api/health` annonce chaque dépendance disponible.
 - [X] T091 [P] [S] Écrire `scripts/golden.ts` et `scripts/golden-set.json` (30 concepts répartis sur les six matières et 10 sujets scolaires hors de ces matières, en français et en anglais) : jouer chaque question contre le fournisseur réel et produire un rapport — taux d'aboutissement, délai jusqu'à la première scène (médiane et 90ᵉ centile), scènes corrigées et écartées, coût, et durée de la version approfondie quand elle est lancée.
