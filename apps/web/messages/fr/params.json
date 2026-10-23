@@ -1,1 +1,15 @@
-{}
+{
+  "Params": {
+    "title": "Fais varier",
+    "reset": "Réinitialiser",
+    "resetDone": "Valeurs réinitialisées.",
+    "withUnit": "{value} {unit}",
+    "entryTag": "saisie directe",
+    "entryRange": "Entre {min} et {max}.",
+    "clamped": "{label} : valeur ramenée à {value}.",
+    "invalid": "{label} : saisie non reconnue, la valeur reste {value}.",
+    "results": {
+      "title": "Résultat calculé"
+    }
+  }
+}

@@ -1,1 +1,15 @@
-{}
+{
+  "Params": {
+    "title": "Vary the values",
+    "reset": "Reset",
+    "resetDone": "Values reset.",
+    "withUnit": "{value} {unit}",
+    "entryTag": "direct entry",
+    "entryRange": "Between {min} and {max}.",
+    "clamped": "{label}: value brought back to {value}.",
+    "invalid": "{label}: entry not recognised, the value stays {value}.",
+    "results": {
+      "title": "Calculated result"
+    }
+  }
+}
