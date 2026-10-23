@@ -16,6 +16,7 @@ export interface VoiceChain {
   readonly providers: readonly string[];
   forExplanation(explanationId: string): Synthesiser;
   health(): Promise<boolean>;
+  healthByProvider(): Promise<Record<string, boolean>>;
 }
 
 const MAX_TRACKED_EXPLANATIONS = 500;
@@ -30,6 +31,13 @@ export function createChain(providers: readonly VoiceProvider[]): VoiceChain {
     if (position.size > MAX_TRACKED_EXPLANATIONS) {
       position.delete(position.keys().next().value!);
     }
+  }
+
+  async function states(): Promise<Record<string, boolean>> {
+    const results = await Promise.all(
+      providers.map((provider) => provider.health().catch(() => false)),
+    );
+    return Object.fromEntries(providers.map((provider, index) => [provider.name, results[index]!]));
   }
 
   return {
@@ -58,10 +66,8 @@ export function createChain(providers: readonly VoiceProvider[]): VoiceChain {
       };
     },
     async health() {
-      const states = await Promise.all(
-        providers.map((provider) => provider.health().catch(() => false)),
-      );
-      return states.some(Boolean);
+      return Object.values(await states()).some(Boolean);
     },
+    healthByProvider: states,
   };
 }

@@ -396,6 +396,29 @@ describe("voice chain", () => {
     expect(await createChain([sick, fake("kokoro")]).health()).toBe(true);
     expect(await createChain([sick, throwing]).health()).toBe(false);
   });
+
+  it("reports the state of each provider by name", async () => {
+    const sick = { ...fake("pocket"), health: async () => false };
+    const throwing = { ...fake("azure"), health: () => Promise.reject(new Error("x")) };
+    const chain = createChain([sick, fake("kokoro"), throwing]);
+    expect(await chain.healthByProvider()).toEqual({ pocket: false, kokoro: true, azure: false });
+    expect(await createChain([]).healthByProvider()).toEqual({});
+  });
+
+  it("hands the rest of an explanation to the next voice when the first one stops", async () => {
+    let pocketUp = true;
+    const pocket = fake("pocket", () => {
+      if (!pocketUp) down("timeout")();
+    });
+    const kokoro = fake("kokoro");
+    const voice = createChain([pocket, kokoro]).forExplanation("e1");
+
+    expect((await voice.synthesize(say("Un."))).provider).toBe("pocket");
+    pocketUp = false;
+    expect((await voice.synthesize(say("Deux."))).provider).toBe("kokoro");
+    expect((await voice.synthesize(say("Trois."))).provider).toBe("kokoro");
+    expect(pocket.calls.map((call) => call.text)).toEqual(["Un.", "Deux."]);
+  });
 });
 
 describe("voice chain from the environment", () => {
