@@ -98,7 +98,7 @@ async function readIndex() {
 }
 
 function names(files: string[]): string[] {
-  return files.filter((name) => name !== "index.json").sort();
+  return files.filter((name) => name !== "index.json" && name !== "ecoute.html").sort();
 }
 
 describe("voices:compare", () => {
@@ -127,6 +127,11 @@ describe("voices:compare", () => {
         expect(Buffer.compare(await readFile(path.join(out, provider, file)), FIXTURE)).toBe(0);
       }
     }
+
+    const page = await readFile(path.join(out, "ecoute.html"), "utf8");
+    expect(page.match(/<audio /g)).toHaveLength(2 * expected.length);
+    expect(page).toContain('src="kokoro/fr-01.mp3"');
+    expect(page).toContain('src="pocket/en-01.mp3"');
 
     const { records, failures } = await readIndex();
     expect(failures).toEqual([]);

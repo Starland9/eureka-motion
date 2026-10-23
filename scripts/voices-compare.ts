@@ -177,6 +177,7 @@ async function compare({ argv, env, stdout, stderr, cwd = process.cwd() }: Compa
 
   const index = { providers: names, languages, health, records, failures };
   await writeFile(path.join(outDir, "index.json"), `${JSON.stringify(index, null, 2)}\n`);
+  await writeFile(path.join(outDir, "ecoute.html"), listeningPage(names, languages, records));
 
   const phraseFailures = failures.filter((failure) => failure.stage === "phrase").length;
   stdout.write(`${records.length} file(s) written, ${phraseFailures} phrase(s) failed.\n`);
@@ -187,6 +188,41 @@ async function compare({ argv, env, stdout, stderr, cwd = process.cwd() }: Compa
     return 1;
   }
   return 0;
+}
+
+const escapeHtml = (text: string): string =>
+  text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+
+function listeningPage(
+  names: string[],
+  languages: readonly Language[],
+  records: CompareRecord[],
+): string {
+  const sections = languages.map((language) => {
+    const phrases = new Map<number, string>();
+    for (const record of records) {
+      if (record.language === language) phrases.set(record.index, record.text);
+    }
+    const rows = [...phrases.entries()]
+      .sort(([a], [b]) => a - b)
+      .map(([index, text]) => {
+        const players = names.map((name) => {
+          const record = records.find(
+            (r) => r.provider === name && r.language === language && r.index === index,
+          );
+          const player = record
+            ? `<audio controls preload="none" src="${escapeHtml(record.file)}"></audio>`
+            : "<em>absent</em>";
+          return `<div><b>${escapeHtml(name)}</b> ${player}</div>`;
+        });
+        return `<section><p>${pad(index)} — ${escapeHtml(text)}</p>${players.join("")}</section>`;
+      });
+    return `<h2>${language}</h2>${rows.join("\n")}`;
+  });
+  return `<!doctype html><meta charset="utf-8"><title>Écoute comparée</title>
+<style>body{font:16px/1.5 serif;max-width:60rem;margin:2rem auto;padding:0 1rem}section{border-top:1px solid #999;padding:.5rem 0}div{display:flex;gap:.75rem;align-items:center}b{min-width:5rem}</style>
+<h1>Écoute comparée</h1>${sections.join("\n")}
+`;
 }
 
 function failureLabel(failure: CompareFailure): string {
