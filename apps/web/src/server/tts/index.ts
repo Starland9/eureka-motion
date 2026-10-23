@@ -4,12 +4,15 @@ import { createAzureProvider } from "./azure";
 import { TTS_CACHE_DIRNAME, withDiskCache } from "./cache";
 import { createChain, type VoiceChain } from "./chain";
 import { createKokoroProvider } from "./kokoro";
+import { createPocketProvider } from "./pocket";
 import type { VoiceProvider } from "./types";
 
 export * from "./types";
 export { createChain, type Synthesiser, type VoiceChain } from "./chain";
 export { createAzureProvider } from "./azure";
 export { createKokoroProvider } from "./kokoro";
+export { createPocketProvider } from "./pocket";
+export { createSpeechProvider } from "./speech";
 export { withDiskCache } from "./cache";
 export { mp3DurationMs } from "./mp3";
 
@@ -29,7 +32,7 @@ function providerNames(env: Env): string[] {
     .filter(Boolean);
   if (names.includes("none")) return [];
   for (const name of names) {
-    if (name !== "azure" && name !== "kokoro") {
+    if (name !== "azure" && name !== "kokoro" && name !== "pocket") {
       throw new Error(`Unknown voice provider "${name}" in TTS_PROVIDERS.`);
     }
   }
@@ -50,12 +53,23 @@ function buildProvider(name: string, env: Env, options: VoiceOptions): VoiceProv
       },
     });
   }
+  if (name === "pocket") {
+    return createPocketProvider({
+      ...options,
+      baseUrl: env.POCKET_BASE_URL || "http://127.0.0.1:8890",
+      voices: { fr: env.POCKET_VOICE_FR || "estelle", en: env.POCKET_VOICE_EN || "alba" },
+    });
+  }
   return createKokoroProvider({
     ...options,
     baseUrl: env.KOKORO_BASE_URL || "http://127.0.0.1:8880",
     apiKey: env.KOKORO_API_KEY || undefined,
     voices: { fr: env.KOKORO_VOICE_FR || "ff_siwis", en: env.KOKORO_VOICE_EN || "af_heart" },
   });
+}
+
+export function isPocketConfigured(env: Env = process.env): boolean {
+  return providerNames(env).includes("pocket");
 }
 
 export function createVoiceChain(env: Env = process.env, options: VoiceOptions = {}): VoiceChain {
