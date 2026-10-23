@@ -312,7 +312,7 @@ describe("reference-generate script", () => {
     ];
     await putScenarios(broken);
 
-    const refused = await generate(["--lang=fr"]);
+    const refused = await generate(["--lang=fr", "--attempts=1"]);
     expect(refused.code).toBe(1);
     expect(refused.stderr).toContain("partial explanation, scenes dropped: s3");
     expect(await files()).toEqual([]);

@@ -354,7 +354,18 @@ async function generate(job: Job, provider: LlmProvider, settings: Settings): Pr
     const dropped = record.verdicts
       .filter((verdict) => verdict.status === "dropped" && verdict.target !== "plan")
       .map((verdict) => verdict.target);
+    if (partial) {
+      for (const verdict of record.verdicts) {
+        if (verdict.status === "dropped" && verdict.target !== "plan") {
+          say(`dropped ${verdict.target}: ${verdict.reason}`);
+        }
+      }
+    }
     if (partial && !settings.allowPartial) {
+      if (attempt < settings.attempts) {
+        say(`partial: attempt ${attempt + 1} of ${settings.attempts}`);
+        continue;
+      }
       return fail(
         `partial explanation, scenes dropped: ${dropped.join(", ")}; use --allow-partial to keep it for hand repair`,
       );

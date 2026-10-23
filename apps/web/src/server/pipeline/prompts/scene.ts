@@ -120,7 +120,7 @@ Limits: the scene is rejected otherwise
 - Time "t" may appear only in the "fn" of a plot.
 ${EXPRESSION_RULES}
 
-Prefer a simulation when one fits the concept: it computes its positions from the law it shows and reacts to the sliders.
+Prefer a simulation when it shows exactly the concept of the scene: it computes its positions from the law it shows and reacts to the sliders. Never borrow a simulation for another phenomenon because it looks alike (a wave simulation shows waves, not an electric current): draw the figure with segments, shapes and objects instead.
 
 ${catalogFor(input.subject)}
 
