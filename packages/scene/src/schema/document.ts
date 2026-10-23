@@ -595,8 +595,12 @@ const SimMarket = z
   .object({
     ...base,
     type: z.literal("sim.market"),
-    demandShift: BindableSchema.describe("Shift of the demand curve; 0 is the starting position."),
-    supplyShift: BindableSchema.describe("Shift of the supply curve; 0 is the starting position."),
+    demandShift: BindableSchema.describe(
+      "Shift of the demand curve in tenths of the axis, useful from -4 to 4; 0 is the starting position.",
+    ),
+    supplyShift: BindableSchema.describe(
+      "Shift of the supply curve in tenths of the axis, useful from -4 to 4; 0 is the starting position.",
+    ),
     priceLabel: label(16).optional(),
     quantityLabel: label(16).optional(),
   })
