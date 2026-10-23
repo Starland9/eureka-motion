@@ -1,6 +1,7 @@
 import { EXPLANATION_ID_PATTERN, getContainer } from "@/server/container";
 import { errorResponse, internalError, requestLanguage } from "@/server/http/errors";
 import type { ExplanationRecord } from "@/server/pipeline/ports";
+import { readDeepVersion, type DeepVersion } from "@/server/deep";
 import { loadReferenceRecord } from "@/server/reference";
 
 export const runtime = "nodejs";
@@ -10,7 +11,17 @@ interface Context {
   params: Promise<{ id: string }>;
 }
 
-function describe(record: ExplanationRecord): Response {
+async function deepOf(record: ExplanationRecord): Promise<DeepVersion> {
+  try {
+    return await readDeepVersion(record);
+  } catch (error) {
+    console.error(`The deep version of explanation ${record.id} could not be read.`, error);
+    return { status: "none", result_url: null };
+  }
+}
+
+async function describe(record: ExplanationRecord): Promise<Response> {
+  const deep = await deepOf(record);
   return Response.json(
     {
       id: record.id,
@@ -30,7 +41,7 @@ function describe(record: ExplanationRecord): Response {
       provider: record.provider,
       model: record.model,
       timings: record.timings,
-      deep: { status: "none" },
+      deep,
       export: { status: "none" },
     },
     { headers: { "Cache-Control": "no-store" } },
@@ -44,14 +55,14 @@ export async function GET(request: Request, { params }: Context): Promise<Respon
     if (!EXPLANATION_ID_PATTERN.test(id)) return errorResponse("not_found", language);
 
     const reference = await loadReferenceRecord(id);
-    if (reference) return describe(reference);
+    if (reference) return await describe(reference);
 
     const { store } = getContainer();
     const record = await store.get(id);
     if (!record) {
       return errorResponse((await store.isExpired(id)) ? "expired" : "not_found", language);
     }
-    return describe(record);
+    return await describe(record);
   } catch (error) {
     return internalError(error, language);
   }

@@ -4,6 +4,7 @@ import type { Subject } from "./prompts/schemas";
 export type StepName = "triage" | "plan" | "verify_plan" | "scenes" | "quiz";
 export type VerdictStatus = "validated" | "corrected" | "dropped";
 export type FinalStatus = "ready" | "partial";
+export type DeepEventStatus = "queued" | "running" | "ready";
 
 export interface Verdict {
   target: string;
@@ -39,7 +40,7 @@ export type PipelineEvent =
   | { type: "scene"; index: number; scene: Scene }
   | { type: "scene_dropped"; index: number }
   | { type: "quiz"; quiz: Quiz }
-  | { type: "deep"; status: "queued" }
+  | { type: "deep"; status: DeepEventStatus }
   | { type: "done"; status: FinalStatus; share_url: string }
   | { type: "error"; code: string; message: string };
 

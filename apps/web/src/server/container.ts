@@ -57,6 +57,9 @@ function build(): Container {
       shareUrl: sharePath,
       findReference: loadReferenceRecord,
       writeQuiz: createQuizWriter(getLlm()),
+      enqueueDeep: async (explanationId) => {
+        await getJobs().enqueue(explanationId, "deep");
+      },
     },
     logs,
   );

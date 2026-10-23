@@ -155,6 +155,7 @@ const SIMPLER_SCENE =
   'Your previous attempts at this scene were rejected by the validation rules. Write a simpler scene that conveys the same idea: a "statement" or "figure-notes" layout, at most five elements, short texts, no "sweep" and no "move".';
 
 const UNAVAILABLE_CODES = new Set(["unavailable", "timeout", "rate_limited"]);
+const DEEP_SUBJECTS: ReadonlySet<Subject> = new Set(["maths", "physics"]);
 const REFORMULATIONS = new Set<ExplanationKind>(["another_analogy", "simpler", "zoom"]);
 
 function isQuestion(input: PipelineRequest): input is StartInput {
@@ -567,11 +568,8 @@ export class Pipeline {
           level,
         });
       }
-      if (triaged.deepEligible && deps.enqueueDeep && status === "ready") {
-        await deps.enqueueDeep(id).then(
-          () => log.emit({ type: "deep", status: "queued" }),
-          () => undefined,
-        );
+      if (triaged.deepEligible && ctx.kind === "initial" && (await this.queueDeep(id))) {
+        log.emit({ type: "deep", status: "queued" });
       }
       log.emit({ type: "done", status, share_url: deps.shareUrl(id, language) });
     } catch (error) {
@@ -580,6 +578,19 @@ export class Pipeline {
         unavailable ? "generation_unavailable" : "generation_failed",
         unavailable ? pipelineMessage(ctx.language, "unavailable") : failed(),
       ).catch(() => undefined);
+    }
+  }
+
+  // The immediate explanation never depends on the deep version: a failure is only logged.
+  private async queueDeep(id: string): Promise<boolean> {
+    const { enqueueDeep } = this.deps;
+    if (!enqueueDeep) return false;
+    try {
+      await enqueueDeep(id);
+      return true;
+    } catch (error) {
+      console.error(`The deep version of explanation ${id} could not be queued.`, error);
+      return false;
     }
   }
 
@@ -662,7 +673,7 @@ export class Pipeline {
     return {
       decision: "accept",
       concept: triage.concept,
-      deepEligible: triage.deep_eligible,
+      deepEligible: triage.deep_eligible && DEEP_SUBJECTS.has(triage.concept.subject),
       detectedLanguage: triage.detected_language,
       firstOutline,
     };

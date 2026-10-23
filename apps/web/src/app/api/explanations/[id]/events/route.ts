@@ -1,4 +1,5 @@
 import { EXPLANATION_ID_PATTERN, getContainer, sharePath } from "@/server/container";
+import { replayDeepStatus } from "@/server/deep";
 import { errorResponse, internalError, requestLanguage } from "@/server/http/errors";
 import { parseAfter } from "@/server/http/request";
 import { replaySource, sseResponse } from "@/server/http/sse";
@@ -32,7 +33,11 @@ export async function GET(request: Request, { params }: Context): Promise<Respon
       }
     }
     if (!isPlayable(record)) return errorResponse("not_found", language);
-    const events = replayEvents(record, sharePath(id, record.language));
+    const events = replayEvents(
+      record,
+      sharePath(id, record.language),
+      await replayDeepStatus(record),
+    );
     return sseResponse(() => replaySource(events, after), request.signal);
   } catch (error) {
     return internalError(error, language);

@@ -47,6 +47,7 @@ describe("reference explanations served with no database", () => {
     const body = (await response.json()) as {
       payload: { scenes: unknown[] };
       verdicts: unknown;
+      deep: unknown;
     };
     expect(body).toMatchObject({
       id: ID,
@@ -61,6 +62,7 @@ describe("reference explanations served with no database", () => {
     });
     expect(body.payload.scenes).toHaveLength(reference.payload.scenes.length);
     expect(body.verdicts).toEqual(reference.verdicts);
+    expect(body.deep).toEqual({ status: "none", result_url: null });
     expect(database.getDb).not.toHaveBeenCalled();
   });
 

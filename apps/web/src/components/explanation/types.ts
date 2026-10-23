@@ -1,6 +1,6 @@
 import type { Language, Level, Model, Outline, Param, Quiz, Scene } from "scene";
 import type { ReferenceEntry } from "@/components/ask/Sommaire";
-import type { StepName, Verdict } from "@/server/pipeline/events";
+import type { DeepEventStatus, StepName, Verdict } from "@/server/pipeline/events";
 import type { Subject } from "@/server/pipeline/prompts/schemas";
 
 export type ExplanationStatus =
@@ -48,6 +48,7 @@ export interface ExplanationState {
   dropped: number[];
   verdicts: Verdict[];
   quiz: Quiz | null;
+  deep: { status: DeepEventStatus } | null;
   clarify: { reason: string; interpretations: Interpretation[] } | null;
   refusal: string | null;
   error: { code: string; message: string; retryAfterSeconds?: number } | null;
@@ -103,6 +104,7 @@ export function initialExplanationState(
     dropped: [],
     verdicts: [],
     quiz: null,
+    deep: null,
     clarify: null,
     refusal: null,
     error: null,

@@ -22,6 +22,7 @@ export function exportResultUrl(explanationId: string): string {
 export interface Jobs {
   enqueue(explanationId: string, type: JobType): Promise<Job>;
   findActive(explanationId: string, type: JobType): Promise<Job | null>;
+  latest(explanationId: string, type: JobType): Promise<Job | null>;
   ensureSucceeded(explanationId: string, type: JobType, resultUrl: string): Promise<Job>;
   get(id: string): Promise<Job | null>;
   reserve(type: JobType): Promise<Job | null>;
@@ -58,6 +59,16 @@ export function createJobs(db: Database, clock: Clock = {}): Jobs {
 
   return {
     findActive,
+
+    async latest(explanationId, type) {
+      const [job] = await db
+        .select()
+        .from(jobs)
+        .where(and(eq(jobs.explanation_id, explanationId), eq(jobs.type, type)))
+        .orderBy(desc(jobs.created_at), desc(jobs.id))
+        .limit(1);
+      return job ?? null;
+    },
 
     async enqueue(explanationId, type) {
       for (let attempt = 0; attempt < ENQUEUE_ATTEMPTS; attempt += 1) {

@@ -63,6 +63,8 @@ export function reduceExplanation(
         : { ...next, dropped: [...state.dropped, event.index] };
     case "quiz":
       return { ...next, quiz: event.quiz };
+    case "deep":
+      return { ...next, deep: { status: event.status } };
     case "clarify":
       return {
         ...next,
@@ -80,7 +82,7 @@ export function reduceExplanation(
     case "error":
       return { ...next, status: "failed", error: { code: event.code, message: event.message } };
     default:
-      // deep, and any event type this client does not know
+      // any event type this client does not know
       return next;
   }
 }

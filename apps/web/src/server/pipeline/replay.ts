@@ -1,4 +1,4 @@
-import type { PipelineEvent } from "./events";
+import type { DeepEventStatus, PipelineEvent } from "./events";
 import type { ExplanationRecord } from "./ports";
 
 const PLAYABLE = new Set<ExplanationRecord["status"]>(["ready", "partial"]);
@@ -9,7 +9,11 @@ export function isPlayable(record: ExplanationRecord): boolean {
   );
 }
 
-export function replayEvents(record: ExplanationRecord, shareUrl: string): PipelineEvent[] {
+export function replayEvents(
+  record: ExplanationRecord,
+  shareUrl: string,
+  deep: DeepEventStatus | null = null,
+): PipelineEvent[] {
   const events: PipelineEvent[] = [{ type: "accepted", explanation_id: record.id, cached: true }];
   const { payload } = record;
   if (!isPlayable(record) || payload.plan === null) {
@@ -48,6 +52,7 @@ export function replayEvents(record: ExplanationRecord, shareUrl: string): Pipel
   }
 
   if (payload.quiz) events.push({ type: "quiz", quiz: payload.quiz });
+  if (deep) events.push({ type: "deep", status: deep });
   events.push({
     type: "done",
     status: record.status === "ready" ? "ready" : "partial",

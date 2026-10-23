@@ -73,6 +73,22 @@ describe("replaying a stored explanation", () => {
     });
   });
 
+  it("replays the status of the deep version after the quiz and before done", () => {
+    for (const status of ["queued", "running", "ready"] as const) {
+      const types = replayEvents(record(), "/x", status).map((event) => event.type);
+      expect(types.slice(-3)).toEqual(["quiz", "deep", "done"]);
+      expect(replayEvents(record(), "/x", status).find((event) => event.type === "deep")).toEqual({
+        type: "deep",
+        status,
+      });
+    }
+  });
+
+  it("replays no deep event when there is no deep version to announce", () => {
+    expect(replayEvents(record(), "/x", null).some((event) => event.type === "deep")).toBe(false);
+    expect(replayEvents(record(), "/x").some((event) => event.type === "deep")).toBe(false);
+  });
+
   it("keeps scenes in index order and reports the dropped ones", () => {
     const base = record();
     const partial = record({

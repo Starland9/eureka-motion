@@ -274,12 +274,35 @@ describe("reduceExplanation", () => {
     });
   });
 
-  it("only advances the sequence number on deep and unknown events", () => {
+  it("only advances the sequence number on an unknown event", () => {
+    const state = fold([{ type: "future" } as unknown as PipelineEvent]);
+    expect(state).toEqual({ ...fresh, lastSeq: 1 });
+  });
+
+  it("starts without a deep version and records its status when the event arrives", () => {
+    expect(fresh.deep).toBeNull();
+    expect(fold([{ type: "deep", status: "queued" }])).toEqual({
+      ...fresh,
+      deep: { status: "queued" },
+      lastSeq: 1,
+    });
+  });
+
+  it("follows the status of the deep version and keeps it through the final events", () => {
     const state = fold([
       { type: "deep", status: "queued" },
-      { type: "future" } as unknown as PipelineEvent,
+      { type: "deep", status: "running" },
+      { type: "done", status: "ready", share_url: "/fr/e/x" },
     ]);
-    expect(state).toEqual({ ...fresh, lastSeq: 2 });
+    expect(state).toMatchObject({ deep: { status: "running" }, status: "ready", lastSeq: 3 });
+  });
+
+  it("does not record a deep event that is not newer", () => {
+    const state = reduceExplanation(fold([{ type: "deep", status: "running" }]), {
+      seq: 1,
+      event: { type: "deep", status: "ready" },
+    });
+    expect(state.deep).toEqual({ status: "running" });
   });
 
   it("notes that an unrelated follow-up was redirected", () => {
@@ -640,6 +663,72 @@ describe("createExplanationClient: start", () => {
     expect(seen.length).toBeGreaterThanOrEqual(4);
     const before = client.getSnapshot();
     expect(client.getSnapshot()).toBe(before);
+  });
+});
+
+const WITH_DEEP: PipelineEvent[] = [
+  ...STORY.slice(0, -1),
+  { type: "deep", status: "queued" },
+  STORY.at(-1)!,
+];
+
+describe("createExplanationClient: deep version", () => {
+  it("keeps the deep status announced by a stream it started", async () => {
+    const { client } = setup((request) =>
+      request.method === "POST" ? eventResponse(sequence(WITH_DEEP)) : recordResponse(),
+    );
+    await client.start(REQUEST);
+    const { state } = await until(client, (current) => current.state?.status === "ready");
+    expect(state?.deep).toEqual({ status: "queued" });
+    expect(state?.lastSeq).toBe(WITH_DEEP.length);
+  });
+
+  it("keeps the deep status when the stream is cut just before it and resumed", async () => {
+    const cut = WITH_DEEP.length - 2;
+    const { client, requests } = setup((request) => {
+      if (request.method === "POST") return eventResponse(sequence(WITH_DEEP).slice(0, cut));
+      if (request.url.includes("/events")) return serverAfter(WITH_DEEP, request);
+      return recordResponse();
+    });
+    await client.start(REQUEST);
+    const { state } = await until(client, (current) => current.state?.status === "ready");
+    expect(requests[1]?.url).toBe(`/api/explanations/${ID}/events?after=${cut}`);
+    expect(state?.deep).toEqual({ status: "queued" });
+  });
+
+  it("does not lose the deep status when a resume sends it again", async () => {
+    const items = sequence(WITH_DEEP);
+    const { client } = setup((request) => {
+      if (request.method === "POST") return eventResponse(items.slice(0, -1));
+      if (request.url.includes("/events")) return eventResponse(items.slice(-3));
+      return recordResponse();
+    });
+    await client.start(REQUEST);
+    const { state } = await until(client, (current) => current.state?.status === "ready");
+    expect(state?.deep).toEqual({ status: "queued" });
+  });
+
+  it("takes the status the replay of an explanation opened by its link carries", async () => {
+    const replay: PipelineEvent[] = [
+      ...STORY.slice(0, -1),
+      { type: "deep", status: "running" },
+      STORY.at(-1)!,
+    ];
+    const { client } = setup((request) =>
+      request.url.includes("/events") ? serverAfter(replay, request) : recordResponse(),
+    );
+    client.open(ID);
+    const { state } = await until(client, (snapshot) => snapshot.state?.status === "ready");
+    expect(state?.deep).toEqual({ status: "running" });
+  });
+
+  it("leaves the deep status empty when the stream announces none", async () => {
+    const { client } = setup((request) =>
+      request.url.includes("/events") ? serverAfter(STORY, request) : recordResponse(),
+    );
+    client.open(ID);
+    const { state } = await until(client, (snapshot) => snapshot.state?.status === "ready");
+    expect(state?.deep).toBeNull();
   });
 });
 

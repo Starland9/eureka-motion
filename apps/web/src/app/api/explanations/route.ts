@@ -1,5 +1,6 @@
 import type { Language, Level } from "scene";
 import { getContainer, sharePath, type Container } from "@/server/container";
+import { replayDeepStatus } from "@/server/deep";
 import { generationUnavailableResponse } from "@/server/health/degraded";
 import { within } from "@/server/health/timeout";
 import { isGenerationAvailable } from "@/server/http/availability";
@@ -19,7 +20,11 @@ async function serveCached(
 ): Promise<Response | null> {
   const record = await store.get(id);
   if (!record || !isPlayable(record)) return null;
-  const events = replayEvents(record, sharePath(id, record.language));
+  const events = replayEvents(
+    record,
+    sharePath(id, record.language),
+    await replayDeepStatus(record),
+  );
   return sseResponse(() => replaySource(events), signal);
 }
 
