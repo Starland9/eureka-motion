@@ -15,6 +15,7 @@ function describe(record: ExplanationRecord): Response {
     {
       id: record.id,
       kind: record.kind,
+      question: record.kind === "reference" ? record.question : null,
       parent_id: record.parent_id,
       root_id: record.root_id,
       status: record.status,

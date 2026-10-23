@@ -50,6 +50,7 @@ describe("reference explanations served with no database", () => {
     expect(body).toMatchObject({
       id: ID,
       kind: "reference",
+      question: reference.question,
       status: "ready",
       language: "fr",
       level: reference.reference_level,

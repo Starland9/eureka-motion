@@ -823,6 +823,7 @@ describe("GET /api/explanations/{id}", () => {
         "parent_id",
         "payload",
         "provider",
+        "question",
         "root_id",
         "scene_count_planned",
         "status",
@@ -835,6 +836,7 @@ describe("GET /api/explanations/{id}", () => {
     expect(body).toMatchObject({
       id,
       kind: "initial",
+      question: null,
       parent_id: null,
       root_id: id,
       status: "ready",
