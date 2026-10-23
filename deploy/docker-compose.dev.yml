@@ -40,7 +40,9 @@ services:
     build:
       context: ../workers/manim
     restart: unless-stopped
+    init: true
     network_mode: none
+    ipc: none
     read_only: true
     user: "1000:1000"
     cap_drop:
@@ -49,13 +51,23 @@ services:
       - no-new-privileges:true
     cpus: 2
     mem_limit: 2g
+    memswap_limit: 2g
     pids_limit: 256
+    ulimits:
+      core: 0
     tmpfs:
-      - /tmp:size=1g,mode=1777
+      - /tmp:size=1g,mode=1777,noexec,nosuid,nodev
     volumes:
-      - ../sandbox:/sandbox
+      # A bind mount rather than the named volume of production: the development worker runs
+      # on the host with SANDBOX_DIR=./sandbox.
+      - ../sandbox:/data/sandbox
     healthcheck:
-      test: ["CMD-SHELL", "find /sandbox/out/.heartbeat -mmin -1 | grep -q ."]
+      test:
+        - "CMD"
+        - "python"
+        - "-I"
+        - "-c"
+        - "import os, sys, time; beat = open(os.environ['SANDBOX_DIR'] + '/out/.heartbeat').read(); sys.exit(0 if time.time() - int(beat) < 60 else 1)"
       interval: 15s
       timeout: 5s
       retries: 4
