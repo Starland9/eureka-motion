@@ -5,6 +5,7 @@ import { afterAll, beforeAll, describe, expect, it, vi } from "vitest";
 import reference from "../../../../content/reference/physics.universal-gravitation.fr.json";
 import { GET as getEvents } from "../../src/app/api/explanations/[id]/events/route";
 import { GET as getExplanation } from "../../src/app/api/explanations/[id]/route";
+import { GET as getVersions } from "../../src/app/api/explanations/[id]/versions/route";
 import { GET as getMedia } from "../../src/app/media/[...path]/route";
 import { referenceId } from "../../src/server/reference";
 import { eventsIn, readSse } from "../helpers/sse";
@@ -79,6 +80,18 @@ describe("reference explanations served with no database", () => {
     expect(types.at(-1)).toBe("done");
     expect(events.at(-1)!.data).toMatchObject({ status: "ready", share_url: `/fr/e/${ID}` });
     expect(database.getDb).not.toHaveBeenCalled();
+  });
+
+  it("lists a reference as its own session while the database is down", async () => {
+    const response = await getVersions(
+      new Request(`${ORIGIN}/api/explanations/${ID}/versions`),
+      context(ID),
+    );
+    expect(response.status).toBe(200);
+    const versions = (await response.json()) as { id: string; kind: string; scene_title: null }[];
+    expect(versions).toEqual([
+      expect.objectContaining({ id: ID, kind: "reference", scene_title: null }),
+    ]);
   });
 
   it("resumes the replay after a given event", async () => {

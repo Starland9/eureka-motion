@@ -1,5 +1,6 @@
 import { EXPLANATION_ID_PATTERN, getContainer } from "@/server/container";
 import { errorResponse, internalError, requestLanguage } from "@/server/http/errors";
+import { within } from "@/server/health/timeout";
 import type { ExplanationRecord, ExplanationStatus } from "@/server/pipeline/ports";
 import { loadReferenceRecord } from "@/server/reference";
 
@@ -18,22 +19,36 @@ function sceneTitle(record: ExplanationRecord, session: ExplanationRecord[]): st
   return parent?.payload.scenes.find(({ id }) => id === record.focus_scene_id)?.title ?? null;
 }
 
+async function storedSession(rootId: string): Promise<ExplanationRecord[]> {
+  try {
+    return await within(getContainer().store.listByRoot(rootId));
+  } catch (error) {
+    console.error("The versions of a reference are read without the database.", error);
+    return [];
+  }
+}
+
 export async function GET(request: Request, { params }: Context): Promise<Response> {
   const language = requestLanguage(request);
   try {
     const { id } = await params;
     if (!EXPLANATION_ID_PATTERN.test(id)) return errorResponse("not_found", language);
 
-    const { store } = getContainer();
     const reference = await loadReferenceRecord(id);
-    const record = reference ?? (await store.get(id));
-    if (!record) {
-      return errorResponse((await store.isExpired(id)) ? "expired" : "not_found", language);
+    let session: ExplanationRecord[];
+    if (reference) {
+      // A reference has no row until its first derived version is written, and it must stay
+      // playable with the database stopped.
+      const stored = await storedSession(reference.root_id);
+      session = [reference, ...stored.filter((row) => row.id !== id)];
+    } else {
+      const { store } = getContainer();
+      const record = await store.get(id);
+      if (!record) {
+        return errorResponse((await store.isExpired(id)) ? "expired" : "not_found", language);
+      }
+      session = await store.listByRoot(record.root_id);
     }
-
-    // A reference has no row until its first derived version is written.
-    const stored = await store.listByRoot(record.root_id);
-    const session = reference ? [reference, ...stored.filter((row) => row.id !== id)] : stored;
 
     return Response.json(
       session
