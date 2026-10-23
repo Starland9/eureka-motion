@@ -46,7 +46,7 @@
   --type-display-xl-font: var(--font-display);
   --type-display-xl-size: clamp(44px, 9vw, 96px);
   --type-display-xl-leading: 1.02;
-  --type-display-xl-weight: 500;
+  --type-display-xl-weight: 600;
   --type-display-l-font: var(--font-display);
   --type-display-l-size: 60px;
   --type-display-l-leading: 1.05;

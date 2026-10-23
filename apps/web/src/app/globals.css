@@ -116,7 +116,7 @@
   font-size: var(--type-display-xl-size);
   line-height: var(--type-display-xl-leading);
   font-weight: var(--type-display-xl-weight);
-  font-variation-settings: "opsz" 48;
+  font-variation-settings: "opsz" 18;
 }
 
 @utility text-display-l {

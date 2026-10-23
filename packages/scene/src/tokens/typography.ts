@@ -39,7 +39,7 @@ export interface TypeStyle {
 }
 
 export const typeScale = {
-  displayXl: { font: "display", size: "clamp(44px, 9vw, 96px)", lineHeight: 1.02, weight: 500 },
+  displayXl: { font: "display", size: "clamp(44px, 9vw, 96px)", lineHeight: 1.02, weight: 600 },
   displayL: { font: "display", size: 60, lineHeight: 1.05, weight: 500 },
   displayM: { font: "display", size: 44, lineHeight: 1.1, weight: 500 },
   title: { font: "display", size: 32, lineHeight: 1.15, weight: 600 },
