@@ -66,6 +66,14 @@
         "fr": "French",
         "en": "English"
       }
+    },
+    "levelChange": {
+      "legend": "Explain at another level",
+      "reference": "[Reference]",
+      "preparing": "Preparing for {level}…",
+      "progress": "Preparing for {level}: {done} of {total, plural, one {# scene} other {# scenes}}…",
+      "ready": "The explanation for {level} is ready.",
+      "open": "Open for {level} →"
     }
   }
 }

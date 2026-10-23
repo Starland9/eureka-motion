@@ -15,6 +15,7 @@ import { cn } from "@/lib/utils";
 import { useExplanationSession } from "./ExplanationSession";
 import { ExplanationHeader } from "./ExplanationHeader";
 import { FinalState } from "./FinalState";
+import { LevelChoice } from "./LevelChoice";
 import { Notices } from "./Notices";
 import { PlancheOverlay } from "./PlancheOverlay";
 import { PreparationRule, PreparationSteps } from "./Preparation";
@@ -155,6 +156,7 @@ export function ExplanationView({ id }: { id: string }) {
                       sceneCount={state?.sceneCount ?? null}
                     />
                   )}
+                  {state === null ? null : <LevelChoice state={state} className="mt-8" />}
                 </div>
               </>
             )}

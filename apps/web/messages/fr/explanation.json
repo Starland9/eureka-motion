@@ -66,6 +66,14 @@
         "fr": "français",
         "en": "anglais"
       }
+    },
+    "levelChange": {
+      "legend": "Expliquer à un autre niveau",
+      "reference": "[Référence]",
+      "preparing": "Préparation au niveau {level}…",
+      "progress": "Préparation au niveau {level} : {done} sur {total, plural, one {# scène} other {# scènes}}…",
+      "ready": "L’explication au niveau {level} est prête.",
+      "open": "Ouvrir au niveau {level} →"
     }
   }
 }

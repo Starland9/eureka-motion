@@ -86,6 +86,7 @@ export interface ExplanationClient {
 interface StoredExplanation {
   language: Language;
   level: Level;
+  reference: ExplanationState["reference"];
   generator: ExplanationState["generator"];
   timings: Record<string, number>;
 }
@@ -151,12 +152,18 @@ async function readFailure(
 function parseStored(record: unknown, fallback: Language): StoredExplanation {
   const language = field(record, "language");
   const level = field(record, "level");
+  const kind = field(record, "kind");
+  const question = field(record, "question");
   const provider = field(record, "provider");
   const model = field(record, "model");
   const timings = field(record, "timings");
   return {
     language: LANGUAGES.find((candidate) => candidate === language) ?? fallback,
     level: LEVELS.find((candidate) => candidate === level) ?? NEUTRAL_LEVEL,
+    reference:
+      kind === "reference" && typeof question === "string" && question.trim() !== ""
+        ? { question }
+        : null,
     generator:
       typeof provider === "string" && typeof model === "string" ? { provider, model } : null,
     timings:
@@ -385,6 +392,7 @@ export function createExplanationClient(options: ExplanationClientOptions = {}):
           level: stored.level,
         }),
         id,
+        reference: stored.reference,
         status: "preparing",
         generator: stored.generator,
         timings: stored.timings,

@@ -34,6 +34,7 @@ export interface ExplanationState {
   cached: boolean;
   redirectTo: string | null;
   question: string;
+  reference: { question: string } | null;
   language: Language;
   level: Level;
   steps: Partial<Record<StepName, "started" | "done">>;
@@ -81,6 +82,7 @@ export function initialExplanationState(
     cached: false,
     redirectTo: null,
     question: request.question,
+    reference: null,
     language: request.language,
     level: request.level,
     steps: {},
