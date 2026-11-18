@@ -30,6 +30,34 @@ function fake(name: string, fail: boolean | (() => boolean) = false): FakeProvid
 
 const say = (text: string): SynthesizeRequest => ({ text, language: "fr" });
 
+const pause = (ms: number) => new Promise<"waited">((resolve) => setTimeout(resolve, ms, "waited"));
+
+interface QueueingProvider extends VoiceProvider {
+  signals: AbortSignal[];
+}
+
+// Holds every call until its signal is aborted, except "fail", which fails at once.
+function queueing(name: string): QueueingProvider {
+  const signals: AbortSignal[] = [];
+  return {
+    name,
+    signals,
+    voiceFor: (language) => `${name}-${language}`,
+    health: async () => true,
+    synthesize(request): Promise<SynthesizedAudio> {
+      if (request.signal) signals.push(request.signal);
+      if (request.text === "fail") return Promise.reject(new TtsError("unavailable", name, "down"));
+      return new Promise((_resolve, reject) => {
+        request.signal?.addEventListener(
+          "abort",
+          () => reject(new TtsError("unavailable", name, "The request was cancelled.")),
+          { once: true },
+        );
+      });
+    },
+  };
+}
+
 function clock(start = 0) {
   let now = start;
   return { now: () => now, advance: (ms: number) => (now += ms) };
@@ -159,6 +187,53 @@ describe("voice router", () => {
     expect((await chain.forExplanation("e2").synthesize(say("deux"))).provider).toBe("second");
     slowRelease();
     expect((await slow).provider).toBe("second");
+  });
+
+  it("cancels the calls still waiting on a voice once their explanation has moved past it", async () => {
+    const queue = queueing("queue");
+    const chain = createChain([queue, fake("next")], { now: clock().now });
+    const voice = chain.forExplanation("e1");
+
+    const calls = ["a", "b", "fail"].map((text) => voice.synthesize(say(text)));
+    const outcome = await Promise.race([Promise.all(calls), pause(200)]);
+
+    expect(outcome).not.toBe("waited");
+    expect((outcome as SynthesizedAudio[]).map((result) => result.provider)).toEqual([
+      "next",
+      "next",
+      "next",
+    ]);
+  });
+
+  it("cancels the waiting calls of the explanation that moved on and no other", async () => {
+    const queue = queueing("queue");
+    const chain = createChain([queue, fake("next")], { now: clock().now });
+    const bystander = chain.forExplanation("e2").synthesize(say("attend"));
+    const mover = chain.forExplanation("e1");
+
+    const moved = await Promise.race([
+      Promise.all([mover.synthesize(say("a")), mover.synthesize(say("fail"))]),
+      pause(200),
+    ]);
+
+    expect(moved).not.toBe("waited");
+    expect(queue.signals.map((signal) => signal.aborted)).toEqual([false, true, true]);
+    expect(await Promise.race([bystander, pause(20)])).toBe("waited");
+  });
+
+  it("still passes the caller's cancellation to the voice", async () => {
+    const queue = queueing("queue");
+    const chain = createChain([queue, fake("next")], { now: clock().now });
+    const controller = new AbortController();
+    const call = chain
+      .forExplanation("e1")
+      .synthesize({ ...say("a"), signal: controller.signal })
+      .catch((error: unknown) => error);
+
+    controller.abort();
+
+    expect(await call).toBeInstanceOf(TtsError);
+    expect(queue.signals[0]!.aborted).toBe(true);
   });
 
   it("sends the overflow to the last voice when every limited voice is full", async () => {

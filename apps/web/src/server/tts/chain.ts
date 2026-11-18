@@ -31,6 +31,8 @@ export const ROUTER_IDLE_MS = 45_000;
 interface Assignment {
   index: number;
   lastUsed: number;
+  // One per voice the explanation has called; aborted once the explanation moves past it.
+  stops: Map<number, AbortController>;
 }
 
 export function createChain(
@@ -41,12 +43,15 @@ export function createChain(
   const assignments = new Map<string, Assignment>();
   const last = providers.length - 1;
 
-  function remember(explanationId: string, assignment: Assignment): void {
+  function entry(explanationId: string, index: number): Assignment {
+    const assignment = assignments.get(explanationId) ?? { index, lastUsed: 0, stops: new Map() };
+    assignment.lastUsed = now();
     assignments.delete(explanationId);
     assignments.set(explanationId, assignment);
     if (assignments.size > MAX_TRACKED_EXPLANATIONS) {
       assignments.delete(assignments.keys().next().value!);
     }
+    return assignment;
   }
 
   function isFull(index: number, explanationId: string): boolean {
@@ -69,8 +74,21 @@ export function createChain(
   }
 
   function advance(explanationId: string, index: number): void {
-    const current = assignments.get(explanationId)?.index ?? 0;
-    remember(explanationId, { index: Math.max(current, index), lastUsed: now() });
+    const assignment = entry(explanationId, index);
+    if (index <= assignment.index) return;
+    assignment.index = index;
+    for (const [held, stop] of assignment.stops) {
+      if (held < index) stop.abort();
+    }
+  }
+
+  function stopFor(assignment: Assignment, index: number): AbortController {
+    let stop = assignment.stops.get(index);
+    if (!stop) {
+      stop = new AbortController();
+      assignment.stops.set(index, stop);
+    }
+    return stop;
   }
 
   async function states(): Promise<Record<string, boolean>> {
@@ -95,9 +113,11 @@ export function createChain(
             throw new TtsError("unavailable", "chain", "No voice could speak this text.");
           }
           // Assigned before any await, so parallel first calls share one voice.
-          const assigned = assignments.get(explanationId);
-          const start = assigned?.index ?? route(explanationId);
-          remember(explanationId, { index: start, lastUsed: now() });
+          const assignment = entry(
+            explanationId,
+            assignments.get(explanationId)?.index ?? route(explanationId),
+          );
+          const start = assignment.index;
 
           for (let index = start; index < providers.length; index++) {
             if (request.signal?.aborted) break;
@@ -108,7 +128,12 @@ export function createChain(
               advance(explanationId, index);
             }
             try {
-              const result = await providers[index]!.synthesize(request);
+              const { signal } = request;
+              const stop = stopFor(assignment, index).signal;
+              const result = await providers[index]!.synthesize({
+                ...request,
+                signal: signal ? AbortSignal.any([signal, stop]) : stop,
+              });
               advance(explanationId, index);
               return result;
             } catch (error) {
