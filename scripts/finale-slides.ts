@@ -5,6 +5,7 @@ import { chromium } from "@playwright/test";
 const root = fileURLToPath(new URL("..", import.meta.url));
 const source = path.join(root, "docs/finale/slides.html");
 const target = path.join(root, "docs/finale/slides.pdf");
+const base = process.env.INIT_CWD ?? process.cwd();
 const shots = process.argv.find((arg) => arg.startsWith("--shots="))?.slice("--shots=".length);
 
 async function main(): Promise<void> {
@@ -36,7 +37,7 @@ async function main(): Promise<void> {
       const slides = page.locator("section.slide");
       const count = await slides.count();
       for (let index = 0; index < count; index += 1) {
-        const file = path.resolve(shots, `slide-${index + 1}.png`);
+        const file = path.resolve(base, shots, `slide-${index + 1}.png`);
         await slides.nth(index).screenshot({ path: file });
         console.log(`Image : ${file}`);
       }
