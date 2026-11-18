@@ -1,0 +1,214 @@
+{
+  "generated_at": "2026-11-18T23:41:51.691Z",
+  "base_url": "https://eureka-motion.starland9.dev",
+  "languages": [
+    "fr"
+  ],
+  "concurrency": 1,
+  "timeout_s": 240,
+  "results": [
+    {
+      "id": "solo2-chute",
+      "kind": "core",
+      "subject": "physics",
+      "level": "lycee",
+      "language": "fr",
+      "question": "la chute libre",
+      "outcome": "ready",
+      "detail": null,
+      "explanation_id": "ackzh26rk6wg",
+      "cached": false,
+      "redirected": false,
+      "first_scene_ms": 22536.962532999998,
+      "total_ms": 37457.693757,
+      "planned_scenes": 6,
+      "scenes": {
+        "validated": 6,
+        "corrected": 0,
+        "dropped": 0
+      },
+      "rate_limited": 0,
+      "waited_ms": 0,
+      "deep": {
+        "status": "timeout",
+        "ms": null
+      }
+    },
+    {
+      "id": "solo2-frottement",
+      "kind": "core",
+      "subject": "physics",
+      "level": "lycee",
+      "language": "fr",
+      "question": "la force de frottement",
+      "outcome": "failed",
+      "detail": "ECONNREFUSED",
+      "explanation_id": null,
+      "cached": false,
+      "redirected": false,
+      "first_scene_ms": null,
+      "total_ms": 280.5633680000028,
+      "planned_scenes": null,
+      "scenes": {
+        "validated": 0,
+        "corrected": 0,
+        "dropped": 0
+      },
+      "rate_limited": 0,
+      "waited_ms": 0,
+      "deep": null
+    },
+    {
+      "id": "solo2-ondes",
+      "kind": "core",
+      "subject": "physics",
+      "level": "lycee",
+      "language": "fr",
+      "question": "la longueur d'onde",
+      "outcome": "failed",
+      "detail": "ECONNREFUSED",
+      "explanation_id": null,
+      "cached": false,
+      "redirected": false,
+      "first_scene_ms": null,
+      "total_ms": 274.80791099999624,
+      "planned_scenes": null,
+      "scenes": {
+        "validated": 0,
+        "corrected": 0,
+        "dropped": 0
+      },
+      "rate_limited": 0,
+      "waited_ms": 0,
+      "deep": null
+    },
+    {
+      "id": "solo2-puissance",
+      "kind": "core",
+      "subject": "physics",
+      "level": "lycee",
+      "language": "fr",
+      "question": "la puissance électrique",
+      "outcome": "failed",
+      "detail": "ECONNREFUSED",
+      "explanation_id": null,
+      "cached": false,
+      "redirected": false,
+      "first_scene_ms": null,
+      "total_ms": 282.2285869999978,
+      "planned_scenes": null,
+      "scenes": {
+        "validated": 0,
+        "corrected": 0,
+        "dropped": 0
+      },
+      "rate_limited": 0,
+      "waited_ms": 0,
+      "deep": null
+    },
+    {
+      "id": "solo2-pression",
+      "kind": "core",
+      "subject": "physics",
+      "level": "lycee",
+      "language": "fr",
+      "question": "la pression",
+      "outcome": "ready",
+      "detail": null,
+      "explanation_id": "8gk7r8nxgn65",
+      "cached": false,
+      "redirected": false,
+      "first_scene_ms": 16108.200150999997,
+      "total_ms": 30467.93063499999,
+      "planned_scenes": 6,
+      "scenes": {
+        "validated": 4,
+        "corrected": 2,
+        "dropped": 0
+      },
+      "rate_limited": 0,
+      "waited_ms": 0,
+      "deep": {
+        "status": "timeout",
+        "ms": null
+      }
+    },
+    {
+      "id": "solo2-moles",
+      "kind": "core",
+      "subject": "chemistry",
+      "level": "lycee",
+      "language": "fr",
+      "question": "la mole",
+      "outcome": "ready",
+      "detail": null,
+      "explanation_id": "qardmjhh4auq",
+      "cached": false,
+      "redirected": false,
+      "first_scene_ms": 14635.854311000003,
+      "total_ms": 30380.081835000005,
+      "planned_scenes": 6,
+      "scenes": {
+        "validated": 4,
+        "corrected": 2,
+        "dropped": 0
+      },
+      "rate_limited": 0,
+      "waited_ms": 0,
+      "deep": null
+    }
+  ],
+  "summary": {
+    "kinds": {
+      "core": {
+        "total": 6,
+        "succeeded": 3,
+        "cached": 0,
+        "counts": {
+          "ready": 3,
+          "partial": 0,
+          "refused": 0,
+          "clarify": 0,
+          "failed": 3,
+          "timeout": 0
+        }
+      },
+      "other": {
+        "total": 0,
+        "succeeded": 0,
+        "cached": 0,
+        "counts": {
+          "ready": 0,
+          "partial": 0,
+          "refused": 0,
+          "clarify": 0,
+          "failed": 0,
+          "timeout": 0
+        }
+      }
+    },
+    "first_scene": {
+      "count": 3,
+      "without": 3,
+      "median_ms": 16108.200150999997,
+      "p90_ms": 22536.962532999998
+    },
+    "scenes": {
+      "validated": 14,
+      "corrected": 4,
+      "dropped": 0
+    },
+    "deep": {
+      "announced": 2,
+      "ready": 0,
+      "within_limit": 0,
+      "median_ms": null,
+      "p90_ms": null
+    }
+  },
+  "threshold_failures": [
+    "aboutissement core : 3/6 (50,0 %), au moins 90 % attendus",
+    "première scène : 90ᵉ centile à 22,5 s, moins de 15,0 s attendues",
+    "version approfondie : 0/2 prêtes en moins de 300,0 s (0,0 %), au moins 80 % attendus"
+  ]
+}

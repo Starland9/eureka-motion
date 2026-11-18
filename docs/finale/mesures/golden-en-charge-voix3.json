@@ -1,0 +1,302 @@
+{
+  "generated_at": "2026-11-18T23:38:41.217Z",
+  "base_url": "https://eureka-motion.starland9.dev",
+  "languages": [
+    "en"
+  ],
+  "concurrency": 10,
+  "timeout_s": 240,
+  "results": [
+    {
+      "id": "chemistry-states-of-matter",
+      "kind": "core",
+      "subject": "chemistry",
+      "level": "college",
+      "language": "en",
+      "question": "How does matter go from solid to liquid to gas?",
+      "outcome": "partial",
+      "detail": null,
+      "explanation_id": "fq3n9fcwdjc5",
+      "cached": false,
+      "redirected": false,
+      "first_scene_ms": 20745.147262000002,
+      "total_ms": 35828.577394,
+      "planned_scenes": 6,
+      "scenes": {
+        "validated": 3,
+        "corrected": 2,
+        "dropped": 1
+      },
+      "rate_limited": 0,
+      "waited_ms": 0,
+      "deep": null
+    },
+    {
+      "id": "chemistry-periodic-table",
+      "kind": "core",
+      "subject": "chemistry",
+      "level": "college",
+      "language": "en",
+      "question": "How is the periodic table of elements organised?",
+      "outcome": "ready",
+      "detail": null,
+      "explanation_id": "rz636gzr9kh6",
+      "cached": false,
+      "redirected": false,
+      "first_scene_ms": 31231.969025,
+      "total_ms": 49180.48317399999,
+      "planned_scenes": 6,
+      "scenes": {
+        "validated": 3,
+        "corrected": 3,
+        "dropped": 0
+      },
+      "rate_limited": 0,
+      "waited_ms": 0,
+      "deep": null
+    },
+    {
+      "id": "chemistry-titration",
+      "kind": "core",
+      "subject": "chemistry",
+      "level": "lycee",
+      "language": "en",
+      "question": "How does an acid-base titration work?",
+      "outcome": "ready",
+      "detail": null,
+      "explanation_id": "274gggn2nb94",
+      "cached": false,
+      "redirected": false,
+      "first_scene_ms": 18180.950591,
+      "total_ms": 33619.780714,
+      "planned_scenes": 6,
+      "scenes": {
+        "validated": 5,
+        "corrected": 1,
+        "dropped": 0
+      },
+      "rate_limited": 0,
+      "waited_ms": 0,
+      "deep": null
+    },
+    {
+      "id": "chemistry-reaction-rate",
+      "kind": "core",
+      "subject": "chemistry",
+      "level": "lycee",
+      "language": "en",
+      "question": "Why does a chemical reaction go faster when it is heated?",
+      "outcome": "ready",
+      "detail": null,
+      "explanation_id": "dd34r36d53ef",
+      "cached": false,
+      "redirected": false,
+      "first_scene_ms": 17364.211531999998,
+      "total_ms": 37444.885564000004,
+      "planned_scenes": 6,
+      "scenes": {
+        "validated": 3,
+        "corrected": 3,
+        "dropped": 0
+      },
+      "rate_limited": 0,
+      "waited_ms": 0,
+      "deep": null
+    },
+    {
+      "id": "chemistry-le-chatelier",
+      "kind": "core",
+      "subject": "chemistry",
+      "level": "superieur",
+      "language": "en",
+      "question": "What does Le Chatelier's principle say about chemical equilibrium?",
+      "outcome": "ready",
+      "detail": null,
+      "explanation_id": "xn57cu32adx7",
+      "cached": false,
+      "redirected": false,
+      "first_scene_ms": 42241.202509,
+      "total_ms": 61191.003614,
+      "planned_scenes": 6,
+      "scenes": {
+        "validated": 2,
+        "corrected": 4,
+        "dropped": 0
+      },
+      "rate_limited": 0,
+      "waited_ms": 0,
+      "deep": null
+    },
+    {
+      "id": "biology-digestion",
+      "kind": "core",
+      "subject": "biology",
+      "level": "college",
+      "language": "en",
+      "question": "How does digestion work?",
+      "outcome": "ready",
+      "detail": null,
+      "explanation_id": "vpyece3ue986",
+      "cached": false,
+      "redirected": false,
+      "first_scene_ms": 55343.98265,
+      "total_ms": 92667.05451599999,
+      "planned_scenes": 6,
+      "scenes": {
+        "validated": 4,
+        "corrected": 2,
+        "dropped": 0
+      },
+      "rate_limited": 0,
+      "waited_ms": 0,
+      "deep": null
+    },
+    {
+      "id": "biology-heredity",
+      "kind": "core",
+      "subject": "biology",
+      "level": "college",
+      "language": "en",
+      "question": "How are traits passed from parents to children?",
+      "outcome": "ready",
+      "detail": null,
+      "explanation_id": "p25rvgwfyn4e",
+      "cached": false,
+      "redirected": false,
+      "first_scene_ms": 16881.801821,
+      "total_ms": 36178.338912,
+      "planned_scenes": 6,
+      "scenes": {
+        "validated": 3,
+        "corrected": 3,
+        "dropped": 0
+      },
+      "rate_limited": 0,
+      "waited_ms": 0,
+      "deep": null
+    },
+    {
+      "id": "biology-mitosis",
+      "kind": "core",
+      "subject": "biology",
+      "level": "lycee",
+      "language": "en",
+      "question": "How does a cell divide into two identical cells?",
+      "outcome": "ready",
+      "detail": null,
+      "explanation_id": "x9vamd5nyt3k",
+      "cached": false,
+      "redirected": false,
+      "first_scene_ms": 18450.746778999997,
+      "total_ms": 37142.913906,
+      "planned_scenes": 6,
+      "scenes": {
+        "validated": 4,
+        "corrected": 2,
+        "dropped": 0
+      },
+      "rate_limited": 0,
+      "waited_ms": 0,
+      "deep": null
+    },
+    {
+      "id": "biology-natural-selection",
+      "kind": "core",
+      "subject": "biology",
+      "level": "lycee",
+      "language": "en",
+      "question": "How does natural selection work?",
+      "outcome": "failed",
+      "detail": "generation_failed",
+      "explanation_id": "wr6hjp9yb2xz",
+      "cached": false,
+      "redirected": false,
+      "first_scene_ms": null,
+      "total_ms": 19389.077354,
+      "planned_scenes": null,
+      "scenes": {
+        "validated": 0,
+        "corrected": 0,
+        "dropped": 0
+      },
+      "rate_limited": 0,
+      "waited_ms": 0,
+      "deep": null
+    },
+    {
+      "id": "biology-action-potential",
+      "kind": "core",
+      "subject": "biology",
+      "level": "superieur",
+      "language": "en",
+      "question": "How does a neuron transmit a nerve signal?",
+      "outcome": "ready",
+      "detail": null,
+      "explanation_id": "bupz8bzamr97",
+      "cached": false,
+      "redirected": false,
+      "first_scene_ms": 44333.622158,
+      "total_ms": 61444.167619,
+      "planned_scenes": 6,
+      "scenes": {
+        "validated": 4,
+        "corrected": 2,
+        "dropped": 0
+      },
+      "rate_limited": 0,
+      "waited_ms": 0,
+      "deep": null
+    }
+  ],
+  "summary": {
+    "kinds": {
+      "core": {
+        "total": 10,
+        "succeeded": 9,
+        "cached": 0,
+        "counts": {
+          "ready": 8,
+          "partial": 1,
+          "refused": 0,
+          "clarify": 0,
+          "failed": 1,
+          "timeout": 0
+        }
+      },
+      "other": {
+        "total": 0,
+        "succeeded": 0,
+        "cached": 0,
+        "counts": {
+          "ready": 0,
+          "partial": 0,
+          "refused": 0,
+          "clarify": 0,
+          "failed": 0,
+          "timeout": 0
+        }
+      }
+    },
+    "first_scene": {
+      "count": 9,
+      "without": 1,
+      "median_ms": 20745.147262000002,
+      "p90_ms": 55343.98265
+    },
+    "scenes": {
+      "validated": 31,
+      "corrected": 22,
+      "dropped": 1
+    },
+    "deep": {
+      "announced": 0,
+      "ready": 0,
+      "within_limit": 0,
+      "median_ms": null,
+      "p90_ms": null
+    }
+  },
+  "threshold_failures": [
+    "première scène : 90ᵉ centile à 55,3 s, moins de 15,0 s attendues"
+  ]
+}

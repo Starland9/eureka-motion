@@ -51,6 +51,21 @@ Les 10 premiers concepts du jeu (maths et physique), en anglais pour éviter le 
 
 **Juste après la charge**, une personne seule a attendu 176,6 s sa première scène : la file se vidait encore. Les cinq questions suivantes, posées une à une, ont donné 32,2 s, 36,2 s, 19,1 s, 37,5 s et 38,6 s ([mesures/golden-fr-seul.json](mesures/golden-fr-seul.json)).
 
+## Dix générations simultanées, avec trois voix (19/11/2026)
+
+Après le déploiement du routeur de voix (`TTS_PROVIDERS=deepgram,assemblyai,pocket`, Deepgram sur `api.eu.deepgram.com`). Chaque nouvelle explication prend la première voix qui a de la place : 6 pour Deepgram, 2 pour AssemblyAI, Pocket au-delà.
+
+| Où                                              | Abouties                     | Première scène, médiane / 90ᵉ centile | Explication complète |
+| ----------------------------------------------- | ---------------------------- | ------------------------------------- | -------------------- |
+| Bêta en ligne, concepts 11 à 20 du jeu, anglais | 9/10 (1 échec de génération) | 20,7 s / 55,3 s                       | 34 à 93 s            |
+| Poste local, Pocket limité à 2 CPU              | 10/10                        | 27,7 s / 58,6 s                       | 43 à 119 s           |
+
+Avant le routeur, sur la bêta, le même test donnait 0/10 en 240 s. Résultat brut : [mesures/golden-en-charge-voix3.json](mesures/golden-en-charge-voix3.json).
+
+Une personne seule, juste après (questions nouvelles, physique et chimie, Lycée) : 22,5 s, 16,1 s et 14,6 s ([mesures/golden-fr-seul-voix3.json](mesures/golden-fr-seul-voix3.json)).
+
+**Incident à expliquer :** pendant cette série, vers 23 h 40 UTC, la bêta a refusé les connexions pendant environ une minute (3 questions en `ECONNREFUSED`), puis est revenue d'elle-même. Cause non établie : redéploiement, ou redémarrage du conteneur. Voir les journaux de Dokploy.
+
 ## Question déjà posée
 
 `maths-thales`, reposée après la mesure de base : servie par le cache, première scène en 1,1 s ([mesures/golden-fr-cache.json](mesures/golden-fr-cache.json)).
