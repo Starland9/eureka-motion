@@ -458,6 +458,38 @@ describe("voice chain from the environment", () => {
     ]);
   });
 
+  it("lets two explanations share AssemblyAI by default and sends the next one on", async () => {
+    const fetchMock = mockFetch(async () => audioReply());
+    const chain = createVoiceChain(
+      env({ TTS_PROVIDERS: "assemblyai,kokoro", ASSEMBLYAI_API_KEY: SECRET }),
+      { fetch: fetchMock },
+    );
+    const providers = [];
+    for (const id of ["e1", "e2", "e3"]) {
+      providers.push((await chain.forExplanation(id).synthesize(say(`Phrase ${id}.`))).provider);
+    }
+    expect(providers).toEqual(["assemblyai", "assemblyai", "kokoro"]);
+  });
+
+  it("reads each voice's limit of explanations from the environment", async () => {
+    const fetchMock = mockFetch(async () => audioReply());
+    const chain = createVoiceChain(
+      env({
+        TTS_PROVIDERS: "deepgram,assemblyai,kokoro",
+        DEEPGRAM_API_KEY: SECRET,
+        DEEPGRAM_MAX_ACTIVE: "1",
+        ASSEMBLYAI_API_KEY: SECRET,
+        ASSEMBLYAI_MAX_ACTIVE: "abc",
+      }),
+      { fetch: fetchMock },
+    );
+    const providers = [];
+    for (const id of ["e1", "e2", "e3", "e4"]) {
+      providers.push((await chain.forExplanation(id).synthesize(say(`Phrase ${id}.`))).provider);
+    }
+    expect(providers).toEqual(["deepgram", "assemblyai", "assemblyai", "kokoro"]);
+  });
+
   it("follows the order of TTS_PROVIDERS and reads the voices from the environment", async () => {
     const fetchMock = mockFetch(async () => audioReply());
     const chain = createVoiceChain(

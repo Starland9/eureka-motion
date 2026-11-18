@@ -124,7 +124,12 @@ export function createVoiceChain(env: Env = process.env, options: VoiceOptions =
     .map((name) => buildProvider(name, env, options))
     .filter((provider): provider is VoiceProvider => provider !== null)
     .map((provider) => withDiskCache(provider, cacheDirectory));
-  return createChain(providers);
+  return createChain(providers, {
+    maxActive: {
+      deepgram: positiveInteger(env.DEEPGRAM_MAX_ACTIVE, 6),
+      assemblyai: positiveInteger(env.ASSEMBLYAI_MAX_ACTIVE, 2),
+    },
+  });
 }
 
 let cached: VoiceChain | undefined;
