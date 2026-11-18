@@ -133,3 +133,13 @@ curl -sL https://raw.githubusercontent.com/kyutai-labs/pocket-tts/main/README.md
 ```
 
 À comparer avec ce fichier : si l'une des réponses change (licence, fichier d'une voix, nouvelle exception dans `unmute-prod-website`, nouvelle clause), le signaler avant de déployer.
+
+## Voix Deepgram (Aura-2)
+
+Service en ligne : chaque phrase à dire est envoyée à l'API de Deepgram, qui renvoie l'audio en MP3. Le projet ne télécharge ni ne redistribue aucun poids ni aucun fichier de voix pour ce fournisseur ; cette section n'a pas été vérifiée à la source, elle ne porte donc aucune date de relecture.
+
+- Voix : celles d'Aura-2 proposées par le service, `aura-2-agathe-fr` (français) et `aura-2-thalia-en` (anglais) par défaut. Voix prédéfinies seulement, pas de clonage, comme pour Pocket.
+- Accès : clé d'API du compte Deepgram (`DEEPGRAM_API_KEY`), jamais versionnée. Le compte démarre avec un crédit d'essai ; son montant et sa durée sont à lire sur le compte, pas dans ce dépôt.
+- Aucune clause des conditions d'utilisation n'est recopiée ici.
+
+À relire dans les conditions d'utilisation du service avant un usage commercial : ce qui est permis pour l'audio généré, les mentions éventuellement exigées, et ce que Deepgram fait des textes envoyés.

@@ -3,6 +3,7 @@ import { getMediaDir } from "../media";
 import { createAzureProvider } from "./azure";
 import { TTS_CACHE_DIRNAME, withDiskCache } from "./cache";
 import { createChain, type VoiceChain } from "./chain";
+import { createDeepgramProvider } from "./deepgram";
 import { createKokoroProvider } from "./kokoro";
 import { createPocketProvider } from "./pocket";
 import type { VoiceProvider } from "./types";
@@ -10,6 +11,7 @@ import type { VoiceProvider } from "./types";
 export * from "./types";
 export { createChain, type Synthesiser, type VoiceChain } from "./chain";
 export { createAzureProvider } from "./azure";
+export { createDeepgramProvider } from "./deepgram";
 export { createKokoroProvider } from "./kokoro";
 export { createPocketProvider } from "./pocket";
 export { createSpeechProvider } from "./speech";
@@ -24,7 +26,7 @@ export interface VoiceOptions {
 }
 
 const DEFAULT_PROVIDERS = "azure,kokoro";
-const KNOWN_PROVIDERS: readonly string[] = ["azure", "kokoro", "pocket"];
+const KNOWN_PROVIDERS: readonly string[] = ["azure", "deepgram", "kokoro", "pocket"];
 
 function providerNames(env: Env): string[] {
   const names = (env.TTS_PROVIDERS || DEFAULT_PROVIDERS)
@@ -40,6 +42,11 @@ function providerNames(env: Env): string[] {
   return [...new Set(names)];
 }
 
+function positiveInteger(value: string | undefined, fallback: number): number {
+  const text = value?.trim() ?? "";
+  return /^[1-9]\d*$/.test(text) ? Number(text) : fallback;
+}
+
 function buildProvider(name: string, env: Env, options: VoiceOptions): VoiceProvider | null {
   if (name === "azure") {
     const key = env.AZURE_SPEECH_KEY;
@@ -52,6 +59,19 @@ function buildProvider(name: string, env: Env, options: VoiceOptions): VoiceProv
         fr: env.AZURE_VOICE_FR || "fr-FR-DeniseNeural",
         en: env.AZURE_VOICE_EN || "en-US-JennyNeural",
       },
+    });
+  }
+  if (name === "deepgram") {
+    const apiKey = env.DEEPGRAM_API_KEY;
+    if (!apiKey) return null;
+    return createDeepgramProvider({
+      ...options,
+      apiKey,
+      voices: {
+        fr: env.DEEPGRAM_VOICE_FR || "aura-2-agathe-fr",
+        en: env.DEEPGRAM_VOICE_EN || "aura-2-thalia-en",
+      },
+      concurrency: positiveInteger(env.DEEPGRAM_CONCURRENCY, 10),
     });
   }
   if (name === "pocket") {
