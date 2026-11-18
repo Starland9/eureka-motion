@@ -95,7 +95,8 @@ function createLimiter(
         resolve();
       };
       const leave = () => {
-        waiting.splice(waiting.indexOf(turn), 1);
+        const position = waiting.indexOf(turn);
+        if (position >= 0) waiting.splice(position, 1);
         reject(cancelled());
       };
       waiting.push(turn);

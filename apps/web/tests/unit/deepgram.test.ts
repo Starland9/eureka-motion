@@ -310,6 +310,30 @@ describe("Deepgram provider", () => {
       expect(gate.peak()).toBe(1);
     });
 
+    it("does not drop another call when a cancellation arrives after its own turn", async () => {
+      const gate = held();
+      const provider = deepgramWith(gate.fetchMock, { concurrency: 1 });
+      const first = provider.synthesize(say("Un."));
+      await until(() => gate.fetchMock.mock.calls.length === 1);
+
+      const controller = new AbortController();
+      vi.spyOn(controller.signal, "removeEventListener").mockImplementation(() => {});
+      const second = provider.synthesize({ ...say("Deux."), signal: controller.signal }).then(
+        () => undefined,
+        () => undefined,
+      );
+      const third = provider.synthesize(say("Trois."));
+
+      gate.release(0);
+      await until(() => gate.fetchMock.mock.calls.length === 2);
+      controller.abort();
+      gate.release(1);
+
+      await until(() => gate.fetchMock.mock.calls.length === 3);
+      gate.release(2);
+      await Promise.all([first, second, third]);
+    });
+
     it("makes no call for a signal that is already cancelled", async () => {
       const fetchMock = mockFetch(async () => audioReply());
       const provider = deepgramWith(fetchMock, { concurrency: 1 });

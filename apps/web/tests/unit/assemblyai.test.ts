@@ -557,6 +557,32 @@ describe("AssemblyAI provider", () => {
       expect(starts.map((start) => start.at)).toEqual([0, 60_000]);
     });
 
+    it("does not drop another call when a cancellation arrives after its own turn", async () => {
+      const clock = fakeClock();
+      const { fetchMock, starts } = recording(clock);
+      const provider = assemblyWith(fetchMock, { perMinute: 1, clock });
+      await provider.synthesize(say("Un."));
+
+      const controller = new AbortController();
+      vi.spyOn(controller.signal, "removeEventListener").mockImplementation(() => {});
+      const second = provider.synthesize({ ...say("Deux."), signal: controller.signal }).then(
+        () => undefined,
+        () => undefined,
+      );
+      const third = provider.synthesize(say("Trois."));
+      await until(() => clock.pendingSleeps() === 1);
+
+      clock.advance(60_000);
+      await until(() => fetchMock.mock.calls.length === 2);
+      controller.abort();
+      await second;
+      await until(() => clock.pendingSleeps() === 1);
+      clock.advance(60_000);
+
+      await third;
+      expect(starts.map((start) => start.text)).toEqual(["Un.", "Deux.", "Trois."]);
+    });
+
     it("makes no call and takes no place for a signal that is already cancelled", async () => {
       const clock = fakeClock();
       const { fetchMock } = recording(clock);
