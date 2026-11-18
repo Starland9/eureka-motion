@@ -22,6 +22,7 @@
     "voices:compare": "pnpm --filter web exec tsx --tsconfig scripts/tsconfig.json ../../scripts/voices-compare.ts",
     "golden": "pnpm --filter web exec tsx --tsconfig scripts/tsconfig.json ../../scripts/golden.ts",
     "frame-budget": "pnpm --filter web exec tsx --tsconfig scripts/tsconfig.json ../../scripts/frame-budget.ts",
+    "finale:slides": "pnpm --filter web exec tsx --tsconfig scripts/tsconfig.json ../../scripts/finale-slides.ts",
     "db:generate": "pnpm --filter web exec drizzle-kit generate",
     "db:migrate": "pnpm --filter web exec drizzle-kit migrate"
   },
