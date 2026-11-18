@@ -83,6 +83,7 @@ function buildProvider(name: string, env: Env, options: VoiceOptions): VoiceProv
     return createDeepgramProvider({
       ...options,
       apiKey,
+      host: env.DEEPGRAM_HOST || undefined,
       voices: {
         fr: env.DEEPGRAM_VOICE_FR || "aura-2-agathe-fr",
         en: env.DEEPGRAM_VOICE_EN || "aura-2-thalia-en",

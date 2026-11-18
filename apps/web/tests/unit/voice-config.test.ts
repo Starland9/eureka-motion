@@ -120,6 +120,27 @@ describe("Deepgram configuration", () => {
     expect(createVoiceChain(env({ DEEPGRAM_API_KEY: KEY })).providers).toEqual(["kokoro"]);
   });
 
+  it("speaks to the host set in DEEPGRAM_HOST, the global one by default", async () => {
+    const urls: string[] = [];
+    const send = vi.fn<typeof fetch>(async (url) => {
+      urls.push(String(url));
+      return new Response(new Uint8Array(FRENCH), { status: 200 });
+    });
+    const say = { text: "Bonjour.", language: "fr" as const };
+    await createVoiceProvider("deepgram", env({ DEEPGRAM_API_KEY: KEY }), {
+      fetch: send,
+    })!.synthesize(say);
+    await createVoiceProvider(
+      "deepgram",
+      env({ DEEPGRAM_API_KEY: KEY, DEEPGRAM_HOST: "https://api.eu.deepgram.com" }),
+      { fetch: send },
+    )!.synthesize(say);
+    expect(urls.map((url) => new URL(url).host)).toEqual([
+      "api.deepgram.com",
+      "api.eu.deepgram.com",
+    ]);
+  });
+
   it("defaults to the Aura-2 voices and reads them from the environment", () => {
     const standard = createVoiceProvider("deepgram", env({ DEEPGRAM_API_KEY: KEY }))!;
     expect(standard.name).toBe("deepgram");

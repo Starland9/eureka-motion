@@ -13,12 +13,13 @@ import {
 export interface DeepgramConfig {
   apiKey: string;
   voices: Voices;
+  host?: string;
   concurrency?: number;
   timeoutMs?: number;
   fetch?: typeof fetch;
 }
 
-const API = "https://api.deepgram.com/v1";
+const DEFAULT_HOST = "https://api.deepgram.com";
 const DEFAULT_CONCURRENCY = 10;
 
 const cancelled = () => new TtsError("unavailable", "deepgram", "The request was cancelled.");
@@ -66,6 +67,7 @@ function createGate(limit: number) {
 
 export function createDeepgramProvider(config: DeepgramConfig): VoiceProvider {
   const send = config.fetch ?? fetch;
+  const api = `${(config.host ?? DEFAULT_HOST).replace(/\/+$/, "")}/v1`;
   const timeoutMs = config.timeoutMs ?? TTS_TIMEOUT_MS;
   const gate = createGate(config.concurrency ?? DEFAULT_CONCURRENCY);
   const authorization = { Authorization: `Token ${config.apiKey}` };
@@ -80,7 +82,7 @@ export function createDeepgramProvider(config: DeepgramConfig): VoiceProvider {
         fetchMp3({
           provider: "deepgram",
           send,
-          url: `${API}/speak?model=${encodeURIComponent(voice)}&encoding=mp3`,
+          url: `${api}/speak?model=${encodeURIComponent(voice)}&encoding=mp3`,
           init: {
             method: "POST",
             headers: { ...authorization, "Content-Type": "application/json" },
@@ -94,7 +96,7 @@ export function createDeepgramProvider(config: DeepgramConfig): VoiceProvider {
     },
     async health(): Promise<boolean> {
       try {
-        const response = await send(`${API}/projects`, {
+        const response = await send(`${api}/projects`, {
           headers: authorization,
           signal: AbortSignal.timeout(TTS_HEALTH_TIMEOUT_MS),
         });

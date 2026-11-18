@@ -26,7 +26,7 @@ const voices = { fr: "aura-2-agathe-fr", en: "aura-2-thalia-en" };
 
 function deepgramWith(
   fetchMock: FetchMock,
-  extra: { timeoutMs?: number; concurrency?: number; voices?: typeof voices } = {},
+  extra: { timeoutMs?: number; concurrency?: number; voices?: typeof voices; host?: string } = {},
 ) {
   return createDeepgramProvider({ apiKey: SECRET, voices, fetch: fetchMock, ...extra });
 }
@@ -103,6 +103,18 @@ describe("Deepgram provider", () => {
     expect(result.audio).toEqual(new Uint8Array(FRENCH));
     expect(result.durationMs).toBe(mp3DurationMs(FRENCH));
     expect(result.durationMs).toBeGreaterThan(0);
+  });
+
+  it("speaks and checks its health on the host it is given", async () => {
+    const fetchMock = mockFetch(async () => audioReply());
+    const provider = deepgramWith(fetchMock, { host: "https://api.eu.deepgram.com/" });
+    await provider.synthesize(say("Une pomme tombe."));
+    expect(urlOf(fetchMock)).toBe(
+      "https://api.eu.deepgram.com/v1/speak?model=aura-2-agathe-fr&encoding=mp3",
+    );
+    const health = mockFetch(async () => new Response("{}", { status: 200 }));
+    expect(await deepgramWith(health, { host: "https://api.eu.deepgram.com" }).health()).toBe(true);
+    expect(urlOf(health)).toBe("https://api.eu.deepgram.com/v1/projects");
   });
 
   it("is named deepgram and gives the voice of each language", () => {
