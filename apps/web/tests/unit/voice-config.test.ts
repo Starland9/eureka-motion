@@ -186,6 +186,46 @@ describe("Deepgram configuration", () => {
     expect(send.mock.calls[0]![1]!.headers).toMatchObject({ Authorization: `Token ${KEY}` });
   });
 
+  async function deadlineOf(
+    environment: Record<string, string>,
+    options: { timeoutMs?: number } = {},
+  ) {
+    const timeout = vi.spyOn(AbortSignal, "timeout");
+    try {
+      const send = vi.fn<typeof fetch>(
+        async () => new Response(new Uint8Array(FRENCH), { status: 200 }),
+      );
+      await createVoiceProvider("deepgram", env({ DEEPGRAM_API_KEY: KEY, ...environment }), {
+        ...options,
+        fetch: send,
+      })!.synthesize({ text: "Bonjour.", language: "fr" });
+      return timeout.mock.calls.map(([ms]) => ms);
+    } finally {
+      timeout.mockRestore();
+    }
+  }
+
+  it("gives a call 10 s to answer by default", async () => {
+    expect(await deadlineOf({})).toEqual([10_000]);
+  });
+
+  it("reads the time to answer from DEEPGRAM_TIMEOUT_MS", async () => {
+    expect(await deadlineOf({ DEEPGRAM_TIMEOUT_MS: "12000" })).toEqual([12_000]);
+  });
+
+  it.each(["0", "-2", "abc", "2.5", "", "  "])(
+    "falls back to 10 s to answer for DEEPGRAM_TIMEOUT_MS=%j",
+    async (value) => {
+      expect(await deadlineOf({ DEEPGRAM_TIMEOUT_MS: value })).toEqual([10_000]);
+    },
+  );
+
+  it("lets the options given in code win over DEEPGRAM_TIMEOUT_MS", async () => {
+    expect(await deadlineOf({ DEEPGRAM_TIMEOUT_MS: "12000" }, { timeoutMs: 3_000 })).toEqual([
+      3_000,
+    ]);
+  });
+
   it("allows ten simultaneous calls by default", async () => {
     expect(await pending(12, { DEEPGRAM_API_KEY: KEY })).toBe(10);
   });

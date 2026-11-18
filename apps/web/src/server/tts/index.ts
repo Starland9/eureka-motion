@@ -90,6 +90,7 @@ function buildProvider(name: string, env: Env, options: VoiceOptions): VoiceProv
         en: env.DEEPGRAM_VOICE_EN || "aura-2-thalia-en",
       },
       concurrency: positiveInteger(env.DEEPGRAM_CONCURRENCY, 10),
+      timeoutMs: options.timeoutMs ?? positiveInteger(env.DEEPGRAM_TIMEOUT_MS, 10_000),
     });
   }
   if (name === "pocket") {
