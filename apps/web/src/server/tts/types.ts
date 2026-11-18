@@ -17,7 +17,7 @@ export class TtsError extends Error {
 
 export const MAX_TEXT_LENGTH = 200;
 export const TTS_TIMEOUT_MS = 6_000;
-export const TTS_HEALTH_TIMEOUT_MS = 4_000;
+export const TTS_HEALTH_TIMEOUT_MS = 2_500;
 
 export interface SynthesizeRequest {
   text: string;

@@ -78,6 +78,33 @@ describe("voice configuration", () => {
   });
 });
 
+describe("voice health deadline", () => {
+  const PROBE_DEADLINE_MS = 3_000;
+
+  it.each(["assemblyai", "azure", "deepgram", "kokoro", "pocket"])(
+    "gives %s less time to answer than the health probe allows",
+    async (name) => {
+      const timeout = vi.spyOn(AbortSignal, "timeout");
+      try {
+        const provider = createVoiceProvider(
+          name,
+          env({
+            ASSEMBLYAI_API_KEY: "key",
+            AZURE_SPEECH_KEY: "key",
+            DEEPGRAM_API_KEY: "key",
+          }),
+          { fetch: vi.fn<typeof fetch>(async () => new Response("{}", { status: 200 })) },
+        )!;
+        expect(await provider.health()).toBe(true);
+        expect(timeout).toHaveBeenCalledOnce();
+        expect(timeout.mock.calls[0]![0]).toBeLessThan(PROBE_DEADLINE_MS);
+      } finally {
+        timeout.mockRestore();
+      }
+    },
+  );
+});
+
 describe("Deepgram configuration", () => {
   const KEY = "dg-test-key";
 
