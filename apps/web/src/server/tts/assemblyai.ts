@@ -110,8 +110,12 @@ export function createAssemblyAiProvider(config: AssemblyAiConfig): VoiceProvide
   const send = config.fetch ?? fetch;
   const timeoutMs = config.timeoutMs ?? TTS_TIMEOUT_MS;
   const url = `${(config.host ?? DEFAULT_HOST).replace(/\/+$/, "")}/v1/speech`;
+  const perMinute = config.perMinute ?? DEFAULT_PER_MINUTE;
+  if (!Number.isInteger(perMinute) || perMinute < 1) {
+    throw new Error("AssemblyAI perMinute must be an integer of at least 1.");
+  }
   const acquire = createLimiter(
-    config.perMinute ?? DEFAULT_PER_MINUTE,
+    perMinute,
     config.maxWaitMs ?? DEFAULT_MAX_WAIT_MS,
     config.now ?? Date.now,
     config.sleep ?? realSleep,

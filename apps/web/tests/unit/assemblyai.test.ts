@@ -365,6 +365,15 @@ describe("AssemblyAI provider", () => {
       }
     });
 
+    it.each([0, -1, 1.5, Number.NaN, Number.POSITIVE_INFINITY])(
+      "refuses a rate of %s a minute when it is built",
+      (perMinute) => {
+        expect(() => assemblyWith(mockFetch(), { perMinute })).toThrow(
+          "AssemblyAI perMinute must be an integer of at least 1.",
+        );
+      },
+    );
+
     it("allows 45 starts per minute by default", async () => {
       const clock = fakeClock();
       const { fetchMock } = recording(clock);

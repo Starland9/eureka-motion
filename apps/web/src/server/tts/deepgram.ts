@@ -70,7 +70,11 @@ export function createDeepgramProvider(config: DeepgramConfig): VoiceProvider {
   const send = config.fetch ?? fetch;
   const api = `${(config.host ?? DEFAULT_HOST).replace(/\/+$/, "")}/v1`;
   const timeoutMs = config.timeoutMs ?? TTS_TIMEOUT_MS;
-  const gate = createGate(config.concurrency ?? DEFAULT_CONCURRENCY);
+  const concurrency = config.concurrency ?? DEFAULT_CONCURRENCY;
+  if (!Number.isInteger(concurrency) || concurrency < 1) {
+    throw new Error("Deepgram concurrency must be an integer of at least 1.");
+  }
+  const gate = createGate(concurrency);
   const authorization = { Authorization: `Token ${config.apiKey}` };
 
   return {

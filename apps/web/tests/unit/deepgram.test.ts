@@ -242,6 +242,15 @@ describe("Deepgram provider", () => {
       expect(settled).toEqual([1, 2, 3, 4, 5]);
     });
 
+    it.each([0, -1, 1.5, Number.NaN, Number.POSITIVE_INFINITY])(
+      "refuses a concurrency of %s when it is built",
+      (concurrency) => {
+        expect(() => deepgramWith(mockFetch(), { concurrency })).toThrow(
+          "Deepgram concurrency must be an integer of at least 1.",
+        );
+      },
+    );
+
     it("allows ten calls at once by default", async () => {
       const gate = held();
       const provider = deepgramWith(gate.fetchMock);
