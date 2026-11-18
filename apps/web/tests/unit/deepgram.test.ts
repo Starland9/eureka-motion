@@ -114,7 +114,7 @@ describe("Deepgram provider", () => {
     );
     const health = mockFetch(async () => new Response("{}", { status: 200 }));
     expect(await deepgramWith(health, { host: "https://api.eu.deepgram.com" }).health()).toBe(true);
-    expect(urlOf(health)).toBe("https://api.eu.deepgram.com/v1/projects");
+    expect(urlOf(health)).toBe("https://api.eu.deepgram.com/v1/auth/token");
   });
 
   it("is named deepgram and gives the voice of each language", () => {
@@ -365,10 +365,10 @@ describe("Deepgram provider", () => {
   });
 
   describe("health", () => {
-    it("asks for the projects with the token and a short deadline", async () => {
+    it("checks the key on the token route with a short deadline", async () => {
       const fetchMock = mockFetch(async () => new Response("{}", { status: 200 }));
       expect(await deepgramWith(fetchMock).health()).toBe(true);
-      expect(urlOf(fetchMock)).toBe("https://api.deepgram.com/v1/projects");
+      expect(urlOf(fetchMock)).toBe("https://api.deepgram.com/v1/auth/token");
       const init = initOf(fetchMock);
       expect(init.headers).toEqual({ Authorization: `Token ${SECRET}` });
       expect(init.signal).toBeInstanceOf(AbortSignal);

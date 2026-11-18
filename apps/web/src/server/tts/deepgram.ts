@@ -96,7 +96,7 @@ export function createDeepgramProvider(config: DeepgramConfig): VoiceProvider {
     },
     async health(): Promise<boolean> {
       try {
-        const response = await send(`${api}/projects`, {
+        const response = await send(`${api}/auth/token`, {
           headers: authorization,
           signal: AbortSignal.timeout(TTS_HEALTH_TIMEOUT_MS),
         });
