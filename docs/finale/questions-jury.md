@@ -10,9 +10,9 @@ Finale du challenge sur les agents IA, GDG Douala, 28 novembre 2026, JFN HIGH-TE
 
 ## Marques à traiter avant le jour J
 
-- `[MESURE : …]` : chiffre à reprendre de `docs/finale/mesures.md`, pas encore écrit. Tant que la mesure manque, ne pas citer de chiffre.
+- Les chiffres mesurés sur la bêta viennent de `docs/finale/mesures.md` (18 novembre 2026).
 - `[À VÉRIFIER : …]` : donnée absente du dépôt. La relever, ou répondre « je ne sais pas encore ».
-- Les limites reconnues sont celles de `docs/portfolio.md` §8, et elles ne se présentent jamais comme faites. Références non relues : question 7. Pas de test avec des élèves : question 14. Isolation Manim sous Dokploy : question 12. Voix pas écoutée : question 24. Pas de licence pour le code : question 21. Jeu de 40 questions pas encore joué sur l'adresse déployée : questions 6, 19 et 20.
+- Les limites reconnues sont celles de `docs/portfolio.md` §8, et elles ne se présentent jamais comme faites. Références non relues : question 7. Pas de test avec des élèves : question 14. Isolation Manim sous Dokploy : question 12. Voix pas écoutée : question 24. Pas de licence pour le code : question 21.
 
 ## 1. Est-ce vraiment un agent ?
 
@@ -40,7 +40,7 @@ Les nombres affichés ne viennent jamais du modèle : le code les calcule à par
 
 ### Q6. Le juge est un modèle : qui vérifie le vérificateur ?
 
-Personne pour l'instant : le juge est un modèle plus fort que celui qui écrit, mais du même fournisseur, et ses verdicts n'ont pas été comparés à l'avis d'un enseignant. Le jeu de 40 questions (pas encore joué sur la bêta quand ce document a été écrit) mesure l'aboutissement, c'est-à-dire une explication affichée dès la première demande, pas l'exactitude : [MESURE : taux de réussite du jeu de 40 questions sur la bêta, groupe des six matières et groupe des autres sujets]. Prochaine étape : une relecture humaine d'un échantillon d'explications, et un fournisseur différent pour le juge, ce que la configuration permet déjà. (`docs/portfolio.md` §8 ; `specs/001-animated-concept-explainer/spec.md` SC-003 ; `docs/configuration.md`)
+Personne pour l'instant : le juge est un modèle plus fort que celui qui écrit, mais du même fournisseur, et ses verdicts n'ont pas été comparés à l'avis d'un enseignant. Le jeu de 40 questions mesure l'aboutissement, pas l'exactitude : sur la bêta, 86,7 % pour les 30 concepts des six matières et 100 % pour les 10 autres sujets, et les 4 échecs sont des plans que le juge a refusés pour de vraies erreurs, dont une unité fausse d'un facteur 10 000. Prochaine étape : une relecture humaine d'un échantillon d'explications, et un fournisseur différent pour le juge, ce que la configuration permet déjà. (`docs/portfolio.md` §8 ; `specs/001-animated-concept-explainer/spec.md` SC-003 ; `docs/configuration.md`)
 
 ### Q7. Vos explications de référence ont-elles été relues par des enseignants ?
 
@@ -98,11 +98,11 @@ Le modèle rapide coûte 0,15 $ par million de jetons en entrée et 0,60 $ en so
 
 ### Q19. Que se passe-t-il si toute une classe, ou toute la salle, l'utilise en même temps ?
 
-Le système vise quelques dizaines de visiteurs simultanés sur un seul serveur, et une question déjà posée au même niveau et dans la même langue repart du cache en environ une seconde, sans appel au modèle. Deux limites sont connues : 10 générations par heure et par adresse réseau en temps normal, ce qui pénalise une classe qui partage une connexion (relevée à 300 pour la finale), et une voix qui traite une phrase à la fois, donc au-delà de trois explications simultanées une scène peut se jouer en sous-titres seuls. Sur la bêta : [MESURE : première scène au 90e centile, échecs et comportement de la voix avec dix générations simultanées]. (`specs/001-animated-concept-explainer/plan.md` ; `docs/portfolio.md` §5.3 ; `docs/configuration.md` ; `specs/001-animated-concept-explainer/contracts/llm-provider.md` §2 ; `specs/002-pocket-tts-voice/research.md` R6 ; `docs/superpowers/specs/2026-11-18-finale-gdg-design.md`)
+Le système vise quelques dizaines de visiteurs simultanés sur un seul serveur, et une question déjà posée au même niveau et dans la même langue repart du cache en environ une seconde, sans appel au modèle. Deux limites sont connues : 10 générations par heure et par adresse réseau en temps normal, ce qui pénalise une classe qui partage une connexion (relevée à 300 pour la finale), et une voix qui traite une phrase à la fois, donc au-delà de trois explications simultanées une scène peut se jouer en sous-titres seuls. Mesuré sur la bêta avec dix générations simultanées et la voix Pocket : aucune n'a fini en 4 minutes, alors que sans voix les dix aboutissent avec une première scène en 16 s ; la voix est le goulot, et je la passe sur un service en ligne [À VÉRIFIER : test de charge refait avec Deepgram]. (`specs/001-animated-concept-explainer/plan.md` ; `docs/portfolio.md` §5.3 ; `docs/configuration.md` ; `specs/001-animated-concept-explainer/contracts/llm-provider.md` §2 ; `specs/002-pocket-tts-voice/research.md` R6 ; `docs/superpowers/specs/2026-11-18-finale-gdg-design.md`)
 
 ### Q20. Pourquoi faut-il attendre plusieurs secondes avant la première scène ?
 
-Avant de montrer la première scène, le système trie la question, écrit le plan, le fait vérifier, puis écrit et contrôle la scène, et chaque étape est un appel au modèle. Pour réduire l'attente, le plan est demandé en même temps que le tri, sa vérification tourne pendant l'écriture des scènes, et la première scène se joue pendant que les suivantes se préparent. Mesuré sur quatre concepts sans voix : 9,0 à 15,0 s ; sur trois concepts avec la voix Kokoro, qui n'est pas la voix de production : 14 à 27 s ; avec Pocket sur la bêta : [MESURE : première scène, médiane et 90e centile, avec la voix de production]. (`specs/001-animated-concept-explainer/contracts/llm-provider.md` §3 ; `docs/portfolio.md` §5.3 et §8)
+Avant de montrer la première scène, le système trie la question, écrit le plan, le fait vérifier, puis écrit et contrôle la scène, et chaque étape est un appel au modèle. Pour réduire l'attente, le plan est demandé en même temps que le tri, sa vérification tourne pendant l'écriture des scènes, et la première scène se joue pendant que les suivantes se préparent. Mesuré sur quatre concepts sans voix : 9,0 à 15,0 s ; sur trois concepts avec la voix Kokoro, qui n'est pas la voix de production : 14 à 27 s ; avec Pocket sur la bêta, pour une personne seule : 17 à 39 s, et 1,1 s quand la question a déjà été posée. (`specs/001-animated-concept-explainer/contracts/llm-provider.md` §3 ; `docs/portfolio.md` §5.3 et §8)
 
 ### Q21. Y a-t-il un modèle économique, et que faudrait-il pour passer à plus grande échelle ?
 
