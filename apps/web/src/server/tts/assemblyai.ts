@@ -117,7 +117,7 @@ export function createAssemblyAiProvider(config: AssemblyAiConfig): VoiceProvide
   const acquire = createLimiter(
     perMinute,
     config.maxWaitMs ?? DEFAULT_MAX_WAIT_MS,
-    config.now ?? Date.now,
+    config.now ?? (() => performance.now()),
     config.sleep ?? realSleep,
   );
 

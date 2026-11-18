@@ -44,7 +44,7 @@ export function createChain(
   providers: readonly VoiceProvider[],
   options: ChainOptions = {},
 ): VoiceChain {
-  const now = options.now ?? Date.now;
+  const now = options.now ?? (() => performance.now());
   const assignments = new Map<string, Assignment>();
   const last = providers.length - 1;
 

@@ -470,7 +470,7 @@ describe("AssemblyAI provider", () => {
     });
 
     it("waits on the real clock by default", async () => {
-      vi.useFakeTimers({ toFake: ["setTimeout", "clearTimeout", "Date"] });
+      vi.useFakeTimers({ toFake: ["setTimeout", "clearTimeout", "Date", "performance"] });
       const fetchMock = mockFetch(async () => audioReply());
       const provider = createAssemblyAiProvider({
         apiKey: SECRET,
@@ -489,6 +489,24 @@ describe("AssemblyAI provider", () => {
       await vi.advanceTimersByTimeAsync(1_000);
       await second;
       expect(fetchMock).toHaveBeenCalledTimes(2);
+    });
+
+    it("ignores changes of the wall clock when it measures the window", async () => {
+      vi.useFakeTimers({ toFake: ["Date"] });
+      const fetchMock = mockFetch(async () => audioReply());
+      const provider = createAssemblyAiProvider({
+        apiKey: SECRET,
+        voices,
+        fetch: fetchMock,
+        perMinute: 1,
+      });
+      await provider.synthesize(say("Un."));
+
+      vi.setSystemTime(Date.now() + 61_000);
+      const error = await failure(provider.synthesize(say("Deux.")));
+
+      expect(error.code).toBe("rate_limited");
+      expect(fetchMock).toHaveBeenCalledTimes(1);
     });
 
     it("does not count the wait in the queue against the timeout", async () => {

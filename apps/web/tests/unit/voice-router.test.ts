@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import {
   createChain,
   TtsError,
@@ -295,6 +295,24 @@ describe("voice router", () => {
 
     expect(await call).toBeInstanceOf(TtsError);
     expect(queue.signals[0]!.aborted).toBe(true);
+  });
+
+  describe("with its own clock", () => {
+    afterEach(() => {
+      vi.useRealTimers();
+    });
+
+    it("ignores changes of the wall clock when it measures the silence", async () => {
+      vi.useFakeTimers({ toFake: ["Date"] });
+      const chain = createChain([fake("assemblyai"), fake("pocket")], {
+        maxActive: { assemblyai: 1 },
+      });
+      await chain.forExplanation("e1").synthesize(say("un"));
+
+      vi.setSystemTime(Date.now() + 3_600_000);
+
+      expect((await chain.forExplanation("e2").synthesize(say("deux"))).provider).toBe("pocket");
+    });
   });
 
   it("sends the overflow to the last voice when every limited voice is full", async () => {
