@@ -11,7 +11,7 @@ interface FakeProvider extends VoiceProvider {
   calls: string[];
 }
 
-function fake(name: string, fail = false): FakeProvider {
+function fake(name: string, fail: boolean | (() => boolean) = false): FakeProvider {
   const calls: string[] = [];
   return {
     name,
@@ -20,7 +20,9 @@ function fake(name: string, fail = false): FakeProvider {
     health: async () => true,
     async synthesize(request): Promise<SynthesizedAudio> {
       calls.push(request.text);
-      if (fail) throw new TtsError("unavailable", name, "down");
+      if (typeof fail === "function" ? fail() : fail) {
+        throw new TtsError("unavailable", name, "down");
+      }
       return { audio: new Uint8Array([1]), durationMs: 1000, provider: name, voice: name };
     },
   };
@@ -107,6 +109,56 @@ describe("voice router", () => {
     });
     expect((await chain.forExplanation("e1").synthesize(say("un"))).provider).toBe("assemblyai");
     expect((await chain.forExplanation("e2").synthesize(say("deux"))).provider).toBe("pocket");
+  });
+
+  it("holds the place on the next voice before falling back, so a failing voice does not flood it", async () => {
+    let deepgramUp = true;
+    const chain = createChain(
+      [fake("deepgram", () => !deepgramUp), fake("assemblyai"), fake("pocket")],
+      { maxActive: { deepgram: 6, assemblyai: 2 }, now: clock().now },
+    );
+    const ids = ["e1", "e2", "e3", "e4", "e5", "e6"];
+    for (const id of ids) {
+      expect((await chain.forExplanation(id).synthesize(say(id))).provider).toBe("deepgram");
+    }
+    deepgramUp = false;
+
+    const results = await Promise.all(
+      ids.map((id) => chain.forExplanation(id).synthesize(say(`${id} suite`))),
+    );
+    const by = (name: string) => results.filter((result) => result.provider === name).length;
+    expect(by("assemblyai")).toBe(2);
+    expect(by("pocket")).toBe(4);
+    expect(by("deepgram")).toBe(0);
+  });
+
+  it("keeps a call on the voice its explanation already holds, even when that voice looks full", async () => {
+    const time = clock();
+    let slowRelease: () => void = () => {};
+    const slowHold = new Promise<void>((resolve) => (slowRelease = resolve));
+    const first = fake("first", () => true);
+    const slowFirst: VoiceProvider = {
+      ...first,
+      async synthesize(request) {
+        if (request.text === "lente") await slowHold;
+        return first.synthesize(request);
+      },
+    };
+    const second = fake("second");
+    const chain = createChain([slowFirst, second, fake("third")], {
+      maxActive: { second: 1 },
+      now: time.now,
+    });
+
+    await chain.forExplanation("e2").synthesize(say("un"));
+    time.advance(50_000);
+
+    const one = chain.forExplanation("e1");
+    const slow = one.synthesize(say("lente"));
+    expect((await one.synthesize(say("vite"))).provider).toBe("second");
+    expect((await chain.forExplanation("e2").synthesize(say("deux"))).provider).toBe("second");
+    slowRelease();
+    expect((await slow).provider).toBe("second");
   });
 
   it("sends the overflow to the last voice when every limited voice is full", async () => {

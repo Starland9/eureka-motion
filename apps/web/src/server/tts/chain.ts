@@ -101,7 +101,12 @@ export function createChain(
 
           for (let index = start; index < providers.length; index++) {
             if (request.signal?.aborted) break;
-            if (index !== start && isFull(index, explanationId)) continue;
+            if (index !== start) {
+              const held = assignments.get(explanationId)?.index ?? 0;
+              if (index > held && isFull(index, explanationId)) continue;
+              // Reserved before the call, so parallel fallbacks do not all pick the same voice.
+              advance(explanationId, index);
+            }
             try {
               const result = await providers[index]!.synthesize(request);
               advance(explanationId, index);
