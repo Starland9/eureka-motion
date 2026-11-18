@@ -31,8 +31,13 @@ export const ROUTER_IDLE_MS = 45_000;
 interface Assignment {
   index: number;
   lastUsed: number;
-  // One per voice the explanation has called; aborted once the explanation moves past it.
-  stops: Map<number, AbortController>;
+  slots: Map<number, Slot>;
+}
+
+// Calls of one explanation to one voice; stop is aborted when the explanation moves past it.
+interface Slot {
+  stop: AbortController;
+  running: number;
 }
 
 export function createChain(
@@ -44,7 +49,7 @@ export function createChain(
   const last = providers.length - 1;
 
   function entry(explanationId: string, index: number): Assignment {
-    const assignment = assignments.get(explanationId) ?? { index, lastUsed: 0, stops: new Map() };
+    const assignment = assignments.get(explanationId) ?? { index, lastUsed: 0, slots: new Map() };
     assignment.lastUsed = now();
     assignments.delete(explanationId);
     assignments.set(explanationId, assignment);
@@ -60,7 +65,8 @@ export function createChain(
     const since = now() - ROUTER_IDLE_MS;
     let active = 0;
     for (const [id, assignment] of assignments) {
-      if (id !== explanationId && assignment.index === index && assignment.lastUsed > since) {
+      if (id === explanationId || assignment.index !== index) continue;
+      if (assignment.lastUsed > since || (assignment.slots.get(index)?.running ?? 0) > 0) {
         active += 1;
       }
     }
@@ -77,18 +83,18 @@ export function createChain(
     const assignment = entry(explanationId, index);
     if (index <= assignment.index) return;
     assignment.index = index;
-    for (const [held, stop] of assignment.stops) {
-      if (held < index) stop.abort();
+    for (const [held, slot] of assignment.slots) {
+      if (held < index) slot.stop.abort();
     }
   }
 
-  function stopFor(assignment: Assignment, index: number): AbortController {
-    let stop = assignment.stops.get(index);
-    if (!stop) {
-      stop = new AbortController();
-      assignment.stops.set(index, stop);
+  function slotFor(assignment: Assignment, index: number): Slot {
+    let slot = assignment.slots.get(index);
+    if (!slot) {
+      slot = { stop: new AbortController(), running: 0 };
+      assignment.slots.set(index, slot);
     }
-    return stop;
+    return slot;
   }
 
   async function states(): Promise<Record<string, boolean>> {
@@ -127,12 +133,13 @@ export function createChain(
               // Reserved before the call, so parallel fallbacks do not all pick the same voice.
               advance(explanationId, index);
             }
+            const slot = slotFor(assignment, index);
+            slot.running += 1;
             try {
               const { signal } = request;
-              const stop = stopFor(assignment, index).signal;
               const result = await providers[index]!.synthesize({
                 ...request,
-                signal: signal ? AbortSignal.any([signal, stop]) : stop,
+                signal: signal ? AbortSignal.any([signal, slot.stop.signal]) : slot.stop.signal,
               });
               advance(explanationId, index);
               return result;
@@ -140,6 +147,8 @@ export function createChain(
               if (error instanceof TtsError && error.code === "invalid_input") throw error;
               // Another call may already have moved past this provider.
               index = Math.max(index, (assignments.get(explanationId)?.index ?? 0) - 1);
+            } finally {
+              slot.running -= 1;
             }
           }
           throw new TtsError("unavailable", "chain", "No voice could speak this text.");

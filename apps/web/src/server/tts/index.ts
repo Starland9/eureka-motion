@@ -62,6 +62,7 @@ function buildProvider(name: string, env: Env, options: VoiceOptions): VoiceProv
       },
       host: env.ASSEMBLYAI_TTS_HOST || "https://tts.eu.assemblyai.com",
       perMinute: positiveInteger(env.ASSEMBLYAI_PER_MINUTE, 45),
+      maxWaitMs: positiveInteger(env.ASSEMBLYAI_MAX_WAIT_MS, 10_000),
     });
   }
   if (name === "azure") {

@@ -29,6 +29,8 @@ const voices = { fr: "aai-donatien", en: "aai-kyla" };
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
+const HOUR_MS = 3_600_000;
+
 async function until(condition: () => boolean): Promise<void> {
   for (let attempt = 0; attempt < 200 && !condition(); attempt++) await sleep(1);
   expect(condition()).toBe(true);
@@ -61,6 +63,7 @@ function assemblyWith(
   extra: {
     timeoutMs?: number;
     perMinute?: number;
+    maxWaitMs?: number;
     host?: string;
     clock?: Clock;
     voices?: typeof voices;
@@ -72,6 +75,7 @@ function assemblyWith(
     voices,
     fetch: fetchMock,
     ...(clock ? { now: clock.now, sleep: clock.sleep } : {}),
+    maxWaitMs: HOUR_MS,
     ...rest,
   });
 }
@@ -377,6 +381,75 @@ describe("AssemblyAI provider", () => {
       expect(fetchMock).toHaveBeenCalledTimes(46);
     });
 
+    describe("bounded wait", () => {
+      function full(extra: { maxWaitMs?: number } = {}) {
+        const clock = fakeClock();
+        const { fetchMock, starts } = recording(clock);
+        const provider = createAssemblyAiProvider({
+          apiKey: SECRET,
+          voices,
+          fetch: fetchMock,
+          now: clock.now,
+          sleep: clock.sleep,
+          perMinute: 2,
+          ...extra,
+        });
+        return { clock, fetchMock, starts, provider };
+      }
+
+      it("rejects at once with rate_limited when the place frees up in more than 10 s", async () => {
+        const { clock, fetchMock, provider } = full();
+        await Promise.all([provider.synthesize(say("Un.")), provider.synthesize(say("Deux."))]);
+
+        const error = await failure(provider.synthesize(say("Trois.")));
+
+        expect(error.code).toBe("rate_limited");
+        expect(error.provider).toBe("assemblyai");
+        expect(error.message).toBe("The assemblyai voice would make this call wait over 10000 ms.");
+        expect(fetchMock).toHaveBeenCalledTimes(2);
+        expect(clock.slept).toEqual([]);
+      });
+
+      it("waits as usual when the place frees up within 10 s, 10 s included", async () => {
+        const { clock, starts, provider } = full();
+        await Promise.all([provider.synthesize(say("Un.")), provider.synthesize(say("Deux."))]);
+        clock.advance(50_000);
+
+        const third = provider.synthesize(say("Trois."));
+        await until(() => clock.pendingSleeps() === 1);
+        expect(clock.slept).toEqual([10_000]);
+        clock.advance(10_000);
+        await third;
+        expect(starts.at(-1)).toEqual({ at: 60_000, text: "Trois." });
+      });
+
+      it("counts the calls already waiting, which take the next places first", async () => {
+        const { clock, fetchMock, provider } = full();
+        await Promise.all([provider.synthesize(say("Un.")), provider.synthesize(say("Deux."))]);
+        clock.advance(55_000);
+
+        const waiting = [provider.synthesize(say("Trois.")), provider.synthesize(say("Quatre."))];
+        const error = await failure(provider.synthesize(say("Cinq.")));
+        expect(error.code).toBe("rate_limited");
+
+        await until(() => clock.pendingSleeps() === 1);
+        clock.advance(5_000);
+        await Promise.all(waiting);
+        expect(fetchMock).toHaveBeenCalledTimes(4);
+      });
+
+      it("takes the longest wait from maxWaitMs", async () => {
+        const { clock, provider } = full({ maxWaitMs: 90_000 });
+        await Promise.all([provider.synthesize(say("Un.")), provider.synthesize(say("Deux."))]);
+
+        const third = provider.synthesize(say("Trois."));
+        await until(() => clock.pendingSleeps() === 1);
+        expect(clock.slept).toEqual([60_000]);
+        clock.advance(60_000);
+        await third;
+      });
+    });
+
     it("keeps the limit per provider instance", async () => {
       const clock = fakeClock();
       const { fetchMock } = recording(clock);
@@ -395,6 +468,7 @@ describe("AssemblyAI provider", () => {
         voices,
         fetch: fetchMock,
         perMinute: 1,
+        maxWaitMs: HOUR_MS,
       });
       const first = provider.synthesize(say("Un."));
       const second = provider.synthesize(say("Deux."));

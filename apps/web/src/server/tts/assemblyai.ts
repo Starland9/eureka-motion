@@ -15,6 +15,7 @@ export interface AssemblyAiConfig {
   voices: Voices;
   host?: string;
   perMinute?: number;
+  maxWaitMs?: number;
   timeoutMs?: number;
   fetch?: typeof fetch;
   now?: () => number;
@@ -24,6 +25,7 @@ export interface AssemblyAiConfig {
 const DEFAULT_HOST = "https://tts.eu.assemblyai.com";
 const HEALTH_URL = "https://api.assemblyai.com/v2/transcript?limit=1";
 const DEFAULT_PER_MINUTE = 45;
+const DEFAULT_MAX_WAIT_MS = 10_000;
 const WINDOW_MS = 60_000;
 const LANGUAGES = { fr: "french", en: "english" } as const;
 
@@ -31,10 +33,33 @@ const cancelled = () => new TtsError("unavailable", "assemblyai", "The request w
 const realSleep = (ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms));
 
 // A 429 would move the whole explanation to the next voice, so calls wait here for a free place.
-function createLimiter(perMinute: number, now: () => number, sleep: (ms: number) => Promise<void>) {
+function createLimiter(
+  perMinute: number,
+  maxWaitMs: number,
+  now: () => number,
+  sleep: (ms: number) => Promise<void>,
+) {
   const starts: number[] = [];
   const waiting: (() => void)[] = [];
   let pumping = false;
+
+  function forget(time: number): void {
+    while (starts.length > 0 && starts[0]! <= time - WINDOW_MS) starts.shift();
+  }
+
+  // Replays the queue in order to find when a call arriving now would start.
+  function waitForPlace(time: number): number {
+    forget(time);
+    const planned = [...starts];
+    let at = time;
+    for (let ahead = 0; ahead <= waiting.length; ahead++) {
+      if (planned.length >= perMinute) {
+        at = Math.max(at, planned[planned.length - perMinute]! + WINDOW_MS);
+      }
+      planned.push(at);
+    }
+    return at - time;
+  }
 
   async function pump(): Promise<void> {
     if (pumping) return;
@@ -42,7 +67,7 @@ function createLimiter(perMinute: number, now: () => number, sleep: (ms: number)
     try {
       while (waiting.length > 0) {
         const time = now();
-        while (starts.length > 0 && starts[0]! <= time - WINDOW_MS) starts.shift();
+        forget(time);
         if (starts.length < perMinute) {
           starts.push(time);
           waiting.shift()!();
@@ -57,6 +82,13 @@ function createLimiter(perMinute: number, now: () => number, sleep: (ms: number)
 
   return async function acquire(signal: AbortSignal | undefined): Promise<void> {
     if (signal?.aborted) throw cancelled();
+    if (waitForPlace(now()) > maxWaitMs) {
+      throw new TtsError(
+        "rate_limited",
+        "assemblyai",
+        `The assemblyai voice would make this call wait over ${maxWaitMs} ms.`,
+      );
+    }
     await new Promise<void>((resolve, reject) => {
       const turn = () => {
         signal?.removeEventListener("abort", leave);
@@ -79,6 +111,7 @@ export function createAssemblyAiProvider(config: AssemblyAiConfig): VoiceProvide
   const url = `${(config.host ?? DEFAULT_HOST).replace(/\/+$/, "")}/v1/speech`;
   const acquire = createLimiter(
     config.perMinute ?? DEFAULT_PER_MINUTE,
+    config.maxWaitMs ?? DEFAULT_MAX_WAIT_MS,
     config.now ?? Date.now,
     config.sleep ?? realSleep,
   );

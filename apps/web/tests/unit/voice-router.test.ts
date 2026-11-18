@@ -129,6 +129,67 @@ describe("voice router", () => {
     expect((await chain.forExplanation("e2").synthesize(say("x"))).provider).toBe("pocket");
   });
 
+  it("keeps an explanation busy while one of its calls is still running, however long it takes", async () => {
+    const time = clock();
+    let release: () => void = () => {};
+    const hold = new Promise<void>((resolve) => (release = resolve));
+    const base = fake("assemblyai");
+    const slow: VoiceProvider = {
+      ...base,
+      async synthesize(request) {
+        if (request.text === "longue") await hold;
+        return base.synthesize(request);
+      },
+    };
+    const chain = createChain([slow, fake("pocket")], {
+      maxActive: { assemblyai: 1 },
+      now: time.now,
+    });
+
+    const long = chain.forExplanation("e1").synthesize(say("longue"));
+    time.advance(60_000);
+    expect((await chain.forExplanation("e2").synthesize(say("x"))).provider).toBe("pocket");
+
+    release();
+    await long;
+    time.advance(45_000);
+    expect((await chain.forExplanation("e3").synthesize(say("y"))).provider).toBe("assemblyai");
+  });
+
+  it("stops counting a call that was cancelled", async () => {
+    const time = clock();
+    const base = fake("assemblyai");
+    const holding: VoiceProvider = {
+      ...base,
+      synthesize(request) {
+        if (request.text !== "attend") return base.synthesize(request);
+        return new Promise((_resolve, reject) => {
+          request.signal?.addEventListener(
+            "abort",
+            () => reject(new TtsError("unavailable", "assemblyai", "The request was cancelled.")),
+            { once: true },
+          );
+        });
+      },
+    };
+    const chain = createChain([holding, fake("pocket")], {
+      maxActive: { assemblyai: 1 },
+      now: time.now,
+    });
+    const controller = new AbortController();
+    const cancelled = chain
+      .forExplanation("e1")
+      .synthesize({ ...say("attend"), signal: controller.signal })
+      .catch((error: unknown) => error);
+    time.advance(60_000);
+    expect((await chain.forExplanation("e2").synthesize(say("ok"))).provider).toBe("pocket");
+
+    controller.abort();
+    await cancelled;
+    time.advance(45_001);
+    expect((await chain.forExplanation("e3").synthesize(say("ok"))).provider).toBe("assemblyai");
+  });
+
   it("counts an explanation for the voice it fell back to", async () => {
     const time = clock();
     const chain = createChain([fake("deepgram", true), fake("assemblyai"), fake("pocket")], {

@@ -2,7 +2,12 @@ import { mkdtemp, readFile, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { createVoiceChain, createVoiceProvider, isPocketConfigured } from "@/server/tts";
+import {
+  createVoiceChain,
+  createVoiceProvider,
+  isPocketConfigured,
+  type TtsError,
+} from "@/server/tts";
 
 const FRENCH = await readFile(path.join(__dirname, "..", "fixtures", "audio", "kokoro-fr.mp3"));
 
@@ -209,9 +214,13 @@ describe("AssemblyAI configuration", () => {
   });
 
   async function startedInTheFirstMinute(count: number, environment: Record<string, string>) {
-    vi.useFakeTimers({ toFake: ["setTimeout", "clearTimeout", "Date"] });
+    vi.useFakeTimers({ toFake: ["setTimeout", "clearTimeout", "Date", "performance"] });
     const send = recordingSend();
-    const provider = createVoiceProvider("assemblyai", env(environment), { fetch: send })!;
+    const provider = createVoiceProvider(
+      "assemblyai",
+      env({ ASSEMBLYAI_MAX_WAIT_MS: "120000", ...environment }),
+      { fetch: send },
+    )!;
     const calls = Array.from({ length: count }, (_, n) =>
       provider.synthesize({ text: `Phrase ${n}.`, language: "fr" }),
     );
@@ -297,6 +306,50 @@ describe("AssemblyAI configuration", () => {
   it("starts 45 calls a minute by default", async () => {
     expect(await startedInTheFirstMinute(47, { ASSEMBLYAI_API_KEY: KEY })).toBe(45);
   });
+
+  async function secondCallOfOnePerMinute(extra: Record<string, string>) {
+    vi.useFakeTimers({ toFake: ["setTimeout", "clearTimeout", "Date", "performance"] });
+    const provider = createVoiceProvider(
+      "assemblyai",
+      env({ ASSEMBLYAI_API_KEY: KEY, ASSEMBLYAI_PER_MINUTE: "1", ...extra }),
+      { fetch: recordingSend() },
+    )!;
+    await provider.synthesize({ text: "Un.", language: "fr" });
+    let outcome = "waiting";
+    const second = provider.synthesize({ text: "Deux.", language: "fr" }).then(
+      () => (outcome = "served"),
+      (error: TtsError) => (outcome = error.code),
+    );
+    await vi.advanceTimersByTimeAsync(1);
+    const early = outcome;
+    await vi.advanceTimersByTimeAsync(60_000);
+    await second;
+    return { early, outcome };
+  }
+
+  it("refuses a call that would wait over 10 s by default", async () => {
+    expect(await secondCallOfOnePerMinute({})).toEqual({
+      early: "rate_limited",
+      outcome: "rate_limited",
+    });
+  });
+
+  it("reads the longest wait from ASSEMBLYAI_MAX_WAIT_MS", async () => {
+    expect(await secondCallOfOnePerMinute({ ASSEMBLYAI_MAX_WAIT_MS: "90000" })).toEqual({
+      early: "waiting",
+      outcome: "served",
+    });
+  });
+
+  it.each(["0", "-2", "abc", "2.5", "", "  "])(
+    "falls back to a longest wait of 10 s for ASSEMBLYAI_MAX_WAIT_MS=%j",
+    async (value) => {
+      expect(await secondCallOfOnePerMinute({ ASSEMBLYAI_MAX_WAIT_MS: value })).toEqual({
+        early: "rate_limited",
+        outcome: "rate_limited",
+      });
+    },
+  );
 
   it("reads the rate from ASSEMBLYAI_PER_MINUTE", async () => {
     expect(
