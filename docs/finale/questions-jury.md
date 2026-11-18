@@ -94,7 +94,7 @@ Le niveau est donné à chaque rôle : le collège vise 11 à 15 ans avec des mo
 
 ### Q18. Combien coûte une explication ?
 
-Le modèle rapide coûte 0,15 $ par million de jetons en entrée et 0,60 $ en sortie (un jeton est un morceau de mot lu ou écrit par le modèle), le juge 0,66 $ et 1,98 $, et ces prix doublent aux heures de pointe du fournisseur (tarifs relevés le 12 octobre 2026). La voix tourne sur le serveur du projet : pas de facture à l'usage, mais le serveur a un coût. Le coût réel d'une explication n'est pas mesuré : [À VÉRIFIER : jetons d'entrée et de sortie par explication, puis prix en dollars et en francs CFA] et [À VÉRIFIER : coût mensuel du serveur]. (`specs/001-animated-concept-explainer/research.md` §5.5 ; `docs/configuration.md` ; `scripts/reference-generate.ts`)
+Le modèle rapide coûte 0,15 $ par million de jetons en entrée et 0,60 $ en sortie (un jeton est un morceau de mot lu ou écrit par le modèle), le juge 0,66 $ et 1,98 $, et ces prix doublent aux heures de pointe du fournisseur (tarifs relevés le 12 octobre 2026). La voix tourne sur le serveur du projet : pas de facture à l'usage, mais le serveur a un coût. Mesuré sur deux concepts : 73 000 à 98 000 jetons en entrée et 5 700 à 7 500 en sortie, soit 0,015 à 0,02 $ par explication et jusqu'à 0,035 $ quand une partie est réécrite, environ 10 à 20 FCFA [À VÉRIFIER : taux du dollar le jour J] ; le serveur reste à chiffrer [À VÉRIFIER : coût mensuel du serveur]. (`docs/finale/mesures.md` ; `specs/001-animated-concept-explainer/research.md` §5.5 ; `docs/configuration.md` ; `scripts/reference-generate.ts`)
 
 ### Q19. Que se passe-t-il si toute une classe, ou toute la salle, l'utilise en même temps ?
 

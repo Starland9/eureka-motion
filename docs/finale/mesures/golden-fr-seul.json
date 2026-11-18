@@ -1,0 +1,222 @@
+{
+  "generated_at": "2026-11-18T12:49:22.459Z",
+  "base_url": "https://eureka-motion.starland9.dev",
+  "languages": [
+    "fr"
+  ],
+  "concurrency": 1,
+  "timeout_s": 240,
+  "results": [
+    {
+      "id": "solo-circulaire",
+      "kind": "core",
+      "subject": "physics",
+      "level": "lycee",
+      "language": "fr",
+      "question": "le mouvement circulaire uniforme",
+      "outcome": "ready",
+      "detail": null,
+      "explanation_id": "jchzb2qt5agm",
+      "cached": false,
+      "redirected": false,
+      "first_scene_ms": 176552.545912,
+      "total_ms": 214637.258914,
+      "planned_scenes": 6,
+      "scenes": {
+        "validated": 6,
+        "corrected": 0,
+        "dropped": 0
+      },
+      "rate_limited": 0,
+      "waited_ms": 0,
+      "deep": {
+        "status": "timeout",
+        "ms": null
+      }
+    },
+    {
+      "id": "solo-cinetique",
+      "kind": "core",
+      "subject": "physics",
+      "level": "lycee",
+      "language": "fr",
+      "question": "l'énergie cinétique",
+      "outcome": "ready",
+      "detail": null,
+      "explanation_id": "mkywyxqe8vbf",
+      "cached": false,
+      "redirected": false,
+      "first_scene_ms": 32210.090519999998,
+      "total_ms": 70058.090099,
+      "planned_scenes": 6,
+      "scenes": {
+        "validated": 4,
+        "corrected": 2,
+        "dropped": 0
+      },
+      "rate_limited": 0,
+      "waited_ms": 0,
+      "deep": {
+        "status": "timeout",
+        "ms": null
+      }
+    },
+    {
+      "id": "solo-gaz",
+      "kind": "core",
+      "subject": "chemistry",
+      "level": "lycee",
+      "language": "fr",
+      "question": "la loi des gaz parfaits",
+      "outcome": "partial",
+      "detail": null,
+      "explanation_id": "v8gxjkkea63e",
+      "cached": false,
+      "redirected": false,
+      "first_scene_ms": 36225.89457199996,
+      "total_ms": 61452.31559299998,
+      "planned_scenes": 6,
+      "scenes": {
+        "validated": 2,
+        "corrected": 3,
+        "dropped": 1
+      },
+      "rate_limited": 0,
+      "waited_ms": 0,
+      "deep": null
+    },
+    {
+      "id": "solo-dilatation",
+      "kind": "core",
+      "subject": "physics",
+      "level": "lycee",
+      "language": "fr",
+      "question": "la dilatation thermique",
+      "outcome": "ready",
+      "detail": null,
+      "explanation_id": "zzmduvv83zvd",
+      "cached": false,
+      "redirected": false,
+      "first_scene_ms": 19054.634127999947,
+      "total_ms": 73624.76453799999,
+      "planned_scenes": 6,
+      "scenes": {
+        "validated": 5,
+        "corrected": 1,
+        "dropped": 0
+      },
+      "rate_limited": 0,
+      "waited_ms": 0,
+      "deep": {
+        "status": "timeout",
+        "ms": null
+      }
+    },
+    {
+      "id": "solo-alternatif",
+      "kind": "core",
+      "subject": "physics",
+      "level": "lycee",
+      "language": "fr",
+      "question": "le courant alternatif",
+      "outcome": "ready",
+      "detail": null,
+      "explanation_id": "wfzpv753p2gf",
+      "cached": false,
+      "redirected": false,
+      "first_scene_ms": 37535.39175300003,
+      "total_ms": 66614.178251,
+      "planned_scenes": 6,
+      "scenes": {
+        "validated": 2,
+        "corrected": 4,
+        "dropped": 0
+      },
+      "rate_limited": 0,
+      "waited_ms": 0,
+      "deep": {
+        "status": "timeout",
+        "ms": null
+      }
+    },
+    {
+      "id": "solo-pendule",
+      "kind": "core",
+      "subject": "physics",
+      "level": "lycee",
+      "language": "fr",
+      "question": "la période d'un pendule",
+      "outcome": "ready",
+      "detail": null,
+      "explanation_id": "w3c7exs7m7et",
+      "cached": false,
+      "redirected": false,
+      "first_scene_ms": 38615.87514200003,
+      "total_ms": 64231.18678500003,
+      "planned_scenes": 6,
+      "scenes": {
+        "validated": 4,
+        "corrected": 2,
+        "dropped": 0
+      },
+      "rate_limited": 0,
+      "waited_ms": 0,
+      "deep": {
+        "status": "timeout",
+        "ms": null
+      }
+    }
+  ],
+  "summary": {
+    "kinds": {
+      "core": {
+        "total": 6,
+        "succeeded": 6,
+        "cached": 0,
+        "counts": {
+          "ready": 5,
+          "partial": 1,
+          "refused": 0,
+          "clarify": 0,
+          "failed": 0,
+          "timeout": 0
+        }
+      },
+      "other": {
+        "total": 0,
+        "succeeded": 0,
+        "cached": 0,
+        "counts": {
+          "ready": 0,
+          "partial": 0,
+          "refused": 0,
+          "clarify": 0,
+          "failed": 0,
+          "timeout": 0
+        }
+      }
+    },
+    "first_scene": {
+      "count": 6,
+      "without": 0,
+      "median_ms": 36880.6431625,
+      "p90_ms": 176552.545912
+    },
+    "scenes": {
+      "validated": 23,
+      "corrected": 12,
+      "dropped": 1
+    },
+    "deep": {
+      "announced": 5,
+      "ready": 0,
+      "within_limit": 0,
+      "median_ms": null,
+      "p90_ms": null
+    }
+  },
+  "threshold_failures": [
+    "première scène : 90ᵉ centile à 176,6 s, moins de 15,0 s attendues",
+    "version approfondie : 0/5 prêtes en moins de 300,0 s (0,0 %), au moins 80 % attendus"
+  ]
+}

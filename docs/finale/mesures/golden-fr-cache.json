@@ -1,0 +1,84 @@
+{
+  "generated_at": "2026-11-18T12:49:24.868Z",
+  "base_url": "https://eureka-motion.starland9.dev",
+  "languages": [
+    "fr"
+  ],
+  "concurrency": 1,
+  "timeout_s": 240,
+  "results": [
+    {
+      "id": "maths-thales",
+      "kind": "core",
+      "subject": "maths",
+      "level": "college",
+      "language": "fr",
+      "question": "À quoi sert le théorème de Thalès ?",
+      "outcome": "ready",
+      "detail": null,
+      "explanation_id": "bnm2tkc2ajb2",
+      "cached": true,
+      "redirected": false,
+      "first_scene_ms": 1094.558441,
+      "total_ms": 1346.6094429999998,
+      "planned_scenes": 6,
+      "scenes": {
+        "validated": 3,
+        "corrected": 3,
+        "dropped": 0
+      },
+      "rate_limited": 0,
+      "waited_ms": 0,
+      "deep": null
+    }
+  ],
+  "summary": {
+    "kinds": {
+      "core": {
+        "total": 1,
+        "succeeded": 1,
+        "cached": 1,
+        "counts": {
+          "ready": 1,
+          "partial": 0,
+          "refused": 0,
+          "clarify": 0,
+          "failed": 0,
+          "timeout": 0
+        }
+      },
+      "other": {
+        "total": 0,
+        "succeeded": 0,
+        "cached": 0,
+        "counts": {
+          "ready": 0,
+          "partial": 0,
+          "refused": 0,
+          "clarify": 0,
+          "failed": 0,
+          "timeout": 0
+        }
+      }
+    },
+    "first_scene": {
+      "count": 0,
+      "without": 0,
+      "median_ms": null,
+      "p90_ms": null
+    },
+    "scenes": {
+      "validated": 3,
+      "corrected": 3,
+      "dropped": 0
+    },
+    "deep": {
+      "announced": 0,
+      "ready": 0,
+      "within_limit": 0,
+      "median_ms": null,
+      "p90_ms": null
+    }
+  },
+  "threshold_failures": []
+}

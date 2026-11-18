@@ -1,0 +1,303 @@
+{
+  "generated_at": "2026-11-18T12:40:09.771Z",
+  "base_url": "https://eureka-motion.starland9.dev",
+  "languages": [
+    "en"
+  ],
+  "concurrency": 10,
+  "timeout_s": 240,
+  "results": [
+    {
+      "id": "maths-thales",
+      "kind": "core",
+      "subject": "maths",
+      "level": "college",
+      "language": "en",
+      "question": "What is Thales's theorem for?",
+      "outcome": "timeout",
+      "detail": null,
+      "explanation_id": "ehcckcvpjv85",
+      "cached": false,
+      "redirected": false,
+      "first_scene_ms": 24947.226493,
+      "total_ms": 240001.76012,
+      "planned_scenes": 6,
+      "scenes": {
+        "validated": 4,
+        "corrected": 1,
+        "dropped": 0
+      },
+      "rate_limited": 0,
+      "waited_ms": 0,
+      "deep": null
+    },
+    {
+      "id": "maths-quadratic-equation",
+      "kind": "core",
+      "subject": "maths",
+      "level": "lycee",
+      "language": "en",
+      "question": "How do I solve a quadratic equation?",
+      "outcome": "timeout",
+      "detail": null,
+      "explanation_id": "cw378y7k8rej",
+      "cached": false,
+      "redirected": false,
+      "first_scene_ms": 138539.81172899998,
+      "total_ms": 239999.98514499998,
+      "planned_scenes": 6,
+      "scenes": {
+        "validated": 1,
+        "corrected": 2,
+        "dropped": 0
+      },
+      "rate_limited": 0,
+      "waited_ms": 0,
+      "deep": null
+    },
+    {
+      "id": "maths-conditional-probability",
+      "kind": "core",
+      "subject": "maths",
+      "level": "lycee",
+      "language": "en",
+      "question": "I don't get conditional probability, can you explain it?",
+      "outcome": "timeout",
+      "detail": null,
+      "explanation_id": "2ssn8uk5bs5f",
+      "cached": false,
+      "redirected": false,
+      "first_scene_ms": 30729.199564000002,
+      "total_ms": 240000.387961,
+      "planned_scenes": 6,
+      "scenes": {
+        "validated": 3,
+        "corrected": 1,
+        "dropped": 1
+      },
+      "rate_limited": 0,
+      "waited_ms": 0,
+      "deep": null
+    },
+    {
+      "id": "maths-integral-area",
+      "kind": "core",
+      "subject": "maths",
+      "level": "superieur",
+      "language": "en",
+      "question": "Why does an integral give an area?",
+      "outcome": "failed",
+      "detail": "plan_unverifiable",
+      "explanation_id": "acs5ec6gcwdu",
+      "cached": false,
+      "redirected": false,
+      "first_scene_ms": null,
+      "total_ms": 34827.74474,
+      "planned_scenes": null,
+      "scenes": {
+        "validated": 0,
+        "corrected": 0,
+        "dropped": 0
+      },
+      "rate_limited": 0,
+      "waited_ms": 0,
+      "deep": null
+    },
+    {
+      "id": "maths-eigenvector",
+      "kind": "core",
+      "subject": "maths",
+      "level": "superieur",
+      "language": "en",
+      "question": "What is an eigenvector?",
+      "outcome": "failed",
+      "detail": "plan_unverifiable",
+      "explanation_id": "tdht3kyadug6",
+      "cached": false,
+      "redirected": false,
+      "first_scene_ms": null,
+      "total_ms": 31561.614168,
+      "planned_scenes": null,
+      "scenes": {
+        "validated": 0,
+        "corrected": 0,
+        "dropped": 0
+      },
+      "rate_limited": 0,
+      "waited_ms": 0,
+      "deep": null
+    },
+    {
+      "id": "physics-refraction",
+      "kind": "core",
+      "subject": "physics",
+      "level": "college",
+      "language": "en",
+      "question": "Why does a pencil look broken in a glass of water?",
+      "outcome": "timeout",
+      "detail": null,
+      "explanation_id": "u6nu9nmm2p89",
+      "cached": false,
+      "redirected": false,
+      "first_scene_ms": 99212.323705,
+      "total_ms": 240000.286781,
+      "planned_scenes": 6,
+      "scenes": {
+        "validated": 2,
+        "corrected": 2,
+        "dropped": 0
+      },
+      "rate_limited": 0,
+      "waited_ms": 0,
+      "deep": null
+    },
+    {
+      "id": "physics-newton-second-law",
+      "kind": "core",
+      "subject": "physics",
+      "level": "lycee",
+      "language": "en",
+      "question": "How does a force change the speed of an object?",
+      "outcome": "timeout",
+      "detail": null,
+      "explanation_id": "3bghyww3rt3k",
+      "cached": false,
+      "redirected": false,
+      "first_scene_ms": 122887.910742,
+      "total_ms": 240000.312461,
+      "planned_scenes": 6,
+      "scenes": {
+        "validated": 3,
+        "corrected": 0,
+        "dropped": 0
+      },
+      "rate_limited": 0,
+      "waited_ms": 0,
+      "deep": null
+    },
+    {
+      "id": "physics-projectile",
+      "kind": "core",
+      "subject": "physics",
+      "level": "lycee",
+      "language": "en",
+      "question": "How do I work out where a ball thrown in the air will land?",
+      "outcome": "timeout",
+      "detail": null,
+      "explanation_id": "ywhdyhwcrb4b",
+      "cached": false,
+      "redirected": false,
+      "first_scene_ms": 60442.815955,
+      "total_ms": 240000.29725,
+      "planned_scenes": 6,
+      "scenes": {
+        "validated": 3,
+        "corrected": 1,
+        "dropped": 0
+      },
+      "rate_limited": 0,
+      "waited_ms": 0,
+      "deep": null
+    },
+    {
+      "id": "physics-doppler",
+      "kind": "core",
+      "subject": "physics",
+      "level": "lycee",
+      "language": "en",
+      "question": "Why does an ambulance siren change pitch when it drives past me?",
+      "outcome": "timeout",
+      "detail": null,
+      "explanation_id": "29f6b9trshcq",
+      "cached": false,
+      "redirected": false,
+      "first_scene_ms": 181339.89335300002,
+      "total_ms": 240001.737037,
+      "planned_scenes": 6,
+      "scenes": {
+        "validated": 1,
+        "corrected": 2,
+        "dropped": 0
+      },
+      "rate_limited": 0,
+      "waited_ms": 0,
+      "deep": null
+    },
+    {
+      "id": "physics-uncertainty-principle",
+      "kind": "core",
+      "subject": "physics",
+      "level": "superieur",
+      "language": "en",
+      "question": "What is Heisenberg's uncertainty principle?",
+      "outcome": "timeout",
+      "detail": null,
+      "explanation_id": "nz3cfjwra9ms",
+      "cached": false,
+      "redirected": false,
+      "first_scene_ms": 80114.03035,
+      "total_ms": 240001.45459500002,
+      "planned_scenes": 6,
+      "scenes": {
+        "validated": 2,
+        "corrected": 1,
+        "dropped": 0
+      },
+      "rate_limited": 0,
+      "waited_ms": 0,
+      "deep": null
+    }
+  ],
+  "summary": {
+    "kinds": {
+      "core": {
+        "total": 10,
+        "succeeded": 0,
+        "cached": 0,
+        "counts": {
+          "ready": 0,
+          "partial": 0,
+          "refused": 0,
+          "clarify": 0,
+          "failed": 2,
+          "timeout": 8
+        }
+      },
+      "other": {
+        "total": 0,
+        "succeeded": 0,
+        "cached": 0,
+        "counts": {
+          "ready": 0,
+          "partial": 0,
+          "refused": 0,
+          "clarify": 0,
+          "failed": 0,
+          "timeout": 0
+        }
+      }
+    },
+    "first_scene": {
+      "count": 8,
+      "without": 2,
+      "median_ms": 89663.1770275,
+      "p90_ms": 181339.89335300002
+    },
+    "scenes": {
+      "validated": 19,
+      "corrected": 10,
+      "dropped": 1
+    },
+    "deep": {
+      "announced": 0,
+      "ready": 0,
+      "within_limit": 0,
+      "median_ms": null,
+      "p90_ms": null
+    }
+  },
+  "threshold_failures": [
+    "aboutissement core : 0/10 (0,0 %), au moins 90 % attendus",
+    "première scène : 90ᵉ centile à 181,3 s, moins de 15,0 s attendues"
+  ]
+}
