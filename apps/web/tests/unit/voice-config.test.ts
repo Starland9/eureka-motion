@@ -175,3 +175,123 @@ describe("Deepgram configuration", () => {
     },
   );
 });
+
+describe("AssemblyAI configuration", () => {
+  const KEY = "aai-test-key";
+
+  function recordingSend() {
+    return vi.fn<typeof fetch>(async () => new Response(new Uint8Array(FRENCH), { status: 200 }));
+  }
+
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
+  async function startedInTheFirstMinute(count: number, environment: Record<string, string>) {
+    vi.useFakeTimers({ toFake: ["setTimeout", "clearTimeout", "Date"] });
+    const send = recordingSend();
+    const provider = createVoiceProvider("assemblyai", env(environment), { fetch: send })!;
+    const calls = Array.from({ length: count }, (_, n) =>
+      provider.synthesize({ text: `Phrase ${n}.`, language: "fr" }),
+    );
+    await vi.advanceTimersByTimeAsync(59_000);
+    const started = send.mock.calls.length;
+    await vi.advanceTimersByTimeAsync(1_000);
+    await Promise.all(calls);
+    expect(send).toHaveBeenCalledTimes(count);
+    return started;
+  }
+
+  it("accepts assemblyai in TTS_PROVIDERS and keeps the order given", () => {
+    const chain = createVoiceChain(
+      env({ TTS_PROVIDERS: "assemblyai,pocket", ASSEMBLYAI_API_KEY: KEY }),
+    );
+    expect(chain.providers).toEqual(["assemblyai", "pocket"]);
+    expect(isPocketConfigured(env({ TTS_PROVIDERS: "assemblyai,pocket" }))).toBe(true);
+  });
+
+  it("skips assemblyai without a key", () => {
+    expect(createVoiceProvider("assemblyai", env())).toBeNull();
+    expect(createVoiceProvider("assemblyai", env({ ASSEMBLYAI_API_KEY: "" }))).toBeNull();
+    expect(createVoiceChain(env({ TTS_PROVIDERS: "assemblyai,pocket" })).providers).toEqual([
+      "pocket",
+    ]);
+  });
+
+  it("is not in the default providers", () => {
+    expect(createVoiceChain(env({ ASSEMBLYAI_API_KEY: KEY })).providers).toEqual(["kokoro"]);
+  });
+
+  it("defaults to the aai-donatien and aai-kyla voices and reads them from the environment", () => {
+    const standard = createVoiceProvider("assemblyai", env({ ASSEMBLYAI_API_KEY: KEY }))!;
+    expect(standard.name).toBe("assemblyai");
+    expect(standard.voiceFor("fr")).toBe("aai-donatien");
+    expect(standard.voiceFor("en")).toBe("aai-kyla");
+
+    const custom = createVoiceProvider(
+      "assemblyai",
+      env({ ASSEMBLYAI_API_KEY: KEY, ASSEMBLYAI_VOICE_FR: "aai-a", ASSEMBLYAI_VOICE_EN: "aai-b" }),
+    )!;
+    expect(custom.voiceFor("fr")).toBe("aai-a");
+    expect(custom.voiceFor("en")).toBe("aai-b");
+  });
+
+  it("sends the key and the configured voice to the EU host by default", async () => {
+    const send = recordingSend();
+    const chain = createVoiceChain(
+      env({ TTS_PROVIDERS: "assemblyai", ASSEMBLYAI_API_KEY: KEY, ASSEMBLYAI_VOICE_EN: "aai-b" }),
+      { fetch: send },
+    );
+    const result = await chain
+      .forExplanation("e1")
+      .synthesize({ text: "Hello Earth.", language: "en" });
+    expect(result).toMatchObject({ provider: "assemblyai", voice: "aai-b" });
+    expect(String(send.mock.calls[0]![0])).toBe("https://tts.eu.assemblyai.com/v1/speech");
+    expect(send.mock.calls[0]![1]!.headers).toMatchObject({ Authorization: KEY });
+    expect(JSON.parse(String(send.mock.calls[0]![1]!.body))).toMatchObject({
+      voice_id: "aai-b",
+      language: "english",
+    });
+  });
+
+  it("reads the host from ASSEMBLYAI_TTS_HOST and ignores it when empty", async () => {
+    const send = recordingSend();
+    const us = createVoiceProvider(
+      "assemblyai",
+      env({ ASSEMBLYAI_API_KEY: KEY, ASSEMBLYAI_TTS_HOST: "https://tts.us.assemblyai.com" }),
+      { fetch: send },
+    )!;
+    await us.synthesize({ text: "Bonjour.", language: "fr" });
+    expect(String(send.mock.calls[0]![0])).toBe("https://tts.us.assemblyai.com/v1/speech");
+
+    const empty = createVoiceProvider(
+      "assemblyai",
+      env({ ASSEMBLYAI_API_KEY: KEY, ASSEMBLYAI_TTS_HOST: "" }),
+      { fetch: send },
+    )!;
+    await empty.synthesize({ text: "Bonjour.", language: "fr" });
+    expect(String(send.mock.calls[1]![0])).toBe("https://tts.eu.assemblyai.com/v1/speech");
+  });
+
+  it("starts 45 calls a minute by default", async () => {
+    expect(await startedInTheFirstMinute(47, { ASSEMBLYAI_API_KEY: KEY })).toBe(45);
+  });
+
+  it("reads the rate from ASSEMBLYAI_PER_MINUTE", async () => {
+    expect(
+      await startedInTheFirstMinute(6, { ASSEMBLYAI_API_KEY: KEY, ASSEMBLYAI_PER_MINUTE: "3" }),
+    ).toBe(3);
+  });
+
+  it.each(["0", "-2", "abc", "2.5", "", "  "])(
+    "falls back to 45 calls a minute for ASSEMBLYAI_PER_MINUTE=%j",
+    async (value) => {
+      expect(
+        await startedInTheFirstMinute(47, {
+          ASSEMBLYAI_API_KEY: KEY,
+          ASSEMBLYAI_PER_MINUTE: value,
+        }),
+      ).toBe(45);
+    },
+  );
+});

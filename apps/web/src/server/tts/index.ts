@@ -1,5 +1,6 @@
 import path from "node:path";
 import { getMediaDir } from "../media";
+import { createAssemblyAiProvider } from "./assemblyai";
 import { createAzureProvider } from "./azure";
 import { TTS_CACHE_DIRNAME, withDiskCache } from "./cache";
 import { createChain, type VoiceChain } from "./chain";
@@ -10,6 +11,7 @@ import type { VoiceProvider } from "./types";
 
 export * from "./types";
 export { createChain, type Synthesiser, type VoiceChain } from "./chain";
+export { createAssemblyAiProvider } from "./assemblyai";
 export { createAzureProvider } from "./azure";
 export { createDeepgramProvider } from "./deepgram";
 export { createKokoroProvider } from "./kokoro";
@@ -26,7 +28,7 @@ export interface VoiceOptions {
 }
 
 const DEFAULT_PROVIDERS = "azure,kokoro";
-const KNOWN_PROVIDERS: readonly string[] = ["azure", "deepgram", "kokoro", "pocket"];
+const KNOWN_PROVIDERS: readonly string[] = ["assemblyai", "azure", "deepgram", "kokoro", "pocket"];
 
 function providerNames(env: Env): string[] {
   const names = (env.TTS_PROVIDERS || DEFAULT_PROVIDERS)
@@ -48,6 +50,20 @@ function positiveInteger(value: string | undefined, fallback: number): number {
 }
 
 function buildProvider(name: string, env: Env, options: VoiceOptions): VoiceProvider | null {
+  if (name === "assemblyai") {
+    const apiKey = env.ASSEMBLYAI_API_KEY;
+    if (!apiKey) return null;
+    return createAssemblyAiProvider({
+      ...options,
+      apiKey,
+      voices: {
+        fr: env.ASSEMBLYAI_VOICE_FR || "aai-donatien",
+        en: env.ASSEMBLYAI_VOICE_EN || "aai-kyla",
+      },
+      host: env.ASSEMBLYAI_TTS_HOST || "https://tts.eu.assemblyai.com",
+      perMinute: positiveInteger(env.ASSEMBLYAI_PER_MINUTE, 45),
+    });
+  }
   if (name === "azure") {
     const key = env.AZURE_SPEECH_KEY;
     if (!key) return null;

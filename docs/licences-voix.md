@@ -143,3 +143,15 @@ Service en ligne : chaque phrase à dire est envoyée à l'API de Deepgram, qui 
 - Aucune clause des conditions d'utilisation n'est recopiée ici.
 
 À relire dans les conditions d'utilisation du service avant un usage commercial : ce qui est permis pour l'audio généré, les mentions éventuellement exigées, et ce que Deepgram fait des textes envoyés.
+
+## Voix AssemblyAI
+
+Service en ligne, lancé le 27/10/2026 : chaque phrase à dire est envoyée à l'API de synthèse vocale d'AssemblyAI (serveur UE par défaut), qui renvoie l'audio en MP3. Le projet ne télécharge ni ne redistribue aucun poids ni aucun fichier de voix pour ce fournisseur.
+
+- Voix : `aai-donatien` (français) et `aai-kyla` (anglais) par défaut.
+- Accès : clé d'API du compte AssemblyAI (`ASSEMBLYAI_API_KEY`), jamais versionnée.
+- Tarif : 15 $ par million de caractères ; 50 $ de crédit gratuit à l'inscription, sans carte.
+- Débit : l'offre gratuite est limitée à 50 requêtes HTTP par minute, le projet en envoie 45 au plus (`ASSEMBLYAI_PER_MINUTE`).
+- Conditions d'utilisation (version du 1er juillet 2026) : licence accordée « for the internal business purposes of Customer », sans clause explicite sur l'usage commercial de l'audio produit.
+
+À relire avant un usage commercial : ce que cette formule permet pour l'audio généré.
