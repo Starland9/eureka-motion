@@ -42,6 +42,8 @@ const ORIGIN = "http://localhost:3000";
 const DAY = 24 * 60 * 60 * 1000;
 const SECRET = "connection refused to postgres://admin:hunter2@10.0.0.5:5432/eureka";
 const T0 = new Date("2026-03-04T10:00:00.000Z");
+const T0_ISO = T0.toISOString();
+const at = (ms: number) => new Date(T0.getTime() + ms).toISOString();
 // Far enough ahead that a stored explanation never expires during a test.
 const CLOCK_START = new Date("2099-01-01T09:00:00.000Z");
 const INPUT: StartInput = { question: reference.question, language: "fr", level: "lycee" };
@@ -50,6 +52,15 @@ const SCENES = DOCUMENT.scenes;
 const OUTLINE: Outline = { plan: DOCUMENT.plan, params: DOCUMENT.params, model: DOCUMENT.model };
 const PARENT_ID = "p00000000001";
 const REFERENCE_ID = referenceId("physics/universal-gravitation", "fr");
+
+function deepBody(fields: {
+  status: string;
+  result_url?: string | null;
+  queued_at?: string | null;
+  started_at?: string | null;
+}) {
+  return { result_url: null, queued_at: null, started_at: null, ...fields };
+}
 
 function triage(subject: Subject, deepEligible: boolean) {
   return {
@@ -576,14 +587,14 @@ describe.skipIf(!database)(
           }),
         ]);
         const response = await requestDeep(id);
-        expect(await response.json()).toEqual({ status: "queued", result_url: null });
+        expect(await response.json()).toEqual(deepBody({ status: "queued", queued_at: T0_ISO }));
       });
 
       it("writes no job for a history concept, and the route answers none", async () => {
         const { id, events } = await run([HISTORY]);
         expect(typesOf(events)).not.toContain("deep");
         expect(await jobRows()).toEqual([]);
-        expect(await (await requestDeep(id)).json()).toEqual({ status: "none", result_url: null });
+        expect(await (await requestDeep(id)).json()).toEqual(deepBody({ status: "none" }));
       });
 
       it("keeps the explanation ready when the queue is unreachable", async () => {
@@ -614,29 +625,27 @@ describe.skipIf(!database)(
         const response = await requestDeep(id);
         expect(response.status).toBe(200);
         expect(response.headers.get("cache-control")).toBe("no-store");
-        expect(await response.json()).toEqual({ status: "none", result_url: null });
+        expect(await response.json()).toEqual(deepBody({ status: "none" }));
       });
 
       it("answers queued for a job nobody has taken", async () => {
         const { id } = await explanation();
         await queue.enqueue(id, "deep");
-        expect(await (await requestDeep(id)).json()).toEqual({
-          status: "queued",
-          result_url: null,
-        });
+        expect(await (await requestDeep(id)).json()).toEqual(
+          deepBody({ status: "queued", queued_at: T0_ISO }),
+        );
       });
 
       it("announces nothing while no worker beats, and again once one does", async () => {
         const { id } = await explanation();
         await queue.enqueue(id, "deep");
         await workerBeats(false);
-        expect(await (await requestDeep(id)).json()).toEqual({ status: "none", result_url: null });
+        expect(await (await requestDeep(id)).json()).toEqual(deepBody({ status: "none" }));
         expect((await replayed(id)).map((event) => event.type)).not.toContain("deep");
         await workerBeats(true);
-        expect(await (await requestDeep(id)).json()).toEqual({
-          status: "queued",
-          result_url: null,
-        });
+        expect(await (await requestDeep(id)).json()).toEqual(
+          deepBody({ status: "queued", queued_at: T0_ISO }),
+        );
       });
 
       it("answers running for a job a worker holds", async () => {
@@ -645,7 +654,48 @@ describe.skipIf(!database)(
         await queue.reserve("deep");
         const response = await requestDeep(id);
         expect(response.headers.get("cache-control")).toBe("no-store");
-        expect(await response.json()).toEqual({ status: "running", result_url: null });
+        expect(await response.json()).toEqual(
+          deepBody({ status: "running", queued_at: T0_ISO, started_at: T0_ISO }),
+        );
+      });
+
+      it("tells when the worker took the job, apart from when it was queued", async () => {
+        const { id } = await explanation();
+        await queue.enqueue(id, "deep");
+        advance(45_000);
+        await queue.reserve("deep");
+        expect(await (await requestDeep(id)).json()).toEqual(
+          deepBody({ status: "running", queued_at: T0_ISO, started_at: at(45_000) }),
+        );
+      });
+
+      it("writes both times as ISO 8601 in UTC, to the millisecond", async () => {
+        const { id } = await explanation();
+        await queue.enqueue(id, "deep");
+        advance(1_234);
+        await queue.reserve("deep");
+        expect(await (await requestDeep(id)).json()).toMatchObject({
+          queued_at: "2026-03-04T10:00:00.000Z",
+          started_at: "2026-03-04T10:00:01.234Z",
+        });
+      });
+
+      it("keeps the time of queueing and forgets the time of taking when a failed attempt sends the job back", async () => {
+        const { id } = await explanation();
+        const job = await queue.enqueue(id, "deep");
+        advance(30_000);
+        await queue.reserve("deep");
+        advance(20_000);
+        await queue.fail(job.id, SECRET);
+        expect(await (await requestDeep(id)).json()).toEqual(
+          deepBody({ status: "queued", queued_at: T0_ISO }),
+        );
+
+        advance(40_000);
+        await queue.reserve("deep");
+        expect(await (await requestDeep(id)).json()).toEqual(
+          deepBody({ status: "running", queued_at: T0_ISO, started_at: at(90_000) }),
+        );
       });
 
       it("answers queued again for a job sent back after a failed attempt", async () => {
@@ -653,10 +703,9 @@ describe.skipIf(!database)(
         const job = await queue.enqueue(id, "deep");
         await queue.reserve("deep");
         await queue.fail(job.id, SECRET);
-        expect(await (await requestDeep(id)).json()).toEqual({
-          status: "queued",
-          result_url: null,
-        });
+        expect(await (await requestDeep(id)).json()).toEqual(
+          deepBody({ status: "queued", queued_at: T0_ISO }),
+        );
       });
 
       it("answers ready with the address of the video once the job succeeded and the file exists", async () => {
@@ -667,10 +716,9 @@ describe.skipIf(!database)(
         await writeDeep(id);
         const response = await requestDeep(id);
         expect(response.headers.get("cache-control")).toBe("no-store");
-        expect(await response.json()).toEqual({
-          status: "ready",
-          result_url: `/media/${id}/deep.mp4`,
-        });
+        expect(await response.json()).toEqual(
+          deepBody({ status: "ready", result_url: `/media/${id}/deep.mp4`, queued_at: T0_ISO }),
+        );
       });
 
       it("keeps running while the job runs, even if the file is already there", async () => {
@@ -678,20 +726,18 @@ describe.skipIf(!database)(
         await queue.enqueue(id, "deep");
         await queue.reserve("deep");
         await writeDeep(id);
-        expect(await (await requestDeep(id)).json()).toEqual({
-          status: "running",
-          result_url: null,
-        });
+        expect(await (await requestDeep(id)).json()).toEqual(
+          deepBody({ status: "running", queued_at: T0_ISO, started_at: T0_ISO }),
+        );
       });
 
       it("keeps queued while the job waits, even if a file is already there", async () => {
         const { id } = await explanation();
         await queue.enqueue(id, "deep");
         await writeDeep(id);
-        expect(await (await requestDeep(id)).json()).toEqual({
-          status: "queued",
-          result_url: null,
-        });
+        expect(await (await requestDeep(id)).json()).toEqual(
+          deepBody({ status: "queued", queued_at: T0_ISO }),
+        );
       });
 
       it("answers none, not ready, when the job succeeded but the file is gone", async () => {
@@ -699,7 +745,7 @@ describe.skipIf(!database)(
         const job = await queue.enqueue(id, "deep");
         await queue.reserve("deep");
         await queue.succeed(job.id, `/media/${id}/deep.mp4`);
-        expect(await (await requestDeep(id)).json()).toEqual({ status: "none", result_url: null });
+        expect(await (await requestDeep(id)).json()).toEqual(deepBody({ status: "none" }));
       });
 
       it("does not take a file of another explanation for its own", async () => {
@@ -709,10 +755,7 @@ describe.skipIf(!database)(
         await queue.reserve("deep");
         await queue.succeed(job.id, `/media/${first.id}/deep.mp4`);
         await writeDeep(second.id);
-        expect(await (await requestDeep(first.id)).json()).toEqual({
-          status: "none",
-          result_url: null,
-        });
+        expect(await (await requestDeep(first.id)).json()).toEqual(deepBody({ status: "none" }));
       });
 
       it("answers abandoned once the job gave up, without the error of the job", async () => {
@@ -721,7 +764,7 @@ describe.skipIf(!database)(
         const response = await requestDeep(id);
         const text = await response.text();
         expect(response.status).toBe(200);
-        expect(JSON.parse(text)).toEqual({ status: "abandoned", result_url: null });
+        expect(JSON.parse(text)).toEqual(deepBody({ status: "abandoned", queued_at: T0_ISO }));
         expect(text).not.toContain("hunter2");
       });
 
@@ -737,7 +780,7 @@ describe.skipIf(!database)(
           finished_at: now(),
         });
         const text = await (await requestDeep(id)).text();
-        expect(JSON.parse(text)).toEqual({ status: "abandoned", result_url: null });
+        expect(JSON.parse(text)).toEqual(deepBody({ status: "abandoned", queued_at: T0_ISO }));
         expect(text).not.toContain("hunter2");
       });
 
@@ -745,10 +788,9 @@ describe.skipIf(!database)(
         const { id } = await explanation();
         await giveUp(id);
         await writeDeep(id);
-        expect(await (await requestDeep(id)).json()).toEqual({
-          status: "abandoned",
-          result_url: null,
-        });
+        expect(await (await requestDeep(id)).json()).toEqual(
+          deepBody({ status: "abandoned", queued_at: T0_ISO }),
+        );
       });
 
       it("reads the latest job when an older one was abandoned", async () => {
@@ -756,21 +798,20 @@ describe.skipIf(!database)(
         await giveUp(id);
         advance(60 * 1000);
         await queue.enqueue(id, "deep");
-        expect(await (await requestDeep(id)).json()).toEqual({
-          status: "queued",
-          result_url: null,
-        });
+        expect(await (await requestDeep(id)).json()).toEqual(
+          deepBody({ status: "queued", queued_at: at(60_000) }),
+        );
       });
 
       it("ignores the export job of the same explanation", async () => {
         const { id } = await explanation();
         await queue.enqueue(id, "export");
-        expect(await (await requestDeep(id)).json()).toEqual({ status: "none", result_url: null });
+        expect(await (await requestDeep(id)).json()).toEqual(deepBody({ status: "none" }));
       });
 
       it("answers none for an explanation that is not finished", async () => {
         const { id } = await explanation({ status: "streaming" });
-        expect(await (await requestDeep(id)).json()).toEqual({ status: "none", result_url: null });
+        expect(await (await requestDeep(id)).json()).toEqual(deepBody({ status: "none" }));
       });
 
       it("answers none for a reference explanation without a deep file, with no database", async () => {
@@ -781,15 +822,14 @@ describe.skipIf(!database)(
         const response = await requestDeep(REFERENCE_ID);
         expect(response.status).toBe(200);
         expect(response.headers.get("cache-control")).toBe("no-store");
-        expect(await response.json()).toEqual({ status: "none", result_url: null });
+        expect(await response.json()).toEqual(deepBody({ status: "none" }));
       });
 
       it("answers ready for a reference explanation that has a deep file", async () => {
         await writeDeep(REFERENCE_ID);
-        expect(await (await requestDeep(REFERENCE_ID)).json()).toEqual({
-          status: "ready",
-          result_url: `/media/${REFERENCE_ID}/deep.mp4`,
-        });
+        expect(await (await requestDeep(REFERENCE_ID)).json()).toEqual(
+          deepBody({ status: "ready", result_url: `/media/${REFERENCE_ID}/deep.mp4` }),
+        );
         await rm(path.join(mediaDir, REFERENCE_ID), { recursive: true, force: true });
       });
 

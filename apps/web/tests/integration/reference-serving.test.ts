@@ -62,7 +62,12 @@ describe("reference explanations served with no database", () => {
     });
     expect(body.payload.scenes).toHaveLength(reference.payload.scenes.length);
     expect(body.verdicts).toEqual(reference.verdicts);
-    expect(body.deep).toEqual({ status: "none", result_url: null });
+    expect(body.deep).toEqual({
+      status: "none",
+      result_url: null,
+      queued_at: null,
+      started_at: null,
+    });
     expect(database.getDb).not.toHaveBeenCalled();
   });
 

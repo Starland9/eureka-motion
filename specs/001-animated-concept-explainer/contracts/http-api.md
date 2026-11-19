@@ -118,8 +118,15 @@ Crée un travail d'export ou renvoie celui qui existe déjà : `{ job_id, status
 
 `GET /api/explanations/{id}/deep`
 
-`{ status, result_url }` avec `status` : `none`, `queued`, `running`, `ready`, `abandoned`.
-`abandoned` se traite comme `none` dans l'interface (FR-034).
+`{ status, result_url, queued_at, started_at }` avec `status` : `none`, `queued`, `running`,
+`ready`, `abandoned`.
+
+- `queued_at` : heure de mise en file du travail actif ou du dernier (ISO 8601), `null` sans
+  travail et pour une explication de référence. Pour `none`, toujours `null`.
+- `started_at` : heure de prise en charge par le worker (ISO 8601), pour `queued` et `running`
+  seulement ; `null` tant que personne n'a pris le travail, et dans les autres états.
+- `abandoned` : l'interface dit que la version n'est pas disponible et que l'explication
+  reste complète, sans alerte (FR-034).
 
 ## 5. Explications de référence
 

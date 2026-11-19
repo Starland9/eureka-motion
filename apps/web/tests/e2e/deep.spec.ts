@@ -160,8 +160,8 @@ test("the margin line shows while the work is under way, then becomes the link, 
     released = Date.now();
     simulation.release();
     await expect(block(page)).toBeVisible();
-    await expect(line(page)).toHaveText(message("Deep.preparing"));
-    await expect(line(page)).toHaveText(message("Deep.preparing").toUpperCase(), {
+    await expect(line(page)).toHaveText(message("Deep.queued"));
+    await expect(line(page)).toHaveText(message("Deep.queued").toUpperCase(), {
       useInnerText: true,
     });
     await expect(watch(page)).toHaveCount(0);
@@ -188,7 +188,8 @@ test("the margin line shows while the work is under way, then becomes the link, 
     await expect(watch(page)).toHaveAttribute("target", "_blank");
     await expect(watch(page)).toHaveAttribute("rel", /noopener/);
     await expect(line(page)).toHaveText(message("Deep.ready"));
-    await expect(block(page)).not.toContainText(message("Deep.preparing"));
+    await expect(block(page)).not.toContainText(message("Deep.queued"));
+    await expect(block(page)).not.toContainText(message("Deep.duration"));
     const box = await watch(page).boundingBox();
     expect(box?.height).toBeGreaterThanOrEqual(44);
 
@@ -219,16 +220,21 @@ test("the margin line shows while the work is under way, then becomes the link, 
   expect(errors).toEqual([]);
 });
 
-test("an abandoned job removes the line without a trace", async ({ page }) => {
+test("an abandoned job says the deep version is unavailable, and the explanation stays complete", async ({
+  page,
+}) => {
   const errors = trackConsole(page);
   const id = await referenceId(page);
   const simulation = await simulate(page, id, [{ status: "running" }, { status: "abandoned" }]);
 
   await open(page, id);
-  await expect(line(page)).toHaveText(message("Deep.preparing"));
+  await expect(line(page)).toHaveText(message("Deep.running"));
 
-  await expect(block(page)).toHaveCount(0, { timeout: POLL_MS + 5000 });
-  await expectNoTrace(page);
+  await expect(line(page)).toContainText(message("Deep.unavailable"), { timeout: POLL_MS + 5000 });
+  await expect(line(page)).toContainText(message("Deep.failed"));
+  await expect(watch(page)).toHaveCount(0);
+  await expect(block(page).getByRole("alert")).toHaveCount(0);
+  await expect(ruler(page)).toBeVisible();
   expect(simulation.polls).toHaveLength(2);
   await page.waitForTimeout(1500);
   expect(simulation.polls).toHaveLength(2);
@@ -258,16 +264,21 @@ test("without any deep version nothing is shown, reserved or read again", async 
   expect(errors).toEqual([]);
 });
 
-test("an abandoned status found at the first read leaves no trace either", async ({ page }) => {
+test("an abandoned status found at the first read says it is unavailable, and reads no more", async ({
+  page,
+}) => {
   const errors = trackConsole(page);
   const id = await referenceId(page);
   const simulation = await simulate(page, id, [{ status: "abandoned" }]);
 
   await open(page, id);
   await expect.poll(() => simulation.polls.length).toBe(1);
-  await page.waitForTimeout(500);
+  await expect(line(page)).toContainText(message("Deep.unavailable"));
+  await expect(line(page)).toContainText(message("Deep.failed"));
+  await expect(watch(page)).toHaveCount(0);
 
-  await expectNoTrace(page);
+  await page.waitForTimeout(POLL_MS + 1000);
+  expect(simulation.polls).toHaveLength(1);
   expect(errors).toEqual([]);
 });
 
@@ -295,11 +306,11 @@ test("three failed reads in a row make the line disappear quietly", async ({ pag
   const simulation = await simulate(page, id, [{ status: "queued" }, "network-error"]);
 
   await open(page, id);
-  await expect(line(page)).toHaveText(message("Deep.preparing"));
+  await expect(line(page)).toHaveText(message("Deep.queued"));
 
   await test.step("the line stays through the first failures", async () => {
     await expect.poll(() => simulation.polls.length, { timeout: POLL_MS + 5000 }).toBe(2);
-    await expect(line(page)).toHaveText(message("Deep.preparing"));
+    await expect(line(page)).toHaveText(message("Deep.queued"));
   });
 
   await test.step("it goes after the third, with no message, and the page stays usable", async () => {

@@ -10,9 +10,16 @@ export type DeepStatus = "none" | "queued" | "running" | "ready" | "abandoned";
 export interface DeepVersion {
   status: DeepStatus;
   result_url: string | null;
+  queued_at: string | null;
+  started_at: string | null;
 }
 
-const NONE: DeepVersion = { status: "none", result_url: null };
+export const NO_DEEP_VERSION: DeepVersion = {
+  status: "none",
+  result_url: null,
+  queued_at: null,
+  started_at: null,
+};
 
 export function deepResultUrl(explanationId: string): string {
   return `/media/${explanationId}/deep.mp4`;
@@ -23,10 +30,20 @@ async function deepFileExists(explanationId: string): Promise<boolean> {
   return file !== null && (await stat(file).catch(() => null))?.isFile() === true;
 }
 
-async function readyIfFile(explanationId: string): Promise<DeepVersion> {
+const isoOrNull = (date: Date | null): string | null => (date ? date.toISOString() : null);
+
+async function readyIfFile(
+  explanationId: string,
+  queuedAt: Date | null = null,
+): Promise<DeepVersion> {
   return (await deepFileExists(explanationId))
-    ? { status: "ready", result_url: deepResultUrl(explanationId) }
-    : NONE;
+    ? {
+        status: "ready",
+        result_url: deepResultUrl(explanationId),
+        queued_at: isoOrNull(queuedAt),
+        started_at: null,
+      }
+    : NO_DEEP_VERSION;
 }
 
 // A reference has no job and no database row: only its file tells.
@@ -36,18 +53,28 @@ export async function readDeepVersion(
   if (record.kind === "reference") return readyIfFile(record.id);
 
   const job = await getJobs().latest(record.id, "deep");
-  if (!job) return NONE;
+  if (!job) return NO_DEEP_VERSION;
   switch (job.status) {
     case "queued":
     case "running":
       // Nothing is announced while no worker is there to take the job.
       return (await readWorkerHealth()).render_worker
-        ? { status: job.status, result_url: null }
-        : NONE;
+        ? {
+            status: job.status,
+            result_url: null,
+            queued_at: job.created_at.toISOString(),
+            started_at: isoOrNull(job.locked_at),
+          }
+        : NO_DEEP_VERSION;
     case "succeeded":
-      return readyIfFile(record.id);
+      return readyIfFile(record.id, job.created_at);
     default:
-      return { status: "abandoned", result_url: null };
+      return {
+        status: "abandoned",
+        result_url: null,
+        queued_at: job.created_at.toISOString(),
+        started_at: null,
+      };
   }
 }
 

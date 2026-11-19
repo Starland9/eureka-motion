@@ -1,7 +1,7 @@
 import { EXPLANATION_ID_PATTERN, getContainer } from "@/server/container";
 import { errorResponse, internalError, requestLanguage } from "@/server/http/errors";
 import type { ExplanationRecord } from "@/server/pipeline/ports";
-import { readDeepVersion, type DeepVersion } from "@/server/deep";
+import { NO_DEEP_VERSION, readDeepVersion, type DeepVersion } from "@/server/deep";
 import { loadReferenceRecord } from "@/server/reference";
 
 export const runtime = "nodejs";
@@ -16,7 +16,7 @@ async function deepOf(record: ExplanationRecord): Promise<DeepVersion> {
     return await readDeepVersion(record);
   } catch (error) {
     console.error(`The deep version of explanation ${record.id} could not be read.`, error);
-    return { status: "none", result_url: null };
+    return NO_DEEP_VERSION;
   }
 }
 

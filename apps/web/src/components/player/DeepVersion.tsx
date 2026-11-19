@@ -6,6 +6,10 @@ import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { isDeepStatus, type DeepStatus } from "./deep-version";
 import { useDeepVersion } from "./useDeepVersion";
+import { useElapsedSeconds } from "./useElapsedSeconds";
+
+const SEPARATOR = " · ";
+const SECONDS_PER_MINUTE = 60;
 
 export interface DeepInitial {
   status: string;
@@ -15,6 +19,24 @@ interface DeepVersionProps {
   explanationId: string;
   initial?: DeepInitial | null;
   className?: string;
+}
+
+function Elapsed({ since }: { since: number }) {
+  const t = useTranslations("Deep");
+  const total = useElapsedSeconds(since);
+  const text =
+    total < SECONDS_PER_MINUTE
+      ? t("elapsedSeconds", { seconds: String(total) })
+      : t("elapsedMinutes", {
+          minutes: String(Math.floor(total / SECONDS_PER_MINUTE)),
+          seconds: String(total % SECONDS_PER_MINUTE).padStart(2, "0"),
+        });
+  return (
+    <span aria-hidden="true">
+      {SEPARATOR}
+      {text}
+    </span>
+  );
 }
 
 function DeepLine({
@@ -34,9 +56,20 @@ function DeepLine({
   return (
     <div data-slot="deep" className={cn("flex min-h-11 flex-col justify-center", className)}>
       <p role="status" className="text-caption text-ink-faint">
-        {view.kind === "preparing" ? t("preparing") : null}
+        {view.kind === "preparing" ? t(view.phase) : null}
+        {view.kind === "unavailable" ? (
+          <>
+            {t("unavailable")} <span className="block">{t("failed")}</span>
+          </>
+        ) : null}
         {announced ? <span className="sr-only">{t("ready")}</span> : null}
       </p>
+      {view.kind === "preparing" ? (
+        <p data-slot="deep-estimate" className="text-caption text-ink-faint">
+          {t("duration")}
+          {view.since !== null ? <Elapsed since={view.since} /> : null}
+        </p>
+      ) : null}
       {view.kind === "ready" ? (
         <>
           <a

@@ -1,6 +1,12 @@
 {
   "Deep": {
-    "preparing": "In-depth version [in preparation]",
+    "queued": "Deep version [queued]",
+    "running": "Deep version [rendering]",
+    "unavailable": "Deep version [unavailable]",
+    "failed": "The rendering did not succeed. The explanation above is complete.",
+    "duration": "About 2 to 4 min",
+    "elapsedSeconds": "for {seconds} s",
+    "elapsedMinutes": "for {minutes} min {seconds}",
     "ready": "The in-depth version is ready.",
     "watch": "Watch the full demonstration →",
     "newTab": "Opens in a new tab."

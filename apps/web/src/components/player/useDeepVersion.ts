@@ -6,11 +6,16 @@ import {
   MAX_POLL_FAILURES,
   POLL_MS,
   readDeep,
+  type DeepPhase,
   type DeepRead,
   type DeepStatus,
 } from "./deep-version";
 
-export type DeepView = { kind: "hidden" } | { kind: "preparing" } | { kind: "ready"; url: string };
+export type DeepView =
+  | { kind: "hidden" }
+  | { kind: "preparing"; phase: DeepPhase; since: number | null }
+  | { kind: "ready"; url: string }
+  | { kind: "unavailable" };
 
 export interface DeepState {
   view: DeepView;
@@ -18,22 +23,30 @@ export interface DeepState {
 }
 
 const HIDDEN_VIEW: DeepView = { kind: "hidden" };
+const UNAVAILABLE_VIEW: DeepView = { kind: "unavailable" };
 const HIDDEN: DeepState = { view: HIDDEN_VIEW, announced: false };
 
 function viewOf(read: Extract<DeepRead, { kind: "answer" }>): DeepView {
-  if (isPreparing(read.status)) return { kind: "preparing" };
+  if (isPreparing(read.status)) {
+    return { kind: "preparing", phase: read.status, since: read.queuedAt };
+  }
   if (read.status === "ready" && read.resultUrl !== null) {
     return { kind: "ready", url: read.resultUrl };
   }
-  return HIDDEN_VIEW;
+  return read.status === "abandoned" ? UNAVAILABLE_VIEW : HIDDEN_VIEW;
+}
+
+function initialState(initial: DeepStatus | null): DeepState {
+  if (isPreparing(initial)) {
+    return { view: { kind: "preparing", phase: initial, since: null }, announced: false };
+  }
+  return initial === "abandoned" ? { view: UNAVAILABLE_VIEW, announced: false } : HIDDEN;
 }
 
 // Without a known status, a single read tells whether there is work or a video; it follows the
 // job only when there is work. A failure never shows anything: the line goes away.
 export function useDeepVersion(explanationId: string, initial: DeepStatus | null): DeepState {
-  const [state, setState] = useState<DeepState>(() =>
-    isPreparing(initial) ? { view: { kind: "preparing" }, announced: false } : HIDDEN,
-  );
+  const [state, setState] = useState<DeepState>(() => initialState(initial));
 
   useEffect(() => {
     if (initial === "none" || initial === "abandoned") return;

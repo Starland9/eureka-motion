@@ -60,6 +60,7 @@ const ORIGIN = "http://localhost:3000";
 const KOKORO = "http://kokoro.test";
 const SECRET = "connection refused to postgres://admin:hunter2@10.0.0.5:5432/eureka";
 const T0 = new Date("2026-03-04T10:00:00.000Z");
+const T0_ISO = T0.toISOString();
 // Far enough ahead that a stored explanation never expires during a test.
 const CLOCK_START = new Date("2099-01-01T09:00:00.000Z");
 const HOUR = 60 * 60 * 1000;
@@ -103,6 +104,15 @@ function routableIds(): () => string {
 }
 
 const typesOf = (events: SseEvent[]): string[] => events.map((event) => event.type);
+
+function deepBody(fields: {
+  status: string;
+  result_url?: string | null;
+  queued_at?: string | null;
+  started_at?: string | null;
+}) {
+  return { result_url: null, queued_at: null, started_at: null, ...fields };
+}
 
 function ago(seconds: number): string {
   return new Date(Date.now() - seconds * 1000).toISOString();
@@ -431,7 +441,30 @@ describe.skipIf(!database)(
         expect(live).toMatchObject({ status: "ready", deep: { status: "queued" }, error: null });
         expect(live.scenes).toHaveLength(SCENE_COUNT);
         expect(live.quiz).not.toBeNull();
-        expect(markupOf(live)).toContain(messages.fr.Deep.preparing);
+        expect(markupOf(live)).toContain(messages.fr.Deep.queued);
+      });
+
+      it("hands the client the time of queueing, then the time a worker took the job", async () => {
+        boot(MATHS);
+        const { id } = await ask();
+        const read = () => readDeep(id, new AbortController().signal);
+        expect(await read()).toEqual({
+          kind: "answer",
+          status: "queued",
+          resultUrl: null,
+          queuedAt: T0.getTime(),
+          startedAt: null,
+        });
+
+        advance(30_000);
+        await reserved(id);
+        expect(await read()).toEqual({
+          kind: "answer",
+          status: "running",
+          resultUrl: null,
+          queuedAt: T0.getTime(),
+          startedAt: T0.getTime() + 30_000,
+        });
       });
 
       it.each([
@@ -543,7 +576,7 @@ describe.skipIf(!database)(
         const { response, text, body } = await deepRoute(id);
         expect(response.status).toBe(200);
         expect(response.headers.get("cache-control")).toBe("no-store");
-        expect(body).toEqual({ status, result_url: null });
+        expect(body).toEqual(deepBody({ status, queued_at: status === "none" ? null : T0_ISO }));
         expect(text).not.toContain("hunter2");
       });
 
@@ -551,7 +584,10 @@ describe.skipIf(!database)(
         const id = await finished();
         const { response, text, body } = await describeExplanation(id);
         expect(response.status).toBe(200);
-        expect(body).toMatchObject({ status: "ready", deep: { status, result_url: null } });
+        expect(body).toMatchObject({
+          status: "ready",
+          deep: deepBody({ status, queued_at: status === "none" ? null : T0_ISO }),
+        });
         expect((body.payload as { scenes: unknown[] }).scenes).toHaveLength(SCENE_COUNT);
         expect(text).not.toContain("hunter2");
       });
@@ -581,13 +617,19 @@ describe.skipIf(!database)(
         await client.start({ question: QUESTION, language: "fr", level: "lycee" });
         const live = await settled(client);
         expect(live.deep).toEqual({ status: "queued" });
-        expect(markupOf(live)).toContain(messages.fr.Deep.preparing);
+        expect(markupOf(live)).toContain(messages.fr.Deep.queued);
 
         const id = String(live.id);
         await end(id);
 
         const read = await readDeep(id, new AbortController().signal);
-        expect(read).toEqual({ kind: "answer", status, resultUrl: null });
+        expect(read).toEqual({
+          kind: "answer",
+          status,
+          resultUrl: null,
+          queuedAt: status === "none" ? null : T0.getTime(),
+          startedAt: null,
+        });
         expect(isPreparing(status)).toBe(false);
 
         const replayed = await replayedState(id);
@@ -611,10 +653,10 @@ describe.skipIf(!database)(
       it("answers none on the deep route and in the description of the explanation", async () => {
         boot(HISTORY);
         const { id } = await ask();
-        expect((await deepRoute(id)).body).toEqual({ status: "none", result_url: null });
+        expect((await deepRoute(id)).body).toEqual(deepBody({ status: "none" }));
         expect((await describeExplanation(id)).body).toMatchObject({
           status: "ready",
-          deep: { status: "none", result_url: null },
+          deep: deepBody({ status: "none" }),
         });
       });
 
@@ -630,6 +672,8 @@ describe.skipIf(!database)(
           kind: "answer",
           status: "none",
           resultUrl: null,
+          queuedAt: null,
+          startedAt: null,
         });
       });
     });
@@ -686,7 +730,7 @@ describe.skipIf(!database)(
 
         expect((await describeExplanation(id)).body).toMatchObject({
           status: "ready",
-          deep: { status: "none", result_url: null },
+          deep: deepBody({ status: "none" }),
         });
         expect(await readDeep(id, new AbortController().signal)).toEqual({ kind: "failed" });
         expectNothingAnnounced(await replayedState(id));
@@ -698,7 +742,7 @@ describe.skipIf(!database)(
         const { id } = await ask();
         setJobsForTests(queue);
 
-        expect((await deepRoute(id)).body).toEqual({ status: "none", result_url: null });
+        expect((await deepRoute(id)).body).toEqual(deepBody({ status: "none" }));
         expectNoDeepEvent(await replay(id));
         expect(await jobRows()).toEqual([]);
       });
@@ -719,7 +763,9 @@ describe.skipIf(!database)(
         expect(await jobRows()).toEqual([
           expect.objectContaining({ explanation_id: id, status: "abandoned", attempts: 1 }),
         ]);
-        expect((await deepRoute(id)).body).toEqual({ status: "abandoned", result_url: null });
+        expect((await deepRoute(id)).body).toEqual(
+          deepBody({ status: "abandoned", queued_at: T0_ISO }),
+        );
         expectNoDeepEvent(await replay(id));
       });
 
@@ -733,9 +779,11 @@ describe.skipIf(!database)(
         for (let visit = 0; visit < 3; visit += 1) {
           advance(HOUR);
           expectNoDeepEvent(await replay(id));
-          expect((await deepRoute(id)).body).toEqual({ status: "abandoned", result_url: null });
+          expect((await deepRoute(id)).body).toEqual(
+            deepBody({ status: "abandoned", queued_at: T0_ISO }),
+          );
           expect((await describeExplanation(id)).body).toMatchObject({
-            deep: { status: "abandoned", result_url: null },
+            deep: deepBody({ status: "abandoned", queued_at: T0_ISO }),
           });
           expectNoDeepEvent((await ask()).events);
           expectNothingAnnounced(await replayedState(id));
@@ -762,10 +810,9 @@ describe.skipIf(!database)(
         await writeFile(path.join(mediaDir, id, "deep.mp4"), "video");
         await queue.succeed(job.id, `/media/${id}/deep.mp4`);
 
-        expect((await deepRoute(id)).body).toEqual({
-          status: "ready",
-          result_url: `/media/${id}/deep.mp4`,
-        });
+        expect((await deepRoute(id)).body).toEqual(
+          deepBody({ status: "ready", result_url: `/media/${id}/deep.mp4`, queued_at: T0_ISO }),
+        );
         const events = await replay(id);
         expect(typesOf(events).slice(-2)).toEqual(["deep", "done"]);
         expect(events.at(-2)?.data).toEqual({ status: "ready" });
