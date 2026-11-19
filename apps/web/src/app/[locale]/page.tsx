@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { AskSentence } from "@/components/ask/AskSentence";
+import { DemoLink } from "@/components/ask/DemoLink";
 import { Preferences } from "@/components/ask/Preferences";
 import { Sommaire } from "@/components/ask/Sommaire";
 import { VoiceCredit } from "@/components/ask/VoiceCredit";
@@ -47,6 +48,7 @@ export default async function HomePage({ params }: Props) {
           </p>
           <div className="min-w-0 lg:col-span-10">
             <AskSentence />
+            <DemoLink />
             <div className="mt-12 border-t border-rule pt-6">
               <Preferences />
             </div>

@@ -8,6 +8,7 @@
     "hint": "Write it in your own words, as you would say it aloud. For example: why the sky is blue, what a derivative is, mitosis.",
     "remaining": "{count, plural, one {# character left} other {# characters left}}",
     "submit": "Explain →",
+    "demoLink": "Watch the demo video (1 min 53) →",
     "pending": "Preparing the explanation…",
     "errors": {
       "rateLimitedSeconds": "You have asked a lot of questions in a short time. Try again in {seconds, plural, one {# second} other {# seconds}}.",

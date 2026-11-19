@@ -602,6 +602,14 @@ test.describe("the automatic check finds no violation", () => {
           await expectNoViolations(page, `home ${language}`);
           expect(errors).toEqual([]);
         });
+
+        test(`on the demo page in ${language}`, async ({ page }) => {
+          const errors = trackConsole(page);
+          await page.goto(`/${language}/demo`);
+          await expect(page.locator("main#content")).toHaveCount(1);
+          await expectNoViolations(page, `demo ${language}`);
+          expect(errors).toEqual([]);
+        });
       }
 
       test("on a reference explanation opened from the contents", async ({ page, request }) => {
@@ -853,6 +861,21 @@ test.describe("on a screen 360 px wide", () => {
       expect(page.viewportSize()?.width).toBe(360);
       await expectNoOverflow(page, `home ${language}`);
       await expectTargets(page, `home ${language}`);
+      expect(await clippedContent(page), "clipped content").toEqual([]);
+      expect(errors).toEqual([]);
+    });
+
+    test(`the demo page in ${language} has no horizontal scroll and wide enough targets`, async ({
+      page,
+    }) => {
+      const errors = trackConsole(page);
+      await page.goto(`/${language}/demo`);
+      await expect(page.locator("main#content")).toHaveCount(1);
+      await settle(page);
+
+      expect(page.viewportSize()?.width).toBe(360);
+      await expectNoOverflow(page, `demo ${language}`);
+      await expectTargets(page, `demo ${language}`);
       expect(await clippedContent(page), "clipped content").toEqual([]);
       expect(errors).toEqual([]);
     });
