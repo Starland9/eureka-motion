@@ -700,8 +700,8 @@ describe("DeepVersion elapsed time", () => {
 
 describe("DeepVersion in English", () => {
   it.each([
-    ["queued", "Deep version [queued]"],
-    ["running", "Deep version [rendering]"],
+    ["queued", "In-depth version [queued]"],
+    ["running", "In-depth version [rendering]"],
   ])("labels the %s phase", async (status, label) => {
     stubServer([answer(status)]);
     const { status: region, estimate } = await mount({ status }, ID, "en");
@@ -735,7 +735,7 @@ describe("DeepVersion in English", () => {
     stubServer([answer("abandoned")]);
     const { status } = await mount(null, ID, "en");
 
-    expect(status()?.textContent).toContain("Deep version [unavailable]");
+    expect(status()?.textContent).toContain("In-depth version [unavailable]");
     expect(status()?.textContent).toContain(
       "The rendering did not succeed. The explanation above is complete.",
     );

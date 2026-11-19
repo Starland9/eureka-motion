@@ -229,7 +229,7 @@ queued ──▶ running ──▶ succeeded
               │
               ├──▶ queued      (nouvelle tentative)
               └──▶ failed      (export : erreur montrée, relance possible)
-                   abandoned   (deep : l'annonce disparaît sans alerte, FR-034)
+                   abandoned   (deep : la ligne dit « non disponible », sans alerte, FR-034)
 ```
 
 ## Limitation de débit (`rate_limits`)

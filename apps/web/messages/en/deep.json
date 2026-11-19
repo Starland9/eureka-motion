@@ -1,8 +1,8 @@
 {
   "Deep": {
-    "queued": "Deep version [queued]",
-    "running": "Deep version [rendering]",
-    "unavailable": "Deep version [unavailable]",
+    "queued": "In-depth version [queued]",
+    "running": "In-depth version [rendering]",
+    "unavailable": "In-depth version [unavailable]",
     "failed": "The rendering did not succeed. The explanation above is complete.",
     "duration": "About 2 to 4 min",
     "elapsedSeconds": "for {seconds} s",
