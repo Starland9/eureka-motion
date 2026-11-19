@@ -5,7 +5,7 @@ const POSTER = "/demo/eureka-motion-demo.jpg";
 
 const PAGES = {
   fr: {
-    link: "Voir la démo en vidéo (1 min 53) →",
+    link: "Voir la démo en vidéo (1 min 52) →",
     submit: "Expliquer →",
     heading: "La démo en vidéo",
     label: "Vidéo de démonstration d’Eureka Motion",
@@ -13,7 +13,7 @@ const PAGES = {
     title: "Démonstration — Eureka Motion",
   },
   en: {
-    link: "Watch the demo video (1 min 53) →",
+    link: "Watch the demo video (1 min 52) →",
     submit: "Explain →",
     heading: "The demo on video",
     label: "Eureka Motion demo video",

@@ -8,7 +8,7 @@
     "hint": "Écris avec tes mots, comme tu le dirais à voix haute. Par exemple : pourquoi le ciel est bleu, ce qu’est une dérivée, la mitose.",
     "remaining": "{count, plural, one {Il reste # caractère} other {Il reste # caractères}}",
     "submit": "Expliquer →",
-    "demoLink": "Voir la démo en vidéo (1 min 53) →",
+    "demoLink": "Voir la démo en vidéo (1 min 52) →",
     "pending": "Je prépare l’explication…",
     "errors": {
       "rateLimitedSeconds": "Tu as posé beaucoup de questions en peu de temps. Réessaie dans {seconds, plural, one {# seconde} other {# secondes}}.",

@@ -23,20 +23,20 @@ const EXPECTED = {
   fr: {
     heading: "La démo en vidéo",
     intro:
-      "Une question d’élève, un agent qui planifie, vérifie et anime l’explication. 1\u00a0min\u00a053, en français, sous-titrée.",
+      "Une question d’élève, un agent qui planifie, vérifie et anime l’explication. 1\u00a0min\u00a052, en français, sous-titrée.",
     label: "Vidéo de démonstration d’Eureka Motion",
-    caption: "FIG. — DÉMONSTRATION · 1 MIN 53",
+    caption: "FIG. — DÉMONSTRATION · 1 MIN 52",
     back: "← Poser ma propre question",
-    homeLink: "Voir la démo en vidéo (1 min 53) →",
+    homeLink: "Voir la démo en vidéo (1 min 52) →",
   },
   en: {
     heading: "The demo on video",
     intro:
-      "A student’s question, an agent that plans, checks and animates the explanation. 1\u00a0min\u00a053, in French, with French subtitles.",
+      "A student’s question, an agent that plans, checks and animates the explanation. 1\u00a0min\u00a052, in French, with French subtitles.",
     label: "Eureka Motion demo video",
-    caption: "FIG. — DEMONSTRATION · 1 MIN 53",
+    caption: "FIG. — DEMONSTRATION · 1 MIN 52",
     back: "← Ask my own question",
-    homeLink: "Watch the demo video (1 min 53) →",
+    homeLink: "Watch the demo video (1 min 52) →",
   },
 } as const;
 
