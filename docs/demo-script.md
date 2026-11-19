@@ -2,7 +2,9 @@
 
 Pour la personne qui présente. Interface en français, niveau Lycée, thème Papier, fenêtre d'au moins 1280 px, serveur relié à un vrai fournisseur de modèle de langage et à une voix. Les libellés entre guillemets sont ceux de l'interface.
 
-Deux choses ne se disent pas comme livrées : l'export vidéo MP4 et la version approfondie en Manim sont prévus, pas faits.
+Pour la finale du 28 novembre 2026, le déroulé de 5 minutes est dans [finale/pitch.md](finale/pitch.md) et la liste du jour J dans [finale/jour-j.md](finale/jour-j.md).
+
+L'export MP4 et la version approfondie en Manim existent, mais ne se montrent pas en direct : la version approfondie met plusieurs minutes (2 prêtes sur 9 dans le délai lors des mesures du 18/11/2026), et l'isolation de son bac à sable n'est pas encore vérifiée sous Dokploy.
 
 ## Déroulé
 
@@ -25,7 +27,7 @@ Deux choses ne se disent pas comme livrées : l'export vidéo MP4 et la version 
 - **Quiz** : l'entrée apparaît quand le quiz est prêt ; les réponses sont gardées jusqu'au changement d'explication.
 - **Couper la génération** : serveur local, couper le réseau du poste (la page, servie en local, reste accessible) ; la disponibilité de la génération est sondée au plus toutes les 30 secondes, d'où la coupure avant 2:40. Avec un serveur distant, couper le réseau du poste ferait aussi disparaître la page : utiliser une instance locale démarrée avec `LLM_API_KEY=` vide.
 - **Question du mode sans réseau** : elle doit être nouvelle, sinon le cache la sert malgré la coupure. Le message complet : « La génération est momentanément indisponible. Les explications préparées à l'avance restent disponibles : ouvre-en une en attendant. »
-- **Exemple du sommaire** : un seul est écrit aujourd'hui (gravitation universelle, en français) et il n'a pas de voix enregistrée : sous-titres seuls, à dire tel quel. Son colophon ne présente pas de verdict de vérification : le montrer sur l'explication générée, pas sur l'exemple.
+- **Exemples du sommaire** : 12 concepts, en français et en anglais, sans voix enregistrée : sous-titres seuls, à dire tel quel. « La gravitation universelle » en français est le seul dont le colophon ne présente pas de verdict de vérification : le montrer sur l'explication générée, pas sur cet exemple.
 - **En retard** : sacrifier d'abord le quiz (garder un exercice), puis les curseurs ; ne pas sacrifier le mode sans réseau.
 
 ## Plan B
@@ -35,17 +37,17 @@ Deux choses ne se disent pas comme livrées : l'export vidéo MP4 et la version 
 | Le réseau ou la clé tombe                 | C'est le mode dégradé : le dire, ouvrir « La gravitation universelle » au sommaire, jouer les curseurs et le quiz de l'exemple avec les sous-titres.                                               |
 | La voix est muette                        | Vérifier que le son n'est pas coupé (touche `m`) et que les sous-titres sont affichés (touche `c`). Sans voix joignable, l'explication se joue avec les sous-titres seuls : les lire et commenter. |
 | La génération est lente                   | Au-delà de 20 secondes sans première scène : changer pour un niveau préchauffé (voir la liste de contrôle) et reposer la question, ou ouvrir l'exemple du sommaire.                                |
-| « Tu as posé beaucoup de questions… »     | La limite est de 10 générations par heure et par adresse (`RATE_LIMIT_PER_HOUR`), et une salle partage souvent une adresse. Ouvrir l'exemple du sommaire.                                          |
+| « Tu as posé beaucoup de questions… »     | La limite est fixée par adresse et par heure (`RATE_LIMIT_PER_HOUR`, 10 par défaut, 300 le jour de la finale), et une salle partage souvent une adresse. Ouvrir l'exemple du sommaire.             |
 | La base de données est arrêtée            | Les questions libres échouent, les exemples se jouent. `GET /api/health` montre `database` à `false`.                                                                                              |
 | Une scène est écartée par la vérification | « Une partie de l'explication manque : une scène n'a pas pu être vérifiée, elle n'est donc pas montrée. » C'est le comportement voulu : le dire, puis « Relancer » ou continuer.                   |
 
 ## Avant de monter sur scène
 
-- [ ] `pnpm golden --base-url=<adresse>` : seuils tenus (réussite d'au moins 90 % sur les 30 concepts et 80 % sur les 10 autres, 90ᵉ centile de la première scène sous 15 secondes). Relever `RATE_LIMIT_PER_HOUR` pour cette passe.
-- [ ] `GET /api/health` : `database`, `generation` et `voice` à `true`. `render_worker` et `deep_worker` restent à `false` tant que ces workers n'existent pas, donc `status` vaut `degraded`.
+- [ ] `pnpm golden --base-url=<adresse>` : seuils tenus (réussite d'au moins 90 % sur les 30 concepts et 80 % sur les 10 autres, 90ᵉ centile de la première scène sous 15 secondes). Relever `RATE_LIMIT_PER_HOUR` pour cette passe ; elle consomme des crédits du modèle et des voix.
+- [ ] `GET /api/health` : `status` à `ok`, toutes les `checks` à `true`, et chaque voix configurée à `true` dans `voices` (en production : `deepgram` et `assemblyai`).
 - [ ] Base de données lancée et migrée : `docker compose -f deploy/docker-compose.dev.yml up -d --wait db`, puis `pnpm db:migrate`.
 - [ ] Clé coupée : vider `LLM_API_KEY`, redémarrer, poser une question libre, constater le message et jouer l'exemple du sommaire. Remettre la clé.
-- [ ] Clé Azure seule coupée : une question nouvelle est narrée par la voix de secours (Kokoro joignable).
+- [ ] Clé Deepgram seule coupée : une question nouvelle est narrée par AssemblyAI (Donatien en français).
 - [ ] Thèmes Papier et Tableau : accueil, lecture, quiz et colophon lisibles dans les deux.
 - [ ] Largeur de 360 px : aucun défilement horizontal, commandes de 44 px.
 - [ ] Son : sortie audio de la salle, volume du système et du lecteur ; lancer la première lecture après un clic. « Mouvement réduit » désactivé dans le système (sinon pas de lecture automatique, progression par « Étape suivante »).
