@@ -128,6 +128,7 @@ async function launch(): Promise<{
 }> {
   const octet = (): number => 1 + Math.floor(Math.random() * 254);
   const browser = await chromium.launch({
+    channel: "chrome",
     headless: false,
     args: [
       "--window-position=0,0",
@@ -400,6 +401,20 @@ async function sliders(): Promise<void> {
     await page.evaluate(() => window.scrollTo({ top: 0, behavior: "smooth" }));
     await pause(3000);
     mark("sliders_end");
+
+    const colophon = page.getByRole("button", { name: /Colophon/ }).first();
+    await colophon.scrollIntoViewIfNeeded();
+    await page.evaluate(() => window.scrollBy({ top: 120, behavior: "smooth" }));
+    await pause(1200);
+    mark("colophon_shown");
+    await clickOn(page, colophon);
+    mark("colophon_open");
+    await pause(1800);
+    for (let step = 0; step < 3; step += 1) {
+      await page.evaluate(() => window.scrollBy({ top: 360, behavior: "smooth" }));
+      await pause(2400);
+    }
+    mark("colophon_end");
   } catch (error) {
     failed = error;
     mark("failed");
