@@ -282,6 +282,7 @@
           {
             "id": "b1",
             "narration": "Here is a right triangle, with a square built on each of its three sides.",
+            "audio": { "url": "/media/vgmsmwwfqv89/s1-b1.mp3", "duration_ms": 4224 },
             "actions": [
               {
                 "do": "show",
@@ -303,6 +304,7 @@
           {
             "id": "b2",
             "narration": "Guess: do the two small squares together cover the big square exactly?",
+            "audio": { "url": "/media/vgmsmwwfqv89/s1-b2.mp3", "duration_ms": 4608 },
             "actions": [
               {
                 "do": "focus",
@@ -323,6 +325,7 @@
           {
             "id": "b3",
             "narration": "Look at the areas: the two small ones really do add up to the big one.",
+            "audio": { "url": "/media/vgmsmwwfqv89/s1-b3.mp3", "duration_ms": 4344 },
             "actions": [
               {
                 "do": "show",
@@ -469,6 +472,7 @@
           {
             "id": "b1",
             "narration": "Two small pizzas, one big pizza. Guess which gives you more to eat.",
+            "audio": { "url": "/media/vgmsmwwfqv89/s2-b1.mp3", "duration_ms": 4584 },
             "actions": [
               {
                 "do": "show",
@@ -491,6 +495,7 @@
           {
             "id": "b2",
             "narration": "Slide the two small ones onto the left pan, the big one on the right.",
+            "audio": { "url": "/media/vgmsmwwfqv89/s2-b2.mp3", "duration_ms": 4536 },
             "actions": [
               {
                 "do": "show",
@@ -531,6 +536,7 @@
           {
             "id": "b3",
             "narration": "The scale stays level. Two small areas can equal one big area, exactly.",
+            "audio": { "url": "/media/vgmsmwwfqv89/s2-b3.mp3", "duration_ms": 5424 },
             "actions": [
               {
                 "do": "show",
@@ -775,6 +781,7 @@
           {
             "id": "b1",
             "narration": "Here is the big square, side c. Watch it get cut up, not guessed at.",
+            "audio": { "url": "/media/vgmsmwwfqv89/s3-b1.mp3", "duration_ms": 4584 },
             "actions": [
               {
                 "do": "show",
@@ -788,6 +795,7 @@
           {
             "id": "b2",
             "narration": "Two squares slide in, and four copies of your triangle fill every gap.",
+            "audio": { "url": "/media/vgmsmwwfqv89/s3-b2.mp3", "duration_ms": 4344 },
             "actions": [
               {
                 "do": "show",
@@ -810,6 +818,7 @@
           {
             "id": "b3",
             "narration": "No overlap, nothing missing: the two squares add up to the big one.",
+            "audio": { "url": "/media/vgmsmwwfqv89/s3-b3.mp3", "duration_ms": 5304 },
             "actions": [
               {
                 "do": "show",
@@ -924,6 +933,7 @@
           {
             "id": "b1",
             "narration": "Look at the sides: a, b, and the long one, c. Each square’s area is its side times itself.",
+            "audio": { "url": "/media/vgmsmwwfqv89/s4-b1.mp3", "duration_ms": 7608 },
             "actions": [
               {
                 "do": "show",
@@ -946,6 +956,7 @@
           {
             "id": "b2",
             "narration": "So the two small squares hold a squared plus b squared.",
+            "audio": { "url": "/media/vgmsmwwfqv89/s4-b2.mp3", "duration_ms": 4176 },
             "actions": [
               {
                 "do": "show",
@@ -959,6 +970,7 @@
           {
             "id": "b3",
             "narration": "And that always equals the big square on c. Change a and b, it still holds.",
+            "audio": { "url": "/media/vgmsmwwfqv89/s4-b3.mp3", "duration_ms": 5664 },
             "actions": [
               {
                 "do": "show",
@@ -1065,6 +1077,7 @@
           {
             "id": "b1",
             "narration": "Take short sides three and four. The squares have areas nine and sixteen.",
+            "audio": { "url": "/media/vgmsmwwfqv89/s5-b1.mp3", "duration_ms": 4656 },
             "actions": [
               {
                 "do": "show",
@@ -1090,6 +1103,7 @@
           {
             "id": "b2",
             "narration": "Add them: twenty-five. The long side squared is twenty-five, so it measures five.",
+            "audio": { "url": "/media/vgmsmwwfqv89/s5-b2.mp3", "duration_ms": 6096 },
             "actions": [
               {
                 "do": "show",
@@ -1110,6 +1124,7 @@
           {
             "id": "b3",
             "narration": "Now double side three to six. Yet the long side does not double. Watch it.",
+            "audio": { "url": "/media/vgmsmwwfqv89/s5-b3.mp3", "duration_ms": 5928 },
             "actions": [
               {
                 "do": "sweep",
@@ -1157,6 +1172,7 @@
           {
             "id": "b1",
             "narration": "First idea: the two small squares fit exactly into the big one, corner to corner.",
+            "audio": { "url": "/media/vgmsmwwfqv89/s6-b1.mp3", "duration_ms": 6024 },
             "actions": [
               {
                 "do": "show",
@@ -1170,6 +1186,7 @@
           {
             "id": "b2",
             "narration": "Double a short side and its square grows four times, not two.",
+            "audio": { "url": "/media/vgmsmwwfqv89/s6-b2.mp3", "duration_ms": 4368 },
             "actions": [
               {
                 "do": "highlight",
@@ -1182,6 +1199,7 @@
           {
             "id": "b3",
             "narration": "And this is the answer to our question: only right triangles obey it.",
+            "audio": { "url": "/media/vgmsmwwfqv89/s6-b3.mp3", "duration_ms": 4608 },
             "actions": [
               {
                 "do": "highlight",

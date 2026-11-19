@@ -27,7 +27,7 @@ L'export MP4 et la version approfondie en Manim existent, mais ne se montrent pa
 - **Quiz** : l'entrée apparaît quand le quiz est prêt ; les réponses sont gardées jusqu'au changement d'explication.
 - **Couper la génération** : serveur local, couper le réseau du poste (la page, servie en local, reste accessible) ; la disponibilité de la génération est sondée au plus toutes les 30 secondes, d'où la coupure avant 2:40. Avec un serveur distant, couper le réseau du poste ferait aussi disparaître la page : utiliser une instance locale démarrée avec `LLM_API_KEY=` vide.
 - **Question du mode sans réseau** : elle doit être nouvelle, sinon le cache la sert malgré la coupure. Le message complet : « La génération est momentanément indisponible. Les explications préparées à l'avance restent disponibles : ouvre-en une en attendant. »
-- **Exemples du sommaire** : 12 concepts, en français et en anglais, sans voix enregistrée : sous-titres seuls, à dire tel quel. « La gravitation universelle » en français est le seul dont le colophon ne présente pas de verdict de vérification : le montrer sur l'explication générée, pas sur cet exemple.
+- **Exemples du sommaire** : 12 concepts, en français et en anglais, narrés (Agathe en français, Thalia en anglais) et sous-titrés. « La gravitation universelle » en français est le seul dont le colophon ne présente pas de verdict de vérification : le montrer sur l'explication générée, pas sur cet exemple.
 - **En retard** : sacrifier d'abord le quiz (garder un exercice), puis les curseurs ; ne pas sacrifier le mode sans réseau.
 
 ## Plan B

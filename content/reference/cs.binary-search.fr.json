@@ -339,6 +339,7 @@
           {
             "id": "b1",
             "narration": "Un dictionnaire, mille pages. Vous cherchez un mot. Par où commencez-vous ?",
+            "audio": { "url": "/media/zqk47yz7ghf2/s1-b1.mp3", "duration_ms": 4656 },
             "actions": [
               {
                 "do": "show",
@@ -362,6 +363,7 @@
           {
             "id": "b2",
             "narration": "Une main impatiente ouvre une page au hasard, puis une autre, encore une.",
+            "audio": { "url": "/media/zqk47yz7ghf2/s1-b2.mp3", "duration_ms": 5544 },
             "actions": [
               {
                 "do": "show",
@@ -407,6 +409,7 @@
           {
             "id": "b3",
             "narration": "Rien à faire : au pire, il faut tourner mille pages. Il existe sûrement mieux.",
+            "audio": { "url": "/media/zqk47yz7ghf2/s1-b3.mp3", "duration_ms": 6696 },
             "actions": [
               {
                 "do": "show",
@@ -516,6 +519,7 @@
           {
             "id": "b1",
             "narration": "Tu cherches un mot. Tu ouvres le dictionnaire au milieu, pas au hasard.",
+            "audio": { "url": "/media/zqk47yz7ghf2/s2-b1.mp3", "duration_ms": 4824 },
             "actions": [
               {
                 "do": "show",
@@ -543,6 +547,7 @@
           {
             "id": "b2",
             "narration": "Regarde : d’un seul geste, une moitié entière devient inutile.",
+            "audio": { "url": "/media/zqk47yz7ghf2/s2-b2.mp3", "duration_ms": 5136 },
             "actions": [
               {
                 "do": "show",
@@ -563,6 +568,7 @@
           {
             "id": "b3",
             "narration": "La page cherchée, elle, reste toujours du bon côté du pli.",
+            "audio": { "url": "/media/zqk47yz7ghf2/s2-b3.mp3", "duration_ms": 4464 },
             "actions": [
               {
                 "do": "highlight",
@@ -644,6 +650,7 @@
           {
             "id": "b1",
             "narration": "On vise le 41. Premier geste : couper au milieu, et comparer.",
+            "audio": { "url": "/media/zqk47yz7ghf2/s3-b1.mp3", "duration_ms": 5616 },
             "actions": [
               {
                 "do": "show",
@@ -662,6 +669,7 @@
           {
             "id": "b2",
             "narration": "Toute la moitié gauche s’éteint : elle ne contient rien d’utile.",
+            "audio": { "url": "/media/zqk47yz7ghf2/s3-b2.mp3", "duration_ms": 4584 },
             "actions": [
               {
                 "do": "play",
@@ -674,6 +682,7 @@
           {
             "id": "b3",
             "narration": "Deuxième et troisième coupures : l’intervalle fond. Regarde le compteur à droite.",
+            "audio": { "url": "/media/zqk47yz7ghf2/s3-b3.mp3", "duration_ms": 5856 },
             "actions": [
               {
                 "do": "play",
@@ -797,6 +806,7 @@
           {
             "id": "b1",
             "narration": "Chaque comparaison coupe l’intervalle en deux. Regarde la barre rétrécir.",
+            "audio": { "url": "/media/zqk47yz7ghf2/s4-b1.mp3", "duration_ms": 4368 },
             "actions": [
               {
                 "do": "show",
@@ -818,6 +828,7 @@
           {
             "id": "b2",
             "narration": "Après k découpes, il reste n divisé par deux puissance k.",
+            "audio": { "url": "/media/zqk47yz7ghf2/s4-b2.mp3", "duration_ms": 5256 },
             "actions": [
               {
                 "do": "show",
@@ -839,6 +850,7 @@
           {
             "id": "b3",
             "narration": "On s’arrête à une case : le nombre d’étapes, c’est le logarithme en base deux.",
+            "audio": { "url": "/media/zqk47yz7ghf2/s4-b3.mp3", "duration_ms": 4464 },
             "actions": [
               {
                 "do": "show",
@@ -941,6 +953,7 @@
           {
             "id": "b1",
             "narration": "Un million d’éléments : la recherche linéaire en compare un million. Devine ce que fait la dichotomie.",
+            "audio": { "url": "/media/zqk47yz7ghf2/s5-b1.mp3", "duration_ms": 7248 },
             "actions": [
               {
                 "do": "show",
@@ -963,6 +976,7 @@
           {
             "id": "b2",
             "narration": "Vingt comparaisons, pas une de plus. Regarde la courbe : elle rampe.",
+            "audio": { "url": "/media/zqk47yz7ghf2/s5-b2.mp3", "duration_ms": 4728 },
             "actions": [
               {
                 "do": "show",
@@ -984,6 +998,7 @@
           {
             "id": "b3",
             "narration": "Double la taille du tableau : une comparaison de plus, à peine.",
+            "audio": { "url": "/media/zqk47yz7ghf2/s5-b3.mp3", "duration_ms": 4656 },
             "actions": [
               {
                 "do": "sweep",
@@ -1027,6 +1042,7 @@
           {
             "id": "b1",
             "narration": "Un : on ouvre au milieu, et la moitié inutile disparaît.",
+            "audio": { "url": "/media/zqk47yz7ghf2/s6-b1.mp3", "duration_ms": 4776 },
             "actions": [
               {
                 "do": "show",
@@ -1040,6 +1056,7 @@
           {
             "id": "b2",
             "narration": "Deux : l’intervalle est divisé par deux à chaque étape, d’où le logarithme.",
+            "audio": { "url": "/media/zqk47yz7ghf2/s6-b2.mp3", "duration_ms": 4704 },
             "actions": [
               {
                 "do": "show",
@@ -1053,6 +1070,7 @@
           {
             "id": "b3",
             "narration": "Trois : voilà la réponse au dictionnaire. Un million de pages, vingt coups.",
+            "audio": { "url": "/media/zqk47yz7ghf2/s6-b3.mp3", "duration_ms": 5208 },
             "actions": [
               {
                 "do": "show",

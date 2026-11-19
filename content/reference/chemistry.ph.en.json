@@ -291,6 +291,7 @@
           {
             "id": "b1",
             "narration": "Dip the meter into lemon juice: it reads pH 2. Vinegar reads pH 3.",
+            "audio": { "url": "/media/82aeegwc7guc/s1-b1.mp3", "duration_ms": 6504 },
             "actions": [
               {
                 "do": "show",
@@ -321,6 +322,7 @@
           {
             "id": "b2",
             "narration": "One small step on the scale. Surely the two liquids are almost the same?",
+            "audio": { "url": "/media/82aeegwc7guc/s1-b2.mp3", "duration_ms": 4608 },
             "actions": [
               {
                 "do": "show",
@@ -334,6 +336,7 @@
           {
             "id": "b3",
             "narration": "Not quite. What does that number count? Guess before you look.",
+            "audio": { "url": "/media/82aeegwc7guc/s1-b3.mp3", "duration_ms": 3888 },
             "actions": [
               {
                 "do": "highlight",
@@ -520,6 +523,7 @@
           {
             "id": "b1",
             "narration": "Climb a staircase of tens: each step up multiplies by ten.",
+            "audio": { "url": "/media/82aeegwc7guc/s2-b1.mp3", "duration_ms": 3984 },
             "actions": [
               {
                 "do": "show",
@@ -543,6 +547,7 @@
           {
             "id": "b2",
             "narration": "The next columns rise ten, then a hundred times higher.",
+            "audio": { "url": "/media/82aeegwc7guc/s2-b2.mp3", "duration_ms": 3936 },
             "actions": [
               {
                 "do": "show",
@@ -576,6 +581,7 @@
           {
             "id": "b3",
             "narration": "That is the whole trick: you count multiplications, not grams.",
+            "audio": { "url": "/media/82aeegwc7guc/s2-b3.mp3", "duration_ms": 4056 },
             "actions": [
               {
                 "do": "show",
@@ -677,6 +683,7 @@
           {
             "id": "b1",
             "narration": "Each bar counts the H⁺ ions in one litre of a beaker.",
+            "audio": { "url": "/media/82aeegwc7guc/s3-b1.mp3", "duration_ms": 3576 },
             "actions": [
               {
                 "do": "show",
@@ -690,6 +697,7 @@
           {
             "id": "b2",
             "narration": "Guess what happens to the pH when the ions become ten times rarer?",
+            "audio": { "url": "/media/82aeegwc7guc/s3-b2.mp3", "duration_ms": 3744 },
             "actions": [
               {
                 "do": "show",
@@ -704,6 +712,7 @@
           {
             "id": "b3",
             "narration": "The count turns into a small handy number: pH goes up by one.",
+            "audio": { "url": "/media/82aeegwc7guc/s3-b3.mp3", "duration_ms": 4344 },
             "actions": [
               {
                 "do": "sweep",
@@ -833,6 +842,7 @@
           {
             "id": "b1",
             "narration": "Here is the whole rule: pH is minus the base-ten log of the H⁺ concentration.",
+            "audio": { "url": "/media/82aeegwc7guc/s4-b1.mp3", "duration_ms": 5784 },
             "actions": [
               {
                 "do": "show",
@@ -855,6 +865,7 @@
           {
             "id": "b2",
             "narration": "Watch the marker ride the scale as the ion concentration changes by a factor of ten.",
+            "audio": { "url": "/media/82aeegwc7guc/s4-b2.mp3", "duration_ms": 4896 },
             "actions": [
               {
                 "do": "show",
@@ -884,6 +895,7 @@
           {
             "id": "b3",
             "narration": "Divide the ions by ten, and the pH climbs by exactly one step.",
+            "audio": { "url": "/media/82aeegwc7guc/s4-b3.mp3", "duration_ms": 3888 },
             "actions": [
               {
                 "do": "highlight",
@@ -989,6 +1001,7 @@
           {
             "id": "b1",
             "narration": "Lemon juice sits at pH 2: ten to the minus two mol per litre of H⁺ ions.",
+            "audio": { "url": "/media/82aeegwc7guc/s5-b1.mp3", "duration_ms": 6744 },
             "actions": [
               {
                 "do": "show",
@@ -1003,6 +1016,7 @@
           {
             "id": "b2",
             "narration": "Vinegar sits at pH 3, ten to the minus three. One step, ten times fewer ions.",
+            "audio": { "url": "/media/82aeegwc7guc/s5-b2.mp3", "duration_ms": 6696 },
             "actions": [
               {
                 "do": "show",
@@ -1017,6 +1031,7 @@
           {
             "id": "b3",
             "narration": "Look at the two bars: vinegar holds ten times fewer H⁺ ions than lemon.",
+            "audio": { "url": "/media/82aeegwc7guc/s5-b3.mp3", "duration_ms": 5328 },
             "actions": [
               {
                 "do": "highlight",
@@ -1052,6 +1067,7 @@
           {
             "id": "b1",
             "narration": "First: pH counts the H⁺ ions in one litre, from 0 to 14.",
+            "audio": { "url": "/media/82aeegwc7guc/s6-b1.mp3", "duration_ms": 6048 },
             "actions": [
               {
                 "do": "show",
@@ -1065,11 +1081,13 @@
           {
             "id": "b2",
             "narration": "Second: one step of pH multiplies the H⁺ concentration by ten.",
+            "audio": { "url": "/media/82aeegwc7guc/s6-b2.mp3", "duration_ms": 5064 },
             "actions": []
           },
           {
             "id": "b3",
             "narration": "So lemon at pH 2 holds ten times more H⁺ than vinegar at pH 3.",
+            "audio": { "url": "/media/82aeegwc7guc/s6-b3.mp3", "duration_ms": 5088 },
             "actions": [
               {
                 "do": "highlight",

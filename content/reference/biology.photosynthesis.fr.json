@@ -409,6 +409,7 @@
           {
             "id": "b1",
             "narration": "Regarde cette graine minuscule, posée dans la terre. Elle pèse presque rien.",
+            "audio": { "url": "/media/8zgjyuw3n5ew/s1-b1.mp3", "duration_ms": 4944 },
             "actions": [
               {
                 "do": "show",
@@ -436,6 +437,7 @@
           {
             "id": "b2",
             "narration": "Quelques années plus tard, en accéléré, voilà un arbre entier.",
+            "audio": { "url": "/media/8zgjyuw3n5ew/s1-b2.mp3", "duration_ms": 3864 },
             "actions": [
               {
                 "do": "show",
@@ -477,6 +479,7 @@
           {
             "id": "b3",
             "narration": "Mais la terre n’a presque pas bougé. D’où vient toute cette matière ?",
+            "audio": { "url": "/media/8zgjyuw3n5ew/s1-b3.mp3", "duration_ms": 4344 },
             "actions": [
               {
                 "do": "show",
@@ -634,6 +637,7 @@
           {
             "id": "b1",
             "narration": "Pense à une cuisine. Il faut des ingrédients, et il faut allumer le four.",
+            "audio": { "url": "/media/8zgjyuw3n5ew/s2-b1.mp3", "duration_ms": 5304 },
             "actions": [
               {
                 "do": "show",
@@ -656,6 +660,7 @@
           {
             "id": "b2",
             "narration": "L’eau et le gaz tombent dans le saladier. Le four allumé, le plat apparaît.",
+            "audio": { "url": "/media/8zgjyuw3n5ew/s2-b2.mp3", "duration_ms": 6024 },
             "actions": [
               {
                 "do": "show",
@@ -692,6 +697,7 @@
           {
             "id": "b3",
             "narration": "Et de la vapeur s’échappe. Sans four, rien ne cuit : c’est la lumière qui allume la feuille.",
+            "audio": { "url": "/media/8zgjyuw3n5ew/s2-b3.mp3", "duration_ms": 7248 },
             "actions": [
               {
                 "do": "show",
@@ -887,6 +893,7 @@
           {
             "id": "b1",
             "narration": "Regarde cette feuille grossie. L’eau monte par la tige, le dioxyde de carbone entre par les petits pores.",
+            "audio": { "url": "/media/8zgjyuw3n5ew/s3-b1.mp3", "duration_ms": 7704 },
             "actions": [
               {
                 "do": "show",
@@ -909,6 +916,7 @@
           {
             "id": "b2",
             "narration": "La lumière frappe la feuille : c’est l’énergie qui lance la cuisine.",
+            "audio": { "url": "/media/8zgjyuw3n5ew/s3-b2.mp3", "duration_ms": 4104 },
             "actions": [
               {
                 "do": "show",
@@ -923,6 +931,7 @@
           {
             "id": "b3",
             "narration": "Et voilà les deux sorties : le sucre descend vers la plante, l’oxygène s’échappe dans l’air.",
+            "audio": { "url": "/media/8zgjyuw3n5ew/s3-b3.mp3", "duration_ms": 7104 },
             "actions": [
               {
                 "do": "show",
@@ -946,6 +955,7 @@
           {
             "id": "b4",
             "narration": "Retiens les trois entrées et les deux sorties : la feuille est une petite usine.",
+            "audio": { "url": "/media/8zgjyuw3n5ew/s3-b4.mp3", "duration_ms": 5928 },
             "actions": [
               {
                 "do": "highlight",
@@ -1053,6 +1063,7 @@
           {
             "id": "b1",
             "narration": "Regarde : plus la feuille reçoit de lumière, plus elle fabrique de sucre.",
+            "audio": { "url": "/media/8zgjyuw3n5ew/s4-b1.mp3", "duration_ms": 5136 },
             "actions": [
               {
                 "do": "show",
@@ -1080,6 +1091,7 @@
           {
             "id": "b2",
             "narration": "Le curseur se promène au-dessus : le résultat grimpe à chaque fois.",
+            "audio": { "url": "/media/8zgjyuw3n5ew/s4-b2.mp3", "duration_ms": 5208 },
             "actions": [
               {
                 "do": "show",
@@ -1106,6 +1118,7 @@
           {
             "id": "b3",
             "narration": "Mais à pleine lumière, la courbe s’aplatit : la plante a un plafond.",
+            "audio": { "url": "/media/8zgjyuw3n5ew/s4-b3.mp3", "duration_ms": 5688 },
             "actions": [
               {
                 "do": "show",
@@ -1208,6 +1221,7 @@
           {
             "id": "b1",
             "narration": "Prends une feuille d’un décimètre carré, sous une lumière moyenne, pendant une heure.",
+            "audio": { "url": "/media/8zgjyuw3n5ew/s5-b1.mp3", "duration_ms": 5016 },
             "actions": [
               {
                 "do": "show",
@@ -1221,6 +1235,7 @@
           {
             "id": "b2",
             "narration": "Deux barres : le sucre fabriqué, et l’oxygène rejeté. Devine laquelle est la plus haute.",
+            "audio": { "url": "/media/8zgjyuw3n5ew/s5-b2.mp3", "duration_ms": 6984 },
             "actions": [
               {
                 "do": "show",
@@ -1235,6 +1250,7 @@
           {
             "id": "b3",
             "narration": "Surprise : l’oxygène pèse plus lourd que le sucre. La feuille en rejette davantage.",
+            "audio": { "url": "/media/8zgjyuw3n5ew/s5-b3.mp3", "duration_ms": 6024 },
             "actions": [
               {
                 "do": "highlight",
@@ -1276,6 +1292,7 @@
           {
             "id": "b1",
             "narration": "Trois idées à garder. La feuille reçoit de la lumière, de l’eau et du dioxyde de carbone.",
+            "audio": { "url": "/media/8zgjyuw3n5ew/s6-b1.mp3", "duration_ms": 6528 },
             "actions": [
               {
                 "do": "show",
@@ -1289,6 +1306,7 @@
           {
             "id": "b2",
             "narration": "Avec ça, elle fabrique du sucre. Et elle rejette de l’oxygène, que tu respires.",
+            "audio": { "url": "/media/8zgjyuw3n5ew/s6-b2.mp3", "duration_ms": 5424 },
             "actions": [
               {
                 "do": "show",
@@ -1302,6 +1320,7 @@
           {
             "id": "b3",
             "narration": "Alors, d’où vient le bois ? Du carbone de l’air, pas de la terre.",
+            "audio": { "url": "/media/8zgjyuw3n5ew/s6-b3.mp3", "duration_ms": 4728 },
             "actions": [
               {
                 "do": "show",

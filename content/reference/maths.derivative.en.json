@@ -327,6 +327,7 @@
           {
             "id": "b1",
             "narration": "Here is a car on a straight road. Its distance grows with time.",
+            "audio": { "url": "/media/j4s4mps89q6s/s1-b1.mp3", "duration_ms": 4056 },
             "actions": [
               {
                 "do": "show",
@@ -354,6 +355,7 @@
           {
             "id": "b2",
             "narration": "Watch the car and the curve together: one second, one new point.",
+            "audio": { "url": "/media/j4s4mps89q6s/s1-b2.mp3", "duration_ms": 4464 },
             "actions": [
               {
                 "do": "move",
@@ -368,6 +370,7 @@
           {
             "id": "b3",
             "narration": "But at exactly three seconds, how fast is it going? Guess first.",
+            "audio": { "url": "/media/j4s4mps89q6s/s1-b3.mp3", "duration_ms": 4368 },
             "actions": [
               {
                 "do": "show",
@@ -532,6 +535,7 @@
           {
             "id": "b1",
             "narration": "Your car’s distance over time. Pick your start, and a later instant.",
+            "audio": { "url": "/media/j4s4mps89q6s/s2-b1.mp3", "duration_ms": 4128 },
             "actions": [
               {
                 "do": "show",
@@ -560,6 +564,7 @@
           {
             "id": "b2",
             "narration": "Join the two points: the secant gives your average speed over that trip.",
+            "audio": { "url": "/media/j4s4mps89q6s/s2-b2.mp3", "duration_ms": 4368 },
             "actions": [
               {
                 "do": "show",
@@ -581,6 +586,7 @@
           {
             "id": "b3",
             "narration": "And the speedometer? Slide the second point closer and watch the line turn.",
+            "audio": { "url": "/media/j4s4mps89q6s/s2-b3.mp3", "duration_ms": 4656 },
             "actions": [
               {
                 "do": "show",
@@ -756,6 +762,7 @@
           {
             "id": "b1",
             "narration": "Two points on the curve, joined by a secant. Its slope is rise over run.",
+            "audio": { "url": "/media/j4s4mps89q6s/s3-b1.mp3", "duration_ms": 5208 },
             "actions": [
               {
                 "do": "show",
@@ -797,6 +804,7 @@
           {
             "id": "b2",
             "narration": "Now slide Q toward P. Watch the secant turn, and the slope change.",
+            "audio": { "url": "/media/j4s4mps89q6s/s3-b2.mp3", "duration_ms": 5256 },
             "actions": [
               {
                 "do": "show",
@@ -815,6 +823,7 @@
           {
             "id": "b3",
             "narration": "When the gap closes, the secant becomes the tangent. That slope is the derivative.",
+            "audio": { "url": "/media/j4s4mps89q6s/s3-b3.mp3", "duration_ms": 5136 },
             "actions": [
               {
                 "do": "show",
@@ -942,6 +951,7 @@
           {
             "id": "b1",
             "narration": "Here is the definition. The green h is the step between the two points.",
+            "audio": { "url": "/media/j4s4mps89q6s/s4-b1.mp3", "duration_ms": 4968 },
             "actions": [
               {
                 "do": "show",
@@ -980,6 +990,7 @@
           {
             "id": "b2",
             "narration": "That dashed line is the secant. Its slope is the average rate of change.",
+            "audio": { "url": "/media/j4s4mps89q6s/s4-b2.mp3", "duration_ms": 4656 },
             "actions": [
               {
                 "do": "show",
@@ -994,6 +1005,7 @@
           {
             "id": "b3",
             "narration": "Now shrink h toward zero. Watch the secant settle into the tangent.",
+            "audio": { "url": "/media/j4s4mps89q6s/s4-b3.mp3", "duration_ms": 4776 },
             "actions": [
               {
                 "do": "sweep",
@@ -1133,6 +1145,7 @@
           {
             "id": "b1",
             "narration": "Here is the limit definition. It works for any function, at any point you choose.",
+            "audio": { "url": "/media/j4s4mps89q6s/s5-b1.mp3", "duration_ms": 5088 },
             "actions": [
               {
                 "do": "show",
@@ -1154,6 +1167,7 @@
           {
             "id": "b2",
             "narration": "Take f of x equals x squared, at x equal to two. Guess the slope before it appears.",
+            "audio": { "url": "/media/j4s4mps89q6s/s5-b2.mp3", "duration_ms": 6768 },
             "actions": [
               {
                 "do": "show",
@@ -1175,6 +1189,7 @@
           {
             "id": "b3",
             "narration": "The tangent rises four for each step right, so the derivative is four.",
+            "audio": { "url": "/media/j4s4mps89q6s/s5-b3.mp3", "duration_ms": 4176 },
             "actions": [
               {
                 "do": "show",
@@ -1195,6 +1210,7 @@
           {
             "id": "b4",
             "narration": "At three, it climbs to six. Twice the x, twice the slope.",
+            "audio": { "url": "/media/j4s4mps89q6s/s5-b4.mp3", "duration_ms": 4776 },
             "actions": [
               {
                 "do": "show",
@@ -1236,6 +1252,7 @@
           {
             "id": "b1",
             "narration": "Three ideas to keep. One: the derivative is an instantaneous rate of change.",
+            "audio": { "url": "/media/j4s4mps89q6s/s6-b1.mp3", "duration_ms": 5904 },
             "actions": [
               {
                 "do": "show",
@@ -1249,11 +1266,13 @@
           {
             "id": "b2",
             "narration": "Two: it is the slope of the tangent line. That is what your speedometer reads.",
+            "audio": { "url": "/media/j4s4mps89q6s/s6-b2.mp3", "duration_ms": 5064 },
             "actions": []
           },
           {
             "id": "b3",
             "narration": "And at x equals two on the parabola, that slope is exactly four.",
+            "audio": { "url": "/media/j4s4mps89q6s/s6-b3.mp3", "duration_ms": 4584 },
             "actions": [
               {
                 "do": "highlight",

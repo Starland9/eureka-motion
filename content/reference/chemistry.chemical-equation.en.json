@@ -372,6 +372,7 @@
           {
             "id": "b1",
             "narration": "A candle burns. Look at the equation people write for it.",
+            "audio": { "url": "/media/aqjqfc9se4ef/s1-b1.mp3", "duration_ms": 4176 },
             "actions": [
               {
                 "do": "show",
@@ -395,6 +396,7 @@
           {
             "id": "b2",
             "narration": "Count the atoms on each side. Hydrogen matches. Oxygen is short by one.",
+            "audio": { "url": "/media/aqjqfc9se4ef/s1-b2.mp3", "duration_ms": 5616 },
             "actions": [
               {
                 "do": "show",
@@ -409,6 +411,7 @@
           {
             "id": "b3",
             "narration": "Does a burning candle destroy oxygen atoms? Think before you answer.",
+            "audio": { "url": "/media/aqjqfc9se4ef/s1-b3.mp3", "duration_ms": 4608 },
             "actions": [
               {
                 "do": "show",
@@ -605,6 +608,7 @@
           {
             "id": "b1",
             "narration": "Picture a bike factory: frames and wheels on the bench, bikes on the other side.",
+            "audio": { "url": "/media/aqjqfc9se4ef/s2-b1.mp3", "duration_ms": 4824 },
             "actions": [
               {
                 "do": "show",
@@ -638,6 +642,7 @@
           {
             "id": "b2",
             "narration": "Each bike needs two wheels. You have three wheels and two bikes waiting.",
+            "audio": { "url": "/media/aqjqfc9se4ef/s2-b2.mp3", "duration_ms": 4584 },
             "actions": [
               {
                 "do": "show",
@@ -659,6 +664,7 @@
           {
             "id": "b3",
             "narration": "One wheel is left over, not lost. Atoms work the same way in an equation.",
+            "audio": { "url": "/media/aqjqfc9se4ef/s2-b3.mp3", "duration_ms": 5256 },
             "actions": [
               {
                 "do": "show",
@@ -749,6 +755,7 @@
           {
             "id": "b1",
             "narration": "Look at the bars: four hydrogen atoms on the left, but only two on the right.",
+            "audio": { "url": "/media/aqjqfc9se4ef/s3-b1.mp3", "duration_ms": 4848 },
             "actions": [
               {
                 "do": "show",
@@ -769,6 +776,7 @@
           {
             "id": "b2",
             "narration": "Put a 2 in front of water to fix oxygen.",
+            "audio": { "url": "/media/aqjqfc9se4ef/s3-b2.mp3", "duration_ms": 2496 },
             "actions": [
               {
                 "do": "sweep",
@@ -790,6 +798,7 @@
           {
             "id": "b3",
             "narration": "Now oxygen matches, but hydrogen is still too high.",
+            "audio": { "url": "/media/aqjqfc9se4ef/s3-b3.mp3", "duration_ms": 3864 },
             "actions": [
               {
                 "do": "highlight",
@@ -880,6 +889,7 @@
           {
             "id": "b1",
             "narration": "Here is the rule: the same count of each element, before and after.",
+            "audio": { "url": "/media/aqjqfc9se4ef/s4-b1.mp3", "duration_ms": 4224 },
             "actions": [
               {
                 "do": "show",
@@ -893,6 +903,7 @@
           {
             "id": "b2",
             "narration": "You may put whole numbers in front. Watch this forbidden trick: changing the formula itself.",
+            "audio": { "url": "/media/aqjqfc9se4ef/s4-b2.mp3", "duration_ms": 5904 },
             "actions": [
               {
                 "do": "show",
@@ -907,6 +918,7 @@
           {
             "id": "b3",
             "narration": "H₂O₂ has more atoms than water, so the trick is out.",
+            "audio": { "url": "/media/aqjqfc9se4ef/s4-b3.mp3", "duration_ms": 3816 },
             "actions": [
               {
                 "do": "show",
@@ -1012,6 +1024,7 @@
           {
             "id": "b1",
             "narration": "Start with two H2 and one O2. On the right, we wrote two waters. Now count.",
+            "audio": { "url": "/media/aqjqfc9se4ef/s5-b1.mp3", "duration_ms": 7176 },
             "actions": [
               {
                 "do": "show",
@@ -1035,6 +1048,7 @@
           {
             "id": "b2",
             "narration": "Hydrogen matches. But oxygen does not: the right side is short by one atom.",
+            "audio": { "url": "/media/aqjqfc9se4ef/s5-b2.mp3", "duration_ms": 5376 },
             "actions": [
               {
                 "do": "show",
@@ -1055,6 +1069,7 @@
           {
             "id": "b3",
             "narration": "Double the water to fix oxygen, and now hydrogen is short. Counts have to match everywhere.",
+            "audio": { "url": "/media/aqjqfc9se4ef/s5-b3.mp3", "duration_ms": 6264 },
             "actions": [
               {
                 "do": "sweep",
@@ -1104,6 +1119,7 @@
           {
             "id": "b1",
             "narration": "Two things to keep. First, atoms are never lost: count them on each side.",
+            "audio": { "url": "/media/aqjqfc9se4ef/s6-b1.mp3", "duration_ms": 5544 },
             "actions": [
               {
                 "do": "show",
@@ -1117,11 +1133,13 @@
           {
             "id": "b2",
             "narration": "Second, you fix the count with whole numbers in front of the formulas, nothing else.",
+            "audio": { "url": "/media/aqjqfc9se4ef/s6-b2.mp3", "duration_ms": 5424 },
             "actions": []
           },
           {
             "id": "b3",
             "narration": "So the candle loses nothing: 2 H₂ plus O₂ gives 2 H₂O. Same atoms, new molecules.",
+            "audio": { "url": "/media/aqjqfc9se4ef/s6-b3.mp3", "duration_ms": 7848 },
             "actions": [
               {
                 "do": "show",

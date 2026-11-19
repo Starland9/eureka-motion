@@ -326,6 +326,7 @@
           {
             "id": "b1",
             "narration": "Two friends set aside the same starting capital, at the same rate.",
+            "audio": { "url": "/media/x2jkv73u5bnu/s1-b1.mp3", "duration_ms": 3816 },
             "actions": [
               {
                 "do": "show",
@@ -340,6 +341,7 @@
           {
             "id": "b2",
             "narration": "One grows in equal steps. The other bends upward, then overtakes.",
+            "audio": { "url": "/media/x2jkv73u5bnu/s1-b2.mp3", "duration_ms": 4944 },
             "actions": [
               {
                 "do": "show",
@@ -360,6 +362,7 @@
           {
             "id": "b3",
             "narration": "Same money, same rate. So why does the second one end up so far ahead?",
+            "audio": { "url": "/media/x2jkv73u5bnu/s1-b3.mp3", "duration_ms": 5136 },
             "actions": [
               {
                 "do": "sweep",
@@ -505,6 +508,7 @@
           {
             "id": "b1",
             "narration": "Picture a snowball rolling downhill, getting heavier with every turn.",
+            "audio": { "url": "/media/x2jkv73u5bnu/s2-b1.mp3", "duration_ms": 4416 },
             "actions": [
               {
                 "do": "show",
@@ -519,6 +523,7 @@
           {
             "id": "b2",
             "narration": "Each turn it sweeps up fresh snow, so it grows faster and faster.",
+            "audio": { "url": "/media/x2jkv73u5bnu/s2-b2.mp3", "duration_ms": 4344 },
             "actions": [
               {
                 "do": "move",
@@ -574,6 +579,7 @@
           {
             "id": "b3",
             "narration": "Interest works the same way: it earns interest, and the curve steepens.",
+            "audio": { "url": "/media/x2jkv73u5bnu/s2-b3.mp3", "duration_ms": 4416 },
             "actions": [
               {
                 "do": "show",
@@ -740,6 +746,7 @@
           {
             "id": "b1",
             "narration": "Year one: the capital earns interest, and the slice is added on top.",
+            "audio": { "url": "/media/x2jkv73u5bnu/s3-b1.mp3", "duration_ms": 4464 },
             "actions": [
               {
                 "do": "show",
@@ -767,6 +774,7 @@
           {
             "id": "b2",
             "narration": "Year two starts from the whole new stack, interest included.",
+            "audio": { "url": "/media/x2jkv73u5bnu/s3-b2.mp3", "duration_ms": 3408 },
             "actions": [
               {
                 "do": "show",
@@ -787,6 +795,7 @@
           {
             "id": "b3",
             "narration": "So the same percentage gives a thicker slice, because it bites the bigger stack.",
+            "audio": { "url": "/media/x2jkv73u5bnu/s3-b3.mp3", "duration_ms": 4344 },
             "actions": [
               {
                 "do": "show",
@@ -962,6 +971,7 @@
           {
             "id": "b1",
             "narration": "Each year your whole balance is multiplied by the same factor, one plus the rate.",
+            "audio": { "url": "/media/x2jkv73u5bnu/s4-b1.mp3", "duration_ms": 5088 },
             "actions": [
               {
                 "do": "show",
@@ -998,6 +1008,7 @@
           {
             "id": "b2",
             "narration": "Repeat it year after year, and the stamps multiply: the same factor again, again.",
+            "audio": { "url": "/media/x2jkv73u5bnu/s4-b2.mp3", "duration_ms": 5088 },
             "actions": [
               {
                 "do": "show",
@@ -1020,6 +1031,7 @@
           {
             "id": "b3",
             "narration": "So the count of stamps becomes an exponent: B equals C times that factor to the n.",
+            "audio": { "url": "/media/x2jkv73u5bnu/s4-b3.mp3", "duration_ms": 6456 },
             "actions": [
               {
                 "do": "show",
@@ -1128,6 +1140,7 @@
           {
             "id": "b1",
             "narration": "Start with one thousand euros at five percent, for ten years.",
+            "audio": { "url": "/media/x2jkv73u5bnu/s5-b1.mp3", "duration_ms": 4104 },
             "actions": [
               {
                 "do": "show",
@@ -1148,6 +1161,7 @@
           {
             "id": "b2",
             "narration": "Watch the balance. It bends upward, while simple interest stays a straight line.",
+            "audio": { "url": "/media/x2jkv73u5bnu/s5-b2.mp3", "duration_ms": 4968 },
             "actions": [
               {
                 "do": "show",
@@ -1168,6 +1182,7 @@
           {
             "id": "b3",
             "narration": "Here is the total, and the part that is pure interest on interest.",
+            "audio": { "url": "/media/x2jkv73u5bnu/s5-b3.mp3", "duration_ms": 4296 },
             "actions": [
               {
                 "do": "show",
@@ -1212,6 +1227,7 @@
           {
             "id": "b1",
             "narration": "First idea: each year, the interest is taken on the whole balance.",
+            "audio": { "url": "/media/x2jkv73u5bnu/s6-b1.mp3", "duration_ms": 4296 },
             "actions": [
               {
                 "do": "show",
@@ -1225,11 +1241,13 @@
           {
             "id": "b2",
             "narration": "Second: the balance is multiplied by one plus r, year after year.",
+            "audio": { "url": "/media/x2jkv73u5bnu/s6-b2.mp3", "duration_ms": 5088 },
             "actions": []
           },
           {
             "id": "b3",
             "narration": "That is why the second bar bends upward and overtakes the first.",
+            "audio": { "url": "/media/x2jkv73u5bnu/s6-b3.mp3", "duration_ms": 4536 },
             "actions": [
               {
                 "do": "highlight",

@@ -303,6 +303,7 @@
           {
             "id": "b1",
             "narration": "Here is a torch bulb, lit by one battery. Look how dim it glows.",
+            "audio": { "url": "/media/mqztyep4z7t8/s1-b1.mp3", "duration_ms": 4728 },
             "actions": [
               {
                 "do": "show",
@@ -318,6 +319,7 @@
           {
             "id": "b2",
             "narration": "Now slide a second battery in beside the first. Same bulb, same wire.",
+            "audio": { "url": "/media/mqztyep4z7t8/s1-b2.mp3", "duration_ms": 6336 },
             "actions": [
               {
                 "do": "show",
@@ -331,6 +333,7 @@
           {
             "id": "b3",
             "narration": "The bulb blazes. Guess: what did the extra battery give the charges?",
+            "audio": { "url": "/media/mqztyep4z7t8/s1-b3.mp3", "duration_ms": 5088 },
             "actions": [
               {
                 "do": "show",
@@ -451,6 +454,7 @@
           {
             "id": "b1",
             "narration": "Picture water in a pipe. The pump pushes, and the water flows.",
+            "audio": { "url": "/media/mqztyep4z7t8/s2-b1.mp3", "duration_ms": 4848 },
             "actions": [
               {
                 "do": "show",
@@ -474,6 +478,7 @@
           {
             "id": "b2",
             "narration": "Push harder: the flow speeds up. More push means more flow.",
+            "audio": { "url": "/media/mqztyep4z7t8/s2-b2.mp3", "duration_ms": 4656 },
             "actions": [
               {
                 "do": "sweep",
@@ -486,6 +491,7 @@
           {
             "id": "b3",
             "narration": "Now pinch the pipe. Same push, but much less water gets through.",
+            "audio": { "url": "/media/mqztyep4z7t8/s2-b3.mp3", "duration_ms": 4656 },
             "actions": [
               {
                 "do": "sweep",
@@ -555,6 +561,7 @@
           {
             "id": "b1",
             "narration": "Here is a battery and a resistor. Watch the charges inside the wire.",
+            "audio": { "url": "/media/mqztyep4z7t8/s3-b1.mp3", "duration_ms": 4008 },
             "actions": [
               {
                 "do": "show",
@@ -577,6 +584,7 @@
           {
             "id": "b2",
             "narration": "The battery pushes. For a bigger voltage, the same charges flow faster.",
+            "audio": { "url": "/media/mqztyep4z7t8/s3-b2.mp3", "duration_ms": 5208 },
             "actions": [
               {
                 "do": "show",
@@ -600,6 +608,7 @@
           {
             "id": "b3",
             "narration": "That flow is the current, in amperes: the ammeter needle climbs.",
+            "audio": { "url": "/media/mqztyep4z7t8/s3-b3.mp3", "duration_ms": 4608 },
             "actions": [
               {
                 "do": "sweep",
@@ -686,6 +695,7 @@
           {
             "id": "b1",
             "narration": "Here is the whole rule: voltage equals resistance times current. Three letters, one line.",
+            "audio": { "url": "/media/mqztyep4z7t8/s4-b1.mp3", "duration_ms": 6408 },
             "actions": [
               {
                 "do": "show",
@@ -706,6 +716,7 @@
           {
             "id": "b2",
             "narration": "Fix the resistance, and the voltage line starts rising as the current grows.",
+            "audio": { "url": "/media/mqztyep4z7t8/s4-b2.mp3", "duration_ms": 5016 },
             "actions": [
               {
                 "do": "show",
@@ -728,6 +739,7 @@
           {
             "id": "b3",
             "narration": "Now double the voltage. Watch the current readout: it doubles too.",
+            "audio": { "url": "/media/mqztyep4z7t8/s4-b3.mp3", "duration_ms": 4464 },
             "actions": [
               {
                 "do": "sweep",
@@ -812,6 +824,7 @@
           {
             "id": "b1",
             "narration": "Same 3 volt battery, two circuits. Guess which one carries more current.",
+            "audio": { "url": "/media/mqztyep4z7t8/s5-b1.mp3", "duration_ms": 5088 },
             "actions": [
               {
                 "do": "show",
@@ -826,6 +839,7 @@
           {
             "id": "b2",
             "narration": "The bulb has 6 ohms. Three volts divided by six gives half an amp.",
+            "audio": { "url": "/media/mqztyep4z7t8/s5-b2.mp3", "duration_ms": 4488 },
             "actions": [
               {
                 "do": "show",
@@ -846,6 +860,7 @@
           {
             "id": "b3",
             "narration": "The thin wire has only 0.1 ohm. Same push, less resistance: the current explodes.",
+            "audio": { "url": "/media/mqztyep4z7t8/s5-b3.mp3", "duration_ms": 7248 },
             "actions": [
               {
                 "do": "highlight",
@@ -886,6 +901,7 @@
           {
             "id": "b1",
             "narration": "Three ideas to keep. Voltage pushes, resistance holds back, current is the flow.",
+            "audio": { "url": "/media/mqztyep4z7t8/s6-b1.mp3", "duration_ms": 5568 },
             "actions": [
               {
                 "do": "show",
@@ -899,11 +915,13 @@
           {
             "id": "b2",
             "narration": "And the rule links them: U equals R times I, every single time.",
+            "audio": { "url": "/media/mqztyep4z7t8/s6-b2.mp3", "duration_ms": 6216 },
             "actions": []
           },
           {
             "id": "b3",
             "narration": "So why is the bulb brighter? Two batteries double the push, so double the flow.",
+            "audio": { "url": "/media/mqztyep4z7t8/s6-b3.mp3", "duration_ms": 6528 },
             "actions": [
               {
                 "do": "highlight",

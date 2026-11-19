@@ -293,6 +293,7 @@
           {
             "id": "b1",
             "narration": "La voiture roule. Regarde le compteur : il grimpe, puis il redescend.",
+            "audio": { "url": "/media/w2gaejjhn8j9/s1-b1.mp3", "duration_ms": 5664 },
             "actions": [
               {
                 "do": "show",
@@ -314,6 +315,7 @@
           {
             "id": "b2",
             "narration": "Ta vitesse change à chaque seconde. Alors laquelle afficher ?",
+            "audio": { "url": "/media/w2gaejjhn8j9/s1-b2.mp3", "duration_ms": 4608 },
             "actions": [
               {
                 "do": "show",
@@ -327,6 +329,7 @@
           {
             "id": "b3",
             "narration": "Il existe pourtant une vitesse précise à cet instant. Où la lire ?",
+            "audio": { "url": "/media/w2gaejjhn8j9/s1-b3.mp3", "duration_ms": 4536 },
             "actions": [
               {
                 "do": "show",
@@ -452,6 +455,7 @@
           {
             "id": "b1",
             "narration": "Deux bornes, un chrono : tu obtiens la vitesse moyenne du trajet.",
+            "audio": { "url": "/media/w2gaejjhn8j9/s2-b1.mp3", "duration_ms": 5304 },
             "actions": [
               {
                 "do": "show",
@@ -475,6 +479,7 @@
           {
             "id": "b2",
             "narration": "Mais le compteur, lui, bouge sans arrêt pendant que tu roules.",
+            "audio": { "url": "/media/w2gaejjhn8j9/s2-b2.mp3", "duration_ms": 3504 },
             "actions": [
               {
                 "do": "show",
@@ -498,6 +503,7 @@
           {
             "id": "b3",
             "narration": "Vitesse moyenne sur un trajet, vitesse instantanée sur le compteur : deux mots différents.",
+            "audio": { "url": "/media/w2gaejjhn8j9/s2-b3.mp3", "duration_ms": 6528 },
             "actions": [
               {
                 "do": "show",
@@ -659,6 +665,7 @@
           {
             "id": "b1",
             "narration": "Voici A et B sur la parabole. La corde qui les relie a une pente précise.",
+            "audio": { "url": "/media/w2gaejjhn8j9/s3-b1.mp3", "duration_ms": 5664 },
             "actions": [
               {
                 "do": "show",
@@ -696,6 +703,7 @@
           {
             "id": "b2",
             "narration": "Fais glisser B vers A : l’écart h rétrécit. Devine ce que devient la corde.",
+            "audio": { "url": "/media/w2gaejjhn8j9/s3-b2.mp3", "duration_ms": 6624 },
             "actions": [
               {
                 "do": "sweep",
@@ -707,6 +715,7 @@
           {
             "id": "b3",
             "narration": "Elle se confond avec la tangente. Sa pente, elle, se stabilise : c’est la dérivée.",
+            "audio": { "url": "/media/w2gaejjhn8j9/s3-b3.mp3", "duration_ms": 6096 },
             "actions": [
               {
                 "do": "show",
@@ -826,6 +835,7 @@
           {
             "id": "b1",
             "narration": "Le quotient de la corde, c’est le taux de variation. Regarde-le pendant que h rétrécit.",
+            "audio": { "url": "/media/w2gaejjhn8j9/s4-b1.mp3", "duration_ms": 7176 },
             "actions": [
               {
                 "do": "show",
@@ -858,6 +868,7 @@
           {
             "id": "b2",
             "narration": "Quand h tend vers zéro, B glisse vers A et la corde devient la tangente.",
+            "audio": { "url": "/media/w2gaejjhn8j9/s4-b2.mp3", "duration_ms": 5616 },
             "actions": [
               {
                 "do": "sweep",
@@ -869,6 +880,7 @@
           {
             "id": "b3",
             "narration": "Le quotient se stabilise : sa limite, c’est la dérivée. La pente de la tangente.",
+            "audio": { "url": "/media/w2gaejjhn8j9/s4-b3.mp3", "duration_ms": 5784 },
             "actions": [
               {
                 "do": "show",
@@ -1022,6 +1034,7 @@
           {
             "id": "b1",
             "narration": "Prends la parabole y égale x au carré. En a, la tangente monte de deux a.",
+            "audio": { "url": "/media/w2gaejjhn8j9/s5-b1.mp3", "duration_ms": 6648 },
             "actions": [
               {
                 "do": "show",
@@ -1059,6 +1072,7 @@
           {
             "id": "b2",
             "narration": "Devine : si l’abscisse double, la pente fait quoi ?",
+            "audio": { "url": "/media/w2gaejjhn8j9/s5-b2.mp3", "duration_ms": 4368 },
             "actions": [
               {
                 "do": "show",
@@ -1080,6 +1094,7 @@
           {
             "id": "b3",
             "narration": "Elle double aussi. La pente, elle, grandit deux fois plus vite.",
+            "audio": { "url": "/media/w2gaejjhn8j9/s5-b3.mp3", "duration_ms": 5088 },
             "actions": [
               {
                 "do": "sweep",
@@ -1121,6 +1136,7 @@
           {
             "id": "b1",
             "narration": "Première idée : la dérivée en a, c’est la pente de la tangente.",
+            "audio": { "url": "/media/w2gaejjhn8j9/s6-b1.mp3", "duration_ms": 4416 },
             "actions": [
               {
                 "do": "show",
@@ -1134,11 +1150,13 @@
           {
             "id": "b2",
             "narration": "Deuxième idée : c’est la limite du taux de variation quand h fond vers zéro.",
+            "audio": { "url": "/media/w2gaejjhn8j9/s6-b2.mp3", "duration_ms": 5568 },
             "actions": []
           },
           {
             "id": "b3",
             "narration": "Et la troisième répond au compteur : la dérivée, c’est la vitesse instantanée.",
+            "audio": { "url": "/media/w2gaejjhn8j9/s6-b3.mp3", "duration_ms": 5376 },
             "actions": [
               {
                 "do": "highlight",

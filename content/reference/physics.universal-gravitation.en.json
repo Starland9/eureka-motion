@@ -325,6 +325,7 @@
           {
             "id": "b1",
             "narration": "Let go of a ball. It falls straight down, no string needed.",
+            "audio": { "url": "/media/hxw9rhyhe3t5/s1-b1.mp3", "duration_ms": 4128 },
             "actions": [
               {
                 "do": "show",
@@ -344,6 +345,7 @@
           {
             "id": "b2",
             "narration": "Now look at the Moon. Same Earth below it. Why does it never fall?",
+            "audio": { "url": "/media/hxw9rhyhe3t5/s1-b2.mp3", "duration_ms": 4824 },
             "actions": [
               {
                 "do": "show",
@@ -366,6 +368,7 @@
           {
             "id": "b3",
             "narration": "Guess before you answer: what keeps pulling the Moon, across empty space?",
+            "audio": { "url": "/media/hxw9rhyhe3t5/s1-b3.mp3", "duration_ms": 4824 },
             "actions": [
               {
                 "do": "highlight",
@@ -495,6 +498,7 @@
           {
             "id": "b1",
             "narration": "Watch the sprayer send paint out in every direction.",
+            "audio": { "url": "/media/hxw9rhyhe3t5/s2-b1.mp3", "duration_ms": 3048 },
             "actions": [
               {
                 "do": "show",
@@ -523,6 +527,7 @@
           {
             "id": "b2",
             "narration": "Our little square sits one metre away. It catches a lot.",
+            "audio": { "url": "/media/hxw9rhyhe3t5/s2-b2.mp3", "duration_ms": 3816 },
             "actions": [
               {
                 "do": "show",
@@ -543,6 +548,7 @@
           {
             "id": "b3",
             "narration": "Now the paint reaches twice as far. Guess what the next square catches?",
+            "audio": { "url": "/media/hxw9rhyhe3t5/s2-b3.mp3", "duration_ms": 4536 },
             "actions": [
               {
                 "do": "show",
@@ -556,6 +562,7 @@
           {
             "id": "b4",
             "narration": "A quarter. Three times as far, and it’s only one ninth.",
+            "audio": { "url": "/media/hxw9rhyhe3t5/s2-b4.mp3", "duration_ms": 3408 },
             "actions": [
               {
                 "do": "show",
@@ -641,6 +648,7 @@
           {
             "id": "b1",
             "narration": "The Earth pulls the Moon. And the Moon pulls the Earth just as hard.",
+            "audio": { "url": "/media/hxw9rhyhe3t5/s3-b1.mp3", "duration_ms": 4056 },
             "actions": [
               {
                 "do": "show",
@@ -663,6 +671,7 @@
           {
             "id": "b2",
             "narration": "Measure from centre to centre: that distance is what counts.",
+            "audio": { "url": "/media/hxw9rhyhe3t5/s3-b2.mp3", "duration_ms": 4368 },
             "actions": [
               {
                 "do": "show",
@@ -684,6 +693,7 @@
           {
             "id": "b3",
             "narration": "Now guess. Move the Moon twice as far. What does each arrow do?",
+            "audio": { "url": "/media/hxw9rhyhe3t5/s3-b3.mp3", "duration_ms": 4656 },
             "actions": [
               {
                 "do": "sweep",
@@ -793,6 +803,7 @@
           {
             "id": "b1",
             "narration": "Here is the law in symbols. The masses sit on top, the distance squared below.",
+            "audio": { "url": "/media/hxw9rhyhe3t5/s4-b1.mp3", "duration_ms": 5424 },
             "actions": [
               {
                 "do": "show",
@@ -820,6 +831,7 @@
           {
             "id": "b2",
             "narration": "Look at the arrow: it points from the Moon to the Earth, along the line joining them.",
+            "audio": { "url": "/media/hxw9rhyhe3t5/s4-b2.mp3", "duration_ms": 4728 },
             "actions": [
               {
                 "do": "show",
@@ -840,6 +852,7 @@
           {
             "id": "b3",
             "narration": "Now push the Moon away. The arrow shrinks fast, because the distance is squared.",
+            "audio": { "url": "/media/hxw9rhyhe3t5/s4-b3.mp3", "duration_ms": 5616 },
             "actions": [
               {
                 "do": "sweep",
@@ -927,6 +940,7 @@
           {
             "id": "b1",
             "narration": "Between the Earth and the Moon, the pull is huge. Read the number.",
+            "audio": { "url": "/media/hxw9rhyhe3t5/s5-b1.mp3", "duration_ms": 4056 },
             "actions": [
               {
                 "do": "show",
@@ -941,6 +955,7 @@
           {
             "id": "b2",
             "narration": "Now guess. Twice as far away, how much force is left?",
+            "audio": { "url": "/media/hxw9rhyhe3t5/s5-b2.mp3", "duration_ms": 4056 },
             "actions": [
               {
                 "do": "show",
@@ -954,6 +969,7 @@
           {
             "id": "b3",
             "narration": "A quarter. Three times as far, a ninth. That is the inverse square.",
+            "audio": { "url": "/media/hxw9rhyhe3t5/s5-b3.mp3", "duration_ms": 4776 },
             "actions": [
               {
                 "do": "show",
@@ -995,6 +1011,7 @@
           {
             "id": "b1",
             "narration": "Two ideas first: two masses always pull on each other, equally hard.",
+            "audio": { "url": "/media/hxw9rhyhe3t5/s6-b1.mp3", "duration_ms": 4776 },
             "actions": [
               {
                 "do": "show",
@@ -1008,6 +1025,7 @@
           {
             "id": "b2",
             "narration": "More mass, more force. Twice as far, and you keep only a quarter.",
+            "audio": { "url": "/media/hxw9rhyhe3t5/s6-b2.mp3", "duration_ms": 4464 },
             "actions": [
               {
                 "do": "show",
@@ -1021,6 +1039,7 @@
           {
             "id": "b3",
             "narration": "And the Moon keeps falling toward Earth. Gravity is the string that never touches.",
+            "audio": { "url": "/media/hxw9rhyhe3t5/s6-b3.mp3", "duration_ms": 4824 },
             "actions": [
               {
                 "do": "show",

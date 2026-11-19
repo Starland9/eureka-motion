@@ -318,6 +318,7 @@
           {
             "id": "b1",
             "narration": "Here are two of your cells: one from your skin, one from a muscle.",
+            "audio": { "url": "/media/bw79fpudqg57/s1-b1.mp3", "duration_ms": 4416 },
             "actions": [
               {
                 "do": "show",
@@ -332,6 +333,7 @@
           {
             "id": "b2",
             "narration": "Look inside. Both hold exactly the same DNA.",
+            "audio": { "url": "/media/bw79fpudqg57/s1-b2.mp3", "duration_ms": 3504 },
             "actions": [
               {
                 "do": "show",
@@ -346,6 +348,7 @@
           {
             "id": "b3",
             "narration": "Yet only the muscle cell makes this protein. How does DNA decide that?",
+            "audio": { "url": "/media/bw79fpudqg57/s1-b3.mp3", "duration_ms": 4704 },
             "actions": [
               {
                 "do": "show",
@@ -484,6 +487,7 @@
           {
             "id": "b1",
             "narration": "Picture a cookbook locked in a glass case. Nobody takes it out.",
+            "audio": { "url": "/media/bw79fpudqg57/s2-b1.mp3", "duration_ms": 3768 },
             "actions": [
               {
                 "do": "show",
@@ -505,6 +509,7 @@
           {
             "id": "b2",
             "narration": "So you photocopy one page, and the copy leaves the library.",
+            "audio": { "url": "/media/bw79fpudqg57/s2-b2.mp3", "duration_ms": 3576 },
             "actions": [
               {
                 "do": "show",
@@ -525,6 +530,7 @@
           {
             "id": "b3",
             "narration": "The copy reaches the kitchen, where it tells you how to bake the cake.",
+            "audio": { "url": "/media/bw79fpudqg57/s2-b3.mp3", "duration_ms": 3696 },
             "actions": [
               {
                 "do": "move",
@@ -689,6 +695,7 @@
           {
             "id": "b1",
             "narration": "The DNA helix unzips. One strand is now exposed, base by base.",
+            "audio": { "url": "/media/bw79fpudqg57/s3-b1.mp3", "duration_ms": 5376 },
             "actions": [
               {
                 "do": "show",
@@ -720,6 +727,7 @@
           {
             "id": "b2",
             "narration": "Free RNA bases pair up: A with U, T with A, C with G.",
+            "audio": { "url": "/media/bw79fpudqg57/s3-b2.mp3", "duration_ms": 5808 },
             "actions": [
               {
                 "do": "show",
@@ -743,6 +751,7 @@
           {
             "id": "b3",
             "narration": "That copy is mRNA. It peels away and leaves the nucleus.",
+            "audio": { "url": "/media/bw79fpudqg57/s3-b3.mp3", "duration_ms": 4368 },
             "actions": [
               {
                 "do": "show",
@@ -920,6 +929,7 @@
           {
             "id": "b1",
             "narration": "The mRNA slides into a ribosome, the machine that reads it.",
+            "audio": { "url": "/media/bw79fpudqg57/s4-b1.mp3", "duration_ms": 4008 },
             "actions": [
               {
                 "do": "show",
@@ -941,6 +951,7 @@
           {
             "id": "b2",
             "narration": "Three bases at a time: each codon calls a tRNA carrying one amino acid.",
+            "audio": { "url": "/media/bw79fpudqg57/s4-b2.mp3", "duration_ms": 5448 },
             "actions": [
               {
                 "do": "show",
@@ -961,6 +972,7 @@
           {
             "id": "b3",
             "narration": "The amino acids link up, and the chain folds into a protein.",
+            "audio": { "url": "/media/bw79fpudqg57/s4-b3.mp3", "duration_ms": 3744 },
             "actions": [
               {
                 "do": "move",
@@ -1066,6 +1078,7 @@
           {
             "id": "b1",
             "narration": "Read the mRNA three bases at a time. Each triplet is a codon.",
+            "audio": { "url": "/media/bw79fpudqg57/s5-b1.mp3", "duration_ms": 5064 },
             "actions": [
               {
                 "do": "show",
@@ -1079,6 +1092,7 @@
           {
             "id": "b2",
             "narration": "One codon, one amino acid. Here AUG calls methionine, and the chain starts.",
+            "audio": { "url": "/media/bw79fpudqg57/s5-b2.mp3", "duration_ms": 6408 },
             "actions": [
               {
                 "do": "show",
@@ -1098,6 +1112,7 @@
           {
             "id": "b3",
             "narration": "Count: three bases per amino acid. Double the gene, and you double the protein.",
+            "audio": { "url": "/media/bw79fpudqg57/s5-b3.mp3", "duration_ms": 5568 },
             "actions": [
               {
                 "do": "show",
@@ -1260,6 +1275,7 @@
           {
             "id": "b1",
             "narration": "Here is one gene. Count its bases: those letters are the recipe.",
+            "audio": { "url": "/media/bw79fpudqg57/s6-b1.mp3", "duration_ms": 4416 },
             "actions": [
               {
                 "do": "show",
@@ -1288,6 +1304,7 @@
           {
             "id": "b2",
             "narration": "Guess the protein’s size if you double the gene. Ready?",
+            "audio": { "url": "/media/bw79fpudqg57/s6-b2.mp3", "duration_ms": 3408 },
             "actions": [
               {
                 "do": "show",
@@ -1318,6 +1335,7 @@
           {
             "id": "b3",
             "narration": "Three bases per amino acid, so twice the gene gives twice the protein.",
+            "audio": { "url": "/media/bw79fpudqg57/s6-b3.mp3", "duration_ms": 4368 },
             "actions": []
           }
         ]
@@ -1345,6 +1363,7 @@
           {
             "id": "b1",
             "narration": "Two steps. Transcription copies the DNA recipe into mRNA and carries it off.",
+            "audio": { "url": "/media/bw79fpudqg57/s7-b1.mp3", "duration_ms": 5784 },
             "actions": [
               {
                 "do": "show",
@@ -1358,11 +1377,13 @@
           {
             "id": "b2",
             "narration": "Translation reads each codon, three bases, and adds one amino acid to the protein.",
+            "audio": { "url": "/media/bw79fpudqg57/s7-b2.mp3", "duration_ms": 5784 },
             "actions": []
           },
           {
             "id": "b3",
             "narration": "Your skin and muscle cells hold the same DNA, but switch on different genes.",
+            "audio": { "url": "/media/bw79fpudqg57/s7-b3.mp3", "duration_ms": 4104 },
             "actions": [
               {
                 "do": "highlight",

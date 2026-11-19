@@ -156,6 +156,7 @@
           {
             "id": "b1",
             "narration": "Lâche une pomme. La Terre l'attire…",
+            "audio": { "url": "/media/3xgqjxv6p8j6/s1-b1.mp3", "duration_ms": 3024 },
             "actions": [
               { "do": "show", "targets": ["ground", "apple"], "how": "fade" },
               { "do": "show", "targets": ["apple_pull"], "how": "draw" }
@@ -164,11 +165,13 @@
           {
             "id": "b2",
             "narration": "…et elle tombe. Rien d'étonnant.",
+            "audio": { "url": "/media/3xgqjxv6p8j6/s1-b2.mp3", "duration_ms": 2688 },
             "actions": [{ "do": "move", "target": "apple", "to": [0, -1.4] }]
           },
           {
             "id": "b3",
             "narration": "La Lune aussi est attirée par la Terre. Alors pourquoi ne tombe-t-elle pas ?",
+            "audio": { "url": "/media/3xgqjxv6p8j6/s1-b3.mp3", "duration_ms": 5064 },
             "actions": [
               { "do": "show", "targets": ["earth", "moon"], "how": "fade" },
               { "do": "show", "targets": ["moon_pull"], "how": "draw" }
@@ -177,6 +180,7 @@
           {
             "id": "b4",
             "narration": "Indice : la même force agit sur les deux. Son nom : la gravitation.",
+            "audio": { "url": "/media/3xgqjxv6p8j6/s1-b4.mp3", "duration_ms": 5808 },
             "actions": [{ "do": "highlight", "targets": ["apple_pull", "moon_pull"] }]
           }
         ]
@@ -205,16 +209,19 @@
           {
             "id": "b1",
             "narration": "Pense à une lampe. Plus tu recules, moins elle t'éclaire : tu l'as déjà remarqué.",
+            "audio": { "url": "/media/3xgqjxv6p8j6/s2-b1.mp3", "duration_ms": 5784 },
             "actions": [{ "do": "show", "targets": ["light"], "how": "fade" }]
           },
           {
             "id": "b2",
             "narration": "Recule deux fois plus loin. Deux fois moins de lumière ? Non : quatre fois moins.",
+            "audio": { "url": "/media/3xgqjxv6p8j6/s2-b2.mp3", "duration_ms": 5376 },
             "actions": [{ "do": "show", "targets": ["twice"], "how": "type" }]
           },
           {
             "id": "b3",
             "narration": "La gravitation fait pareil : elle s'affaiblit très vite quand on s'éloigne.",
+            "audio": { "url": "/media/3xgqjxv6p8j6/s2-b3.mp3", "duration_ms": 5808 },
             "actions": [{ "do": "show", "targets": ["thrice"], "how": "type" }]
           }
         ]
@@ -249,6 +256,7 @@
           {
             "id": "b1",
             "narration": "La Terre attire la Lune. Et la Lune attire la Terre, exactement aussi fort.",
+            "audio": { "url": "/media/3xgqjxv6p8j6/s3-b1.mp3", "duration_ms": 5184 },
             "actions": [
               { "do": "show", "targets": ["sys.body_a", "sys.body_b"], "how": "fade" },
               { "do": "show", "targets": ["sys.force_a", "sys.force_b"], "how": "draw" }
@@ -257,6 +265,7 @@
           {
             "id": "b2",
             "narration": "Ce qui compte, c'est la distance entre leurs centres.",
+            "audio": { "url": "/media/3xgqjxv6p8j6/s3-b2.mp3", "duration_ms": 3456 },
             "actions": [
               { "do": "show", "targets": ["sys.distance"], "how": "draw" },
               { "do": "show", "targets": ["force_now", "distance_now"], "how": "fade" }
@@ -265,6 +274,7 @@
           {
             "id": "b3",
             "narration": "Regarde ce qui arrive quand la distance double : la force est divisée par quatre.",
+            "audio": { "url": "/media/3xgqjxv6p8j6/s3-b3.mp3", "duration_ms": 6216 },
             "actions": [
               { "do": "sweep", "param": "r", "to": { "expr": "2 * r" } },
               { "do": "show", "targets": ["rule"], "how": "type", "at": 0.6 }
@@ -300,6 +310,7 @@
           {
             "id": "b1",
             "narration": "Newton a tout fait tenir en une ligne. En haut, les deux masses : plus elles sont grosses, plus ça tire.",
+            "audio": { "url": "/media/3xgqjxv6p8j6/s4-b1.mp3", "duration_ms": 6984 },
             "actions": [
               { "do": "show", "targets": ["law"], "how": "type" },
               { "do": "show", "targets": ["sys"], "how": "fade" }
@@ -308,6 +319,7 @@
           {
             "id": "b2",
             "narration": "En bas, la distance au carré : c'est elle qui fait chuter la force, comme pour la lampe.",
+            "audio": { "url": "/media/3xgqjxv6p8j6/s4-b2.mp3", "duration_ms": 6984 },
             "actions": [
               { "do": "show", "targets": ["force_now", "distance_now"], "how": "fade" },
               { "do": "sweep", "param": "r", "to": { "expr": "2 * r" }, "at": 0.3 }
@@ -316,6 +328,7 @@
           {
             "id": "b3",
             "narration": "Et G ? Un nombre minuscule. Voilà pourquoi tu ne sens pas l'attraction de ton voisin de table.",
+            "audio": { "url": "/media/3xgqjxv6p8j6/s4-b3.mp3", "duration_ms": 6144 },
             "actions": [{ "do": "highlight", "targets": ["force_now"] }]
           }
         ]
@@ -346,16 +359,19 @@
           {
             "id": "b1",
             "narration": "Entre la Terre et la Lune, la force est colossale. Lis sa valeur : elle donne le vertige.",
+            "audio": { "url": "/media/3xgqjxv6p8j6/s5-b1.mp3", "duration_ms": 7368 },
             "actions": [{ "do": "show", "targets": ["value", "where"], "how": "type" }]
           },
           {
             "id": "b2",
             "narration": "À distance double, elle tombe au quart. À distance triple, au neuvième.",
+            "audio": { "url": "/media/3xgqjxv6p8j6/s5-b2.mp3", "duration_ms": 4848 },
             "actions": [{ "do": "show", "targets": ["forces"], "how": "fade" }]
           },
           {
             "id": "b3",
             "narration": "C'est elle qui retient la Lune, comme une fronde retient sa pierre.",
+            "audio": { "url": "/media/3xgqjxv6p8j6/s5-b3.mp3", "duration_ms": 4416 },
             "actions": [{ "do": "show", "targets": ["meaning"], "how": "type" }]
           }
         ]
@@ -382,16 +398,19 @@
           {
             "id": "b1",
             "narration": "Trois idées à garder. Un : deux masses s'attirent toujours, aussi fort l'une que l'autre.",
+            "audio": { "url": "/media/3xgqjxv6p8j6/s6-b1.mp3", "duration_ms": 6288 },
             "actions": [{ "do": "show", "targets": ["recap"], "how": "type" }]
           },
           {
             "id": "b2",
             "narration": "Deux : plus de masse, plus de force. Et deux fois plus loin, quatre fois moins.",
+            "audio": { "url": "/media/3xgqjxv6p8j6/s6-b2.mp3", "duration_ms": 5904 },
             "actions": []
           },
           {
             "id": "b3",
             "narration": "Et la Lune ? Elle tombe sans cesse vers la Terre. Mais elle file si vite qu'elle tourne autour.",
+            "audio": { "url": "/media/3xgqjxv6p8j6/s6-b3.mp3", "duration_ms": 6384 },
             "actions": [{ "do": "highlight", "targets": ["recap.i3"] }]
           }
         ]

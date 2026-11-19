@@ -320,6 +320,7 @@
           {
             "id": "b1",
             "narration": "Même capital, même taux. À gauche, les intérêts sont retirés chaque année.",
+            "audio": { "url": "/media/wfsd8f7fwtsb/s1-b1.mp3", "duration_ms": 5184 },
             "actions": [
               {
                 "do": "show",
@@ -333,6 +334,7 @@
           {
             "id": "b2",
             "narration": "À droite, ils restent sur le compte et rapportent à leur tour.",
+            "audio": { "url": "/media/wfsd8f7fwtsb/s1-b2.mp3", "duration_ms": 3888 },
             "actions": [
               {
                 "do": "show",
@@ -346,6 +348,7 @@
           {
             "id": "b3",
             "narration": "Regarde la barre de l’an 3 : sans verser un euro de plus, elle est plus haute. Pourquoi ?",
+            "audio": { "url": "/media/wfsd8f7fwtsb/s1-b3.mp3", "duration_ms": 6288 },
             "actions": [
               {
                 "do": "highlight",
@@ -533,6 +536,7 @@
           {
             "id": "b1",
             "narration": "Une boule de neige roule sur une pente. Regarde sa taille à chaque tour.",
+            "audio": { "url": "/media/wfsd8f7fwtsb/s2-b1.mp3", "duration_ms": 5376 },
             "actions": [
               {
                 "do": "show",
@@ -547,6 +551,7 @@
           {
             "id": "b2",
             "narration": "Chaque tour, elle ramasse une couche de neige, et la couche est plus épaisse.",
+            "audio": { "url": "/media/wfsd8f7fwtsb/s2-b2.mp3", "duration_ms": 5088 },
             "actions": [
               {
                 "do": "show",
@@ -561,6 +566,7 @@
           {
             "id": "b3",
             "narration": "C’est ça, les intérêts composés : plus le capital grossit, plus il rapporte.",
+            "audio": { "url": "/media/wfsd8f7fwtsb/s2-b3.mp3", "duration_ms": 5208 },
             "actions": [
               {
                 "do": "show",
@@ -692,6 +698,7 @@
           {
             "id": "b1",
             "narration": "An un : les intérêts tombent et viennent s’ajouter au capital.",
+            "audio": { "url": "/media/wfsd8f7fwtsb/s3-b1.mp3", "duration_ms": 5304 },
             "actions": [
               {
                 "do": "show",
@@ -712,6 +719,7 @@
           {
             "id": "b2",
             "narration": "An deux : c’est le nouveau capital, plus gros, qui rapporte.",
+            "audio": { "url": "/media/wfsd8f7fwtsb/s3-b2.mp3", "duration_ms": 4056 },
             "actions": [
               {
                 "do": "show",
@@ -725,6 +733,7 @@
           {
             "id": "b3",
             "narration": "An trois : chaque année ajoute un peu plus. Regarde le saut final.",
+            "audio": { "url": "/media/wfsd8f7fwtsb/s3-b3.mp3", "duration_ms": 5856 },
             "actions": [
               {
                 "do": "show",
@@ -817,6 +826,7 @@
           {
             "id": "b1",
             "narration": "Chaque année, le capital est multiplié par un plus i.",
+            "audio": { "url": "/media/wfsd8f7fwtsb/s4-b1.mp3", "duration_ms": 3576 },
             "actions": [
               {
                 "do": "show",
@@ -844,6 +854,7 @@
           {
             "id": "b2",
             "narration": "Répète n fois : la puissance résume ces multiplications en chaîne.",
+            "audio": { "url": "/media/wfsd8f7fwtsb/s4-b2.mp3", "duration_ms": 5424 },
             "actions": [
               {
                 "do": "show",
@@ -858,6 +869,7 @@
           {
             "id": "b3",
             "narration": "La courbe monte de plus en plus raide : les intérêts rapportent des intérêts.",
+            "audio": { "url": "/media/wfsd8f7fwtsb/s4-b3.mp3", "duration_ms": 6024 },
             "actions": [
               {
                 "do": "highlight",
@@ -965,6 +977,7 @@
           {
             "id": "b1",
             "narration": "Tu places ton capital à un taux fixe, et tu n’y touches plus.",
+            "audio": { "url": "/media/wfsd8f7fwtsb/s5-b1.mp3", "duration_ms": 4896 },
             "actions": [
               {
                 "do": "show",
@@ -986,6 +999,7 @@
           {
             "id": "b2",
             "narration": "Année après année, la courbe se redresse au lieu de rester droite.",
+            "audio": { "url": "/media/wfsd8f7fwtsb/s5-b2.mp3", "duration_ms": 5064 },
             "actions": [
               {
                 "do": "show",
@@ -1006,6 +1020,7 @@
           {
             "id": "b3",
             "narration": "Regarde la dernière année : ce qu’elle rapporte dépasse la première.",
+            "audio": { "url": "/media/wfsd8f7fwtsb/s5-b3.mp3", "duration_ms": 3888 },
             "actions": [
               {
                 "do": "highlight",
@@ -1048,6 +1063,7 @@
           {
             "id": "b1",
             "narration": "Une idée simple : chaque année, tu multiplies ton capital par le même facteur.",
+            "audio": { "url": "/media/wfsd8f7fwtsb/s6-b1.mp3", "duration_ms": 4944 },
             "actions": [
               {
                 "do": "show",
@@ -1061,6 +1077,7 @@
           {
             "id": "b2",
             "narration": "Et comme le capital grossit, les intérêts grossissent avec lui. La boule de neige.",
+            "audio": { "url": "/media/wfsd8f7fwtsb/s6-b2.mp3", "duration_ms": 5328 },
             "actions": [
               {
                 "do": "show",
@@ -1074,6 +1091,7 @@
           {
             "id": "b3",
             "narration": "Tu as ta formule, et la réponse : la croissance s’accélère toute seule.",
+            "audio": { "url": "/media/wfsd8f7fwtsb/s6-b3.mp3", "duration_ms": 5208 },
             "actions": [
               {
                 "do": "show",

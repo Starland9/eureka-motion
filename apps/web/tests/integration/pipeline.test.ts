@@ -24,9 +24,16 @@ import {
   waitForEvent,
   type RecordedCall,
 } from "../helpers/fakes";
-import { brokenScene, draftSteps, scenarioFromReference, sceneIdKey } from "../helpers/scenario";
+import {
+  brokenScene,
+  draftSteps,
+  scenarioFromReference,
+  sceneIdKey,
+  withoutAudio,
+} from "../helpers/scenario";
 
-const document = typesetTexts(DocumentSchema.parse(reference.payload), "fr");
+const parsed = DocumentSchema.parse(reference.payload);
+const document = typesetTexts({ ...parsed, scenes: parsed.scenes.map(withoutAudio) }, "fr");
 const INPUT: StartInput = { question: reference.question, language: "fr", level: "lycee" };
 const KEY = { language: "fr", level: "lycee" } as const;
 const DAY_MS = 24 * 60 * 60 * 1000;
@@ -126,17 +133,6 @@ const isOutlineCall = (call: RecordedCall): boolean =>
   call.role === "author" && call.user.startsWith(OUTLINE_MARKER);
 const sceneCalls = (llm: Harness["llm"], index: number): RecordedCall[] =>
   llm.calls.filter((call) => call.user.startsWith(`${sceneMarker(index)}\n`));
-
-function withoutAudio(scene: Scene): Scene {
-  return {
-    ...scene,
-    beats: scene.beats.map((beat) => {
-      const copy = { ...beat };
-      delete copy.audio;
-      return copy;
-    }),
-  };
-}
 
 const settle = (ms = 30): Promise<void> => new Promise((resolve) => setTimeout(resolve, ms));
 

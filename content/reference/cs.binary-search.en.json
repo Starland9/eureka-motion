@@ -321,6 +321,7 @@
           {
             "id": "b1",
             "narration": "Here is a sorted list: a million names, one target you need.",
+            "audio": { "url": "/media/cvvse9qr8qd8/s1-b1.mp3", "duration_ms": 4224 },
             "actions": [
               {
                 "do": "show",
@@ -355,6 +356,7 @@
           {
             "id": "b2",
             "narration": "Reading it from the top would take a million checks. Happy?",
+            "audio": { "url": "/media/cvvse9qr8qd8/s1-b2.mp3", "duration_ms": 3456 },
             "actions": [
               {
                 "do": "show",
@@ -375,6 +377,7 @@
           {
             "id": "b3",
             "narration": "Guess how few checks are enough. Watch these numbers while you think.",
+            "audio": { "url": "/media/cvvse9qr8qd8/s1-b3.mp3", "duration_ms": 4104 },
             "actions": [
               {
                 "do": "show",
@@ -617,6 +620,7 @@
           {
             "id": "b1",
             "narration": "I think of a number between one and a hundred. Your first guess is fifty.",
+            "audio": { "url": "/media/cvvse9qr8qd8/s2-b1.mp3", "duration_ms": 4896 },
             "actions": [
               {
                 "do": "show",
@@ -641,6 +645,7 @@
           {
             "id": "b2",
             "narration": "Too low, I say. Everything left of fifty is now impossible.",
+            "audio": { "url": "/media/cvvse9qr8qd8/s2-b2.mp3", "duration_ms": 4008 },
             "actions": [
               {
                 "do": "show",
@@ -664,6 +669,7 @@
           {
             "id": "b3",
             "narration": "You guess seventy-five: too high. The floor has already shortened the list.",
+            "audio": { "url": "/media/cvvse9qr8qd8/s2-b3.mp3", "duration_ms": 4056 },
             "actions": [
               {
                 "do": "show",
@@ -786,6 +792,7 @@
           {
             "id": "b1",
             "narration": "Compare the target with the middle box: that is your one look inside.",
+            "audio": { "url": "/media/cvvse9qr8qd8/s3-b1.mp3", "duration_ms": 3888 },
             "actions": [
               {
                 "do": "show",
@@ -806,6 +813,7 @@
           {
             "id": "b2",
             "narration": "Too small? Everything left of mid is impossible, so lo jumps past mid.",
+            "audio": { "url": "/media/cvvse9qr8qd8/s3-b2.mp3", "duration_ms": 5256 },
             "actions": [
               {
                 "do": "show",
@@ -826,6 +834,7 @@
           {
             "id": "b3",
             "narration": "The interval you still must search has just halved. Feel how fast that shrinks.",
+            "audio": { "url": "/media/cvvse9qr8qd8/s3-b3.mp3", "duration_ms": 5016 },
             "actions": [
               {
                 "do": "show",
@@ -941,6 +950,7 @@
           {
             "id": "b1",
             "narration": "Each step halves the interval. So how many halvings until one element is left?",
+            "audio": { "url": "/media/cvvse9qr8qd8/s4-b1.mp3", "duration_ms": 5256 },
             "actions": [
               {
                 "do": "show",
@@ -970,6 +980,7 @@
           {
             "id": "b2",
             "narration": "That number is the logarithm base two. Guess what happens when n doubles.",
+            "audio": { "url": "/media/cvvse9qr8qd8/s4-b2.mp3", "duration_ms": 4536 },
             "actions": [
               {
                 "do": "show",
@@ -999,6 +1010,7 @@
           {
             "id": "b3",
             "narration": "The count only grows by one, while n doubles. That is the whole point.",
+            "audio": { "url": "/media/cvvse9qr8qd8/s4-b3.mp3", "duration_ms": 5016 },
             "actions": [
               {
                 "do": "show",
@@ -1081,6 +1093,7 @@
           {
             "id": "b1",
             "narration": "Eight sorted boxes, target 44. Predict the number of comparisons before I run it.",
+            "audio": { "url": "/media/cvvse9qr8qd8/s5-b1.mp3", "duration_ms": 6384 },
             "actions": [
               {
                 "do": "show",
@@ -1094,6 +1107,7 @@
           {
             "id": "b2",
             "narration": "Watch the interval shrink: eight, four, two, one.",
+            "audio": { "url": "/media/cvvse9qr8qd8/s5-b2.mp3", "duration_ms": 4224 },
             "actions": [
               {
                 "do": "play",
@@ -1113,6 +1127,7 @@
           {
             "id": "b3",
             "narration": "Four checks, one of them on the last single box. That extra one surprises you.",
+            "audio": { "url": "/media/cvvse9qr8qd8/s5-b3.mp3", "duration_ms": 5784 },
             "actions": [
               {
                 "do": "show",
@@ -1154,6 +1169,7 @@
           {
             "id": "b1",
             "narration": "One: compare with the middle, and half the list is gone for good.",
+            "audio": { "url": "/media/cvvse9qr8qd8/s6-b1.mp3", "duration_ms": 3984 },
             "actions": [
               {
                 "do": "show",
@@ -1167,11 +1183,13 @@
           {
             "id": "b2",
             "narration": "Two: the interval halves each step, so the worst case grows like a logarithm.",
+            "audio": { "url": "/media/cvvse9qr8qd8/s6-b2.mp3", "duration_ms": 5544 },
             "actions": []
           },
           {
             "id": "b3",
             "narration": "Three: your huge list needs at most {{L|int}} checks. Logarithmic, not thousands.",
+            "audio": { "url": "/media/cvvse9qr8qd8/s6-b3.mp3", "duration_ms": 6288 },
             "actions": [
               {
                 "do": "highlight",

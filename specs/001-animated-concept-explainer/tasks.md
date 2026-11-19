@@ -307,7 +307,7 @@ service externe.
 - [ ] T059 [US2] [O] Produire et corriger à la main les 24 explications de référence : exactitude, qualité de l'analogie, lisibilité de chaque scène, curseurs pertinents, quiz ; renseigner `reviewed_by` et `reviewed_at`.
   - Lire : spec.md SC-004 ; design-system/eureka-motion/MASTER.md § 4. Dépend de T052 à T058.
   - Réussite : les 24 documents passent `pnpm reference:build` et se jouent sans défaut dans la galerie.
-- [ ] T060 [US2] [S] Écrire et exécuter `scripts/reference-audio.ts` : synthétiser avec Azure l'audio de chaque temps de narration des 24 documents vers `content/reference/audio/`, et inscrire les durées dans les documents.
+- [x] T060 [US2] [S] Écrire et exécuter `scripts/reference-audio.ts` : synthétiser avec Azure (fait le 19/11/2026 avec Deepgram, Azure étant inaccessible) l'audio de chaque temps de narration des 24 documents vers `content/reference/audio/`, et inscrire les durées dans les documents.
   - Lire : contracts/llm-provider.md § 2 ; data-model.md (Fichiers média). Dépend de l'action A2.
   - Réussite : chaque temps de narration des 24 documents a un fichier audio et une durée.
 - [X] T061 [US2] [S] Écrire la route de santé `apps/web/src/app/api/health/route.ts` (l'état du worker et du bac à sable est lu dans `media/.health/worker.json` ; un battement de plus de 60 secondes vaut indisponible) et le mode dégradé : `POST /api/explanations` répond 503 `generation_unavailable` avec la liste des références quand le fournisseur est indisponible, et l'accueil affiche le message et le sommaire.

@@ -400,6 +400,7 @@
           {
             "id": "b1",
             "narration": "A market stall at closing time. Three euros a kilo, and plenty of tomatoes left.",
+            "audio": { "url": "/media/qww9rgbrpfa3/s1-b1.mp3", "duration_ms": 5904 },
             "actions": [
               {
                 "do": "show",
@@ -424,6 +425,7 @@
           {
             "id": "b2",
             "narration": "Nobody orders it, yet the tag drops to two euros, and the pile shrinks fast.",
+            "audio": { "url": "/media/qww9rgbrpfa3/s1-b2.mp3", "duration_ms": 6048 },
             "actions": [
               {
                 "do": "show",
@@ -455,6 +457,7 @@
           {
             "id": "b3",
             "narration": "Watch the tag slide down. Who decided that price? Nobody did, exactly.",
+            "audio": { "url": "/media/qww9rgbrpfa3/s1-b3.mp3", "duration_ms": 5784 },
             "actions": [
               {
                 "do": "show",
@@ -615,6 +618,7 @@
           {
             "id": "b1",
             "narration": "Think of a seesaw: a buyer sits on one side, a seller on the other.",
+            "audio": { "url": "/media/qww9rgbrpfa3/s2-b1.mp3", "duration_ms": 4536 },
             "actions": [
               {
                 "do": "show",
@@ -638,6 +642,7 @@
           {
             "id": "b2",
             "narration": "Too high a price, and the buyer pushes down; too low, the seller pushes up.",
+            "audio": { "url": "/media/qww9rgbrpfa3/s2-b2.mp3", "duration_ms": 5064 },
             "actions": [
               {
                 "do": "show",
@@ -652,6 +657,7 @@
           {
             "id": "b3",
             "narration": "When the two pushes match, the board levels off. That is the equilibrium price.",
+            "audio": { "url": "/media/qww9rgbrpfa3/s2-b3.mp3", "duration_ms": 4968 },
             "actions": [
               {
                 "do": "show",
@@ -784,6 +790,7 @@
           {
             "id": "b1",
             "narration": "Buyers want less as the price rises; sellers offer more. The two curves must cross.",
+            "audio": { "url": "/media/qww9rgbrpfa3/s3-b1.mp3", "duration_ms": 6096 },
             "actions": [
               {
                 "do": "show",
@@ -799,6 +806,7 @@
           {
             "id": "b2",
             "narration": "Too high, unsold goods pile up and push the price down. Too low, buyers rush in.",
+            "audio": { "url": "/media/qww9rgbrpfa3/s3-b2.mp3", "duration_ms": 6144 },
             "actions": [
               {
                 "do": "show",
@@ -826,6 +834,7 @@
           {
             "id": "b3",
             "narration": "The pushes shrink until they cancel: that is the equilibrium price and quantity.",
+            "audio": { "url": "/media/qww9rgbrpfa3/s3-b3.mp3", "duration_ms": 5328 },
             "actions": [
               {
                 "do": "sweep",
@@ -959,6 +968,7 @@
           {
             "id": "b1",
             "narration": "Two straight lines, two equations. The same symbols appear in both.",
+            "audio": { "url": "/media/qww9rgbrpfa3/s4-b1.mp3", "duration_ms": 4608 },
             "actions": [
               {
                 "do": "show",
@@ -979,6 +989,7 @@
           {
             "id": "b2",
             "narration": "Buyers read the falling line: higher price, smaller quantity demanded.",
+            "audio": { "url": "/media/qww9rgbrpfa3/s4-b2.mp3", "duration_ms": 5064 },
             "actions": [
               {
                 "do": "show",
@@ -992,6 +1003,7 @@
           {
             "id": "b3",
             "narration": "Sellers read the rising one. Where they cross, nobody wants to move.",
+            "audio": { "url": "/media/qww9rgbrpfa3/s4-b3.mp3", "duration_ms": 4536 },
             "actions": [
               {
                 "do": "show",
@@ -1141,6 +1153,7 @@
           {
             "id": "b1",
             "narration": "Here the curves cross where supply meets demand: solve the two equations, and you have the price.",
+            "audio": { "url": "/media/qww9rgbrpfa3/s5-b1.mp3", "duration_ms": 6024 },
             "actions": [
               {
                 "do": "show",
@@ -1187,6 +1200,7 @@
           {
             "id": "b2",
             "narration": "Now every buyer wants twice as much. Guess where the crossing lands.",
+            "audio": { "url": "/media/qww9rgbrpfa3/s5-b2.mp3", "duration_ms": 4824 },
             "actions": [
               {
                 "do": "show",
@@ -1208,6 +1222,7 @@
           {
             "id": "b3",
             "narration": "Surprise: the quantity reaches {{Q_2a|int}}, but the price stops at {{P_2a|fixed:2}} euros.",
+            "audio": { "url": "/media/qww9rgbrpfa3/s5-b3.mp3", "duration_ms": 7464 },
             "actions": [
               {
                 "do": "highlight",
@@ -1248,6 +1263,7 @@
           {
             "id": "b1",
             "narration": "Three ideas. Buyers want less as the price climbs; sellers offer more.",
+            "audio": { "url": "/media/qww9rgbrpfa3/s6-b1.mp3", "duration_ms": 5568 },
             "actions": [
               {
                 "do": "show",
@@ -1261,6 +1277,7 @@
           {
             "id": "b2",
             "narration": "Too expensive, tomatoes pile up. Too cheap, the stall empties fast.",
+            "audio": { "url": "/media/qww9rgbrpfa3/s6-b2.mp3", "duration_ms": 5424 },
             "actions": [
               {
                 "do": "show",
@@ -1274,6 +1291,7 @@
           {
             "id": "b3",
             "narration": "So the tomato price settled on its own, where both sides agree.",
+            "audio": { "url": "/media/qww9rgbrpfa3/s6-b3.mp3", "duration_ms": 4464 },
             "actions": [
               {
                 "do": "show",

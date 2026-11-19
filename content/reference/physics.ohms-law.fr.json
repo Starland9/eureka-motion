@@ -304,6 +304,7 @@
           {
             "id": "b1",
             "narration": "Deux lampes, deux piles identiques. Regarde laquelle brille le plus.",
+            "audio": { "url": "/media/jydd63vcaqcj/s1-b1.mp3", "duration_ms": 4728 },
             "actions": [
               {
                 "do": "show",
@@ -326,6 +327,7 @@
           {
             "id": "b2",
             "narration": "La petite éclaire fort. La grosse, à peine : on la distingue mal.",
+            "audio": { "url": "/media/jydd63vcaqcj/s1-b2.mp3", "duration_ms": 5256 },
             "actions": [
               {
                 "do": "show",
@@ -339,6 +341,7 @@
           {
             "id": "b3",
             "narration": "Même pile pourtant. Qu’est-ce qui freine le courant dans la grosse ?",
+            "audio": { "url": "/media/jydd63vcaqcj/s1-b3.mp3", "duration_ms": 4008 },
             "actions": [
               {
                 "do": "focus",
@@ -466,6 +469,7 @@
           {
             "id": "b1",
             "narration": "Une pompe pousse l’eau dans un tuyau bien large. Regarde le jet qui sort.",
+            "audio": { "url": "/media/jydd63vcaqcj/s2-b1.mp3", "duration_ms": 5856 },
             "actions": [
               {
                 "do": "show",
@@ -489,6 +493,7 @@
           {
             "id": "b2",
             "narration": "Maintenant je serre le tuyau. Devine : le jet va-t-il faiblir ?",
+            "audio": { "url": "/media/jydd63vcaqcj/s2-b2.mp3", "duration_ms": 5448 },
             "actions": [
               {
                 "do": "show",
@@ -502,6 +507,7 @@
           {
             "id": "b3",
             "narration": "Il faiblit. Même poussée, mais plus d’obstacle : moins d’eau passe.",
+            "audio": { "url": "/media/jydd63vcaqcj/s2-b3.mp3", "duration_ms": 5064 },
             "actions": [
               {
                 "do": "sweep",
@@ -562,6 +568,7 @@
           {
             "id": "b1",
             "narration": "La pile pousse les charges ; elles défilent dans le fil.",
+            "audio": { "url": "/media/jydd63vcaqcj/s3-b1.mp3", "duration_ms": 4896 },
             "actions": [
               {
                 "do": "show",
@@ -589,6 +596,7 @@
           {
             "id": "b2",
             "narration": "Le rétrécissement, lui, les freine : regarde le compteur baisser.",
+            "audio": { "url": "/media/jydd63vcaqcj/s3-b2.mp3", "duration_ms": 4104 },
             "actions": [
               {
                 "do": "show",
@@ -617,6 +625,7 @@
           {
             "id": "b3",
             "narration": "Plus la résistance est grande, plus le courant passe faiblement.",
+            "audio": { "url": "/media/jydd63vcaqcj/s3-b3.mp3", "duration_ms": 4584 },
             "actions": [
               {
                 "do": "highlight",
@@ -700,6 +709,7 @@
           {
             "id": "b1",
             "narration": "Trois lettres, une seule règle : la tension vaut la résistance fois l’intensité.",
+            "audio": { "url": "/media/jydd63vcaqcj/s4-b1.mp3", "duration_ms": 5856 },
             "actions": [
               {
                 "do": "show",
@@ -730,6 +740,7 @@
           {
             "id": "b2",
             "narration": "La pile pousse, la résistance freine, et l’intensité suit les deux.",
+            "audio": { "url": "/media/jydd63vcaqcj/s4-b2.mp3", "duration_ms": 5736 },
             "actions": [
               {
                 "do": "sweep",
@@ -743,6 +754,7 @@
           {
             "id": "b3",
             "narration": "Regarde : je double la résistance… l’intensité tombe de moitié, exactement.",
+            "audio": { "url": "/media/jydd63vcaqcj/s4-b3.mp3", "duration_ms": 5688 },
             "actions": [
               {
                 "do": "sweep",
@@ -842,6 +854,7 @@
           {
             "id": "b1",
             "narration": "Ici, une pile de douze volts alimente une lampe de vingt-quatre ohms.",
+            "audio": { "url": "/media/jydd63vcaqcj/s5-b1.mp3", "duration_ms": 5568 },
             "actions": [
               {
                 "do": "show",
@@ -862,6 +875,7 @@
           {
             "id": "b2",
             "narration": "On divise la tension par la résistance : douze divisé par vingt-quatre.",
+            "audio": { "url": "/media/jydd63vcaqcj/s5-b2.mp3", "duration_ms": 5448 },
             "actions": [
               {
                 "do": "show",
@@ -882,6 +896,7 @@
           {
             "id": "b3",
             "narration": "Résultat : un demi-ampère. Bien moins que ce que tu imaginais, non ?",
+            "audio": { "url": "/media/jydd63vcaqcj/s5-b3.mp3", "duration_ms": 5184 },
             "actions": [
               {
                 "do": "show",
@@ -923,6 +938,7 @@
           {
             "id": "b1",
             "narration": "Trois idées à garder. La tension pousse les charges, la résistance les freine : U égale R fois I.",
+            "audio": { "url": "/media/jydd63vcaqcj/s6-b1.mp3", "duration_ms": 8136 },
             "actions": [
               {
                 "do": "show",
@@ -936,11 +952,13 @@
           {
             "id": "b2",
             "narration": "Avec la même pile, une grande résistance laisse passer un courant plus petit.",
+            "audio": { "url": "/media/jydd63vcaqcj/s6-b2.mp3", "duration_ms": 4224 },
             "actions": []
           },
           {
             "id": "b3",
             "narration": "La lampe qui brillait à peine ? Sa résistance était grande. Voilà toute l’histoire.",
+            "audio": { "url": "/media/jydd63vcaqcj/s6-b3.mp3", "duration_ms": 4944 },
             "actions": [
               {
                 "do": "highlight",

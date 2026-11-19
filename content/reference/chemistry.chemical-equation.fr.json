@@ -385,6 +385,7 @@
           {
             "id": "b1",
             "narration": "Voici une équation chimique écrite un peu vite. Regarde-la bien.",
+            "audio": { "url": "/media/a78zzu7f8xeb/s1-b1.mp3", "duration_ms": 4536 },
             "actions": [
               {
                 "do": "show",
@@ -415,6 +416,7 @@
           {
             "id": "b2",
             "narration": "Compte les boules d’oxygène : deux à gauche, une seule à droite.",
+            "audio": { "url": "/media/a78zzu7f8xeb/s1-b2.mp3", "duration_ms": 5208 },
             "actions": [
               {
                 "do": "show",
@@ -443,6 +445,7 @@
           {
             "id": "b3",
             "narration": "Il manque un atome. Comment rétablir l’équilibre, à ton avis ?",
+            "audio": { "url": "/media/a78zzu7f8xeb/s1-b3.mp3", "duration_ms": 4056 },
             "actions": [
               {
                 "do": "show",
@@ -584,6 +587,7 @@
           {
             "id": "b1",
             "narration": "Pense à une recette de crêpes : un bol de farine, un œuf. Simple.",
+            "audio": { "url": "/media/a78zzu7f8xeb/s2-b1.mp3", "duration_ms": 5544 },
             "actions": [
               {
                 "do": "show",
@@ -599,6 +603,7 @@
           {
             "id": "b2",
             "narration": "Tu veux deux fois plus de pâte ? Prends deux bols et deux œufs.",
+            "audio": { "url": "/media/a78zzu7f8xeb/s2-b2.mp3", "duration_ms": 4104 },
             "actions": [
               {
                 "do": "show",
@@ -622,6 +627,7 @@
           {
             "id": "b3",
             "narration": "Mais si tu doubles la farine sans les œufs, il reste des œufs sur la table.",
+            "audio": { "url": "/media/a78zzu7f8xeb/s2-b3.mp3", "duration_ms": 4656 },
             "actions": [
               {
                 "do": "hide",
@@ -723,6 +729,7 @@
           {
             "id": "b1",
             "narration": "Regarde les comptages en bas : deux colonnes, un barreau par type d’atome.",
+            "audio": { "url": "/media/a78zzu7f8xeb/s3-b1.mp3", "duration_ms": 5616 },
             "actions": [
               {
                 "do": "show",
@@ -752,6 +759,7 @@
           {
             "id": "b2",
             "narration": "Devine : si je monte le coefficient c, les barreaux vont-ils se rejoindre ?",
+            "audio": { "url": "/media/a78zzu7f8xeb/s3-b2.mp3", "duration_ms": 5256 },
             "actions": [
               {
                 "do": "sweep",
@@ -763,6 +771,7 @@
           {
             "id": "b3",
             "narration": "Essaie c égal à deux : l’hydrogène colle, et l’oxygène aussi.",
+            "audio": { "url": "/media/a78zzu7f8xeb/s3-b3.mp3", "duration_ms": 5088 },
             "actions": [
               {
                 "do": "sweep",
@@ -911,6 +920,7 @@
           {
             "id": "b1",
             "narration": "Compte chaque élément séparément : à gauche, à droite.",
+            "audio": { "url": "/media/a78zzu7f8xeb/s4-b1.mp3", "duration_ms": 4848 },
             "actions": [
               {
                 "do": "show",
@@ -933,6 +943,7 @@
           {
             "id": "b2",
             "narration": "Tu peux changer les coefficients, devant les formules. Les petits indices, eux, ne bougent jamais.",
+            "audio": { "url": "/media/a78zzu7f8xeb/s4-b2.mp3", "duration_ms": 6984 },
             "actions": [
               {
                 "do": "show",
@@ -961,6 +972,7 @@
           {
             "id": "b3",
             "narration": "Quand les deux comptages se rejoignent, l’équation est équilibrée.",
+            "audio": { "url": "/media/a78zzu7f8xeb/s4-b3.mp3", "duration_ms": 4608 },
             "actions": [
               {
                 "do": "sweep",
@@ -1029,6 +1041,7 @@
           {
             "id": "b1",
             "narration": "Méthane qui brûle : CH4 plus O2, ça donne CO2 et de l’eau.",
+            "audio": { "url": "/media/a78zzu7f8xeb/s5-b1.mp3", "duration_ms": 6264 },
             "actions": [
               {
                 "do": "show",
@@ -1042,6 +1055,7 @@
           {
             "id": "b2",
             "narration": "Compte : quatre hydrogènes à gauche, il en faut quatre à droite.",
+            "audio": { "url": "/media/a78zzu7f8xeb/s5-b2.mp3", "duration_ms": 4488 },
             "actions": [
               {
                 "do": "show",
@@ -1062,6 +1076,7 @@
           {
             "id": "b3",
             "narration": "Deux 2 devant O2 et H2O, et tout est coché des deux côtés.",
+            "audio": { "url": "/media/a78zzu7f8xeb/s5-b3.mp3", "duration_ms": 4584 },
             "actions": [
               {
                 "do": "show",
@@ -1111,6 +1126,7 @@
           {
             "id": "b1",
             "narration": "D’abord, compte chaque type d’atome, à gauche comme à droite.",
+            "audio": { "url": "/media/a78zzu7f8xeb/s6-b1.mp3", "duration_ms": 3528 },
             "actions": [
               {
                 "do": "show",
@@ -1124,6 +1140,7 @@
           {
             "id": "b2",
             "narration": "Ensuite, ajuste les coefficients devant les formules. Et jamais les indices.",
+            "audio": { "url": "/media/a78zzu7f8xeb/s6-b2.mp3", "duration_ms": 4848 },
             "actions": [
               {
                 "do": "highlight",
@@ -1136,6 +1153,7 @@
           {
             "id": "b3",
             "narration": "Deux H₂ plus un O₂ donnent deux H₂O. Les atomes sont tous casés.",
+            "audio": { "url": "/media/a78zzu7f8xeb/s6-b3.mp3", "duration_ms": 6264 },
             "actions": [
               {
                 "do": "highlight",

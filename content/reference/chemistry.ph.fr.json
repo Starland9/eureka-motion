@@ -378,6 +378,7 @@
           {
             "id": "b1",
             "narration": "Un citron affiche pH 2, un savon pH 12. Un simple chiffre ?",
+            "audio": { "url": "/media/wmp4f4upvapa/s1-b1.mp3", "duration_ms": 5784 },
             "actions": [
               {
                 "do": "show",
@@ -404,6 +405,7 @@
           {
             "id": "b2",
             "narration": "Regarde le compteur d’ions quand le curseur glisse de 2 à 12.",
+            "audio": { "url": "/media/wmp4f4upvapa/s1-b2.mp3", "duration_ms": 5424 },
             "actions": [
               {
                 "do": "show",
@@ -433,6 +435,7 @@
           {
             "id": "b3",
             "narration": "Dix unités d’écart : dix milliards de fois moins d’ions. Que cache ce chiffre ?",
+            "audio": { "url": "/media/wmp4f4upvapa/s1-b3.mp3", "duration_ms": 6336 },
             "actions": [
               {
                 "do": "sweep",
@@ -538,6 +541,7 @@
           {
             "id": "b1",
             "narration": "Un chuchotement, une rue, un concert, un décollage : ça change de volume, non ?",
+            "audio": { "url": "/media/wmp4f4upvapa/s2-b1.mp3", "duration_ms": 5664 },
             "actions": [
               {
                 "do": "show",
@@ -575,6 +579,7 @@
           {
             "id": "b2",
             "narration": "Chaque barre est dix fois plus haute. On additionne dix, mais on multiplie le bruit.",
+            "audio": { "url": "/media/wmp4f4upvapa/s2-b2.mp3", "duration_ms": 6528 },
             "actions": [
               {
                 "do": "show",
@@ -589,6 +594,7 @@
           {
             "id": "b3",
             "narration": "Le pH fait pareil : une unité de moins, et les ions sont dix fois plus nombreux.",
+            "audio": { "url": "/media/wmp4f4upvapa/s2-b3.mp3", "duration_ms": 6144 },
             "actions": [
               {
                 "do": "show",
@@ -750,6 +756,7 @@
           {
             "id": "b1",
             "narration": "Voici un bécher. Les petites boules sont les ions H₃O⁺, l’ion oxonium.",
+            "audio": { "url": "/media/wmp4f4upvapa/s3-b1.mp3", "duration_ms": 7128 },
             "actions": [
               {
                 "do": "show",
@@ -773,6 +780,7 @@
           {
             "id": "b2",
             "narration": "Ces ions portent l’acidité. Compte-les, puis augmente leur nombre.",
+            "audio": { "url": "/media/wmp4f4upvapa/s3-b2.mp3", "duration_ms": 4824 },
             "actions": [
               {
                 "do": "show",
@@ -792,6 +800,7 @@
           {
             "id": "b3",
             "narration": "Le curseur monte : les ions se multiplient dans le litre. Plus il y en a, plus c’est acide.",
+            "audio": { "url": "/media/wmp4f4upvapa/s3-b3.mp3", "duration_ms": 6936 },
             "actions": [
               {
                 "do": "show",
@@ -907,6 +916,7 @@
           {
             "id": "b1",
             "narration": "Voici la règle : le pH, c’est moins le logarithme de la concentration en ions H₃O⁺.",
+            "audio": { "url": "/media/wmp4f4upvapa/s4-b1.mp3", "duration_ms": 7296 },
             "actions": [
               {
                 "do": "show",
@@ -920,6 +930,7 @@
           {
             "id": "b2",
             "narration": "Deux curseurs sur une même règle : la concentration d’un côté, le pH de l’autre.",
+            "audio": { "url": "/media/wmp4f4upvapa/s4-b2.mp3", "duration_ms": 6384 },
             "actions": [
               {
                 "do": "show",
@@ -943,6 +954,7 @@
           {
             "id": "b3",
             "narration": "Dix fois plus d’ions : la concentration bondit, le pH descend d’un seul cran.",
+            "audio": { "url": "/media/wmp4f4upvapa/s4-b3.mp3", "duration_ms": 6408 },
             "actions": [
               {
                 "do": "sweep",
@@ -1112,6 +1124,7 @@
           {
             "id": "b1",
             "narration": "Un vinaigre à pH 3, un autre dilué à pH 5. Deux crans d’écart, rien de plus ?",
+            "audio": { "url": "/media/wmp4f4upvapa/s5-b1.mp3", "duration_ms": 6024 },
             "actions": [
               {
                 "do": "show",
@@ -1142,6 +1155,7 @@
           {
             "id": "b2",
             "narration": "Lis les concentrations : dix puissance moins trois, et dix puissance moins cinq.",
+            "audio": { "url": "/media/wmp4f4upvapa/s5-b2.mp3", "duration_ms": 5904 },
             "actions": [
               {
                 "do": "show",
@@ -1156,6 +1170,7 @@
           {
             "id": "b3",
             "narration": "Cent fois plus d’ions dans le premier. Voilà ce que cache un petit écart de pH.",
+            "audio": { "url": "/media/wmp4f4upvapa/s5-b3.mp3", "duration_ms": 5256 },
             "actions": [
               {
                 "do": "show",
@@ -1197,6 +1212,7 @@
           {
             "id": "b1",
             "narration": "Trois idées à garder. Le pH, c’est moins le log de la concentration en ions H₃O⁺.",
+            "audio": { "url": "/media/wmp4f4upvapa/s6-b1.mp3", "duration_ms": 7368 },
             "actions": [
               {
                 "do": "show",
@@ -1210,6 +1226,7 @@
           {
             "id": "b2",
             "narration": "Une unité de pH en moins, et la concentration est dix fois plus grande.",
+            "audio": { "url": "/media/wmp4f4upvapa/s6-b2.mp3", "duration_ms": 5784 },
             "actions": [
               {
                 "do": "highlight",
@@ -1222,6 +1239,7 @@
           {
             "id": "b3",
             "narration": "Alors pH 3 ou pH 5 : cent fois plus d’ions, pas deux fois plus.",
+            "audio": { "url": "/media/wmp4f4upvapa/s6-b3.mp3", "duration_ms": 5136 },
             "actions": []
           }
         ]

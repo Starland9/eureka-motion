@@ -384,6 +384,7 @@
           {
             "id": "b1",
             "narration": "Un billet de concert. Un mois avant, il s’affiche à 40 euros.",
+            "audio": { "url": "/media/gdh2nxzd4pkh/s1-b1.mp3", "duration_ms": 4584 },
             "actions": [
               {
                 "do": "show",
@@ -398,6 +399,7 @@
           {
             "id": "b2",
             "narration": "Une semaine avant, 90. Le jour même, 250. Devine qui a décidé ça.",
+            "audio": { "url": "/media/gdh2nxzd4pkh/s1-b2.mp3", "duration_ms": 6216 },
             "actions": [
               {
                 "do": "show",
@@ -412,6 +414,7 @@
           {
             "id": "b3",
             "narration": "Personne ne l’a vraiment décidé : l’offre et la demande se sont rencontrées.",
+            "audio": { "url": "/media/gdh2nxzd4pkh/s1-b3.mp3", "duration_ms": 5136 },
             "actions": [
               {
                 "do": "highlight",
@@ -541,6 +544,7 @@
           {
             "id": "b1",
             "narration": "Imagine une table d’échange de cartes. À gauche, ceux qui vendent. À droite, ceux qui cherchent.",
+            "audio": { "url": "/media/gdh2nxzd4pkh/s2-b1.mp3", "duration_ms": 6648 },
             "actions": [
               {
                 "do": "show",
@@ -555,6 +559,7 @@
           {
             "id": "b2",
             "narration": "Affiche un prix élevé : les vendeurs se pressent, les acheteurs reculent.",
+            "audio": { "url": "/media/gdh2nxzd4pkh/s2-b2.mp3", "duration_ms": 4776 },
             "actions": [
               {
                 "do": "show",
@@ -590,6 +595,7 @@
           {
             "id": "b3",
             "narration": "Baisse le prix, et regarde : c’est l’inverse qui se produit.",
+            "audio": { "url": "/media/gdh2nxzd4pkh/s2-b3.mp3", "duration_ms": 4296 },
             "actions": [
               {
                 "do": "sweep",
@@ -601,6 +607,7 @@
           {
             "id": "b4",
             "narration": "Alors, quel prix mettrait tout le monde d’accord ?",
+            "audio": { "url": "/media/gdh2nxzd4pkh/s2-b4.mp3", "duration_ms": 2448 },
             "actions": [
               {
                 "do": "highlight",
@@ -697,6 +704,7 @@
           {
             "id": "b1",
             "narration": "Un prix monte ? Les vendeurs en proposent davantage : la courbe d’offre grimpe.",
+            "audio": { "url": "/media/gdh2nxzd4pkh/s3-b1.mp3", "duration_ms": 5904 },
             "actions": [
               {
                 "do": "show",
@@ -724,6 +732,7 @@
           {
             "id": "b2",
             "narration": "Les acheteurs, eux, reculent : la demande descend quand le prix grimpe.",
+            "audio": { "url": "/media/gdh2nxzd4pkh/s3-b2.mp3", "duration_ms": 4968 },
             "actions": [
               {
                 "do": "show",
@@ -749,6 +758,7 @@
           {
             "id": "b3",
             "narration": "Là où les deux courbes se croisent, offre et demande s’égalent : c’est l’équilibre.",
+            "audio": { "url": "/media/gdh2nxzd4pkh/s3-b3.mp3", "duration_ms": 6216 },
             "actions": [
               {
                 "do": "show",
@@ -895,6 +905,7 @@
           {
             "id": "b1",
             "narration": "Voici l’offre qui monte et la demande qui descend. Elles se croisent en un seul point.",
+            "audio": { "url": "/media/gdh2nxzd4pkh/s4-b1.mp3", "duration_ms": 6096 },
             "actions": [
               {
                 "do": "show",
@@ -916,6 +927,7 @@
           {
             "id": "b2",
             "narration": "À cette verticale, ce que les vendeurs offrent égale ce que les acheteurs demandent.",
+            "audio": { "url": "/media/gdh2nxzd4pkh/s4-b2.mp3", "duration_ms": 4704 },
             "actions": [
               {
                 "do": "sweep",
@@ -937,6 +949,7 @@
           {
             "id": "b3",
             "narration": "Ce prix porte un nom : le prix d’équilibre. Lis-le sur le graphique.",
+            "audio": { "url": "/media/gdh2nxzd4pkh/s4-b3.mp3", "duration_ms": 5256 },
             "actions": [
               {
                 "do": "show",
@@ -1040,6 +1053,7 @@
           {
             "id": "b1",
             "narration": "À 8 euros, les vendeurs proposent beaucoup d’objets, mais peu d’acheteurs se présentent.",
+            "audio": { "url": "/media/gdh2nxzd4pkh/s5-b1.mp3", "duration_ms": 5904 },
             "actions": [
               {
                 "do": "sweep",
@@ -1068,6 +1082,7 @@
           {
             "id": "b2",
             "narration": "Les invendus s’empilent. Alors les vendeurs baissent le prix, jusqu’au croisement.",
+            "audio": { "url": "/media/gdh2nxzd4pkh/s5-b2.mp3", "duration_ms": 5424 },
             "actions": [
               {
                 "do": "sweep",
@@ -1082,6 +1097,7 @@
           {
             "id": "b3",
             "narration": "Descends à 2 euros : la file d’acheteurs s’allonge. Le prix remonte tout seul vers son équilibre.",
+            "audio": { "url": "/media/gdh2nxzd4pkh/s5-b3.mp3", "duration_ms": 6768 },
             "actions": [
               {
                 "do": "sweep",
@@ -1115,6 +1131,7 @@
           {
             "id": "b1",
             "narration": "Trois idées. L’offre monte quand le prix monte, la demande fait l’inverse.",
+            "audio": { "url": "/media/gdh2nxzd4pkh/s6-b1.mp3", "duration_ms": 5544 },
             "actions": [
               {
                 "do": "show",
@@ -1128,6 +1145,7 @@
           {
             "id": "b2",
             "narration": "À l’équilibre, la quantité offerte égale exactement la quantité demandée.",
+            "audio": { "url": "/media/gdh2nxzd4pkh/s6-b2.mp3", "duration_ms": 4416 },
             "actions": [
               {
                 "do": "focus",
@@ -1140,6 +1158,7 @@
           {
             "id": "b3",
             "narration": "Ton billet à 250 euros ? Trop cher : des places restent, le prix redescend.",
+            "audio": { "url": "/media/gdh2nxzd4pkh/s6-b3.mp3", "duration_ms": 6768 },
             "actions": [
               {
                 "do": "highlight",

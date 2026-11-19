@@ -39,8 +39,20 @@ export function outlineOf(reference: ReferenceFile): Outline {
   return { plan, params, model };
 }
 
+export function withoutAudio(scene: Scene): Scene {
+  return {
+    ...scene,
+    beats: scene.beats.map((beat) => {
+      const silent = { ...beat };
+      delete silent.audio;
+      return silent;
+    }),
+  };
+}
+
+// References carry narration audio; a model never does, so scenarios start from silent scenes.
 export function scenesOf(reference: ReferenceFile): Scene[] {
-  return DocumentSchema.parse(reference.payload).scenes;
+  return DocumentSchema.parse(reference.payload).scenes.map(withoutAudio);
 }
 
 export function quizOf(reference: ReferenceFile): Quiz {

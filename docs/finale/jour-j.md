@@ -48,14 +48,14 @@ Bêta : <https://eureka-motion.starland9.dev/fr>. Pitch : [pitch.md](pitch.md). 
 
 ## En scène : si quelque chose cède
 
-| Incident                                     | Que faire                                                                                                                                             |
-| -------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Pas de première scène 30 s après la question | Dire la réserve de [pitch.md](pitch.md). Une minute après la question, reposer la question au niveau Collège : elle est en cache et démarre aussitôt. |
-| L'explication démarre en 1 s, sans étapes    | La purge n'a pas pris : le dire (« elle est déjà en cache »), jouer la démo, puis montrer « Une autre image », qui fait travailler l'agent en direct. |
-| Le partage de connexion tombe                | Onglet 3 : l'instance de secours. Jouer « La gravitation universelle » avec ses curseurs et son quiz, sous-titres seuls.                              |
-| Tout tombe                                   | Onglet 4 : la vidéo de 88 s, en disant que les attentes y sont raccourcies au montage.                                                                |
-| Une scène est écartée                        | C'est voulu : une scène non vérifiée n'est jamais montrée. Le dire, puis continuer.                                                                   |
-| La voix est muette                           | `m` pour le son, `c` pour les sous-titres. Sans voix, lire les sous-titres.                                                                           |
+| Incident                                     | Que faire                                                                                                                                               |
+| -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Pas de première scène 30 s après la question | Dire la réserve de [pitch.md](pitch.md). Une minute après la question, reposer la question au niveau Collège : elle est en cache et démarre aussitôt.   |
+| L'explication démarre en 1 s, sans étapes    | La purge n'a pas pris : le dire (« elle est déjà en cache »), jouer la démo, puis montrer « Une autre image », qui fait travailler l'agent en direct.   |
+| Le partage de connexion tombe                | Onglet 3 : l'instance de secours. Jouer « La gravitation universelle » avec ses curseurs, son quiz et sa voix enregistrée, qui ne demande aucun réseau. |
+| Tout tombe                                   | Onglet 4 : la vidéo de 88 s, en disant que les attentes y sont raccourcies au montage.                                                                  |
+| Une scène est écartée                        | C'est voulu : une scène non vérifiée n'est jamais montrée. Le dire, puis continuer.                                                                     |
+| La voix est muette                           | `m` pour le son, `c` pour les sous-titres. Sans voix, lire les sous-titres.                                                                             |
 
 ## Après la présentation
 

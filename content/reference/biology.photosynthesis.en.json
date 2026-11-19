@@ -357,6 +357,7 @@
           {
             "id": "b1",
             "narration": "This huge tree started as a tiny seed. Where did all that wood come from?",
+            "audio": { "url": "/media/uhcxh3yhga6n/s1-b1.mp3", "duration_ms": 4704 },
             "actions": [
               {
                 "do": "show",
@@ -380,6 +381,7 @@
           {
             "id": "b2",
             "narration": "Most of it comes from the air, not from the soil you see below.",
+            "audio": { "url": "/media/uhcxh3yhga6n/s1-b2.mp3", "duration_ms": 3696 },
             "actions": [
               {
                 "do": "show",
@@ -401,6 +403,7 @@
           {
             "id": "b3",
             "narration": "Watch: the more sugar the leaf makes, the taller the tree grows.",
+            "audio": { "url": "/media/uhcxh3yhga6n/s1-b3.mp3", "duration_ms": 4056 },
             "actions": [
               {
                 "do": "sweep",
@@ -552,6 +555,7 @@
           {
             "id": "b1",
             "narration": "Think of a leaf as a tiny kitchen. Light is the cooker, water and air are the ingredients.",
+            "audio": { "url": "/media/uhcxh3yhga6n/s2-b1.mp3", "duration_ms": 6936 },
             "actions": [
               {
                 "do": "show",
@@ -577,6 +581,7 @@
           {
             "id": "b2",
             "narration": "Here is the sugar piling up on the counter while the light shines.",
+            "audio": { "url": "/media/uhcxh3yhga6n/s2-b2.mp3", "duration_ms": 3696 },
             "actions": [
               {
                 "do": "show",
@@ -590,6 +595,7 @@
           {
             "id": "b3",
             "narration": "Now guess: cover the window. Does the pile keep growing?",
+            "audio": { "url": "/media/uhcxh3yhga6n/s2-b3.mp3", "duration_ms": 4608 },
             "actions": [
               {
                 "do": "sweep",
@@ -610,6 +616,7 @@
           {
             "id": "b4",
             "narration": "It stops. No power, no meal, however much water and air you pour in.",
+            "audio": { "url": "/media/uhcxh3yhga6n/s2-b4.mp3", "duration_ms": 5784 },
             "actions": [
               {
                 "do": "highlight",
@@ -729,6 +736,7 @@
           {
             "id": "b1",
             "narration": "Zoom in on a leaf. Water climbs up the veins, like a drink through a straw.",
+            "audio": { "url": "/media/uhcxh3yhga6n/s3-b1.mp3", "duration_ms": 5064 },
             "actions": [
               {
                 "do": "show",
@@ -749,6 +757,7 @@
           {
             "id": "b2",
             "narration": "Tiny pores open to the air, and carbon dioxide slips in.",
+            "audio": { "url": "/media/uhcxh3yhga6n/s3-b2.mp3", "duration_ms": 3984 },
             "actions": [
               {
                 "do": "show",
@@ -769,6 +778,7 @@
           {
             "id": "b3",
             "narration": "Inside, light powers the kitchen: sugar leaves for the plant, oxygen leaks out.",
+            "audio": { "url": "/media/uhcxh3yhga6n/s3-b3.mp3", "duration_ms": 5784 },
             "actions": [
               {
                 "do": "show",
@@ -884,6 +894,7 @@
           {
             "id": "b1",
             "narration": "Here is the kitchen rule. Big S is the sugar that comes out.",
+            "audio": { "url": "/media/uhcxh3yhga6n/s4-b1.mp3", "duration_ms": 3888 },
             "actions": [
               {
                 "do": "show",
@@ -904,6 +915,7 @@
           {
             "id": "b2",
             "narration": "Light times leaf area: more power and more worktop, more sugar.",
+            "audio": { "url": "/media/uhcxh3yhga6n/s4-b2.mp3", "duration_ms": 4848 },
             "actions": [
               {
                 "do": "show",
@@ -922,6 +934,7 @@
           {
             "id": "b3",
             "narration": "Air is the ingredient that runs out first. Watch the bars when it drops.",
+            "audio": { "url": "/media/uhcxh3yhga6n/s4-b3.mp3", "duration_ms": 4584 },
             "actions": [
               {
                 "do": "sweep",
@@ -933,6 +946,7 @@
           {
             "id": "b4",
             "narration": "And a whole sunny day multiplies the sugar by twelve.",
+            "audio": { "url": "/media/uhcxh3yhga6n/s4-b4.mp3", "duration_ms": 3456 },
             "actions": [
               {
                 "do": "sweep",
@@ -1081,6 +1095,7 @@
           {
             "id": "b1",
             "narration": "Here is sugar per hour as the light gets stronger, with your leaf area and air.",
+            "audio": { "url": "/media/uhcxh3yhga6n/s5-b1.mp3", "duration_ms": 5688 },
             "actions": [
               {
                 "do": "show",
@@ -1101,6 +1116,7 @@
           {
             "id": "b2",
             "narration": "Weak light, little sugar. Twice the light, roughly twice the sugar. Guess what comes next.",
+            "audio": { "url": "/media/uhcxh3yhga6n/s5-b2.mp3", "duration_ms": 6144 },
             "actions": [
               {
                 "do": "show",
@@ -1135,6 +1151,7 @@
           {
             "id": "b3",
             "narration": "Now push the light to the max: the curve flattens. Something else is running short.",
+            "audio": { "url": "/media/uhcxh3yhga6n/s5-b3.mp3", "duration_ms": 6264 },
             "actions": [
               {
                 "do": "show",
@@ -1191,6 +1208,7 @@
           {
             "id": "b1",
             "narration": "First idea: a leaf builds sugar from water, from air and from light.",
+            "audio": { "url": "/media/uhcxh3yhga6n/s6-b1.mp3", "duration_ms": 5184 },
             "actions": [
               {
                 "do": "show",
@@ -1204,11 +1222,13 @@
           {
             "id": "b2",
             "narration": "Second: more light, more leaf, more carbon dioxide means more sugar. Until something runs short.",
+            "audio": { "url": "/media/uhcxh3yhga6n/s6-b2.mp3", "duration_ms": 7944 },
             "actions": []
           },
           {
             "id": "b3",
             "narration": "And your big tree? Most of its wood was once air, pulled into the leaves.",
+            "audio": { "url": "/media/uhcxh3yhga6n/s6-b3.mp3", "duration_ms": 4968 },
             "actions": [
               {
                 "do": "highlight",

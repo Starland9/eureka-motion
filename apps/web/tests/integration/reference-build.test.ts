@@ -5,17 +5,23 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { promisify } from "node:util";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
-import reference from "../../../../content/reference/physics.universal-gravitation.fr.json";
+import published from "../../../../content/reference/physics.universal-gravitation.fr.json";
 import { checkReferences, referenceId, type CheckedReference } from "../../src/server/reference";
 
 const run = promisify(execFile);
 const WEB = fileURLToPath(new URL("../..", import.meta.url));
 const SCRIPT = fileURLToPath(new URL("../../../../scripts/reference-build.ts", import.meta.url));
 const NAME = "physics.universal-gravitation.fr.json";
-const ID = referenceId(reference.slug, "fr");
+const ID = referenceId(published.slug, "fr");
 
-type Reference = typeof reference;
+type Reference = typeof published;
 type Beat = Reference["payload"]["scenes"][number]["beats"][number];
+
+// The published file is voiced; these tests build their own audio files where they need any.
+const reference: Reference = structuredClone(published);
+for (const scene of reference.payload.scenes) {
+  for (const beat of scene.beats as { audio?: unknown }[]) delete beat.audio;
+}
 
 let dir: string;
 

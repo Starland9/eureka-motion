@@ -339,6 +339,7 @@
           {
             "id": "b1",
             "narration": "Dans le noyau, l’ADN garde le mode d’emploi. Il ne sort jamais.",
+            "audio": { "url": "/media/fzb43dtpkj6z/s1-b1.mp3", "duration_ms": 5424 },
             "actions": [
               {
                 "do": "show",
@@ -366,6 +367,7 @@
           {
             "id": "b2",
             "narration": "Pourtant, la protéine est fabriquée dehors. Devine ce qui traverse la membrane.",
+            "audio": { "url": "/media/fzb43dtpkj6z/s1-b2.mp3", "duration_ms": 5328 },
             "actions": [
               {
                 "do": "show",
@@ -386,6 +388,7 @@
           {
             "id": "b3",
             "narration": "Une copie, l’ARN messager, sort et porte le message jusqu’au ribosome.",
+            "audio": { "url": "/media/fzb43dtpkj6z/s1-b3.mp3", "duration_ms": 5136 },
             "actions": [
               {
                 "do": "show",
@@ -531,6 +534,7 @@
           {
             "id": "b1",
             "narration": "Ton livre de recettes reste dans la cuisine, impossible à sortir.",
+            "audio": { "url": "/media/fzb43dtpkj6z/s2-b1.mp3", "duration_ms": 4728 },
             "actions": [
               {
                 "do": "show",
@@ -552,6 +556,7 @@
           {
             "id": "b2",
             "narration": "Alors tu recopies la recette sur une fiche, et elle sort.",
+            "audio": { "url": "/media/fzb43dtpkj6z/s2-b2.mp3", "duration_ms": 4704 },
             "actions": [
               {
                 "do": "show",
@@ -573,6 +578,7 @@
           {
             "id": "b3",
             "narration": "Au comptoir, les ingrédients s’alignent un à un : le plat se prépare.",
+            "audio": { "url": "/media/fzb43dtpkj6z/s2-b3.mp3", "duration_ms": 5256 },
             "actions": [
               {
                 "do": "show",
@@ -768,6 +774,7 @@
           {
             "id": "b1",
             "narration": "L’enzyme ouvre la double hélice. Regarde : les deux brins se séparent.",
+            "audio": { "url": "/media/fzb43dtpkj6z/s3-b1.mp3", "duration_ms": 5808 },
             "actions": [
               {
                 "do": "show",
@@ -796,6 +803,7 @@
           {
             "id": "b2",
             "narration": "Sur un brin, elle pose les bases complémentaires : A avec U, C avec G.",
+            "audio": { "url": "/media/fzb43dtpkj6z/s3-b2.mp3", "duration_ms": 7584 },
             "actions": [
               {
                 "do": "show",
@@ -817,6 +825,7 @@
           {
             "id": "b3",
             "narration": "L’ARNm s’allonge lettre par lettre. Saisis un autre nombre de codons, et regarde.",
+            "audio": { "url": "/media/fzb43dtpkj6z/s3-b3.mp3", "duration_ms": 6168 },
             "actions": [
               {
                 "do": "show",
@@ -958,6 +967,7 @@
           {
             "id": "b1",
             "narration": "Le ribosome se pose sur l’ARNm et repère le premier triplet : un codon.",
+            "audio": { "url": "/media/fzb43dtpkj6z/s4-b1.mp3", "duration_ms": 6288 },
             "actions": [
               {
                 "do": "show",
@@ -979,6 +989,7 @@
           {
             "id": "b2",
             "narration": "À chaque codon lu, un acide aminé s’accroche et la chaîne s’allonge.",
+            "audio": { "url": "/media/fzb43dtpkj6z/s4-b2.mp3", "duration_ms": 4704 },
             "actions": [
               {
                 "do": "show",
@@ -1007,6 +1018,7 @@
           {
             "id": "b3",
             "narration": "Le ribosome avance, codon après codon : plus de codons lus, plus la protéine grandit.",
+            "audio": { "url": "/media/fzb43dtpkj6z/s4-b3.mp3", "duration_ms": 7224 },
             "actions": [
               {
                 "do": "sweep",
@@ -1035,6 +1047,7 @@
           {
             "id": "b4",
             "narration": "Compte : trois bases par codon, un acide aminé ajouté à chaque fois.",
+            "audio": { "url": "/media/fzb43dtpkj6z/s4-b4.mp3", "duration_ms": 5256 },
             "actions": [
               {
                 "do": "highlight",
@@ -1200,6 +1213,7 @@
           {
             "id": "b1",
             "narration": "Lis ce codon dans le tableau : UGG, un acide aminé s’accroche à la chaîne.",
+            "audio": { "url": "/media/fzb43dtpkj6z/s5-b1.mp3", "duration_ms": 6048 },
             "actions": [
               {
                 "do": "show",
@@ -1237,6 +1251,7 @@
           {
             "id": "b2",
             "narration": "Maintenant UAA : c’est un codon-stop, la traduction s’arrête net.",
+            "audio": { "url": "/media/fzb43dtpkj6z/s5-b2.mp3", "duration_ms": 5904 },
             "actions": [
               {
                 "do": "show",
@@ -1264,6 +1279,7 @@
           {
             "id": "b3",
             "narration": "Une seule lettre de changée, et la protéine s’arrête trop tôt.",
+            "audio": { "url": "/media/fzb43dtpkj6z/s5-b3.mp3", "duration_ms": 4296 },
             "actions": [
               {
                 "do": "show",
@@ -1306,6 +1322,7 @@
           {
             "id": "b1",
             "narration": "Trois étapes à garder. Un : la transcription copie l’ADN en ARN messager.",
+            "audio": { "url": "/media/fzb43dtpkj6z/s6-b1.mp3", "duration_ms": 7608 },
             "actions": [
               {
                 "do": "show",
@@ -1319,11 +1336,13 @@
           {
             "id": "b2",
             "narration": "Deux : la traduction lit chaque codon et pose un acide aminé après l’autre.",
+            "audio": { "url": "/media/fzb43dtpkj6z/s6-b2.mp3", "duration_ms": 6216 },
             "actions": []
           },
           {
             "id": "b3",
             "narration": "Et voilà la réponse : c’est l’ARNm, la copie, qui sort du noyau. L’ADN, lui, reste.",
+            "audio": { "url": "/media/fzb43dtpkj6z/s6-b3.mp3", "duration_ms": 6888 },
             "actions": [
               {
                 "do": "highlight",

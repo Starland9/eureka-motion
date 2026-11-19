@@ -40,10 +40,12 @@ const REFERENCE = path.resolve(
   import.meta.dirname,
   "../../../../content/reference/physics.universal-gravitation.fr.json",
 );
+// The reference now carries its narration audio; these tests start from a silent document.
 const gravity: ExplanationDocument = typesetTexts(
   DocumentSchema.parse(JSON.parse(readFileSync(REFERENCE, "utf8")).payload),
   "fr",
 );
+for (const scene of gravity.scenes) for (const beat of scene.beats) delete beat.audio;
 
 const NBSP = " ";
 const paper = getTheme("paper");

@@ -282,6 +282,7 @@
           {
             "id": "b1",
             "narration": "Regarde ce triangle : deux côtés mesurent trois et quatre mètres, et l’angle est droit.",
+            "audio": { "url": "/media/jwm2fadf9b9f/s1-b1.mp3", "duration_ms": 5856 },
             "actions": [
               {
                 "do": "show",
@@ -304,6 +305,7 @@
           {
             "id": "b2",
             "narration": "Son grand côté, lui, mesure cinq mètres. Trois, quatre, cinq : rien de bizarre en apparence.",
+            "audio": { "url": "/media/jwm2fadf9b9f/s1-b2.mp3", "duration_ms": 6624 },
             "actions": [
               {
                 "do": "show",
@@ -324,6 +326,7 @@
           {
             "id": "b3",
             "narration": "Et pourtant, ces trois nombres sont reliés. Saurais-tu deviner par quoi ?",
+            "audio": { "url": "/media/jwm2fadf9b9f/s1-b3.mp3", "duration_ms": 4248 },
             "actions": [
               {
                 "do": "show",
@@ -468,6 +471,7 @@
           {
             "id": "b1",
             "narration": "Une échelle est posée contre un mur. Regarde bien ce qui peut bouger.",
+            "audio": { "url": "/media/jwm2fadf9b9f/s2-b1.mp3", "duration_ms": 4656 },
             "actions": [
               {
                 "do": "show",
@@ -504,6 +508,7 @@
           {
             "id": "b2",
             "narration": "Si j’éloigne le pied du mur, le haut de l’échelle descend. Devine pourquoi.",
+            "audio": { "url": "/media/jwm2fadf9b9f/s2-b2.mp3", "duration_ms": 4824 },
             "actions": [
               {
                 "do": "sweep",
@@ -515,6 +520,7 @@
           {
             "id": "b3",
             "narration": "Deux longueurs changent à la fois, mais l’échelle, elle, garde sa taille.",
+            "audio": { "url": "/media/jwm2fadf9b9f/s2-b3.mp3", "duration_ms": 4824 },
             "actions": [
               {
                 "do": "sweep",
@@ -604,6 +610,7 @@
           {
             "id": "b1",
             "narration": "Sur chaque côté du triangle, fais pousser un carré. Regarde bien leurs tailles.",
+            "audio": { "url": "/media/jwm2fadf9b9f/s3-b1.mp3", "duration_ms": 5568 },
             "actions": [
               {
                 "do": "show",
@@ -626,6 +633,7 @@
           {
             "id": "b2",
             "narration": "Les deux petits carrés se vident dans le grand. Devine : est-ce qu’il déborde ?",
+            "audio": { "url": "/media/jwm2fadf9b9f/s3-b2.mp3", "duration_ms": 6216 },
             "actions": [
               {
                 "do": "show",
@@ -641,6 +649,7 @@
           {
             "id": "b3",
             "narration": "Non. Il est rempli pile : le grand carré vaut la somme des deux autres.",
+            "audio": { "url": "/media/jwm2fadf9b9f/s3-b3.mp3", "duration_ms": 5448 },
             "actions": [
               {
                 "do": "show",
@@ -725,6 +734,7 @@
           {
             "id": "b1",
             "narration": "Regarde les trois côtés : les deux petits portent a et b, le grand porte c.",
+            "audio": { "url": "/media/jwm2fadf9b9f/s4-b1.mp3", "duration_ms": 6336 },
             "actions": [
               {
                 "do": "show",
@@ -738,6 +748,7 @@
           {
             "id": "b2",
             "narration": "La règle s’écrit : a au carré plus b au carré égale c au carré.",
+            "audio": { "url": "/media/jwm2fadf9b9f/s4-b2.mp3", "duration_ms": 5424 },
             "actions": [
               {
                 "do": "show",
@@ -751,6 +762,7 @@
           {
             "id": "b3",
             "narration": "Vérifie avec les aires des carrés : la somme des deux petits remplit le grand.",
+            "audio": { "url": "/media/jwm2fadf9b9f/s4-b3.mp3", "duration_ms": 5544 },
             "actions": [
               {
                 "do": "show",
@@ -894,6 +906,7 @@
           {
             "id": "b1",
             "narration": "Un mur de trois mètres, un pied d’échelle à quatre mètres : dessinons à l’échelle.",
+            "audio": { "url": "/media/jwm2fadf9b9f/s5-b1.mp3", "duration_ms": 6288 },
             "actions": [
               {
                 "do": "show",
@@ -916,6 +929,7 @@
           {
             "id": "b2",
             "narration": "L’échelle se déplie du sol jusqu’au haut du mur, et mesure…",
+            "audio": { "url": "/media/jwm2fadf9b9f/s5-b2.mp3", "duration_ms": 4104 },
             "actions": [
               {
                 "do": "show",
@@ -936,6 +950,7 @@
           {
             "id": "b3",
             "narration": "Neuf plus seize font vingt-cinq. Vingt-cinq, c’est cinq fois cinq : l’échelle mesure cinq mètres.",
+            "audio": { "url": "/media/jwm2fadf9b9f/s5-b3.mp3", "duration_ms": 7704 },
             "actions": [
               {
                 "do": "show",
@@ -984,6 +999,7 @@
           {
             "id": "b1",
             "narration": "Un : dans un triangle rectangle, le carré du grand côté égale la somme des deux autres carrés.",
+            "audio": { "url": "/media/jwm2fadf9b9f/s6-b1.mp3", "duration_ms": 6216 },
             "actions": [
               {
                 "do": "show",
@@ -997,6 +1013,7 @@
           {
             "id": "b2",
             "narration": "Deux : côté 3 et côté 4 donnent 9 plus 16, donc 25. Le grand côté vaut 5.",
+            "audio": { "url": "/media/jwm2fadf9b9f/s6-b2.mp3", "duration_ms": 6888 },
             "actions": [
               {
                 "do": "show",
@@ -1010,6 +1027,7 @@
           {
             "id": "b3",
             "narration": "Et ce n’est pas un hasard du 3-4-5 : ça marche pour tous les triangles rectangles.",
+            "audio": { "url": "/media/jwm2fadf9b9f/s6-b3.mp3", "duration_ms": 6888 },
             "actions": [
               {
                 "do": "show",
