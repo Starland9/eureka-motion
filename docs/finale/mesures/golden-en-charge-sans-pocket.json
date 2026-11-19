@@ -1,0 +1,303 @@
+{
+  "generated_at": "2026-11-19T00:14:14.697Z",
+  "base_url": "https://eureka-motion.starland9.dev",
+  "languages": [
+    "en"
+  ],
+  "concurrency": 10,
+  "timeout_s": 240,
+  "results": [
+    {
+      "id": "economics-inflation",
+      "kind": "core",
+      "subject": "economics",
+      "level": "college",
+      "language": "en",
+      "question": "Why do prices go up with inflation?",
+      "outcome": "ready",
+      "detail": null,
+      "explanation_id": "nzgxamayucj3",
+      "cached": false,
+      "redirected": false,
+      "first_scene_ms": 17772.060705,
+      "total_ms": 36334.495664,
+      "planned_scenes": 6,
+      "scenes": {
+        "validated": 4,
+        "corrected": 2,
+        "dropped": 0
+      },
+      "rate_limited": 0,
+      "waited_ms": 0,
+      "deep": null
+    },
+    {
+      "id": "economics-gdp",
+      "kind": "core",
+      "subject": "economics",
+      "level": "lycee",
+      "language": "en",
+      "question": "How is a country's GDP calculated?",
+      "outcome": "ready",
+      "detail": null,
+      "explanation_id": "kwd76utdkbvz",
+      "cached": false,
+      "redirected": false,
+      "first_scene_ms": 21772.416633,
+      "total_ms": 35116.27927,
+      "planned_scenes": 6,
+      "scenes": {
+        "validated": 6,
+        "corrected": 0,
+        "dropped": 0
+      },
+      "rate_limited": 0,
+      "waited_ms": 0,
+      "deep": null
+    },
+    {
+      "id": "economics-price-elasticity",
+      "kind": "core",
+      "subject": "economics",
+      "level": "lycee",
+      "language": "en",
+      "question": "What is the price elasticity of demand?",
+      "outcome": "partial",
+      "detail": null,
+      "explanation_id": "228re3fpbrxu",
+      "cached": false,
+      "redirected": false,
+      "first_scene_ms": 19441.339054,
+      "total_ms": 40967.471542,
+      "planned_scenes": 6,
+      "scenes": {
+        "validated": 4,
+        "corrected": 1,
+        "dropped": 1
+      },
+      "rate_limited": 0,
+      "waited_ms": 0,
+      "deep": null
+    },
+    {
+      "id": "economics-comparative-advantage",
+      "kind": "core",
+      "subject": "economics",
+      "level": "superieur",
+      "language": "en",
+      "question": "What is Ricardo's comparative advantage?",
+      "outcome": "failed",
+      "detail": "plan_unverifiable",
+      "explanation_id": "jn859ub3d5gm",
+      "cached": false,
+      "redirected": false,
+      "first_scene_ms": null,
+      "total_ms": 59284.449849000004,
+      "planned_scenes": null,
+      "scenes": {
+        "validated": 0,
+        "corrected": 0,
+        "dropped": 0
+      },
+      "rate_limited": 0,
+      "waited_ms": 0,
+      "deep": null
+    },
+    {
+      "id": "economics-keynesian-multiplier",
+      "kind": "core",
+      "subject": "economics",
+      "level": "superieur",
+      "language": "en",
+      "question": "How does the Keynesian multiplier work?",
+      "outcome": "ready",
+      "detail": null,
+      "explanation_id": "tz5h4kns47y4",
+      "cached": false,
+      "redirected": false,
+      "first_scene_ms": 18171.781307999998,
+      "total_ms": 42050.849178000004,
+      "planned_scenes": 6,
+      "scenes": {
+        "validated": 3,
+        "corrected": 3,
+        "dropped": 0
+      },
+      "rate_limited": 0,
+      "waited_ms": 0,
+      "deep": null
+    },
+    {
+      "id": "history-french-revolution",
+      "kind": "other",
+      "subject": "history",
+      "level": "college",
+      "language": "en",
+      "question": "Why did the French Revolution break out in 1789?",
+      "outcome": "ready",
+      "detail": null,
+      "explanation_id": "yx3bp6w52tmc",
+      "cached": false,
+      "redirected": false,
+      "first_scene_ms": 24065.507114,
+      "total_ms": 47819.600817,
+      "planned_scenes": 6,
+      "scenes": {
+        "validated": 4,
+        "corrected": 2,
+        "dropped": 0
+      },
+      "rate_limited": 0,
+      "waited_ms": 0,
+      "deep": null
+    },
+    {
+      "id": "history-cold-war",
+      "kind": "other",
+      "subject": "history",
+      "level": "lycee",
+      "language": "en",
+      "question": "How did the Cold War begin?",
+      "outcome": "ready",
+      "detail": null,
+      "explanation_id": "m74cw5etxjnx",
+      "cached": false,
+      "redirected": false,
+      "first_scene_ms": 18627.782425999998,
+      "total_ms": 35889.197988,
+      "planned_scenes": 6,
+      "scenes": {
+        "validated": 4,
+        "corrected": 2,
+        "dropped": 0
+      },
+      "rate_limited": 0,
+      "waited_ms": 0,
+      "deep": null
+    },
+    {
+      "id": "geography-climate-zones",
+      "kind": "other",
+      "subject": "geography",
+      "level": "college",
+      "language": "en",
+      "question": "Why is it hotter at the equator than at the poles?",
+      "outcome": "partial",
+      "detail": null,
+      "explanation_id": "vn29dbk5q9jc",
+      "cached": false,
+      "redirected": false,
+      "first_scene_ms": 20067.195116000003,
+      "total_ms": 41359.887920999994,
+      "planned_scenes": 6,
+      "scenes": {
+        "validated": 3,
+        "corrected": 2,
+        "dropped": 1
+      },
+      "rate_limited": 0,
+      "waited_ms": 0,
+      "deep": null
+    },
+    {
+      "id": "geography-demographic-transition",
+      "kind": "other",
+      "subject": "geography",
+      "level": "lycee",
+      "language": "en",
+      "question": "What is the demographic transition?",
+      "outcome": "ready",
+      "detail": null,
+      "explanation_id": "qdmg3k4gtuq6",
+      "cached": false,
+      "redirected": false,
+      "first_scene_ms": 33163.227137,
+      "total_ms": 46781.051833,
+      "planned_scenes": 6,
+      "scenes": {
+        "validated": 5,
+        "corrected": 1,
+        "dropped": 0
+      },
+      "rate_limited": 0,
+      "waited_ms": 0,
+      "deep": null
+    },
+    {
+      "id": "grammar-past-participle",
+      "kind": "other",
+      "subject": "grammar",
+      "level": "college",
+      "language": "en",
+      "question": "How do you make the past participle agree with the auxiliary avoir in French?",
+      "outcome": "partial",
+      "detail": null,
+      "explanation_id": "62r5nyq95eua",
+      "cached": false,
+      "redirected": false,
+      "first_scene_ms": 22154.372665000003,
+      "total_ms": 36640.481878,
+      "planned_scenes": 6,
+      "scenes": {
+        "validated": 3,
+        "corrected": 2,
+        "dropped": 1
+      },
+      "rate_limited": 0,
+      "waited_ms": 0,
+      "deep": null
+    }
+  ],
+  "summary": {
+    "kinds": {
+      "core": {
+        "total": 5,
+        "succeeded": 4,
+        "cached": 0,
+        "counts": {
+          "ready": 3,
+          "partial": 1,
+          "refused": 0,
+          "clarify": 0,
+          "failed": 1,
+          "timeout": 0
+        }
+      },
+      "other": {
+        "total": 5,
+        "succeeded": 5,
+        "cached": 0,
+        "counts": {
+          "ready": 3,
+          "partial": 2,
+          "refused": 0,
+          "clarify": 0,
+          "failed": 0,
+          "timeout": 0
+        }
+      }
+    },
+    "first_scene": {
+      "count": 9,
+      "without": 1,
+      "median_ms": 20067.195116000003,
+      "p90_ms": 33163.227137
+    },
+    "scenes": {
+      "validated": 36,
+      "corrected": 15,
+      "dropped": 3
+    },
+    "deep": {
+      "announced": 0,
+      "ready": 0,
+      "within_limit": 0,
+      "median_ms": null,
+      "p90_ms": null
+    }
+  },
+  "threshold_failures": [
+    "aboutissement core : 4/5 (80,0 %), au moins 90 % attendus",
+    "première scène : 90ᵉ centile à 33,2 s, moins de 15,0 s attendues"
+  ]
+}

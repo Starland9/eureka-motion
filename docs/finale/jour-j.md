@@ -30,7 +30,7 @@ Bêta : <https://eureka-motion.starland9.dev/fr>. Pitch : [pitch.md](pitch.md). 
   Le dernier tableau doit afficher `0` et `0`.
 
 - [ ] À partir de là, plus personne ne pose de question sur la gravité au niveau Lycée en français avant la démo.
-- [ ] `curl -s https://eureka-motion.starland9.dev/api/health` : `"status":"ok"` **et** `"voices":{"deepgram":true,"assemblyai":true,"pocket":true}`. Un `status` à `ok` ne suffit pas : il reste vrai même si seule Pocket répond.
+- [ ] `curl -s https://eureka-motion.starland9.dev/api/health` : `"status":"ok"` **et** `"voices":{"deepgram":true,"assemblyai":true}`. Un `status` à `ok` ne suffit pas : il reste vrai même si une seule des deux voix répond.
 - [ ] Écouter une phrase de la démo par le partage de connexion : la voix doit être Agathe (Deepgram, voix de femme). Une voix d'homme veut dire qu'on est passé sur AssemblyAI.
 
 ## Sur place, avant de monter

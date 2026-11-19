@@ -66,6 +66,21 @@ Une personne seule, juste après (questions nouvelles, physique et chimie, Lycé
 
 **Incident à expliquer :** pendant cette série, vers 23 h 40 UTC, la bêta a refusé les connexions pendant environ une minute (3 questions en `ECONNREFUSED`), puis est revenue d'elle-même. Cause non établie : redéploiement, ou redémarrage du conteneur. Voir les journaux de Dokploy.
 
+## Dix générations simultanées, sans Pocket (19/11/2026)
+
+Pocket retirée de la production (`TTS_PROVIDERS=deepgram,assemblyai`, service `voice-pocket` arrêté), après les correctifs de la relecture : le repli réserve sa place, l'attente chez AssemblyAI est plafonnée à 10 s, et Deepgram a 10 s pour répondre. Concepts 26 à 35 du jeu, en anglais.
+
+| Mesure                        | Avec Pocket (concepts 11 à 20) | Sans Pocket (concepts 26 à 35)    |
+| ----------------------------- | ------------------------------ | --------------------------------- |
+| Abouties                      | 9/10                           | 9/10 (l'échec est un plan refusé) |
+| Première scène, médiane / 90ᵉ | 20,7 s / 55,3 s                | 20,1 s / 33,2 s                   |
+| Explication complète          | 34 à 93 s                      | 35 à 59 s                         |
+| Phrases avec voix             | toutes                         | 145/159 (91 %)                    |
+
+Les 14 phrases sans voix appartiennent à une seule explication, celle qui a débordé sur AssemblyAI au-delà de sa limite de 45 phrases par minute : 4 phrases sur 18 avec voix, le reste en sous-titres. Résultat brut : [mesures/golden-en-charge-sans-pocket.json](mesures/golden-en-charge-sans-pocket.json).
+
+Un redéploiement coupe la bêta environ 11 s (réponses 404 pendant le changement de conteneur, mesuré le 19/11 à 00 h 04 UTC). L'incident de 23 h 40 UTC (connexions refusées pendant une minute) a une autre signature et reste à expliquer.
+
 ## Question déjà posée
 
 `maths-thales`, reposée après la mesure de base : servie par le cache, première scène en 1,1 s ([mesures/golden-fr-cache.json](mesures/golden-fr-cache.json)).
