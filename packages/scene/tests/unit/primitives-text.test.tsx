@@ -322,8 +322,23 @@ describe("formula", () => {
     expect(size).toBeLessThan(px(sceneMetrics.text.formula));
     expect(size * 1.21 * 1.8).toBeLessThanOrEqual(tall.ctx.size.height);
     const inNotes = mount({ ...flat, slot: "notes" });
-    expect(inNotes.root.style.fontSize).toBe(`${px(5)}px`);
+    const notesSize = Number.parseFloat(inNotes.root.style.fontSize);
+    expect(notesSize).toBeLessThanOrEqual(px(5));
+    // F = G m₁ m₂ / r² measures 8.27 em in Chrome with the KaTeX fonts, .katex scale included.
+    expect(notesSize * 8.27).toBeLessThanOrEqual(inNotes.ctx.size.width);
     expect(inNotes.root.style.justifyContent).toBe("flex-start");
+  });
+
+  it("shrinks a long formula so that it stays inside the width of its slot", () => {
+    const long: ElementOf<"formula"> = {
+      ...formula,
+      tex: "a^2 + b^2 = \\res{c}^2 \\text{ seulement si l’angle est droit}",
+    };
+    const mounted = mount(long, focus);
+    const size = Number.parseFloat(mounted.root.style.fontSize);
+    expect(size).toBeLessThan(px(sceneMetrics.text.formula));
+    // This formula measures 21.28 em in Chrome with the KaTeX fonts, .katex scale included.
+    expect(size * 21.28).toBeLessThanOrEqual(mounted.ctx.size.width);
   });
 
   it("is hidden before its show and visible after", () => {
