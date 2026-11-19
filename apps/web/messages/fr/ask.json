@@ -28,7 +28,7 @@
     "voiceCredit": "Voix de synthèse : <model>Pocket TTS</model>, un modèle de Kyutai, sous licence <licence>CC BY 4.0</licence>. Voix anglaise : <voices>Alba MacKenna</voices>, licence <licence>CC BY 4.0</licence>.",
     "sommaire": {
       "title": "Sommaire",
-      "intro": "Des explications préparées et relues à l’avance. Ouvre-en une pour la voir tout de suite.",
+      "intro": "Des explications préparées à l’avance, narrées et sous-titrées. Ouvre-en une pour la voir tout de suite.",
       "levelIntro": "Niveau de référence :",
       "subjects": {
         "maths": "Mathématiques",
